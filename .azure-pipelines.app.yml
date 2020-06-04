@@ -1,4 +1,4 @@
-﻿resources:
+resources:
    containers:
      - container: windows
        image: nventive/build-agent:vs16.5.3
