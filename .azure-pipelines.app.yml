@@ -1,0 +1,73 @@
+﻿resources:
+   containers:
+     - container: windows
+       image: nventive/build-agent:vs16.5.3
+
+variables:
+- name: NUGET_VERSION
+  value: 5.1.0
+- name: ApplicationOutputPath # Path where the application package (ipa, apk, msixbundle and wasm website) will be copied to.
+  value: $(Build.ArtifactStagingDirectory)
+- name: PackageOutputPath # Path used for nuget packages
+  value: $(Build.ArtifactStagingDirectory)
+- name: SolutionFileName # Example: MyApplication.sln
+  value: ApplicationTemplate.sln
+- name: IsLightBuild # Used by Nimue.Application.Building.Light nuget package to speed up PullRequest builds
+  value: $[eq(variables['Build.Reason'], 'PullRequest')]
+
+trigger: none
+
+jobs:
+- job: Windows
+  strategy:
+    maxParallel: 3
+    matrix:
+      Release_Android:
+        ApplicationConfiguration: Release_Android
+        ApplicationPlatform: Any CPU
+        Environment: Staging
+      Release_UWA:
+        ApplicationConfiguration: Release_UWP
+        ApplicationPlatform: x64
+        Environment: Staging
+      Release_Desktop:
+        ApplicationConfiguration: Release_Tests
+        ApplicationPlatform: Any CPU
+        Environment: Staging
+
+  pool:
+    name: 'Windows 1809'
+
+  workspace:
+    clean: all
+
+  container: windows
+
+  steps:
+  - template: build/steps.yml
+
+- job: macOS
+  strategy:
+    maxParallel: 1
+    matrix:
+      Release_iOS:
+        ApplicationConfiguration: Release_iOS
+        ApplicationPlatform: Any CPU
+        Environment: Staging
+
+  pool:
+    name: Default
+    demands:
+    - Xamarin.iOS -equals 13.16
+
+  workspace:
+    clean: all
+
+  variables:
+  - name: NUGET_PACKAGES
+    value: $(Agent.TempDirectory)/.nuget
+  - name: NUGET_HTTP_CACHE_PATH
+    value: $(Agent.TempDirectory)/.nuget-http-cache.
+
+  steps:
+  - template: build/steps.yml

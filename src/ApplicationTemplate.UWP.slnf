@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "path": "ApplicationTemplate.sln",
+    "projects": [
+      "app\\ApplicationTemplate.Shared.Views\\ApplicationTemplate.Shared.Views.shproj",
+      "app\\ApplicationTemplate.Shared\\ApplicationTemplate.Shared.shproj",
+      "app\\ApplicationTemplate.UWP\\ApplicationTemplate.UWP.csproj"
+    ]
+  }
+}

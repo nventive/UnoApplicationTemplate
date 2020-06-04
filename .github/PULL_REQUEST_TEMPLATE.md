@@ -1,42 +1,36 @@
 GitHub Issue: #
-<!-- Link to relevant GitHub issue if applicable.
-     All PRs should be associated with an issue -->
 
-## Proposed Changes
-<!-- Please un-comment one ore more that apply to this PR -->
+## PR Type
 
-<!-- - Bug fix -->
-<!-- - Feature -->
-<!-- - Code style update (formatting) -->
-<!-- - Refactoring (no functional changes, no api changes) -->
-<!-- - Build or CI related changes -->
-<!-- - Documentation content changes -->
-<!-- - Other, please describe: -->
+What kind of change does this PR introduce?
+<!-- Please uncomment one or more that apply to this PR -->
 
-
-## What is the current behavior?
-<!-- Please describe the current behavior that you are modifying,
-     or link to a relevant issue. -->
+- Bugfix
+- Feature
+- Code style update (formatting)
+- Refactoring (no functional changes, no api changes)
+- Build or CI related changes
+- Documentation content changes
+- Other... Please describe:
 
 
-## What is the new behavior?
-<!-- Please describe the new behavior after your modifications. -->
+## Description
+
+<!-- (Please describe the changes that this PR introduces.) -->
 
 
-## Checklist
-
+## PR Checklist 
 Please check if your PR fulfills the following requirements:
 
-- [ ] Documentation has been added/updated
-- [ ] Automated Unit / Integration tests for the changes have been added/updated
-- [ ] Contains **NO** breaking changes
-- [ ] Updated the Changelog
-- [ ] Associated with an issue
-
-<!-- If this PR contains a breaking change, please describe the impact
-     and migration path for existing applications below. -->
+- [ ] Interface members are XML documented
+- [ ] Documentation (XML or comments) has been added and/or existing documentation has been updated
+- [ ] [Architecture documents](./doc/Architecture.md) have been updated
+- [ ] Tested on all relevant platforms
 
 
 ## Other information
+
 <!-- Please provide any additional information if necessary -->
 
+## Internal Issue (If applicable):
+<!-- Link to relevant internal issue if applicable. All PRs should be associated with an issue (GitHub issue or internal) -->

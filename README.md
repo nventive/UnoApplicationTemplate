@@ -1,60 +1,48 @@
-# Open Source Project Template
+﻿# Uno Application Template
 
-This repository contains a template to seed a repository for an Open Source
-project.
+This is a mobile app project template using latest practices.
 
-## How to use this template
-
-1. Check out this repository
-2. Delete the `.git` folder
-3. Git init this repository and start working on your project!
-4. Prior to submitting your request for publication, make sure to review the
-   [Open Source guidelines for publications](https://nventive.visualstudio.com/Internal/_wiki/wikis/Internal_wiki?wikiVersion=GBwikiMaster&pagePath=%2FOpen%20Source%2FPublishing&pageId=7120).
-
-## Features (to keep as-is, configure or remove)
-- [Mergify](https://mergify.io/) is configured. You can edit or remove [.mergify.yml](/.mergify.yml).
-- [allcontributors](https://allcontributors.org/) is configured. It helps adding contributors to the README.
-- [dependabot](https://dependabot.com/) is configured. This bot will open pull requests automatically to update nuget dependencies. This one could be annoying, feel free to remove the [.dependabot](/.dependabot) folder.
-
-The following is the template for the final README.md file:
-
----
-
-# Project Title
-
-{Project tag line}
-
-{Small description of the purpose of the project}
-
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+We use `dotnet` project templates to easily create new projects. It simplifies the project renaming and supports conditional inclusions.
 
 ## Getting Started
 
-{Instructions to quickly get started using the project: pre-requisites, packages
-to install, sample code, etc.}
+1. Install the template using the following command at the root of the project.
 
-## Features
+    `dotnet new -i ./`
 
-{More details/listing of features of the project}
+1. If you want to uninstall the template, run the following command.
+
+    `dotnet new -u`
+
+    This will list you the list of installed templates, look for this template and copy the command with the absolute path like this. (Note the quotes added, otherwise it doesn't work)
+
+    `dotnet new -u "C:\P\ApplicationTemplate"`
+
+1. To run the template and create a new project, run the following command.
+
+    `dotnet new nv-mobile -n MyProjectName`
+
+    The following options are available when running the command.
+
+    - To get help: `dotnet new nv-mobile -h`
+    - To add Firebase Analytics: `dotnet new nv-mobile -n MyProjectName --include-firebase-analytics` (or -fa)
+
+[Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
+
+## Architecture
+
+Please consult the [Architecture document](Doc/Architecture.md) for more information about the project.
 
 ## Changelog
 
-Please consult the [CHANGELOG](CHANGELOG.md) for more information about version
-history.
+Please consult the [CHANGELOG](CHANGELOG.md) for more information about the version history.
 
 ## License
 
-This project is licensed under the Apache 2.0 license - see the
-[LICENSE](LICENSE) file for details.
+This project is licensed under the Apache 2.0 license. See the [LICENSE](LICENSE) for details.
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on the process for
-contributing to this project.
+Please read [CONTRIBUTING](CONTRIBUTING.md) for details on the process for contributing to this project.
 
 Be mindful of our [Code of Conduct](CODE_OF_CONDUCT.md).
-
-## Contributors
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- ALL-CONTRIBUTORS-LIST:END -->

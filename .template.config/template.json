@@ -1,0 +1,67 @@
+﻿{
+  "$schema": "http://json.schemastore.org/template",
+  "author": "nventive",
+  "name": "nventive Mobile Template",
+  "identity": "NV.Templates.Mobile",
+  "groupIdentity": "NV.Templates.Mobile",
+  "shortName": "nv-mobile",
+  "classifications": ["Mobile"],
+  "tags": {
+    "language": "C#",
+    "type": "project"
+  },
+  "sourceName": "ApplicationTemplate",
+  "preferNameDirectory": true,
+  "guids": [
+    "c76e144c-92ad-4b8f-93f4-232d1ccddaf0",
+    "564c0343-a576-49ba-9b93-4ea543db65d6"
+  ],
+  "sources": [
+    {
+      "modifiers": [
+        {
+          "condition": "(!IncludeFirebaseAnalytics)",
+          "exclude": [ "**/FirebasePerformanceHandler.cs" ]
+        },
+        {
+          "exclude": [
+            "**/[Bb]in/**",
+            "**/[Oo]bj/**",
+            ".template.config/**/*",
+            "**/*.user",
+            "**/*.lock.json",
+            "**/.vs/**",
+            "**/.git/**",
+            "template-scripts/**"
+          ]
+        }
+      ]
+    }
+  ],
+  "SpecialCustomOperations": {
+    "**/*.projitems": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "if": [ "<!--#if" ],
+            "else": [ "<!--#else" ],
+            "elseif": [ "<!--#elseif" ],
+            "endif": [ "#endif -->" ],
+            "trim": true,
+            "wholeLine": true,
+            "evaluator": "C++"
+          }
+        }
+      ]
+    }
+  },
+  "symbols": {
+    "IncludeFirebaseAnalytics": {
+        "type": "parameter",
+        "datatype": "bool",
+        "description": "If specified, adds Firebase Analytics (Analytics, Crashlytics, Performance).",
+        "defaultValue": "false"
+    }
+  }
+}
