@@ -31,9 +31,8 @@
   inputs:
     command: restore
     solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
-    selectOrConfig: select
-    feedRestore: nventive
-    includeNuGetOrg: true
+    feedsToUse: 'config'
+    nugetConfigPath: 'nuget.config'
     verbosityRestore: Normal
     noCache: true
 
