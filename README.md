@@ -31,7 +31,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 ## Architecture
 
-Please consult the [Architecture document](Doc/Architecture.md) for more information about the project.
+Please consult the [Architecture document](doc/Architecture.md) for more information about the project.
 
 ## Changelog
 
