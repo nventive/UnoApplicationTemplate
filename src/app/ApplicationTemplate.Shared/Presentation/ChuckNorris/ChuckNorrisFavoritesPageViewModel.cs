@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
@@ -18,7 +19,9 @@ namespace ApplicationTemplate
 	{
 		public IDynamicCommand RefreshQuotes => this.GetCommandFromDataLoaderRefresh(Quotes);
 
-		public IDataLoader Quotes => this.GetDataLoader(LoadQuotes);
+		public IDataLoader Quotes => this.GetDataLoader(LoadQuotes, c => c
+			.UpdateOnCollectionChanged()
+		);
 
 		public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<ChuckNorrisItemViewModel>(async (ct, item) =>
 		{
@@ -27,19 +30,19 @@ namespace ApplicationTemplate
 			item.IsFavorite = !item.IsFavorite;
 		});
 
-		private SerialDisposable QuotesSubscription => this.GetOrCreateDisposable(() => new SerialDisposable());
-
-		private async Task<ReadOnlyObservableCollection<ChuckNorrisItemViewModel>> LoadQuotes(CancellationToken ct)
+		private async Task<ReadOnlyObservableCollection<ChuckNorrisItemViewModel>> LoadQuotes(CancellationToken ct, IDataLoaderRequest request)
 		{
 			var quotes = await this.GetService<IChuckNorrisService>().GetFavorites(ct);
 
-			QuotesSubscription.Disposable = quotes
+			// This is an observable list that will dynamically remove items when we unfavorite. We could use 'quotes.Items' if we don't want the list to remove items directly.
+			quotes
 				.Connect()
 				.Transform(q => this.GetChild(() => new ChuckNorrisItemViewModel(this, q), q.Id))
 				.ObserveOn(this.GetService<IDispatcherScheduler>())
 				.Bind(out var list)
 				.DisposeMany()
-				.Subscribe();
+				.Subscribe()
+				.DisposeWithNextLoad(request);
 
 			return list;
 		}
