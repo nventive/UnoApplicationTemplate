@@ -15,7 +15,10 @@ variables:
 - name: IsLightBuild # Used by Nimue.Application.Building.Light nuget package to speed up PullRequest builds
   value: $[eq(variables['Build.Reason'], 'PullRequest')]
 
-trigger: none
+trigger:
+  branches:
+    include:
+    - master
 
 jobs:
 - job: Windows
