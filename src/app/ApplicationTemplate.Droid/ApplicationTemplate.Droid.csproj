@@ -68,6 +68,9 @@
     <AndroidManagedSymbols>True</AndroidManagedSymbols>
     <AndroidEnableSGenConcurrent>True</AndroidEnableSGenConcurrent>
     <AndroidAotAdditionalArguments>nodebug,no-write-symbols</AndroidAotAdditionalArguments>
+		<EnableLLVM>True</EnableLLVM>
+		<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
+		<AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -161,6 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\segmdl2.ttf" />
+		<AndroidAotProfile Include="$(MSBuildThisFileDirectory)custom.aprof" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
