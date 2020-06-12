@@ -11,6 +11,12 @@ using Microsoft.Extensions.Options;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for view model configuration.
+	/// - Configures the dynamic properties.
+	/// - Configures the dynamic commands.
+	/// - Configures the data loaders.
+	/// </summary>
 	public static class ViewModelConfiguration
 	{
 		/// <summary>

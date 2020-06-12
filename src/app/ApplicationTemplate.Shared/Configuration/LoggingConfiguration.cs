@@ -8,6 +8,11 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for logging configuration.
+	/// - Configures the logger filters (see appsettings.json).
+	/// - Configures the loggers.
+	/// </summary>
 	public static class LoggingConfiguration
 	{
 		/// <summary>

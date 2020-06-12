@@ -9,6 +9,10 @@ using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for navigation configuration.
+	/// - Configures the navigator.
+	/// </summary>
 	public static class NavigationCoreConfiguration
 	{
 		/// <summary>

@@ -10,9 +10,7 @@
 
 # These packages are not open source and will be filtered out.
 $privatePackages = @(
-  "Nventive*",
-  "Uno.Serialization",  
-  "Rx-Single-NoGenerics"
+  "Nventive*"
 )
 
 # These packages have invalid licenses and will be updated.
@@ -23,6 +21,15 @@ $packageLicenses = @{
   "*Uno*" = "https://github.com/unoplatform/uno/blob/master/License.md"
   "Xamarin.Android.Support.*" = "https://github.com/xamarin/AndroidSupportComponents/blob/master/LICENSE.md"
   "Xamarin.Essentials" = "https://github.com/xamarin/Essentials/blob/develop/LICENSE"
+  "Reactive.Annex*" = "https://github.com/nventive/Reactive.Annex/blob/master/LICENSE"
+  "MallardMessageHandlers*" = "https://github.com/nventive/MallardMessageHandlers/blob/master/LICENSE"
+  "Chinook.DataLoader*" = "https://github.com/nventive/Chinook.DataLoader/blob/master/LICENSE"
+  "Chinook.*Navigation*" = "https://github.com/nventive/Chinook.Navigation/blob/master/LICENSE"
+  "Chinook.DynamicMvvm*" = "https://github.com/nventive/Chinook.DynamicMvvm/blob/master/LICENSE"
+  "Chinook.BackButtonManager*" = "https://github.com/nventive/Chinook.BackButtonManager/blob/master/LICENSE"
+  "GeneratedSerializers*" = "https://github.com/nventive/GeneratedSerializers/blob/master/LICENSE"
+  "SpecFlow**" = "https://github.com/SpecFlowOSS/SpecFlow/blob/master/LICENSE.txt"
+  "NUnit**" = "https://github.com/nunit/docs/wiki/License"  
 }
 
 # This method will output a list of packages.
