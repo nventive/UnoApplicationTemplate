@@ -13,6 +13,11 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for error configuration.
+	/// - Handles unhandled exceptions.
+	/// - Handles command exceptions.
+	/// </summary>
 	public static class ErrorConfiguration
 	{
 		/// <summary>

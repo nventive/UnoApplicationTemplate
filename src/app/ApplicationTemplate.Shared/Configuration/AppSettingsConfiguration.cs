@@ -11,6 +11,11 @@ using Microsoft.Extensions.Hosting;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for app settings configuration.
+	/// - Loads the environment specific app settings.
+	/// - Configures the host.
+	/// </summary>
 	public static class AppSettingsConfiguration
 	{
 		public const string AppSettingsFileName = "appsettings";

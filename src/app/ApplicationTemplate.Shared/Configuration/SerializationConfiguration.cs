@@ -27,6 +27,10 @@ using Nventive.Persistence;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for serialization configuration.
+	/// - Configures the serializers.
+	/// </summary>
 	public static class SerializationConfiguration
 	{
 		/// <summary>

@@ -16,6 +16,11 @@ using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for application services configuration.
+	/// - Configures business services.
+	/// - Configures platform services.
+	/// </summary>
 	public static class AppServicesConfiguration
 	{
 		/// <summary>

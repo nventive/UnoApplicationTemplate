@@ -7,6 +7,10 @@ using Windows.UI.Core;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for view services.
+	/// - Configures view services.
+	/// </summary>
 	public static class ViewServicesConfiguration
 	{
 		public static IServiceCollection AddViewServices(this IServiceCollection services)

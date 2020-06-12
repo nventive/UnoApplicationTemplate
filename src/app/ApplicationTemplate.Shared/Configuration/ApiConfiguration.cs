@@ -16,6 +16,11 @@ using Refit;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for API configuration.
+	/// - Configures API endpoints.
+	/// - Configures HTTP handlers.
+	/// </summary>
 	public static class ApiConfiguration
 	{
 		/// <summary>

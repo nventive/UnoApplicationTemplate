@@ -13,6 +13,11 @@ using Windows.ApplicationModel.Resources;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for localization configuration.
+	/// - Configures the supported cultures.
+	/// - Configures the localization services.
+	/// </summary>
 	public static class LocalizationConfiguration
 	{
 		private static ThreadCultureOverrideService _cultureOverrideService;

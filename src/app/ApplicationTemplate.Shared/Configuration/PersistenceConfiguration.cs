@@ -8,6 +8,10 @@ using Nventive.Persistence;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This class is used for persistence configuration.
+	/// - Configures the application settings.
+	/// </summary>
 	public static class PersistenceConfiguration
 	{
 		/// <summary>
