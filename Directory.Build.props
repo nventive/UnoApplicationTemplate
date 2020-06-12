@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AdditionalFiles Include="..\..\..\stylecop.json" Link="Properties\stylecop.json" />
+    <AdditionalFiles Include="..\..\..\stylecop.json" Visible="False" />
   </ItemGroup>
 
   <PropertyGroup>
