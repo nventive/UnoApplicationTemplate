@@ -68,9 +68,9 @@
     <AndroidManagedSymbols>True</AndroidManagedSymbols>
     <AndroidEnableSGenConcurrent>True</AndroidEnableSGenConcurrent>
     <AndroidAotAdditionalArguments>nodebug,no-write-symbols</AndroidAotAdditionalArguments>
-		<EnableLLVM>True</EnableLLVM>
-		<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
-		<AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
+    <EnableLLVM>True</EnableLLVM>
+    <AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
+    <AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -89,6 +89,9 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools">
+      <Version>6.0.0-ge975abb046</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
@@ -164,7 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\segmdl2.ttf" />
-		<AndroidAotProfile Include="$(MSBuildThisFileDirectory)custom.aprof" />
+    <AndroidAotProfile Include="$(MSBuildThisFileDirectory)custom.aprof" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
