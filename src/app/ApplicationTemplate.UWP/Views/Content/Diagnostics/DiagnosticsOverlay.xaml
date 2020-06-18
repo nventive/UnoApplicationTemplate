@@ -113,5 +113,13 @@
 				FontSize="12"
 				Foreground="White"
 				Background="#AA000000" />
+
+		<Button Command="{Binding ToggleAlignmentGrid}"
+				HorizontalAlignment="Stretch"
+				Content="Grid"
+				Padding="4"
+				FontSize="12"
+				Foreground="White"
+				Background="#AA000000" />
 	</StackPanel>
 </UserControl>
