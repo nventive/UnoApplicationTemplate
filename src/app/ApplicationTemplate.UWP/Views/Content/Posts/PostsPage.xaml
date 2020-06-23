@@ -14,6 +14,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
@@ -27,9 +28,21 @@
 				HorizontalAlignment="Stretch"
 				Grid.Row="1" />
 
+		<StackPanel Orientation="Horizontal"
+					Margin="12,0,0,0"
+					Grid.Row="2">
+			
+			<TextBlock Text="Example of an image" />
+			<Image Source="ms-appx:///Assets/Image_Example.png"
+				   Height="20"
+				   Width="20"
+				   Margin="4,0" />
+		</StackPanel>
+
 		<dl:DataLoaderView Source="{Binding Posts}"
 						   RefreshCommand="{Binding RefreshPosts}"
-						   Grid.Row="2">
+						   Margin="0,12,0,0"
+						   Grid.Row="3">
 			<DataTemplate>
 				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
 								IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
