@@ -35,6 +35,17 @@ namespace ApplicationTemplate
 			IsAlignmentGridEnabled = !IsAlignmentGridEnabled;
 		});
 
+		public bool IsDiagnosticsExpanded
+		{
+			get => this.Get<bool>();
+			set => this.Set(value);
+		}
+
+		public IDynamicCommand ToggleMore => this.GetCommand(() =>
+		{
+			IsDiagnosticsExpanded = !IsDiagnosticsExpanded;
+		});
+
 		public CountersData Counters => this.GetFromObservable(ObserveCounters, DiagnosticsCountersService.Counters);
 
 		private IObservable<CountersData> ObserveCounters =>
