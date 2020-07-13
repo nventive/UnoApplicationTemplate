@@ -104,6 +104,7 @@
     <PackageReference Include="Reactive.Annex.Uno" Version="0.1.0-dev.10" />
     <PackageReference Include="GeneratedSerializers.Json" Version="0.1.0-dev.12" />
     <PackageReference Include="Uno.UI" Version="2.4.0" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="2.4.0" />
     <PackageReference Include="Uno.Injectable" Version="1.32.0" />
     <PackageReference Include="Uno.CodeGen" Version="1.32.0" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.32" />
@@ -244,7 +245,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\ApplicationTemplate.UWP\App.xaml.cs" />
-    <ApplicationDefinition Include="..\ApplicationTemplate.UWP\App.xaml" Visible="False" />
+    <ApplicationDefinition Include="..\ApplicationTemplate.UWP\App.xaml" Link="App.xaml" Visible="False" />
     <Page Include="..\ApplicationTemplate.UWP\Views\**\*.xaml" Visible="False">
       <Link>Views\%(RecursiveDir)%(FileName)%(Extension)</Link>
       <SubType>Designer</SubType>
