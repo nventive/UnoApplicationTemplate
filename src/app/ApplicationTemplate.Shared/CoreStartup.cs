@@ -75,15 +75,16 @@ namespace ApplicationTemplate
 			{
 				await section.Navigate(ct, () => new OnboardingPageViewModel());
 			}
-
+#if __MOBILE__ || WINDOWS_UWP
 			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 
-			_ = dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, DismissSplashScreen);
+			_ = dispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplashScreen);
 
 			void DismissSplashScreen() // Runs on UI thread
 			{
 				Shell.Instance.ExtendedSplashScreen.Dismiss();
 			}
+#endif
 		}
 
 		private void NotifyUserOnSessionExpired(IServiceProvider services)
