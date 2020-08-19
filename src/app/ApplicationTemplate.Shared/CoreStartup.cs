@@ -14,6 +14,7 @@ using Microsoft.Extensions.Logging;
 using Nventive.ExtendedSplashScreen;
 using Nventive.MessageDialog;
 using Uno.Disposables;
+using Windows.UI.Core;
 
 namespace ApplicationTemplate
 {
@@ -58,7 +59,6 @@ namespace ApplicationTemplate
 		private async Task ExecuteInitialNavigation(CancellationToken ct, IServiceProvider services)
 		{
 			var applicationSettingsService = services.GetRequiredService<IApplicationSettingsService>();
-			var extendedSplashScreenService = services.GetRequiredService<IExtendedSplashScreenService>();
 			var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
 
 			var section = await sectionsNavigator.SetActiveSection(ct, "Home");
@@ -75,8 +75,16 @@ namespace ApplicationTemplate
 			{
 				await section.Navigate(ct, () => new OnboardingPageViewModel());
 			}
+#if __MOBILE__ || WINDOWS_UWP
+			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 
-			extendedSplashScreenService.Dismiss();
+			_ = dispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplashScreen);
+
+			void DismissSplashScreen() // Runs on UI thread
+			{
+				Shell.Instance.ExtendedSplashScreen.Dismiss();
+			}
+#endif
 		}
 
 		private void NotifyUserOnSessionExpired(IServiceProvider services)

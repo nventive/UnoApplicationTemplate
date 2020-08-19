@@ -33,7 +33,6 @@ namespace ApplicationTemplate
 			return services
 				.AddXamarinEssentials()
 				.AddMessageDialog()
-				.AddExtendedSplashScreen()
 				.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 				.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
 				.AddSingleton<IPostService, PostService>()
@@ -50,11 +49,6 @@ namespace ApplicationTemplate
 				.AddSingleton<IAppInfo, AppInfoImplementation>()
 				.AddSingleton<IBrowser, BrowserImplementation>()
 				.AddSingleton<IEmail, EmailImplementation>();
-		}
-
-		private static IServiceCollection AddExtendedSplashScreen(this IServiceCollection services)
-		{
-			return services.AddSingleton<IExtendedSplashScreenService, ExtendedSplashScreenService>();
 		}
 
 		private static IServiceCollection AddMessageDialog(this IServiceCollection services)
