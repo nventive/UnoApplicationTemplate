@@ -7,7 +7,6 @@
 			 xmlns:ue="using:Nventive.View.Extensions"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
 			 mc:Ignorable="d">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -19,22 +18,12 @@
 					DataContext="{Binding Menu}"
 					VerticalAlignment="Bottom" />
 
-		<developerTools:AlignmentGrid Visibility="{Binding DiagnosticsOverlay.IsAlignmentGridEnabled, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
-									  Opacity="0.25"
-									  LineBrush="Red"
-									  HorizontalStep="4"
-									  VerticalStep="4"
-									  Grid.RowSpan="2" />
-
 		<local:DiagnosticsOverlay DataContext="{Binding DiagnosticsOverlay}"
-								  Visibility="{Binding IsDiagnosticsOverlayEnabled, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
-								  Margin="0,100"
-								  Grid.RowSpan="2" />
+								  Visibility="{Binding IsDiagnosticsOverlayEnabled, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}" />
 
 		<splash:ExtendedSplashScreen x:Name="AppExtendedSplashScreen"
 									 ue:MultipleTapExtension.Command="{Binding DiagnosticsOverlay.NavigateToDiagnosticsPage}"
-									 ue:MultipleTapExtension.TapCount="3"
-									 Grid.RowSpan="2" />
+									 ue:MultipleTapExtension.TapCount="3" />
 	</Grid>
 
 </UserControl>

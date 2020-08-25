@@ -37,34 +37,6 @@ namespace ApplicationTemplate
 			set => this.Set(value);
 		}
 
-		public bool CanSetIsFileLoggingEnabled =>
-//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-			// File logging is not supported on UWP.
-			false;
-//-:cnd:noEmit
-#else
-//+:cnd:noEmit
-			true;
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-
-		public bool CanSetIsConsoleLoggingEnabled =>
-//-:cnd:noEmit
-#if DEBUG
-//+:cnd:noEmit
-			// Console logging is always enabled in debug.
-			false;
-//-:cnd:noEmit
-#else
-//+:cnd:noEmit
-			true;
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-
 		public IDynamicCommand DeleteLogFiles => this.GetCommandFromTask(async ct =>
 		{
 			var confirmation = await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
@@ -112,40 +84,36 @@ namespace ApplicationTemplate
 		{
 			var isCurrentlyEnabled = LoggingConfiguration.ConsoleLogging.GetIsEnabled();
 
-			if (isCurrentlyEnabled == isEnabled)
-			{
-				return;
-			}
-
 			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{isEnabled} console logging.", isEnabled ? "Enabling" : "Disabling");
 
 			LoggingConfiguration.ConsoleLogging.SetIsEnabled(isEnabled);
 
-			await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
-				.Title("Diagnostics")
-				.Content("Restart the application to apply your changes.")
-				.OkCommand()
-			);
+			if (isCurrentlyEnabled != isEnabled)
+			{
+				await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
+					.Title("Diagnostics")
+					.Content("Restart the application to apply your changes.")
+					.OkCommand()
+				);
+			}
 		}
 
 		private async Task OnFileLoggingChanged(CancellationToken ct, bool isEnabled)
 		{
 			var isCurrentlyEnabled = LoggingConfiguration.FileLogging.GetIsEnabled();
 
-			if (isCurrentlyEnabled == isEnabled)
-			{
-				return;
-			}
-
 			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{isEnabled} file logging.", isEnabled ? "Enabling" : "Disabling");
 
 			LoggingConfiguration.FileLogging.SetIsEnabled(isEnabled);
 
-			await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
-				.Title("Diagnostics")
-				.Content("Restart the application to apply your changes.")
-				.OkCommand()
-			);
+			if (isCurrentlyEnabled != isEnabled)
+			{
+				await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
+				   .Title("Diagnostics")
+				   .Content("Restart the application to apply your changes.")
+				   .OkCommand()
+			   );
+			}
 		}
 	}
 }

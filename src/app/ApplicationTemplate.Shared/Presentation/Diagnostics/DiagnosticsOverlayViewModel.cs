@@ -22,7 +22,7 @@ namespace ApplicationTemplate
 			await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new DiagnosticsPageViewModel());
 		});
 
-		public bool IsDiagnosticsOverlayEnabled => true;
+		public bool IsDiagnosticsOverlayEnabled => DiagnosticsConfiguration.DiagnosticsOverlay.GetIsEnabled();
 
 		public bool IsAlignmentGridEnabled
 		{

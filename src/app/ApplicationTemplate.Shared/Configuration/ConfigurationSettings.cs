@@ -1,6 +1,7 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 namespace ApplicationTemplate
@@ -8,38 +9,59 @@ namespace ApplicationTemplate
 	public static class ConfigurationSettings
 	{
 		/// <summary>
+		/// Adding a cache to the settings as an application restart is required
+		/// to see the changes applied by these settings.
+		/// </summary>
+		private static readonly Dictionary<string, bool> _cache = new Dictionary<string, bool>();
+
+		/// <summary>
 		/// Gets whether or not a setting is enabled.
 		/// This method checks the presence of a file on disk which
 		/// is faster than resolving any service and deserialize the setting content.
 		/// </summary>
-		/// <param name="settingFilename">File name of the setting. This must be unique.</param>
+		/// <param name="settingFileName">File name of the setting. This must be unique.</param>
+		/// <param name="defaultValue">Default value if the setting has not been set.</param>
 		/// <returns>True if the setting is enabled, false otherwise.</returns>
-		public static bool GetIsSettingEnabled(string settingFilename)
+		public static bool GetIsSettingEnabled(string settingFileName, bool defaultValue)
 		{
-			var filePath = GetSettingsFilePath(settingFilename);
+			var result = defaultValue;
 
-			return File.Exists(filePath);
+			if (_cache.TryGetValue(settingFileName, out var cachedResult))
+			{
+				result = cachedResult;
+			}
+			else
+			{
+				var filePath = GetSettingsFilePath(settingFileName);
+
+				if (File.Exists(filePath))
+				{
+					var bytes = File.ReadAllBytes(filePath);
+
+					if (bytes.Length == 1)
+					{
+						result = Convert.ToBoolean(bytes.Single());
+					}
+				}
+
+				_cache[settingFileName] = result;
+			}
+
+			return result;
 		}
 
 		/// <summary>
 		/// Sets whether or not a setting is enabled.
-		/// This methods creates a file on disk if the setting is enabled
-		/// and deletes it otherwise.
 		/// </summary>
 		/// <param name="settingFileName">File name of the setting. This must be unique.</param>
-		/// <param name="isEnabled">Is the setting enabled</param>
+		/// <param name="isEnabled">Is the setting enabled.</param>
 		public static void SetIsSettingEnabled(string settingFileName, bool isEnabled)
 		{
 			var filePath = GetSettingsFilePath(settingFileName);
 
-			if (isEnabled)
-			{
-				File.Create(filePath).Dispose();
-			}
-			else if (File.Exists(filePath))
-			{
-				File.Delete(filePath);
-			}
+			var byteValue = Convert.ToByte(isEnabled);
+
+			File.WriteAllBytes(filePath, new byte[] { byteValue });
 		}
 
 		private static string GetSettingsFilePath(string fileName)
