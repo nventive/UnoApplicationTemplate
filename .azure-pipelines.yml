@@ -1,0 +1,196 @@
+trigger:
+  branches:
+    include:
+      - master
+      - release/*
+      - feature/*
+
+pr: 
+  branches:
+    include:
+      - master
+      - release/*
+
+variables:
+
+  # Prerequisites - Variable groups
+  # Make sure you have the following variable groups in your Azure pipeline library:
+  # ApplicationTemplate.Distribution.GooglePlay
+  #   AndroidApplicationId: This is the official application id of the app that should go on the store.
+  #   AndroidSigningKeyAlias: This is the keystore alias.
+  #   AndroidSigningKeyPass: This is the keystore keypass (secured).
+  #   AndroidSigningStorePass: This is the keystore storepass (secured).
+  # ApplicationTemplate.Distribution.AppStore
+  #   AppleBundleId: The official bundle id of the app that should go on the store; the app will be resigned with this id.
+  #   AppleCertificatePassword: The certificate password (secured).
+  #   AppleTeamId: The developer account team id (secured).
+  #   AppleTeamName: The developer account team name.
+
+  # Prerequisites - Secured files
+  # Make sure you have the following secured files in your Azure pipeline library.
+  GooglePlayKeystore: com.nventive.applicationtemplate.jks # This is the official keystore used for Google Play.
+  AppStoreProvisioningProfile: com.nventive.applicationtemplate.mobileprovision # This is the official provisioning profile for the AppStore.
+  AppStoreCertificate: nventive.p12 # This is the official certificate for the AppStore.
+
+  # Prerequisites - Service connections
+  # Make sure you have the following service connections in your Azure pipeline library.
+  GooglePlayServiceConnection: GooglePlay-nventive-ApplicationTemplate
+  AppCenterServiceConnection: AppCenter-nventive-framework
+  AppStoreServiceConnection: AppStore-nventive
+
+  # AppCenter slugs
+  AppCenterAndroidSlug: 'nventive-framework/Application-Template-1'
+  AppCenteriOSSlug: 'nventive-framework/Application-Template'
+  AppCenterUWPSlug: 'nventive-framework/Application-Template-2'
+
+  # Azure subscription
+  # AzureSubscriptionName:
+  # AzureStorageAccountName: 
+
+  # Solution to build
+  SolutionFileName: ApplicationTemplate.sln
+
+  # Pool names
+  windowsPoolName: 'windows 1809'
+  macOSPoolName: 'Default'
+
+  # Versions to use
+  NUGET_VERSION: 5.4.0
+  XAMARIN_IOS_VERSION: 13.16
+
+  # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
+  # We make seperate folders so that releases can each download only the folder they need.
+  AndroidArtifactName: Android
+  iOSArtifactName: iOS
+  UWPArtifactName: UWP
+  WASMArtifactName: WASM
+  TestsArtifactName: Tests
+
+  # Path where packages (nuget or app packages) will be copied to.
+  PackageOutputPath: $(Build.ArtifactStagingDirectory)
+  
+  # For Application.Building.Light optimizations
+  IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
+
+  # For release conditions
+  IsReleaseBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))]
+
+  # Android configurations
+  ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  
+  # Optional, specifiy xcode and xamarin versions. See ios-build-select-version.yml if needed.
+  # xCodeRoot: '/Applications/Xcode_11.3.app'
+  # XamarinSDKVersion: 6_6_0
+
+stages:
+- stage: Build
+  jobs:
+  - job: On_Windows # Build UWP and Android on a windows machine
+    strategy:
+      maxParallel: 3
+      matrix:
+        Android:
+          ApplicationConfiguration: Release_Android
+          ApplicationPlatform: Any CPU
+          ArtifactName: $(AndroidArtifactName)
+        UWP:
+          ApplicationConfiguration: Release_UWP
+          ApplicationPlatform: Any CPU
+          ArtifactName: $(UWPArtifactName)
+        Tests:
+          ApplicationConfiguration: Release_Tests
+          ApplicationPlatform: Any CPU
+          ArtifactName: $(TestsArtifactName)
+    pool:
+      name: $(windowsPoolName)
+
+    variables:
+    - group: ApplicationTemplate.Distribution.GooglePlay
+    
+    container: 'nventive/build-agent:vs16.6.0'
+
+    steps:
+      - template: build/stage-build.yml
+
+  - job: On_Mac # Build iOS on a mac
+    strategy:
+      maxParallel: 3
+      matrix:
+        iOS:
+          ApplicationConfiguration: Release_iOS
+          ApplicationPlatform: Any CPU
+          ArtifactName: $(iOSArtifactName)        
+    pool:
+      name: $(macOSPoolName)
+      demands:
+        - Xamarin.iOS -equals $(XAMARIN_IOS_VERSION)
+      
+    variables:
+    - name: SkipUnknownFrameworks
+      value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
+    - group: ApplicationTemplate.Distribution.AppStore
+
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Install .Net Core runtime 2.1.x'
+      inputs:
+        version: 2.1.x
+        packageType: 'runtime'
+        installationPath: '$(Agent.ToolsDirectory)/dotnet'
+        
+    - template: build/stage-build.yml
+
+  # - job: On_Linux
+  #   strategy:
+  #     maxParallel: 1
+  #     matrix:
+  #       Wasm:
+  #         ApplicationConfiguration: Release_WASM
+  #         ApplicationPlatform: Any CPU
+  #         ArtifactName: $(WASMArtifactName)
+
+  #   container: unoplatform/wasm-build:2.2
+
+  #   pool:
+  #     vmImage: 'ubuntu-18.04'
+
+  #   variables:
+  #     NUGET_PACKAGES: $(build.sourcesdirectory)/.nuget
+  #     SkipUnknowFrameworks: True
+
+  #   steps:
+  #     - template: build/stage-build-wasm.yml
+
+- stage: AppCenter
+  # Only release when the build is not a Pull Request and it's using one of the proper release branches
+  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+  dependsOn: Build
+    
+  jobs:
+  - template: build/stage-release-appcenter.yml
+
+# - stage: Azure
+#   # Only release when the build is not a Pull Request and it's using one of the proper release branches
+#   condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+#   dependsOn: Build
+
+#   jobs:
+#   - template: build/stage-release-wasm.yml
+
+- stage: AppStore
+  # Only release when the build is not a Pull Request and it's using one of the proper release branches
+  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+  dependsOn: Build
+
+  jobs: 
+  - template: build/stage-release-appstore.yml
+
+- stage: GooglePlay
+  # Only release when the build is not a Pull Request and it's using one of the proper release branches
+  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
+  dependsOn: Build
+
+  jobs: 
+  - template: build/stage-release-googleplay.yml

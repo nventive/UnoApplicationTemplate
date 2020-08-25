@@ -30,6 +30,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConfigurationSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\DiagnosticsConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ErrorConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\FluentValidationLanguageManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LinkerConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LocalizationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationCoreConfiguration.cs" />

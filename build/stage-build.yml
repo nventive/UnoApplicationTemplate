@@ -1,16 +1,13 @@
 ﻿steps:
-## Install .netcore runtime required by GitVersion@5
-- task: UseDotNet@2
+- task: gitversion/setup@0
   inputs:
-    packageType: 'runtime'
-    version: '2.1.0'
-    installationPath: '$(Agent.ToolsDirectory)/dotnet'
+    versionSpec: '5.0.0'
+  displayName: 'Install GitVersion'
 
-- task: GitVersion@5
+- task: gitversion/execute@0
   inputs:
-    runtime: 'core'
     useConfigFile: true
-    configFilePath: gitversion.yml
+    configFilePath: 'gitversion.yml'
   displayName: 'Calculate version'
 
 - task: NuGetToolInstaller@0
@@ -20,7 +17,7 @@
     checkLatest: false
 
 - task: VisualStudioTestPlatformInstaller@1
-  condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Desktop'))
+  condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
   inputs:
     packageFeedSelector: 'nugetOrg'
     versionSelector: 'specificVersion'
@@ -31,11 +28,16 @@
   inputs:
     command: restore
     solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
-    selectOrConfig: select
-    feedRestore: nventive
-    includeNuGetOrg: true
+    feedsToUse: 'config'
+    nugetConfigPath: 'nuget.config'
     verbosityRestore: Normal
     noCache: true
+
+- task: DownloadSecureFile@1
+  name: keyStore
+  displayName: "Download keystore from secure files"
+  inputs:
+    secureFile: $(GooglePlayKeystore)
 
 - task: MSBuild@1
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
@@ -51,10 +53,11 @@
     restoreNugetPackages: false
     logProjectEvents: false
     createLogFile: false
+    msbuildArguments: /p:PackageVersion=$(SemVer) /p:ApplicationVersion=$(MajorMinorPatch) /p:AndroidSigningKeyStore=$(keyStore.secureFilePath) /p:AndroidSigningStorePass=$(AndroidSigningStorePass) /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass) /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias) /p:AndroidKeyStore=true
 
 - task: VSTest@2
   displayName: 'Run tests'
-  condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Desktop'))
+  condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
   inputs:
     testAssemblyVer2: |
       **\*tests*.dll
@@ -63,20 +66,11 @@
     vsTestVersion: "latest"
     testSelector: testAssemblies
 
-# - task: nventiveReleaseNotesCompiler@4
-#   displayName: 'Compile release notes'
-#   inputs:
-#     EnvironmentName: $(Environment)
-#     AdditionalReleaseNotesFile: Canary.md
-#     OutputFilePath: $(Build.ArtifactStagingDirectory)/ReleaseNotes.md
-#     CharacterLimit: 2000
-#     TruncatedOutputFilePath: '$(Build.ArtifactStagingDirectory)/ReleaseNotes-Excerpt.md'
-
 - task: PublishBuildArtifacts@1
-  displayName: 'Publish artifact $(ApplicationConfiguration)'
+  displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
   inputs:
     PathtoPublish: $(Build.ArtifactStagingDirectory)
-    ArtifactName: $(ApplicationConfiguration)
+    ArtifactName: $(ArtifactName)
     ArtifactType: Container
 
 - task: PostBuildCleanup@3

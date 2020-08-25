@@ -33,15 +33,16 @@ namespace ApplicationTemplate.UITests
 			set => Helpers.App = _app = value;
 		}
 
-		[SetUp]
-		public void StartApp()
-		{
-			App = AppInitializer.AttachToApp();
-		}
+		// TODO #193539 Reactivate UI tests
+		//[SetUp]
+		//public void StartApp()
+		//{
+		//	App = AppInitializer.AttachToApp();
+		//}
 
-		[TearDown]
-		public void StopApp()
-		{
-		}
+		//[TearDown]
+		//public void StopApp()
+		//{
+		//}
 	}
 }

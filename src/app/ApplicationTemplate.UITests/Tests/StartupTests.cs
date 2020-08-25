@@ -9,10 +9,11 @@ namespace ApplicationTemplate.UITests.Tests
 	[TestFixture]
 	public class StartupTests : TestBase
 	{
-		[Test]
-		public void ShowRepl()
-		{
-			TestBase.App.Repl();
-		}
+		// TODO #193539 Reactivate UI tests
+		//[Test]
+		//public void ShowRepl()
+		//{
+		//	TestBase.App.Repl();
+		//}
 	}
 }
