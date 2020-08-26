@@ -8,6 +8,7 @@ using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
+using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -40,6 +41,8 @@ namespace ApplicationTemplate
 			InitializeLoggerFactories(services);
 
 			HandleUnhandledExceptions(services);
+
+			ValidatorOptions.LanguageManager = new FluentValidationLanguageManager();
 		}
 
 		protected override async Task StartServices(IServiceProvider services, bool isFirstStart)
