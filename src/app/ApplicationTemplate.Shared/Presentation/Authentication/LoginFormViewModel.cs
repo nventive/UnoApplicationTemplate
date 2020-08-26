@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate
 {
@@ -29,9 +30,10 @@ namespace ApplicationTemplate
 
 	public class LoginFormValidator : AbstractValidator<LoginFormViewModel>
 	{
-		public LoginFormValidator()
+		public LoginFormValidator(IStringLocalizer localizer)
 		{
-			RuleFor(x => x.Email).NotEmpty().EmailAddress();
+			// This is an example of overriding one specific validation error message
+			RuleFor(x => x.Email).NotEmpty().WithMessage(_ => localizer["ValidationNotEmpty_Email"]).EmailAddress();
 			RuleFor(x => x.Password).NotEmpty();
 		}
 	}

@@ -180,139 +180,142 @@
   <data name="Settings_CommandBar.Content" xml:space="preserve">
     <value>Paramètres</value>
   </data>
-	<data name="Settings_Licenses.Content" xml:space="preserve">
+  <data name="Settings_Licenses.Content" xml:space="preserve">
     <value>Licenses</value>
   </data>
-	<data name="Settings_PrivacyPolicy.Content" xml:space="preserve">
+  <data name="Settings_PrivacyPolicy.Content" xml:space="preserve">
     <value>Politique de confidentialité</value>
   </data>
-	<data name="Settings_TermsAndConditions.Content" xml:space="preserve">
+  <data name="Settings_TermsAndConditions.Content" xml:space="preserve">
     <value>Termes et conditions</value>
   </data>
-	<data name="Settings_EditProfile.Content" xml:space="preserve">
+  <data name="Settings_EditProfile.Content" xml:space="preserve">
     <value>Modifier le profil</value>
   </data>
-	<data name="Settings_Version.Text" xml:space="preserve">
+  <data name="Settings_Version.Text" xml:space="preserve">
     <value>Version</value>
   </data>
-	<data name="Welcome_Title.Text" xml:space="preserve">
+  <data name="Welcome_Title.Text" xml:space="preserve">
     <value>Bienvenue</value>
   </data>
-	<data name="Welcome_Login.Content" xml:space="preserve">
+  <data name="Welcome_Login.Content" xml:space="preserve">
     <value>Connexion</value>
   </data>
-	<data name="Welcome_CreateAccount.Content" xml:space="preserve">
+  <data name="Welcome_CreateAccount.Content" xml:space="preserve">
     <value>Créer un compte</value>
   </data>
-	<data name="Welcome_Continue.Content" xml:space="preserve">
+  <data name="Welcome_Continue.Content" xml:space="preserve">
     <value>Continuer</value>
   </data>
-	<data name="Posts_CommandBar.Content" xml:space="preserve">
+  <data name="Posts_CommandBar.Content" xml:space="preserve">
     <value>Articles</value>
   </data>
-	<data name="Posts_NewPost.Content" xml:space="preserve">
+  <data name="Posts_NewPost.Content" xml:space="preserve">
     <value>Créer article</value>
   </data>
-	<data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
+  <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
     <value>Continuer</value>
   </data>
-	<data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
+  <data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
     <value>Passer</value>
   </data>
-	<data name="Menu_Home.Content" xml:space="preserve">
+  <data name="Menu_Home.Content" xml:space="preserve">
     <value>Accueil</value>
   </data>
-	<data name="Menu_Posts.Content" xml:space="preserve">
+  <data name="Menu_Posts.Content" xml:space="preserve">
     <value>Articles</value>
   </data>
-	<data name="Menu_Settings.Content" xml:space="preserve">
+  <data name="Menu_Settings.Content" xml:space="preserve">
     <value>Paramètres</value>
   </data>
-	<data name="Login_CommandBar.Content" xml:space="preserve">
+  <data name="Login_CommandBar.Content" xml:space="preserve">
     <value>Connexion</value>
   </data>
-	<data name="Login_Email.PlaceholderText" xml:space="preserve">
+  <data name="Login_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
   </data>
-	<data name="Login_Password.PlaceholderText" xml:space="preserve">
+  <data name="Login_Password.PlaceholderText" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
-	<data name="Login_Login.Content" xml:space="preserve">
+  <data name="Login_Login.Content" xml:space="preserve">
     <value>Se connecter</value>
   </data>
-	<data name="Login_CreateAccount.Content" xml:space="preserve">
+  <data name="Login_CreateAccount.Content" xml:space="preserve">
     <value>Créer un compte</value>
   </data>
-	<data name="Login_ForgotPassword.Content" xml:space="preserve">
+  <data name="Login_ForgotPassword.Content" xml:space="preserve">
     <value>Mot de passe oublié?</value>
   </data>
-	<data name="Home_Title.Text" xml:space="preserve">
+  <data name="Home_Title.Text" xml:space="preserve">
     <value>Accueil</value>
   </data>
-	<data name="Home_Posts.Content" xml:space="preserve">
+  <data name="Home_Posts.Content" xml:space="preserve">
     <value>Articles</value>
   </data>
-	<data name="Home_Settings.Content" xml:space="preserve">
+  <data name="Home_Settings.Content" xml:space="preserve">
     <value>Paramètres</value>
   </data>
-	<data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
+  <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
     <value>Mot de passe oublié</value>
   </data>
-	<data name="EditPost_NewPost" xml:space="preserve">
+  <data name="EditPost_NewPost" xml:space="preserve">
     <value>Nouvel article</value>
   </data>
-	<data name="EditPost_Save.Content" xml:space="preserve">
+  <data name="EditPost_Save.Content" xml:space="preserve">
     <value>Sauvegarder</value>
   </data>
-	<data name="EditPost_Delete.Content" xml:space="preserve">
+  <data name="EditPost_Delete.Content" xml:space="preserve">
     <value>Supprimer</value>
   </data>
-	<data name="SessionExpired_DialogTitle" xml:space="preserve">
+  <data name="SessionExpired_DialogTitle" xml:space="preserve">
     <value>Session expirée</value>
   </data>
-	<data name="SessionExpired_DialogBody" xml:space="preserve">
+  <data name="SessionExpired_DialogBody" xml:space="preserve">
     <value>Votre session est expirée. Veuillez vous reconnecter.</value>
   </data>
-	<data name="PrivacyPolicyUrl" xml:space="preserve">
+  <data name="PrivacyPolicyUrl" xml:space="preserve">
     <value>http://nventive.com</value>
   </data>
-	<data name="TermsAndConditionsUrl" xml:space="preserve">
+  <data name="TermsAndConditionsUrl" xml:space="preserve">
     <value>http://nventive.com</value>
   </data>
-	<data name="Licenses_CommandBar" xml:space="preserve">
+  <data name="Licenses_CommandBar" xml:space="preserve">
     <value>Licenses</value>
   </data>
-	<data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
   </data>
-	<data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
-	<data name="CreateAccount_Confirm.Content" xml:space="preserve">
+  <data name="CreateAccount_Confirm.Content" xml:space="preserve">
     <value>Créer un compte</value>
   </data>
-	<data name="ForgotPassword_Email.PlaceholderText" xml:space="preserve">
+  <data name="ForgotPassword_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
   </data>
-	<data name="ForgotPassword_Reset.Content" xml:space="preserve">
+  <data name="ForgotPassword_Reset.Content" xml:space="preserve">
     <value>Réinitialiser</value>
   </data>
-	<data name="ChuckNorrisSearch_CommandBar" xml:space="preserve">
+  <data name="ChuckNorrisSearch_CommandBar" xml:space="preserve">
     <value>Citations</value>
   </data>
-	<data name="ChuckNorrisSearch_SearchTerm.PlaceholderText" xml:space="preserve">
+  <data name="ChuckNorrisSearch_SearchTerm.PlaceholderText" xml:space="preserve">
     <value>Entrer un mot clé</value>
   </data>
-	<data name="Profile_CommandBar" xml:space="preserve">
+  <data name="Profile_CommandBar" xml:space="preserve">
     <value>Profil</value>
   </data>
-	<data name="Profile_FirstName.PlaceholderText" xml:space="preserve">
+  <data name="Profile_FirstName.PlaceholderText" xml:space="preserve">
     <value>Prénom</value>
   </data>
-	<data name="Profile_LastName.PlaceholderText" xml:space="preserve">
+  <data name="Profile_LastName.PlaceholderText" xml:space="preserve">
     <value>Nom</value>
   </data>
-	<data name="Profile_Save.Content" xml:space="preserve">
+  <data name="Profile_Save.Content" xml:space="preserve">
     <value>Enregistrer</value>
-  </data>	
+  </data>
+  <data name="ValidationNotEmpty_Email" xml:space="preserve">
+    <value>Le courriel ne doit pas être vide.</value>
+  </data>
 </root>
