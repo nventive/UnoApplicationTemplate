@@ -100,36 +100,27 @@ namespace ApplicationTemplate
 //-:cnd:noEmit
 #if DEBUG
 //+:cnd:noEmit
-				// Console logging is always enabled in debug.
-				return true;
+				var defaultValue = true;
 //-:cnd:noEmit
 #else
 //+:cnd:noEmit
-				return ConfigurationSettings.GetIsSettingEnabled("console-logging");
+				var defaultValue = false;
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
+
+				return ConfigurationSettings.GetIsSettingEnabled("console-logging", defaultValue);
 			}
 
 			public static void SetIsEnabled(bool isEnabled)
 			{
-//-:cnd:noEmit
-#if DEBUG
-//+:cnd:noEmit
-				// Console logging is always enabled in debug.
-//-:cnd:noEmit
-#else
-//+:cnd:noEmit
 				ConfigurationSettings.SetIsSettingEnabled("console-logging", isEnabled);
-//-:cnd:noEmit
-#endif
-				//+:cnd:noEmit
 			}
 		}
 
 		public static class FileLogging
 		{
-			public static bool GetIsEnabled() => ConfigurationSettings.GetIsSettingEnabled("file-logging");
+			public static bool GetIsEnabled() => ConfigurationSettings.GetIsSettingEnabled("file-logging", defaultValue: false);
 
 			public static void SetIsEnabled(bool isEnabled) => ConfigurationSettings.SetIsSettingEnabled("file-logging", isEnabled);
 

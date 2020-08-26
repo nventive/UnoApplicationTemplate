@@ -5,6 +5,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:uc="using:Nventive.View.Converters"
 			 xmlns:xamarin="http://nventive.com/xamarin"
+			 xmlns:developerTools="using:Microsoft.Toolkit.Uwp.DeveloperTools"
 			 mc:Ignorable="d xamarin"
 			 d:DesignHeight="300"
 			 d:DesignWidth="400">
@@ -20,7 +21,7 @@
 				<Setter Property="Margin"
 						Value="0,1" />
 				<Setter Property="TextAlignment"
-						Value="Center" />
+						Value="Left" />
 			</Style>
 
 			<Style x:Key="DiagnosticsCounterToolTipStyle"
@@ -31,6 +32,67 @@
 						Value="WhiteSmoke" />
 			</Style>
 
+			<Style x:Key="DiagnosticsOverlayButtonStyle"
+				   TargetType="Button">
+				<Setter Property="FontSize"
+						Value="11" />
+				<Setter Property="HorizontalAlignment"
+						Value="Stretch" />
+				<Setter Property="Foreground"
+						Value="White" />
+				<Setter Property="Background"
+						Value="#AA000000" />
+				<Setter Property="Padding"
+						Value="4,4" />
+				<Setter Property="MaxWidth"
+						Value="200" />
+				<Setter Property="MinWidth"
+						Value="0" />
+				<Setter Property="Margin"
+						Value="0,1" />
+				<Setter Property="BorderThickness"
+						Value="0" />
+				<Setter Property="MinHeight"
+						Value="0" />
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="Button">
+							<Grid VerticalAlignment="{TemplateBinding VerticalAlignment}"
+								  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+								<VisualStateManager.VisualStateGroups>
+									<VisualStateGroup x:Name="CommonStates">
+										<VisualState x:Name="Normal" />
+										<VisualState x:Name="PointerOver" />
+										<VisualState x:Name="Pressed">
+											<Storyboard>
+												<DoubleAnimation Duration="0:0:0.1"
+																 To="0.8"
+																 Storyboard.TargetName="BackgroundBorder"
+																 Storyboard.TargetProperty="Opacity" />
+											</Storyboard>
+										</VisualState>
+										<VisualState x:Name="Disabled" />
+									</VisualStateGroup>
+								</VisualStateManager.VisualStateGroups>
+
+								<Border x:Name="BackgroundBorder"
+										Background="{TemplateBinding Background}"
+										BorderThickness="{TemplateBinding BorderThickness}"
+										BorderBrush="{TemplateBinding BorderBrush}" />
+
+								<ContentPresenter x:Name="ContentPresenter"
+												  Margin="{TemplateBinding Padding}"
+												  Content="{TemplateBinding Content}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  AutomationProperties.AccessibilityView="Raw"
+												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
 			<uc:FromNullableBoolToCustomValueConverter x:Key="TrueToHorizontalStretch"
 													   TrueValue="Stretch"
 													   NullOrFalseValue="Right" />
@@ -38,27 +100,42 @@
 			<uc:FromNullableBoolToCustomValueConverter x:Key="TrueToVerticalStretch"
 													   TrueValue="Stretch"
 													   NullOrFalseValue="Right" />
+
+			<uc:FromNullableBoolToCustomValueConverter x:Key="IsExpandedToCornerRadius"
+													   TrueValue="0"
+													   NullOrFalseValue="8,0,0,8" />
 		</ResourceDictionary>
 	</UserControl.Resources>
 
-	<Grid Background="#AA000000"
-		  BorderThickness="1"
-		  BorderBrush="#000000"
-		  HorizontalAlignment="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToHorizontalStretch}, FallbackValue=Right}"
-		  VerticalAlignment="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVerticalStretch}, FallbackValue=Top}">
+	<Grid>
+		<developerTools:AlignmentGrid Visibility="{Binding IsAlignmentGridEnabled, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
+									  Opacity="0.25"
+									  LineBrush="Red"
+									  HorizontalStep="4"
+									  VerticalStep="4" />
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="auto" />
-			<RowDefinition Height="auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
+		<Grid Background="#AA000000"
+			  BorderThickness="1"
+			  BorderBrush="#000000"
+			  HorizontalAlignment="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToHorizontalStretch}, FallbackValue=Right}"
+			  VerticalAlignment="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVerticalStretch}, FallbackValue=Top}"
+			  Margin="0,100,0,0"
+			  Padding="2,2,0,2"
+			  CornerRadius="{Binding IsDiagnosticsExpanded, Converter={StaticResource IsExpandedToCornerRadius}}">
 
-		<StackPanel DataContext="{Binding Counters}"
-					Padding="4"
-					xamarin:IsHitTestVisible="False">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
 
-			<TextBlock Foreground="#4cbfe1"
-					   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
+			<StackPanel DataContext="{Binding Counters}"
+						HorizontalAlignment="Right"
+						Padding="4"
+						xamarin:IsHitTestVisible="False">
+
+				<TextBlock Foreground="#4cbfe1"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
 				<Run Text="AVM:" />
 				<Run Text="{Binding ActiveViewModels}" />
 					
@@ -66,10 +143,10 @@
 					<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
 							 Content="Number of active viewmodels (Created - Disposed)" />
 				</ToolTipService.ToolTip>
-			</TextBlock>
+				</TextBlock>
 
-			<TextBlock Foreground="#4cbfe1"
-					   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
+				<TextBlock Foreground="#4cbfe1"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
 				<Run Text="UVM:" />
 				<Run Text="{Binding UncollectedViewModels}" />
 					
@@ -77,10 +154,10 @@
 					<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
 							 Content="Number of uncollected viewmodels (Disposed - Destroyed)" />
 				</ToolTipService.ToolTip>
-			</TextBlock>
+				</TextBlock>
 
-			<TextBlock Foreground="#4cbfe1"
-					   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
+				<TextBlock Foreground="#4cbfe1"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
 				<Run Text="AP:" />
 				<Run Text="{Binding ActiveProperties}" />
 					
@@ -88,10 +165,10 @@
 					<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
 							 Content="Number of active properties (Created - Disposed)" />
 				</ToolTipService.ToolTip>
-			</TextBlock>
+				</TextBlock>
 
-			<TextBlock Foreground="#4cbfe1"
-					   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
+				<TextBlock Foreground="#4cbfe1"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
 				<Run Text="UP:" />
 				<Run Text="{Binding UncollectedProperties}" />
 					
@@ -99,10 +176,10 @@
 					<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
 							 Content="Number of uncollected properties (Disposed - Destroyed)" />
 				</ToolTipService.ToolTip>
-			</TextBlock>
+				</TextBlock>
 
-			<TextBlock Foreground="#4cbfe1"
-					   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
+				<TextBlock Foreground="#4cbfe1"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
 				<Run Text="AC:" />
 				<Run Text="{Binding ActiveCommands}" />
 					
@@ -110,10 +187,10 @@
 					<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
 							 Content="Number of active commands (Created - Disposed)" />
 				</ToolTipService.ToolTip>
-			</TextBlock>
+				</TextBlock>
 
-			<TextBlock Foreground="#4cbfe1"
-					   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
+				<TextBlock Foreground="#4cbfe1"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
 				<Run Text="UC:" />
 				<Run Text="{Binding UncollectedCommands}" />
 					
@@ -121,46 +198,35 @@
 					<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
 							 Content="Number of uncollected commands (Disposed - Destroyed)" />
 				</ToolTipService.ToolTip>
-			</TextBlock>
-		</StackPanel>
+				</TextBlock>
+			</StackPanel>
 
-		<StackPanel Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
-					Grid.Row="1">
-			<!-- Diagnostics expanded content -->
-		</StackPanel>
+			<StackPanel Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
+						Grid.Row="1">
+				<!-- Diagnostics expanded content -->
+			</StackPanel>
 
-		<StackPanel Grid.Row="2"
-					VerticalAlignment="Bottom">
-			<Button Command="{Binding CollectMemory}"
-					Content="Collect"
-					HorizontalAlignment="Stretch"
-					Padding="4"
-					FontSize="12"
-					Foreground="White"
-					Background="#AA000000" />
-			
-			<Button Command="{Binding ToggleAlignmentGrid}"
-				HorizontalAlignment="Stretch"
-				Content="Grid"
-				Padding="4"
-				FontSize="12"
-				Foreground="White"
-				Background="#AA000000" />
+			<StackPanel Grid.Row="2"
+						HorizontalAlignment="Right">
+				<Button Command="{Binding CollectMemory}"
+						Content="Collect"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
-			<Button Command="{Binding ToggleMore}"
-					HorizontalAlignment="Stretch"
-					Padding="4"
-					FontSize="12"
-					Foreground="White"
-					Background="#AA000000">
-				<Grid>
-					<TextBlock Text="More"
-							   Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToCollapsed}, FallbackValue=Collapsed}" />
+				<Button Command="{Binding ToggleAlignmentGrid}"
+						Content="Grid"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
-					<TextBlock Text="Less"
-							   Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}" />
-				</Grid>
-			</Button>
-		</StackPanel>
+				<Button Command="{Binding ToggleMore}"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}">
+					<Grid>
+						<TextBlock Text="&lt;"
+								   Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToCollapsed}, FallbackValue=Collapsed}" />
+
+						<TextBlock Text=">"
+								   Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}" />
+					</Grid>
+				</Button>
+			</StackPanel>
+		</Grid>
 	</Grid>
 </UserControl>
