@@ -136,4 +136,7 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Client\Mock\ChuckNorrisEndpointMock.Search.json" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.production.json" />
+  </ItemGroup>
 </Project>

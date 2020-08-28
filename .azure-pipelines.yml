@@ -11,6 +11,11 @@ pr:
       - master
       - release/*
 
+resources:
+  containers:
+    - container: windows
+      image: nventive/build-agent:vs16.6.0
+
 variables:
 
   # Prerequisites - Variable groups
@@ -42,6 +47,9 @@ variables:
   AppCenterAndroidSlug: 'nventive-framework/Application-Template-1'
   AppCenteriOSSlug: 'nventive-framework/Application-Template'
   AppCenterUWPSlug: 'nventive-framework/Application-Template-2'
+  AppCenterAndroidSlug_Production: 'nventive-framework/ApplicationTemplate-Production-1'
+  AppCenteriOSSlug_Production: 'nventive-framework/ApplicationTemplate-Production'
+  AppCenterUWPSlug_Production: 'nventive-framework/ApplicationTemplate-Production-2'
 
   # Azure subscription
   # AzureSubscriptionName:
@@ -75,122 +83,72 @@ variables:
   # For release conditions
   IsReleaseBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))]
 
-  # Android configurations
-  ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
-  
-  # Optional, specifiy xcode and xamarin versions. See ios-build-select-version.yml if needed.
+  # Only release when the build is not a Pull Request and it's using one of the proper release branches
+  IsReleaseBuild: $[and(ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))]
+
+  # Android variables (hosted agent)
+  # ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  # ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+  # AndroidNdkDirectory: C:\Microsoft\AndroidNDK64\android-ndk-r16b
+
+  # iOS variables (hosted agent) / See ios-build-select-version.yml if needed.
   # xCodeRoot: '/Applications/Xcode_11.3.app'
   # XamarinSDKVersion: 6_6_0
 
 stages:
-- stage: Build
+- stage: Build_Staging
   jobs:
-  - job: On_Windows # Build UWP and Android on a windows machine
-    strategy:
-      maxParallel: 3
-      matrix:
-        Android:
-          ApplicationConfiguration: Release_Android
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(AndroidArtifactName)
-        UWP:
-          ApplicationConfiguration: Release_UWP
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(UWPArtifactName)
-        Tests:
-          ApplicationConfiguration: Release_Tests
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(TestsArtifactName)
-    pool:
-      name: $(windowsPoolName)
+  - template: build/stage-build.yml
+    parameters:
+      applicationEnvironment: Staging
 
-    variables:
-    - group: ApplicationTemplate.Distribution.GooglePlay
-    
-    container: 'nventive/build-agent:vs16.6.0'
+- stage: Build_Production
+  dependsOn: Build_Staging # Use [] if you want to run both builds in parallel.
+  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  jobs:
+  - template: build/stage-build.yml
+    parameters:
+      applicationEnvironment: Production
 
-    steps:
-      - template: build/stage-build.yml
-
-  - job: On_Mac # Build iOS on a mac
-    strategy:
-      maxParallel: 3
-      matrix:
-        iOS:
-          ApplicationConfiguration: Release_iOS
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(iOSArtifactName)        
-    pool:
-      name: $(macOSPoolName)
-      demands:
-        - Xamarin.iOS -equals $(XAMARIN_IOS_VERSION)
-      
-    variables:
-    - name: SkipUnknownFrameworks
-      value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
-    - group: ApplicationTemplate.Distribution.AppStore
-
-    steps:
-    - task: UseDotNet@2
-      displayName: 'Install .Net Core runtime 2.1.x'
-      inputs:
-        version: 2.1.x
-        packageType: 'runtime'
-        installationPath: '$(Agent.ToolsDirectory)/dotnet'
-        
-    - template: build/stage-build.yml
-
-  # - job: On_Linux
-  #   strategy:
-  #     maxParallel: 1
-  #     matrix:
-  #       Wasm:
-  #         ApplicationConfiguration: Release_WASM
-  #         ApplicationPlatform: Any CPU
-  #         ArtifactName: $(WASMArtifactName)
-
-  #   container: unoplatform/wasm-build:2.2
-
-  #   pool:
-  #     vmImage: 'ubuntu-18.04'
-
-  #   variables:
-  #     NUGET_PACKAGES: $(build.sourcesdirectory)/.nuget
-  #     SkipUnknowFrameworks: True
-
-  #   steps:
-  #     - template: build/stage-build-wasm.yml
-
-- stage: AppCenter
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
-  dependsOn: Build
+- stage: AppCenter_Staging
+  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  dependsOn: Build_Staging
     
   jobs:
   - template: build/stage-release-appcenter.yml
+    parameters:
+      appCenterUWPSlug: $(AppCenterUWPSlug)
+      appCenteriOSSlug: $(AppCenteriOSSlug)
+      appCenterAndroidSlug: $(AppCenterAndroidSlug)
+
+- stage: AppCenter_Production
+  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  dependsOn: Build_Production
+    
+  jobs:
+  - template: build/stage-release-appcenter.yml
+    parameters:
+      appCenterUWPSlug: $(AppCenterUWPSlug_Production)
+      appCenteriOSSlug: $(AppCenteriOSSlug_Production)
+      appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
 
 # - stage: Azure
-#   # Only release when the build is not a Pull Request and it's using one of the proper release branches
-#   condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
-#   dependsOn: Build
+#   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+#   dependsOn: Build_Production
 
 #   jobs:
 #   - template: build/stage-release-wasm.yml
 
 - stage: AppStore
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
-  dependsOn: Build
+  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  dependsOn: Build_Production
 
   jobs: 
   - template: build/stage-release-appstore.yml
 
 - stage: GooglePlay
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  condition: and(succeeded(), ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))
-  dependsOn: Build
+  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  dependsOn: Build_Production
 
   jobs: 
   - template: build/stage-release-googleplay.yml

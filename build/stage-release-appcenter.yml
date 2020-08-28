@@ -1,8 +1,13 @@
+parameters:
+  appCenterUWPSlug: ''
+  appCenteriOSSlug: ''
+  appCenterAndroidSlug: ''
+
 jobs:
 - job: AppCenter_UWP
   pool: $(windowsPoolName)
 
-  container: 'nventive/build-agent:vs16.6.0'
+  container: windows
 
   steps:
   - checkout: none
@@ -17,7 +22,7 @@ jobs:
     displayName: Deploy UWP to AppCenter
     inputs:
       serverEndpoint: $(AppCenterServiceConnection)
-      appSlug: $(AppCenterUWPSlug)
+      appSlug: ${{ parameters.appCenterUWPSlug }}
       appFile: $(System.ArtifactsDirectory)/$(UWPArtifactName)/*.msixbundle
       releaseNotesInput: |
         CI build
@@ -45,7 +50,7 @@ jobs:
     displayName: Deploy iOS to AppCenter
     inputs:
       serverEndpoint: $(AppCenterServiceConnection)
-      appSlug: $(AppCenteriOSSlug)
+      appSlug: ${{ parameters.appCenteriOSSlug }}
       appFile: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa
       symbolsDsymFiles: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.dSYM
       symbolsIncludeParentDirectory: true
@@ -91,7 +96,7 @@ jobs:
     displayName: Deploy Android to AppCenter
     inputs:
       serverEndpoint: $(AppCenterServiceConnection)
-      appSlug: $(AppCenterAndroidSlug)
+      appSlug: ${{ parameters.appCenterAndroidSlug }}
       appFile: '$(Build.SourcesDirectory)/tmp/*.apk'
       releaseNotesInput: |
         CI build
