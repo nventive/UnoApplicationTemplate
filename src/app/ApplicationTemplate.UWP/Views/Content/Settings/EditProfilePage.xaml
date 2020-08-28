@@ -7,7 +7,9 @@
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:android="http://nventive.com/android"
 	  xmlns:ios="http://nventive.com/ios"
-	  mc:Ignorable="d android ios">
+	  xmlns:wasm="http://uno.ui/wasm"
+	  xmlns:not_wasm="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  mc:Ignorable="d android ios wasm">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -18,7 +20,7 @@
 
 		<CommandBar Content="Profile"
 					x:Uid="Profile_CommandBar" />
-		
+
 		<ScrollViewer Grid.Row="1">
 			<StackPanel Margin="20,0,20,20">
 
@@ -38,12 +40,17 @@
 				<local:DataValidationView Model="{Binding Form}"
 										  PropertyName="LastName"
 										  Margin="0,4">
-					<TextBox PlaceholderText="Last name"
-							 x:Uid="Profile_LastName"
-							 Text="{Binding Form.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 ue:TextBoxBehavior.DismissKeyboardOnEnter="True"
-							 ue:TextBoxBehavior.EnterCommand="{Binding UpdateProfile}"
-							 FontSize="16" />
+					<not_wasm:TextBox PlaceholderText="Last name"
+									  x:Uid="Profile_LastName"
+									  Text="{Binding Form.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									  ue:TextBoxBehavior.DismissKeyboardOnEnter="True"
+									  ue:TextBoxBehavior.EnterCommand="{Binding UpdateProfile}"
+									  FontSize="16" />
+					<wasm:TextBox PlaceholderText="Last name"
+								  x:Uid="Profile_LastName"
+								  Text="{Binding Form.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  ue:TextBoxBehavior.EnterCommand="{Binding UpdateProfile}"
+								  FontSize="16" />
 				</local:DataValidationView>
 
 				<Button Command="{Binding UpdateProfile}"

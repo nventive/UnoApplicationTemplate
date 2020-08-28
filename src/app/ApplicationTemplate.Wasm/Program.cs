@@ -5,7 +5,7 @@ namespace ApplicationTemplate.Wasm
 {
 	public class Program
 	{
-		private static App _app;
+		private static Application _app;
 
 		static int Main(string[] args)
 		{

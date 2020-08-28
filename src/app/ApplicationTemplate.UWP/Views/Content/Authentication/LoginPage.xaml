@@ -7,7 +7,9 @@
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:android="http://nventive.com/android"
 	  xmlns:ios="http://nventive.com/ios"
-	  mc:Ignorable="d ios android">
+	  xmlns:wasm="http://uno.ui/wasm"
+	  xmlns:not_wasm="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  mc:Ignorable="d ios android wasm">
 
 	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
@@ -41,15 +43,23 @@
 				<local:DataValidationView Model="{Binding Form}"
 										  PropertyName="Password"
 										  Margin="0,4">
-					<PasswordBox x:Name="PasswordField"
-								 PlaceholderText="Password"
-								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 ios:ReturnKeyType="Done"
-								 android:ImeOptions="Done"
-								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True"
-								 ue:PasswordBoxBehavior.EnterCommand="{Binding Login}"
-								 x:Uid="Login_Password"
-								 FontSize="16" />
+					<not_wasm:PasswordBox x:Name="PasswordField"
+										  PlaceholderText="Password"
+										  Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+										  ios:ReturnKeyType="Done"
+										  android:ImeOptions="Done"
+										  ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True"
+										  ue:PasswordBoxBehavior.EnterCommand="{Binding Login}"
+										  x:Uid="Login_Password"
+										  FontSize="16" />
+					<wasm:PasswordBox x:Name="PasswordField"
+									  PlaceholderText="Password"
+									  Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									  ios:ReturnKeyType="Done"
+									  android:ImeOptions="Done"
+									  ue:PasswordBoxBehavior.EnterCommand="{Binding Login}"
+									  x:Uid="Login_Password"
+									  FontSize="16" />
 				</local:DataValidationView>
 
 				<HyperlinkButton Content="Forgot password?"
