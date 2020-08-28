@@ -57,8 +57,6 @@
 		<PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.2.0-dev.22" />
 		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="0.2.0-dev.22" />
 		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="0.2.0-dev.22" />
-		<PackageReference Include="Chinook.BackButtonManager" Version="0.2.0-dev.13" />
-		<PackageReference Include="Chinook.BackButtonManager.Uno" Version="0.2.0-dev.13" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno" Version="0.2.0-dev.33" />
 		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.2.0-dev.33" />
 		<PackageReference Include="Chinook.DataLoader.Uno" Version="0.2.0-dev.27" />

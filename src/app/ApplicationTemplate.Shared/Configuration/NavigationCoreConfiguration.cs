@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Chinook.BackButtonManager;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+#if !__WASM__
+using Chinook.BackButtonManager;
+#endif
 
 namespace ApplicationTemplate
 {
@@ -32,6 +34,7 @@ namespace ApplicationTemplate
 
 			return services
 				.AddSingleton<IStackNavigator>(s => new SectionsNavigatorToStackNavigatorAdapter(s.GetService<ISectionsNavigator>()))
+#if !__WASM__
 				.AddSingleton<IBackButtonManager>(s =>
 				{
 					var manager = new BackButtonManager();
@@ -44,7 +47,9 @@ namespace ApplicationTemplate
 					));
 
 					return manager;
-				});
+				})
+#endif
+				;
 		}
 	}
 }

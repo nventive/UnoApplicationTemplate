@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using Chinook.BackButtonManager;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
+#if !__WASM__
+using Chinook.BackButtonManager;
+#endif
 
 namespace Chinook.DynamicMvvm
 {
@@ -22,6 +24,7 @@ namespace Chinook.DynamicMvvm
 		/// <param name="priority">The optional priority. (See <see cref="IBackButtonManager.AddHandler(IBackButtonHandler, int?)"/> for more info.)</param>
 		public static void RegisterBackHandler(this IViewModel vm, Func<CancellationToken, Task> handle, Func<bool> canHandle = null, string handlerName = null, int? priority = null)
 		{
+#if !__WASM__
 			vm = vm ?? throw new ArgumentNullException(nameof(vm));
 			handlerName = handlerName ?? vm.GetType().Name;
 			handle = handle ?? throw new ArgumentNullException(nameof(handle));
@@ -40,6 +43,7 @@ namespace Chinook.DynamicMvvm
 				// The handler can handle the back only if the associated ViewModel is the one currently active in the navigator.
 				return navigator.GetActiveViewModel() == vm;
 			}
+#endif
 		}
 	}
 }

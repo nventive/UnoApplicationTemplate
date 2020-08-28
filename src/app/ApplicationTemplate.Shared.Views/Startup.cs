@@ -2,7 +2,6 @@
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Chinook.BackButtonManager;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
@@ -10,6 +9,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Nventive.AsyncWebView;
 using Windows.UI.Core;
+#if !__WASM__
+using Chinook.BackButtonManager;
+#endif
 
 namespace ApplicationTemplate
 {
@@ -90,6 +92,7 @@ namespace ApplicationTemplate
 		/// </summary>
 		private async Task AddSystemBackButtonSource(IServiceProvider services)
 		{
+#if !__WASM__
 			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 			var backButtonManager = services.GetRequiredService<IBackButtonManager>();
 			await dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.High, AddSystemBackButtonSourceInner);
@@ -100,6 +103,7 @@ namespace ApplicationTemplate
 				var source = new SystemNavigationBackButtonSource();
 				backButtonManager.AddSource(source);
 			}
+#endif
 		}
 
 		protected override ILogger GetLogger(IServiceProvider serviceProvider)

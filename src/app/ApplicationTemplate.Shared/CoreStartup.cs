@@ -3,7 +3,6 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
-using Chinook.BackButtonManager;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -16,6 +15,9 @@ using Nventive.ExtendedSplashScreen;
 using Nventive.MessageDialog;
 using Uno.Disposables;
 using Windows.UI.Core;
+#if !__WASM__
+using Chinook.BackButtonManager;
+#endif
 
 namespace ApplicationTemplate
 {
@@ -115,7 +117,9 @@ namespace ApplicationTemplate
 
 			StackNavigationConfiguration.LoggerFactory = loggerFactory;
 			SectionsNavigationConfiguration.LoggerFactory = loggerFactory;
+#if !__WASM__
 			BackButtonManagerConfiguration.LoggerFactory = loggerFactory;
+#endif
 			DynamicMvvmConfiguration.LoggerFactory = loggerFactory;
 			DataLoaderConfiguration.LoggerFactory = loggerFactory;
 		}
