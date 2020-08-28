@@ -5,7 +5,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>ApplicationTemplate</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.nventive.applicationtemplate</string>
+	<string>com.nventive.apptemplate</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.99.99</string>
 	<key>CFBundleVersion</key>
