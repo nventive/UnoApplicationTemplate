@@ -7,6 +7,12 @@
 		<DefineConstants>$(DefineConstants);__WASM__</DefineConstants>
 		<NoWarn>NU1701</NoWarn>
 		<UserSecretsId>5d5b2692-9b96-434d-b514-c834d76d8dd3</UserSecretsId>
+	<!-- 
+      Disabled the linker because of the following error:
+      Mono.Linker.MarkException: Error processing method: 'System.Buffers.OperationStatus System.Text.Unicode.UnicodeHelpers::DecodeScalarValueFromUtf8(System.ReadOnlySpan`1<System.Byte>,System.UInt32&,System.Int32&)' 
+      in assembly: 'System.Text.Encodings.Web.dll' Mono.Cecil.ResolutionException: Failed to resolve System.Buffers.OperationStatus
+    -->
+    <WasmShellILLinkerEnabled>False</WasmShellILLinkerEnabled>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)'=='Debug'">
 		<MonoRuntimeDebuggerEnabled>true</MonoRuntimeDebuggerEnabled>
@@ -41,6 +47,7 @@
 		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
+		<PackageReference Include="Uno.CodeGen" Version="1.32.0" />
 		<PackageReference Include="Uno.UI.RemoteControl" Version="3.0.0-dev.1533" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Uno.UI.WebAssembly" Version="3.0.0-dev.1533" />
 		<PackageReference Include="Uno.Wasm.Bootstrap" Version="1.4.0-dev.16" />
@@ -72,6 +79,7 @@
 		<PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
 		<PackageReference Include="DynamicData" Version="6.14.18" />
 		<PackageReference Include="Nventive.View.Uno" Version="0.1.0-dev.13" />
+		<PackageReference Include="Reactive.Annex.Uno" Version="0.2.0-dev.14" />
 	</ItemGroup>
 	<ItemGroup>
 		<Compile Include="..\ApplicationTemplate.UWP\App.xaml.cs" />
