@@ -19,13 +19,13 @@
 		<ShouldWriteErrorOnInvalidXaml>True</ShouldWriteErrorOnInvalidXaml>
 	</PropertyGroup>
 
-	<!-- Environment-specific build variables are defined here -->
-	<PropertyGroup Condition="'$(AppEnvironment)'=='Staging'">
-		<BuildConstants>STAGING</BuildConstants>
+  <!-- Environment-specific build variables are defined here -->
+	<PropertyGroup Condition="'$(ApplicationEnvironment)'=='Staging'">
+		<DefineConstants>$(DefineConstants);STAGING</DefineConstants>
 	</PropertyGroup>
 
-	<PropertyGroup Condition="'$(AppEnvironment)'=='Production'">
-		<BuildConstants>PRODUCTION</BuildConstants>
+	<PropertyGroup Condition="'$(ApplicationEnvironment)'=='Production'">
+		<DefineConstants>$(DefineConstants);PRODUCTION</DefineConstants>
 	</PropertyGroup>
 
 </Project>

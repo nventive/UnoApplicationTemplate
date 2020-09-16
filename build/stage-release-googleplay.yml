@@ -2,7 +2,7 @@ jobs:
 - job:  GooglePlay_Android
   pool: $(windowsPoolName)
 
-  container: 'nventive/build-agent:vs16.6.0'
+  container: windows
 
   variables:
   - group: ApplicationTemplate.Distribution.GooglePlay

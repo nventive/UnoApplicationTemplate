@@ -1,78 +1,84 @@
-﻿steps:
-- task: gitversion/setup@0
-  inputs:
-    versionSpec: '5.0.0'
-  displayName: 'Install GitVersion'
+parameters:
+  applicationEnvironment: ''
 
-- task: gitversion/execute@0
-  inputs:
-    useConfigFile: true
-    configFilePath: 'gitversion.yml'
-  displayName: 'Calculate version'
+jobs:
+  - job: On_Windows # Build UWP and Android on a windows machine
+    strategy:
+      maxParallel: 3
+      matrix:
+        Android:
+          ApplicationConfiguration: Release_Android
+          ApplicationPlatform: Any CPU
+          ArtifactName: $(AndroidArtifactName)
+          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+        UWP:
+          ApplicationConfiguration: Release_UWP
+          ApplicationPlatform: Any CPU
+          ArtifactName: $(UWPArtifactName)
+          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+        Tests:
+          ApplicationConfiguration: Release_Tests
+          ApplicationPlatform: Any CPU
+          ArtifactName: $(TestsArtifactName)
+          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+    pool:
+      name: $(windowsPoolName)
 
-- task: NuGetToolInstaller@0
-  displayName: 'Install NuGet $(NUGET_VERSION)'
-  inputs:
-    versionSpec: $(NUGET_VERSION)
-    checkLatest: false
+    variables:
+    - group: ApplicationTemplate.Distribution.GooglePlay
+    
+    container: windows
 
-- task: VisualStudioTestPlatformInstaller@1
-  condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
-  inputs:
-    packageFeedSelector: 'nugetOrg'
-    versionSelector: 'specificVersion'
-    testPlatformVersion: '15.9.2'
+    steps:
+      - template: steps-build.yml
 
-- task: NuGetCommand@2
-  displayName: 'Restore solution packages'
-  inputs:
-    command: restore
-    solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
-    feedsToUse: 'config'
-    nugetConfigPath: 'nuget.config'
-    verbosityRestore: Normal
-    noCache: true
+  - job: On_Mac # Build iOS on a mac
+    strategy:
+      maxParallel: 3
+      matrix:
+        iOS:
+          ApplicationConfiguration: Release_iOS
+          ApplicationPlatform: Any CPU
+          ArtifactName: $(iOSArtifactName)    
+          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}   
+    pool:
+      name: $(macOSPoolName)
+      demands:
+        - Xamarin.iOS -equals $(XAMARIN_IOS_VERSION)
+      
+    variables:
+    - name: SkipUnknownFrameworks
+      value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
+    - group: ApplicationTemplate.Distribution.AppStore
 
-- task: DownloadSecureFile@1
-  name: keyStore
-  displayName: "Download keystore from secure files"
-  inputs:
-    secureFile: $(GooglePlayKeystore)
+    steps:
+    - task: UseDotNet@2
+      displayName: 'Install .Net Core runtime 2.1.x'
+      inputs:
+        version: 2.1.x
+        packageType: 'runtime'
+        installationPath: '$(Agent.ToolsDirectory)/dotnet'
+        
+    - template: steps-build.yml
 
-- task: MSBuild@1
-  displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
-  inputs:
-    solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
-    msbuildLocationMethod: version
-    msbuildVersion: latest
-    msbuildArchitecture: x86
-    configuration: $(ApplicationConfiguration)
-    platform: $(ApplicationPlatform)
-    clean: false
-    maximumCpuCount: true
-    restoreNugetPackages: false
-    logProjectEvents: false
-    createLogFile: false
-    msbuildArguments: /p:PackageVersion=$(SemVer) /p:ApplicationVersion=$(MajorMinorPatch) /p:AndroidSigningKeyStore=$(keyStore.secureFilePath) /p:AndroidSigningStorePass=$(AndroidSigningStorePass) /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass) /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias) /p:AndroidKeyStore=true
+  # - job: On_Linux
+  #   strategy:
+  #     maxParallel: 1
+  #     matrix:
+  #       Wasm:
+  #         ApplicationConfiguration: Release_WASM
+  #         ApplicationPlatform: Any CPU
+  #         ArtifactName: $(WASMArtifactName)
+  #         ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
 
-- task: VSTest@2
-  displayName: 'Run tests'
-  condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
-  inputs:
-    testAssemblyVer2: |
-      **\*tests*.dll
-      !**\obj\**
-    vstestLocationMethod: version
-    vsTestVersion: "latest"
-    testSelector: testAssemblies
+  #   container: unoplatform/wasm-build:2.2
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)
-    ArtifactName: $(ArtifactName)
-    ArtifactType: Container
+  #   pool:
+  #     vmImage: 'ubuntu-18.04'
 
-- task: PostBuildCleanup@3
-  displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
-  condition: always()
+  #   variables:
+  #     NUGET_PACKAGES: $(build.sourcesdirectory)/.nuget
+  #     SkipUnknowFrameworks: True
+
+  #   steps:
+  #     - template: steps-build-wasm.yml

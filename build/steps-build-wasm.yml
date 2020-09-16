@@ -19,7 +19,7 @@
     targetType: inline
     script: |
       source ~/emsdk/emsdk_env.sh
-      msbuild /r /p:Configuration=Release_WASM /p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) $(build.sourcesdirectory)/src/app/ApplicationTemplate.Wasm/ApplicationTemplate.Wasm.csproj
+      msbuild /r /p:Configuration=$(ApplicationConfiguration) /p:BuildConstants=$(ApplicationEnvironment) /p:ApplicationVersion=$(USEGITVERSION.GITVERSION.MAJORMINORPATCH) $(build.sourcesdirectory)/src/app/ApplicationTemplate.Wasm/ApplicationTemplate.Wasm.csproj
 
 - task: CopyFiles@2
   displayName: 'Copy version information'
