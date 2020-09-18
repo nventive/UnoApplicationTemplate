@@ -5,7 +5,7 @@ trigger:
       - release/*
       - feature/*
 
-pr: 
+pr:
   branches:
     include:
       - master
@@ -53,7 +53,7 @@ variables:
 
   # Azure subscription
   # AzureSubscriptionName:
-  # AzureStorageAccountName: 
+  # AzureStorageAccountName:
 
   # Solution to build
   SolutionFileName: ApplicationTemplate.sln
@@ -76,7 +76,7 @@ variables:
 
   # Path where packages (nuget or app packages) will be copied to.
   PackageOutputPath: $(Build.ArtifactStagingDirectory)
-  
+
   # For Application.Building.Light optimizations
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
 
@@ -103,7 +103,7 @@ stages:
       applicationEnvironment: Staging
 
 - stage: Build_Production
-  dependsOn: Build_Staging # Use [] if you want to run both builds in parallel.
+  dependsOn: Build_Staging # Use dependsOn: [] if you want to run both builds in parallel.
   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
   jobs:
   - template: build/stage-build.yml
@@ -113,7 +113,7 @@ stages:
 - stage: AppCenter_Staging
   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
   dependsOn: Build_Staging
-    
+
   jobs:
   - template: build/stage-release-appcenter.yml
     parameters:
@@ -124,7 +124,7 @@ stages:
 - stage: AppCenter_Production
   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
   dependsOn: Build_Production
-    
+
   jobs:
   - template: build/stage-release-appcenter.yml
     parameters:
@@ -143,12 +143,12 @@ stages:
   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
   dependsOn: Build_Production
 
-  jobs: 
+  jobs:
   - template: build/stage-release-appstore.yml
 
 - stage: GooglePlay
   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
   dependsOn: Build_Production
 
-  jobs: 
+  jobs:
   - template: build/stage-release-googleplay.yml
