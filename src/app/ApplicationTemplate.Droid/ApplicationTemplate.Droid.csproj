@@ -47,6 +47,8 @@
 		<DefineConstants>DEBUG;TRACE</DefineConstants>
 		<Optimize>False</Optimize>
 		<OutputPath>bin\Debug\</OutputPath>
+		<AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
+		<UseHighDPIResources>False</UseHighDPIResources>
 		<EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
 		<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 		<AotAssemblies>false</AotAssemblies>
