@@ -1,10 +1,10 @@
 ﻿# Uno Application Template
 
-This is a mobile app project template using latest practices.
-
-We use `dotnet` project templates to easily create new projects. It simplifies the project renaming and supports conditional inclusions.
+This is a mobile app project template using [Uno](https://github.com/unoplatform/uno) and the latest .NET practices.
 
 ## Getting Started
+
+We use `dotnet` project templates to easily create new projects. It simplifies the **project renaming** and supports **conditional inclusions**.
 
 1. Install the template using the following command at the root of the project.
 
@@ -29,9 +29,24 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 [Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
 
-## Architecture
+## Documentation
 
-Please consult the [Architecture document](doc/Architecture.md) for more information about the project.
+This repository provides documentation on different topics under the [doc](doc/) folder.
+
+- [Architecture](doc/Architecture.md)
+- [Dependency Injection](doc/DependencyInjection.md)
+- [Configuration](doc/Configuration.md)
+- [HTTP](doc/HTTP.md)
+- [Logging](doc/Logging.md)
+- [Platform specifics](doc/PlatformSpecifics.md)
+- [Serialization](doc/Serialization.md)
+- [Startup](doc/Startup.md)
+- [Testing](doc/Testing.md)
+- [Environments](doc/Environments.md)
+- [Localization](doc/Localization.md)
+- [Validation](doc/Validation.md)
+- [Error handling](doc/ErrorHandling.md)
+- [Scheduling](doc/Scheduling.md)
 
 ## Changelog
 

@@ -20,14 +20,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{4A31B4ED-94E
 	ProjectSection(SolutionItems) = preProject
 		..\doc\Architecture.md = ..\doc\Architecture.md
 		..\CHANGELOG.md = ..\CHANGELOG.md
+		..\doc\Configuration.md = ..\doc\Configuration.md
 		..\doc\DependencyInjection.md = ..\doc\DependencyInjection.md
+		..\doc\Environments.md = ..\doc\Environments.md
+		..\doc\ErrorHandling.md = ..\doc\ErrorHandling.md
 		..\doc\HTTP.md = ..\doc\HTTP.md
+		..\doc\Localization.md = ..\doc\Localization.md
 		..\doc\Logging.md = ..\doc\Logging.md
 		..\doc\PlatformSpecifics.md = ..\doc\PlatformSpecifics.md
 		..\README.md = ..\README.md
+		..\doc\Scheduling.md = ..\doc\Scheduling.md
 		..\doc\Serialization.md = ..\doc\Serialization.md
 		..\doc\Startup.md = ..\doc\Startup.md
 		..\doc\Testing.md = ..\doc\Testing.md
+		..\doc\Validation.md = ..\doc\Validation.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApplicationTemplate.Droid", "app\ApplicationTemplate.Droid\ApplicationTemplate.Droid.csproj", "{E020FFC0-80C4-45D8-AFA9-A6954935FDDE}"

@@ -1,29 +1,29 @@
-﻿## HTTP
+﻿# HTTP
 
 We use [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http) for any HTTP related work.
 
-- You can register a service with a dependency to `HttpClient` using `services.AddHttpClient<IEndpoint, EndpointImplementation>()`.
+For more documentation on HTTP requests, read the references listed at the bottom.
 
-- We created a `NetworkAwareMessageHandler` which checks network connectivity if an exception is thrown when executing an HTTP request.
-You can add this handler using `.AddHttpMessageHandler<NetworkAwareMessageHandler>()`.
-We could create an extension `AddNoNetworkAware` which would auto-register a transient `NetworkAwareMessageHandler`.
+## HTTP endpoints
 
-- We could create more `DelegatingHandlers` to leverage more use cases (e.g. OAuth2.0, error handling, etc.). 
+- You can register a service with a dependency to `HttpClient` using `services.AddHttpClient<IEndpoint, EndpointImplementation>()` in the [ApiConfiguration.cs](../src/app/ApplicationTemplate.Shared/Configuration/ApiConfiguration.cs) file.
 
-We use [JSONPlaceholder](https://jsonplaceholder.typicode.com/) as a testing API. 
+- We use `DelegatingHandler` to create HTTP request / response pipelines. There are lot of delegating handlers implementation in the community, we provide some in [MallardMessageHandlers](https://github.com/nventive/MallardMessageHandlers).
 
-- This API lets us send GET, POST, PUT, DELETE, etc. requests with proper mocked responses. 
+- We use [Refit](https://www.nuget.org/packages/Refit/) to generate the implementation of the client layer.
 
-- We currently use the `/posts` route which contains 100 posts.
+## Caching and policies
 
-We use [Refit](https://www.nuget.org/packages/Refit/) to generate the implementation of the client layer.
+- We may use [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) to leverage request policies (e.g. retry, timeout, etc.).
 
-At the moment, we use [Xamarin.Essentials](https://www.nuget.org/packages/Xamarin.Essentials/) to test the network connectivity as it is not implemented in Uno.
+- We may use [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache) to leverage API response caching.
 
-We may use [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) to leverage request policies (e.g. retry, timeout, etc.).
+## Mocking
 
-### References
+- We use a simple `BaseMock` class to support mocking scenarios. You simply add embbedded resources (.json files) that contain the mocked responses into your project.
+
+## References
 - [Making HTTP requests using IHttpClientFactory](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/http-requests?view=aspnetcore-3.0)
+- [Delegating handlers](https://docs.microsoft.com/en-us/aspnet/web-api/overview/advanced/http-message-handlers)
 - [Polly and HttpClientFactory](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory)
 - [What is Refit](https://github.com/reactiveui/refit)
-- [Testing network connectivity using Xamarin.Essentials](https://docs.microsoft.com/en-us/xamarin/essentials/connectivity)

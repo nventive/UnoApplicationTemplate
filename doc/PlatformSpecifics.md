@@ -1,6 +1,6 @@
-## Platform specifics
+# Platform specifics
 
-### Android
+## Android
 
 #### AndroidManifest
 - Information usually found in AndroidManifest is split into three files.
@@ -8,10 +8,10 @@
     - `AssemblyInfo.cs` for the permissions.
     - `Main.cs` for the `<Application>` properties. 
 
-#### ApplicationName
+### ApplicationName
 - `Label` is set in Main.cs to a resource. For Android this ApplicationName resource is located in `Resources/values/Strings.xml`. Resources.resw in the Shared project is not used for the label on Android.
 
-#### Profiled AOT
+### Profiled AOT
 
 In order to get better startup performance on Android, this application is bootstrapped using profiled AOT.
 
