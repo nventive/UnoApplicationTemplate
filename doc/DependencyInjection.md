@@ -1,24 +1,10 @@
-﻿## Dependency injection
+﻿# Dependency injection
 
 We use [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) for any IoC related work.
 
-### Configuring
+For more documentation on dependency injection, read the references listed at the bottom.
 
-The host is configured inside the [Startup.cs](src/ApplicationTemplate.Shared/Startup.cs) file.
-
-- **File configuration**: The configuration is loaded from the [appsettings.json](src/ApplicationTemplate.Shared/appsettings.json) file. We could have a settings file per configuration (e.g. _appsettings.production.json_).
-We extract the file from the assembly and use `AddJsonStream` to import it. 
-We could use `.AddJsonFile`, but it freezes in WebAssembly.
-As of now, loading the configuration file doesn't create poor startup performance (< 500ms startup times). It will be something to check in the future.
-
-- **In-memory configuration**: The configuration can also be loaded from a dictionnary using `AddInMemoryConfiguration`.
-
-- **Precedence**: Multiple configurations can be loaded, the order in which they are loaded determines which one is used.
-For example, if you have two keys with the same name, the last one will overwrite the first one.
-
-- **Custom properties**: Custom properties can be added to the configuration. They can then be resolved using `ctx.Configuration.GetValue("MyKey")`.
-
-### Registering
+## Registering
 
 - Services are registered into `IServiceCollection`. We can register different services depending on the current configuration defined into the `HostBuilderContext.HostingEnvironment.EnvironmentName` property. 
 
@@ -35,9 +21,19 @@ For example, we could have a `.AddLocation()` extension to include everything Io
 
 - You can't register named dependencies as this is [generally a bad practice](https://stackoverflow.com/questions/46476112/dependency-injection-of-multiple-instances-of-same-type-in-asp-net-core-2).
 
-### Resolving
+## Resolving
 
-- Dependencies are injected automatically into the constructors.
+- Dependencies are injected automatically into the constructors of the registered services.
+
+  ```csharp
+  services.AddSingleton<MyService>();
+  services.AddSingleton<MyOtherService>();
+
+  public class MyService(MyOtherService myOtherService)
+  {
+    // Resolving MyService will automatically add MyOtherService here.
+  }
+  ```
 
 - If you can't use constructor injection, you can use `IServiceProvider.GetRequiredService<IService>()` to resolve a service.
 This will throw an exception if the type `IService` is not registered.
@@ -45,7 +41,25 @@ You can also use `IServiceProvider.GetService<IService>()` which will return `de
 
 - Circular dependencies will not work with this container. If you do have them, you will get the following exception `A circular dependency was detected for the service of type`.
 
-### References
+- You can access the service provider **statically** using `App.Instance.Startup.ServiceProvider`.
+
+- You can access your services from a **view model** using `this.GetService<MyService>`.
+
+- You can also access your services from a **view model** using the `[Inject]` attribute.
+
+  ```csharp
+  // Your class needs to be partial.
+  public partial class MyViewModel
+  {
+    // This property will be automatically assigned in the constructor.
+    [Inject] private MyService _service;
+  }
+  ```
+
+  Support of this attribute is done in the [ViewModel.cs](../src/app/ApplicationTemplate.Shared/Presentation/ViewModel.cs) file.
+
+## References
 
 - [Understanding Generic Host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0)
 - [Using dependency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0)
+- [Using Uno.Injectable](https://github.com/unoplatform/Uno.CodeGen/blob/master/doc/Injectable%20Generation.md)
