@@ -102,7 +102,7 @@ namespace ApplicationTemplate
 			}
 		}
 
-		protected override ILogger GetLogger(IServiceProvider serviceProvider)
+		protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
 		{
 			return serviceProvider.GetRequiredService<ILogger<Startup>>();
 		}

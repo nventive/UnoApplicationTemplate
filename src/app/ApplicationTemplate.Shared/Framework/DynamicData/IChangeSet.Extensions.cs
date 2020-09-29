@@ -8,6 +8,11 @@ namespace DynamicData
 	{
 		public static IEnumerable<T> GetAddedItems<T>(this IChangeSet<T> changeSet)
 		{
+			if (changeSet is null)
+			{
+				throw new ArgumentNullException(nameof(changeSet));
+			}
+
 			foreach (var change in changeSet)
 			{
 				switch (change.Type)
@@ -33,6 +38,11 @@ namespace DynamicData
 
 		public static IEnumerable<T> GetRemovedItems<T>(this IChangeSet<T> changeSet)
 		{
+			if (changeSet is null)
+			{
+				throw new ArgumentNullException(nameof(changeSet));
+			}
+
 			foreach (var change in changeSet)
 			{
 				switch (change.Type)

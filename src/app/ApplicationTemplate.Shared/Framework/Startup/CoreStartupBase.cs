@@ -20,8 +20,6 @@ namespace ApplicationTemplate
 		/// </summary>
 		protected static readonly CompositeDisposable _neverDisposed = new CompositeDisposable();
 
-		protected ILogger _logger;
-
 		public StartupState State { get; } = new StartupState();
 
 		public IServiceProvider ServiceProvider { get; private set; }
@@ -29,6 +27,8 @@ namespace ApplicationTemplate
 		public Activity BuildCoreHostActivity { get; } = new Activity("BuildCoreHost");
 
 		public Activity BuildHostActivity { get; } = new Activity("BuildHost");
+
+		protected ILogger Logger { get; private set; }
 
 		/// <summary>
 		/// Pre-initializes the application.
@@ -66,7 +66,7 @@ namespace ApplicationTemplate
 
 			BuildCoreHostActivity.Start();
 
-			_logger = CreateHostLogger();
+			Logger = CreateHostLogger();
 
 			BuildCoreHostActivity.Stop();
 
@@ -90,7 +90,7 @@ namespace ApplicationTemplate
 
 			State.IsInitialized = true;
 
-			_logger.LogInformation("Initialized core startup.");
+			Logger.LogInformation("Initialized core startup.");
 		}
 
 		/// <summary>
@@ -98,7 +98,7 @@ namespace ApplicationTemplate
 		/// </summary>
 		/// <param name="serviceProvider">The service provider from which the implemator class should obtain the logger.</param>
 		/// <returns>The <see cref="ILogger{TCategoryName}"/> typed to the implementator class.</returns>
-		protected abstract ILogger GetLogger(IServiceProvider serviceProvider);
+		protected abstract ILogger GetOrCreateLogger(IServiceProvider serviceProvider);
 
 		/// <summary>
 		/// Initializes services into the provided <see cref="IHostBuilder"/>.
@@ -126,20 +126,22 @@ namespace ApplicationTemplate
 				throw new InvalidOperationException($"You must call {nameof(Initialize)} before calling '{nameof(Start)}'.");
 			}
 
-			_logger.LogDebug("Starting core startup.");
+			Logger.LogDebug("Starting core startup.");
 
 			var isFirstStart = !State.IsStarted;
 
-			_logger.LogDebug($"Starting services (isFirstStart: {isFirstStart}).");
+			Logger.LogDebug($"Starting services (isFirstStart: {isFirstStart}).");
+
 			await StartServices(ServiceProvider, isFirstStart);
-			_logger.LogInformation("Started services.");
+
+			Logger.LogInformation("Started services.");
 
 			if (isFirstStart)
 			{
 				State.IsStarted = true;
 			}
 
-			_logger.LogInformation("Started core startup.");
+			Logger.LogInformation("Started core startup.");
 		}
 
 		/// <summary>
@@ -162,7 +164,7 @@ namespace ApplicationTemplate
 				.AddHostLogging()
 				.Build();
 
-			return GetLogger(coreHost.Services);
+			return GetOrCreateLogger(coreHost.Services);
 		}
 
 		private string GetContentRootPath()

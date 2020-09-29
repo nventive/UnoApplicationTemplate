@@ -9,7 +9,7 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate
 {
-	public class ChuckNorrisService : IChuckNorrisService
+	public sealed class ChuckNorrisService : IChuckNorrisService, IDisposable
 	{
 		private readonly IApplicationSettingsService _applicationSettingsService;
 		private readonly IChuckNorrisEndpoint _chuckNorrisEndpoint;
@@ -89,6 +89,11 @@ namespace ApplicationTemplate
 			}
 
 			return _favouriteQuotes;
+		}
+
+		public void Dispose()
+		{
+			_favouriteQuotes?.Dispose();
 		}
 	}
 }

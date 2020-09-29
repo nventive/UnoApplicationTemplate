@@ -27,7 +27,7 @@ namespace ApplicationTemplate
 		/// <summary>
 		/// Sets whether or not a quote is favorite.
 		/// </summary>
-		/// <param name="ct"><see cref="CancellationToken"</param>
+		/// <param name="ct"><see cref="CancellationToken"/></param>
 		/// <param name="quote"><see cref="ChuckNorrisQuote"/></param>
 		/// <param name="isFavorite">Is favorite or not</param>
 		/// <returns><see cref="Task"/></returns>

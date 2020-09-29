@@ -67,6 +67,11 @@ namespace ApplicationTemplate
 		/// If <paramref name="serializer" /> is left empty, the serializer defined in ctor. will be used".
 		/// Note that this will deserialize the first embedded resource whose name ends with the specified <paramref name="resourceName" />.
 		/// </remarks>
+		/// <typeparam name="T">Type of object</typeparam>
+		/// <param name="resourceName">Name of the resource</param>
+		/// <param name="serializer">Deserializer</param>
+		/// <param name="callerMemberName">Name of the caller (used if no resource name provided)</param>
+		/// <returns>Deserialized object</returns>
 		protected Task<T> GetTaskFromEmbeddedResource<T>(
 			string resourceName = null,
 			IObjectSerializer serializer = null,

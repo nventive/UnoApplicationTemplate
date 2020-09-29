@@ -34,7 +34,13 @@ namespace ApplicationTemplate
 
 			this.GetService<IDispatcherScheduler>().ScheduleTask(async (ct2, s) =>
 			{
+//-:cnd:noEmit
+#if WINDOWS_UWP
+//+:cnd:noEmit
 				await Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
 			});
 		});
 

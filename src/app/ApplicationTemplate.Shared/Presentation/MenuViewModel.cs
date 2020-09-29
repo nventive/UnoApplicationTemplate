@@ -13,6 +13,16 @@ namespace ApplicationTemplate
 {
 	public partial class MenuViewModel : ViewModel
 	{
+		/// <summary>
+		/// The list of ViewModel types on which the bottom menu should be visible.
+		/// </summary>
+		private Type[] _viewModelsWithBottomMenu = new Type[]
+		{
+			typeof(HomePageViewModel),
+			typeof(PostsPageViewModel),
+			typeof(SettingsPageViewModel),
+		};
+
 		public IDynamicCommand ShowHome => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new HomePageViewModel());
@@ -60,15 +70,5 @@ namespace ApplicationTemplate
 				}
 			}
 		}
-
-		/// <summary>
-		/// The list of ViewModel types on which the bottom menu should be visible.
-		/// </summary>
-		private Type[] _viewModelsWithBottomMenu = new Type[]
-		{
-			typeof(HomePageViewModel),
-			typeof(PostsPageViewModel),
-			typeof(SettingsPageViewModel),
-		};
 	}
 }

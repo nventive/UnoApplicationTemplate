@@ -109,7 +109,7 @@ namespace ApplicationTemplate
 						.OkCommand()
 					);
 				})
-				.Subscribe(_ => { }, e => _logger.LogError(e, "Failed to notify user of session expiration."))
+				.Subscribe(_ => { }, e => Logger.LogError(e, "Failed to notify user of session expiration."))
 				.DisposeWith(_neverDisposed);
 		}
 
@@ -203,7 +203,7 @@ namespace ApplicationTemplate
 			};
 		}
 
-		protected override ILogger GetLogger(IServiceProvider serviceProvider)
+		protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
 		{
 			return serviceProvider.GetRequiredService<ILogger<CoreStartup>>();
 		}
