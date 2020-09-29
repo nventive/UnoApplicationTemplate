@@ -14,7 +14,7 @@ namespace ApplicationTemplate
 		}
 
 		/// <summary>
-		/// Represents the type of this validation state.
+		/// Gets the type of this validation state.
 		/// </summary>
 		public DataValidationStateType StateType { get; }
 

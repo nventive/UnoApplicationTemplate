@@ -16,7 +16,7 @@ namespace ApplicationTemplate
 
 		public IDynamicCommand TestErrorInTaskScheduler => this.GetCommand(() =>
 		{
-			/// This will be handled by <see cref="TaskScheduler.UnobservedTaskException" />
+			// This will be handled by <see cref="TaskScheduler.UnobservedTaskException" />
 			var _ = Task.Run(() => throw new Exception("This is a test of an exception in the TaskScheduler. Please ignore."));
 
 			// Wait until the task had a chance to throw without awaiting it.
@@ -45,7 +45,7 @@ namespace ApplicationTemplate
 				return;
 			}
 
-			/// This will be handled by <see cref="AppDomain.CurrentDomain.UnhandledException" />
+			// This will be handled by <see cref="AppDomain.CurrentDomain.UnhandledException" />
 			var _ = ThreadPool.QueueUserWorkItem(__ => throw new Exception("This is a test of an exception in the ThreadPool. Please ignore."));
 		});
 

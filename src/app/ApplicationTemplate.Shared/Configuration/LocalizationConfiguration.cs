@@ -122,20 +122,20 @@ namespace ApplicationTemplate
 				throw new ArgumentNullException(nameof(name));
 			}
 
-			var format = _resourceLoader.GetString(name);
+			var resource = _resourceLoader.GetString(name);
 
-			if (_treatEmptyAsNotFound && string.IsNullOrEmpty(format))
+			if (_treatEmptyAsNotFound && string.IsNullOrEmpty(resource))
 			{
-				format = null;
+				resource = null;
 			}
 
-			format = format ?? name;
+			resource = resource ?? name;
 
 			var value = arguments.Any()
-				? string.Format(format, arguments)
-				: format;
+				? string.Format(CultureInfo.CurrentCulture, resource, arguments)
+				: resource;
 
-			return new LocalizedString(name, value, resourceNotFound: format == null, searchedLocation: SearchLocation);
+			return new LocalizedString(name, value, resourceNotFound: resource == null, searchedLocation: SearchLocation);
 		}
 
 		/// <inheritdoc/>
@@ -197,7 +197,7 @@ namespace ApplicationTemplate
 				}
 
 				// Use the fallback culture if the language is not supported.
-				if (!_supportedLanguages.Any(l => l.StartsWith(culture.TwoLetterISOLanguageName)))
+				if (!_supportedLanguages.Any(l => l.StartsWith(culture.TwoLetterISOLanguageName, StringComparison.InvariantCultureIgnoreCase)))
 				{
 					culture = _fallbackCulture;
 				}
@@ -221,7 +221,7 @@ namespace ApplicationTemplate
 		}
 
 		/// <summary>
-		/// Gets the culture override set using the <see cref="SetCulture"/> method. 
+		/// Gets the culture override set using the <see cref="SetCulture"/> method.
 		/// </summary>
 		/// <returns>Current culture override. Null if not set.</returns>
 		public CultureInfo GetCulture()
@@ -243,6 +243,11 @@ namespace ApplicationTemplate
 		/// <param name="culture">Culture</param>
 		public void SetCulture(CultureInfo culture)
 		{
+			if (culture is null)
+			{
+				throw new ArgumentNullException(nameof(culture));
+			}
+
 			using (var writer = File.CreateText(_settingFilePath))
 			{
 				writer.Write(culture.Name);

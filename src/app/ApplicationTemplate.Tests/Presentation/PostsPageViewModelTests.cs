@@ -4,8 +4,8 @@ using System.Collections.Immutable;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using FluentAssertions;
 using Chinook.DynamicMvvm;
+using FluentAssertions;
 using Xunit;
 
 namespace ApplicationTemplate.Tests

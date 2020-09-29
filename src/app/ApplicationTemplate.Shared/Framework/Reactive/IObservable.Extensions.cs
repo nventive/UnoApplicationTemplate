@@ -11,15 +11,16 @@ using Uno.Logging;
 
 namespace System.Reactive.Linq
 {
-	public static class ObservableExtensions
+	public static class ObservableExtensions2
 	{
 		/// <summary>
 		/// This operator is like the throttle operator, but it doesn't wait for the <paramref name="delay"/> for initial values.
 		/// </summary>
 		/// <typeparam name="T">The type of the observable.</typeparam>
-		/// <param name="source"></param>
-		/// <param name="delay"></param>
-		/// <param name="scheduler"></param>
+		/// <param name="source">Source observable</param>
+		/// <param name="delay">Time delay</param>
+		/// <param name="scheduler">Scheduler</param>
+		/// <returns>Output observable</returns>
 		[SuppressMessage("nventive.Globalization", "NV2005:NV2005 - Simple cyclomatic complexity​​", Justification = "Imported code")]
 		[SuppressMessage("nventive.Reliability", "NV0016:NV0016 - Do not create an async void lambda expression", Justification = "Imported code")]
 		public static IObservable<T> ThrottleOrImmediate<T>(this IObservable<T> source, TimeSpan delay, IScheduler scheduler)
@@ -49,7 +50,8 @@ namespace System.Reactive.Linq
 							// send current item with scheduler
 							scheduler.Schedule(() => observer.OnNext(item));
 						}
-						else // There is still time before we can send an item
+						// There is still time before we can send an item
+						else
 						{
 							// we schedule the time for the following item
 							nextItemTime = currentTime + delay;
@@ -75,7 +77,7 @@ namespace System.Reactive.Linq
 							}
 						}
 					},
-					exception => typeof(ObservableExtensions).Log().ErrorIfEnabled(() => "Error in ThrottleOrImmediate subscription.")
+					exception => typeof(ObservableExtensions2).Log().ErrorIfEnabled(() => "Error in ThrottleOrImmediate subscription.")
 				));
 			});
 		}

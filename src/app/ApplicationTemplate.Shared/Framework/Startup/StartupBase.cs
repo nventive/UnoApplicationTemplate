@@ -14,8 +14,6 @@ namespace ApplicationTemplate
 	/// </summary>
 	public abstract class StartupBase
 	{
-		protected ILogger _logger;
-
 		public StartupBase(CoreStartupBase coreStartup)
 		{
 			CoreStartup = coreStartup;
@@ -32,6 +30,8 @@ namespace ApplicationTemplate
 		public Activity StartActivity { get; } = new Activity(nameof(Start));
 
 		public CoreStartupBase CoreStartup { get; }
+
+		protected ILogger Logger { get; private set; }
 
 		/// <summary>
 		/// Pre-initializes the application.
@@ -72,7 +72,7 @@ namespace ApplicationTemplate
 
 			CoreStartup.Initialize(InitializeViewServices);
 
-			_logger = GetLogger(ServiceProvider);
+			Logger = GetOrCreateLogger(ServiceProvider);
 
 			OnInitialized(ServiceProvider);
 
@@ -80,15 +80,15 @@ namespace ApplicationTemplate
 
 			State.IsInitialized = true;
 
-			_logger.LogInformation("Initialized startup.");
+			Logger.LogInformation("Initialized startup.");
 		}
 
 		/// <summary>
 		/// Gets a <see cref="ILogger{TCategoryName}"/> typed to the implementator class.
 		/// </summary>
-		/// <param name="serviceProvider">The service provider from which the implemator class should obtain the logger.</param>
+		/// <param name="serviceProvider">The service provider from which the implementator class should obtain the logger.</param>
 		/// <returns>The <see cref="ILogger{TCategoryName}"/> typed to the implementator class.</returns>
-		protected abstract ILogger GetLogger(IServiceProvider serviceProvider);
+		protected abstract ILogger GetOrCreateLogger(IServiceProvider serviceProvider);
 
 		/// <summary>
 		/// Initializes view services into the provided <see cref="IHostBuilder"/>.
@@ -115,7 +115,7 @@ namespace ApplicationTemplate
 				throw new InvalidOperationException($"You must call {nameof(Initialize)} before calling '{nameof(Start)}'.");
 			}
 
-			_logger.LogDebug("Starting startup.");
+			Logger.LogDebug("Starting startup.");
 
 			var isFirstLoad = !State.IsStarted;
 
@@ -136,15 +136,15 @@ namespace ApplicationTemplate
 				State.IsStarted = true;
 			}
 
-			_logger.LogInformation("Started startup.");
+			Logger.LogInformation("Started startup.");
 
 			async Task StartViewServicesWithLogs(IServiceProvider services, bool isFirstStart)
 			{
-				_logger.LogDebug($"Starting view services (isFirstStart: {isFirstStart}).");
+				Logger.LogDebug($"Starting view services (isFirstStart: {isFirstStart}).");
 
 				await StartViewServices(services, isFirstStart);
 
-				_logger.LogInformation("Started view services.");
+				Logger.LogInformation("Started view services.");
 			}
 		}
 

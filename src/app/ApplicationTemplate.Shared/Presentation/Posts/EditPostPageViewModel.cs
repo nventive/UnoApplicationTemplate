@@ -20,22 +20,6 @@ namespace ApplicationTemplate
 			this.RegisterBackHandler(OnBackRequested);
 		}
 
-		private async Task OnBackRequested(CancellationToken ct)
-		{
-			var result = await this.GetService<IMessageDialogService>()
-				.ShowMessage(ct, mdb => mdb
-					.Title("Warning")
-					.Content("Are you sure you want to leave this page?")
-					.OkCommand()
-					.CancelCommand()
-				);
-
-			if (result == MessageDialogResult.Ok)
-			{
-				await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
-			}
-		}
-
 		public string Title { get; }
 
 		public bool IsNewPost { get; }
@@ -74,5 +58,21 @@ namespace ApplicationTemplate
 				await this.GetService<IStackNavigator>().NavigateBack(ct);
 			}
 		});
+
+		private async Task OnBackRequested(CancellationToken ct)
+		{
+			var result = await this.GetService<IMessageDialogService>()
+				.ShowMessage(ct, mdb => mdb
+					.Title("Warning")
+					.Content("Are you sure you want to leave this page?")
+					.OkCommand()
+					.CancelCommand()
+				);
+
+			if (result == MessageDialogResult.Ok)
+			{
+				await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
+			}
+		}
 	}
 }

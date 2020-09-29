@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
     <IsPackable>false</IsPackable>
+		<GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
 	<ItemGroup>
