@@ -308,3 +308,11 @@ dotnet_diagnostic.SA1201.severity = suggestion
 dotnet_diagnostic.SA1629.severity = suggestion
 # SA1514: Element documentation header should be preceded by blank line
 dotnet_diagnostic.SA1514.severity = suggestion
+# SA1134: Attributes should not share line
+dotnet_diagnostic.SA1134.severity = none
+# SA1413: Use trailing comma in multi-line initializers
+dotnet_diagnostic.SA1413.severity = suggestion
+# CA1062: Validate arguments of public methods
+dotnet_diagnostic.CA1062.severity = suggestion
+# CA2227: Collection properties should be read only
+dotnet_diagnostic.CA2227.severity = silent
