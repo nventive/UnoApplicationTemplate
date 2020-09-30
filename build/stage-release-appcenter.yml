@@ -2,102 +2,118 @@ parameters:
   appCenterUWPSlug: ''
   appCenteriOSSlug: ''
   appCenterAndroidSlug: ''
+  deploymentEnvironment: ''
 
 jobs:
-- job: AppCenter_UWP
+- deployment: AppCenter_UWP
   pool: $(windowsPoolName)
+
+  environment: ${{ parameters.deploymentEnvironment }}
 
   container: windows
 
-  steps:
-  - checkout: none
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: none
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: current
-      downloadType: single
-      artifactName: $(UWPArtifactName)
-      
-  - task: AppCenterDistribute@3
-    displayName: Deploy UWP to AppCenter
-    inputs:
-      serverEndpoint: $(AppCenterServiceConnection)
-      appSlug: ${{ parameters.appCenterUWPSlug }}
-      appFile: $(System.ArtifactsDirectory)/$(UWPArtifactName)/*.msixbundle
-      releaseNotesInput: |
-        CI build
-      isSilent: true
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: current
+            downloadType: single
+            artifactName: $(UWPArtifactName)
+            
+        - task: AppCenterDistribute@3
+          displayName: Deploy UWP to AppCenter
+          inputs:
+            serverEndpoint: $(AppCenterServiceConnection)
+            appSlug: ${{ parameters.appCenterUWPSlug }}
+            appFile: $(System.ArtifactsDirectory)/$(UWPArtifactName)/*.msixbundle
+            releaseNotesInput: |
+              CI build
+            isSilent: true
 
-- job: AppCenter_iOS
+- deployment: AppCenter_iOS
   pool: 
     name: $(macOSPoolName)
     demands:
     - fastlane
 
+  environment: ${{ parameters.deploymentEnvironment }}
+
   variables:
   - group: ApplicationTemplate.Distribution.AppStore
 
-  steps:
-  - checkout: none
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: none
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: current
-      downloadType: single
-      artifactName: $(iOSArtifactName)
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: current
+            downloadType: single
+            artifactName: $(iOSArtifactName)
 
-  - task: AppCenterDistribute@3
-    displayName: Deploy iOS to AppCenter
-    inputs:
-      serverEndpoint: $(AppCenterServiceConnection)
-      appSlug: ${{ parameters.appCenteriOSSlug }}
-      appFile: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa
-      symbolsDsymFiles: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.dSYM
-      symbolsIncludeParentDirectory: true
-      releaseNotesInput: |
-        CI build
-      isSilent: true
+        - task: AppCenterDistribute@3
+          displayName: Deploy iOS to AppCenter
+          inputs:
+            serverEndpoint: $(AppCenterServiceConnection)
+            appSlug: ${{ parameters.appCenteriOSSlug }}
+            appFile: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa
+            symbolsDsymFiles: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.dSYM
+            symbolsIncludeParentDirectory: true
+            releaseNotesInput: |
+              CI build
+            isSilent: true
 
-- job: AppCenter_Android
+- deployment: AppCenter_Android
   pool: $(windowsPoolName)
 
   variables:
   - group: ApplicationTemplate.Distribution.GooglePlay
     
-  container: 'nventive/build-agent:vs16.6.0'
+  environment: ${{ parameters.deploymentEnvironment }}
+
+  container: windows
   
-  steps:
-  - checkout: none
+  strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: none
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: current
-      downloadType: single
-      artifactName: $(AndroidArtifactName)
+          - task: DownloadBuildArtifacts@0
+            inputs:
+              buildType: current
+              downloadType: single
+              artifactName: $(AndroidArtifactName)
 
-  - task: DownloadSecureFile@1
-    name: keyStore
-    displayName: "Download keystore from secure files"
-    inputs:
-      secureFile: $(GooglePlayKeystore)
+          - task: DownloadSecureFile@1
+            name: keyStore
+            displayName: "Download keystore from secure files"
+            inputs:
+              secureFile: $(GooglePlayKeystore)
 
-  - task: InstallBundletool@1
+          - task: InstallBundletool@1
 
-  - task: AabConvertToUniversalApk@1
-    inputs:
-      aabFilePath: '$(System.ArtifactsDirectory)/$(AndroidArtifactName)/*-Signed.aab'
-      keystoreFilePath: '$(keyStore.secureFilePath)'
-      keystorePassword: '$(AndroidSigningStorePass)'
-      keystoreAlias: '$(AndroidSigningKeyAlias)'
-      keystoreAliasPassword: '$(AndroidSigningKeyPass)'
-      outputFolder: '$(Build.SourcesDirectory)/tmp'
-  
-  - task: AppCenterDistribute@3
-    displayName: Deploy Android to AppCenter
-    inputs:
-      serverEndpoint: $(AppCenterServiceConnection)
-      appSlug: ${{ parameters.appCenterAndroidSlug }}
-      appFile: '$(Build.SourcesDirectory)/tmp/*.apk'
-      releaseNotesInput: |
-        CI build
-      isSilent: true
+          - task: AabConvertToUniversalApk@1
+            inputs:
+              aabFilePath: '$(System.ArtifactsDirectory)/$(AndroidArtifactName)/*-Signed.aab'
+              keystoreFilePath: '$(keyStore.secureFilePath)'
+              keystorePassword: '$(AndroidSigningStorePass)'
+              keystoreAlias: '$(AndroidSigningKeyAlias)'
+              keystoreAliasPassword: '$(AndroidSigningKeyPass)'
+              outputFolder: '$(Build.SourcesDirectory)/tmp'
+          
+          - task: AppCenterDistribute@3
+            displayName: Deploy Android to AppCenter
+            inputs:
+              serverEndpoint: $(AppCenterServiceConnection)
+              appSlug: ${{ parameters.appCenterAndroidSlug }}
+              appFile: '$(Build.SourcesDirectory)/tmp/*.apk'
+              releaseNotesInput: |
+                CI build
+              isSilent: true

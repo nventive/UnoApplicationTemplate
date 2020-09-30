@@ -1,54 +1,62 @@
-﻿jobs: 
-- job: AppStore_iOS
+﻿parameters:
+  deploymentEnvironment: ''
+
+jobs: 
+- deployment: AppStore_iOS
 
   pool:
     name: $(macOSPoolName)
     demands:
       - Xamarin.iOS -equals $(XAMARIN_IOS_VERSION)
+
+  environment: ${{ parameters.deploymentEnvironment }}
     
   variables:
   - group: ApplicationTemplate.Distribution.AppStore
 
-  steps:
-  - checkout: none
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: none
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: current
-      downloadType: single
-      artifactName: $(iOSArtifactName)
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: current
+            downloadType: single
+            artifactName: $(iOSArtifactName)
 
-  - task: InstallAppleCertificate@2
-    displayName: 'Install an Apple certificate'
-    name: Certificate
-    inputs:
-      certSecureFile: $(AppStoreCertificate)
-      certPwd: '$(AppleCertificatePassword)'
+        - task: InstallAppleCertificate@2
+          displayName: 'Install an Apple certificate'
+          name: Certificate
+          inputs:
+            certSecureFile: $(AppStoreCertificate)
+            certPwd: '$(AppleCertificatePassword)'
 
-  - task: InstallAppleProvisioningProfile@1
-    displayName: 'Install an Apple provisioning profile'
-    name: Profile
-    inputs:
-      provProfileSecureFile: $(AppStoreProvisioningProfile)
+        - task: InstallAppleProvisioningProfile@1
+          displayName: 'Install an Apple provisioning profile'
+          name: Profile
+          inputs:
+            provProfileSecureFile: $(AppStoreProvisioningProfile)
 
-  - task: ms-vsclient.app-store.ipa-resign.IpaResign@1
-    displayName: 'Resign ipa file'
-    inputs:
-      ipaPath: '$(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa'
-      signMethod: id
-      signIdIdentity: '$(Certificate.signingIdentity)'
-      provisionMethod: id
-      provIdProfileUuid: '$(Profile.provisioningProfileUuid)'
-      sighResignArgs: '--new_bundle_id $(AppleBundleId)'
+        - task: ms-vsclient.app-store.ipa-resign.IpaResign@1
+          displayName: 'Resign ipa file'
+          inputs:
+            ipaPath: '$(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa'
+            signMethod: id
+            signIdIdentity: '$(Certificate.signingIdentity)'
+            provisionMethod: id
+            provIdProfileUuid: '$(Profile.provisioningProfileUuid)'
+            sighResignArgs: '--new_bundle_id $(AppleBundleId)'
 
-  - task: AppStoreRelease@1
-    displayName: 'Publish to AppStore'
-    inputs:
-      serviceEndpoint: $(AppStoreServiceConnection)
-      appIdentifier: $(AppleBundleId)
-      appType: 'iOS'
-      ipaPath: '$(PackageOutputPath)/$(iOSArtifactName)/*.ipa'
-      releaseTrack: 'TestFlight'
-      shouldSkipWaitingForProcessing: true
-      teamId: $(AppleTeamId)
-      teamName: $(AppleTeamName)
+        - task: AppStoreRelease@1
+          displayName: 'Publish to AppStore'
+          inputs:
+            serviceEndpoint: $(AppStoreServiceConnection)
+            appIdentifier: $(AppleBundleId)
+            appType: 'iOS'
+            ipaPath: '$(PackageOutputPath)/$(iOSArtifactName)/*.ipa'
+            releaseTrack: 'TestFlight'
+            shouldSkipWaitingForProcessing: true
+            teamId: $(AppleTeamId)
+            teamName: $(AppleTeamName)

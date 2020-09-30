@@ -120,6 +120,7 @@ stages:
       appCenterUWPSlug: $(AppCenterUWPSlug)
       appCenteriOSSlug: $(AppCenteriOSSlug)
       appCenterAndroidSlug: $(AppCenterAndroidSlug)
+      deploymentEnvironment: 'Staging'
 
 - stage: AppCenter_Production
   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
@@ -131,6 +132,7 @@ stages:
       appCenterUWPSlug: $(AppCenterUWPSlug_Production)
       appCenteriOSSlug: $(AppCenteriOSSlug_Production)
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
+      deploymentEnvironment: 'Production'
 
 # - stage: Azure
 #   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
@@ -145,6 +147,8 @@ stages:
 
   jobs:
   - template: build/stage-release-appstore.yml
+    parameters:    
+      deploymentEnvironment: 'Production'
 
 - stage: GooglePlay
   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
@@ -152,3 +156,5 @@ stages:
 
   jobs:
   - template: build/stage-release-googleplay.yml
+    parameters:    
+      deploymentEnvironment: 'Production'

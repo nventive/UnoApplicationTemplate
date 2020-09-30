@@ -1,20 +1,28 @@
+parameters:
+  deploymentEnvironment: ''
+
 jobs:
-- job: Azure_WASM
+- deployment: Azure_WASM
   pool:
     vmImage: windows-2019
 
-  steps:
-  - checkout: none
+  environment: ${{ parameters.deploymentEnvironment }}
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: current
-      downloadType: single
-      artifactName: $(WASMArtifactName)
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: none
 
-  - task: nventivecorp.nventive.nventive.websiteVersion.websiteVersion@5
-    displayName: 'Publish to Azure'
-    inputs:
-      WebsitePath: '$(System.ArtifactsDirectory)/$(WASMArtifactName)'
-      AzureSubscription: $(AzureSubscriptionName)
-      AzureStorageAccount: $(AzureStorageAccountName)
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: current
+            downloadType: single
+            artifactName: $(WASMArtifactName)
+
+        - task: nventivecorp.nventive.nventive.websiteVersion.websiteVersion@5
+          displayName: 'Publish to Azure'
+          inputs:
+            WebsitePath: '$(System.ArtifactsDirectory)/$(WASMArtifactName)'
+            AzureSubscription: $(AzureSubscriptionName)
+            AzureStorageAccount: $(AzureStorageAccountName)
