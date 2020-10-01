@@ -148,7 +148,7 @@ stages:
   jobs:
   - template: build/stage-release-appstore.yml
     parameters:    
-      deploymentEnvironment: 'Production'
+      deploymentEnvironment: 'Store'
 
 - stage: GooglePlay
   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
@@ -157,4 +157,4 @@ stages:
   jobs:
   - template: build/stage-release-googleplay.yml
     parameters:    
-      deploymentEnvironment: 'Production'
+      deploymentEnvironment: 'Store'
