@@ -73,6 +73,31 @@ For more documentation on testing, read the references listed at the bottom.
 
   With a simple test, you can do very advanced integration tests. The `TestBase` class bootstraps the application in its initialization phase using the `CoreStartup`, reusing all the IoC already configured in your project.
 
+### Mocking
+
+You can also mock services that are normally registered with their implementations. In your `TestBase` class, simply override the `ConfigureHost` method and call the `ReplaceWithMock` method.
+
+```csharp
+  public class MyIntegrationTest : TestBase
+  {
+    protected override void ConfigureHost(IHostBuilder host)
+    {
+      host.ConfigureServices(s =>
+      {
+        // This will replace the actual implementation of IApplicationSettingsService with a mocked version.
+        ReplaceWithMock<IApplicationSettingsService>(s, mock =>
+        {
+          ApplicationSettings result = ApplicationSettings.Default.WithIsOnboardingCompleted(false);
+          mock.Setup(m => m.GetCurrent(AnyCancellationToken)).Returns(Task.FromResult(result));
+          mock.Setup(m => m.GetAndObserveCurrent()).Returns(Observable.Return(result));
+        });
+      });
+    }
+
+    ...
+  }
+  ```
+
 ## UI testing
 
 - We use [Uno.UITest](https://github.com/unoplatform/Uno.UITest) and [Xamarin.UITest](https://docs.microsoft.com/en-us/appcenter/test-cloud/frameworks/uitest/) to execute UI tests.
