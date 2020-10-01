@@ -1,25 +1,33 @@
+parameters:
+  deploymentEnvironment: ''
+
 jobs:
-- job:  GooglePlay_Android
+- deployment:  GooglePlay_Android
   pool: $(windowsPoolName)
+
+  environment: ${{ parameters.deploymentEnvironment }}
 
   container: windows
 
   variables:
   - group: ApplicationTemplate.Distribution.GooglePlay
   
-  steps:
-  - checkout: none
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: none
 
-  - task: DownloadBuildArtifacts@0
-    inputs:
-      buildType: current
-      downloadType: single
-      artifactName: $(AndroidArtifactName)
+        - task: DownloadBuildArtifacts@0
+          inputs:
+            buildType: current
+            downloadType: single
+            artifactName: $(AndroidArtifactName)
 
-  - task: GooglePlayReleaseBundle@3
-    displayName: 'Publish to GooglePlay'
-    inputs:
-      serviceConnection: $(GooglePlayServiceConnection)
-      bundleFile: '$(System.ArtifactsDirectory)/$(AndroidArtifactName)/*-Signed.aab'
-      applicationId: '$(AndroidApplicationId)'
-      languageCode: 'en-CA'
+        - task: GooglePlayReleaseBundle@3
+          displayName: 'Publish to GooglePlay'
+          inputs:
+            serviceConnection: $(GooglePlayServiceConnection)
+            bundleFile: '$(System.ArtifactsDirectory)/$(AndroidArtifactName)/*-Signed.aab'
+            applicationId: '$(AndroidApplicationId)'
+            languageCode: 'en-CA'
