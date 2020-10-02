@@ -98,6 +98,20 @@ You can also mock services that are normally registered with their implementatio
   }
   ```
 
+## Code coverage
+
+We use [Coverlet.MSBuild](https://www.nuget.org/packages/coverlet.msbuild/) to collect code coverage data.
+
+The result of the code coverage data (using the cobertura format) is used to generate a report that is presented as part of the CI process.
+
+You can collect the code coverage locally using the following command line.
+
+```
+dotnet test .\src\ApplicationTemplate.sln /p:Configuration=Release_Tests /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=cobertura /p:ExcludeByFile="**/*.g.cs" /p:Exclude="[*]*.Tests.*" --logger trx --no-build
+```
+
+_Note: We need to include the test assembly since we're using shared projects. In order to ignore coverage on the tests themselves, we simply exclude anything under the `*.Tests` namespace._
+
 ## UI testing
 
 - We use [Uno.UITest](https://github.com/unoplatform/Uno.UITest) and [Xamarin.UITest](https://docs.microsoft.com/en-us/appcenter/test-cloud/frameworks/uitest/) to execute UI tests.
@@ -109,3 +123,4 @@ You can also mock services that are normally registered with their implementatio
 - [Getting started with xUnit](https://xunit.net/docs/getting-started/netfx/visual-studio)
 - [Getting started with Fluent Assertions](https://fluentassertions.com/introduction)
 - [How to use Moq](https://github.com/moq/moq4)
+- [How to use Coverlet](https://github.com/coverlet-coverage/coverlet)
