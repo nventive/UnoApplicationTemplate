@@ -38,7 +38,9 @@ namespace ApplicationTemplate
 
 		public IDynamicCommand NavigateToDiagnosticsPage => this.GetCommandFromTask(async ct =>
 		{
+#if !PRODUCTION
 			await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new DiagnosticsPageViewModel());
+#endif
 		});
 
 		public IDynamicCommand NavigateToEditProfilePage => this.GetCommandFromTask(async ct =>
