@@ -99,7 +99,7 @@
 
 			<uc:FromNullableBoolToCustomValueConverter x:Key="TrueToVerticalStretch"
 													   TrueValue="Stretch"
-													   NullOrFalseValue="Right" />
+													   NullOrFalseValue="Top" />
 
 			<uc:FromNullableBoolToCustomValueConverter x:Key="IsExpandedToCornerRadius"
 													   TrueValue="0"
