@@ -36,16 +36,15 @@ namespace ApplicationTemplate
 		private static IServiceCollection AddDynamicCommands(this IServiceCollection services)
 		{
 			return services
-				.AddSingleton<IDynamicCommandStrategyDecorator>(s =>
-					new DynamicCommandStrategyDecorator(c => c
-						.WithLogs(s.GetRequiredService<ILogger<IDynamicCommand>>())
+				.AddSingleton<IDynamicCommandBuilderFactory>(s =>
+					new DynamicCommandBuilderFactory(c => c
 						.CatchErrors(s.GetRequiredService<IDynamicCommandErrorHandler>())
-						.CancelPrevious()
-						.OnBackgroundThread()
+						.WithLogs(s.GetRequiredService<ILogger<IDynamicCommand>>())
 						.DisableWhileExecuting()
+						.OnBackgroundThread()
+						.CancelPrevious()
 					)
-				)
-				.AddSingleton<IDynamicCommandFactory, DynamicCommandFactory>();
+				);
 		}
 
 		private static IServiceCollection AddDynamicProperties(this IServiceCollection services)
