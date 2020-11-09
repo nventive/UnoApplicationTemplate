@@ -91,12 +91,6 @@ variables:
   # For Application.Building.Light optimizations
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
 
-  # For release conditions
-  IsReleaseBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))]
-
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  IsReleaseBuild: $[and(ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))]
-
   # Android variables (hosted agent)
   # ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   # ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
@@ -117,7 +111,7 @@ stages:
 
 - stage: Build_Production
   dependsOn: Build_Staging # Use dependsOn: [] if you want to run both builds in parallel.
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   jobs:
   - template: build/stage-build.yml
     parameters:
@@ -126,7 +120,7 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
 
 - stage: AppCenter_Staging
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Staging
 
   jobs:
@@ -140,7 +134,7 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal'
 
 - stage: AppCenter_Production
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
 
   jobs:
@@ -154,14 +148,14 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
 
 # - stage: Azure
-#   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
 #   dependsOn: Build_Production
 
 #   jobs:
 #   - template: build/stage-release-wasm.yml
 
 - stage: AppStore
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
 
   jobs:
@@ -170,7 +164,7 @@ stages:
       deploymentEnvironment: 'Store'
 
 - stage: GooglePlay
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
 
   jobs:
