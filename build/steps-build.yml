@@ -1,5 +1,8 @@
 ﻿parameters:
   androidKeyStoreFile: ''
+  iosCertificateFile: ''
+  iosCertificatePassword: ''
+  iosProvisioningProfileFile: ''
 
 steps:
 - task: gitversion/setup@0
@@ -35,6 +38,18 @@ steps:
   condition: and(succeeded(), not(eq('${{ parameters.androidKeyStoreFile }}', ''))) # Don't run this task when the parameter is empty
   inputs:
     secureFile: ${{ parameters.androidKeyStoreFile }}
+
+- task: InstallAppleCertificate@2
+  condition: and(succeeded(), not(eq('${{ parameters.iosCertificateFile }}', '')))
+  inputs:
+    certSecureFile: ${{ parameters.iosCertificateFile}}
+    certPwd: ${{ parameters.iosCertificatePassword}}
+
+- task: InstallAppleProvisioningProfile@1
+  name: provisioningProfile
+  condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
+  inputs:
+    provProfileSecureFile: ${{ parameters.iosProvisioningProfileFile }}
 
 - task: MSBuild@1
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'

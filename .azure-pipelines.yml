@@ -21,7 +21,7 @@ variables:
    # Prerequisites - Variable groups
   # Make sure you have the following variable groups in your Azure pipeline library:
   #
-  # ApplicationTemplate.Distribution.Internal
+  # ApplicationTemplate.Distribution.Internal.Android
   #   AndroidApplicationId: This is the internal application id of the app for AppCenter releases.
   #   AndroidSigningKeyAlias: This is the keystore alias.
   #   AndroidSigningKeyPass: This is the keystore keypass (secured).
@@ -33,6 +33,9 @@ variables:
   #   AndroidSigningKeyPass: This is the keystore keypass (secured).
   #   AndroidSigningStorePass: This is the keystore storepass (secured).
   #
+  # ApplicationTemplate.Distribution.Internal.iOS
+  #   AppleCertificatePassword: The certificate password (secured).
+  #
   # ApplicationTemplate.Distribution.AppStore
   #   AppleBundleId: The official bundle id of the app that should go on the store; the app will be resigned with this id.
   #   AppleCertificatePassword: The certificate password (secured).
@@ -41,10 +44,15 @@ variables:
 
   # Prerequisites - Secured files
   # Make sure you have the following secured files in your Azure pipeline library.
+  #
+  # Android
   InternalKeystore: com.nventive.internal.applicationtemplate.jks # This is the internal keystore used for internal builds.
   GooglePlayKeystore: com.nventive.applicationtemplate.jks # This is the official keystore used for Google Play.
+  # iOS
+  InternalProvisioningProfile: com.nventive.internal.applicationtemplate.mobileprovision # This is the internal provisioning profile for internal builds.
+  InternalCertificate: nventive.internal.p12 # This is the certificate from the entreprise account used to sign internal builds.
   AppStoreProvisioningProfile: com.nventive.applicationtemplate.mobileprovision # This is the official provisioning profile for the AppStore.
-  AppStoreCertificate: nventive.p12 # This is the official certificate for the AppStore.
+  AppStoreCertificate: nventive.p12 # This is the official certificate used to sign AppStore builds.
 
   # Prerequisites - Service connections
   # Make sure you have the following service connections in your Azure pipeline library.
@@ -107,7 +115,10 @@ stages:
     parameters:
       applicationEnvironment: Staging
       androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal'
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      iosProvisioningProfileFile: $(InternalProvisioningProfile)
+      iosCertificateFile: $(InternalCertificate)
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 
 - stage: Build_Production
   dependsOn: Build_Staging # Use dependsOn: [] if you want to run both builds in parallel.
@@ -118,6 +129,9 @@ stages:
       applicationEnvironment: Production
       androidKeyStoreFile: $(GooglePlayKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
+      iosProvisioningProfileFile: $(AppStoreProvisioningProfile)
+      iosCertificateFile: $(AppStoreCertificate)
+      iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
 - stage: AppCenter_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
@@ -131,7 +145,7 @@ stages:
       appCenterAndroidSlug: $(AppCenterAndroidSlug)
       deploymentEnvironment: 'Staging'
       androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal'
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
 
 - stage: AppCenter_Production
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))

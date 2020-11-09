@@ -2,6 +2,9 @@ parameters:
   applicationEnvironment: ''
   androidKeyStoreFile: ''
   androidVariableGroup: ''
+  iosCertificateFile: ''
+  iosProvisioningProfileFile: ''
+  iosVariableGroup: ''
 
 jobs:
   - job: On_Windows # Build UWP and Android on a windows machine
@@ -53,7 +56,7 @@ jobs:
     variables:
     - name: SkipUnknownFrameworks
       value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
-    - group: ApplicationTemplate.Distribution.AppStore
+    - group: ${{ parameters.iosVariableGroup }}
 
     steps:
     - task: UseDotNet@2
@@ -64,6 +67,10 @@ jobs:
         installationPath: '$(Agent.ToolsDirectory)/dotnet'
         
     - template: steps-build.yml
+      parameters:
+        iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
+        iosCertificateFile: ${{ parameters.iosCertificateFile }}
+        iosCertificatePassword: $(AppleCertificatePassword)
 
   # - job: On_Linux
   #   strategy:
