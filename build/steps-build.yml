@@ -1,4 +1,7 @@
-﻿steps:
+﻿parameters:
+  androidKeyStoreFile: ''
+
+steps:
 - task: gitversion/setup@0
   inputs:
     versionSpec: '5.0.0'
@@ -29,8 +32,9 @@
 - task: DownloadSecureFile@1
   name: keyStore
   displayName: "Download keystore from secure files"
+  condition: and(succeeded(), not(eq('${{ parameters.androidKeyStoreFile }}', ''))) # Don't run this task when the parameter is empty
   inputs:
-    secureFile: $(GooglePlayKeystore)
+    secureFile: ${{ parameters.androidKeyStoreFile }}
 
 - task: MSBuild@1
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'

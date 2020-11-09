@@ -3,6 +3,8 @@ parameters:
   appCenteriOSSlug: ''
   appCenterAndroidSlug: ''
   deploymentEnvironment: ''
+  androidKeyStoreFile: ''
+  androidVariableGroup: ''
 
 jobs:
 - deployment: AppCenter_UWP
@@ -73,7 +75,7 @@ jobs:
   pool: $(windowsPoolName)
 
   variables:
-  - group: ApplicationTemplate.Distribution.GooglePlay
+  - group: ${{ parameters.androidVariableGroup }}
     
   environment: ${{ parameters.deploymentEnvironment }}
 
@@ -95,7 +97,7 @@ jobs:
             name: keyStore
             displayName: "Download keystore from secure files"
             inputs:
-              secureFile: $(GooglePlayKeystore)
+              secureFile: ${{ parameters.androidKeyStoreFile }}
 
           - task: InstallBundletool@1
 

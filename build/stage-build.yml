@@ -1,5 +1,7 @@
 parameters:
   applicationEnvironment: ''
+  androidKeyStoreFile: ''
+  androidVariableGroup: ''
 
 jobs:
   - job: On_Windows # Build UWP and Android on a windows machine
@@ -25,12 +27,14 @@ jobs:
       name: $(windowsPoolName)
 
     variables:
-    - group: ApplicationTemplate.Distribution.GooglePlay
+    - group: ${{ parameters.androidVariableGroup }}
     
     container: windows
 
     steps:
       - template: steps-build.yml
+        parameters:
+          androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
 
   - job: On_Mac # Build iOS on a mac
     strategy:
