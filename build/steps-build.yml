@@ -58,7 +58,16 @@ steps:
     msbuildLocationMethod: version
     msbuildVersion: latest
     msbuildArchitecture: x86
-    msbuildArguments: /p:PackageVersion=$(SemVer) /p:ApplicationEnvironment=$(ApplicationEnvironment) /p:ApplicationVersion=$(MajorMinorPatch) /p:AndroidSigningKeyStore=$(keyStore.secureFilePath) /p:AndroidSigningStorePass=$(AndroidSigningStorePass) /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass) /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias) /p:AndroidKeyStore=true
+    msbuildArguments: >
+      /p:PackageVersion=$(SemVer)
+      /p:ApplicationEnvironment=$(ApplicationEnvironment)
+      /p:ApplicationVersion=$(MajorMinorPatch)
+      /p:AndroidSigningKeyStore=$(keyStore.secureFilePath)
+      /p:AndroidSigningStorePass=$(AndroidSigningStorePass)
+      /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass)
+      /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias)
+      /p:AndroidKeyStore=true
+      /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid)
     configuration: $(ApplicationConfiguration)
     platform: $(ApplicationPlatform)
     clean: false
