@@ -1,15 +1,17 @@
-trigger:
+﻿schedules:
+- cron: "30 08 * * Mon-Fri" # Format is "Minutes Hours DayOfMonth Month DayOfWeet" in UTC (that's why 08 is 3h EST)
+  displayName: 'Nightly weekdays build - 3:30 EST'
+  always: false # If nothing changed, don't start a new run.
   branches:
     include:
       - master
       - release/*
       - feature/*
 
-pr:
-  branches:
-    include:
-      - master
-      - release/*
+# trigger:        # Use this if you want runs whenever the master branch is updated.
+#   branches:
+#     include:
+#       - master
 
 resources:
   containers:
@@ -20,22 +22,40 @@ variables:
 
   # Prerequisites - Variable groups
   # Make sure you have the following variable groups in your Azure pipeline library:
-  # ApplicationTemplate.Distribution.GooglePlay
-  #   AndroidApplicationId: This is the official application id of the app that should go on the store.
+  #
+  # ApplicationTemplate.Distribution.Internal.Android
+  #   ApplicationIdentifier: This is the internal application id of the app for AppCenter releases. Note that this variable is used by Nimue to automatically change the package name.
   #   AndroidSigningKeyAlias: This is the keystore alias.
   #   AndroidSigningKeyPass: This is the keystore keypass (secured).
   #   AndroidSigningStorePass: This is the keystore storepass (secured).
+  #
+  # ApplicationTemplate.Distribution.GooglePlay
+  #   ApplicationIdentifier: This is the official application id of the app that should go on the store. Note that this variable is used by Nimue to automatically change the package name.
+  #   AndroidSigningKeyAlias: This is the keystore alias.
+  #   AndroidSigningKeyPass: This is the keystore keypass (secured).
+  #   AndroidSigningStorePass: This is the keystore storepass (secured).
+  #
+  # ApplicationTemplate.Distribution.Internal.iOS
+  #   ApplicationIdentifier: This is the internal application id of the app for AppCenter releases. Note that this variable is used by Nimue to automatically change the bundle id.
+  #   AppleCertificatePassword: The certificate password (secured).
+  #
   # ApplicationTemplate.Distribution.AppStore
-  #   AppleBundleId: The official bundle id of the app that should go on the store; the app will be resigned with this id.
+  #   ApplicationIdentifier: The official bundle id of the app that should go on the store; the app will be resigned with this id. Note that this variable is used by Nimue to automatically change the bundle id.
   #   AppleCertificatePassword: The certificate password (secured).
   #   AppleTeamId: The developer account team id (secured).
   #   AppleTeamName: The developer account team name.
 
   # Prerequisites - Secured files
   # Make sure you have the following secured files in your Azure pipeline library.
+  #
+  # Android
+  InternalKeystore: com.nventive.internal.applicationtemplate.jks # This is the internal keystore used for internal builds.
   GooglePlayKeystore: com.nventive.applicationtemplate.jks # This is the official keystore used for Google Play.
+  # iOS
+  InternalProvisioningProfile: com.nventive.internal.applicationtemplate.mobileprovision # This is the internal provisioning profile for internal builds.
+  InternalCertificate: nventive.internal.p12 # This is the certificate from the entreprise account used to sign internal builds.
   AppStoreProvisioningProfile: com.nventive.applicationtemplate.mobileprovision # This is the official provisioning profile for the AppStore.
-  AppStoreCertificate: nventive.p12 # This is the official certificate for the AppStore.
+  AppStoreCertificate: nventive.p12 # This is the official certificate used to sign AppStore builds.
 
   # Prerequisites - Service connections
   # Make sure you have the following service connections in your Azure pipeline library.
@@ -44,6 +64,8 @@ variables:
   AppStoreServiceConnection: AppStore-nventive
 
   # AppCenter slugs
+  # The "app slug" corresponds to the identifiers of the app in AppCenter; to find it, navigate to the app in a browser and;
+  # the URL should look like this: https://appcenter.ms/orgs/{orgId}/apps/{appId}; the slug is simply: "{orgId}/{appId}".
   AppCenterAndroidSlug: 'nventive-framework/Application-Template-1'
   AppCenteriOSSlug: 'nventive-framework/Application-Template'
   AppCenterUWPSlug: 'nventive-framework/Application-Template-2'
@@ -80,12 +102,6 @@ variables:
   # For Application.Building.Light optimizations
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
 
-  # For release conditions
-  IsReleaseBranch: $[or(eq(variables['Build.SourceBranch'], 'refs/heads/master'), startsWith(variables['Build.SourceBranch'], 'refs/heads/feature/'), startsWith(variables['Build.SourceBranch'], 'refs/heads/release/'))]
-
-  # Only release when the build is not a Pull Request and it's using one of the proper release branches
-  IsReleaseBuild: $[and(ne(variables['IsLightBuild'], 'true'), eq(variables['IsReleaseBranch'], 'true'))]
-
   # Android variables (hosted agent)
   # ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
   # ANDROID_NDK_PATH: C:\Microsoft\AndroidNDK64\android-ndk-r16b
@@ -101,60 +117,78 @@ stages:
   - template: build/stage-build.yml
     parameters:
       applicationEnvironment: Staging
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      iosProvisioningProfileFile: $(InternalProvisioningProfile)
+      iosCertificateFile: $(InternalCertificate)
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 
 - stage: Build_Production
   dependsOn: Build_Staging # Use dependsOn: [] if you want to run both builds in parallel.
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   jobs:
   - template: build/stage-build.yml
     parameters:
       applicationEnvironment: Production
+      androidKeyStoreFile: $(GooglePlayKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
+      iosProvisioningProfileFile: $(AppStoreProvisioningProfile)
+      iosCertificateFile: $(AppStoreCertificate)
+      iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
 - stage: AppCenter_Staging
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Staging
 
   jobs:
   - template: build/stage-release-appcenter.yml
     parameters:
+      applicationEnvironment: Staging
+      deploymentEnvironment: AppCenter
       appCenterUWPSlug: $(AppCenterUWPSlug)
       appCenteriOSSlug: $(AppCenteriOSSlug)
       appCenterAndroidSlug: $(AppCenterAndroidSlug)
-      deploymentEnvironment: 'Staging'
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
 
 - stage: AppCenter_Production
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
 
   jobs:
   - template: build/stage-release-appcenter.yml
     parameters:
+      applicationEnvironment: Production
+      deploymentEnvironment: 'AppCenter Prod'
       appCenterUWPSlug: $(AppCenterUWPSlug_Production)
       appCenteriOSSlug: $(AppCenteriOSSlug_Production)
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
-      deploymentEnvironment: 'Production'
+      androidKeyStoreFile: $(GooglePlayKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
 
 # - stage: Azure
-#   condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
 #   dependsOn: Build_Production
 
 #   jobs:
 #   - template: build/stage-release-wasm.yml
 
 - stage: AppStore
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
 
   jobs:
   - template: build/stage-release-appstore.yml
     parameters:    
-      deploymentEnvironment: 'Store'
+      applicationEnvironment: Production
+      deploymentEnvironment: AppStore
 
 - stage: GooglePlay
-  condition: and(succeeded(), eq(variables['IsReleaseBuild'], 'true'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
 
   jobs:
   - template: build/stage-release-googleplay.yml
     parameters:    
-      deploymentEnvironment: 'Store'
+      applicationEnvironment: Production
+      deploymentEnvironment: GooglePlay

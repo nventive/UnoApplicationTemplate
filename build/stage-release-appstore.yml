@@ -1,5 +1,6 @@
 ﻿parameters:
-  deploymentEnvironment: ''
+  applicationEnvironment: '' # e.g. "Staging", "Production"
+  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
 
 jobs: 
 - deployment: AppStore_iOS
@@ -18,44 +19,17 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - checkout: none
 
-        - task: DownloadBuildArtifacts@0
-          inputs:
-            buildType: current
-            downloadType: single
-            artifactName: $(iOSArtifactName)
-
-        - task: InstallAppleCertificate@2
-          displayName: 'Install an Apple certificate'
-          name: Certificate
-          inputs:
-            certSecureFile: $(AppStoreCertificate)
-            certPwd: '$(AppleCertificatePassword)'
-
-        - task: InstallAppleProvisioningProfile@1
-          displayName: 'Install an Apple provisioning profile'
-          name: Profile
-          inputs:
-            provProfileSecureFile: $(AppStoreProvisioningProfile)
-
-        - task: ms-vsclient.app-store.ipa-resign.IpaResign@1
-          displayName: 'Resign ipa file'
-          inputs:
-            ipaPath: '$(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa'
-            signMethod: id
-            signIdIdentity: '$(Certificate.signingIdentity)'
-            provisionMethod: id
-            provIdProfileUuid: '$(Profile.provisioningProfileUuid)'
-            sighResignArgs: '--new_bundle_id $(AppleBundleId)'
+        - download: current
+          artifact: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
 
         - task: AppStoreRelease@1
           displayName: 'Publish to AppStore'
           inputs:
             serviceEndpoint: $(AppStoreServiceConnection)
-            appIdentifier: $(AppleBundleId)
+            appIdentifier: $(ApplicationIdentifier)
             appType: 'iOS'
-            ipaPath: '$(PackageOutputPath)/$(iOSArtifactName)/*.ipa'
+            ipaPath: '$(Pipeline.Workspace)/$(iOSArtifactName)_${{ parameters.applicationEnvironment }}/*.ipa'
             releaseTrack: 'TestFlight'
             shouldSkipWaitingForProcessing: true
             teamId: $(AppleTeamId)

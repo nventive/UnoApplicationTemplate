@@ -1,5 +1,10 @@
 parameters:
   applicationEnvironment: ''
+  androidKeyStoreFile: ''
+  androidVariableGroup: ''
+  iosCertificateFile: ''
+  iosProvisioningProfileFile: ''
+  iosVariableGroup: ''
 
 jobs:
   - job: On_Windows # Build UWP and Android on a windows machine
@@ -9,28 +14,30 @@ jobs:
         Android:
           ApplicationConfiguration: Release_Android
           ApplicationPlatform: Any CPU
-          ArtifactName: $(AndroidArtifactName)
+          ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
         UWP:
           ApplicationConfiguration: Release_UWP
           ApplicationPlatform: Any CPU
-          ArtifactName: $(UWPArtifactName)
+          ArtifactName: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
         Tests:
           ApplicationConfiguration: Release_Tests
           ApplicationPlatform: Any CPU
-          ArtifactName: $(TestsArtifactName)
+          ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
     pool:
       name: $(windowsPoolName)
 
     variables:
-    - group: ApplicationTemplate.Distribution.GooglePlay
+    - group: ${{ parameters.androidVariableGroup }}
     
     container: windows
 
     steps:
       - template: steps-build.yml
+        parameters:
+          androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
 
   - job: On_Mac # Build iOS on a mac
     strategy:
@@ -39,7 +46,7 @@ jobs:
         iOS:
           ApplicationConfiguration: Release_iOS
           ApplicationPlatform: Any CPU
-          ArtifactName: $(iOSArtifactName)    
+          ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}   
     pool:
       name: $(macOSPoolName)
@@ -49,7 +56,7 @@ jobs:
     variables:
     - name: SkipUnknownFrameworks
       value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
-    - group: ApplicationTemplate.Distribution.AppStore
+    - group: ${{ parameters.iosVariableGroup }}
 
     steps:
     - task: UseDotNet@2
@@ -60,6 +67,10 @@ jobs:
         installationPath: '$(Agent.ToolsDirectory)/dotnet'
         
     - template: steps-build.yml
+      parameters:
+        iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
+        iosCertificateFile: ${{ parameters.iosCertificateFile }}
+        iosCertificatePassword: $(AppleCertificatePassword)
 
   # - job: On_Linux
   #   strategy:

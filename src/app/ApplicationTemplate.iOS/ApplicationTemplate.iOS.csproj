@@ -130,17 +130,17 @@
     <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.1.0-dev.2" />
     <PackageReference Include="Nventive.View.Uno" Version="0.1.0-dev.13" />
     <PackageReference Include="nventive.Nimue.Application.Building.Light">
-      <Version>0.1.0-alpha.42</Version>
+      <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="nventive.Nimue.Application.Packaging">
-      <Version>0.1.0-alpha.42</Version>
+      <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="nventive.Nimue.Application.Versioning">
-      <Version>0.1.0-alpha.42</Version>
+      <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>

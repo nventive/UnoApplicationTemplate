@@ -1,4 +1,10 @@
-﻿steps:
+﻿parameters:
+  androidKeyStoreFile: ''
+  iosCertificateFile: ''
+  iosCertificatePassword: ''
+  iosProvisioningProfileFile: ''
+
+steps:
 - task: gitversion/setup@0
   inputs:
     versionSpec: '5.0.0'
@@ -29,8 +35,23 @@
 - task: DownloadSecureFile@1
   name: keyStore
   displayName: "Download keystore from secure files"
+  condition: and(succeeded(), not(eq('${{ parameters.androidKeyStoreFile }}', ''))) # Don't run this task when the parameter is empty
   inputs:
-    secureFile: $(GooglePlayKeystore)
+    secureFile: ${{ parameters.androidKeyStoreFile }}
+
+- task: InstallAppleCertificate@2
+  displayName: 'Install Apple certificate ${{ parameters.iosCertificateFile }}'
+  condition: and(succeeded(), not(eq('${{ parameters.iosCertificateFile }}', '')))
+  inputs:
+    certSecureFile: ${{ parameters.iosCertificateFile}}
+    certPwd: ${{ parameters.iosCertificatePassword}}
+
+- task: InstallAppleProvisioningProfile@1
+  displayName: 'Install Apple provisioning profile ${{ parameters.iosProvisioningProfileFile }}'
+  name: provisioningProfile
+  condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
+  inputs:
+    provProfileSecureFile: ${{ parameters.iosProvisioningProfileFile }}
 
 - task: MSBuild@1
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
@@ -39,7 +60,17 @@
     msbuildLocationMethod: version
     msbuildVersion: latest
     msbuildArchitecture: x86
-    msbuildArguments: /p:PackageVersion=$(SemVer) /p:ApplicationEnvironment=$(ApplicationEnvironment) /p:ApplicationVersion=$(MajorMinorPatch) /p:AndroidSigningKeyStore=$(keyStore.secureFilePath) /p:AndroidSigningStorePass=$(AndroidSigningStorePass) /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass) /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias) /p:AndroidKeyStore=true
+    msbuildArguments: >
+      /p:PackageVersion=$(SemVer)
+      /p:ApplicationEnvironment=$(ApplicationEnvironment)
+      /p:ApplicationVersion=$(MajorMinorPatch)
+      /p:AndroidSigningKeyStore=$(keyStore.secureFilePath)
+      /p:AndroidSigningStorePass=$(AndroidSigningStorePass)
+      /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass)
+      /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias)
+      /p:AndroidKeyStore=true
+      /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid)
+      /p:ApplicationIdentifier=$(ApplicationIdentifier)
     configuration: $(ApplicationConfiguration)
     platform: $(ApplicationPlatform)
     clean: false
@@ -66,12 +97,9 @@
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: "$(Build.SourcesDirectory)/src/coverage.cobertura.xml"
 
-- task: PublishBuildArtifacts@1
+- publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)
-    ArtifactName: $(ArtifactName)
-    ArtifactType: Container
+  artifact: $(ArtifactName)
 
 - task: PostBuildCleanup@3
   displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
