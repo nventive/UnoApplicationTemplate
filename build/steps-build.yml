@@ -94,12 +94,9 @@ steps:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: "$(Build.SourcesDirectory)/src/coverage.cobertura.xml"
 
-- task: PublishBuildArtifacts@1
+- publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
-  inputs:
-    PathtoPublish: $(Build.ArtifactStagingDirectory)
-    ArtifactName: $(ArtifactName)
-    ArtifactType: Container
+  artifact: $(ArtifactName)
 
 - task: PostBuildCleanup@3
   displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'

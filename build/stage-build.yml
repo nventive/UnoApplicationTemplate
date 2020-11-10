@@ -14,17 +14,17 @@ jobs:
         Android:
           ApplicationConfiguration: Release_Android
           ApplicationPlatform: Any CPU
-          ArtifactName: $(AndroidArtifactName)
+          ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
         UWP:
           ApplicationConfiguration: Release_UWP
           ApplicationPlatform: Any CPU
-          ArtifactName: $(UWPArtifactName)
+          ArtifactName: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
         Tests:
           ApplicationConfiguration: Release_Tests
           ApplicationPlatform: Any CPU
-          ArtifactName: $(TestsArtifactName)
+          ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
     pool:
       name: $(windowsPoolName)
@@ -46,7 +46,7 @@ jobs:
         iOS:
           ApplicationConfiguration: Release_iOS
           ApplicationPlatform: Any CPU
-          ArtifactName: $(iOSArtifactName)    
+          ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}   
     pool:
       name: $(macOSPoolName)

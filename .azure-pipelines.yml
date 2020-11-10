@@ -1,4 +1,4 @@
-trigger:
+﻿trigger:
   branches:
     include:
       - master
@@ -22,22 +22,23 @@ variables:
   # Make sure you have the following variable groups in your Azure pipeline library:
   #
   # ApplicationTemplate.Distribution.Internal.Android
-  #   AndroidApplicationId: This is the internal application id of the app for AppCenter releases.
+  #   ApplicationIdentifier: This is the internal application id of the app for AppCenter releases. Note that this variable is used by Nimue to automatically change the package name.
   #   AndroidSigningKeyAlias: This is the keystore alias.
   #   AndroidSigningKeyPass: This is the keystore keypass (secured).
   #   AndroidSigningStorePass: This is the keystore storepass (secured).
   #
   # ApplicationTemplate.Distribution.GooglePlay
-  #   AndroidApplicationId: This is the official application id of the app that should go on the store.
+  #   ApplicationIdentifier: This is the official application id of the app that should go on the store. Note that this variable is used by Nimue to automatically change the package name.
   #   AndroidSigningKeyAlias: This is the keystore alias.
   #   AndroidSigningKeyPass: This is the keystore keypass (secured).
   #   AndroidSigningStorePass: This is the keystore storepass (secured).
   #
   # ApplicationTemplate.Distribution.Internal.iOS
+  #   ApplicationIdentifier: This is the internal application id of the app for AppCenter releases. Note that this variable is used by Nimue to automatically change the bundle id.
   #   AppleCertificatePassword: The certificate password (secured).
   #
   # ApplicationTemplate.Distribution.AppStore
-  #   AppleBundleId: The official bundle id of the app that should go on the store; the app will be resigned with this id.
+  #   ApplicationIdentifier: The official bundle id of the app that should go on the store; the app will be resigned with this id. Note that this variable is used by Nimue to automatically change the bundle id.
   #   AppleCertificatePassword: The certificate password (secured).
   #   AppleTeamId: The developer account team id (secured).
   #   AppleTeamName: The developer account team name.
@@ -140,10 +141,11 @@ stages:
   jobs:
   - template: build/stage-release-appcenter.yml
     parameters:
+      applicationEnvironment: Staging
+      deploymentEnvironment: AppCenter
       appCenterUWPSlug: $(AppCenterUWPSlug)
       appCenteriOSSlug: $(AppCenteriOSSlug)
       appCenterAndroidSlug: $(AppCenterAndroidSlug)
-      deploymentEnvironment: 'Staging'
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
 
@@ -154,10 +156,11 @@ stages:
   jobs:
   - template: build/stage-release-appcenter.yml
     parameters:
+      applicationEnvironment: Production
+      deploymentEnvironment: 'AppCenter Prod'
       appCenterUWPSlug: $(AppCenterUWPSlug_Production)
       appCenteriOSSlug: $(AppCenteriOSSlug_Production)
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
-      deploymentEnvironment: 'Production'
       androidKeyStoreFile: $(GooglePlayKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
 
@@ -175,7 +178,8 @@ stages:
   jobs:
   - template: build/stage-release-appstore.yml
     parameters:    
-      deploymentEnvironment: 'Store'
+      applicationEnvironment: Production
+      deploymentEnvironment: AppStore
 
 - stage: GooglePlay
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
@@ -184,4 +188,5 @@ stages:
   jobs:
   - template: build/stage-release-googleplay.yml
     parameters:    
-      deploymentEnvironment: 'Store'
+      applicationEnvironment: Production
+      deploymentEnvironment: GooglePlay

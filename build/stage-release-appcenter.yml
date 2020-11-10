@@ -1,8 +1,9 @@
 parameters:
+  applicationEnvironment: '' # e.g. "Staging", "Production"
+  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
   appCenterUWPSlug: ''
   appCenteriOSSlug: ''
-  appCenterAndroidSlug: ''
-  deploymentEnvironment: ''
+  appCenterAndroidSlug: ''  
   androidKeyStoreFile: ''
   androidVariableGroup: ''
 
@@ -18,20 +19,16 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - checkout: none
 
-        - task: DownloadBuildArtifacts@0
-          inputs:
-            buildType: current
-            downloadType: single
-            artifactName: $(UWPArtifactName)
-            
+        - download: current
+          artifact: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
+
         - task: AppCenterDistribute@3
           displayName: Deploy UWP to AppCenter
           inputs:
             serverEndpoint: $(AppCenterServiceConnection)
             appSlug: ${{ parameters.appCenterUWPSlug }}
-            appFile: $(System.ArtifactsDirectory)/$(UWPArtifactName)/*.msixbundle
+            appFile: $(Pipeline.Workspace)/$(UWPArtifactName)_${{ parameters.applicationEnvironment }}/*.msixbundle
             releaseNotesInput: |
               CI build
             isSilent: true
@@ -51,24 +48,20 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - checkout: none
 
-        - task: DownloadBuildArtifacts@0
-          inputs:
-            buildType: current
-            downloadType: single
-            artifactName: $(iOSArtifactName)
+        - download: current
+          artifact: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
 
         - task: AppCenterDistribute@3
           displayName: Deploy iOS to AppCenter
           inputs:
             serverEndpoint: $(AppCenterServiceConnection)
             appSlug: ${{ parameters.appCenteriOSSlug }}
-            appFile: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.ipa
-            symbolsDsymFiles: $(System.ArtifactsDirectory)/$(iOSArtifactName)/*.dSYM
+            appFile: $(Pipeline.Workspace)/$(iOSArtifactName)_${{ parameters.applicationEnvironment }}/*.ipa
+            symbolsDsymFiles: $(Pipeline.Workspace)/$(iOSArtifactName)_${{ parameters.applicationEnvironment }}/*.dSYM
             symbolsIncludeParentDirectory: true
             releaseNotesInput: |
-              CI build
+              CI build            
             isSilent: true
 
 - deployment: AppCenter_Android
@@ -85,13 +78,9 @@ jobs:
       runOnce:
         deploy:
           steps:
-          - checkout: none
-
-          - task: DownloadBuildArtifacts@0
-            inputs:
-              buildType: current
-              downloadType: single
-              artifactName: $(AndroidArtifactName)
+          
+          - download: current
+            artifact: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
 
           - task: DownloadSecureFile@1
             name: keyStore
@@ -103,7 +92,7 @@ jobs:
 
           - task: AabConvertToUniversalApk@1
             inputs:
-              aabFilePath: '$(System.ArtifactsDirectory)/$(AndroidArtifactName)/*-Signed.aab'
+              aabFilePath: '$(Pipeline.Workspace)/$(AndroidArtifactName)_${{ parameters.applicationEnvironment }}/*-Signed.aab'
               keystoreFilePath: '$(keyStore.secureFilePath)'
               keystorePassword: '$(AndroidSigningStorePass)'
               keystoreAlias: '$(AndroidSigningKeyAlias)'

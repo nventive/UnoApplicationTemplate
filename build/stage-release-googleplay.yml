@@ -1,5 +1,6 @@
 parameters:
-  deploymentEnvironment: ''
+  applicationEnvironment: '' # e.g. "Staging", "Production"
+  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
 
 jobs:
 - deployment:  GooglePlay_Android
@@ -16,18 +17,14 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - checkout: none
 
-        - task: DownloadBuildArtifacts@0
-          inputs:
-            buildType: current
-            downloadType: single
-            artifactName: $(AndroidArtifactName)
+        - download: current
+          artifact: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
 
         - task: GooglePlayReleaseBundle@3
           displayName: 'Publish to GooglePlay'
           inputs:
             serviceConnection: $(GooglePlayServiceConnection)
-            bundleFile: '$(System.ArtifactsDirectory)/$(AndroidArtifactName)/*-Signed.aab'
-            applicationId: '$(AndroidApplicationId)'
+            bundleFile: '$(Pipeline.Workspace)/$(AndroidArtifactName)_${{ parameters.applicationEnvironment }}/*-Signed.aab'
+            applicationId: '$(ApplicationIdentifier)'
             languageCode: 'en-CA'
