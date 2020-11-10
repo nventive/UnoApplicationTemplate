@@ -1,15 +1,17 @@
-﻿trigger:
+﻿schedules:
+- cron: "30 08 * * Mon-Fri" # Format is "Minutes Hours DayOfMonth Month DayOfWeet" in UTC (that's why 08 is 3h EST)
+  displayName: 'Nightly weekdays build - 3:30 EST'
+  always: false # If nothing changed, don't start a new run.
   branches:
     include:
       - master
       - release/*
       - feature/*
 
-pr:
-  branches:
-    include:
-      - master
-      - release/*
+# trigger:        # Use this if you want runs whenever the master branch is updated.
+#   branches:
+#     include:
+#       - master
 
 resources:
   containers:
@@ -18,7 +20,7 @@ resources:
 
 variables:
 
-   # Prerequisites - Variable groups
+  # Prerequisites - Variable groups
   # Make sure you have the following variable groups in your Azure pipeline library:
   #
   # ApplicationTemplate.Distribution.Internal.Android

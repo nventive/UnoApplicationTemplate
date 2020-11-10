@@ -40,12 +40,14 @@ steps:
     secureFile: ${{ parameters.androidKeyStoreFile }}
 
 - task: InstallAppleCertificate@2
+  displayName: 'Install Apple certificate ${{ parameters.iosCertificateFile }}'
   condition: and(succeeded(), not(eq('${{ parameters.iosCertificateFile }}', '')))
   inputs:
     certSecureFile: ${{ parameters.iosCertificateFile}}
     certPwd: ${{ parameters.iosCertificatePassword}}
 
 - task: InstallAppleProvisioningProfile@1
+  displayName: 'Install Apple provisioning profile ${{ parameters.iosProvisioningProfileFile }}'
   name: provisioningProfile
   condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
   inputs:
@@ -68,6 +70,7 @@ steps:
       /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias)
       /p:AndroidKeyStore=true
       /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid)
+      /p:ApplicationIdentifier=$(ApplicationIdentifier)
     configuration: $(ApplicationConfiguration)
     platform: $(ApplicationPlatform)
     clean: false
