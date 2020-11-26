@@ -5,6 +5,7 @@ using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationTemplate.Framework;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
@@ -47,7 +48,7 @@ namespace ApplicationTemplate
 			return services
 				.AddSingleton<IDeviceInfo, DeviceInfoImplementation>()
 				.AddSingleton<IAppInfo, AppInfoImplementation>()
-				.AddSingleton<IBrowser, BrowserImplementation>()
+				.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 				.AddSingleton<IEmail, EmailImplementation>();
 		}
 

@@ -35,6 +35,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LocalizationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationCoreConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_Configuration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\OnDataLostDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\AnalyticsDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\BaseMock.cs" />

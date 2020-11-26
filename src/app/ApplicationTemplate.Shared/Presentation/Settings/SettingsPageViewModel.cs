@@ -65,14 +65,14 @@ namespace ApplicationTemplate
 		{
 			var url = this.GetService<IStringLocalizer>()["PrivacyPolicyUrl"];
 
-			await RunOnDispatcher(ct, ct2 => this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.SystemPreferred));
+			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.SystemPreferred);
 		});
 
 		public IDynamicCommand NavigateToTermsAndConditionsPage => this.GetCommandFromTask(async ct =>
 		{
 			var url = this.GetService<IStringLocalizer>()["TermsAndConditionsUrl"];
 
-			await RunOnDispatcher(ct, ct2 => this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External));
+			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
 		});
 
 		public IDynamicCommand NavigateToWebViewPage => this.GetCommandFromTask(async ct =>
