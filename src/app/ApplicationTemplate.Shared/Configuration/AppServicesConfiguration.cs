@@ -48,7 +48,13 @@ namespace ApplicationTemplate
 			return services
 				.AddSingleton<IDeviceInfo, DeviceInfoImplementation>()
 				.AddSingleton<IAppInfo, AppInfoImplementation>()
+//-:cnd:noEmit
+#if WINDOWS_UWP || __IOS__ || __ANDROID__
+//+:cnd:noEmit
 				.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
 				.AddSingleton<IEmail, EmailImplementation>();
 		}
 
