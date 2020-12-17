@@ -7,6 +7,12 @@
       - master
       - release/*
       - feature/*
+pr:
+ branches:
+   include:
+   - master
+   - release/*
+   - feature/*
 
 # trigger:        # Use this if you want runs whenever the master branch is updated.
 #   branches:
