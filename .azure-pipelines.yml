@@ -14,6 +14,7 @@ pr:
    - release/*
    - feature/*
 
+trigger: none
 # trigger:        # Use this if you want runs whenever the master branch is updated.
 #   branches:
 #     include:
