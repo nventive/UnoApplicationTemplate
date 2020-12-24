@@ -1,7 +1,7 @@
 ﻿<local:AttachableUserControl x:Class="ApplicationTemplate.Menu"
 							 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 							 xmlns:local="using:ApplicationTemplate"
-							 xmlns:ne="using:Nventive.View.Extensions"
+							 xmlns:ne="using:Chinook.View.Extensions"
 							 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 							 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 							 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

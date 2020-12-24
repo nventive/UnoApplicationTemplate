@@ -5,8 +5,8 @@
 					xmlns:xamarin="http://nventive.com/xamarin"
 					xmlns:android="http://nventive.com/android"
 					xmlns:ios="http://nventive.com/ios"
-					xmlns:u="using:Nventive.View.Controls"
-					xmlns:ue="using:Nventive.View.Extensions"
+					xmlns:u="using:Chinook.View.Controls"
+					xmlns:ue="using:Chinook.View.Extensions"
 					xmlns:toolkit="using:Uno.UI.Toolkit"
 					mc:Ignorable="xamarin android ios">
 

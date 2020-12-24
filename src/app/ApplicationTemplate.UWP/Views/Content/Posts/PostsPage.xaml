@@ -4,8 +4,8 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:ue="using:Nventive.View.Extensions"
-	  xmlns:u="using:Nventive.View.Controls"
+	  xmlns:ue="using:Chinook.View.Extensions"
+	  xmlns:u="using:Chinook.View.Controls"
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
