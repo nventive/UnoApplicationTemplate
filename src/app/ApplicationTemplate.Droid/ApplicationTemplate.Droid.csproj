@@ -87,6 +87,7 @@
   <ItemGroup>
     <PackageReference Include="DynamicData" Version="6.14.18" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
+    <PackageReference Include="MessageDialogService.Uno" Version="0.2.0-dev.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
@@ -125,7 +126,6 @@
     <PackageReference Include="Chinook.View.Uno" Version="0.1.0-dev.3" />
     <PackageReference Include="Chinook.Persistence.Reactive" Version="0.1.0-dev.5" />
     <PackageReference Include="Chinook.Persistence.Uno" Version="0.1.0-dev.5" />
-    <PackageReference Include="Nventive.MessageDialog.Uno" Version="0.1.0-dev.3" />
     <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.1.0-dev.22" />
     <PackageReference Include="nventive.Nimue.Application.Building.Light">
       <Version>0.1.0-alpha.73</Version>

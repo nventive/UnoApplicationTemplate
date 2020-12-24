@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
+using MessageDialogService;
 using Microsoft.Extensions.Localization;
-using Nventive.MessageDialog;
 
 namespace ApplicationTemplate
 {

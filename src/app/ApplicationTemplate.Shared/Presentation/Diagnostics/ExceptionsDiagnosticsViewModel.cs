@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
-using Nventive.MessageDialog;
+using MessageDialogService;
 using Windows.UI.Core;
 
 namespace ApplicationTemplate

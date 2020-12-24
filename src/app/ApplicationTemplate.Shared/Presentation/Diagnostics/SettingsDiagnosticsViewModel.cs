@@ -4,8 +4,8 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
+using MessageDialogService;
 using Microsoft.Extensions.Logging;
-using Nventive.MessageDialog;
 using Windows.Storage;
 using Windows.System;
 

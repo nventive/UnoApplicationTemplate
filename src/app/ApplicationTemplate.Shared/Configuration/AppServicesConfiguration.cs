@@ -6,11 +6,11 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationTemplate.Framework;
+using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Nventive.ExtendedSplashScreen;
-using Nventive.MessageDialog;
 using Windows.ApplicationModel;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
@@ -64,7 +64,7 @@ namespace ApplicationTemplate
 //-:cnd:noEmit
 #if WINDOWS_UWP || __IOS__ || __ANDROID__
 //+:cnd:noEmit
-				new MessageDialogService(
+				new MessageDialogService.MessageDialogService(
 					() => s.GetRequiredService<Windows.UI.Core.CoreDispatcher>(),
 					new MessageDialogBuilderDelegate(
 						key => s.GetRequiredService<IStringLocalizer>()[key]

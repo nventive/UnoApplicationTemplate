@@ -12,8 +12,8 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using MessageDialogService;
 using Nventive.ExtendedSplashScreen;
-using Nventive.MessageDialog;
 using Uno.Disposables;
 using Windows.UI.Core;
 
