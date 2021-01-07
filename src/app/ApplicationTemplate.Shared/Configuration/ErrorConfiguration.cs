@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -49,6 +50,25 @@ namespace ApplicationTemplate
 #if __ANDROID__
 				//+:cnd:noEmit
 				Firebase.Crashlytics.FirebaseCrashlytics.Instance.RecordException(Java.Lang.Throwable.FromException(exception));
+				//-:cnd:noEmit
+#elif __IOS__
+				//+:cnd:noEmit
+				var crashInfo = new Dictionary<object, object>
+				{
+					{ Foundation.NSError.LocalizedDescriptionKey, exception.Message },
+					{ "StackTrace ", exception.StackTrace },
+				};
+
+				var error = Foundation.NSError.FromDomain(
+					new Foundation.NSString(exception.GetType().FullName),
+					-1001,
+					Foundation.NSDictionary.FromObjectsAndKeys(
+						crashInfo.Values.ToArray(),
+						crashInfo.Keys.ToArray(),
+						crashInfo.Count)
+				);
+
+				Firebase.Crashlytics.Crashlytics.SharedInstance.RecordError(error);
 				//-:cnd:noEmit
 #endif
 				//+:cnd:noEmit
