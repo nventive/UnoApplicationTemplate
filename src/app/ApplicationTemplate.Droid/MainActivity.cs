@@ -24,12 +24,6 @@ namespace ApplicationTemplate
 		protected override void OnCreate(Bundle bundle)
 		{
 			base.OnCreate(bundle);
-
-#if (IncludeFirebaseAnalytics)
-			/// Do not call Crashlytics.Crashlytics.HandleManagedExceptions();
-			/// We are already handling managed exceptions in <see cref="HandleUnhandledExceptions"/>
-			/// WARNING: This method will fail if you didn't provide a GoogleServicesJson file.
-#endif
 		}
 	}
 }

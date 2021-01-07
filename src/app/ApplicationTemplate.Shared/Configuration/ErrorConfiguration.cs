@@ -45,13 +45,13 @@ namespace ApplicationTemplate
 #if (IncludeFirebaseAnalytics)
 			if (!isTerminating)
 			{
-//-:cnd:noEmit
+				//-:cnd:noEmit
 #if __ANDROID__
-//+:cnd:noEmit
-				Crashlytics.Crashlytics.LogException(Crashlytics.MonoExceptionHelper.Create(exception));
-//-:cnd:noEmit
+				//+:cnd:noEmit
+				Firebase.Crashlytics.FirebaseCrashlytics.Instance.RecordException(Java.Lang.Throwable.FromException(exception));
+				//-:cnd:noEmit
 #endif
-//+:cnd:noEmit
+				//+:cnd:noEmit
 			}
 #endif
 		}
