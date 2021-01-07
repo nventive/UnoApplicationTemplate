@@ -2,13 +2,13 @@
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Chinook.AsyncWebView;
 using Chinook.BackButtonManager;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Nventive.AsyncWebView;
 using Windows.UI.Core;
 
 namespace ApplicationTemplate

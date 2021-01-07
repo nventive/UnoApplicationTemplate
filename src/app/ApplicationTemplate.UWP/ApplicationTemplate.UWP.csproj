@@ -165,6 +165,7 @@
     <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
+    <PackageReference Include="MessageDialogService.Uno" Version="0.2.0-dev.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
@@ -184,7 +185,7 @@
     <PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
     <PackageReference Include="Reactive.Annex.Uno" Version="0.2.0-dev.14" />
     <PackageReference Include="Uno.UI" Version="3.1.0-beta.84" />
-    <PackageReference Include="Uno.Injectable" Version="1.32.0" />
+    <PackageReference Include="Uno.Injectable" Version="1.34.0-dev.175" />
     <PackageReference Include="Uno.CodeGen" Version="1.32.0" />
     <PackageReference Include="Chinook.DynamicMvvm" Version="0.3.0-dev.34" />
     <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.3.0-dev.34" />
@@ -196,13 +197,12 @@
     <PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.2.0-dev.46" />
     <PackageReference Include="Chinook.DataLoader.Uno" Version="0.2.0-dev.37" />
     <PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="0.2.0-dev.37" />
-    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.1.0-dev.20" />
-    <PackageReference Include="Nventive.MessageDialog.Uno" Version="0.1.0-dev.3" />
-    <PackageReference Include="Nventive.Persistence.Reactive" Version="0.1.0-dev.7" />
-    <PackageReference Include="Nventive.Persistence.Uno" Version="0.1.0-dev.7" />
-    <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.1.0-dev.2" />
-    <PackageReference Include="Nventive.View.Uno" Version="0.1.0-dev.19" />
+    <PackageReference Include="Chinook.AsyncWebView.Uno" Version="0.1.0-dev.7" />
+    <PackageReference Include="Chinook.Persistence.Reactive" Version="0.1.0-dev.5" />
+    <PackageReference Include="Chinook.Persistence.Uno" Version="0.1.0-dev.5" />
+    <PackageReference Include="Chinook.View.Uno" Version="0.1.0-dev.3" />
     <PackageReference Include="DynamicData" Version="6.14.18" />
+    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.1.0-dev.22" />
     <PackageReference Include="nventive.Nimue.Application.Building.Light">
       <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

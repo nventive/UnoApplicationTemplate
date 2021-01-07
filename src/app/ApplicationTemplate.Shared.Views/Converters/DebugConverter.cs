@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Nventive.View.Converters;
+using Chinook.View.Converters;
 
 namespace ApplicationTemplate
 {

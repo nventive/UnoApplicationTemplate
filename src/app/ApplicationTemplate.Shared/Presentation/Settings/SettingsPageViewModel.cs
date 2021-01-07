@@ -6,8 +6,8 @@ using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
+using MessageDialogService;
 using Microsoft.Extensions.Localization;
-using Nventive.MessageDialog;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
 

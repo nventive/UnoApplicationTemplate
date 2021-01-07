@@ -5,10 +5,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using MallardMessageHandlers;
+using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using Nventive.MessageDialog;
 using Uno.Extensions;
 
 namespace ApplicationTemplate

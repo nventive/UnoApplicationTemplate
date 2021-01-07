@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Reactive.Concurrency;
 using System.Text;
+using Chinook.Persistence;
 using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
-using Nventive.Persistence;
 
 namespace ApplicationTemplate
 {
