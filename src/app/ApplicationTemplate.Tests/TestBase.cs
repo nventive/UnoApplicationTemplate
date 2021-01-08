@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.Persistence;
@@ -24,7 +25,7 @@ namespace ApplicationTemplate.Tests
 		{
 			_coreStartup.PreInitialize();
 
-			_coreStartup.Initialize(ConfigureHost);
+			_coreStartup.Initialize(AddThreadConfiguration);
 
 			ConfigureSecurityProtocol();
 		}
@@ -34,11 +35,17 @@ namespace ApplicationTemplate.Tests
 			await _coreStartup.Start();
 		}
 
-		/// <summary>
-		/// A chance to configure the <paramref name="host"/> after its default configuration.
-		/// </summary>
-		/// <param name="host">Host builder</param>
-		protected virtual void ConfigureHost(IHostBuilder host) { }
+		private void AddThreadConfiguration(IHostBuilder host)
+		{
+			host.ConfigureServices(services =>
+			{
+				services
+					.AddSingleton<IScheduler>(s => TaskPoolScheduler.Default)
+					.AddSingleton<IDispatcherScheduler>(s => new DispatcherSchedulerAdapter(
+						s.GetRequiredService<IScheduler>()
+					));
+			});
+		}
 
 		/// <summary>
 		/// Returns the requested service.
