@@ -10,63 +10,50 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class PostsPageViewModelTests : TestBase
+	public class PostsPageViewModelTests : NavigationTestsBase
 	{
-		[Fact(Skip = "This test is no longer valid because 'viewModel.Posts' is a DataLoader and not a dynamic property.")]
+		[Fact]
 		public async Task It_Should_GetAll()
 		{
-			// TODO #172359: Find a cuter way to test the reactive properties.
+			await StartNavigation(DefaultCancellationToken, () => new PostsPageViewModel());
+			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
+			var posts = await viewModel.Posts.Load(DefaultCancellationToken) as ImmutableList<PostData>;
 
-			var viewModel = new PostsPageViewModel();
-			var testObserver = new TestObserver<ImmutableList<PostData>>(2);
-
-			var postsProperty = viewModel.GetProperty<ImmutableList<PostData>>(nameof(viewModel.Posts));
-			postsProperty.GetAndObserve().Subscribe(testObserver);
-
-			await testObserver.ExpectedNotifications;
-
-			testObserver.Values[0].Should().BeNull();
-			testObserver.Values[1].Should().NotBeEmpty();
+			posts.Should().NotBeNull();
+			posts.Should().HaveCount(100);
 		}
 
-		private class TestObserver<T> : IObserver<T>
+		[Fact]
+		public async Task It_Should_Navigate_New_Post()
 		{
-			private readonly int _valuesCount;
-			private readonly TaskCompletionSource<object> _taskCompletionSource;
+			await StartNavigation(DefaultCancellationToken, () => new PostsPageViewModel());
+			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
+			await viewModel.NavigateToNewPost.Execute();
+			var currentViewModel = GetCurrentViewModel();
 
-			public TestObserver(int expectedNotifications)
-			{
-				_valuesCount = expectedNotifications;
-				_taskCompletionSource = new TaskCompletionSource<object>();
-			}
+			currentViewModel.Should().NotBeNull();
+			currentViewModel.Should().BeOfType<EditPostPageViewModel>();
 
-			public bool IsCompleted { get; private set; }
+			var editPostVm = currentViewModel as EditPostPageViewModel;
+			editPostVm.IsNewPost.Should().BeTrue();
+		}
 
-			public Exception Error { get; private set; }
+		[Fact]
+		public async Task It_Should_Navigate_Edit_Post()
+		{
+			await StartNavigation(DefaultCancellationToken, () => new PostsPageViewModel());
+			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
+			var posts = await viewModel.Posts.Load(DefaultCancellationToken) as ImmutableList<PostData>;
+			var editedPost = posts.First();
+			await viewModel.NavigateToPost.Execute(editedPost);
+			var currentViewModel = GetCurrentViewModel();
 
-			public IList<T> Values { get; } = new List<T>();
+			currentViewModel.Should().NotBeNull();
+			currentViewModel.Should().BeOfType<EditPostPageViewModel>();
 
-			public Task ExpectedNotifications => _taskCompletionSource.Task;
-
-			public void OnCompleted()
-			{
-				IsCompleted = true;
-			}
-
-			public void OnError(Exception error)
-			{
-				Error = error;
-			}
-
-			public void OnNext(T value)
-			{
-				Values.Add(value);
-
-				if (Values.Count >= _valuesCount)
-				{
-					_taskCompletionSource.SetResult(null);
-				}
-			}
+			var editPostVm = currentViewModel as EditPostPageViewModel;
+			editPostVm.Title.Should().Be(editedPost.Title);
+			editPostVm.IsNewPost.Should().BeFalse();
 		}
 	}
 }
