@@ -191,6 +191,10 @@ namespace ApplicationTemplate
 //+:cnd:noEmit
 			return services.AddTransient<FirebasePerformanceHandler>();
 //-:cnd:noEmit
+#else
+//+:cnd:noEmit
+			return services;
+//-:cnd:noEmit
 #endif
 //+:cnd:noEmit
 		}
