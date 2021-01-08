@@ -1,150 +1,150 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-	<PropertyGroup>
-		<Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-		<Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
-		<ProjectGuid>{B7F111B6-6C94-41E1-BB0B-1895415D8261}</ProjectGuid>
-		<ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-		<OutputType>Exe</OutputType>
-		<RootNamespace>ApplicationTemplate</RootNamespace>
-		<IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-		<AssemblyName>ApplicationTemplate</AssemblyName>
-		<NuGetPackageImportStamp>
-		</NuGetPackageImportStamp>
-		<ResourcesDirectory>..\ApplicationTemplate.Shared\Strings</ResourcesDirectory>
-		<DefaultLanguage>en</DefaultLanguage>
-		<DefaultApplicationLanguage>$(DefaultLanguage)</DefaultApplicationLanguage>
-		<CopyNuGetImplementations>True</CopyNuGetImplementations>
-		<AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
-		<IsUiAutomationMappingEnabled Condition="'$(UITestsEnabled)'!=''">True</IsUiAutomationMappingEnabled>
-		<NoCompilerStandardLib>True</NoCompilerStandardLib>
-		<NoStdLib>True</NoStdLib>
-		<DebugSymbols>True</DebugSymbols>
-		<DebugType>portable</DebugType>
-		<ErrorReport>prompt</ErrorReport>
-		<WarningLevel>4</WarningLevel>
-		<ConsolePause>False</ConsolePause>
-		<MtouchLink>Full</MtouchLink>
-		<MtouchTlsProvider>Default</MtouchTlsProvider>
-		<MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-		<MtouchProfiling>False</MtouchProfiling>
-		<MtouchFastDev>False</MtouchFastDev>
-		<MtouchFloat32>False</MtouchFloat32>
-		<MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
-		<MtouchEnableBitcode>False</MtouchEnableBitcode>
-		<MtouchUseRefCounting>False</MtouchUseRefCounting>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
-		<OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-		<DefineConstants>DEBUG</DefineConstants>
-		<Optimize>False</Optimize>
-		<MtouchDebug>True</MtouchDebug>
-		<MtouchArch>x86_64</MtouchArch>
-		<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-		<MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
-		<OutputPath>bin\iPhone\Debug</OutputPath>
-		<DefineConstants>DEBUG</DefineConstants>
-		<Optimize>False</Optimize>
-		<MtouchDebug>True</MtouchDebug>
-		<MtouchArch>ARM64</MtouchArch>
-		<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-		<CodesignKey>iPhone Developer</CodesignKey>
-		<MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-		<OutputPath>bin\iPhone\Release</OutputPath>
-		<CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-		<Optimize>True</Optimize>
-		<MtouchDebug>False</MtouchDebug>
-		<MtouchArch>ARM64</MtouchArch>
-		<MtouchUseSGen>True</MtouchUseSGen>
-		<OptimizePNGs>True</OptimizePNGs>
-		<MtouchUseLlvm>True</MtouchUseLlvm>
-		<MtouchUseThumb>True</MtouchUseThumb>
-		<MtouchEnableSGenConc>True</MtouchEnableSGenConc>
-		<MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-		<BuildIpa>True</BuildIpa>
-		<CodesignKey>iPhone Distribution</CodesignKey>
-	</PropertyGroup>
-	<ItemGroup>
-		<Compile Include="Application.cs" />
-		<BundleResource Include="Resources\Assets\splashscreen_icon.png" />
-		<BundleResource Include="Resources\Assets\splashscreen_icon%402x.png" />
-		<BundleResource Include="Resources\Assets\splashscreen_icon%403x.png" />
-		<None Include="Info.plist" />
-		<Compile Include="Properties\AssemblyInfo.cs" />
-		<Content Include="Entitlements.plist" />
-		<BundleResource Include="Resources\Fonts\segmdl2.ttf" />
-		<InterfaceDefinition Include="LaunchScreen.storyboard" />
-	</ItemGroup>
-	<ItemGroup>
-		<Reference Include="mscorlib" />
-		<Reference Include="System" />
-		<Reference Include="System.Net.Http" />
-		<Reference Include="System.Xml" />
-		<Reference Include="System.Core" />
-		<Reference Include="Xamarin.iOS" />
-	</ItemGroup>
-	<ItemGroup>
-		<PackageReference Include="DynamicData" Version="7.1.1" />
-		<PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
-		<PackageReference Include="MessageDialogService.Uno" Version="0.2.0-dev.3" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
-		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
-		<PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools">
-			<Version>6.1.0-build.205.g2e0e348372</Version>
-		</PackageReference>
-		<PackageReference Include="Xamarin.Build.Download" Version="0.10.0" />
-		<PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
-		<PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
-		<PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
-		<PackageReference Include="Serilog.Sinks.Xamarin" Version="0.1.37" />
-		<PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
-		<PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.16" />
-		<PackageReference Include="Refit" Version="4.7.51" />
-		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.2" />
-		<PackageReference Include="Reactive.Annex.Uno" Version="0.2.0-dev.14" />
-		<PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
-		<PackageReference Include="Uno.UI" Version="3.1.10" />
-		<PackageReference Include="Uno.UI.RemoteControl" Version="3.1.10" />
-		<PackageReference Include="Uno.Injectable" Version="1.34.0-dev.175" />
-		<PackageReference Include="Uno.CodeGen" Version="1.34.0-dev.175" />
-		<PackageReference Include="Chinook.DynamicMvvm" Version="0.3.0-dev.34" />
-		<PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.3.0-dev.34" />
-		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="0.3.0-dev.34" />
-		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="0.3.0-dev.34" />
-		<PackageReference Include="Chinook.SectionsNavigation.Uno" Version="0.2.0-dev.46" />
-		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.2.0-dev.46" />
-		<PackageReference Include="Chinook.DataLoader.Uno" Version="0.2.0-dev.37" />
-		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="0.2.0-dev.37" />
-		<PackageReference Include="Chinook.BackButtonManager" Version="0.2.0-dev.17" />
-		<PackageReference Include="Chinook.BackButtonManager.Uno" Version="0.2.0-dev.17" />
-		<PackageReference Include="Chinook.AsyncWebView.Uno" Version="0.1.0-dev.7" />
-		<PackageReference Include="Chinook.Persistence.Reactive" Version="0.1.0-dev.5" />
-		<PackageReference Include="Chinook.Persistence.Uno" Version="0.1.0-dev.5" />
-		<PackageReference Include="Chinook.View.Uno" Version="0.1.0-dev.3" />
-		<PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.1.0-dev.22" />
-		<PackageReference Include="nventive.Nimue.Application.Building.Light">
-			<Version>0.1.0-alpha.73</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Packaging">
-			<Version>0.1.0-alpha.73</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<PackageReference Include="nventive.Nimue.Application.Versioning">
-			<Version>0.1.0-alpha.73</Version>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-			<PrivateAssets>all</PrivateAssets>
-		</PackageReference>
-		<!--#if (IncludeFirebaseAnalytics)
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">iPhoneSimulator</Platform>
+    <ProjectGuid>{B7F111B6-6C94-41E1-BB0B-1895415D8261}</ProjectGuid>
+    <ProjectTypeGuids>{FEACFBD2-3405-455C-9665-78FE426C6842};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>ApplicationTemplate</RootNamespace>
+    <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
+    <AssemblyName>ApplicationTemplate</AssemblyName>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <ResourcesDirectory>..\ApplicationTemplate.Shared\Strings</ResourcesDirectory>
+    <DefaultLanguage>en</DefaultLanguage>
+    <DefaultApplicationLanguage>$(DefaultLanguage)</DefaultApplicationLanguage>
+    <CopyNuGetImplementations>True</CopyNuGetImplementations>
+    <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
+    <IsUiAutomationMappingEnabled Condition="'$(UITestsEnabled)'!=''">True</IsUiAutomationMappingEnabled>
+    <NoCompilerStandardLib>True</NoCompilerStandardLib>
+    <NoStdLib>True</NoStdLib>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>portable</DebugType>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>False</ConsolePause>
+    <MtouchLink>Full</MtouchLink>
+    <MtouchTlsProvider>Default</MtouchTlsProvider>
+    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchProfiling>False</MtouchProfiling>
+    <MtouchFastDev>False</MtouchFastDev>
+    <MtouchFloat32>False</MtouchFloat32>
+    <MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
+    <MtouchEnableBitcode>False</MtouchEnableBitcode>
+    <MtouchUseRefCounting>False</MtouchUseRefCounting>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
+    <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <Optimize>False</Optimize>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchArch>x86_64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
+    <OutputPath>bin\iPhone\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <Optimize>False</Optimize>
+    <MtouchDebug>True</MtouchDebug>
+    <MtouchArch>ARM64</MtouchArch>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <OutputPath>bin\iPhone\Release</OutputPath>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <Optimize>True</Optimize>
+    <MtouchDebug>False</MtouchDebug>
+    <MtouchArch>ARM64</MtouchArch>
+    <MtouchUseSGen>True</MtouchUseSGen>
+    <OptimizePNGs>True</OptimizePNGs>
+    <MtouchUseLlvm>True</MtouchUseLlvm>
+    <MtouchUseThumb>True</MtouchUseThumb>
+    <MtouchEnableSGenConc>True</MtouchEnableSGenConc>
+    <MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+    <BuildIpa>True</BuildIpa>
+    <CodesignKey>iPhone Distribution</CodesignKey>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Application.cs" />
+    <BundleResource Include="Resources\Assets\splashscreen_icon.png" />
+    <BundleResource Include="Resources\Assets\splashscreen_icon%402x.png" />
+    <BundleResource Include="Resources\Assets\splashscreen_icon%403x.png" />
+    <None Include="Info.plist" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Content Include="Entitlements.plist" />
+    <BundleResource Include="Resources\Fonts\segmdl2.ttf" />
+    <InterfaceDefinition Include="LaunchScreen.storyboard" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="mscorlib" />
+    <Reference Include="System" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="Xamarin.iOS" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="DynamicData" Version="7.1.1" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
+    <PackageReference Include="MessageDialogService.Uno" Version="0.2.0-dev.3" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools">
+      <Version>6.1.0-build.205.g2e0e348372</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" />
+    <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
+    <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+    <PackageReference Include="Serilog.Sinks.Xamarin" Version="0.1.37" />
+    <PackageReference Include="Serilog.Sinks.File" Version="4.0.0" />
+    <PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.16" />
+    <PackageReference Include="Refit" Version="4.7.51" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.2" />
+    <PackageReference Include="Reactive.Annex.Uno" Version="0.2.0-dev.14" />
+    <PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
+    <PackageReference Include="Uno.UI" Version="3.4.0" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.4.0" />
+    <PackageReference Include="Uno.Injectable" Version="1.34.0-dev.175" />
+    <PackageReference Include="Uno.CodeGen" Version="1.34.0-dev.175" />
+    <PackageReference Include="Chinook.DynamicMvvm" Version="0.3.0-dev.34" />
+    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.3.0-dev.34" />
+    <PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="0.3.0-dev.34" />
+    <PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="0.3.0-dev.34" />
+    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="0.2.0-dev.46" />
+    <PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.2.0-dev.46" />
+    <PackageReference Include="Chinook.DataLoader.Uno" Version="0.2.0-dev.37" />
+    <PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="0.2.0-dev.37" />
+    <PackageReference Include="Chinook.BackButtonManager" Version="0.2.0-dev.17" />
+    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="0.2.0-dev.17" />
+    <PackageReference Include="Chinook.AsyncWebView.Uno" Version="0.1.0-dev.7" />
+    <PackageReference Include="Chinook.Persistence.Reactive" Version="0.1.0-dev.5" />
+    <PackageReference Include="Chinook.Persistence.Uno" Version="0.1.0-dev.5" />
+    <PackageReference Include="Chinook.View.Uno" Version="0.1.0-dev.3" />
+    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.1.0-dev.22" />
+    <PackageReference Include="nventive.Nimue.Application.Building.Light">
+      <Version>0.1.0-alpha.73</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="nventive.Nimue.Application.Packaging">
+      <Version>0.1.0-alpha.73</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="nventive.Nimue.Application.Versioning">
+      <Version>0.1.0-alpha.73</Version>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <!--#if (IncludeFirebaseAnalytics)
 		<PackageReference Include="Xamarin.Firebase.iOS.Analytics" Version="6.4.1" />
 		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="6.6.6" />
 		<PackageReference Include="Xamarin.Firebase.iOS.InstanceID" Version="4.3.3" />
@@ -154,76 +154,76 @@
 		<PackageReference Include="Xamarin.Firebase.iOS.RemoteConfig" Version="4.4.9" />
 		<PackageReference Include="Xamarin.Firebase.iOS.ABTesting" Version="3.2.0" />
 		#endif -->
-	</ItemGroup>
-	<ItemGroup>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-1024.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-20.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-20@2x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-20@3x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-29.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-29@2x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-29@3x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-40.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-40@2x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-40@3x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60@2x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60@3x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76@2x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5@2x.png">
-			<Visible>false</Visible>
-		</ImageAsset>
-		<ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\Contents.json">
-			<Visible>false</Visible>
-		</ImageAsset>
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Include="..\ApplicationTemplate.UWP\App.xaml.cs" />
-		<ApplicationDefinition Include="..\ApplicationTemplate.UWP\App.xaml" Link="App.xaml" Visible="False" />
-		<Page Include="..\ApplicationTemplate.UWP\Views\**\*.xaml" Visible="False">
-			<Link>Views\%(RecursiveDir)%(FileName)%(Extension)</Link>
-			<SubType>Designer</SubType>
-			<Generator>MSBuild:Compile</Generator>
-		</Page>
-		<Compile Include="..\ApplicationTemplate.UWP\Views\**\*.cs" Visible="False">
-			<Link>Views\%(RecursiveDir)%(FileName)%(Extension)</Link>
-		</Compile>
-	</ItemGroup>
-	<ItemGroup>
-		<LinkDescription Include="LinkerExclusions.xml" />
-	</ItemGroup>
-	<Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" Condition="Exists('..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems')" />
-	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
-	<Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
+  </ItemGroup>
+  <ItemGroup>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-1024.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-20.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-20@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-20@3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-29.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-29@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-29@3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-40.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-40@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-40@3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-60@3x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-76@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Icon-83.5@2x.png">
+      <Visible>false</Visible>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Media.xcassets\LaunchImages.launchimage\Contents.json">
+      <Visible>false</Visible>
+    </ImageAsset>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\ApplicationTemplate.UWP\App.xaml.cs" />
+    <ApplicationDefinition Include="..\ApplicationTemplate.UWP\App.xaml" Link="App.xaml" Visible="False" />
+    <Page Include="..\ApplicationTemplate.UWP\Views\**\*.xaml" Visible="False">
+      <Link>Views\%(RecursiveDir)%(FileName)%(Extension)</Link>
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Compile Include="..\ApplicationTemplate.UWP\Views\**\*.cs" Visible="False">
+      <Link>Views\%(RecursiveDir)%(FileName)%(Extension)</Link>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <LinkDescription Include="LinkerExclusions.xml" />
+  </ItemGroup>
+  <Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" Condition="Exists('..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems')" />
+  <Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
+  <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
