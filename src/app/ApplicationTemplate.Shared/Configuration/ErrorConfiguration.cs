@@ -46,13 +46,13 @@ namespace ApplicationTemplate
 #if (IncludeFirebaseAnalytics)
 			if (!isTerminating)
 			{
-				//-:cnd:noEmit
+//-:cnd:noEmit
 #if __ANDROID__
-				//+:cnd:noEmit
+//+:cnd:noEmit
 				Firebase.Crashlytics.FirebaseCrashlytics.Instance.RecordException(Java.Lang.Throwable.FromException(exception));
-				//-:cnd:noEmit
+//-:cnd:noEmit
 #elif __IOS__
-				//+:cnd:noEmit
+//+:cnd:noEmit
 				var crashInfo = new Dictionary<object, object>
 				{
 					{ Foundation.NSError.LocalizedDescriptionKey, exception.Message },
@@ -69,9 +69,9 @@ namespace ApplicationTemplate
 				);
 
 				Firebase.Crashlytics.Crashlytics.SharedInstance.RecordError(error);
-				//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-				//+:cnd:noEmit
+//+:cnd:noEmit
 			}
 #endif
 		}

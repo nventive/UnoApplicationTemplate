@@ -111,14 +111,14 @@ namespace ApplicationTemplate
 #if (IncludeFirebaseAnalytics)
 		private void ConfigureFirebase()
 		{
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if __IOS__
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			// This is used to initalize firebase and crashlytics.
 			Firebase.Core.App.Configure();
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 		}
 #endif
 	}
