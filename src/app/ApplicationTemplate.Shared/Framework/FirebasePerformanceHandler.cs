@@ -23,12 +23,14 @@ namespace ApplicationTemplate.Framework
 			{
 				metric.Start();
 
+				// Make sure to store request information before the API call has been made. Otherwise, the request may have been disposed.
+				metric.SetRequestPayloadSize(request.Content?.Headers?.ContentLength ?? 0);
+
 				var response = await base.SendAsync(request, ct);
 
 				metric.SetHttpResponseCode((int)response.StatusCode);
 				metric.SetResponseContentType(response.Content?.Headers?.ContentType?.MediaType);
 				metric.SetResponsePayloadSize(response.Content?.Headers?.ContentLength ?? 0);
-				metric.SetRequestPayloadSize(request.Content?.Headers?.ContentLength ?? 0);
 
 				return response;
 			}
