@@ -9,17 +9,23 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task It_Should_GetAll()
 		{
+			// Act
 			var results = await SUT.GetAll(DefaultCancellationToken);
 
+			// Assert
 			results.Should().NotBeNullOrEmpty();
 		}
 
 		[Fact]
 		public async Task It_Should_GetOne()
 		{
+			// Arrange
 			var postId = 1;
+
+			// Act
 			var result = await SUT.Get(DefaultCancellationToken, postId);
 
+			// Assert
 			result.Should().NotBeNull();
 			result.Id.Should().Be(postId);
 		}
@@ -27,6 +33,7 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task It_Should_Create()
 		{
+			// Arrange
 			var post = new PostData.Builder()
 			{
 				Title = "My title",
@@ -34,8 +41,10 @@ namespace ApplicationTemplate.Tests
 				UserIdentifier = 100,
 			};
 
+			// Act
 			var result = await SUT.Create(DefaultCancellationToken, post);
 
+			// Assert
 			result.Should().NotBeNull();
 			result.Id.Should().BeGreaterThan(0);
 			result.Title.Should().Be(post.Title);
@@ -46,6 +55,7 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task It_Should_Update()
 		{
+			// Arrange
 			var post = new PostData.Builder()
 			{
 				Id = 1,
@@ -54,8 +64,10 @@ namespace ApplicationTemplate.Tests
 				UserIdentifier = 100,
 			};
 
+			// Act
 			var result = await SUT.Update(DefaultCancellationToken, post.Id, post);
 
+			// Assert
 			result.Should().NotBeNull();
 			result.Id.Should().Be(post.Id);
 			result.Title.Should().Be(post.Title);
@@ -66,8 +78,10 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task It_Should_Delete()
 		{
+			// Arrange
 			var postId = 1;
 
+			// Act
 			await SUT.Delete(DefaultCancellationToken, postId);
 		}
 	}

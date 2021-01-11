@@ -13,10 +13,14 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task It_Should_EmptyCriterion_NoResults()
 		{
+			// Arrange
 			await StartNavigation(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
 			var viewModel = (ChuckNorrisSearchPageViewModel)GetCurrentViewModel();
+
+			// Act
 			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
 
+			// Assert
 			quotes.Should().NotBeNull();
 			quotes.Should().BeEmpty();
 		}
@@ -24,11 +28,15 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task It_Should_NotEmptyCriterion_Results()
 		{
+			// Arrange
 			await StartNavigation(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
 			var viewModel = (ChuckNorrisSearchPageViewModel)GetCurrentViewModel();
+
+			// Act
 			viewModel.SearchTerm = "dog";
 			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
 
+			// Assert
 			quotes.Should().NotBeNull();
 			quotes.Should().NotBeEmpty();
 			quotes.All(q => q.Quote.Value.ToUpperInvariant().Contains("DOG")).Should().BeTrue("All quotes found searching for search term 'dog' should contain 'dog' ");
