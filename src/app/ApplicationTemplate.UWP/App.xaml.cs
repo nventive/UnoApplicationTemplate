@@ -114,8 +114,8 @@ namespace ApplicationTemplate
 //-:cnd:noEmit
 #if __IOS__
 //+:cnd:noEmit
+			// This is used to initalize firebase and crashlytics.
 			Firebase.Core.App.Configure();
-			Fabric.Fabric.With(typeof(Firebase.Crashlytics.Crashlytics));
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit

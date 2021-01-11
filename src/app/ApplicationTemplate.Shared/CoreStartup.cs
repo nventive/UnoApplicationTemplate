@@ -9,10 +9,10 @@ using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using FluentValidation;
+using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using MessageDialogService;
 using Nventive.ExtendedSplashScreen;
 using Uno.Disposables;
 using Windows.UI.Core;
@@ -78,9 +78,9 @@ namespace ApplicationTemplate
 			{
 				await section.Navigate(ct, () => new OnboardingPageViewModel());
 			}
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if __MOBILE__ || WINDOWS_UWP
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 
 			_ = dispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplashScreen);
@@ -89,9 +89,9 @@ namespace ApplicationTemplate
 			{
 				Shell.Instance.ExtendedSplashScreen.Dismiss();
 			}
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 		}
 
 		private void NotifyUserOnSessionExpired(IServiceProvider services)
@@ -128,28 +128,28 @@ namespace ApplicationTemplate
 		{
 			void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
 
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if WINDOWS_UWP || __ANDROID__ || __IOS__
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			Windows.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
 			{
 				OnError(e.Exception);
 				e.Handled = true;
 			};
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
-			//-:cnd:noEmit
+//+:cnd:noEmit
+//-:cnd:noEmit
 #if __ANDROID__
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser += (s, e) =>
 			{
 				OnError(e.Exception);
 				e.Handled = true;
 			};
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 
 			TaskScheduler.UnobservedTaskException += (s, e) =>
 			{
@@ -166,26 +166,26 @@ namespace ApplicationTemplate
 					return;
 				}
 
-#if (IncludeFirebaseAnalytics)
-				//-:cnd:noEmit
+				#if (IncludeFirebaseAnalytics)
+//-:cnd:noEmit
 #if __ANDROID__
-				//+:cnd:noEmit
-				if (exception is Crashlytics.MonoExceptionHelper)
+//+:cnd:noEmit
+				if (exception is Java.Lang.RuntimeException)
 				{
-					/// If the exception is a <see cref="MonoExceptionHelper"/> it was already handled.
+					/// If the exception is a <see cref="Java.Lang.RuntimeException"/> it was already handled and labeled as "Crash" on the console.
 					return;
 				}
-				//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-				//+:cnd:noEmit
+//+:cnd:noEmit
 #endif
 
 				OnError(exception, e.IsTerminating);
 
-#if (IncludeFirebaseAnalytics)
-				//-:cnd:noEmit
+				#if (IncludeFirebaseAnalytics)
+//-:cnd:noEmit
 #if __ANDROID__
-				//+:cnd:noEmit
+//+:cnd:noEmit
 				if (e.IsTerminating && Java.Lang.Thread.DefaultUncaughtExceptionHandler != null)
 				{
 					/// We need to call <see cref="Java.Lang.Thread.DefaultUncaughtExceptionHandler.UncaughtException"/>
@@ -193,12 +193,12 @@ namespace ApplicationTemplate
 					/// This will re-invoke <see cref="AppDomain.CurrentDomain.UnhandledException"/> with the new exception.
 					Java.Lang.Thread.DefaultUncaughtExceptionHandler.UncaughtException(
 						Java.Lang.Thread.CurrentThread(),
-						Crashlytics.MonoExceptionHelper.Create(exception)
+						new Java.Lang.RuntimeException(Java.Lang.Throwable.FromException(exception))
 					);
 				}
-				//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-				//+:cnd:noEmit
+//+:cnd:noEmit
 #endif
 			};
 		}
