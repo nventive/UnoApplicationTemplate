@@ -6,9 +6,10 @@ This is a mobile app project template using [Uno](https://github.com/unoplatform
 
 We use `dotnet` project templates to easily create new projects. It simplifies the **project renaming** and supports **conditional inclusions**.
 
-1. Install the template using the following command at the root of the project.
+1. Clone this repository on your machine and open a command prompt at the root of the project and run the following command 
 
-    `dotnet new -i ./`
+   `dotnet new -i ./`
+
 
 1. If you want to uninstall the template, run the following command.
 
