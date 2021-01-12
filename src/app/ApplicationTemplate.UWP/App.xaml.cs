@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Chinook.SectionsNavigation;
+using Uno.UI;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Graphics.Display;
@@ -19,6 +20,10 @@ namespace ApplicationTemplate
 
 			Startup = new Startup();
 			Startup.PreInitialize();
+
+#if __ANDROID__ || __IOS__
+			FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+#endif
 
 			InitializeComponent();
 
