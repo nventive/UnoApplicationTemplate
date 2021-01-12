@@ -45,9 +45,7 @@ namespace ApplicationTemplate
 				throw new InvalidOperationException($"You shouldn't call {nameof(PreInitialize)} more than once.");
 			}
 
-#if __ANDROID__ || __IOS__
-			FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
-#endif
+			PreInitializeServices();
 
 			PreInitializeActivity.Start();
 
@@ -87,6 +85,12 @@ namespace ApplicationTemplate
 
 			Logger.LogInformation("Initialized startup.");
 		}
+
+		/// <summary>
+		/// Inialize All App configuration needed before all containers
+		/// Ex: Uno Configuration , Languages etc...
+		/// </summary>
+		protected abstract void PreInitializeServices();
 
 		/// <summary>
 		/// Gets a <see cref="ILogger{TCategoryName}"/> typed to the implementator class.
