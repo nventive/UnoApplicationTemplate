@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Uno.UI;
 
 namespace ApplicationTemplate
 {
@@ -43,6 +44,10 @@ namespace ApplicationTemplate
 			{
 				throw new InvalidOperationException($"You shouldn't call {nameof(PreInitialize)} more than once.");
 			}
+
+#if __ANDROID__ || __IOS__
+			FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+#endif
 
 			PreInitializeActivity.Start();
 
