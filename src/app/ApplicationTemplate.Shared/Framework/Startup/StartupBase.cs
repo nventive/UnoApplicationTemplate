@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Uno.UI;
 
 namespace ApplicationTemplate
 {
@@ -44,6 +45,8 @@ namespace ApplicationTemplate
 				throw new InvalidOperationException($"You shouldn't call {nameof(PreInitialize)} more than once.");
 			}
 
+			PreInitializeServices();
+
 			PreInitializeActivity.Start();
 
 			CoreStartup.PreInitialize();
@@ -82,6 +85,12 @@ namespace ApplicationTemplate
 
 			Logger.LogInformation("Initialized startup.");
 		}
+
+		/// <summary>
+		/// Inialize All App configuration needed before all containers
+		/// Ex: Uno Configuration , Languages etc...
+		/// </summary>
+		protected abstract void PreInitializeServices();
 
 		/// <summary>
 		/// Gets a <see cref="ILogger{TCategoryName}"/> typed to the implementator class.

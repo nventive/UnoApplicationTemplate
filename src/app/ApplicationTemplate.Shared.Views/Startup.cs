@@ -9,6 +9,7 @@ using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Uno.UI;
 using Windows.UI.Core;
 
 namespace ApplicationTemplate
@@ -18,6 +19,18 @@ namespace ApplicationTemplate
 		public Startup()
 			: base(new CoreStartup())
 		{
+		}
+
+		protected override void PreInitializeServices()
+		{
+//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
+//+:cnd:noEmit
+
+			FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
 		}
 
 		protected override void InitializeViewServices(IHostBuilder hostBuilder)
