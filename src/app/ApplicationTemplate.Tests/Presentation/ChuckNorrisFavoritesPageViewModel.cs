@@ -17,7 +17,7 @@ namespace ApplicationTemplate.Tests
 		public async Task It_Should_Return_No_Results()
 		{
 			// Arrange
-			await StartNavigation(DefaultCancellationToken, () => new ChuckNorrisFavoritesPageViewModel());
+			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisFavoritesPageViewModel());
 			var viewModel = (ChuckNorrisFavoritesPageViewModel)GetCurrentViewModel();
 
 			// Act
@@ -31,7 +31,7 @@ namespace ApplicationTemplate.Tests
 		public async Task It_Should_Return_Favourited()
 		{
 			// Arrange
-			await StartNavigation(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
+			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
 			var searchViewModel = (ChuckNorrisSearchPageViewModel)GetCurrentViewModel();
 			searchViewModel.SearchTerm = "dog";
 			var searchedQuotes = await searchViewModel.Quotes.Load(DefaultCancellationToken);
@@ -40,7 +40,7 @@ namespace ApplicationTemplate.Tests
 			// Act
 			await searchViewModel.ToggleIsFavorite.Execute(firstQuoteVm);
 
-			await StartNavigation(DefaultCancellationToken, () => new ChuckNorrisFavoritesPageViewModel());
+			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisFavoritesPageViewModel());
 			var favouritesViewModel = (ChuckNorrisFavoritesPageViewModel)GetCurrentViewModel();
 
 			var favouritedQuotes = await favouritesViewModel.Quotes.Load(DefaultCancellationToken) as ReadOnlyObservableCollection<ChuckNorrisItemViewModel>;

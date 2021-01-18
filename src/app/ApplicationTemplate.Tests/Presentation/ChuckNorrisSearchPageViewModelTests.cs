@@ -14,7 +14,7 @@ namespace ApplicationTemplate.Tests
 		public async Task It_Should_EmptyCriterion_NoResults()
 		{
 			// Arrange
-			await StartNavigation(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
+			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
 			var viewModel = (ChuckNorrisSearchPageViewModel)GetCurrentViewModel();
 
 			// Act
@@ -29,7 +29,7 @@ namespace ApplicationTemplate.Tests
 		public async Task It_Should_NotEmptyCriterion_Results()
 		{
 			// Arrange
-			await StartNavigation(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
+			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
 			var viewModel = (ChuckNorrisSearchPageViewModel)GetCurrentViewModel();
 
 			// Act

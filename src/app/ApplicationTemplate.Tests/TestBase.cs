@@ -25,7 +25,7 @@ namespace ApplicationTemplate.Tests
 		{
 			_coreStartup.PreInitialize();
 
-			_coreStartup.Initialize(AddThreadConfiguration);
+			_coreStartup.Initialize(ConfigureHost);
 
 			ConfigureSecurityProtocol();
 		}
@@ -35,6 +35,19 @@ namespace ApplicationTemplate.Tests
 			await _coreStartup.Start();
 		}
 
+		/// <summary>
+		/// A chance to configure the <paramref name="host"/> after its default configuration.
+		/// </summary>
+		/// <param name="host">Host builder</param>
+		protected virtual void ConfigureHost(IHostBuilder host)
+		{
+			AddThreadConfiguration(host);
+		}
+
+		/// <summary>
+		/// Adds instances of thread related interfaces in the IoC.
+		/// </summary>
+		/// <param name="host">Host Builder.</param>
 		private void AddThreadConfiguration(IHostBuilder host)
 		{
 			host.ConfigureServices(services =>

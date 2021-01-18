@@ -16,7 +16,7 @@ namespace ApplicationTemplate.Tests
 		public async Task It_Should_GetAll()
 		{
 			// Arrange
-			await StartNavigation(DefaultCancellationToken, () => new PostsPageViewModel());
+			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
 			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
 
 			// Act
@@ -30,8 +30,8 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task It_Should_Navigate_New_Post()
 		{
-			// Arrangee
-			await StartNavigation(DefaultCancellationToken, () => new PostsPageViewModel());
+			// Arrange
+			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
 			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
 
 			// Act
@@ -50,7 +50,7 @@ namespace ApplicationTemplate.Tests
 		public async Task It_Should_Navigate_Edit_Post()
 		{
 			// Arrange
-			await StartNavigation(DefaultCancellationToken, () => new PostsPageViewModel());
+			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
 			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
 			var posts = await viewModel.Posts.Load(DefaultCancellationToken) as ImmutableList<PostData>;
 
