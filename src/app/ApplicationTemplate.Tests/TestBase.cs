@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net;
+using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.Persistence;
@@ -38,7 +39,26 @@ namespace ApplicationTemplate.Tests
 		/// A chance to configure the <paramref name="host"/> after its default configuration.
 		/// </summary>
 		/// <param name="host">Host builder</param>
-		protected virtual void ConfigureHost(IHostBuilder host) { }
+		protected virtual void ConfigureHost(IHostBuilder host)
+		{
+			AddThreadConfiguration(host);
+		}
+
+		/// <summary>
+		/// Adds instances of thread related interfaces in the IoC.
+		/// </summary>
+		/// <param name="host">Host Builder.</param>
+		private void AddThreadConfiguration(IHostBuilder host)
+		{
+			host.ConfigureServices(services =>
+			{
+				services
+					.AddSingleton<IScheduler>(s => TaskPoolScheduler.Default)
+					.AddSingleton<IDispatcherScheduler>(s => new DispatcherSchedulerAdapter(
+						s.GetRequiredService<IScheduler>()
+					));
+			});
+		}
 
 		/// <summary>
 		/// Returns the requested service.

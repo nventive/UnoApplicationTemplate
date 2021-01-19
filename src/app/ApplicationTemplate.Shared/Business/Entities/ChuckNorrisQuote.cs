@@ -32,6 +32,7 @@ namespace ApplicationTemplate
 
 		public string[] Categories { get; }
 
+		[EqualityIgnore]
 		public bool IsFavorite { get; }
 	}
 }

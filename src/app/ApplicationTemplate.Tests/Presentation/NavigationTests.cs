@@ -10,7 +10,7 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class NavigationTests : TestBase
+	public class NavigationTests : NavigationTestsBase
 	{
 		[Fact]
 		public async Task It_Should_Navigate_Everywhere()
@@ -64,18 +64,6 @@ namespace ApplicationTemplate.Tests
 			await navigationCommand(viewModel).Execute();
 
 			return GetAndAssertCurrentViewModel<TDestinationViewModel>();
-		}
-
-		private TViewModel GetAndAssertCurrentViewModel<TViewModel>()
-		{
-			var viewModel = GetCurrentViewModel();
-
-			return Assert.IsType<TViewModel>(viewModel);
-		}
-
-		private IViewModel GetCurrentViewModel()
-		{
-			return GetService<IStackNavigator>().State.Stack.LastOrDefault()?.ViewModel as IViewModel;
 		}
 	}
 }

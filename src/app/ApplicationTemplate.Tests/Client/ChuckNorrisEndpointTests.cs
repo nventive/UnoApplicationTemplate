@@ -13,8 +13,10 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task It_Should_GetAll()
 		{
+			// Act
 			var result = await SUT.Search(DefaultCancellationToken, "test");
 
+			// Assert
 			result.Should().NotBeNull();
 			result.Quotes.Should().NotBeNullOrEmpty();
 		}

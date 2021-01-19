@@ -75,6 +75,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\ChuckNorris\ChuckNorrisSearchPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\CultureDiagnosticsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\DiagnosticsCountersService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\SectionNavigatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\IViewModel.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\MenuViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Settings\EditProfileFormViewModel.cs" />
