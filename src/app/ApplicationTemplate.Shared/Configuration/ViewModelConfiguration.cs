@@ -27,6 +27,7 @@ namespace ApplicationTemplate
 		public static IServiceCollection AddMvvm(this IServiceCollection services)
 		{
 			return services
+				.RegisterViewModels()
 				.AddDynamicProperties()
 				.AddDynamicCommands()
 				.AddDataLoaders()
@@ -70,6 +71,17 @@ namespace ApplicationTemplate
 					return state.Data == null || (state.Data is IEnumerable enumerable && !enumerable.Cast<object>().Any());
 				}
 			});
+		}
+
+		private static IServiceCollection RegisterViewModels(this IServiceCollection services)
+		{
+			return services
+					.AddTransient<HomePageViewModel>()
+					.AddTransient<WelcomePageViewModel>()
+					.AddTransient<ChuckNorrisFavoritesPageViewModel>()
+					.AddTransient<ChuckNorrisSearchPageViewModel>()
+					.AddTransient<ShellViewModel>()
+					.AddTransient<MenuViewModel>();			
 		}
 	}
 }
