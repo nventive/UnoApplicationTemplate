@@ -77,6 +77,7 @@ namespace ApplicationTemplate
 		{
 			return services
 					.AddTransient<HomePageViewModel>()
+				    .AddTransient<OnboardingPageViewModel>()
 					.AddTransient<WelcomePageViewModel>()
 					.AddTransient<ChuckNorrisFavoritesPageViewModel>()
 					.AddTransient<ChuckNorrisSearchPageViewModel>()
