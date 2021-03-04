@@ -6,6 +6,7 @@ parameters:
   appCenterAndroidSlug: ''  
   androidKeyStoreFile: ''
   androidVariableGroup: ''
+  iOSVariableGroup: ''
 
 jobs:
 - deployment: AppCenter_UWP
@@ -42,7 +43,7 @@ jobs:
   environment: ${{ parameters.deploymentEnvironment }}
 
   variables:
-  - group: ApplicationTemplate.Distribution.AppStore
+  - group: ${{ parameters.iOSVariableGroup }}
 
   strategy:
     runOnce:
