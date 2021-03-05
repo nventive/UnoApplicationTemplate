@@ -1,0 +1,119 @@
+parameters:
+  applicationEnvironment: '' # e.g. "Staging", "Production"
+  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
+  appCenterUWPSlug: ''
+  appCenteriOSSlug: ''
+  appCenterAndroidSlug: ''  
+  androidKeyStoreFile: ''
+  androidVariableGroup: ''
+
+jobs:
+- deployment: AppCenter_iOS
+  pool: 
+    name: $(macOSPoolName)
+    demands:
+    - fastlane
+
+  environment: ${{ parameters.deploymentEnvironment }}
+
+  variables:
+  - group: ApplicationTemplate.Distribution.AppStore
+
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+
+        - download: current
+          artifact: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+
+        - task: UseDotNet@2
+          displayName: 'Use .Net Core runtime 2.2.x'
+          inputs:
+            packageType: runtime
+            version: 2.2.x
+
+        - task: nventiveCanaryUpdater@5
+          displayName: 'Canary Update'
+          condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/canaries')
+          inputs:
+            solution: src/ApplicationTemplate.sln
+            branchToMerge: master
+            summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
+            resultFile: '$(Build.ArtifactStagingDirectory)/result.json'
+            nugetUpdaterVersion: 2.0.6
+            packageAuthor: nventive
+
+        - task: AppCenterDistribute@3
+          displayName: Deploy iOS to AppCenter
+          inputs:
+            serverEndpoint: $(AppCenterServiceConnection)
+            appSlug: ${{ parameters.appCenteriOSSlug }}
+            appFile: $(Pipeline.Workspace)/$(iOSArtifactName)_${{ parameters.applicationEnvironment }}/*.ipa
+            symbolsDsymFiles: $(Pipeline.Workspace)/$(iOSArtifactName)_${{ parameters.applicationEnvironment }}/*.dSYM
+            symbolsIncludeParentDirectory: true
+            releaseNotesInput: |
+              CI build            
+            isSilent: true
+
+- deployment: AppCenter_Android
+  pool: $(windowsPoolName)
+
+  variables:
+  - group: ${{ parameters.androidVariableGroup }}
+    
+  environment: ${{ parameters.deploymentEnvironment }}
+
+  container: windows
+  
+  strategy:
+      runOnce:
+        deploy:
+          steps:
+          
+          - download: current
+            artifact: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+
+          - task: UseDotNet@2
+            displayName: 'Use .Net Core runtime 2.2.x'
+            inputs:
+              packageType: runtime
+              version: 2.2.x
+
+          - task: nventiveCanaryUpdater@5
+            displayName: 'Canary Update'
+            condition: startsWith(variables['Build.SourceBranch'], 'refs/heads/canaries')
+            inputs:
+              solution: src/ApplicationTemplate.sln
+              branchToMerge: master
+              summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
+              resultFile: '$(Build.ArtifactStagingDirectory)/result.json'
+              nugetUpdaterVersion: 2.0.6
+              packageAuthor: nventive
+
+          - task: DownloadSecureFile@1
+            name: keyStore
+            displayName: "Download keystore from secure files"
+            inputs:
+              secureFile: ${{ parameters.androidKeyStoreFile }}
+
+          - task: InstallBundletool@1
+
+          - task: AabConvertToUniversalApk@1
+            inputs:
+              aabFilePath: '$(Pipeline.Workspace)/$(AndroidArtifactName)_${{ parameters.applicationEnvironment }}/*-Signed.aab'
+              keystoreFilePath: '$(keyStore.secureFilePath)'
+              keystorePassword: '$(AndroidSigningStorePass)'
+              keystoreAlias: '$(AndroidSigningKeyAlias)'
+              keystoreAliasPassword: '$(AndroidSigningKeyPass)'
+              outputFolder: '$(Build.SourcesDirectory)/tmp'
+          
+          - task: AppCenterDistribute@3
+            displayName: Deploy Android to AppCenter
+            inputs:
+              serverEndpoint: $(AppCenterServiceConnection)
+              appSlug: ${{ parameters.appCenterAndroidSlug }}
+              appFile: '$(Build.SourcesDirectory)/tmp/*.apk'
+              releaseNotesInput: |
+                CI build
+              isSilent: true

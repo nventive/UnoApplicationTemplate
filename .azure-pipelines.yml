@@ -5,12 +5,14 @@
   branches:
     include:
       - master
+      - develop
       - release/*
       - feature/*
 pr:
  branches:
    include:
    - master
+   - develop
    - release/*
    - feature/*
 
@@ -79,6 +81,8 @@ variables:
   AppCenterAndroidSlug_Production: 'nventive-framework/ApplicationTemplate-Production-1'
   AppCenteriOSSlug_Production: 'nventive-framework/ApplicationTemplate-Production'
   AppCenterUWPSlug_Production: 'nventive-framework/ApplicationTemplate-Production-2'
+  AppCenterAndroidSlug_Canary: 'nventive-framework/ApplicationTemplate-Canary-1'
+  AppCenteriOSSlug_Canary: 'nventive-framework/ApplicationTemplate-Canary'
 
   # Azure subscription
   # AzureSubscriptionName:
@@ -172,6 +176,21 @@ stages:
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
       androidKeyStoreFile: $(GooglePlayKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
+
+- stage: AppCenter_Canary
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+  dependsOn: Build_Staging
+
+  jobs:
+  - template: build/stage-canary-updater.yml
+    parameters:
+      applicationEnvironment: Canary
+      deploymentEnvironment: AppCenter
+      appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
+      appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+
 
 # - stage: Azure
 #   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
