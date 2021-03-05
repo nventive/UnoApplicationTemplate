@@ -1,10 +1,22 @@
 parameters:
-  applicationEnvironment: ''
-  androidKeyStoreFile: ''
-  androidVariableGroup: ''
-  iosCertificateFile: ''
-  iosProvisioningProfileFile: ''
-  iosVariableGroup: ''
+- name: applicationEnvironment
+  type: string
+  default: ''
+- name: androidKeyStoreFile
+  type: string
+  default: ''
+- name: androidVariableGroup
+  type: string
+  default: ''
+- name: iosCertificateFile
+  type: string
+  default: ''
+- name: iosProvisioningProfileFile
+  type: string
+  default: ''
+- name: iosVariableGroup
+  type: string
+  default: ''
 - name: preBuildSteps
   type: stepList
   default: []
