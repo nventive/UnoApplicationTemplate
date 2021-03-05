@@ -108,6 +108,7 @@ variables:
 
   # For Application.Building.Light optimizations
   IsLightBuild: $[eq(variables['Build.Reason'], 'PullRequest')]
+  IsCanary: $[startsWith(variables['Build.SourceBranch'], 'refs/heads/canaries')]
 
   # Android variables (hosted agent)
   # ANDROID_NDK_HOME: C:\Microsoft\AndroidNDK64\android-ndk-r16b
@@ -120,6 +121,7 @@ variables:
 
 stages:
 - stage: Build_Staging
+  condition: and(eq(variables['IsCanary'], 'false'))
   jobs:
   - template: build/stage-build.yml
     parameters:
@@ -143,6 +145,32 @@ stages:
       iosCertificateFile: $(AppStoreCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
+- stage: Build_Canary
+  condition: and(eq(variables['IsCanary'], 'true'))
+  dependsOn: []
+  jobs:
+  - template: build/stage-build.yml
+    parameters:
+      applicationEnvironment: Staging
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      iosProvisioningProfileFile: $(InternalProvisioningProfile)
+      iosCertificateFile: $(InternalCertificate)
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
+      preBuildSteps:
+        - task: UseDotNet@2
+          displayName: 'Use .Net Core runtime 2.2.x'
+          inputs:
+            packageType: runtime
+            version: 2.2.x
+        - task: nventiveCanaryUpdater@5
+          displayName: 'Canary Update'
+          inputs:
+            solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
+            branchToMerge: master
+            summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
+            resultFile: '$(Build.ArtifactStagingDirectory)/result.json'
+    
 - stage: AppCenter_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Staging
@@ -172,6 +200,21 @@ stages:
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
       androidKeyStoreFile: $(GooglePlayKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
+
+- stage: AppCenter_Canary
+  condition: and(succeeded(), eq(variables['IsCanary'], 'true'))
+  dependsOn: Build_Canary
+
+  jobs:
+  - template: build/stage-release-appcenter.yml
+    parameters:
+      applicationEnvironment: Staging
+      deploymentEnvironment: AppCenter
+      appCenterUWPSlug: $(AppCenterUWPSlug)
+      appCenteriOSSlug: $(AppCenteriOSSlug)
+      appCenterAndroidSlug: $(AppCenterAndroidSlug)
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
 
 # - stage: Azure
 #   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))

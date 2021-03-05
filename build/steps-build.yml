@@ -1,8 +1,19 @@
 ﻿parameters:
-  androidKeyStoreFile: ''
-  iosCertificateFile: ''
-  iosCertificatePassword: ''
-  iosProvisioningProfileFile: ''
+- name: androidKeyStoreFile
+  type: string
+  default: ''
+- name: iosCertificateFile
+  type: string
+  default: ''
+- name: iosCertificatePassword
+  type: string
+  default: ''
+- name: iosProvisioningProfileFile
+  type: string
+  default: ''
+- name: preBuildSteps
+  type: stepList
+  default: []
 
 steps:
 - task: gitversion/setup@0
@@ -15,6 +26,10 @@ steps:
     useConfigFile: true
     configFilePath: 'gitversion.yml'
   displayName: 'Calculate version'
+
+- ${{ each step in parameters.preBuildSteps }}:
+    - ${{ each pair in step }}:
+        ${{ pair.key }}: ${{ pair.value }}
 
 - task: NuGetToolInstaller@0
   displayName: 'Install NuGet $(NUGET_VERSION)'
