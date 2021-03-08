@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Framework;
@@ -16,6 +13,13 @@ namespace ApplicationTemplate
 {
 	public class ChuckNorrisSearchPageViewModel : ViewModel
 	{
+		private readonly Func<IChuckNorrisService> _chuckNorrisService;
+
+		public ChuckNorrisSearchPageViewModel(Func<IChuckNorrisService> chuckNorrisService)
+		{
+			_chuckNorrisService = chuckNorrisService;
+		}
+
 		public string SearchTerm
 		{
 			get => this.Get<string>();
@@ -42,17 +46,24 @@ namespace ApplicationTemplate
 
 		public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<ChuckNorrisItemViewModel>(async (ct, item) =>
 		{
-			await this.GetService<IChuckNorrisService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
+			await _chuckNorrisService().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
 		});
 
 		private async Task<ChuckNorrisItemViewModel[]> LoadQuotes(CancellationToken ct, IDataLoaderRequest request)
 		{
+			// If the search term does not contain at least 3 characters, the API returns an exception.
+			// It must be handle on app side.
+			if (SearchTerm.Length < 3)
+			{
+				return Array.Empty<ChuckNorrisItemViewModel>();
+			}
+
 			await SetupFavoritesUpdate(ct);
 
 			// Add the SearchTerm to the IDataLoaderContext to be able to bind it in the empty state.
 			request.Context["SearchTerm"] = SearchTerm;
 
-			var quotes = await this.GetService<IChuckNorrisService>().Search(ct, SearchTerm);
+			var quotes = await _chuckNorrisService().Search(ct, SearchTerm);
 
 			return quotes
 				.Select(q => this.GetChild(() => new ChuckNorrisItemViewModel(this, q), q.Id))
@@ -66,7 +77,7 @@ namespace ApplicationTemplate
 			if (!TryGetDisposable(FavoritesKey, out var _))
 			{
 				// Get the observable list of favorites.
-				var favorites = await this.GetService<IChuckNorrisService>().GetFavorites(ct);
+				var favorites = await _chuckNorrisService().GetFavorites(ct);
 
 				// Subscribe to the observable list to update the current items.
 				var subscription = favorites
