@@ -172,6 +172,7 @@ stages:
           inputs:
             solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
             branchToMerge: master
+            packageAuthor: nventive
             summaryFile: '$(Build.ArtifactStagingDirectory)/Canary.md'
             resultFile: '$(Build.ArtifactStagingDirectory)/result.json'
     
