@@ -123,7 +123,7 @@ variables:
 
 stages:
 - stage: Build_Staging
-  condition: and(succeeded(), eq(variables['IsCanary'], 'false'))
+  condition: eq(variables['IsCanary'], 'false')
   jobs:
   - template: build/stage-build.yml
     parameters:
@@ -150,7 +150,7 @@ stages:
 # Build steps for the Canary
 # Build the project the same as prod and QA builds, but update all nuget packages to latest
 - stage: Build_Canary
-  condition: and(succeeded(), eq(variables['IsCanary'], 'true'))
+  condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['IsCanary'], 'true'))
   dependsOn: []
   jobs:
   - template: build/stage-build.yml
