@@ -1,10 +1,25 @@
 parameters:
-  applicationEnvironment: ''
-  androidKeyStoreFile: ''
-  androidVariableGroup: ''
-  iosCertificateFile: ''
-  iosProvisioningProfileFile: ''
-  iosVariableGroup: ''
+- name: applicationEnvironment
+  type: string
+  default: ''
+- name: androidKeyStoreFile
+  type: string
+  default: ''
+- name: androidVariableGroup
+  type: string
+  default: ''
+- name: iosCertificateFile
+  type: string
+  default: ''
+- name: iosProvisioningProfileFile
+  type: string
+  default: ''
+- name: iosVariableGroup
+  type: string
+  default: ''
+- name: preBuildSteps
+  type: stepList
+  default: []
 
 jobs:
   - job: On_Windows # Build UWP and Android on a windows machine
@@ -26,6 +41,7 @@ jobs:
           ApplicationPlatform: Any CPU
           ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+          
     pool:
       name: $(windowsPoolName)
 
@@ -37,6 +53,7 @@ jobs:
     steps:
       - template: steps-build.yml
         parameters:
+          preBuildSteps: ${{ parameters.preBuildSteps }}
           androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
 
   - job: On_Mac # Build iOS on a mac
@@ -68,6 +85,7 @@ jobs:
         
     - template: steps-build.yml
       parameters:
+        preBuildSteps: ${{ parameters.preBuildSteps }}
         iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
         iosCertificateFile: ${{ parameters.iosCertificateFile }}
         iosCertificatePassword: $(AppleCertificatePassword)
