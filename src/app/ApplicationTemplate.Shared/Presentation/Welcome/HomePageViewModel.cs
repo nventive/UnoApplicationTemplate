@@ -1,6 +1,4 @@
 ﻿using System;
-using System.IO;
-using System.Text;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
@@ -63,7 +61,7 @@ namespace ApplicationTemplate
 
 		public IDynamicCommand NavigateToChuckNorrisSearchPage => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new ChuckNorrisSearchPageViewModel());
+			await this.GetService<IStackNavigator>().Navigate(ct, () => new ChuckNorrisSearchPageViewModel(() => this.GetService<IChuckNorrisService>()));
 		});
 
 		public IDynamicCommand NavigateToSettingsPage => this.GetCommandFromTask(async ct =>

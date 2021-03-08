@@ -1,17 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using AutoFixture.Xunit2;
 using FluentAssertions;
 using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class PostServiceTests : TestBase<IPostService>
+	public class PostServiceShould : TestBase<IPostService>
 	{
 		[Fact]
-		public async Task It_Should_GetAll()
+		public async Task GetAllPosts()
 		{
 			// Act
 			var results = await SUT.GetPosts(DefaultCancellationToken);
@@ -20,22 +18,42 @@ namespace ApplicationTemplate.Tests
 			results.Should().NotBeNullOrEmpty();
 		}
 
-		[Fact]
-		public async Task It_Should_GetOne()
+		[Theory]
+		// Valid cases
+		[InlineAutoData(1)]
+		// Invalid cases
+		[InlineAutoData(-1)]
+		[InlineAutoData(0)]
+		[InlineAutoData(int.MaxValue)] // This will be invalid most of the time but it can be valid if the max amount of posts if created.
+		public async Task GetPostOrThrowException(int givenId)
 		{
 			// Arrange
-			var postId = 1;
+			var posts = await SUT.GetPosts(DefaultCancellationToken);
+			var postsNumber = posts.Count;
 
 			// Act
-			var result = await SUT.GetPost(DefaultCancellationToken, postId);
+			Func<Task<PostData>> act = () => SUT.GetPost(DefaultCancellationToken, givenId);
 
-			// Assert
-			result.Should().NotBeNull();
-			result.Id.Should().Be(postId);
+			if (givenId >= 1 && givenId <= postsNumber)
+			{
+				var result = await act();
+
+				// Assert with valid id
+				result
+					.Should().NotBeNull();
+				result.Id
+					.Should().Be(givenId);
+			}
+			else
+			{
+				// Assert with invalid id
+				await act
+					.Should().ThrowExactlyAsync<ArgumentOutOfRangeException>(because: "Id '{0}' is not registered in database", givenId);
+			}
 		}
 
 		[Fact]
-		public async Task It_Should_Create()
+		public async Task CreatePostOrThrowException()
 		{
 			// Arrange
 			var post = new PostData.Builder()
@@ -57,7 +75,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Update()
+		public async Task UpdateWhenGivenPostAlreadyExists()
 		{
 			// Arrange
 			var post = new PostData.Builder()
@@ -80,7 +98,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Delete()
+		public async Task DeletePostWhenGivenPostExists()
 		{
 			// Arrange
 			var postId = 1;
