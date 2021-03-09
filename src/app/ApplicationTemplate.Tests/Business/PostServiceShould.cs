@@ -1,13 +1,26 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using FluentAssertions;
+using FluentAssertions.Execution;
+using Moq;
 using Xunit;
 
-namespace ApplicationTemplate.Tests
+namespace ApplicationTemplate.Tests.Business
 {
-	public class PostServiceShould : TestBase<IPostService>
+	public partial class PostServiceShould : TestBase<IPostService>
 	{
+		private Mock<IPostEndpoint> _mockedPostEndpoint;
+		private PostService _sut;
+
+		public PostServiceShould()
+		{
+			_mockedPostEndpoint = new Mock<IPostEndpoint>();
+			_sut = new PostService(_mockedPostEndpoint.Object);
+		}
+
 		[Fact]
 		public async Task GetAllPosts()
 		{
@@ -19,37 +32,51 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Theory]
-		// Valid cases
 		[InlineAutoData(1)]
-		// Invalid cases
-		[InlineAutoData(-1)]
-		[InlineAutoData(0)]
-		[InlineAutoData(int.MaxValue)] // This will be invalid most of the time but it can be valid if the max amount of posts if created.
-		public async Task GetPostOrThrowException(int givenId)
+		[InlineAutoData(2)]
+		public async Task GetPostWhenGivenIdIsValid(int givenId)
 		{
 			// Arrange
-			var posts = await SUT.GetPosts(DefaultCancellationToken);
-			var postsNumber = posts.Count;
+			_mockedPostEndpoint.Reset();
+			_mockedPostEndpoint
+				.Setup(endpoint => endpoint.GetAll(It.IsAny<CancellationToken>()))
+				.ReturnsAsync(GetMockedPostData().ToArray());
 
 			// Act
 			Func<Task<PostData>> act = () => SUT.GetPost(DefaultCancellationToken, givenId);
 
-			if (givenId >= 1 && givenId <= postsNumber)
-			{
-				var result = await act();
+			var result = await act();
 
-				// Assert with valid id
+			// Assert with valid id
+			using (new AssertionScope())
+			{
 				result
 					.Should().NotBeNull();
+				result
+					.Should().BeOfType<PostData>();
 				result.Id
 					.Should().Be(givenId);
 			}
-			else
-			{
-				// Assert with invalid id
-				await act
-					.Should().ThrowExactlyAsync<ArgumentOutOfRangeException>(because: "Id '{0}' is not registered in database", givenId);
-			}
+		}
+
+		[Theory]
+		[InlineAutoData(-1)]
+		[InlineAutoData(0)]
+		[InlineAutoData(int.MaxValue)] // This will be invalid most of the time but it can be valid if the max amount of posts if created.
+		public async Task GetPostThrowExceptionWhenGivenIdIsInvalid(int givenId)
+		{
+			// Arrange
+			_mockedPostEndpoint.Reset();
+			_mockedPostEndpoint
+				.Setup(endpoint => endpoint.GetAll(It.IsAny<CancellationToken>()))
+				.ReturnsAsync(GetMockedPostData().ToArray());
+
+			// Act
+			Func<Task<PostData>> act = () => SUT.GetPost(DefaultCancellationToken, givenId);
+
+			// Assert with invalid id
+			await act
+				.Should().ThrowExactlyAsync<ArgumentOutOfRangeException>(because: "Id '{0}' is not registered in database", givenId);
 		}
 
 		[Fact]
