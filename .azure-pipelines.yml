@@ -79,8 +79,9 @@ variables:
   AppCenterAndroidSlug_Production: 'nventive-framework/ApplicationTemplate-Production-1'
   AppCenteriOSSlug_Production: 'nventive-framework/ApplicationTemplate-Production'
   AppCenterUWPSlug_Production: 'nventive-framework/ApplicationTemplate-Production-2'
-  AppCenterAndroidSlug_Canary: 'nventive-framework/ApplicationTemplate-Canary-1'
-  AppCenteriOSSlug_Canary: 'nventive-framework/ApplicationTemplate-Canary'
+  AppCenterAndroidSlug_Canary: 'nventive-framework/Application-Template-Canary-1'
+  AppCenteriOSSlug_Canary: 'nventive-framework/Application-Template-Canary'
+  AppCenterUWPSlug_Canary: 'nventive-framework/Application-Template-Canary-2'
 
   # Azure subscription
   # AzureSubscriptionName:
@@ -215,6 +216,7 @@ stages:
     parameters:
       applicationEnvironment: Staging
       deploymentEnvironment: AppCenter
+      appCenterUWPSlug: $(AppCenterUWPSlug_Canary)
       appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
       androidKeyStoreFile: $(InternalKeystore)
