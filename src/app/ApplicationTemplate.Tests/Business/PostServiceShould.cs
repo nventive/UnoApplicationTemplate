@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using FluentAssertions.Execution;
+using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
 namespace ApplicationTemplate.Tests.Business
 {
-	public partial class PostServiceShould : TestBase<IPostService>
+	public partial class PostServiceShould
 	{
 		private Mock<IPostEndpoint> _mockedPostEndpoint;
 		private PostService _sut;
@@ -25,7 +26,7 @@ namespace ApplicationTemplate.Tests.Business
 		public async Task GetAllPosts()
 		{
 			// Act
-			var results = await SUT.GetPosts(DefaultCancellationToken);
+			var results = await _sut.GetPosts(CancellationToken.None);
 
 			// Assert
 			results.Should().NotBeNullOrEmpty();
@@ -43,7 +44,7 @@ namespace ApplicationTemplate.Tests.Business
 				.ReturnsAsync(GetMockedPostData().ToArray());
 
 			// Act
-			Func<Task<PostData>> act = () => SUT.GetPost(DefaultCancellationToken, givenId);
+			Func<Task<PostData>> act = () => _sut.GetPost(CancellationToken.None, givenId);
 
 			var result = await act();
 
@@ -72,7 +73,7 @@ namespace ApplicationTemplate.Tests.Business
 				.ReturnsAsync(GetMockedPostData().ToArray());
 
 			// Act
-			Func<Task<PostData>> act = () => SUT.GetPost(DefaultCancellationToken, givenId);
+			Func<Task<PostData>> act = () => _sut.GetPost(CancellationToken.None, givenId);
 
 			// Assert with invalid id
 			await act
@@ -91,7 +92,7 @@ namespace ApplicationTemplate.Tests.Business
 			};
 
 			// Act
-			var result = await SUT.Create(DefaultCancellationToken, post);
+			var result = await _sut.Create(CancellationToken.None, post);
 
 			// Assert
 			result.Should().NotBeNull();
@@ -114,7 +115,7 @@ namespace ApplicationTemplate.Tests.Business
 			};
 
 			// Act
-			var result = await SUT.Update(DefaultCancellationToken, post.Id, post);
+			var result = await _sut.Update(CancellationToken.None, post.Id, post);
 
 			// Assert
 			result.Should().NotBeNull();
@@ -131,7 +132,7 @@ namespace ApplicationTemplate.Tests.Business
 			var postId = 1;
 
 			// Act
-			await SUT.Delete(DefaultCancellationToken, postId);
+			await _sut.Delete(CancellationToken.None, postId);
 		}
 	}
 }

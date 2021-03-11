@@ -61,7 +61,7 @@ namespace ApplicationTemplate
 
 		public IDynamicCommand NavigateToChuckNorrisSearchPage => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new ChuckNorrisSearchPageViewModel(() => this.GetService<IChuckNorrisService>()));
+			await this.GetService<IStackNavigator>().Navigate(ct, () => new ChuckNorrisSearchPageViewModel());
 		});
 
 		public IDynamicCommand NavigateToSettingsPage => this.GetCommandFromTask(async ct =>

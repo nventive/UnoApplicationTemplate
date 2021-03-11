@@ -14,14 +14,14 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class TestBase : IAsyncLifetime
+	public class IntegrationTestBase : IAsyncLifetime
 	{
 		protected static readonly CancellationToken DefaultCancellationToken = CancellationToken.None;
 		protected static readonly CancellationToken AnyCancellationToken = It.IsAny<CancellationToken>();
 
 		private readonly CoreStartup _coreStartup = new CoreStartup();
 
-		public TestBase()
+		public IntegrationTestBase()
 		{
 			_coreStartup.PreInitialize();
 
@@ -109,7 +109,7 @@ namespace ApplicationTemplate.Tests
 		}
 	}
 
-	public class TestBase<TSUT> : TestBase
+	public class IntegrationTestBase<TSUT> : IntegrationTestBase
 	{
 		protected virtual TSUT SUT => GetService<TSUT>();
 	}

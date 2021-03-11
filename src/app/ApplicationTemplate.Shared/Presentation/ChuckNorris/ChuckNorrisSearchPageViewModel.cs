@@ -13,13 +13,6 @@ namespace ApplicationTemplate
 {
 	public class ChuckNorrisSearchPageViewModel : ViewModel
 	{
-		private readonly Func<IChuckNorrisService> _chuckNorrisService;
-
-		public ChuckNorrisSearchPageViewModel(Func<IChuckNorrisService> chuckNorrisService)
-		{
-			_chuckNorrisService = chuckNorrisService;
-		}
-
 		public string SearchTerm
 		{
 			get => this.Get<string>();
@@ -46,7 +39,7 @@ namespace ApplicationTemplate
 
 		public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<ChuckNorrisItemViewModel>(async (ct, item) =>
 		{
-			await _chuckNorrisService().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
+			await this.GetService<IChuckNorrisService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
 		});
 
 		private async Task<ChuckNorrisItemViewModel[]> LoadQuotes(CancellationToken ct, IDataLoaderRequest request)
@@ -63,7 +56,7 @@ namespace ApplicationTemplate
 			// Add the SearchTerm to the IDataLoaderContext to be able to bind it in the empty state.
 			request.Context["SearchTerm"] = SearchTerm;
 
-			var quotes = await _chuckNorrisService().Search(ct, SearchTerm);
+			var quotes = await this.GetService<IChuckNorrisService>().Search(ct, SearchTerm);
 
 			return quotes
 				.Select(q => this.GetChild(() => new ChuckNorrisItemViewModel(this, q), q.Id))
@@ -77,7 +70,7 @@ namespace ApplicationTemplate
 			if (!TryGetDisposable(FavoritesKey, out var _))
 			{
 				// Get the observable list of favorites.
-				var favorites = await _chuckNorrisService().GetFavorites(ct);
+				var favorites = await this.GetService<IChuckNorrisService>().GetFavorites(ct);
 
 				// Subscribe to the observable list to update the current items.
 				var subscription = favorites
