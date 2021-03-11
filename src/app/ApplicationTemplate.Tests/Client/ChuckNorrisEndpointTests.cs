@@ -8,7 +8,7 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class ChuckNorrisEndpointTests : TestBase<IChuckNorrisEndpoint>
+	public class ChuckNorrisEndpointTests : IntegrationTestBase<IChuckNorrisEndpoint>
 	{
 		[Fact]
 		public async Task It_Should_GetAll()

@@ -14,7 +14,7 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class NavigationTestsBase : TestBase
+	public class NavigationTestsBase : IntegrationTestBase
 	{
 		protected TViewModel GetAndAssertCurrentViewModel<TViewModel>()
 		{

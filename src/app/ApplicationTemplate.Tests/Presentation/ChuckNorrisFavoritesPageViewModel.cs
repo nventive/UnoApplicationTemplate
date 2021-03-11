@@ -31,7 +31,7 @@ namespace ApplicationTemplate.Tests
 		{
 			// Arrange
 			var mockChuckNorrisService = new Mock<IChuckNorrisService>();
-			var searchViewModel = new ChuckNorrisSearchPageViewModel(() => mockChuckNorrisService.Object);
+			var searchViewModel = new ChuckNorrisSearchPageViewModel();
 
 			searchViewModel.SearchTerm = "dog";
 			var searchedQuotes = await searchViewModel.Quotes.Load(DefaultCancellationToken);

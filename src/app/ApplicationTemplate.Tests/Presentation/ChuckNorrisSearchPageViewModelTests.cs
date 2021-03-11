@@ -18,7 +18,7 @@ namespace ApplicationTemplate.Tests
 		{
 			// Arrange
 			var mockChuckNorrisService = new Mock<IChuckNorrisService>();
-			var viewModel = new ChuckNorrisSearchPageViewModel(() => mockChuckNorrisService.Object);
+			var viewModel = new ChuckNorrisSearchPageViewModel();
 
 			// Act
 			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
@@ -36,7 +36,7 @@ namespace ApplicationTemplate.Tests
 		{
 			// Arrange
 			var mockChuckNorrisService = new Mock<IChuckNorrisService>();
-			var viewModel = new ChuckNorrisSearchPageViewModel(() => mockChuckNorrisService.Object);
+			var viewModel = new ChuckNorrisSearchPageViewModel();
 
 			// Act
 			viewModel.SearchTerm = "dog";
@@ -63,7 +63,7 @@ namespace ApplicationTemplate.Tests
 		{
 			// Arrange
 			var mockChuckNorrisService = new Mock<IChuckNorrisService>();
-			var viewModel = new ChuckNorrisSearchPageViewModel(() => mockChuckNorrisService.Object);
+			var viewModel = new ChuckNorrisSearchPageViewModel();
 
 			// Act
 			viewModel.SearchTerm = searchTerm;
@@ -120,7 +120,7 @@ namespace ApplicationTemplate.Tests
 				.Setup(s => s.GetFavorites(It.IsAny<CancellationToken>()))
 				.ReturnsAsync(new SourceList<ChuckNorrisQuote>().AsObservableList());
 
-			var searchPageViewModel = new ChuckNorrisSearchPageViewModel(() => chuckNorrisServiceMock.Object);
+			var searchPageViewModel = new ChuckNorrisSearchPageViewModel();
 
 			// Act
 			searchPageViewModel.SearchTerm = searchTerm;
