@@ -80,7 +80,7 @@ namespace ApplicationTemplate.Tests
 			// Arrange
 			var anything = "Anything";
 			var mockChuckNorrisService = new Mock<IChuckNorrisService>();
-			var searchPageViewModelMock = new Mock<ChuckNorrisSearchPageViewModel>(mockChuckNorrisService.Object);
+			var searchPageViewModelMock = new Mock<ChuckNorrisSearchPageViewModel>();
 			searchPageViewModelMock
 				.SetupSet(vm => vm.SearchTerm = anything)
 				.Verifiable();
