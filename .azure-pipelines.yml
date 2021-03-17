@@ -157,7 +157,6 @@ stages:
       appCenterAndroidSlug: $(AppCenterAndroidSlug)
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      iOSVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 
 - stage: AppCenter_Production
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
@@ -173,7 +172,6 @@ stages:
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
       androidKeyStoreFile: $(GooglePlayKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
-      iOSVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
 # - stage: Azure
 #   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))

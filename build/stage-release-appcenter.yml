@@ -6,7 +6,6 @@ parameters:
   appCenterAndroidSlug: ''  
   androidKeyStoreFile: ''
   androidVariableGroup: ''
-  iOSVariableGroup: ''
 
 jobs:
 - deployment: AppCenter_UWP
@@ -41,9 +40,6 @@ jobs:
     - fastlane
 
   environment: ${{ parameters.deploymentEnvironment }}
-
-  variables:
-  - group: ${{ parameters.iOSVariableGroup }}
 
   strategy:
     runOnce:
