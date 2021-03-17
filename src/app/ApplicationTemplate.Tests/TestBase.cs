@@ -3,7 +3,7 @@ using System.Net;
 using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
-using Chinook.Persistence;
+using Nventive.Persistence;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;

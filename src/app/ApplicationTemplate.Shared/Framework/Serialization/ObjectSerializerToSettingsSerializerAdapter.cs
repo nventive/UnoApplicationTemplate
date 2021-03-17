@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Chinook.Persistence;
+using Nventive.Persistence;
 using GeneratedSerializers;
 
 namespace ApplicationTemplate

@@ -3,7 +3,7 @@ using System.Collections.Immutable;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Chinook.Persistence;
+using Nventive.Persistence;
 
 namespace ApplicationTemplate
 {
