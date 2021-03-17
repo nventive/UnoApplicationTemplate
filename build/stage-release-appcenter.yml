@@ -41,9 +41,6 @@ jobs:
 
   environment: ${{ parameters.deploymentEnvironment }}
 
-  variables:
-  - group: ApplicationTemplate.Distribution.AppStore
-
   strategy:
     runOnce:
       deploy:
