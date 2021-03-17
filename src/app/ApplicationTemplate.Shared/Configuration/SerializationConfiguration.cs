@@ -1,6 +1,6 @@
 ﻿using System;
 using ApplicationTemplate;
-using Chinook.Persistence;
+using Nventive.Persistence;
 using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
 

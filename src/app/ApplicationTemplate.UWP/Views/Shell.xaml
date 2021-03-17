@@ -4,7 +4,7 @@
 			 xmlns:local="using:ApplicationTemplate"
 			 xmlns:splash="using:Nventive.ExtendedSplashScreen"
 			 xmlns:nav="using:Chinook.SectionsNavigation"
-			 xmlns:ue="using:Chinook.View.Extensions"
+			 xmlns:ue="using:Nventive.View.Extensions"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d">

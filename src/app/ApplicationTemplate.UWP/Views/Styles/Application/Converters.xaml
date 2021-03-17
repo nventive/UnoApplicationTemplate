@@ -2,7 +2,7 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:converters="using:ApplicationTemplate"
-					xmlns:uc="using:Chinook.View.Converters">
+					xmlns:uc="using:Nventive.View.Converters">
 
 	<uc:FromNullableBoolToVisibilityConverter x:Key="TrueToCollapsed"
 											VisibilityIfTrue="Collapsed" />
