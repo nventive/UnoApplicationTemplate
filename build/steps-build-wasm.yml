@@ -35,3 +35,7 @@
     PathtoPublish: $(build.artifactstagingdirectory)
     ArtifactName: $(ArtifactName)
     ArtifactType: Container
+
+- task: PostBuildCleanup@3
+  displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
+  condition: always()
