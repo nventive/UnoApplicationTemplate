@@ -28,3 +28,10 @@ jobs:
             bundleFile: '$(Pipeline.Workspace)/$(AndroidArtifactName)_${{ parameters.applicationEnvironment }}/*-Signed.aab'
             applicationId: '$(ApplicationIdentifier)'
             languageCode: 'en-CA'
+        
+        - task: DeleteFiles@1
+          displayName: "Remove downloaded artifacts"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)
+            Contents: '**'

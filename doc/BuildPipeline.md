@@ -39,7 +39,9 @@ Because this is built on our internal machines, a cleanup step is also included 
 
 One thing to note here is that the build is also taking care of the signature of the application.
 
-#Release
+# Release
+
+The release stages are even more straigtforward than the build ones. One thing to note is that, for the same reason as it is done at the end of the build steps, a clean-up step is included in every stage.
 
 ## [stage-release-appcenter.yml](../build/stage-release-appcenter.yml)
 This stage is in charge of pushing the 3 versions of the application to AppCenter. Correspondingly, 3 jobs are run, one for each platform.
