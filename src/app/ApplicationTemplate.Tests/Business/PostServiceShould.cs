@@ -67,17 +67,21 @@ namespace ApplicationTemplate.Tests.Business
 			// Arrange
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
 			mockedPostEndpoint
-				.Setup(endpoint => endpoint.GetAll(It.IsAny<CancellationToken>()))
-				.ReturnsAsync(GetMockedPosts().ToArray());
+				.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>(), It.IsAny<long>()))
+				.ReturnsAsync(GetMockedPosts()
+					.Where(post => post.Id == givenId)
+					.FirstOrDefault()
+				);
 
 			var sut = new PostService(mockedPostEndpoint.Object);
 
 			// Act
-			Func<Task<PostData>> act = () => sut.GetPost(CancellationToken.None, givenId);
+			var result = await sut.GetPost(CancellationToken.None, givenId);
 
 			// Assert with invalid id
-			await act
-				.Should().ThrowExactlyAsync<ArgumentOutOfRangeException>(because: "Id '{0}' is not registered in database", givenId);
+			result
+				.Should()
+				.Be(default(PostData));
 		}
 
 		[Fact]
@@ -95,8 +99,8 @@ namespace ApplicationTemplate.Tests.Business
 
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
 			mockedPostEndpoint
-				.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), post))
-				.ReturnsAsync(post.WithId(randomId).ToImmutable());
+				.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), It.IsAny<PostData>()))
+				.ReturnsAsync(post.WithId(randomId));
 
 			var sut = new PostService(mockedPostEndpoint.Object);
 
