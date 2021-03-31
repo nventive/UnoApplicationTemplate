@@ -1,12 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive;
-using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Moq;
 using Xunit;
 
 namespace ApplicationTemplate.Tests
@@ -31,8 +30,9 @@ namespace ApplicationTemplate.Tests
 		public async Task It_Should_Return_Favourited()
 		{
 			// Arrange
-			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
-			var searchViewModel = (ChuckNorrisSearchPageViewModel)GetCurrentViewModel();
+			var mockChuckNorrisService = new Mock<IChuckNorrisService>();
+			var searchViewModel = new ChuckNorrisSearchPageViewModel();
+
 			searchViewModel.SearchTerm = "dog";
 			var searchedQuotes = await searchViewModel.Quotes.Load(DefaultCancellationToken);
 			var firstQuoteVm = searchedQuotes.First();

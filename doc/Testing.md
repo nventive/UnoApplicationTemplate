@@ -46,9 +46,9 @@ For more documentation on testing, read the references listed at the bottom.
   - Executes an API call
   - Assert that the result is in the correct format and is cached in the app settings.
 
-- This template provides a `TestBase` class that allows you to do those kinds of tests without worrying about bootstrapping your application; it does it for you. This is an example of an integration test.
+- This template provides a `IntegrationTestBase` class that allows you to do those kinds of tests without worrying about bootstrapping your application; it does it for you. This is an example of an integration test.
   ```csharp
-  public class MyIntegrationTest : TestBase
+  public class MyIntegrationTest : IntegrationTestBase
   {
       [Fact]
 	  public async Task It_Should_Do_Something()
@@ -75,24 +75,34 @@ For more documentation on testing, read the references listed at the bottom.
 
 ### Mocking
 
-You can also mock services that are normally registered with their implementations. In your `TestBase` class, simply override the `ConfigureHost` method and call the `ReplaceWithMock` method.
+You can also mock services that are normally registered with their implementations. In your test class, simply call `ConfigurationSetUp` with your specific configuration.
 
 ```csharp
-  public class MyIntegrationTest : TestBase
+  public class MyIntegrationTest : IntegrationTestBase
   {
-    protected override void ConfigureHost(IHostBuilder host)
-    {
-      host.ConfigureServices(s =>
-      {
-        // This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-        ReplaceWithMock<IApplicationSettingsService>(s, mock =>
-        {
-          ApplicationSettings result = ApplicationSettings.Default.WithIsOnboardingCompleted(false);
-          mock.Setup(m => m.GetCurrent(AnyCancellationToken)).Returns(Task.FromResult(result));
-          mock.Setup(m => m.GetAndObserveCurrent()).Returns(Observable.Return(result));
-        });
-      });
-    }
+	private void YourTest_SpecialConfiguration(IHostBuilder host)
+	{
+		host.ConfigureServices(services =>
+		{
+			// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
+			ReplaceWithMock<IServiceInterface>(services, mock =>
+			{
+				mock
+					.Setup(m => m.Method(It.IsAny<CancellationToken>()))
+					.ReturnsAsync(new MockObject());
+			});
+		});
+	}
+
+	public async Task YourTest()
+	{
+		// Arrange
+		ConfigurationSetup(YourTest_SpecialConfiguration);
+
+		// Act
+
+		// Assert
+	}
 
     ...
   }

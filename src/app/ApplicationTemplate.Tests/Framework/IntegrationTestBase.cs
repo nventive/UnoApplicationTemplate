@@ -14,18 +14,26 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class TestBase : IAsyncLifetime
+	public class IntegrationTestBase : IAsyncLifetime
 	{
 		protected static readonly CancellationToken DefaultCancellationToken = CancellationToken.None;
 		protected static readonly CancellationToken AnyCancellationToken = It.IsAny<CancellationToken>();
 
-		private readonly CoreStartup _coreStartup = new CoreStartup();
+		private CoreStartup _coreStartup;
 
-		public TestBase()
+		// This is called before every test
+		public IntegrationTestBase()
 		{
-			_coreStartup.PreInitialize();
+			ConfigurationSetup(ConfigureHost);
+		}
 
-			_coreStartup.Initialize(ConfigureHost);
+		protected void ConfigurationSetup(Action<IHostBuilder> extraHostConfiguration = null)
+		{
+			var coreStartup = new CoreStartup();
+			coreStartup.PreInitialize();
+			coreStartup.Initialize(extraHostConfiguration);
+
+			_coreStartup = coreStartup;
 
 			ConfigureSecurityProtocol();
 		}
@@ -39,7 +47,7 @@ namespace ApplicationTemplate.Tests
 		/// A chance to configure the <paramref name="host"/> after its default configuration.
 		/// </summary>
 		/// <param name="host">Host builder</param>
-		protected virtual void ConfigureHost(IHostBuilder host)
+		protected void ConfigureHost(IHostBuilder host)
 		{
 			AddThreadConfiguration(host);
 		}
@@ -109,7 +117,7 @@ namespace ApplicationTemplate.Tests
 		}
 	}
 
-	public class TestBase<TSUT> : TestBase
+	public class IntegrationTestBase<TSUT> : IntegrationTestBase
 	{
 		protected virtual TSUT SUT => GetService<TSUT>();
 	}
