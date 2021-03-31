@@ -8,10 +8,10 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class ChuckNorrisEndpointTests : IntegrationTestBase<IChuckNorrisEndpoint>
+	public class ChuckNorrisEndpointShould : IntegrationTestBase<IChuckNorrisEndpoint>
 	{
 		[Fact]
-		public async Task It_Should_GetAll()
+		public async Task GetAll()
 		{
 			// Act
 			var result = await SUT.Search(DefaultCancellationToken, "test");

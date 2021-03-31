@@ -14,6 +14,9 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
+	/// <summary>
+	/// Gives access to navigation events to reproduce the standard app behavior.
+	/// </summary>
 	public class NavigationTestsBase : IntegrationTestBase
 	{
 		protected TViewModel GetAndAssertCurrentViewModel<TViewModel>()

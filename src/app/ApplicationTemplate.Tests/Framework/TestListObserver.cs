@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationTemplate.Tests
 {
-	public partial class PostsPageViewModelTests
+	public partial class PostsPageViewModelShould
 	{
 		private class TestListObserver<T> : IObserver<T>
 		{

@@ -4,10 +4,10 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class PostEndpointTests : IntegrationTestBase<IPostEndpoint>
+	public class PostEndpointShould : IntegrationTestBase<IPostEndpoint>
 	{
 		[Fact]
-		public async Task It_Should_GetAll()
+		public async Task GetAll()
 		{
 			// Act
 			var results = await SUT.GetAll(DefaultCancellationToken);
@@ -17,7 +17,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_GetOne()
+		public async Task GetOne()
 		{
 			// Arrange
 			var postId = 1;
@@ -31,7 +31,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Create()
+		public async Task CreateOne()
 		{
 			// Arrange
 			var post = new PostData.Builder()
@@ -53,7 +53,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Update()
+		public async Task UpdateOne()
 		{
 			// Arrange
 			var post = new PostData.Builder()
@@ -76,7 +76,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Delete()
+		public async Task DeleteOne()
 		{
 			// Arrange
 			var postId = 1;

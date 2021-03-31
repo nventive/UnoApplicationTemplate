@@ -12,28 +12,10 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class ChuckNorrisSearchPageViewModelTests : NavigationTestsBase
+	public class ChuckNorrisSearchPageViewModelShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task It_Should_EmptyCriterion_NoResults()
-		{
-			// Arrange
-			var viewModel = new ChuckNorrisSearchPageViewModel();
-			viewModel.SearchTerm = string.Empty;
-
-			// Act
-			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
-
-			// Assert
-			using (new AssertionScope())
-			{
-				quotes.Should().NotBeNull();
-				quotes.Should().BeEmpty();
-			}
-		}
-
-		[Fact]
-		public async Task It_Should_NotEmptyCriterion_Results()
+		public async Task ReturnQuotes()
 		{
 			// Arrange
 			var viewModel = new ChuckNorrisSearchPageViewModel();
@@ -59,7 +41,7 @@ namespace ApplicationTemplate.Tests
 		[InlineData("")]
 		[InlineData("a")]
 		[InlineData("aa")]
-		public async Task DisplayNothingIfSearchIsNotValid(string searchTerm)
+		public async Task ReturnEmptyCriterion_WhenProvidedSearchTermIsTooShort(string searchTerm)
 		{
 			// Arrange
 			var viewModel = new ChuckNorrisSearchPageViewModel();
@@ -69,8 +51,7 @@ namespace ApplicationTemplate.Tests
 			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
 
 			// Assert
-			quotes.Length
-				.Should().Be(0);
+			quotes.Should().BeEmpty();
 		}
 
 		[Fact]
@@ -88,7 +69,7 @@ namespace ApplicationTemplate.Tests
 				.Should().Be(anything);
 		}
 
-		private void CheckForSearchMethodWhenQuotesAreLoading_SpecialConfiguration(IHostBuilder host)
+		private void CheckForSearchMethod_WhenQuotesAreLoading_SpecialConfiguration(IHostBuilder host)
 		{
 			host.ConfigureServices(services =>
 			{
@@ -125,7 +106,7 @@ namespace ApplicationTemplate.Tests
 		{
 			// Arrange
 			var chuckNorrisServiceMock = new Mock<IChuckNorrisService>();
-			ConfigurationSetup(CheckForSearchMethodWhenQuotesAreLoading_SpecialConfiguration);
+			ConfigurationSetup(CheckForSearchMethod_WhenQuotesAreLoading_SpecialConfiguration);
 
 			var searchPageViewModel = new ChuckNorrisSearchPageViewModel();
 
@@ -138,7 +119,7 @@ namespace ApplicationTemplate.Tests
 				.Should().Be(2);
 		}
 
-		private void CheckForMultipleSearchMethodCall_SpecialConfiguration(IHostBuilder host)
+		private void GiveDifferentResults_ForMultipleSearchMethodCall_SpecialConfiguration(IHostBuilder host)
 		{
 			host.ConfigureServices(services =>
 			{
@@ -169,11 +150,11 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task CheckForMultipleSearchMethodCall()
+		public async Task GiveDifferentResults_ForMultipleSearchMethodCall()
 		{
 			// Arrange
 			var chuckNorrisServiceMock = new Mock<IChuckNorrisService>();
-			ConfigurationSetup(CheckForMultipleSearchMethodCall_SpecialConfiguration);
+			ConfigurationSetup(GiveDifferentResults_ForMultipleSearchMethodCall_SpecialConfiguration);
 
 			var viewModel = new ChuckNorrisSearchPageViewModel();
 
