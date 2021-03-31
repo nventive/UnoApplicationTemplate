@@ -44,13 +44,6 @@ namespace ApplicationTemplate
 
 		private async Task<ChuckNorrisItemViewModel[]> LoadQuotes(CancellationToken ct, IDataLoaderRequest request)
 		{
-			// If the search term does not contain at least 3 characters, the API returns an exception.
-			// It must be handle on app side.
-			if (SearchTerm.Length < 3)
-			{
-				return Array.Empty<ChuckNorrisItemViewModel>();
-			}
-
 			await SetupFavoritesUpdate(ct);
 
 			// Add the SearchTerm to the IDataLoaderContext to be able to bind it in the empty state.

@@ -121,7 +121,6 @@ namespace ApplicationTemplate.Tests
 		/// <returns><see cref="Task"/>.</returns>
 		[Theory]
 		[InlineAutoData("test")]
-		[InlineAutoData("")]
 		public async Task CheckForSearchMethodWhenQuotesAreLoading(string searchTerm)
 		{
 			// Arrange
@@ -135,17 +134,8 @@ namespace ApplicationTemplate.Tests
 			var quotes = await searchPageViewModel.Quotes.Load(DefaultCancellationToken);
 
 			// Assert
-			if (string.IsNullOrEmpty(searchTerm))
-			{
-				// Less than 3 chars will result in an empty array even if Search returns something
-				quotes.Length
-					.Should().Be(0);
-			}
-			else
-			{
-				quotes.Length
-					.Should().Be(2);
-			}
+			quotes.Length
+				.Should().Be(2);
 		}
 
 		private void CheckForMultipleSearchMethodCall_SpecialConfiguration(IHostBuilder host)
