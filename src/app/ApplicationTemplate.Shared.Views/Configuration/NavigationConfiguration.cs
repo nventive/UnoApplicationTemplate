@@ -44,12 +44,11 @@ namespace ApplicationTemplate
 			{ typeof(ChuckNorrisFavoritesPageViewModel), typeof(ChuckNorrisFavoritesPage) },
 		};
 
-		private static void DisableAnimations()
+		private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)
 		{
-			MultiFrame.Animations.ChangeSectionAnimation_HideFrame1ToRevealFrame2 = MultiFrame.Animations.CollapseFrame1AndShowFrame2;
-			MultiFrame.Animations.ChangeSectionAnimation_ShowFrame2ToHideFrame1 = MultiFrame.Animations.CollapseFrame1AndShowFrame2;
-			MultiFrame.Animations.OpenModalAnimation = MultiFrame.Animations.CollapseFrame1AndShowFrame2;
-			MultiFrame.Animations.CloseModalAnimation = MultiFrame.Animations.CollapseFrame1AndShowFrame2;
+			frameSectionsNavigator.DefaultSetActiveSectionTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
+			frameSectionsNavigator.DefaultOpenModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
+			frameSectionsNavigator.DefaultCloseModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
 		}
 	}
 }
