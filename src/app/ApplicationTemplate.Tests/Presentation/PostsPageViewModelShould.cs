@@ -9,10 +9,10 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public partial class PostsPageViewModelTests : NavigationTestsBase
+	public partial class PostsPageViewModelShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task It_Should_GetAll()
+		public async Task GetAll()
 		{
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
@@ -27,7 +27,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Navigate_New_Post()
+		public async Task NavigateToNewPost()
 		{
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
@@ -52,7 +52,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Navigate_Edit_Post()
+		public async Task NavigateToEditPost()
 		{
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());

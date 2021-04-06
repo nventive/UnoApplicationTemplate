@@ -14,6 +14,9 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
+	/// <summary>
+	/// Gives access to navigation methods.
+	/// </summary>
 	public class NavigationTestsBase : IntegrationTestBase
 	{
 		protected TViewModel GetAndAssertCurrentViewModel<TViewModel>()
@@ -41,9 +44,9 @@ namespace ApplicationTemplate.Tests
 		/// <summary>
 		/// This method can be helpful when a test depends on navigation. (e.g. picker).
 		/// </summary>
-		/// <typeparam name="TViewModel">Target ViewModel.</typeparam>
-		/// <param name="actionOnNavigation">Action to execute after navigating to the target ViewModel.</param>
-		/// <returns><see cref="IDisposable"/>.</returns>
+		/// <typeparam name="TViewModel">The target ViewModel.</typeparam>
+		/// <param name="actionOnNavigation">The action to execute after navigating to the target ViewModel.</param>
+		/// <returns><see cref="IDisposable"/>The subscription of the <see cref="ISectionsNavigator"/> observer.</returns>
 		protected IDisposable SubscribeToNavigation<TViewModel>(Action actionOnNavigation)
 			where TViewModel : IViewModel
 		{

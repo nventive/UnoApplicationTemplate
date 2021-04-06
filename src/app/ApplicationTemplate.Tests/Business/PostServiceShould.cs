@@ -33,7 +33,7 @@ namespace ApplicationTemplate.Tests.Business
 		[Theory]
 		[InlineAutoData(1)]
 		[InlineAutoData(2)]
-		public async Task GetPostWhenGivenIdIsValid(long givenId)
+		public async Task GetPost_WhenGivenIdIsValid(long givenId)
 		{
 			// Arrange
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
@@ -62,7 +62,7 @@ namespace ApplicationTemplate.Tests.Business
 		[InlineAutoData(-1)]
 		[InlineAutoData(0)]
 		[InlineAutoData(int.MaxValue)] // This will be invalid most of the time but it can be valid if the max amount of posts if created.
-		public async Task GetPostThrowExceptionWhenGivenIdIsInvalid(int givenId)
+		public async Task GetPostThrowException_WhenGivenIdIsInvalid(int givenId)
 		{
 			// Arrange
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
@@ -124,7 +124,7 @@ namespace ApplicationTemplate.Tests.Business
 		}
 
 		[Fact]
-		public async Task ReturnsNullWhenCreatePostFailed()
+		public async Task ReturnNull_WhenCreatePostFailed()
 		{
 			// Arrange
 			var post = new PostData.Builder()
@@ -150,7 +150,7 @@ namespace ApplicationTemplate.Tests.Business
 		}
 
 		[Fact]
-		public async Task ReturnsNullWhenCreatePostBodyIsNull()
+		public async Task ReturnNull_WhenCreatePostBodyIsNull()
 		{
 			// Arrange
 			var post = default(PostData);
@@ -175,7 +175,7 @@ namespace ApplicationTemplate.Tests.Business
 		}
 
 		[Fact]
-		public async Task UpdateWhenGivenPostAlreadyExists()
+		public async Task Update_WhenGivenPostAlreadyExists()
 		{
 			// Arrange
 			var post = new PostData.Builder()
@@ -215,7 +215,7 @@ namespace ApplicationTemplate.Tests.Business
 		}
 
 		[Fact]
-		public async Task DeletePostWhenGivenPostExists()
+		public async Task DeletePost_WhenGivenPostExists()
 		{
 			// Arrange
 			var postId = 1;

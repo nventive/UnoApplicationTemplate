@@ -4,7 +4,7 @@ using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Tests
 {
-	public partial class NavigationTests
+	public partial class NavigationShould
 	{
 		/// <summary>
 		/// Navigates from the <typeparamref name="TSourceViewModel"/> to the <typeparamref name="TDestinationViewModel"/>

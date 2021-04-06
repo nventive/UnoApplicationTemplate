@@ -10,10 +10,10 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class ChuckNorrisFavoritesPageViewModelTests : NavigationTestsBase
+	public class ChuckNorrisFavoritesPageViewModelShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task It_Should_Return_No_Results()
+		public async Task ReturnNoResults()
 		{
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisFavoritesPageViewModel());
@@ -27,7 +27,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Return_Favourited()
+		public async Task ReturnFavourited()
 		{
 			// Arrange
 			var mockChuckNorrisService = new Mock<IChuckNorrisService>();

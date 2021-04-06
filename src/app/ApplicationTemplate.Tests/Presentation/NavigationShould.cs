@@ -3,10 +3,10 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public partial class NavigationTests : NavigationTestsBase
+	public partial class NavigationShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task It_Should_Navigate_Everywhere()
+		public async Task NavigateEverywhere()
 		{
 			await AssertNavigateFromTo<OnboardingPageViewModel, WelcomePageViewModel>(p => p.NavigateToWelcomePage);
 
