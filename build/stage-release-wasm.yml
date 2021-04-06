@@ -26,5 +26,6 @@ jobs:
           displayName: "Remove downloaded artifacts"
           condition: always()
           inputs:
-            SourceFolder: $(Pipeline.Workspace)
+            SourceFolder: $(Pipeline.Workspace)/$(WASMArtifactName)
+            RemoveSourceFolder: true
             Contents: '**'
