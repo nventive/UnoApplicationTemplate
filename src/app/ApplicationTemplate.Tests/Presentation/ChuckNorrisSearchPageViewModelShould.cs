@@ -22,7 +22,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		// Basic class configuration
-		private void ChuckNorrisSearchPageViewModelShould_SpecialConfiguration(IHostBuilder host)
+		private void ChuckNorrisSearchPageViewModelShould_Configuration(IHostBuilder host)
 		{
 			host.ConfigureServices(services =>
 			{
@@ -42,7 +42,7 @@ namespace ApplicationTemplate.Tests
 		{
 			// Arrange
 			var viewModel = new ChuckNorrisSearchPageViewModel();
-			ConfigurationSetup(ChuckNorrisSearchPageViewModelShould_SpecialConfiguration);
+			InitializeServices(ChuckNorrisSearchPageViewModelShould_Configuration);
 
 			// Act
 			viewModel.SearchTerm = searchTerm;
@@ -67,31 +67,11 @@ namespace ApplicationTemplate.Tests
 				.Should().Be(anything);
 		}
 
-		private void CheckForSearchMethod_WhenQuotesAreLoading_SpecialConfiguration(IHostBuilder host)
-		{
-			host.ConfigureServices(services =>
-			{
-				// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-				ReplaceWithMock<IChuckNorrisService>(services, mock =>
-				{
-					mock
-						.Setup(m => m.Search(It.IsAny<CancellationToken>(), It.IsAny<string>()))
-						.ReturnsAsync(new ChuckNorrisQuote[]
-						{
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("0").WithValue("Something something dog"), false),
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1203").WithValue("Dog something"), false)
-						});
-
-					MockingGetFavorites(mock);
-				});
-			});
-		}
-
 		[Fact]
 		public async Task CheckForSearchMethod_WhenQuotesAreLoading()
 		{
 			// Arrange
-			ConfigurationSetup(CheckForSearchMethod_WhenQuotesAreLoading_SpecialConfiguration);
+			InitializeServices(Configure);
 			var viewModel = new ChuckNorrisSearchPageViewModel();
 
 			// Act
@@ -109,41 +89,33 @@ namespace ApplicationTemplate.Tests
 				quotes.All(q => q.Quote.Value.ToUpperInvariant().Contains("DOG"))
 					.Should().BeTrue("All quotes found searching for search term 'dog' should contain 'dog' ");
 			}
-		}
 
-		private void GiveDifferentResults_ForMultipleSearchMethodCall_SpecialConfiguration(IHostBuilder host)
-		{
-			host.ConfigureServices(services =>
+			void Configure(IHostBuilder host)
 			{
-				// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-				ReplaceWithMock<IChuckNorrisService>(services, mock =>
+				host.ConfigureServices(services =>
 				{
-					mock
-						.Setup(m => m.Search(It.IsAny<CancellationToken>(), "dog"))
-						.ReturnsAsync(new ChuckNorrisQuote[]
-						{
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1"), false),
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("3"), false),
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1204"), false)
-						});
+					// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
+					ReplaceWithMock<IChuckNorrisService>(services, mock =>
+					{
+						mock
+							.Setup(m => m.Search(It.IsAny<CancellationToken>(), It.IsAny<string>()))
+							.ReturnsAsync(new ChuckNorrisQuote[]
+							{
+							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("0").WithValue("Something something dog"), false),
+							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1203").WithValue("Dog something"), false)
+							});
 
-					mock
-						.Setup(m => m.Search(It.IsAny<CancellationToken>(), "cat"))
-						.ReturnsAsync(new ChuckNorrisQuote[]
-						{
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1"), false)
-						});
-
-					MockingGetFavorites(mock);
+						MockingGetFavorites(mock);
+					});
 				});
-			});
+			}
 		}
 
 		[Fact]
-		public async Task GiveDifferentResults_ForMultipleSearchMethodCall()
+		public async Task ReturnDifferentResults_ForMultipleSearchMethodCall()
 		{
 			// Arrange
-			ConfigurationSetup(GiveDifferentResults_ForMultipleSearchMethodCall_SpecialConfiguration);
+			InitializeServices(Configure);
 
 			var viewModel = new ChuckNorrisSearchPageViewModel();
 
@@ -162,6 +134,34 @@ namespace ApplicationTemplate.Tests
 
 				secondQuotes.Length
 					.Should().Be(1);
+			}
+
+			void Configure(IHostBuilder host)
+			{
+				host.ConfigureServices(services =>
+				{
+					// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
+					ReplaceWithMock<IChuckNorrisService>(services, mock =>
+					{
+						mock
+							.Setup(m => m.Search(It.IsAny<CancellationToken>(), "dog"))
+							.ReturnsAsync(new ChuckNorrisQuote[]
+							{
+							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1"), false),
+							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("3"), false),
+							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1204"), false)
+							});
+
+						mock
+							.Setup(m => m.Search(It.IsAny<CancellationToken>(), "cat"))
+							.ReturnsAsync(new ChuckNorrisQuote[]
+							{
+							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1"), false)
+							});
+
+						MockingGetFavorites(mock);
+					});
+				});
 			}
 		}
 	}

@@ -27,15 +27,14 @@ namespace ApplicationTemplate.Tests
 		// This is called before every test
 		public IntegrationTestBase()
 		{
-			ConfigurationSetup(ConfigureHost);
+			InitializeServices(ConfigureHost);
 		}
 
 		/// <summary>
 		/// Initializes different services used by the app.
-		/// Normally used for mocking services.
 		/// </summary>
-		/// <param name="extraHostConfiguration">Add specific configurations for project initialization.</param>
-		protected void ConfigurationSetup(Action<IHostBuilder> extraHostConfiguration = null)
+		/// <param name="extraHostConfiguration">Add specific configurations for app initialization.</param>
+		protected void InitializeServices(Action<IHostBuilder> extraHostConfiguration = null)
 		{
 			var coreStartup = new CoreStartup();
 			coreStartup.PreInitialize();
@@ -80,7 +79,7 @@ namespace ApplicationTemplate.Tests
 		/// Returns the requested service.
 		/// </summary>
 		/// <typeparam name="TService">Type of service.</typeparam>
-		/// <returns>Requested service.</returns>
+		/// <returns>The requested service.</returns>
 		protected virtual TService GetService<TService>()
 		{
 			return _coreStartup.ServiceProvider.GetRequiredService<TService>();
@@ -89,10 +88,10 @@ namespace ApplicationTemplate.Tests
 		/// <summary>
 		/// Replaces the registration for type <typeparamref name="TService"/> with a mocked implementation.
 		/// </summary>
-		/// <typeparam name="TService">Type of service.</typeparam>
-		/// <param name="services">Service collection.</param>
-		/// <param name="mockSetup">Mock configuration.</param>
-		/// <returns>Redistered services.</returns>
+		/// <typeparam name="TService">The type of service.</typeparam>
+		/// <param name="services">The service collection.</param>
+		/// <param name="mockSetup">The mock configuration.</param>
+		/// <returns>the redistered services.</returns>
 		protected virtual IServiceCollection ReplaceWithMock<TService>(IServiceCollection services, Action<Mock<TService>> mockSetup)
 			 where TService : class
 		{
@@ -126,10 +125,9 @@ namespace ApplicationTemplate.Tests
 	}
 
 	/// <summary>
-	/// Gives access to the services and their configuration with a specific refence to the tested service.
-	/// Normally used to test Endpoints.
+	/// Gives access to the services and their configuration with a specific reference to the tested service.
 	/// </summary>
-	/// <typeparam name="TSUT">Refence to the service under test.</typeparam>
+	/// <typeparam name="TSUT">The type of the service under test.</typeparam>
 	public class IntegrationTestBase<TSUT> : IntegrationTestBase
 	{
 		protected virtual TSUT SUT => GetService<TSUT>();

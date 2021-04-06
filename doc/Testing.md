@@ -71,14 +71,14 @@ For more documentation on testing, read the references listed at the bottom.
   }
   ```
 
-  With a simple test, you can do very advanced integration tests. The `TestBase` class bootstraps the application in its initialization phase using the `CoreStartup`, reusing all the IoC already configured in your project.
+  With a simple test, you can do very advanced integration tests. The `IntegrationTestBase` class bootstraps the application in its initialization phase using the `CoreStartup`, reusing all the IoC already configured in your project.
 
-### Mocking
+## Mocking
 
-You can also mock services that are normally registered with their implementations. In your test class, simply call `ConfigurationSetUp` with your specific configuration.
+You can also mock services that are normally registered with their implementations. In your test class, simply call `InitializeServices` with your specific configuration.
 
 ```csharp
-  public class MyIntegrationTest : IntegrationTestBase
+  public class MyIntegrationTestClass : IntegrationTestBase
   {
 	private void YourTest_SpecialConfiguration(IHostBuilder host)
 	{
@@ -93,11 +93,12 @@ You can also mock services that are normally registered with their implementatio
 			});
 		});
 	}
-
+	
+	[Fact]
 	public async Task YourTest()
 	{
 		// Arrange
-		ConfigurationSetup(YourTest_SpecialConfiguration);
+		InitializeServices(YourTest_SpecialConfiguration);
 
 		// Act
 
@@ -107,6 +108,73 @@ You can also mock services that are normally registered with their implementatio
     ...
   }
   ```
+
+## Naming
+
+It is important to follow certain rules about the names of your class and your methods. The idea here is to make a sentence when combining your class name with one of your test.
+
+- The suggested test class nomenclature is "<TestedClass>Should".
+- The suggested test method nomenclature is "<ExpectedResult>_<Condition>" (Condition is optional in the default case).
+
+Here is an example:
+Let's say we want to test this class.
+
+```csharp
+  public class MyTestClassViewModel
+  {
+	public async Task<int[]> MyTestMethod(bool isNeeded)
+	{
+		if(isNeeded)
+		{
+			return Array.Empty<int>();
+		}
+		...
+
+		return aFullArray;
+	}
+
+    ...
+  }
+  ```
+
+ The test class of MyTestClassViewModel should look like this.
+  
+```csharp
+  public class MyTestClassViewModelShould : IntegrationTestBase
+  {
+	[Fact]
+	public async Task ReturnAnEmptyArray_WhenItIsNotNeeded()
+	{
+		// Arrange
+		var vm = new MyTestClassViewModel()
+
+		// Act
+		var result = vm.MyTestMethod(false);
+
+		// Assert
+		result.Should().BeEmpty();
+	}
+	
+	[Fact]
+	public async Task ReturnAFullArray()
+	{
+		// Arrange
+		var vm = new MyTestClassViewModel()
+
+		// Act
+		var result = vm.MyTestMethod(true);
+
+		// Assert
+		result.Should().NotBeEmpty();
+	}
+
+    ...
+  }
+  ```
+  
+ When executing this test class, the result will look something like this:
+ - MyTestClassViewModelShould ReturnAFullArray -> My Test Class View Model Should Return A Full Array.
+ - MyTestClassViewModelShould ReturnAnEmptyArray_WhenItIsNotNeeded -> My Test Class View Model Should Return An Empty Array When It Is Not Needed.
 
 ## Code coverage
 
