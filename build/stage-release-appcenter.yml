@@ -119,14 +119,14 @@ jobs:
               keystorePassword: '$(AndroidSigningStorePass)'
               keystoreAlias: '$(AndroidSigningKeyAlias)'
               keystoreAliasPassword: '$(AndroidSigningKeyPass)'
-              outputFolder: '$(Pipeline.Workspace)/$(artifactName)/tmp'
+              outputFolder: '$(Pipeline.Workspace)/$(artifactName)'
           
           - task: AppCenterDistribute@3
             displayName: Deploy Android to AppCenter
             inputs:
               serverEndpoint: $(AppCenterServiceConnection)
               appSlug: ${{ parameters.appCenterAndroidSlug }}
-              appFile: '$(Pipeline.Workspace)/tmp/*.apk'
+              appFile: '$(Pipeline.Workspace)/$(artifactName)/*.apk'
               releaseNotesInput: |
                 CI build
               isSilent: true
