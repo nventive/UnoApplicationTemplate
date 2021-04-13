@@ -1,5 +1,7 @@
 ﻿using System;
 using ApplicationTemplate;
+using ApplicationTemplate.Business;
+using ApplicationTemplate.Client;
 using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;

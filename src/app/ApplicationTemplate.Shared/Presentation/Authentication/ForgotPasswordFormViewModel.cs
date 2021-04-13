@@ -4,7 +4,7 @@ using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class ForgotPasswordFormViewModel : ViewModel
 	{

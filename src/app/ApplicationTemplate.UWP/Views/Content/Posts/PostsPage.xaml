@@ -1,4 +1,4 @@
-﻿<Page x:Class="ApplicationTemplate.PostsPage"
+﻿<Page x:Class="ApplicationTemplate.Views.Content.PostsPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:ApplicationTemplate"

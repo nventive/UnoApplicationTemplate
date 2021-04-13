@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class CultureDiagnosticsViewModel : ViewModel
 	{

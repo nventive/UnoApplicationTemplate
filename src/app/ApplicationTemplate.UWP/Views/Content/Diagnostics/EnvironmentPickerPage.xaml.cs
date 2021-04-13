@@ -13,7 +13,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Views.Content
 {
 	public sealed partial class EnvironmentPickerPage : Page
 	{

@@ -4,9 +4,10 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
 using GeneratedSerializers;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	public class UserProfileEndpointMock : BaseMock, IUserProfileEndpoint
 	{

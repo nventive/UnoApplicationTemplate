@@ -9,11 +9,12 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using DynamicData;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class ChuckNorrisFavoritesPageViewModel : ViewModel
 	{

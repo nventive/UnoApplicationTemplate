@@ -1,9 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Nventive.View.Converters;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Views
 {
 	/// <summary>
 	/// Use this converter to debug data bindings in your xaml.

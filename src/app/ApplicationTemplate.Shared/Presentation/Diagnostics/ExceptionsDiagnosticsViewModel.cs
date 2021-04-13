@@ -5,7 +5,7 @@ using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Windows.UI.Core;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class ExceptionsDiagnosticsViewModel : ViewModel
 	{

@@ -2,6 +2,7 @@
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -11,7 +12,7 @@ using Microsoft.Extensions.Logging;
 using Uno.UI;
 using Windows.UI.Core;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Views
 {
 	public sealed class Startup : StartupBase
 	{

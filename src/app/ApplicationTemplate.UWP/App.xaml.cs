@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using ApplicationTemplate.Views;
 using Chinook.SectionsNavigation;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;

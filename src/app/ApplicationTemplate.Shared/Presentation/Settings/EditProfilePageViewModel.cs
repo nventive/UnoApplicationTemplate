@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ApplicationTemplate.Business;
+using ApplicationTemplate.Client;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class EditProfilePageViewModel : ViewModel
 	{

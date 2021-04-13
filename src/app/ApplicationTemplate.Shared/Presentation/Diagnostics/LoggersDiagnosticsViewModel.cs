@@ -6,7 +6,7 @@ using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.Logging;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class LoggersDiagnosticsViewModel : ViewModel
 	{

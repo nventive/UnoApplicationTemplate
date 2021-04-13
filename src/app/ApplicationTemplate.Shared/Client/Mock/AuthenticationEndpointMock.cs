@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using GeneratedSerializers;
 using Uno.Extensions;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	public class AuthenticationEndpointMock : IAuthenticationEndpoint
 	{

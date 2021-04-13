@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
+using ApplicationTemplate.Client;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class EditPostPageViewModel : ViewModel
 	{

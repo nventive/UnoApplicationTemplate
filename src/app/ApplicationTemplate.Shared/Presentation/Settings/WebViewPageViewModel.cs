@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class WebViewPageViewModel : ViewModel
 	{

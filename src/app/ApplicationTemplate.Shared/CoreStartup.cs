@@ -3,6 +3,8 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
+using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
