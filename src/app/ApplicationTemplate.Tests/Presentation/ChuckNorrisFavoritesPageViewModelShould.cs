@@ -4,6 +4,8 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
+using ApplicationTemplate.Presentation;
 using FluentAssertions;
 using Moq;
 using Xunit;
