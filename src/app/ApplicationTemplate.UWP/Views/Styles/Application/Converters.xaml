@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-					xmlns:converters="using:ApplicationTemplate.Views"
-					xmlns:uc="using:Nventive.View.Converters">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:converters="using:ApplicationTemplate.Views"
+                    xmlns:uc="using:Nventive.View.Converters">
 
 	<uc:FromNullableBoolToVisibilityConverter x:Key="TrueToCollapsed"
 											VisibilityIfTrue="Collapsed" />
