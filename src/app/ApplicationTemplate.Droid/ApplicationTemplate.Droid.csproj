@@ -87,15 +87,13 @@
   <ItemGroup>
     <PackageReference Include="DynamicData" Version="7.1.1" />
     <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
-    <PackageReference Include="MessageDialogService.Uno" Version="0.2.0-dev.3" />
+    <PackageReference Include="MessageDialogService.Uno" Version="0.3.0-dev.5" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
-    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools">
-      <Version>6.1.0-build.205.g2e0e348372</Version>
-    </PackageReference>
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools" Version="6.1.0-build.205.g2e0e348372" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
@@ -105,28 +103,28 @@
     <PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.16" />
     <PackageReference Include="Refit" Version="4.7.51" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.2" />
-    <PackageReference Include="Reactive.Annex.Uno" Version="0.2.0-dev.14" />
+    <PackageReference Include="Reactive.Annex.Uno" Version="0.3.0-dev.18" />
     <PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
-    <PackageReference Include="Uno.UI" Version="3.4.0" />
+    <PackageReference Include="Uno.UI" Version="3.5.1" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="3.4.0" />
     <PackageReference Include="Uno.Injectable" Version="1.34.0-dev.175" />
     <PackageReference Include="Uno.CodeGen" Version="1.34.0-dev.175" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.32" />
-    <PackageReference Include="Chinook.DynamicMvvm" Version="0.3.0-dev.34" />
-    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.3.0-dev.34" />
-    <PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="0.3.0-dev.34" />
-    <PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="0.3.0-dev.34" />
-    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="0.2.0-dev.46" />
-    <PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.2.0-dev.46" />
-    <PackageReference Include="Chinook.DataLoader.Uno" Version="0.2.0-dev.37" />
-    <PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="0.2.0-dev.37" />
-    <PackageReference Include="Chinook.BackButtonManager" Version="0.2.0-dev.17" />
-    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="0.2.0-dev.17" />
-    <PackageReference Include="Chinook.AsyncWebView.Uno" Version="0.1.0-dev.7" />
-    <PackageReference Include="Chinook.View.Uno" Version="0.1.0-dev.3" />
-    <PackageReference Include="Chinook.Persistence.Reactive" Version="0.1.0-dev.5" />
-    <PackageReference Include="Chinook.Persistence.Uno" Version="0.1.0-dev.5" />
-    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.1.0-dev.22" />
+    <PackageReference Include="Chinook.DynamicMvvm" Version="0.4.0-dev.41" />
+    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.4.0-dev.41" />
+    <PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="0.4.0-dev.41" />
+    <PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="0.4.0-dev.41" />
+    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="0.4.0-dev.59" />
+    <PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.4.0-dev.59" />
+    <PackageReference Include="Chinook.DataLoader.Uno" Version="0.3.0-dev.42" />
+    <PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="0.3.0-dev.42" />
+    <PackageReference Include="Chinook.BackButtonManager" Version="0.3.0-dev.22" />
+    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="0.3.0-dev.22" />
+    <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.2.0-dev.11" />
+    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.2.0-dev.24" />
+    <PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.14" />
+    <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.14" />
+    <PackageReference Include="Nventive.View.Uno" Version="0.2.0-dev.9" />
     <PackageReference Include="nventive.Nimue.Application.Building.Light">
       <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

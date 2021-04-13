@@ -1,8 +1,8 @@
 ﻿using System;
 using ApplicationTemplate;
-using Chinook.Persistence;
 using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
+using Nventive.Persistence;
 
 // In case that you need to have ImmutableList<T> at the root for endpoint (to not have arrays in endpoint)
 // You need to add <IsImmutablesAtRootDisabled>0</IsImmutablesAtRootDisabled> in SerializationConfig.xml

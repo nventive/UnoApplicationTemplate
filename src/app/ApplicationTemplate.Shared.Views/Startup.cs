@@ -2,7 +2,6 @@
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using Chinook.AsyncWebView;
 using Chinook.BackButtonManager;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -40,7 +39,7 @@ namespace ApplicationTemplate
 
 		protected override void OnInitialized(IServiceProvider services)
 		{
-			AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView>>();
+			AsyncWebView.AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView.AsyncWebView>>();
 		}
 
 		protected override async Task StartViewServices(IServiceProvider services, bool isFirstStart)

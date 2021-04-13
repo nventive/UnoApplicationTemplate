@@ -11,6 +11,10 @@ jobs:
 - deployment: AppCenter_UWP
   pool: $(windowsPoolName)
 
+  variables:
+  - name: artifactName
+    value: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
+
   environment: ${{ parameters.deploymentEnvironment }}
 
   container: windows
@@ -21,17 +25,25 @@ jobs:
         steps:
 
         - download: current
-          artifact: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
+          artifact: $(artifactName)
 
         - task: AppCenterDistribute@3
           displayName: Deploy UWP to AppCenter
           inputs:
             serverEndpoint: $(AppCenterServiceConnection)
             appSlug: ${{ parameters.appCenterUWPSlug }}
-            appFile: $(Pipeline.Workspace)/$(UWPArtifactName)_${{ parameters.applicationEnvironment }}/*.msixbundle
+            appFile: $(Pipeline.Workspace)/$(artifactName)/*.msixbundle
             releaseNotesInput: |
               CI build
             isSilent: true
+        
+        - task: DeleteFiles@1
+          displayName: "Remove downloaded artifacts"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+            RemoveSourceFolder: true
+            Contents: '**'
 
 - deployment: AppCenter_iOS
   pool: 
@@ -39,10 +51,11 @@ jobs:
     demands:
     - fastlane
 
-  environment: ${{ parameters.deploymentEnvironment }}
-
   variables:
-  - group: ApplicationTemplate.Distribution.AppStore
+  - name: artifactName
+    value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+
+  environment: ${{ parameters.deploymentEnvironment }}
 
   strategy:
     runOnce:
@@ -50,29 +63,38 @@ jobs:
         steps:
 
         - download: current
-          artifact: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+          artifact: $(artifactName)
 
         - task: AppCenterDistribute@3
           displayName: Deploy iOS to AppCenter
           inputs:
             serverEndpoint: $(AppCenterServiceConnection)
             appSlug: ${{ parameters.appCenteriOSSlug }}
-            appFile: $(Pipeline.Workspace)/$(iOSArtifactName)_${{ parameters.applicationEnvironment }}/*.ipa
-            symbolsDsymFiles: $(Pipeline.Workspace)/$(iOSArtifactName)_${{ parameters.applicationEnvironment }}/*.dSYM
+            appFile: $(Pipeline.Workspace)/$(artifactName)/*.ipa
+            symbolsDsymFiles: $(Pipeline.Workspace)/$(artifactName)/*.dSYM
             symbolsIncludeParentDirectory: true
             releaseNotesInput: |
               CI build            
             isSilent: true
+        
+        - task: DeleteFiles@1
+          displayName: "Remove downloaded artifacts"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+            RemoveSourceFolder: true
+            Contents: '**'
 
 - deployment: AppCenter_Android
-  pool: $(windowsPoolName)
+  pool:
+    vmImage: windows-latest
 
   variables:
   - group: ${{ parameters.androidVariableGroup }}
+  - name: artifactName
+    value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}  
     
   environment: ${{ parameters.deploymentEnvironment }}
-
-  container: windows
   
   strategy:
       runOnce:
@@ -80,7 +102,7 @@ jobs:
           steps:
           
           - download: current
-            artifact: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+            artifact: $(artifactName)
 
           - task: DownloadSecureFile@1
             name: keyStore
@@ -92,19 +114,27 @@ jobs:
 
           - task: AabConvertToUniversalApk@1
             inputs:
-              aabFilePath: '$(Pipeline.Workspace)/$(AndroidArtifactName)_${{ parameters.applicationEnvironment }}/*-Signed.aab'
+              aabFilePath: '$(Pipeline.Workspace)/$(artifactName)/*-Signed.aab'
               keystoreFilePath: '$(keyStore.secureFilePath)'
               keystorePassword: '$(AndroidSigningStorePass)'
               keystoreAlias: '$(AndroidSigningKeyAlias)'
               keystoreAliasPassword: '$(AndroidSigningKeyPass)'
-              outputFolder: '$(Build.SourcesDirectory)/tmp'
+              outputFolder: '$(Pipeline.Workspace)/$(artifactName)'
           
           - task: AppCenterDistribute@3
             displayName: Deploy Android to AppCenter
             inputs:
               serverEndpoint: $(AppCenterServiceConnection)
               appSlug: ${{ parameters.appCenterAndroidSlug }}
-              appFile: '$(Build.SourcesDirectory)/tmp/*.apk'
+              appFile: '$(Pipeline.Workspace)/$(artifactName)/*.apk'
               releaseNotesInput: |
                 CI build
               isSilent: true
+        
+          - task: DeleteFiles@1
+            displayName: "Remove downloaded artifacts"
+            condition: always()
+            inputs:
+              SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+              RemoveSourceFolder: true
+              Contents: '**'

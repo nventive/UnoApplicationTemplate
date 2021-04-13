@@ -14,6 +14,8 @@ jobs:
     
   variables:
   - group: ApplicationTemplate.Distribution.AppStore
+  - name: artifactName
+    value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
 
   strategy:
     runOnce:
@@ -21,7 +23,7 @@ jobs:
         steps:
 
         - download: current
-          artifact: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+          artifact: $(artifactName)
 
         - task: AppStoreRelease@1
           displayName: 'Publish to AppStore'
@@ -29,8 +31,16 @@ jobs:
             serviceEndpoint: $(AppStoreServiceConnection)
             appIdentifier: $(ApplicationIdentifier)
             appType: 'iOS'
-            ipaPath: '$(Pipeline.Workspace)/$(iOSArtifactName)_${{ parameters.applicationEnvironment }}/*.ipa'
+            ipaPath: '$(Pipeline.Workspace)/$(artifactName)/*.ipa'
             releaseTrack: 'TestFlight'
             shouldSkipWaitingForProcessing: true
             teamId: $(AppleTeamId)
             teamName: $(AppleTeamName)
+        
+        - task: DeleteFiles@1
+          displayName: "Remove downloaded artifacts"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+            RemoveSourceFolder: True
+            Contents: '**'

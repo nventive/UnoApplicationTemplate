@@ -25,17 +25,17 @@ namespace ApplicationTemplate.Framework
 
 		public async Task OpenAsync(string uri)
 		{
-			await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(uri));
+			await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri)));
 		}
 
 		public async Task OpenAsync(string uri, BrowserLaunchMode launchMode)
 		{
-			await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(uri, launchMode));
+			await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri), launchMode));
 		}
 
 		public async Task OpenAsync(string uri, BrowserLaunchOptions options)
 		{
-			await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(uri, options));
+			await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri), options));
 		}
 
 		public async Task OpenAsync(Uri uri)

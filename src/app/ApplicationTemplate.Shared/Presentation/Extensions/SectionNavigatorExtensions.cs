@@ -15,6 +15,7 @@ namespace ApplicationTemplate.Presentation
 		/// Gets an observable of the last page type from currently active section.
 		/// The observable pushes a value whenever a navigation request is processed with the type of the last page ViewModel.
 		/// </summary>
+		/// <param name="sectionsNavigator">The sections navigator.</param>
 		/// <returns>An observable of types.</returns>
 		public static IObservable<Type> ObserveActiveSectionLastPageType(this ISectionsNavigator sectionsNavigator)
 		{

@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
 using System.Reactive;
-using System.Text;
 using System.Threading.Tasks;
 using FluentAssertions;
+using Moq;
 using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class ChuckNorrisFavoritesPageViewModelTests : NavigationTestsBase
+	public class ChuckNorrisFavoritesPageViewModelShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task It_Should_Return_No_Results()
+		public async Task ReturnNoResults()
 		{
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisFavoritesPageViewModel());
@@ -28,11 +27,12 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Return_Favourited()
+		public async Task ReturnFavourited()
 		{
 			// Arrange
-			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisSearchPageViewModel());
-			var searchViewModel = (ChuckNorrisSearchPageViewModel)GetCurrentViewModel();
+			var mockChuckNorrisService = new Mock<IChuckNorrisService>();
+			var searchViewModel = new ChuckNorrisSearchPageViewModel();
+
 			searchViewModel.SearchTerm = "dog";
 			var searchedQuotes = await searchViewModel.Quotes.Load(DefaultCancellationToken);
 			var firstQuoteVm = searchedQuotes.First();

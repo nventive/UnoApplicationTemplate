@@ -12,6 +12,8 @@ jobs:
 
   variables:
   - group: ApplicationTemplate.Distribution.GooglePlay
+  - name: artifactName
+    value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
   
   strategy:
     runOnce:
@@ -19,12 +21,20 @@ jobs:
         steps:
 
         - download: current
-          artifact: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+          artifact: $(artifactName)
 
         - task: GooglePlayReleaseBundle@3
           displayName: 'Publish to GooglePlay'
           inputs:
             serviceConnection: $(GooglePlayServiceConnection)
-            bundleFile: '$(Pipeline.Workspace)/$(AndroidArtifactName)_${{ parameters.applicationEnvironment }}/*-Signed.aab'
+            bundleFile: '$(Pipeline.Workspace)/$(artifactName)/*-Signed.aab'
             applicationId: '$(ApplicationIdentifier)'
             languageCode: 'en-CA'
+        
+        - task: DeleteFiles@1
+          displayName: "Remove downloaded artifacts"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+            RemoveSourceFolder: true
+            Contents: '**'

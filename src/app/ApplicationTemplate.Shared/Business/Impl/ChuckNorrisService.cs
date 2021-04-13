@@ -23,7 +23,9 @@ namespace ApplicationTemplate
 
 		public async Task<ChuckNorrisQuote[]> Search(CancellationToken ct, string searchTerm)
 		{
-			if (string.IsNullOrEmpty(searchTerm))
+			// If the search term does not contain at least 3 characters, the API returns an exception.
+			// It must be handle on app side.
+			if (searchTerm.Length < 3)
 			{
 				return Array.Empty<ChuckNorrisQuote>();
 			}

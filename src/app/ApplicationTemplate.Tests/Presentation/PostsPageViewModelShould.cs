@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using FluentAssertions;
+using FluentAssertions.Execution;
 using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class PostsPageViewModelTests : NavigationTestsBase
+	public partial class PostsPageViewModelShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task It_Should_GetAll()
+		public async Task GetAll()
 		{
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
@@ -28,7 +27,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Navigate_New_Post()
+		public async Task NavigateToNewPost()
 		{
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
@@ -39,15 +38,21 @@ namespace ApplicationTemplate.Tests
 
 			// Assert
 			var currentViewModel = GetCurrentViewModel();
-			currentViewModel.Should().NotBeNull();
-			currentViewModel.Should().BeOfType<EditPostPageViewModel>();
+			using (new AssertionScope())
+			{
+				currentViewModel.Should().NotBeNull();
+				currentViewModel.Should().BeOfType<EditPostPageViewModel>();
+			}
 
-			var editPostVm = currentViewModel as EditPostPageViewModel;
-			editPostVm.IsNewPost.Should().BeTrue();
+			using (new AssertionScope())
+			{
+				var editPostVm = currentViewModel as EditPostPageViewModel;
+				editPostVm.IsNewPost.Should().BeTrue();
+			}
 		}
 
 		[Fact]
-		public async Task It_Should_Navigate_Edit_Post()
+		public async Task NavigateToEditPost()
 		{
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
@@ -60,12 +65,19 @@ namespace ApplicationTemplate.Tests
 			var currentViewModel = GetCurrentViewModel();
 
 			// Assert
-			currentViewModel.Should().NotBeNull();
-			currentViewModel.Should().BeOfType<EditPostPageViewModel>();
+			using (new AssertionScope())
+			{
+				currentViewModel.Should().NotBeNull();
+				currentViewModel.Should().BeOfType<EditPostPageViewModel>();
+			}
 
-			var editPostVm = currentViewModel as EditPostPageViewModel;
-			editPostVm.Title.Should().Be(editedPost.Title);
-			editPostVm.IsNewPost.Should().BeFalse();
+			// Assert the following only if we confirmed the currentViewModel is valid
+			using (new AssertionScope())
+			{
+				var editPostVm = currentViewModel as EditPostPageViewModel;
+				editPostVm.Title.Should().Be(editedPost.Title);
+				editPostVm.IsNewPost.Should().BeFalse();
+			}
 		}
 	}
 }

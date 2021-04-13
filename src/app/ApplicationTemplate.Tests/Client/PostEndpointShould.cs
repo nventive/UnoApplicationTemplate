@@ -1,33 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class PostServiceTests : TestBase<IPostService>
+	public class PostEndpointShould : IntegrationTestBase<IPostEndpoint>
 	{
 		[Fact]
-		public async Task It_Should_GetAll()
+		public async Task GetAll()
 		{
 			// Act
-			var results = await SUT.GetPosts(DefaultCancellationToken);
+			var results = await SUT.GetAll(DefaultCancellationToken);
 
 			// Assert
 			results.Should().NotBeNullOrEmpty();
 		}
 
 		[Fact]
-		public async Task It_Should_GetOne()
+		public async Task GetOne()
 		{
 			// Arrange
 			var postId = 1;
 
 			// Act
-			var result = await SUT.GetPost(DefaultCancellationToken, postId);
+			var result = await SUT.Get(DefaultCancellationToken, postId);
 
 			// Assert
 			result.Should().NotBeNull();
@@ -35,7 +31,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Create()
+		public async Task CreateOne()
 		{
 			// Arrange
 			var post = new PostData.Builder()
@@ -57,7 +53,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Update()
+		public async Task UpdateOne()
 		{
 			// Arrange
 			var post = new PostData.Builder()
@@ -80,7 +76,7 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task It_Should_Delete()
+		public async Task DeleteOne()
 		{
 			// Arrange
 			var postId = 1;

@@ -12,17 +12,20 @@ jobs:
     runOnce:
       deploy:
         steps:
-        - checkout: none
-
-        - task: DownloadBuildArtifacts@0
-          inputs:
-            buildType: current
-            downloadType: single
-            artifactName: $(WASMArtifactName)
+        - download: current
+          artifact: $(WASMArtifactName)
 
         - task: nventivecorp.nventive.nventive.websiteVersion.websiteVersion@5
           displayName: 'Publish to Azure'
           inputs:
-            WebsitePath: '$(System.ArtifactsDirectory)/$(WASMArtifactName)'
+            WebsitePath: '$(Pipeline.Workspace)/$(WASMArtifactName)'
             AzureSubscription: $(AzureSubscriptionName)
             AzureStorageAccount: $(AzureStorageAccountName)
+        
+        - task: DeleteFiles@1
+          displayName: "Remove downloaded artifacts"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(WASMArtifactName)
+            RemoveSourceFolder: true
+            Contents: '**'
