@@ -196,13 +196,9 @@
 											VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 						</Grid>
 
-						<!-- Workaround for iOS in order to be able to delete the content if a IsEnabled property is set on the TextBox -->
-						<!-- Task #113012 : Need to be removed when userecho is fixed : https://feedback.nventive.com/communities/1/topics/2387-ios-textbox-cleartext-button-is-always-disabled -->
-						<!--  -->
 						<Button x:Name="DeleteButton"
 								Content="&#xE10A;"
 								Style="{StaticResource DeleteOrRevealButtonStyle}"
-								IsEnabled="{TemplateBinding IsEnabled}"
 								HorizontalContentAlignment="Right"
 								IsTabStop="False"
 								Opacity="0"
