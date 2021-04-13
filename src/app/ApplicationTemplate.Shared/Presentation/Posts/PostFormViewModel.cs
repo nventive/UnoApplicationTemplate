@@ -1,8 +1,9 @@
 ﻿using System;
+using ApplicationTemplate.Client;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class PostFormViewModel : ViewModel
 	{

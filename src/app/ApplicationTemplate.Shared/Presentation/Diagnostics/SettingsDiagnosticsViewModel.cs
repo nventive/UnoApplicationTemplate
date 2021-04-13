@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Windows.Storage;
 using Windows.System;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class SettingsDiagnosticsViewModel : ViewModel
 	{

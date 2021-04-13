@@ -3,6 +3,7 @@ using System.Net;
 using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;

@@ -3,9 +3,10 @@ using System.Collections.Immutable;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Client;
 using Nventive.Persistence;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Business
 {
 	public partial class ApplicationSettingsService : IApplicationSettingsService
 	{

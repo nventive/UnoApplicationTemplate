@@ -2,7 +2,7 @@
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public partial class WelcomePageViewModel : ViewModel
 	{

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using GeneratedSerializers;
 using Refit;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	public class ChuckNorrisEndpointMock : BaseMock, IChuckNorrisEndpoint
 	{

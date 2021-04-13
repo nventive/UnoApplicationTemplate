@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Client;
 using DynamicData;
 using Uno.Extensions;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Business
 {
 	public sealed class ChuckNorrisService : IChuckNorrisService, IDisposable
 	{

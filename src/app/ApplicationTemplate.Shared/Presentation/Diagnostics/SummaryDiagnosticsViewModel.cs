@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public partial class SummaryDiagnosticsViewModel : ViewModel
 	{

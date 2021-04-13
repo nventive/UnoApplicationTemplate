@@ -4,7 +4,7 @@ using System.Text;
 using Uno;
 using Windows.UI.Xaml.Data;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	[Bindable]
 	[GeneratedImmutable]

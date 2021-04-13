@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class NetworkDiagnosticsViewModel : ViewModel
 	{

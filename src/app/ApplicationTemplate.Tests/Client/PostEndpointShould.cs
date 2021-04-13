@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ApplicationTemplate.Client;
 using FluentAssertions;
 using Xunit;
 
