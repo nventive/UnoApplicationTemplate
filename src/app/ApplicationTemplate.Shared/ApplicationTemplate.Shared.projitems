@@ -59,7 +59,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Startup\CoreStartupBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CoreStartup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\ObjectSerializerToSettingsSerializerAdapter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Reactive\IObservable.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\SystemTextJsonToObjectSerializerAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\SystemTextJsonToContentSerializerAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Startup\StartupBase.cs" />
@@ -130,7 +129,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Framework\DataLoader\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Framework\Reactive\" />
     <Folder Include="$(MSBuildThisFileDirectory)Framework\Serialization\" />
     <Folder Include="$(MSBuildThisFileDirectory)Presentation\Posts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Presentation\Welcome\" />

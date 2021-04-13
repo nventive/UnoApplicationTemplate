@@ -52,9 +52,7 @@ namespace ApplicationTemplate.Presentation
 					var vmType = GetViewModelType(state);
 					return _viewModelsWithBottomMenu.Contains(vmType) ? "Open" : "Closed";
 				})
-				.DistinctUntilChanged()
-				// On iOS, when Visual states are changed too fast, they break. This is a workaround for this bug.
-				.ThrottleOrImmediate(TimeSpan.FromMilliseconds(350), Scheduler.Default);
+				.DistinctUntilChanged();
 
 			Type GetViewModelType(SectionsNavigatorState currentState)
 			{
