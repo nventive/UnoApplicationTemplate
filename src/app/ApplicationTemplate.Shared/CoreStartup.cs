@@ -52,7 +52,6 @@ namespace ApplicationTemplate
 			if (isFirstStart)
 			{
 				// Start your services here.
-
 				NotifyUserOnSessionExpired(services);
 
 				services.GetRequiredService<DiagnosticsCountersService>().Start();
