@@ -26,7 +26,7 @@ namespace ApplicationTemplate.Business
 		{
 			// If the search term does not contain at least 3 characters, the API returns an exception.
 			// It must be handle on app side.
-			if (searchTerm.Length < 3)
+			if (string.IsNullOrEmpty(searchTerm) || searchTerm.Length < 3)
 			{
 				return Array.Empty<ChuckNorrisQuote>();
 			}
