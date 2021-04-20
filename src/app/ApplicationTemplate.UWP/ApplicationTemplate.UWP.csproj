@@ -182,7 +182,7 @@
     <PackageReference Include="Refit" Version="4.7.51" />
     <PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
     <PackageReference Include="Reactive.Annex.Uno" Version="0.3.0-dev.18" />
-    <PackageReference Include="Uno.UI" Version="3.5.1" />
+    <PackageReference Include="Uno.UI" Version="3.6.6" />
     <PackageReference Include="Uno.Injectable" Version="1.34.0-dev.175" />
     <PackageReference Include="Uno.CodeGen" Version="1.34.0-dev.175" />
     <PackageReference Include="Chinook.DynamicMvvm" Version="0.4.0-dev.41" />
@@ -215,6 +215,9 @@
       <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="XamlFlair.Uno">
+      <Version>1.2.6</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
