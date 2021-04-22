@@ -7,7 +7,7 @@ namespace ApplicationTemplate
 {
 	public sealed partial class Shell : UserControl
 	{
-		public Shell(LaunchActivatedEventArgs e)
+		public Shell(IActivatedEventArgs e)
 		{
 			this.InitializeComponent();
 
