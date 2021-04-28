@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DataLoader;
@@ -13,8 +15,8 @@ namespace ApplicationTemplate.Tests.Framework
 		public async Task NotDisposePreviousData_When_FirstLoad()
 		{
 			// Arrange
-			var cpt = 0;
-			Action<object> mockAction = _ => cpt++;
+			var methodCount = 0;
+			Action<object> mockAction = data => methodCount++;
 
 			var sut = new OnDataLostDataLoaderStrategy(mockAction);
 			sut.InnerStrategy = new MockDelegatingDataLoaderStrategy(() => Task.FromResult(new object()));
@@ -23,63 +25,32 @@ namespace ApplicationTemplate.Tests.Framework
 			await sut.Load(CancellationToken.None, null);
 
 			// Assert
-			cpt.Should().Be(0);
+			methodCount.Should().Be(0);
 		}
 
-		[Fact]
-		public async Task DisposePreviousData_When_LoadNewReference()
+		[Theory]
+		[ClassData(typeof(OnDataLostDataLoaderStrategyTestData))]
+		public async Task DisposePreviousData_If_LoadReturnsNewReference(object firstLoad, object secondLoad, int expectedMethodCount)
 		{
 			// Arrange
-			var cpt = 0;
-			Action<object> mockAction = _ => cpt++;
+			var methodCount = 0;
+			var isFirstLoad = true;
+			Action<object> mockAction = data => methodCount++;
 
 			var sut = new OnDataLostDataLoaderStrategy(mockAction);
-			sut.InnerStrategy = new MockDelegatingDataLoaderStrategy(() => Task.FromResult(new object()));
+			sut.InnerStrategy = new MockDelegatingDataLoaderStrategy(() =>
+			{
+				var result = isFirstLoad ? firstLoad : secondLoad;
+				return Task.FromResult(result);
+			});
 			await sut.Load(CancellationToken.None, null);
+			isFirstLoad = false;
 
 			// Act
 			await sut.Load(CancellationToken.None, null);
 
 			// Assert
-			cpt.Should().Be(1);
-		}
-
-		[Fact]
-		public async Task DisposePreviousData_When_LoadNewValue()
-		{
-			// Arrange
-			var cpt = 0;
-			Action<object> mockAction = _ => cpt++;
-
-			var value = new Random().Next(int.MaxValue);
-			var sut = new OnDataLostDataLoaderStrategy(mockAction);
-			sut.InnerStrategy = new MockDelegatingDataLoaderStrategy(async () => value);
-			await sut.Load(CancellationToken.None, null);
-
-			// Act
-			await sut.Load(CancellationToken.None, null);
-
-			// Assert
-			cpt.Should().Be(1);
-		}
-
-		[Fact]
-		public async Task NotDisposePreviousData_When_LoadSameReference()
-		{
-			// Arrange
-			var cpt = 0;
-			Action<object> mockAction = _ => cpt++;
-
-			var instance = new object();
-			var sut = new OnDataLostDataLoaderStrategy(mockAction);
-			sut.InnerStrategy = new MockDelegatingDataLoaderStrategy(() => Task.FromResult(instance));
-			await sut.Load(CancellationToken.None, null);
-
-			// Act
-			await sut.Load(CancellationToken.None, null);
-
-			// Assert
-			cpt.Should().Be(0);
+			methodCount.Should().Be(expectedMethodCount);
 		}
 
 		public class MockDelegatingDataLoaderStrategy : DelegatingDataLoaderStrategy
@@ -95,6 +66,26 @@ namespace ApplicationTemplate.Tests.Framework
 			{
 				return await _innerFunc();
 			}
+		}
+
+		public class OnDataLostDataLoaderStrategyTestData : IEnumerable<object[]>
+		{
+			public IEnumerator<object[]> GetEnumerator()
+			{
+				var list = new List<object[]>();
+
+				var value = new Random().Next(int.MaxValue);
+				var instance1 = new object();
+				var instance2 = new object();
+
+				list.Add(new object[] { instance1, instance2, 1 }); // Different reference, will call dispose.
+				list.Add(new object[] { instance1, instance1, 0 }); // Same reference, won't call dispose.
+				list.Add(new object[] { value, value, 1 }); // Same value, but will still call dispose.
+
+				return list.GetEnumerator();
+			}
+
+			IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 		}
 	}
 }
