@@ -11,7 +11,7 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="NUnit" Version="3.12.0" />
-		<PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+		<PackageReference Include="NUnit3TestAdapter" Version="3.17.0">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
@@ -25,9 +25,9 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
 		<PackageReference Include="Uno.SourceGenerationTasks" Version="3.0.0" />
-		<PackageReference Include="Uno.UITest" Version="1.0.0-dev.107" />
-		<PackageReference Include="Uno.UITest.Helpers" Version="1.0.0-dev.107" />
-		<PackageReference Include="Xamarin.UITest" Version="3.0.5" />
+		<PackageReference Include="Uno.UITest" Version="1.0.0" />
+		<PackageReference Include="Uno.UITest.Helpers" Version="1.0.0" />
+		<PackageReference Include="Xamarin.UITest" Version="3.0.19" />
 	</ItemGroup>
 
 	<ItemGroup>
