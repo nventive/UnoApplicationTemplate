@@ -10,6 +10,7 @@
 				<ResourceDictionary Source="Views/Styles/Application/Colors.xaml" />
 				<ResourceDictionary Source="Views/Styles/Application/Fonts.xaml" />
 				<ResourceDictionary Source="Views/Styles/Application/LayoutConstants.xaml" />
+				<ResourceDictionary Source="Views/Styles/Controls/AddToCartControl.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/AsyncWebView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/Button.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/CheckBox.xaml" />
