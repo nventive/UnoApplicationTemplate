@@ -11,9 +11,12 @@ namespace ApplicationTemplate.Presentation
 	{
 		public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
 
+		public CreateWatchlistFormViewModel Form2 => this.GetChild(() => new CreateWatchlistFormViewModel());
+
 		public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
 		{
-			var validationResult = await Form.Validate(ct);
+			var validationResult = await Form.Validate(ct);	
+			var validationResult2 = await Form2.Validate(ct);
 
 			if (validationResult.IsValid)
 			{

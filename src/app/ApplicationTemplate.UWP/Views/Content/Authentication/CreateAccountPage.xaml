@@ -50,6 +50,36 @@
 								 ue:PasswordBoxBehavior.EnterCommand="{Binding CreateAccount}" />
 				</local:DataValidationView>
 
+				<local:DataValidationView Model="{Binding Form2}"
+									  PropertyName="WatchlistName"
+									  Margin="0,4">
+					<StackPanel>
+
+						<TextBox x:Name="WatchlistTextfield"
+							 PlaceholderText="Watchlist Name"
+							 Text="{Binding Form2.WatchlistName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 ios:ReturnKeyType="Done"
+							 android:ImeOptions="Done"
+							 MaxLength="24"
+							 CornerRadius="4"
+							 Margin="16,26,16,0" />
+
+						<Grid Margin="16,4,16,0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*"/>
+								<ColumnDefinition Width="Auto"/>
+							</Grid.ColumnDefinitions>
+
+							<!-- Character Count -->
+							<TextBlock Foreground="Black"
+								   Margin="0,0,12,0"
+								   Grid.Column="1">
+							<Run Text="{Binding Text.Length, ElementName=WatchlistTextfield}"/><Run Text="/24"/>
+							</TextBlock>
+						</Grid>
+					</StackPanel>
+				</local:DataValidationView>
+
 				<Button x:Name="ConfirmButton"
 						x:Uid="CreateAccount_Confirm"
 						Content="Create account"

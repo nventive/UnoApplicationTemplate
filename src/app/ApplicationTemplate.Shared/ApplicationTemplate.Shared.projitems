@@ -68,6 +68,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Validation\DataValidationStateType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Validation\DataValidationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\CreateAccountFormViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\CreatWatchlistFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\LoginFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\ForgotPasswordFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\ChuckNorris\ChuckNorrisFavoritesPageViewModel.cs" />
