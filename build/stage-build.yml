@@ -17,9 +17,6 @@ parameters:
 - name: iosVariableGroup
   type: string
   default: ''
-- name: preBuildSteps
-  type: stepList
-  default: []
 
 jobs:
   - job: On_Windows # Build UWP and Android on a windows machine
@@ -53,7 +50,6 @@ jobs:
     steps:
       - template: steps-build.yml
         parameters:
-          preBuildSteps: ${{ parameters.preBuildSteps }}
           androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
 
   - job: On_Mac # Build iOS on a mac
@@ -85,7 +81,6 @@ jobs:
         
     - template: steps-build.yml
       parameters:
-        preBuildSteps: ${{ parameters.preBuildSteps }}
         iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
         iosCertificateFile: ${{ parameters.iosCertificateFile }}
         iosCertificatePassword: $(AppleCertificatePassword)

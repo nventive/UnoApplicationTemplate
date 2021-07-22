@@ -1,0 +1,30 @@
+pool:
+  name: Windows 1809
+
+variables:
+- SolutionFileName: ApplicationTemplate.sln
+
+steps:
+- task: UseDotNet@2
+  displayName: 'Use .Net Core runtime 2.2.x'
+  inputs:
+    version: 2.2.x
+steps:
+- task: nventivecorp.nventive.nventive.canaryUpdater.nventiveCanaryUpdater@5
+  displayName: 'Canary Update'
+  inputs:
+    solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
+    usePrivateFeed: false
+    branchToMerge: master
+    pushBranch: true
+    gitUserName: 'nventive DevOps'
+    gitUserEmail: 'devops@nventive.com'
+    nugetVersion: 'dev,beta,stable'
+    allowDowngrade: true
+    packageAuthor: nventive
+    useVersionOverrides: true
+    versionOverridesFile: 'https://raw.githubusercontent.com/nventive/Canary/master/version-overrides.json'
+
+- task: PostBuildCleanup@3
+  displayName: 'Clean Agent Directories'
+  condition: always()

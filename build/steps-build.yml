@@ -11,9 +11,6 @@
 - name: iosProvisioningProfileFile
   type: string
   default: ''
-- name: preBuildSteps
-  type: stepList
-  default: []
 
 steps:
 - task: gitversion/setup@0
@@ -26,10 +23,6 @@ steps:
     useConfigFile: true
     configFilePath: 'gitversion.yml'
   displayName: 'Calculate version'
-
-- ${{ each step in parameters.preBuildSteps }}:
-    - ${{ each pair in step }}:
-        ${{ pair.key }}: ${{ pair.value }}
 
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet $(NUGET_VERSION)'
