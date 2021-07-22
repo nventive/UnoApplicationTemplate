@@ -3,13 +3,14 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Framework;
+using ApplicationTemplate;
+using ApplicationTemplate.Business;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 using DynamicData;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class ChuckNorrisSearchPageViewModel : ViewModel
 	{

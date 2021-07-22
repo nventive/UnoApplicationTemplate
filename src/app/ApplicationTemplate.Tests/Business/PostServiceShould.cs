@@ -2,6 +2,8 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
+using ApplicationTemplate.Client;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using FluentAssertions.Execution;

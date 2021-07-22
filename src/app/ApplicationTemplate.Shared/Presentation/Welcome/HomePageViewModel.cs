@@ -4,7 +4,7 @@ using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 using MallardMessageHandlers;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public partial class HomePageViewModel : ViewModel
 	{

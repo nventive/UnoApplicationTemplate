@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Uno;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	[GeneratedImmutable]
 	public partial class ChuckNorrisErrorResponse

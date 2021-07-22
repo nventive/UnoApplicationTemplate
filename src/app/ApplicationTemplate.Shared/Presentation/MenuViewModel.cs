@@ -9,7 +9,7 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Uno;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public partial class MenuViewModel : ViewModel
 	{

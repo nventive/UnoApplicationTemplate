@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	[Headers("Authorization: Bearer")]
 	public interface IPostEndpoint

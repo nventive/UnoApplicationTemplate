@@ -4,7 +4,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	public interface IAuthenticationEndpoint
 	{

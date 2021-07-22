@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Immutable;
+using ApplicationTemplate.Client;
 using Uno;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Business
 {
 	[GeneratedImmutable]
 	public partial class ApplicationSettings

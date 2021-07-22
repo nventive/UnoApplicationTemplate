@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class DiagnosticsCountersService
 	{

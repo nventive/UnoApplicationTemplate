@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class DiagnosticsPageViewModel : ViewModel
 	{

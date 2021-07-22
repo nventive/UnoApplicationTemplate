@@ -4,7 +4,7 @@ using System.Text;
 using GeneratedSerializers;
 using Uno;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	[GeneratedImmutable]
 	public partial class ChuckNorrisData

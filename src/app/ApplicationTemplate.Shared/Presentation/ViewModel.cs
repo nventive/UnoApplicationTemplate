@@ -10,7 +10,7 @@ using Chinook.StackNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Uno;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	/// <summary>
 	/// ViewModel to use as a base for all other ViewModels.

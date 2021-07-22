@@ -2,6 +2,8 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationTemplate.Client;
+using ApplicationTemplate.Presentation;
 using Chinook.DynamicMvvm;
 using FluentAssertions;
 using FluentAssertions.Execution;

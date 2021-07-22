@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ApplicationTemplate.Client;
 using Uno;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Business
 {
 	[GeneratedImmutable]
 	public partial class ChuckNorrisQuote

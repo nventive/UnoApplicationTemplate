@@ -1,7 +1,7 @@
 ﻿using System;
 using Chinook.DynamicMvvm;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class ShellViewModel : ViewModel
 	{

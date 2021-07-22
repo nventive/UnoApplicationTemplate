@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Reactive.Concurrency;
-using System.Text;
+﻿using System.Reactive.Concurrency;
 using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Core;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Views
 {
 	/// <summary>
 	/// This class is used for view services.

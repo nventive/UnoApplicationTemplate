@@ -2,7 +2,7 @@
 using GeneratedSerializers;
 using Uno;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	[GeneratedImmutable]
 	public partial class AuthenticationToken

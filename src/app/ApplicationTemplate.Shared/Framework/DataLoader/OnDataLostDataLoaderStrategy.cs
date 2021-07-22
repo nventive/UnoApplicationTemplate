@@ -25,7 +25,8 @@ namespace Chinook.DataLoader
 		{
 			var result = await base.Load(ct, request);
 
-			if (_data != null)
+			// We should not dispose the previous data if we load the same instance.
+			if (_data != null && !ReferenceEquals(_data, result))
 			{
 				_onPreviousDataLost(_data);
 			}

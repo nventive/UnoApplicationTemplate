@@ -6,9 +6,10 @@ using System.Reactive.Subjects;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Client;
 using MallardMessageHandlers;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Business
 {
 	public partial class AuthenticationService : IAuthenticationService, IAuthenticationTokenProvider<AuthenticationData>
 	{

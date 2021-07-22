@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class CreateAccountPageViewModel : ViewModel
 	{

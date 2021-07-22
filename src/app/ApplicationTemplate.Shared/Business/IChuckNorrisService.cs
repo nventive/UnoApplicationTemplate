@@ -5,7 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DynamicData;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Business
 {
 	public interface IChuckNorrisService
 	{

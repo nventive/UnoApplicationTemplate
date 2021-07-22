@@ -7,7 +7,7 @@ using Windows.UI.Core;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
 
-namespace ApplicationTemplate.Framework
+namespace ApplicationTemplate
 {
 	/// <summary>
 	/// Invokes calls to an IBrowser on the dispatcher

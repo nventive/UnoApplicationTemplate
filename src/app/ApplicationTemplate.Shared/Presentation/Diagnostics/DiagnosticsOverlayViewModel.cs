@@ -4,7 +4,7 @@ using System.Reactive.Linq;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public partial class DiagnosticsOverlayViewModel : ViewModel
 	{
