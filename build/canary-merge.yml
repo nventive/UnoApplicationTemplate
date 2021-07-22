@@ -2,7 +2,7 @@ pool:
   name: Windows 1809
 
 variables:
-- SolutionFileName: ApplicationTemplate.sln
+ SolutionFileName: ApplicationTemplate.sln
 
 steps:
 - task: UseDotNet@2
