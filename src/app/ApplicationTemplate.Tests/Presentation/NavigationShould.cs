@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using ApplicationTemplate.Presentation;
 using Xunit;
 
 namespace ApplicationTemplate.Tests

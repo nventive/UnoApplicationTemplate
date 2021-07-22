@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class ChuckNorrisItemViewModel : ViewModel
 	{

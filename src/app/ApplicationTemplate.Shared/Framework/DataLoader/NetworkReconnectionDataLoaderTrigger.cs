@@ -4,7 +4,7 @@ using System.Text;
 using Chinook.DataLoader;
 using MallardMessageHandlers;
 
-namespace ApplicationTemplate.Framework
+namespace ApplicationTemplate
 {
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__ || WINDOWS_UWP

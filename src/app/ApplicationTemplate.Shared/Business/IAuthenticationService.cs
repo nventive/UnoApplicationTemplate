@@ -4,8 +4,9 @@ using System.Reactive;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Client;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Business
 {
 	public interface IAuthenticationService
 	{

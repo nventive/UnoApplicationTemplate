@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using GeneratedSerializers;
 using MallardMessageHandlers;
 
-namespace ApplicationTemplate.Framework
+namespace ApplicationTemplate
 {
 	public class ObjectSerializerToResponseContentDeserializer : IResponseContentDeserializer
 	{

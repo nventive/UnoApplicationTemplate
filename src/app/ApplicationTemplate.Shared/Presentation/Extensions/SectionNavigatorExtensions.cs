@@ -7,7 +7,7 @@ using System.Text;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate.Presentation
+namespace Chinook.SectionsNavigation
 {
 	public static class SectionNavigatorExtensions
 	{

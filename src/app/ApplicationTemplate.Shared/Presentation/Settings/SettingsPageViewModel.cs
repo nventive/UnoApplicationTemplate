@@ -2,6 +2,8 @@
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
+using ApplicationTemplate.Client;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -11,7 +13,7 @@ using Microsoft.Extensions.Localization;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public partial class SettingsPageViewModel : ViewModel
 	{

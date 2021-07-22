@@ -1,8 +1,9 @@
 ﻿using System;
+using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public partial class OnboardingPageViewModel : ViewModel
 	{

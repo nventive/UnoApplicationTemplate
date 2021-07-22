@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ApplicationTemplate.Client;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class EditProfileFormViewModel : ViewModel
 	{

@@ -2,11 +2,13 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
+using ApplicationTemplate.Client;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public partial class PostsPageViewModel : ViewModel
 	{

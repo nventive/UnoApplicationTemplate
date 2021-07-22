@@ -6,8 +6,9 @@ using System.Reactive.Threading.Tasks;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Client;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Business
 {
 	public partial class UserProfileService : IUserProfileService
 	{

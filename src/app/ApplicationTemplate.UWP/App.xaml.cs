@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading.Tasks;
+using ApplicationTemplate.Views;
 using Chinook.SectionsNavigation;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -37,7 +36,18 @@ namespace ApplicationTemplate
 
 		public Window CurrentWindow => Windows.UI.Xaml.Window.Current;
 
-		protected override void OnLaunched(LaunchActivatedEventArgs e)
+		protected override void OnLaunched(LaunchActivatedEventArgs args)
+		{
+			InitializeAndStart(args);
+		}
+
+		protected override void OnActivated(IActivatedEventArgs args)
+		{
+			// This is where your app launches if you use custom schemes, Universal Links, or Android App Links.
+			InitializeAndStart(args);
+		}
+
+		private void InitializeAndStart(IActivatedEventArgs args)
 		{
 			Shell = CurrentWindow.Content as Shell;
 
@@ -56,7 +66,7 @@ namespace ApplicationTemplate
 
 				ShellActivity.Start();
 
-				CurrentWindow.Content = Shell = new Shell(e);
+				CurrentWindow.Content = Shell = new Shell(args);
 
 				ShellActivity.Stop();
 			}

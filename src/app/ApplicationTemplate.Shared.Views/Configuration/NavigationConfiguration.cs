@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ApplicationTemplate.Presentation;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using ApplicationTemplate.Views.Content;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Views
 {
 	/// <summary>
 	/// This class is used for navigation configuration.

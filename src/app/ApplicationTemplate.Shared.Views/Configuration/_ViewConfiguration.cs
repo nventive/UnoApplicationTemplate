@@ -4,7 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Microsoft.Extensions.Hosting;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Views
 {
 	[SuppressMessage("Documentation", "SA1649:File name should match first type name", Justification = "Visibility purposes")]
 	public static class ViewConfiguration

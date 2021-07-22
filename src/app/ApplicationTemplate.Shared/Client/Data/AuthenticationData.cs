@@ -3,7 +3,7 @@ using GeneratedSerializers;
 using MallardMessageHandlers;
 using Uno;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Client
 {
 	[GeneratedImmutable]
 	public partial class AuthenticationData : IAuthenticationToken

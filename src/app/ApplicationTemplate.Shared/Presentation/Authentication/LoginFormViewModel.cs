@@ -5,7 +5,7 @@ using Chinook.DynamicMvvm;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class LoginFormViewModel : ViewModel
 	{

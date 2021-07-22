@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 using FluentValidation;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate.Presentation
 {
 	public class LoginPageViewModel : ViewModel
 	{
