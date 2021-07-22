@@ -11,9 +11,6 @@
 - name: iosProvisioningProfileFile
   type: string
   default: ''
-- name: preBuildSteps
-  type: stepList
-  default: []
 
 steps:
 - task: gitversion/setup@0
@@ -26,10 +23,6 @@ steps:
     useConfigFile: true
     configFilePath: 'gitversion.yml'
   displayName: 'Calculate version'
-
-- ${{ each step in parameters.preBuildSteps }}:
-    - ${{ each pair in step }}:
-        ${{ pair.key }}: ${{ pair.value }}
 
 - task: NuGetToolInstaller@1
   displayName: 'Install NuGet $(NUGET_VERSION)'
@@ -111,6 +104,16 @@ steps:
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: "$(Build.SourcesDirectory)/src/coverage.cobertura.xml"
+  
+  # Generates basic release notes for App Center including: branch, commit id, url to the pipeline run, the environment name for the app
+- task: nventiveReleaseNotesCompiler@5
+  displayName: 'Generate release notes file'
+  inputs:
+    EnvironmentName: $(ApplicationEnvironment)
+    AdditionalReleaseNotesFile: Canary.md
+    OutputFilePath: $(Build.ArtifactStagingDirectory)/ReleaseNotes.md
+    CharacterLimit: 5000
+    TruncatedOutputFilePath: '$(Build.ArtifactStagingDirectory)/ReleaseNotes-Truncated.md'
 
 - publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
