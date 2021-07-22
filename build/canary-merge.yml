@@ -9,7 +9,7 @@ steps:
   displayName: 'Use .Net Core runtime 2.2.x'
   inputs:
     version: 2.2.x
-steps:
+
 - task: nventivecorp.nventive.nventive.canaryUpdater.nventiveCanaryUpdater@5
   displayName: 'Canary Update'
   inputs:
