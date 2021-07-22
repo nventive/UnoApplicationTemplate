@@ -104,6 +104,16 @@ steps:
   inputs:
     codeCoverageTool: 'Cobertura'
     summaryFileLocation: "$(Build.SourcesDirectory)/src/coverage.cobertura.xml"
+  
+  # Generates basic release notes for App Center including: branch, commit id, url to the pipeline run, the environment name for the app
+- task: nventiveReleaseNotesCompiler@5
+  displayName: 'Generate release notes file'
+  inputs:
+    EnvironmentName: $(ApplicationEnvironment)
+    AdditionalReleaseNotesFile: Canary.md
+    OutputFilePath: $(Build.ArtifactStagingDirectory)/ReleaseNotes.md
+    CharacterLimit: 5000
+    TruncatedOutputFilePath: '$(Build.ArtifactStagingDirectory)/ReleaseNotes-Truncated.md'
 
 - publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
