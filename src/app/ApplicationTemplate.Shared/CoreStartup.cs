@@ -44,7 +44,7 @@ namespace ApplicationTemplate
 
 			HandleUnhandledExceptions(services);
 
-			ValidatorOptions.LanguageManager = new FluentValidationLanguageManager();
+			ValidatorOptions.Global.LanguageManager = new FluentValidationLanguageManager();
 		}
 
 		protected override async Task StartServices(IServiceProvider services, bool isFirstStart)
@@ -52,7 +52,6 @@ namespace ApplicationTemplate
 			if (isFirstStart)
 			{
 				// Start your services here.
-
 				NotifyUserOnSessionExpired(services);
 
 				services.GetRequiredService<DiagnosticsCountersService>().Start();

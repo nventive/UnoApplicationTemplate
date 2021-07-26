@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using ApplicationTemplate.Presentation;
-using Chinook.SectionsNavigation;
-using Chinook.StackNavigation;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using ApplicationTemplate.Views.Content;
+using Chinook.SectionsNavigation;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate.Views
 {
