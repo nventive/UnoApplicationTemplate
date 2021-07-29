@@ -32,8 +32,8 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
     <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools" Version="6.0.0-ge975abb046" />
-    <PackageReference Include="Uno.UI.WebAssembly" Version="3.1.0-beta.84" />
-		<PackageReference Include="Uno.UI.RemoteControl" Version="3.6.6" />
+    <PackageReference Include="Uno.UI.WebAssembly" Version="3.9.1" />
+		<PackageReference Include="Uno.UI.RemoteControl" Version="3.9.1" />
 		<PackageReference Include="Uno.Injectable" Version="1.34.0-dev.175" />
 		<PackageReference Include="Uno.CodeGen" Version="1.34.0-dev.175" />
     <PackageReference Include="Uno.Wasm.Bootstrap" Version="1.3.6" />
