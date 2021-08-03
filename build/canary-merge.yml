@@ -5,23 +5,34 @@ variables:
 - SolutionFileName: ApplicationTemplate.sln
 
 steps:
+- checkout: self
+  clean: true
+  persistCredentials: true
+
 - task: UseDotNet@2
   displayName: 'Use .Net Core runtime 2.2.x'
   inputs:
     version: 2.2.x
 
-- task: nventivecorp.nventive.nventive.canaryUpdater.nventiveCanaryUpdater@5
-  displayName: 'Canary Update'
+- task: nventiveCanaryUpdater@5
+  env:
+    SYSTEM_ACCESSTOKEN: $(System.AccessToken)
   inputs:
-    solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
+    solution: '$(Build.SourcesDirectory)/src/$(SolutionFileName)'
     usePrivateFeed: false
-    branchToMerge: master
+    useNuGetOrg: true
+    mergeBranch: true
+    branchToMerge: 'master'
+    isBranchToMergeAway: true
+    mergeRepositoryConnection: 'UnoApplicationTemplate'
+    pushMergeBranch: true
     pushBranch: true
     gitUserName: 'nventive DevOps'
     gitUserEmail: 'devops@nventive.com'
+    nugetUpdaterVersion: '2.1.1'
     nugetVersion: 'dev,beta,stable'
     allowDowngrade: true
-    packageAuthor: nventive
+    packageAuthor: 'nventive'
     useVersionOverrides: true
     versionOverridesFile: 'https://raw.githubusercontent.com/nventive/Canary/master/version-overrides.json'
 
