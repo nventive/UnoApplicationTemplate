@@ -1,28 +1,26 @@
 ﻿using System;
-using System.Net.Http;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Reactive.Subjects;
-using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
-using MallardMessageHandlers;
 
 namespace ApplicationTemplate.Business
 {
-	public partial class AuthenticationService : IAuthenticationService, IAuthenticationTokenProvider<AuthenticationData>
+	public partial class AuthenticationService : IAuthenticationService
 	{
-		private readonly ISubject<Unit> _sessionExpired = new Subject<Unit>();
 		private readonly IApplicationSettingsService _applicationSettingsService;
 		private readonly IAuthenticationEndpoint _authenticationEndpoint;
+		private readonly INotifySessionExpired _notifySessionExpired;
 
 		public AuthenticationService(
 			IApplicationSettingsService applicationSettingsService,
-			IAuthenticationEndpoint authenticationEndpoint)
+			IAuthenticationEndpoint authenticationEndpoint,
+			INotifySessionExpired notifySessionExpired)
 		{
 			_applicationSettingsService = applicationSettingsService ?? throw new ArgumentNullException(nameof(applicationSettingsService));
 			_authenticationEndpoint = authenticationEndpoint ?? throw new ArgumentNullException(nameof(authenticationEndpoint));
+			_notifySessionExpired = notifySessionExpired ?? throw new ArgumentNullException(nameof(notifySessionExpired));
 		}
 
 		/// <inheritdoc/>
@@ -41,7 +39,7 @@ namespace ApplicationTemplate.Business
 		}
 
 		/// <inheritdoc/>
-		public IObservable<Unit> ObserveSessionExpired() => _sessionExpired;
+		public IObservable<Unit> ObserveSessionExpired() => _notifySessionExpired.ObserveSessionExpired();
 
 		/// <inheritdoc/>
 		public async Task<AuthenticationData> Login(CancellationToken ct, string email, string password)
@@ -57,32 +55,6 @@ namespace ApplicationTemplate.Business
 		public async Task Logout(CancellationToken ct)
 		{
 			await _applicationSettingsService.DiscardUserSettings(ct);
-		}
-
-		/// <inheritdoc/>
-		public async Task<AuthenticationData> GetToken(CancellationToken ct, HttpRequestMessage request)
-		{
-			var settings = await _applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
-
-			return settings.AuthenticationData;
-		}
-
-		/// <inheritdoc/>
-		public async Task<AuthenticationData> RefreshToken(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
-		{
-			var authenticationData = await _authenticationEndpoint.RefreshToken(ct, unauthorizedToken);
-
-			await _applicationSettingsService.SetAuthenticationData(ct, authenticationData);
-
-			return authenticationData;
-		}
-
-		/// <inheritdoc/>
-		public async Task NotifySessionExpired(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
-		{
-			await _applicationSettingsService.SetAuthenticationData(ct, default(AuthenticationData));
-
-			_sessionExpired.OnNext(Unit.Default);
 		}
 
 		/// <inheritdoc/>

@@ -37,7 +37,7 @@
 		<PackageReference Include="Moq" Version="4.13.0" />
 		<PackageReference Include="FluentAssertions" Version="5.9.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.2" />
-		<PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.16" />
+		<PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.21" />
 		<PackageReference Include="Refit" Version="4.7.51" />
 		<PackageReference Include="Reactive.Annex" Version="0.3.0-dev.18" />
 		<PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
