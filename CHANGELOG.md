@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Changed
 * Improved the build pipeline cleanup process
+* Concurrent access token refreshing
 
 ### Deprecated
 

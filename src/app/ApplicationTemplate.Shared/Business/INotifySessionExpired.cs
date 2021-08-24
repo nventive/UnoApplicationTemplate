@@ -3,6 +3,9 @@ using System.Reactive;
 
 namespace ApplicationTemplate.Business
 {
+	/// <summary>
+	/// This interface allows to notify that a user session has expired through an observable sequence.
+	/// </summary>
 	public interface INotifySessionExpired
 	{
 		/// <summary>
