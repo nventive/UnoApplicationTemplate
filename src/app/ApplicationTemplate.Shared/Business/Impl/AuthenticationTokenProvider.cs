@@ -23,7 +23,7 @@ namespace ApplicationTemplate.Business
 		{
 			_applicationSettingsService = applicationSettingsService;
 			_authenticationEndpoint = authenticationEndpoint;
-			_inner = new ConcurrentAuthenticationTokenProvider<AuthenticationData>(loggerFactory, GetToken, NotifySessionExpired, RefreshToken);
+			_inner = new ConcurrentAuthenticationTokenProvider<AuthenticationData>(loggerFactory, GetTokenInternal, NotifySessionExpiredInternal, RefreshTokenInternal);
 		}
 
 		/// <inheritdoc />
@@ -41,21 +41,21 @@ namespace ApplicationTemplate.Business
 		Task IAuthenticationTokenProvider<AuthenticationData>.NotifySessionExpired(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
 			=> _inner.NotifySessionExpired(ct, request, unauthorizedToken);
 
-		private async Task<AuthenticationData> GetToken(CancellationToken ct, HttpRequestMessage request)
+		private async Task<AuthenticationData> GetTokenInternal(CancellationToken ct, HttpRequestMessage request)
 		{
 			var settings = await _applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
 
 			return settings.AuthenticationData;
 		}
 
-		private async Task NotifySessionExpired(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
+		private async Task NotifySessionExpiredInternal(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
 		{
 			await _applicationSettingsService.SetAuthenticationData(ct, default(AuthenticationData));
 
 			_sessionExpired.OnNext(Unit.Default);
 		}
 
-		private async Task<AuthenticationData> RefreshToken(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
+		private async Task<AuthenticationData> RefreshTokenInternal(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
 		{
 			var authenticationData = await _authenticationEndpoint.RefreshToken(ct, unauthorizedToken);
 
