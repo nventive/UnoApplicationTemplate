@@ -17,7 +17,7 @@ namespace ApplicationTemplate.Business
 
 		private readonly IApplicationSettingsService _applicationSettingsService;
 		private readonly IAuthenticationEndpoint _authenticationEndpoint;
-		private readonly IAuthenticationTokenProvider<AuthenticationData> _inner;
+		private readonly IAuthenticationTokenProvider<AuthenticationData> _authTokenProvider;
 
 		public AuthenticationService(
 			ILoggerFactory loggerFactory,
@@ -26,7 +26,7 @@ namespace ApplicationTemplate.Business
 		{
 			_applicationSettingsService = applicationSettingsService ?? throw new ArgumentNullException(nameof(applicationSettingsService));
 			_authenticationEndpoint = authenticationEndpoint ?? throw new ArgumentNullException(nameof(authenticationEndpoint));
-			_inner = new ConcurrentAuthenticationTokenProvider<AuthenticationData>(loggerFactory, GetTokenInternal, NotifySessionExpiredInternal, RefreshTokenInternal);
+			_authTokenProvider = new ConcurrentAuthenticationTokenProvider<AuthenticationData>(loggerFactory, GetTokenInternal, NotifySessionExpiredInternal, RefreshTokenInternal);
 		}
 
 		/// <inheritdoc/>
@@ -77,15 +77,15 @@ namespace ApplicationTemplate.Business
 
 		/// <inheritdoc />
 		Task<AuthenticationData> IAuthenticationTokenProvider<AuthenticationData>.GetToken(CancellationToken ct, HttpRequestMessage request)
-			=> _inner.GetToken(ct, request);
+			=> _authTokenProvider.GetToken(ct, request);
 
 		/// <inheritdoc />
 		Task<AuthenticationData> IAuthenticationTokenProvider<AuthenticationData>.RefreshToken(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
-			=> _inner.RefreshToken(ct, request, unauthorizedToken);
+			=> _authTokenProvider.RefreshToken(ct, request, unauthorizedToken);
 
 		/// <inheritdoc/>
 		Task IAuthenticationTokenProvider<AuthenticationData>.NotifySessionExpired(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
-			=> _inner.NotifySessionExpired(ct, request, unauthorizedToken);
+			=> _authTokenProvider.NotifySessionExpired(ct, request, unauthorizedToken);
 
 		private async Task<AuthenticationData> GetTokenInternal(CancellationToken ct, HttpRequestMessage request)
 		{
