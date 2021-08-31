@@ -12,10 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Business\Entities\ChuckNorrisQuote.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IAuthenticationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IChuckNorrisService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\AuthenticationTokenProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\ChuckNorrisService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\UserProfileService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Business\INotifySessionExpired.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IUserProfileService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\ChuckNorrisData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\ChuckNorrisErrorResponse.cs" />

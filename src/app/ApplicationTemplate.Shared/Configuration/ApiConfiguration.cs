@@ -181,8 +181,7 @@ namespace ApplicationTemplate
 		private static IServiceCollection AddAuthenticationTokenHandler(this IServiceCollection services)
 		{
 			return services
-				.AddSingleton<IAuthenticationTokenProvider<AuthenticationData>, AuthenticationTokenProvider>()
-				.AddSingleton(s => s.GetRequiredService<IAuthenticationTokenProvider<AuthenticationData>>() as INotifySessionExpired)
+				.AddSingleton<IAuthenticationTokenProvider<AuthenticationData>>(s => s.GetRequiredService<IAuthenticationService>())
 				.AddTransient<AuthenticationTokenHandler<AuthenticationData>>();
 		}
 
