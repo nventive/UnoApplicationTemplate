@@ -1,14 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
+using MallardMessageHandlers;
 
 namespace ApplicationTemplate.Business
 {
-	public interface IAuthenticationService
+	public interface IAuthenticationService : IAuthenticationTokenProvider<AuthenticationData>
 	{
 		/// <summary>
 		/// Gets and observes the current <see cref="AuthenticationData"/>.
