@@ -1,6 +1,6 @@
 ﻿# Uno Platform Application Template
 
-This is a mobile app project template using [Uno Platform](https://github.com/platform/uno) and the latest .NET practices.
+This is a mobile app project template using [Uno Platform](https://github.com/unoplatform/uno) and the latest .NET practices.
 
 ## Getting Started
 
