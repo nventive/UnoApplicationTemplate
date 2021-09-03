@@ -18,6 +18,7 @@ using Nventive.Persistence;
 [assembly: JsonSerializableType(typeof(AuthenticationToken))]
 [assembly: JsonSerializableType(typeof(AuthenticationData))]
 [assembly: JsonSerializableType(typeof(ApplicationSettings))]
+[assembly: JsonSerializableType(typeof(Refit.ProblemDetails))]
 [assembly: JsonSerializableType(typeof(PostData))]
 [assembly: JsonSerializableType(typeof(PostData[]))]
 [assembly: JsonSerializableType(typeof(ChuckNorrisResponse))]
