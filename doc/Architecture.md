@@ -30,18 +30,27 @@ _[Create this diagram from the [architecture file](diagrams/architecture.drawio)
 
 ## Topics
 
-### T01 - Caching
+### T01 - Material Theme
+
+This app uses [Uno.Themes](https://github.com/unoplatform/Uno.Themes) resources.
+
+Resources from **Uno.Material** are used for the following:
+- Color system
+- Typography (TextBlock styles)
+- Controls styles
+
+### T02 - Caching
 
 _[Insert description of the caching here]_
 
-### T02 - Offline
+### T03 - Offline
 
 _[Insert description of the offline here]_
 
-### T03 - Security
+### T04 - Security
 
 _[Insert description of the security here]_
 
-### T04 - [Name of topic]
+### T05 - [Name of topic]
 
 _[Insert description of topic here]_
