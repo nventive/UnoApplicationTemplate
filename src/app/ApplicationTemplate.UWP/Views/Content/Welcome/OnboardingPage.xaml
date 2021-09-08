@@ -47,7 +47,7 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
 		<u:ImageSlideshow x:Name="OnboardingSlideshow"
 						  ItemsSource="{Binding OnboardingItems}"
 						  ItemTemplate="{StaticResource OnboardingItemTemplate}"

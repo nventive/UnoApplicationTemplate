@@ -217,5 +217,5 @@
 
 	<!-- Default Style -->
 	<Style TargetType="TextBox"
-		   BasedOn="{StaticResource TextBoxStyle}" />
+		   BasedOn="{StaticResource MaterialOutlinedTextBoxStyle}" />
 </ResourceDictionary>

@@ -8,7 +8,7 @@
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource AccentColorBrush}">
+		  Background="{StaticResource MaterialSurfaceBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 
@@ -66,20 +66,17 @@
 
 		<RadioButton Content="Home"
 					 x:Uid="Menu_Home"
-					 Foreground="White"
 					 HorizontalAlignment="Center"
 					 Command="{Binding ShowHome}" />
 
 		<RadioButton Content="Posts"
 					 x:Uid="Menu_Posts"
-					 Foreground="White"
 					 HorizontalAlignment="Center"
 					 Command="{Binding ShowPosts}"
 					 Grid.Column="1" />
 
 		<RadioButton Content="Settings"
 					 x:Uid="Menu_Settings"
-					 Foreground="White"
 					 HorizontalAlignment="Center"
 					 Command="{Binding ShowSettings}"
 					 Grid.Column="2" />

@@ -58,14 +58,14 @@
 								<VisualState x:Name="CheckedPointerOver">
 									<VisualState.Setters>
 										<Setter Target="Star.Fill"
-												Value="{StaticResource AccentColorBrush}" />
+												Value="{StaticResource MaterialPrimaryBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
 								<VisualState x:Name="Checked">
 									<VisualState.Setters>
 										<Setter Target="Star.Fill"
-												Value="{StaticResource AccentColorBrush}" />
+												Value="{StaticResource MaterialPrimaryBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -74,7 +74,7 @@
 										<Setter Target="ContentRoot.Opacity"
 												Value="0.7" />
 										<Setter Target="Star.Fill"
-												Value="{StaticResource AccentColorBrush}" />
+												Value="{StaticResource MaterialPrimaryBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
