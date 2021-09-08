@@ -9,7 +9,7 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -32,7 +32,8 @@
 					Margin="12,0,0,0"
 					Grid.Row="2">
 			
-			<TextBlock Text="Example of an image" />
+			<TextBlock Text="Example of an image"
+					   Style="{StaticResource MaterialSubtitle1}"/>
 			<Image Source="ms-appx:///Assets/Image_Example.png"
 				   Height="20"
 				   Width="20"
@@ -52,7 +53,8 @@
 							  IsItemClickEnabled="True">
 						<ListView.ItemTemplate>
 							<DataTemplate>
-								<TextBlock Text="{Binding Title}" />
+								<TextBlock Text="{Binding Title}"
+										   Style="{StaticResource MaterialBody1}"/>
 							</DataTemplate>
 						</ListView.ItemTemplate>
 					</ListView>

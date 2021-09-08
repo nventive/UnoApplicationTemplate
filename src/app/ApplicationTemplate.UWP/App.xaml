@@ -6,10 +6,19 @@
 	<Application.Resources>
 		<ResourceDictionary>
 			<ResourceDictionary.MergedDictionaries>
+				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
+
+				<!-- Uno material -->
+				<MaterialColors xmlns="using:Uno.Material"
+								ColorPaletteOverrideSource="ms-appx:///Views/Styles/Application/MaterialOverride.xaml" />
+				<MaterialResources xmlns="using:Uno.Material" />
+
+				<ResourceDictionary Source="Views/Styles/Application/ColorPalette.xaml" />
+				<ResourceDictionary Source="Views/Styles/Application/Brushes.xaml" />
 				<ResourceDictionary Source="Views/Styles/Application/Converters.xaml" />
-				<ResourceDictionary Source="Views/Styles/Application/Colors.xaml" />
 				<ResourceDictionary Source="Views/Styles/Application/Fonts.xaml" />
 				<ResourceDictionary Source="Views/Styles/Application/LayoutConstants.xaml" />
+				
 				<ResourceDictionary Source="Views/Styles/Controls/AsyncWebView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/Button.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/CheckBox.xaml" />

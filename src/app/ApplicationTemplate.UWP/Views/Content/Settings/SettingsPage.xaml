@@ -18,7 +18,7 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -35,7 +35,8 @@
 							   EmptyTemplate="{StaticResource UserEmptyTemplate}">
 				<DataTemplate>
 					<StackPanel>
-						<TextBlock FontSize="24">
+						<TextBlock FontSize="24"
+								   Style="{StaticResource MaterialHeadline6}">
 							<Run Text="Hello" />
 							<Run Text="{Binding Data.FirstName}"
 								 FontWeight="Bold"/>
@@ -87,7 +88,7 @@
 				  Background="Transparent"
 				  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
 				  ue:MultipleTapExtension.TapCount="3">
-				<TextBlock>
+				<TextBlock Style="{StaticResource MaterialCaption}">
 					<Run Text="Version"
 						 x:Uid="Settings_Version" />
 					<Run Text="{Binding VersionNumber}" />

@@ -7,7 +7,7 @@
 		   TargetType="HyperlinkButton">
 
 		<Setter Property="Foreground"
-				Value="{StaticResource AccentColorBrush}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="BorderThickness"

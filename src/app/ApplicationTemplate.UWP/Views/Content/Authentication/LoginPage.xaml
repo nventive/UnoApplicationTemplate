@@ -9,7 +9,7 @@
 	  xmlns:ios="http://nventive.com/ios"
 	  mc:Ignorable="d ios android">
 
-	<Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

@@ -15,20 +15,16 @@
 		https://github.com/unoplatform/uno/blob/master/doc/articles/controls/CommandBar.md
 	-->
 
-	<ResourceDictionary.MergedDictionaries>
-		<ResourceDictionary Source="../Application/Colors.xaml" />
-	</ResourceDictionary.MergedDictionaries>
-
 	<Style x:Key="DefaultCommandBarStyle"
 		   TargetType="CommandBar"
 		   xamarin:BasedOn="{StaticResource NativeDefaultCommandBar}">
 		<!-- COMMON SETTERS -->
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
-				Value="{StaticResource CommandBarForegroundBrush}" />
+				Value="{StaticResource MaterialOnSurfaceBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource CommandBarBackgroundBrush}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource CommandBarForegroundBrush}" />
+				Value="{StaticResource MaterialOnSurfaceBrush}" />
 
 		<!-- StatusBarThickness Padding set here in order to fix those two known issues:
 				On iOS the content will be underneath the CommandBar
