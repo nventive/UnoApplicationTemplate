@@ -27,7 +27,7 @@
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Dark">
-			<Color x:Key="MaterialPrimaryColor">#FF274A9D</Color>
+			<Color x:Key="MaterialPrimaryColor">#FF839DDA</Color>
 			
 			<Color x:Key="MaterialBackgroundColor">#FF111111</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#FFEFEFEF</Color>

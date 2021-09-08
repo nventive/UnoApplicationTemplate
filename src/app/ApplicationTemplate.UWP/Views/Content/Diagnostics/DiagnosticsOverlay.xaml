@@ -216,6 +216,10 @@
 						Content="Grid"
 						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
+				<Button Click="OnThemeButtonClicked"
+						Content="Theme"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
+
 				<Button Command="{Binding ToggleMore}"
 						Style="{StaticResource DiagnosticsOverlayButtonStyle}">
 					<Grid>
