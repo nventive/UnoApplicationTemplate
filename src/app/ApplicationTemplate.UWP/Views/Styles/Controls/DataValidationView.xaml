@@ -63,7 +63,7 @@
 						<!-- Error border -->
 						<Border x:Name="ErrorBorder"
 								Opacity="0"
-								BorderBrush="Red"
+								BorderBrush="{StaticResource MaterialErrorBrush}"
 								BorderThickness="2" />
 
 						<!-- Valid border -->
@@ -79,7 +79,8 @@
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
 										<TextBlock Text="{Binding ErrorMessage}"
-												   Foreground="Red" />
+												   Style="{StaticResource MaterialCaption}"
+												   Foreground="{StaticResource MaterialErrorBrush}" />
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>

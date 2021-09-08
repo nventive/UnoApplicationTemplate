@@ -7,44 +7,5 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					mc:Ignorable="android">
 
-	<!--
-	******************************************************************
-		DEFAULT TEXTBLOCK STYLE
-	******************************************************************
-	-->
-
-	<Style x:Key="DefaultTypo"
-		   TargetType="TextBlock">
-		<Setter Property="FontWeight"
-				Value="Normal" />
-		<Setter Property="FontStyle"
-				Value="Normal" />
-		<Setter Property="LineStackingStrategy"
-				Value="BlockLineHeight" />
-		<Setter Property="TextTrimming"
-				Value="CharacterEllipsis" />
-		<Setter Property="TextWrapping"
-				Value="Wrap" />
-		<Setter Property="Foreground"
-				Value="Black" />
-	</Style>
-
-	<!--
-	******************************************************************
-		STYLE GUIDE TEXTBLOCKS STYLES
-	******************************************************************
-	-->
-
-	<Style x:Key="Typo01"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource DefaultTypo}">
-		<!--
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
-		-->
-		<Setter Property="FontSize"
-				Value="35" />
-		<Setter Property="Foreground"
-				Value="White" />
-	</Style>
+	<!-- List of Material TextBlock styles: https://github.com/unoplatform/Uno.Themes/blob/master/src/library/Uno.Material/Styles/Controls/TextBlock.xaml -->
 </ResourceDictionary>

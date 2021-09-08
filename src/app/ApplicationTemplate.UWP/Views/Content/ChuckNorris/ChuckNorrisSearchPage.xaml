@@ -16,7 +16,8 @@
 							Visibility="{Binding Request.Context[SearchTerm], Converter={StaticResource EmptyStringToVisible}, FallbackValue=Collapsed}">
 
 					<TextBlock Text="Enter keywords to search"
-							   HorizontalAlignment="Center" />
+							   HorizontalAlignment="Center"
+							   Style="{StaticResource MaterialBody1}"/>
 
 					<Button Content="My favorites quotes"
 							Command="{Binding Parent.NavigateToFavoriteQuotes}"
@@ -29,11 +30,13 @@
 							Visibility="{Binding Request.Context[SearchTerm], Converter={StaticResource EmptyStringToCollapsed}, FallbackValue=Collapsed}">
 
 					<TextBlock Text="No results found for"
-							   HorizontalAlignment="Center" />
+							   HorizontalAlignment="Center"
+							   Style="{StaticResource MaterialBody1}"/>
 
 					<TextBlock Text="{Binding Request.Context[SearchTerm]}"
 							   HorizontalAlignment="Center"
 							   Margin="0,8,0,0"
+							   Style="{StaticResource MaterialBody1}"
 							   FontWeight="Bold" />
 				</StackPanel>
 			</Grid>
@@ -86,11 +89,13 @@
 										<ColumnDefinition Width="60" />
 									</Grid.ColumnDefinitions>
 
-									<TextBlock Text="{Binding Quote.Value}" />
+									<TextBlock Text="{Binding Quote.Value}"
+											   Style="{StaticResource MaterialBody1}"/>
 									
 									<TextBlock Text="{Binding IsFavorite}"
 											   Grid.Column="1"
-											   Margin="4,0,0,0"/>
+											   Margin="4,0,0,0"
+											   Style="{StaticResource MaterialCaption}"/>
 
 									<ToggleButton IsChecked="{Binding IsFavorite}"
 												  Command="{Binding Parent.ToggleIsFavorite}"

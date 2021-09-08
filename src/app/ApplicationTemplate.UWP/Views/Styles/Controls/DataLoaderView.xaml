@@ -6,6 +6,7 @@
 	<DataTemplate x:Key="DataLoaderViewEmptyTemplate">
 		<Grid>
 			<TextBlock Text="Nothing to show here"
+					   Style="{StaticResource MaterialBody1}"
 					   HorizontalAlignment="Center"
 					   VerticalAlignment="Top"
 					   Margin="0,44,0,0" />
@@ -22,7 +23,8 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<TextBlock Foreground="White"
+			<TextBlock Style="{StaticResource MaterialBody1}"
+					   Foreground="White"
 					   HorizontalAlignment="Left"
 					   VerticalAlignment="Center">
 				<Run Text="Something went wrong." />
@@ -45,8 +47,7 @@
 					HorizontalAlignment="Stretch">
 			<!-- Title -->
 			<TextBlock Text="Error"
-					   FontSize="16"
-					   FontWeight="Bold"
+					   Style="{StaticResource MaterialHeadline6}"
 					   TextAlignment="Center"
 					   Margin="32,44,32,0" />
 
@@ -56,11 +57,13 @@
 				  HorizontalAlignment="Center"
 				  Margin="32,12,32,0">
 				<TextBlock Text="{Binding Error.Message}"
+						   Style="{StaticResource MaterialBody1}"
 						   Foreground="White" />
 			</Grid>
 
 			<!-- Message -->
 			<TextBlock Text="Please try again later."
+					   Style="{StaticResource MaterialBody2}"
 					   TextAlignment="Center"
 					   Margin="32,12,32,0" />
 

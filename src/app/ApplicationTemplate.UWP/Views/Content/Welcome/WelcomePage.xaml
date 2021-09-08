@@ -15,7 +15,7 @@
 
 		<TextBlock Text="Welcome"
 				   x:Uid="Welcome_Title"
-				   FontSize="30"
+				   Style="{StaticResource MaterialHeadline3}"
 				   Margin="20,40,20,20" />
 
 		<StackPanel Margin="20,0,20,20"

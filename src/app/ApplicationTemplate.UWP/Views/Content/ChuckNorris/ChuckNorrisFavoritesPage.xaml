@@ -11,6 +11,7 @@
 	<Page.Resources>
 		<DataTemplate x:Key="QuotesEmptyTemplate">
 			<TextBlock Text="You don't have any favorites"
+					   Style="{StaticResource MaterialBody1}"
 					   VerticalAlignment="Center"
 					   HorizontalAlignment="Center" />
 		</DataTemplate>
@@ -42,7 +43,8 @@
 										<ColumnDefinition Width="60" />
 									</Grid.ColumnDefinitions>
 
-									<TextBlock Text="{Binding Quote.Value}" />
+									<TextBlock Text="{Binding Quote.Value}"
+											   Style="{StaticResource MaterialBody1}"/>
 
 									<ToggleButton IsChecked="{Binding IsFavorite}"
 												  Command="{Binding Parent.ToggleIsFavorite}"

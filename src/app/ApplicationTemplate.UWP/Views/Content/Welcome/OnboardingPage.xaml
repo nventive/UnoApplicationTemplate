@@ -21,8 +21,8 @@
 			<DataTemplate x:Key="OnboardingItemTemplate">
 				<Grid Background="Black">
 					<TextBlock Text="{Binding PrimaryText}"
+							   Style="{StaticResource MaterialHeadline3}"
 							   Foreground="White"
-							   FontSize="25"
 							   Margin="40"
 							   HorizontalAlignment="Center" />
 
