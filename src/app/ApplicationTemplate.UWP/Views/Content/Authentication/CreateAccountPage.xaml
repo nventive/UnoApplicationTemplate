@@ -22,15 +22,115 @@
 		<ScrollViewer Grid.Row="1">
 			<StackPanel Margin="20,0,20,20">
 
+				<!-- First Name -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="FirstName"
+										  Margin="0,24,0,4">
+					<TextBox PlaceholderText="First Name"
+							 x:Uid="CreateAccount_FirstName"
+							 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 IsSpellCheckEnabled="False"
+							 ios:ReturnKeyType="Next"
+							 android:ImeOptions="Next"
+							 ue:TextBoxBehavior.NextControl="{Binding ElementName=LastNameField}" />
+				</local:DataValidationView>
+
+				<!-- Last Name -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="LastName"
+										  Margin="0,4">
+					<TextBox x:Name="LastNameField"
+							 PlaceholderText="Last Name"
+							 x:Uid="CreateAccount_LastName"
+							 Text="{Binding Form.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 IsSpellCheckEnabled="False"
+							 ios:ReturnKeyType="Next"
+							 android:ImeOptions="Next"
+							 ue:TextBoxBehavior.NextControl="{Binding ElementName=EmailField}" />
+				</local:DataValidationView>
+
 				<!-- Email -->
 				<local:DataValidationView Model="{Binding Form}"
 										  PropertyName="Email"
 										  Margin="0,4">
-					<TextBox PlaceholderText="Email"
+					<TextBox x:Name="EmailField"
+							 PlaceholderText="Email"
 							 x:Uid="CreateAccount_Email"
 							 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 InputScope="EmailSmtpAddress"
 							 IsSpellCheckEnabled="False"
+							 ios:ReturnKeyType="Next"
+							 android:ImeOptions="Next"
+							 ue:TextBoxBehavior.NextControl="{Binding ElementName=PhoneNumberField}" />
+				</local:DataValidationView>
+
+				<!-- Phone Number -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="PhoneNumber"
+										  Margin="0,4">
+					
+					<!-- Todo adding formating (000) 000-0000 -->
+					<TextBox x:Name="PhoneNumberField"
+							 PlaceholderText="Phone Number (000) 000-0000"
+							 x:Uid="CreateAccount_PhoneNumber"
+							 Text="{Binding Form.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 InputScope="Number"
+							 MaxLength="14"
+							 IsSpellCheckEnabled="False"
+							 ios:ReturnKeyType="Next"
+							 android:ImeOptions="Next"
+							 ue:TextBoxBehavior.NextControl="{Binding ElementName=SecondaryPhoneNumberField}" />
+				</local:DataValidationView>
+
+				<!-- Secondary Phone Number -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="SecondaryPhoneNumber"
+										  Margin="0,4">
+					
+					<!-- Todo adding formating (000) 000-0000 -->
+					<TextBox x:Name="SecondaryPhoneNumberField"
+							 PlaceholderText="Secondary Phone Number (000) 000-0000 (optional)"
+							 x:Uid="CreateAccount_SecondaryPhoneNumber"
+							 Text="{Binding Form.SecondaryPhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 InputScope="Number"
+							 MaxLength="14"
+							 IsSpellCheckEnabled="False"
+							 ios:ReturnKeyType="Next"
+							 android:ImeOptions="Next"
+							 ue:TextBoxBehavior.NextControl="{Binding ElementName=BirthDayField}" />
+				</local:DataValidationView>
+
+				<!-- Birth Day -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="DateOfBirth"
+										  Margin="0,4">
+					<StackPanel>
+
+						<!-- Label -->
+						<TextBlock Text="Date of Birth"
+								   Foreground="Black"
+								   FontSize="16" />
+
+						<!-- DatePicker -->
+						<DatePicker x:Name="BirthDayField"
+									Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									Margin="0,4,0,0"/>
+					</StackPanel>
+				</local:DataValidationView>
+
+				<!-- Postal Code -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="PostalCode"
+										  Margin="0,4">
+					
+					<!-- Todo adding formating A0A 0A0 -->
+					<TextBox x:Name="PostalCodeField"
+							 PlaceholderText="Postal Code A0A 0A0"
+							 x:Uid="CreateAccount_PostalCode"
+							 Text="{Binding Form.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 InputScope="EmailSmtpAddress"
+							 IsSpellCheckEnabled="False"
+							 MaxLength="7"
 							 ios:ReturnKeyType="Next"
 							 android:ImeOptions="Next"
 							 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
@@ -44,11 +144,55 @@
 								 x:Uid="CreateAccount_Password"
 								 PlaceholderText="Password"
 								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 ios:ReturnKeyType="Next"
+								 android:ImeOptions="Next"
+								 ue:PasswordBoxBehavior.NextControl="{Binding ElementName=ConfirmPasswordField}" />
+				</local:DataValidationView>
+
+				<!-- Comfirm Password -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="ConfirmPassword"
+										  Margin="0,4">
+					<PasswordBox x:Name="ConfirmPasswordField"
+								 x:Uid="CreateAccount_ConfirmPassword"
+								 PlaceholderText="Confirm Password"
+								 Password="{Binding Form.ConfirmPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 								 ios:ReturnKeyType="Done"
 								 android:ImeOptions="Done"
-								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True"
-								 ue:PasswordBoxBehavior.EnterCommand="{Binding CreateAccount}" />
+								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True"/>
 				</local:DataValidationView>
+
+				<!-- Top 3 Favorite Donnut -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="FavoriteDonuts"
+										  Margin="0,4">
+					<StackPanel>
+
+						<!-- Label -->
+						<TextBlock Text="Favorite Donuts (pick at least 3)"
+								   Foreground="Black"
+								   FontSize="16" />
+
+						<!-- List -->
+						<ListView ItemsSource="{Binding Donuts}"
+								  ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDonuts, Mode=TwoWay}"
+								  ItemContainerStyle="{StaticResource CheckedListViewItemStyle}"
+								  SelectionMode="Multiple"
+								  IsItemClickEnabled="True" />
+					</StackPanel>
+				</local:DataValidationView>
+				
+				<!-- Terms of Service Agreement -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="AgreeToTermsOfServices"
+										  Margin="0,4">
+
+					<!-- Checkbox -->
+					<CheckBox x:Name="TermsOfServiceCheckBox"
+							  Content="I agree to terms of services"
+							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							  HorizontalAlignment="Left"/>
+				</local:DataValidationView> 
 
 				<Button x:Name="ConfirmButton"
 						x:Uid="CreateAccount_Confirm"
@@ -56,7 +200,7 @@
 						Command="{Binding CreateAccount}"
 						Style="{StaticResource ExecutingButtonStyle}"
 						HorizontalAlignment="Stretch"
-						Margin="0,4" />
+						Margin="0,32" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>
