@@ -66,6 +66,7 @@
 								IsRefreshing="{Binding Parent.RefreshQuotes.IsExecuting}"
 								IndicatorColor="Black">
 					<ListView ItemsSource="{Binding Data}"
+							  IsItemClickEnabled="True"
 							  Header="{Binding}">
 						<ListView.HeaderTemplate>
 							<DataTemplate>
@@ -79,16 +80,22 @@
 						</ListView.HeaderTemplate>
 						<ListView.ItemTemplate>
 							<DataTemplate>
-								<Grid>
+								<Grid VerticalAlignment="Center"
+									  BorderBrush="Black"
+									  BorderThickness="1">
 									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="340" />
 										<ColumnDefinition Width="Auto" />
 										<ColumnDefinition Width="60" />
 									</Grid.ColumnDefinitions>
 
-									<TextBlock Text="{Binding Quote.Value}" />
-									
+									<TextBlock Text="{Binding Quote.Value}"
+											   VerticalAlignment="Center"
+											   TextWrapping="Wrap"
+											   Margin="0,8,16,8"/>
+
 									<TextBlock Text="{Binding IsFavorite}"
+											   VerticalAlignment="Center"
 											   Grid.Column="1"
 											   Margin="4,0,0,0"/>
 
