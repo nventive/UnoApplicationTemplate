@@ -68,7 +68,7 @@ variables:
 
   # Versions to use
   NUGET_VERSION: 5.8.1
-  XAMARIN_IOS_VERSION: 14.2
+  XAMARIN_IOS_VERSION: 14.16
 
   # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
   # We make seperate folders so that releases can each download only the folder they need.
