@@ -112,6 +112,7 @@ steps:
     EnvironmentName: $(ApplicationEnvironment)
     AdditionalReleaseNotesFile: Canary.md
     OutputFilePath: $(Build.ArtifactStagingDirectory)/ReleaseNotes.md
+    CreateTruncatedVersion: true
     CharacterLimit: 5000
     TruncatedOutputFilePath: '$(Build.ArtifactStagingDirectory)/ReleaseNotes-Truncated.md'
 
