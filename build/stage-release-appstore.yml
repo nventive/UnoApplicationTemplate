@@ -8,7 +8,7 @@ jobs:
   pool:
     name: $(macOSPoolName)
     demands:
-      - Xamarin.iOS -equals $(XAMARIN_IOS_VERSION)
+      - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
 
   environment: ${{ parameters.deploymentEnvironment }}
     
