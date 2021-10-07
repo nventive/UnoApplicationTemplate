@@ -16,9 +16,7 @@ jobs:
     value: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
 
   environment: ${{ parameters.deploymentEnvironment }}
-
-  container: windows
-
+  
   strategy:
     runOnce:
       deploy:
@@ -46,10 +44,7 @@ jobs:
             Contents: '**'
 
 - deployment: AppCenter_iOS
-  pool: 
-    name: $(macOSPoolName)
-    demands:
-    - fastlane
+  pool: $(windowsPoolName)
 
   variables:
   - name: artifactName
@@ -86,9 +81,8 @@ jobs:
             Contents: '**'
 
 - deployment: AppCenter_Android
-  pool:
-    vmImage: windows-latest
-
+  pool: $(windowsPoolName)
+    
   variables:
   - group: ${{ parameters.androidVariableGroup }}
   - name: artifactName
