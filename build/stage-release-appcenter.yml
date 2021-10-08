@@ -82,6 +82,8 @@ jobs:
 
 - deployment: AppCenter_Android
   pool: $(windowsPoolName)
+  
+  container: windows
     
   variables:
   - group: ${{ parameters.androidVariableGroup }}
