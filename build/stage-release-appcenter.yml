@@ -32,7 +32,7 @@ jobs:
             appSlug: ${{ parameters.appCenterUWPSlug }}
             appFile: $(Pipeline.Workspace)/$(artifactName)/*.msixbundle
             releaseNotesOption: file
-            releaseNotesFile: $($(Pipeline.Workspace)/$(artifactName)/ReleaseNotes-Truncated.md
+            releaseNotesFile: $(Pipeline.Workspace)/$(artifactName)/ReleaseNotes-Truncated.md
             isSilent: true
         
         - task: DeleteFiles@1
@@ -69,7 +69,7 @@ jobs:
             symbolsDsymFiles: $(Pipeline.Workspace)/$(artifactName)/*.dSYM
             symbolsIncludeParentDirectory: true
             releaseNotesOption: file
-            releaseNotesFile: $($(Pipeline.Workspace)/$(artifactName)/ReleaseNotes-Truncated.md
+            releaseNotesFile: $(Pipeline.Workspace)/$(artifactName)/ReleaseNotes-Truncated.md
             isSilent: true
         
         - task: DeleteFiles@1
@@ -122,7 +122,7 @@ jobs:
               appSlug: ${{ parameters.appCenterAndroidSlug }}
               appFile: '$(Pipeline.Workspace)/$(artifactName)/*.apk'
               releaseNotesOption: file
-              releaseNotesFile: $($(Pipeline.Workspace)/$(artifactName)/ReleaseNotes-Truncated.md
+              releaseNotesFile: $(Pipeline.Workspace)/$(artifactName)/ReleaseNotes-Truncated.md
               isSilent: true
         
           - task: DeleteFiles@1
