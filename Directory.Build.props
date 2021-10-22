@@ -13,6 +13,14 @@
   <ItemGroup>
     <AdditionalFiles Include="..\..\..\stylecop.json" Visible="False" />
   </ItemGroup>
+	
+	<!-- Instructs MSBuild to use hard links instead of copying files - this speeds up the build process -->
+	<PropertyGroup>
+	  <CreateHardLinksForCopyFilesToOutputDirectoryIfPossible>true</CreateHardLinksForCopyFilesToOutputDirectoryIfPossible>
+		<CreateHardLinksForCopyLocalIfPossible>true</CreateHardLinksForCopyLocalIfPossible>
+		<CreateHardLinksForAdditionalFilesIfPossible>true</CreateHardLinksForAdditionalFilesIfPossible>
+		<CreateHardLinksForPublishFilesIfPossible>true</CreateHardLinksForPublishFilesIfPossible>
+	</PropertyGroup>
 
   <PropertyGroup>
 		<!-- Forces Uno's XamlFileGenerator to write error when XAML is invalid-->
