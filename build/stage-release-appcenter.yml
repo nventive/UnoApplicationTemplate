@@ -81,9 +81,9 @@ jobs:
             Contents: '**'
 
 - deployment: AppCenter_Android
-  pool: $(windowsPoolName)
-  
-  container: windows
+  # AabConvertToUniversalApk requires unzip, which is available on the Microsoft-hosted image
+  pool:
+    image: windows-latest
     
   variables:
   - group: ${{ parameters.androidVariableGroup }}
