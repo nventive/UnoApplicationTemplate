@@ -23,13 +23,14 @@ jobs:
         - download: current
           artifact: $(artifactName)
 
-        - task: GooglePlayReleaseBundle@3
-          displayName: 'Publish to GooglePlay'
+        - task: GooglePlayRelease@4
+          displayName: 'Release aab'
           inputs:
-            serviceConnection: $(GooglePlayServiceConnection)
-            bundleFile: '$(Pipeline.Workspace)/$(artifactName)/*-Signed.aab'
+            serviceEndpoint: '$(GooglePlayServiceConnection)'
             applicationId: '$(ApplicationIdentifier)'
-            languageCode: 'en-CA'
+            action: 'SingleBundle'
+            apkFile: '$(Pipeline.Workspace)/$(artifactName)/*-Signed.aab'
+            track: 'internal'
         
         - task: DeleteFiles@1
           displayName: "Remove downloaded artifacts"
