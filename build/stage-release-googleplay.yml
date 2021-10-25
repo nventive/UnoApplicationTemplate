@@ -29,7 +29,7 @@ jobs:
             serviceEndpoint: '$(GooglePlayServiceConnection)'
             applicationId: '$(ApplicationIdentifier)'
             action: 'SingleBundle'
-            apkFile: '$(Pipeline.Workspace)/$(artifactName)/*-Signed.aab'
+            bundleFile: '$(Pipeline.Workspace)/$(artifactName)/*-Signed.aab'
             track: 'internal'
         
         - task: DeleteFiles@1
