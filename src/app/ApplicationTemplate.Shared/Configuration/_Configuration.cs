@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace ApplicationTemplate
@@ -22,6 +23,7 @@ namespace ApplicationTemplate
 			}
 
 			return hostBuilder.ConfigureServices((context, s) => s
+					.AutoRegisterServicesFromAssembly()
 					.AddApi(context.Configuration)
 					.AddMvvm()
 					.AddPersistence()
