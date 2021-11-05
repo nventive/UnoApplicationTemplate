@@ -29,6 +29,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\UserProfileEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConfigurationSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\DiagnosticsConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\ChuckNorrisEndpointOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\EndpointOptions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ErrorConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\FluentValidationLanguageManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LinkerConfiguration.cs" />
@@ -36,9 +38,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationCoreConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_Configuration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Configuration\IConfigurationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\OnDataLostDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\AnalyticsDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\BaseMock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\DependencyInjection\RegistrationServiceCollectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicData\IChangeSet.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\NetworkReconnectionDataLoaderTrigger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicMvvm\IViewModel.Extensions.cs" />
