@@ -4,10 +4,12 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
+using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
 
 namespace ApplicationTemplate.Business
 {
+	[RegisterService(ServiceLifetime.Singleton)]
 	public partial class ApplicationSettingsService : IApplicationSettingsService
 	{
 		private readonly IObservableDataPersister<ApplicationSettings> _dataPersister;

@@ -6,10 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
 using DynamicData;
+using Microsoft.Extensions.DependencyInjection;
 using Uno.Extensions;
 
 namespace ApplicationTemplate.Business
 {
+	[RegisterService(ServiceLifetime.Singleton)]
 	public sealed class ChuckNorrisService : IChuckNorrisService, IDisposable
 	{
 		private readonly IApplicationSettingsService _applicationSettingsService;

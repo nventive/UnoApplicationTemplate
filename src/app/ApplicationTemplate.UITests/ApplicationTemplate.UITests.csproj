@@ -19,6 +19,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
+		<PackageReference Include="Scrutor" Version="3.3.0" />
 		<PackageReference Include="SpecFlow" Version="3.1.78" />
 		<PackageReference Include="SpecFlow.NUnit" Version="3.1.78" />
 		<PackageReference Include="SpecFlow.Tools.MsBuild.Generation" Version="3.1.78" />

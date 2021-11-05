@@ -3,9 +3,11 @@ using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate.Business
 {
+	[RegisterService(ServiceLifetime.Singleton)]
 	public partial class PostService : IPostService
 	{
 		private readonly IPostEndpoint _postEndpoint;

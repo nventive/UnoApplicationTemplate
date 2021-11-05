@@ -7,10 +7,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
 using MallardMessageHandlers;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Business
 {
+	[RegisterService(ServiceLifetime.Singleton)]
 	public partial class AuthenticationService : IAuthenticationService
 	{
 		private readonly ISubject<Unit> _sessionExpired = new Subject<Unit>();

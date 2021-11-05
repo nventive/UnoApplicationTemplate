@@ -42,6 +42,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\OnDataLostDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\AnalyticsDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\BaseMock.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\DependencyInjection\RegisterServiceAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\DependencyInjection\RegistrationModes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DependencyInjection\RegistrationServiceCollectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicData\IChangeSet.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\NetworkReconnectionDataLoaderTrigger.cs" />

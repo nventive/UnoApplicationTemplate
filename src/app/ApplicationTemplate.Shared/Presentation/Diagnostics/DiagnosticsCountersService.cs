@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate.Presentation
 {
+	[RegisterService(RegistrationModes.ConcreteClass, ServiceLifetime.Singleton)]
 	public class DiagnosticsCountersService
 	{
 		public event EventHandler CountersChanged;

@@ -36,13 +36,7 @@ namespace ApplicationTemplate
 			return services
 				.AddXamarinEssentials()
 				.AddMessageDialog()
-				.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
-				.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
-				.AddSingleton<IPostService, PostService>()
-				.AddSingleton<IChuckNorrisService, ChuckNorrisService>()
-				.AddSingleton<IAuthenticationService, AuthenticationService>()
-				.AddSingleton<IUserProfileService, UserProfileService>()
-				.AddSingleton<DiagnosticsCountersService>();
+				.AddSingleton(s => TaskPoolScheduler.Default.ToBackgroundScheduler());
 		}
 
 		private static IServiceCollection AddXamarinEssentials(this IServiceCollection services)

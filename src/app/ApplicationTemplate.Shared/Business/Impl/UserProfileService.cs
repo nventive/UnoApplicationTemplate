@@ -7,9 +7,11 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate.Business
 {
+	[RegisterService(ServiceLifetime.Singleton)]
 	public partial class UserProfileService : IUserProfileService
 	{
 		private readonly IUserProfileEndpoint _profileEndpoint;
