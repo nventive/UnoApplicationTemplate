@@ -21,9 +21,8 @@ namespace ApplicationTemplate
 				throw new ArgumentNullException(nameof(hostBuilder));
 			}
 
-			return hostBuilder
-				.AddApi()
-				.ConfigureServices(s => s
+			return hostBuilder.ConfigureServices((context, s) => s
+					.AddApi(context.Configuration)
 					.AddMvvm()
 					.AddPersistence()
 					.AddNavigationCore()

@@ -26,18 +26,17 @@ namespace ApplicationTemplate
 	public static class ApiConfiguration
 	{
 		/// <summary>
-		/// Adds the API services to the <see cref="IHostBuilder"/>.
+		/// Adds the API services to the <see cref="IServiceCollection"/>.
 		/// </summary>
-		/// <param name="hostBuilder">Host builder.</param>
-		/// <returns><see cref="IHostBuilder"/>.</returns>
-		public static IHostBuilder AddApi(this IHostBuilder hostBuilder)
+		/// <param name="services">The <see cref="IServiceCollection"/>.</param>
+		/// <param name="configuration">The <see cref="IConfiguration"/>.</param>
+		/// <returns>The updated <see cref="IServiceCollection"/>.</returns>
+		public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
 		{
-			if (hostBuilder is null)
-			{
-				throw new ArgumentNullException(nameof(hostBuilder));
-			}
+			// For example purpose: the following line loads the ChuckNorrisEndpoint configuration section and make IOptions<ChuckNorrisEndpointOptions> available for DI.
+			services.BindOptionsToConfiguration<ChuckNorrisEndpointOptions>(configuration);
 
-			return hostBuilder.ConfigureServices((context, s) => s
+			services
 				.AddMainHandler()
 				.AddNetworkExceptionHandler()
 				.AddExceptionHubHandler()
@@ -46,24 +45,25 @@ namespace ApplicationTemplate
 				.AddFirebaseHandler()
 #endif
 				.AddResponseContentDeserializer()
-				.AddAuthenticationEndpoint(context)
-				.AddPostEndpoint(context)
-				.AddUserProfileEndpoint(context)
-				.AddChuckNorrisEndpoint(context)
-			);
+				.AddAuthenticationEndpoint(configuration)
+				.AddPostEndpoint(configuration)
+				.AddUserProfileEndpoint(configuration)
+				.AddChuckNorrisEndpoint(configuration);
+
+			return services;
 		}
 
-		private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services, HostBuilderContext context)
+		private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IUserProfileEndpoint, UserProfileEndpointMock>(context, "UserProfileEndpoint");
+			return services.AddEndpoint<IUserProfileEndpoint, UserProfileEndpointMock>(configuration, "UserProfileEndpoint");
 		}
 
-		private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services, HostBuilderContext context)
+		private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IAuthenticationEndpoint, AuthenticationEndpointMock>(context, "AuthenticationEndpoint");
+			return services.AddEndpoint<IAuthenticationEndpoint, AuthenticationEndpointMock>(configuration, "AuthenticationEndpoint");
 		}
 
-		private static IServiceCollection AddPostEndpoint(this IServiceCollection services, HostBuilderContext context)
+		private static IServiceCollection AddPostEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
 			return services
 				.AddSingleton<IErrorResponseInterpreter<PostErrorResponse>>(s => new ErrorResponseInterpreter<PostErrorResponse>(
@@ -71,13 +71,13 @@ namespace ApplicationTemplate
 					(request, response, deserializedResponse) => new PostEndpointException(deserializedResponse)
 				))
 				.AddTransient<ExceptionInterpreterHandler<PostErrorResponse>>()
-				.AddEndpoint<IPostEndpoint, PostEndpointMock>(context, "PostEndpoint", b => b
+				.AddEndpoint<IPostEndpoint, PostEndpointMock>(configuration, "PostEndpoint", b => b
 					.AddHttpMessageHandler<ExceptionInterpreterHandler<PostErrorResponse>>()
 					.AddHttpMessageHandler<AuthenticationTokenHandler<AuthenticationData>>()
 				);
 		}
 
-		private static IServiceCollection AddChuckNorrisEndpoint(this IServiceCollection services, HostBuilderContext context)
+		private static IServiceCollection AddChuckNorrisEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
 			return services
 				.AddSingleton<IErrorResponseInterpreter<ChuckNorrisErrorResponse>>(s => new ErrorResponseInterpreter<ChuckNorrisErrorResponse>(
@@ -85,23 +85,23 @@ namespace ApplicationTemplate
 					(request, response, deserializedResponse) => new ChuckNorrisException(deserializedResponse.Message)
 				))
 				.AddTransient<ExceptionInterpreterHandler<ChuckNorrisErrorResponse>>()
-				.AddEndpoint<IChuckNorrisEndpoint, ChuckNorrisEndpointMock>(context, "ChuckNorrisEndpoint", b => b
+				.AddEndpoint<IChuckNorrisEndpoint, ChuckNorrisEndpointMock>(configuration, "ChuckNorrisEndpoint", b => b
 					.AddHttpMessageHandler<ExceptionInterpreterHandler<ChuckNorrisErrorResponse>>()
 				);
 		}
 
 		private static IServiceCollection AddEndpoint<TInterface, TMock>(
 			this IServiceCollection services,
-			HostBuilderContext context,
+			IConfiguration configuration,
 			string name,
 			Func<IHttpClientBuilder, IHttpClientBuilder> configure = null
 		)
 			where TInterface : class
 			where TMock : class, TInterface
 		{
-			var options = Options.Create(context.Configuration.GetSection(name).Get<EndpointOptions>());
+			var options = configuration.GetSection(name).Get<EndpointOptions>();
 
-			if (options.Value.EnableMock)
+			if (options.EnableMock)
 			{
 				services.AddSingleton<TInterface, TMock>();
 			}
@@ -115,7 +115,7 @@ namespace ApplicationTemplate
 					.ConfigurePrimaryHttpMessageHandler(serviceProvider => serviceProvider.GetRequiredService<HttpMessageHandler>())
 					.ConfigureHttpClient((serviceProvider, client) =>
 					{
-						client.BaseAddress = new Uri(options.Value.Url);
+						client.BaseAddress = options.Url;
 						AddDefaultHeaders(client, serviceProvider);
 					})
 					.AddHttpMessageHandler<ExceptionHubHandler>();
@@ -239,13 +239,6 @@ namespace ApplicationTemplate
 			return services
 				.AddHttpClient(typeof(T).FullName)
 				.AddTypedClient((client, serviceProvider) => RestService.For(client, serviceProvider.GetService<IRequestBuilder<T>>()));
-		}
-
-		private class EndpointOptions
-		{
-			public string Url { get; set; }
-
-			public bool EnableMock { get; set; }
 		}
 	}
 }
