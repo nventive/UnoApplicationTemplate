@@ -11,13 +11,36 @@ For more documentation on dependency injection, read the references listed at th
 - We could leverage more hosting extensions under the `Microsoft.Extensions.DependencyInjection` namespace when adding internal packages.
 For example, we could have a `.AddLocation()` extension to include everything IoC related to a location services.
 
-- You can register a singleton service using `services.AddSingleton<IService, ServiceImplementation>()`. This service will be shared by every user.
+- You can register a service by using the `[RegisterService]` attribute.
 
-  - You don't need to specify any constructor parameters if all dependencies can be resolved automatically. Otherwise, you can use `services.AddSingleton<IService>(s => new ServiceImplementation(..))`.
+  ```csharp
+  // Register the IMyService interface with the MyService implementation as a transient service in DI
+  [RegisterService]
+  public class MyService(MyOtherService myOtherService) : IMyService
+  {
+    ...
+  }
+  ```
+  By default, the service will be registered as an interface with a transient lifetime. To change this behavior, simply specify the registration mode and/or lifetime:
 
-- You can register a service that will be created everytime you request it by using `services.AddTransient<IService, ServiceImplementation>()`. 
+  ```csharp
+  // Register the the MyService implementation as a singleton service in DI
+  [RegisterService(RegistrationModes.ConcreteClass, ServiceLifetime.Singleton)]
+  public class MyService(MyOtherService myOtherService)
+  {
+    ...
+  }
+  ```
 
-- You can use `TryAdd*` which will register the service only if there hasn't been a registration of that type yet.
+- You can still register a service by using `services.AddXXX()` methods, especially when service constructor requires some parameters that can't be resolved automatically: 
+
+  - You can register a singleton service using `services.AddSingleton<IService, ServiceImplementation>()`. This service will be shared by every user.
+
+    - You don't need to specify any constructor parameters if all dependencies can be resolved automatically. Otherwise, you can use `services.AddSingleton<IService>(s => new ServiceImplementation(..))`.
+
+  - You can register a service that will be created everytime you request it by using `services.AddTransient<IService, ServiceImplementation>()`. 
+
+  - You can use `TryAdd*` which will register the service only if there hasn't been a registration of that type yet.
 
 - You can't register named dependencies as this is [generally a bad practice](https://stackoverflow.com/questions/46476112/dependency-injection-of-multiple-instances-of-same-type-in-asp-net-core-2).
 

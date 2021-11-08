@@ -52,6 +52,25 @@ For example, if you have two keys with the same name, the last one will overwrit
   }
   ```
 
+- Configuration sections can be loaded and registred in DI as `IOptions<T>`. 
+
+  - The easy way (to map a root section using pattern matching):
+    1. Create a `MyConfigurationSectionOptions` object that map your configuration section named `MyConfigurationSection`
+    1. Register the object
+
+     ```csharp
+     // Loads the MyConfigurationSection configuration section and make IOptions<MyConfigurationSectionOptions> available for DI.
+    services.BindOptionsToConfiguration<MyConfigurationSectionOptions>(configuration);
+    ```
+  - The complete way (to map subsections or where class name does not match the `[sectionName]Options` pattern)
+    1. Create a `MySubOrCustomSectionOptions` object that map your configuration section
+    1. Register the object
+
+     ```csharp
+     // Loads the MySection:MySubSection configuration section and make IOptions<MySubOrCustomSectionOptions> available for DI.
+    services.BindOptionsToConfiguration<MySubOrCustomSectionOptions>(configuration, "MySection:MySubSection");
+    ```
+
 - The `IConfiguration` interface is registered as a service to simplify the process of resolving an application setting.
 
   ```csharp
