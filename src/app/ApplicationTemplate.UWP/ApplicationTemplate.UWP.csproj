@@ -159,7 +159,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Scrutor">
     <PackageReference Include="Scrutor" Version="3.3.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
