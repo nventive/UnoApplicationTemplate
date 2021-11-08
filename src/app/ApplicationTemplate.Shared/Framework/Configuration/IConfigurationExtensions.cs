@@ -11,7 +11,7 @@ namespace Microsoft.Extensions.Configuration
 	{
 		/// <summary>
 		/// Returns the <see cref="IConfigurationSection"/> for the options represented by <typeparamref name="T"/>.
-		/// The section name is either the options type name (minus the -Options prefix) or <paramref name="key"/>, if provided.
+		/// The section name is either the options type name (minus the -Options suffix) or <paramref name="key"/>, if provided.
 		/// <see cref="DefaultOptionsName{T}"/> as well.
 		/// </summary>
 		/// <typeparam name="T">The options type.</typeparam>
@@ -25,7 +25,7 @@ namespace Microsoft.Extensions.Configuration
 
 		/// <summary>
 		/// Reads the current value for options.
-		/// The section name is either the options type name (minus the -Options prefix) or <paramref name="key"/>, if provided.
+		/// The section name is either the options type name (minus the -Options suffix) or <paramref name="key"/>, if provided.
 		/// <see cref="DefaultOptionsName{T}"/> as well.
 		/// </summary>
 		/// <typeparam name="T">The options type.</typeparam>
@@ -41,13 +41,13 @@ namespace Microsoft.Extensions.Configuration
 
 		/// <summary>
 		/// Gets the default name for options of type <paramref name="optionsType"/>.
-		/// Removes the -Options prefix if any.
+		/// Removes the -Options suffix if any.
 		/// </summary>
 		public static string DefaultOptionsName(Type optionsType) => Regex.Replace(optionsType.Name, @"Options$", string.Empty);
 
 		/// <summary>
 		/// Gets the default name for options of type <typeparamref name="T"/>.
-		/// Removes the -Options prefix if any.
+		/// Removes the -Options suffix if any.
 		/// </summary>
 		/// <typeparam name="T">The Options type.</typeparam>
 		public static string DefaultOptionsName<T>() => DefaultOptionsName(typeof(T));
