@@ -15,17 +15,17 @@ For example, we could have a `.AddLocation()` extension to include everything Io
 
   ```csharp
   // Register the IMyService interface with the MyService implementation as a transient service in DI
-  [RegisterService]
+  [RegisterService(ServiceLifetime.Transient)]
   public class MyService(MyOtherService myOtherService) : IMyService
   {
     ...
   }
   ```
-  By default, the service will be registered as an interface with a transient lifetime. To change this behavior, simply specify the registration mode and/or lifetime:
+  By default, the service will be registered as an interface. To change this behavior, simply specify the registration mode and/or lifetime:
 
   ```csharp
   // Register the the MyService implementation as a singleton service in DI
-  [RegisterService(RegistrationModes.ConcreteClass, ServiceLifetime.Singleton)]
+  [RegisterService(ServiceLifetime.Singleton, RegistrationModes.ConcreteClass)]
   public class MyService(MyOtherService myOtherService)
   {
     ...

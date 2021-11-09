@@ -6,7 +6,7 @@ namespace Microsoft.Extensions.DependencyInjection
 {
 	/// <summary>
 	/// Allows to register a service into the dependency injection service collection.
-	/// By default, the <see cref="RegistrationModes.Interface"/> registration mode is used with a <see cref="ServiceLifetime.Transient"/> lifetime.
+	/// By default, the <see cref="RegistrationModes.Interface"/> registration mode is used. <see cref="ServiceLifetime"/> must always be specified.
 	/// </summary>
 	/// <param name="modes">The registration modes.</param>
 	/// <param name="lifetime">The registration lifetime.</param>
