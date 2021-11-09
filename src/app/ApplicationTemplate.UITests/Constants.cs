@@ -9,6 +9,6 @@ namespace ApplicationTemplate.UITests
 		public const string AndroidAppName = "com.nventive.internal.applicationtemplate";
 		public const string IOSDeviceNameOrId = "00008030-000865912E90802E";
 
-		public static Platform PlatformUnderTest { get; set; }
+		public static Platform PlatformUnderTest { get; } = Platform.Android;
 	}
 }
