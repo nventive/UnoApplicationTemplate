@@ -13,17 +13,10 @@ namespace Microsoft.Extensions.DependencyInjection
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
 	public sealed class RegisterServiceAttribute : Attribute
 	{
-		public RegisterServiceAttribute(
-			RegistrationModes modes = RegistrationModes.Interface,
-			ServiceLifetime lifetime = ServiceLifetime.Transient)
+		public RegisterServiceAttribute(ServiceLifetime lifetime, RegistrationModes modes = RegistrationModes.Interface)
 		{
 			Modes = modes;
 			Lifetime = lifetime;
-		}
-
-		public RegisterServiceAttribute(ServiceLifetime lifetime, RegistrationModes modes = RegistrationModes.Interface)
-			: this(modes, lifetime)
-		{
 		}
 
 		public RegistrationModes Modes { get; }

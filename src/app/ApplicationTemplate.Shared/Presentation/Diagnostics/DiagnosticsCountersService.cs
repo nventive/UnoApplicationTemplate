@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate.Presentation
 {
-	[RegisterService(RegistrationModes.ConcreteClass, ServiceLifetime.Singleton)]
+	[RegisterService(ServiceLifetime.Singleton, RegistrationModes.ConcreteClass)]
 	public class DiagnosticsCountersService
 	{
 		public event EventHandler CountersChanged;
