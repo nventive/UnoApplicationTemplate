@@ -49,8 +49,8 @@
 		<PackageReference Include="Chinook.DataLoader" Version="0.3.0-dev.42" />
 		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="0.3.0-dev.42" />
 		<PackageReference Include="Chinook.BackButtonManager" Version="0.3.0-dev.22" />
-		<PackageReference Include="Chinook.SectionsNavigation" Version="0.3.0-dev.50" />
-		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.3.0-dev.50" />
+		<PackageReference Include="Chinook.SectionsNavigation" Version="0.4.0-dev.59" />
+		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.4.0-dev.59" />
 		<PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.2.0-dev.24" />
 		<PackageReference Include="xunit" Version="2.4.1" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">

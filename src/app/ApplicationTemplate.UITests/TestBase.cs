@@ -13,9 +13,9 @@ namespace ApplicationTemplate.UITests
 		{
 			AppInitializer.TestEnvironment.AndroidAppName = Constants.AndroidAppName;
 			AppInitializer.TestEnvironment.WebAssemblyDefaultUri = Constants.WebAssemblyDefaultUri;
-			AppInitializer.TestEnvironment.iOSAppName = Constants.iOSAppName;
+			AppInitializer.TestEnvironment.iOSAppName = Constants.IOSAppName;
 			AppInitializer.TestEnvironment.AndroidAppName = Constants.AndroidAppName;
-			AppInitializer.TestEnvironment.iOSDeviceNameOrId = Constants.iOSDeviceNameOrId;
+			AppInitializer.TestEnvironment.iOSDeviceNameOrId = Constants.IOSDeviceNameOrId;
 			AppInitializer.TestEnvironment.CurrentPlatform = Constants.PlatformUnderTest;
 
 #if DEBUG

@@ -309,14 +309,15 @@
 	<data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
     <value>Password</value>
   </data>
+	<data name="CreateAccount_TermsOfServices.Content" xml:space="preserve">
+    <value>I agree to the terms of service</value>
+  </data>
 	<data name="CreateAccount_ConfirmPassword.PlaceholderText" xml:space="preserve">
     <value>Confirm Password</value>
   </data>
   <data name="CreateAccount_Confirm.Content" xml:space="preserve">
     <value>Create account</value>
   </data>
-
-
 	<data name="CreateAccount_PhoneNumberValidation" xml:space="preserve">
     <value>Please provide a complete phone number.</value>
   </data>
@@ -338,7 +339,6 @@
 	<data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
     <value>You must accepts terms of service to create an account.</value>
   </data>
-	
   <data name="ForgotPassword_Email.PlaceholderText" xml:space="preserve">
     <value>Email</value>
   </data>
