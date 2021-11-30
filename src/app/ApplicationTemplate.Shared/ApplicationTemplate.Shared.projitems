@@ -77,6 +77,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\ChuckNorris\ChuckNorrisFavoritesPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\ChuckNorris\ChuckNorrisItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\ChuckNorris\ChuckNorrisSearchPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesFiltersPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\CultureDiagnosticsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\DiagnosticsCountersService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\ValidatorExtensions.cs" />

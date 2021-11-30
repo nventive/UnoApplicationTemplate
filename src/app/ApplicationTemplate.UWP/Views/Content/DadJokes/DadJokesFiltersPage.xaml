@@ -1,0 +1,57 @@
+﻿<Page x:Class="ApplicationTemplate.Views.Content.DadJokesFiltersPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:dl="using:Chinook.DataLoader"
+	  xmlns:ue="using:Nventive.View.Extensions"
+	  xmlns:u="using:Nventive.View.Controls"
+	  mc:Ignorable="d">
+
+	<Page.Resources>
+		<DataTemplate x:Key="QuotesEmptyTemplate">
+			<TextBlock Text="You don't have any favorites"
+					   Style="{StaticResource MaterialBody1}"
+					   VerticalAlignment="Center"
+					   HorizontalAlignment="Center" />
+		</DataTemplate>
+	</Page.Resources>
+
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<CommandBar Content="Filters"
+					
+					x:Uid="DadJokesFiltersPage_CommandBar" />
+
+
+		<StackPanel Grid.Row="1" Margin="20,25,20,0">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<StackPanel Grid.Row="0">
+					<CheckBox x:Name="favorites"
+							  Content="Favorites" />
+				</StackPanel>
+
+				<StackPanel Grid.Row="1">
+					<CheckBox x:Name="newJokes"
+							  Content="New" />
+				</StackPanel>
+
+				<StackPanel Grid.Row="2">
+					<CheckBox x:Name="created_by"
+							  Content="Created by"/>
+				</StackPanel>
+			</Grid>
+		</StackPanel>
+	</Grid>
+</Page>

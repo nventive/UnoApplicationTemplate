@@ -61,5 +61,13 @@
 				Background="White"
 				Foreground="Black"
 				Margin="0,0,0,40" />
+
+		<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
+				Command="{Binding NavigateToWelcomePage}"
+				VerticalAlignment="Bottom"
+				HorizontalAlignment="Center"
+				Background="White"
+				Foreground="Black"
+				Margin="0,0,0,40" />
 	</Grid>
 </Page>

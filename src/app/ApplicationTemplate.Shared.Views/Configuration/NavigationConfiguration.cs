@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using ApplicationTemplate.Presentation;
+using ApplicationTemplate.Presentation.DadJokes;
 using ApplicationTemplate.Views.Content;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -43,7 +44,8 @@ namespace ApplicationTemplate.Views
 			{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
 			{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
 			{ typeof(ChuckNorrisSearchPageViewModel), typeof(ChuckNorrisSearchPage) },
-			{ typeof(ChuckNorrisFavoritesPageViewModel), typeof(ChuckNorrisFavoritesPage) },
+			{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
+			{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
 		};
 
 		private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)

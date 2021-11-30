@@ -220,7 +220,7 @@
     <value>Passer</value>
   </data>
   <data name="Menu_Home.Content" xml:space="preserve">
-    <value>Accueil</value>
+    <value>Blagues</value>
   </data>
   <data name="Menu_Posts.Content" xml:space="preserve">
     <value>Articles</value>
@@ -282,58 +282,58 @@
   <data name="Licenses_CommandBar" xml:space="preserve">
     <value>Licenses</value>
   </data>
-	<data name="CreateAccount_FirstName.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_FirstName.PlaceholderText" xml:space="preserve">
     <value>Prenom</value>
   </data>
-	<data name="CreateAccount_LastName.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_LastName.PlaceholderText" xml:space="preserve">
     <value>Nom de famille</value>
   </data>
-	<data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
   </data>
-	<data name="CreateAccount_PhoneNumber.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_PhoneNumber.PlaceholderText" xml:space="preserve">
     <value>Numéro de téléphone (000) 000-0000</value>
   </data>
-	<data name="CreateAccount_SecondaryPhoneNumber.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_SecondaryPhoneNumber.PlaceholderText" xml:space="preserve">
     <value>Second numéro de téléphone (000) 000-0000 (optionel)</value>
   </data>
-	<data name="CreateAccount_DateOfBirth.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_DateOfBirth.PlaceholderText" xml:space="preserve">
     <value>Date de naissance</value>
   </data>
-	<data name="CreateAccount_PostalCode.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_PostalCode.PlaceholderText" xml:space="preserve">
     <value>Code Postal A0A 0A0</value>
   </data>
-	<data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
     <value>Mot de passe</value>
   </data>
-	<data name="CreateAccount_ConfirmPassword.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_ConfirmPassword.PlaceholderText" xml:space="preserve">
     <value>Confirmer mot de passe</value>
   </data>
-	<data name="CreateAccount_TermsOfServices.Content" xml:space="preserve">
+  <data name="CreateAccount_TermsOfServices.Content" xml:space="preserve">
     <value>Je consent au modalités de service</value>
   </data>
-	<data name="CreateAccount_Confirm.Content" xml:space="preserve">
+  <data name="CreateAccount_Confirm.Content" xml:space="preserve">
     <value>Créer un compte</value>
   </data>
-	<data name="CreateAccount_PhoneNumberValidation" xml:space="preserve">
+  <data name="CreateAccount_PhoneNumberValidation" xml:space="preserve">
     <value>Veuillez fournir un numéro de téléphone complet.</value>
   </data>
-	<data name="CreateAccount_PostalValidation" xml:space="preserve">
+  <data name="CreateAccount_PostalValidation" xml:space="preserve">
     <value>Veuillez fournir un code postal complet.</value>
   </data>
-	<data name="CreateAccount_DateOfBirthValidation" xml:space="preserve">
+  <data name="CreateAccount_DateOfBirthValidation" xml:space="preserve">
     <value>Vous devez avoir 18+ ans pour créer un compte.</value>
   </data>
-	<data name="CreateAccount_PasswordValidation" xml:space="preserve">
+  <data name="CreateAccount_PasswordValidation" xml:space="preserve">
     <value>Le mot de passe doit être composé de 8 caractères ou plus et contenir au moins 1 chiffre.</value>
   </data>
-	<data name="CreateAccount_PasswordConfirmValidation" xml:space="preserve">
+  <data name="CreateAccount_PasswordConfirmValidation" xml:space="preserve">
     <value>Les mots de passe ne correspondent pas</value>
   </data>
-	<data name="CreateAccount_FavoriteDonutsValidation" xml:space="preserve">
+  <data name="CreateAccount_FavoriteDonutsValidation" xml:space="preserve">
     <value>Vous devez fournir au moins 3 types de beignes.</value>
   </data>
-	<data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
+  <data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
     <value>Vous devez accepter les conditions d'utilisation pour créer un compte.</value>
   </data>
   <data name="ForgotPassword_Email.PlaceholderText" xml:space="preserve">
@@ -362,5 +362,11 @@
   </data>
   <data name="ValidationNotEmpty_Email" xml:space="preserve">
     <value>Le courriel ne doit pas être vide.</value>
+  </data>
+  <data name="DadJokesFiltersPage_CommandBar.Content" xml:space="preserve">
+    <value>Filtres</value>
+  </data>
+  <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
+    <value>Blagues</value>
   </data>
 </root>

@@ -64,10 +64,11 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<RadioButton Content="Home"
-					 x:Uid="Menu_Home"
-					 HorizontalAlignment="Center"
-					 Command="{Binding ShowHome}" />
+		<RadioButton Content="DadJokes"
+				x:Uid="Menu_Home"
+				HorizontalAlignment="Center"
+				Grid.Column="0"
+				Command="{Binding ShowHome}" />
 
 		<RadioButton Content="Posts"
 					 x:Uid="Menu_Posts"

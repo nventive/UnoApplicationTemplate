@@ -17,13 +17,14 @@
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
-			<Color x:Key="MaterialPrimaryColor">#FF274A9D</Color>
+			<Color x:Key="MaterialPrimaryColor">#595397</Color>
+			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
 
 			<Color x:Key="MaterialBackgroundColor">#FFFCFCFC</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#FF444444</Color>
 
 			<Color x:Key="MaterialSurfaceColor">#FFEDEDED</Color>
-			<Color x:Key="MaterialOnSurfaceColor">#FF222222</Color>
+			<Color x:Key="MaterialOnSurfaceColor">#000000</Color>
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Dark">

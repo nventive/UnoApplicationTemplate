@@ -4,53 +4,70 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:uc="using:Nventive.View.Converters"
+	  xmlns:u="using:Nventive.View.Controls"
 	  mc:Ignorable="d">
 
+	<Page.Resources>
+		<ResourceDictionary>
+			<uc:PartitionConverter x:Key="SelectedIndexToButtonContent"
+								   DefaultValue="Skip"
+								   x:Uid="Onboarding_Skip">
+				<uc:IntervalPartition LowerBound="2"
+									  InRangeValue="Continue"
+									  x:Uid="Onboarding_Continue" />
+			</uc:PartitionConverter>
+
+			<DataTemplate x:Key="OnboardingItemTemplate">
+				<Grid Background="Black">
+					<TextBlock Text="{Binding PrimaryText}"
+							   Style="{StaticResource MaterialHeadline3}"
+							   Foreground="White"
+							   Margin="40"
+							   HorizontalAlignment="Center" />
+
+					<Image Source="{Binding ImageUrl}"
+						   Stretch="Uniform"
+						   Margin="20"
+						   VerticalAlignment="Center" />
+				</Grid>
+			</DataTemplate>
+
+			<DataTemplate x:Key="OnboardingIndexIndicatorTemplate">
+				<Rectangle Fill="Gray"
+						   Width="20"
+						   Height="10" />
+			</DataTemplate>
+
+			<DataTemplate x:Key="OnboardingSelectedIndexIndicatorTemplate">
+				<Rectangle Fill="White"
+						   Width="20"
+						   Height="10" />
+			</DataTemplate>
+		</ResourceDictionary>
+	</Page.Resources>
+
 	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+		<u:ImageSlideshow x:Name="OnboardingSlideshow"
+						  ItemsSource="{Binding OnboardingItems}"
+						  ItemTemplate="{StaticResource OnboardingItemTemplate}"
+						  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
+						  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
+		<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
+				Command="{Binding NavigateToWelcomePage}"
+				VerticalAlignment="Bottom"
+				HorizontalAlignment="Center"
+				Background="White"
+				Foreground="Black"
+				Margin="0,0,0,40" />
 
-		<TextBlock Text="Home"
-				   x:Uid="Home_Title"
-				   Style="{StaticResource MaterialHeadline4}"
-				   Margin="20,40,20,20" />
-
-		<StackPanel Margin="20,0,20,20"
-					Grid.Row="1">
-			<Button Content="Posts"
-					x:Uid="Home_Posts"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToPostsPage}" />
-
-			<Button Content="Posts (No network)"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToPostsPageWithNoNetwork}" />
-
-			<Button Content="Posts (Odd error)"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToPostsPageWithOddError}" />
-
-			<Button Content="Posts (Even error)"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToPostsPageWithEvenError}" />
-
-			<Button Content="Chuck Norris"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToChuckNorrisSearchPage}" />
-
-			<Button Content="Settings"
-					x:Uid="Home_Settings"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToSettingsPage}" />
-		</StackPanel>
+		<Button Content="Jokes"
+				Command="{Binding NavigateToJokes}"
+				VerticalAlignment="Bottom"
+				HorizontalAlignment="Center"
+				Background="White"
+				Foreground="Black"
+				Margin="0,0,0,40" />
 	</Grid>
 </Page>
