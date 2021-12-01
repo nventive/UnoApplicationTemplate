@@ -67,7 +67,7 @@ variables:
   macOSPoolName: 'macOS'
 
   # Versions to use
-  NUGET_VERSION: 5.9.1
+  NUGET_VERSION: 5.10.0
   XAMARIN_IOS_VERSION: 15.0
 
   # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
