@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ApplicationTemplate.Presentation.DadJokes;
+using ApplicationTemplate.Presentation;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 using MallardMessageHandlers;

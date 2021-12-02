@@ -12,8 +12,9 @@
 		<DataTemplate x:Key="UserEmptyTemplate">
 			<Button Content="Login"
 					x:Uid="Settings_Login"
-					HorizontalAlignment="Stretch"
+					HorizontalAlignment="Left"
 					Margin="0,4"
+					Style="{StaticResource OutlinedExecutingButtonStyle}"
 					Command="{Binding Parent.NavigateToLoginPage}" />
 		</DataTemplate>
 	</Page.Resources>
@@ -30,69 +31,78 @@
 
 		<StackPanel Margin="20,0,20,20"
 					Grid.Row="1">
+			<Grid>
 
-			<dl:DataLoaderView Source="{Binding UserProfile}"
-							   EmptyTemplate="{StaticResource UserEmptyTemplate}">
-				<DataTemplate>
-					<StackPanel>
-						<TextBlock FontSize="24"
-								   Style="{StaticResource MaterialHeadline6}">
-							<Run Text="Hello" />
-							<Run Text="{Binding Data.FirstName}"
-								 FontWeight="Bold"/>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="0.9*" />
+					<RowDefinition Height="0.1*" />
+				</Grid.RowDefinitions>
+
+				<StackPanel Grid.Row="0"
+							Margin="0, 20">
+					<dl:DataLoaderView Source="{Binding UserProfile}"
+									   Grid.Row="0"
+									   EmptyTemplate="{StaticResource UserEmptyTemplate}">
+						<DataTemplate>
+							<StackPanel>
+
+								<TextBlock FontSize="24"
+										   Style="{StaticResource MaterialHeadline6}">
+									<Run Text="{Binding Data.LastName}"
+										 FontWeight="Bold" />
+									<Run Text="{Binding Data.FirstName}"
+										 FontWeight="Bold" />
+								</TextBlock>
+								<Button Content="Change password"
+										x:Uid="Settings_ChangePassword"
+										Margin="0,20,0,4"
+										HorizontalAlignment="Left"
+										Style="{StaticResource OutlinedExecutingButtonStyle}"
+										Command="{Binding Parent.NavigateToEditProfilePage}" />
+
+								<Button Content="Logout"
+										x:Uid="Settings_Logout"
+										HorizontalAlignment="Left"
+										Margin="0,4"
+										Style="{StaticResource OutlinedExecutingButtonStyle}"
+										Command="{Binding Parent.Logout}" />
+							</StackPanel>
+						</DataTemplate>
+					</dl:DataLoaderView>
+
+					<Rectangle HorizontalAlignment="Stretch"
+							   Margin="0, 30, 0, 20"
+							   Fill="#000000"
+							   Opacity="0.1"
+							   Height="1" />
+
+					<HyperlinkButton Content="Privacy Policy"
+									 x:Uid="Settings_PrivacyPolicy"
+									 HorizontalAlignment="Left"
+									 Command="{Binding NavigateToPrivacyPolicyPage}" />
+
+					<HyperlinkButton Content="Terms and Conditions"
+									 x:Uid="Settings_TermsAndConditions"
+									 HorizontalAlignment="Left"
+									 Command="{Binding NavigateToTermsAndConditionsPage}" />
+				</StackPanel>
+
+
+				<StackPanel Grid.Row="1"
+							HorizontalAlignment="Center"
+							VerticalAlignment="Bottom">
+
+					<Grid Background="Transparent"
+						  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
+						  ue:MultipleTapExtension.TapCount="3">
+						<TextBlock Style="{StaticResource MaterialCaption}">
+							<Run Text="Version"
+									x:Uid="Settings_Version" />
+							<Run Text="{Binding VersionNumber}" />	
 						</TextBlock>
+					</Grid>
 
-						<Button Content="Edit profile"
-								x:Uid="Settings_EditProfile"
-								HorizontalAlignment="Stretch"
-								Margin="0,4"
-								Command="{Binding Parent.NavigateToEditProfilePage}" />
-
-						<Button Content="Logout"
-								x:Uid="Settings_Logout"
-								HorizontalAlignment="Stretch"
-								Margin="0,4"
-								Command="{Binding Parent.Logout}" />
-					</StackPanel>
-				</DataTemplate>
-			</dl:DataLoaderView>
-
-			<Button Content="Terms and Conditions"
-					x:Uid="Settings_TermsAndConditions"
-					HorizontalAlignment="Stretch"
-					Padding="12"
-					Margin="0,5"
-					Command="{Binding NavigateToTermsAndConditionsPage}" />
-
-			<Button Content="Privacy Policy"
-					x:Uid="Settings_PrivacyPolicy"
-					HorizontalAlignment="Stretch"
-					Padding="12"
-					Margin="0,5"
-					Command="{Binding NavigateToPrivacyPolicyPage}" />
-
-			<Button Content="Licenses"
-					x:Uid="Settings_Licenses"
-					HorizontalAlignment="Stretch"
-					Padding="12"
-					Margin="0,5"
-					Command="{Binding NavigateToLicensesPage}" />
-
-			<Button Content="WebView"
-					HorizontalAlignment="Stretch"
-					Padding="12"
-					Margin="0,5"
-					Command="{Binding NavigateToWebViewPage}" />
-
-			<Grid HorizontalAlignment="Center"
-				  Background="Transparent"
-				  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
-				  ue:MultipleTapExtension.TapCount="3">
-				<TextBlock Style="{StaticResource MaterialCaption}">
-					<Run Text="Version"
-						 x:Uid="Settings_Version" />
-					<Run Text="{Binding VersionNumber}" />
-				</TextBlock>
+				</StackPanel>
 			</Grid>
 		</StackPanel>
 	</Grid>

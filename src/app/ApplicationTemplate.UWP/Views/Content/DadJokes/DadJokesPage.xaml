@@ -9,12 +9,12 @@
 	  mc:Ignorable="d">
 
 	<Page.Resources>
-		<DataTemplate x:Key="QuotesEmptyTemplate">
+		<DataTemplate x:Key="JokesEmptyTemplate">
 			<Grid>
 
 				<StackPanel VerticalAlignment="Center"
 							HorizontalAlignment="Stretch"
-							Visibility="{Binding Request.Context[SearchTerm], Converter={StaticResource EmptyStringToCollapsed}, FallbackValue=Collapsed}">
+							Visibility="{Binding Jokes, Converter={StaticResource EmptyStringToCollapsed}, FallbackValue=Collapsed}">
 
 					<TextBlock Text="No results found for"
 							   HorizontalAlignment="Center"
@@ -24,55 +24,78 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+	<Grid Margin="0">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="1*" />
 		</Grid.RowDefinitions>
 
 		<CommandBar Content="Jokes"
+					Grid.Row="0"
 					x:Uid="DadJokesPage_CommandBar">
 			<CommandBar.PrimaryCommands>
 				<AppBarButton Command="{Binding NavigateToFilters}">
 					<PathIcon Data="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z"
 							  HorizontalAlignment="Center"
-							  Foreground="white"/>
+							  Foreground="{StaticResource MaterialOnPrimaryColor}" />
 				</AppBarButton>
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
 
-		<dl:DataLoaderView Source="{Binding Quotes}"
-						   EmptyTemplate="{StaticResource QuotesEmptyTemplate}"
-						   Grid.Row="2">
+		<dl:DataLoaderView Source="{Binding Jokes}"
+						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
+						   Grid.Row="1">
 			<DataTemplate>
-				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshQuotes}"
-								IsRefreshing="{Binding Parent.RefreshQuotes.IsExecuting}"
-								IndicatorColor="Black">
+				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshJokes}"
+								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
+								IndicatorColor="{StaticResource MaterialPrimaryColor}">
 					<ListView ItemsSource="{Binding Data}"
-							  Header="{Binding}">
+							  Header="{Binding}"
+							  Background="{StaticResource MaterialSurfaceColor}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<Grid>
-									<Grid.ColumnDefinitions>
-										<ColumnDefinition Width="*" />
-										<ColumnDefinition Width="Auto" />
-										<ColumnDefinition Width="60" />
-									</Grid.ColumnDefinitions>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
 
-									<TextBlock Text="{Binding Quote.Value}"
-											   Style="{StaticResource MaterialBody1}" />
+									<Grid Grid.Row="0"
+										  Padding="0, 15">
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+										<Grid Grid.Column="0">
+											<Grid.RowDefinitions>
+												<RowDefinition Height="Auto" />
+												<RowDefinition Height="Auto" />
+											</Grid.RowDefinitions>
 
-									<TextBlock Text="{Binding IsFavorite}"
-											   Grid.Column="1"
-											   Margin="4,0,0,0"
-											   Style="{StaticResource MaterialCaption}" />
+											<TextBlock Text="Mock"
+													   Grid.Row="0"
+													   FontSize="16"
+													   Margin="0,15, 0, 5"
+													   FontWeight="SemiBold"
+													   Style="{StaticResource MaterialCaption}" />
 
-									<ToggleButton IsChecked="{Binding IsFavorite}"
-												  Command="{Binding Parent.ToggleIsFavorite}"
-												  CommandParameter="{Binding}"
-												  HorizontalAlignment="Center"
-												  Grid.Column="2" />
+											<TextBlock Text="{Binding Quote.Value}"
+													   Grid.Row="1"
+													   Style="{StaticResource MaterialBody1}" />
+
+										</Grid>
+										<ToggleButton IsChecked="{Binding IsFavorite}"
+													  Command="{Binding Parent.ToggleIsFavorite}"
+													  CommandParameter="{Binding}"
+													  HorizontalAlignment="Center"
+													  Grid.Column="1" />
+
+									</Grid>
+									<StackPanel Grid.Column="1">
+									<Rectangle Height="15"
+												   Fill="{StaticResource ApplicationPageBackgroundThemeBrush}" />
+									</StackPanel>
 								</Grid>
 							</DataTemplate>
 						</ListView.ItemTemplate>

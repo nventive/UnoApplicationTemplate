@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate.Presentation.DadJokes
+namespace ApplicationTemplate.Presentation
 {
     class DadJokesFiltersPageViewModel : ViewModel
     {

@@ -10,47 +10,34 @@ using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 using DynamicData;
 
-namespace ApplicationTemplate.Presentation.DadJokes
+namespace ApplicationTemplate.Presentation
 {
 	class DadJokesPageViewModel : ViewModel
 	{
-		public string SearchTerm
-		{
-			get => this.Get<string>();
-			set => this.Set(value);
-		}
 
 		public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
 		});
 
-		public IDynamicCommand RefreshQuotes => this.GetCommandFromDataLoaderRefresh(Quotes);
+		public IDynamicCommand RefreshJokes => this.GetCommandFromDataLoaderRefresh(Jokes);
 
-		public IDataLoader<ChuckNorrisItemViewModel[]> Quotes => this.GetDataLoader(LoadQuotes, b => b
+		public IDataLoader<ChuckNorrisItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
 			// Dispose the previous ItemViewModels when Quotes produces new values
 			.DisposePreviousData()
-			.TriggerFromObservable(SearchTermChanged, nameof(SearchTermChanged))
 			.TriggerOnNetworkReconnection()
 		);
-
-		private IObservable<string> SearchTermChanged => this.GetProperty(x => x.SearchTerm)
-			.Observe()
-			.Throttle(TimeSpan.FromMilliseconds(300));
 
 		public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<ChuckNorrisItemViewModel>(async (ct, item) =>
 		{
 			await this.GetService<IChuckNorrisService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
 		});
 
-		private async Task<ChuckNorrisItemViewModel[]> LoadQuotes(CancellationToken ct, IDataLoaderRequest request)
+		private async Task<ChuckNorrisItemViewModel[]> LoadJokes(CancellationToken ct, IDataLoaderRequest request)
 		{
 			await SetupFavoritesUpdate(ct);
 
-			// Add the SearchTerm to the IDataLoaderContext to be able to bind it in the empty state.
-			request.Context["SearchTerm"] = SearchTerm;
-
-			var quotes = await this.GetService<IChuckNorrisService>().Search(ct, SearchTerm);
+			var quotes = await this.GetService<IChuckNorrisService>().Search(ct, "aaa");
 
 			return quotes
 				.Select(q => this.GetChild(() => new ChuckNorrisItemViewModel(this, q), q.Id))
@@ -76,7 +63,7 @@ namespace ApplicationTemplate.Presentation.DadJokes
 
 			void UpdateItemViewModels(IChangeSet<ChuckNorrisQuote> changeSet)
 			{
-				var quotesVMs = Quotes.State.Data;
+				var quotesVMs = Jokes.State.Data;
 				if (quotesVMs != null && quotesVMs.Any())
 				{
 					var addedItems = changeSet.GetAddedItems();

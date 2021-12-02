@@ -8,7 +8,7 @@
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource MaterialSurfaceBrush}">
+		  Background="{StaticResource MaterialPrimaryColor}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 
@@ -53,7 +53,7 @@
 								Y="80" />
 		</Grid.RenderTransform>
 		<Grid.RowDefinitions>
-			<RowDefinition Height="56" />
+			<RowDefinition Height="75" />
 			<!-- SafeAreaRow.Height is set in code behind -->
 			<RowDefinition x:Name="SafeAreaRow"
 						   Height="0" />
@@ -64,22 +64,71 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<RadioButton Content="DadJokes"
-				x:Uid="Menu_Home"
-				HorizontalAlignment="Center"
-				Grid.Column="0"
-				Command="{Binding ShowHome}" />
+		<Button Grid.Column="0" 
+				Command="{Binding ShowHome}"
+				HorizontalAlignment="Center">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+				
+				<PathIcon Data="M11.99 2.5C6.47 2.5 2 6.98 2 12.5C2 18.02 6.47 22.5 11.99 22.5C17.52 22.5 22 18.02 22 12.5C22 6.98 17.52 2.5 11.99 2.5ZM12 20.5C7.58 20.5 4 16.92 4 12.5C4 8.08 7.58 4.5 12 4.5C16.42 4.5 20 8.08 20 12.5C20 16.92 16.42 20.5 12 20.5ZM15.5 11.5C16.33 11.5 17 10.83 17 10C17 9.17 16.33 8.5 15.5 8.5C14.67 8.5 14 9.17 14 10C14 10.83 14.67 11.5 15.5 11.5ZM8.5 11.5C9.33 11.5 10 10.83 10 10C10 9.17 9.33 8.5 8.5 8.5C7.67 8.5 7 9.17 7 10C7 10.83 7.67 11.5 8.5 11.5ZM12 18C14.33 18 16.31 16.54 17.11 14.5H6.89C7.69 16.54 9.67 18 12 18Z"
+						  HorizontalAlignment="Center"
+						  Foreground="white"
+						  Height="24"
+						  Grid.Row="0" />
+				<TextBlock Text="Jokes"
+						x:Uid="Menu_Home"
+						HorizontalAlignment="Center"
+						Foreground="{StaticResource MaterialOnPrimaryColor}"
+						Grid.Row="1" />
+			</Grid>
+		</Button>
 
-		<RadioButton Content="Posts"
-					 x:Uid="Menu_Posts"
-					 HorizontalAlignment="Center"
-					 Command="{Binding ShowPosts}"
-					 Grid.Column="1" />
+		<Button Grid.Column="1"
+				Command="{Binding ShowPosts}"
+				HorizontalAlignment="Center">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
 
-		<RadioButton Content="Settings"
-					 x:Uid="Menu_Settings"
-					 HorizontalAlignment="Center"
-					 Command="{Binding ShowSettings}"
-					 Grid.Column="2" />
+				<PathIcon Data="M21.99 4.5C21.99 3.4 21.1 2.5 20 2.5H4C2.9 2.5 2 3.4 2 4.5V16.5C2 17.6 2.9 18.5 4 18.5H18L22 22.5L21.99 4.5ZM18 14.5H6V12.5H18V14.5ZM18 11.5H6V9.5H18V11.5ZM18 8.5H6V6.5H18V8.5Z"
+						  HorizontalAlignment="Center"
+						  Foreground="white"
+						  Height="24"
+						  Grid.Row="0" />
+				<TextBlock Text="Posts"
+						   x:Uid="Menu_Posts"
+						   HorizontalAlignment="Center"
+						   Foreground="{StaticResource MaterialOnPrimaryColor}"
+						   Grid.Row="1" />
+			</Grid>
+		</Button>
+
+		<Button Grid.Column="2"
+				Command="{Binding ShowSettings}"
+				HorizontalAlignment="Center">
+			<Grid>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="*" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
+
+				<PathIcon Data="M19.14 13.4399C19.18 13.1399 19.2 12.8299 19.2 12.4999C19.2 12.1799 19.18 11.8599 19.13 11.5599L21.16 9.9799C21.34 9.8399 21.39 9.5699 21.28 9.3699L19.36 6.0499C19.24 5.8299 18.99 5.7599 18.77 5.8299L16.38 6.7899C15.88 6.4099 15.35 6.0899 14.76 5.8499L14.4 3.3099C14.36 3.0699 14.16 2.8999 13.92 2.8999H10.08C9.83999 2.8999 9.64999 3.0699 9.60999 3.3099L9.24999 5.8499C8.65999 6.0899 8.11999 6.4199 7.62999 6.7899L5.23999 5.8299C5.01999 5.7499 4.76999 5.8299 4.64999 6.0499L2.73999 9.3699C2.61999 9.5799 2.65999 9.8399 2.85999 9.9799L4.88999 11.5599C4.83999 11.8599 4.79999 12.1899 4.79999 12.4999C4.79999 12.8099 4.81999 13.1399 4.86999 13.4399L2.83999 15.0199C2.65999 15.1599 2.60999 15.4299 2.71999 15.6299L4.63999 18.9499C4.75999 19.1699 5.00999 19.2399 5.22999 19.1699L7.61999 18.2099C8.11999 18.5899 8.64999 18.9099 9.23999 19.1499L9.59999 21.6899C9.64999 21.9299 9.83999 22.0999 10.08 22.0999H13.92C14.16 22.0999 14.36 21.9299 14.39 21.6899L14.75 19.1499C15.34 18.9099 15.88 18.5899 16.37 18.2099L18.76 19.1699C18.98 19.2499 19.23 19.1699 19.35 18.9499L21.27 15.6299C21.39 15.4099 21.34 15.1599 21.15 15.0199L19.14 13.4399ZM12 16.0999C10.02 16.0999 8.39999 14.4799 8.39999 12.4999C8.39999 10.5199 10.02 8.8999 12 8.8999C13.98 8.8999 15.6 10.5199 15.6 12.4999C15.6 14.4799 13.98 16.0999 12 16.0999Z"
+						  HorizontalAlignment="Center"
+						  Foreground="white"
+						  Height="24"
+						  Grid.Row="0" />
+				<TextBlock Text="Settings"
+						   x:Uid="Menu_Settings"
+						   HorizontalAlignment="Center"
+						   Foreground="{StaticResource MaterialOnPrimaryColor}"
+						   Grid.Row="1" />
+			</Grid>
+		</Button>
+
 	</Grid>
 </local:AttachableUserControl>

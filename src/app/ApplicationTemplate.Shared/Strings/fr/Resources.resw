@@ -219,13 +219,13 @@
   <data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
     <value>Passer</value>
   </data>
-  <data name="Menu_Home.Content" xml:space="preserve">
+  <data name="Menu_Home.Text" xml:space="preserve">
     <value>Blagues</value>
   </data>
-  <data name="Menu_Posts.Content" xml:space="preserve">
+  <data name="Menu_Posts.Text" xml:space="preserve">
     <value>Articles</value>
   </data>
-  <data name="Menu_Settings.Content" xml:space="preserve">
+  <data name="Menu_Settings.Text" xml:space="preserve">
     <value>Paramètres</value>
   </data>
   <data name="Login_CommandBar.Content" xml:space="preserve">

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using ApplicationTemplate.Presentation;
-using ApplicationTemplate.Presentation.DadJokes;
 using ApplicationTemplate.Views.Content;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -43,7 +42,6 @@ namespace ApplicationTemplate.Views
 			{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
 			{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
 			{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
-			{ typeof(ChuckNorrisSearchPageViewModel), typeof(ChuckNorrisSearchPage) },
 			{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
 			{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
 		};

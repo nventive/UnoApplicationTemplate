@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Text;
-using ApplicationTemplate.Presentation.DadJokes;
+using ApplicationTemplate.Presentation;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
