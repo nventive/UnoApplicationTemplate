@@ -44,7 +44,7 @@ jobs:
             Contents: '**'
 
 - deployment: AppCenter_iOS
-  pool: $(windowsPoolName)
+  pool: $(macOSPoolName)
 
   variables:
   - name: artifactName

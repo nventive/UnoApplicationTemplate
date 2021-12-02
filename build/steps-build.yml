@@ -24,21 +24,22 @@ steps:
     configFilePath: 'gitversion.yml'
   displayName: 'Calculate version'
 
-- task: NuGetToolInstaller@1
-  displayName: 'Install NuGet $(NUGET_VERSION)'
-  inputs:
-    versionSpec: $(NUGET_VERSION)
-    checkLatest: false
-
-- task: NuGetCommand@2
+- task: MSBuild@1
   displayName: 'Restore solution packages'
   inputs:
-    command: restore
     solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
-    feedsToUse: 'config'
-    nugetConfigPath: 'nuget.config'
-    verbosityRestore: Normal
-    noCache: true
+    msbuildLocationMethod: version
+    msbuildVersion: latest
+    msbuildArchitecture: x86
+    msbuildArguments: >
+      /t:restore
+    configuration: $(ApplicationConfiguration)
+    platform: $(ApplicationPlatform)
+    clean: false
+    maximumCpuCount: true
+    restoreNugetPackages: false
+    logProjectEvents: false
+    createLogFile: false
 
 - task: DownloadSecureFile@1
   name: keyStore
