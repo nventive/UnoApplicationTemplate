@@ -64,7 +64,7 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<Button Grid.Column="0" 
+		<Button Grid.Column="0"
 				Command="{Binding ShowHome}"
 				HorizontalAlignment="Center">
 			<Grid>
@@ -72,17 +72,17 @@
 					<RowDefinition Height="*" />
 					<RowDefinition Height="*" />
 				</Grid.RowDefinitions>
-				
+
 				<PathIcon Data="M11.99 2.5C6.47 2.5 2 6.98 2 12.5C2 18.02 6.47 22.5 11.99 22.5C17.52 22.5 22 18.02 22 12.5C22 6.98 17.52 2.5 11.99 2.5ZM12 20.5C7.58 20.5 4 16.92 4 12.5C4 8.08 7.58 4.5 12 4.5C16.42 4.5 20 8.08 20 12.5C20 16.92 16.42 20.5 12 20.5ZM15.5 11.5C16.33 11.5 17 10.83 17 10C17 9.17 16.33 8.5 15.5 8.5C14.67 8.5 14 9.17 14 10C14 10.83 14.67 11.5 15.5 11.5ZM8.5 11.5C9.33 11.5 10 10.83 10 10C10 9.17 9.33 8.5 8.5 8.5C7.67 8.5 7 9.17 7 10C7 10.83 7.67 11.5 8.5 11.5ZM12 18C14.33 18 16.31 16.54 17.11 14.5H6.89C7.69 16.54 9.67 18 12 18Z"
 						  HorizontalAlignment="Center"
 						  Foreground="white"
 						  Height="24"
 						  Grid.Row="0" />
 				<TextBlock Text="Jokes"
-						x:Uid="Menu_Home"
-						HorizontalAlignment="Center"
-						Foreground="{StaticResource MaterialOnPrimaryColor}"
-						Grid.Row="1" />
+						   x:Uid="Menu_Home"
+						   HorizontalAlignment="Center"
+						   Foreground="{StaticResource MaterialOnPrimaryColor}"
+						   Grid.Row="1" />
 			</Grid>
 		</Button>
 

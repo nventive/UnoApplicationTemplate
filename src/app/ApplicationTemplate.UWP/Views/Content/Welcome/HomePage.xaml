@@ -8,66 +8,39 @@
 	  xmlns:u="using:Nventive.View.Controls"
 	  mc:Ignorable="d">
 
-	<Page.Resources>
-		<ResourceDictionary>
-			<uc:PartitionConverter x:Key="SelectedIndexToButtonContent"
-								   DefaultValue="Skip"
-								   x:Uid="Onboarding_Skip">
-				<uc:IntervalPartition LowerBound="2"
-									  InRangeValue="Continue"
-									  x:Uid="Onboarding_Continue" />
-			</uc:PartitionConverter>
-
-			<DataTemplate x:Key="OnboardingItemTemplate">
-				<Grid Background="Black">
-					<TextBlock Text="{Binding PrimaryText}"
-							   Style="{StaticResource MaterialHeadline3}"
-							   Foreground="White"
-							   Margin="40"
-							   HorizontalAlignment="Center" />
-
-					<Image Source="{Binding ImageUrl}"
-						   Stretch="Uniform"
-						   Margin="20"
-						   VerticalAlignment="Center" />
-				</Grid>
-			</DataTemplate>
-
-			<DataTemplate x:Key="OnboardingIndexIndicatorTemplate">
-				<Rectangle Fill="Gray"
-						   Width="20"
-						   Height="10" />
-			</DataTemplate>
-
-			<DataTemplate x:Key="OnboardingSelectedIndexIndicatorTemplate">
-				<Rectangle Fill="White"
-						   Width="20"
-						   Height="10" />
-			</DataTemplate>
-		</ResourceDictionary>
-	</Page.Resources>
-
 	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-		<u:ImageSlideshow x:Name="OnboardingSlideshow"
-						  ItemsSource="{Binding OnboardingItems}"
-						  ItemTemplate="{StaticResource OnboardingItemTemplate}"
-						  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
-						  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
 
-		<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
-				Command="{Binding NavigateToWelcomePage}"
-				VerticalAlignment="Bottom"
-				HorizontalAlignment="Center"
-				Background="White"
-				Foreground="Black"
-				Margin="0,0,0,40" />
+		<Grid.RowDefinitions>
+			<RowDefinition Height="0.9*" />
+			<RowDefinition Height="0.1*" />
+		</Grid.RowDefinitions>
+
+		<StackPanel HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Grid.Row="0">
+			<TextBlock Text="Dad's app jokes"
+					   x:Uid="Home_Title"
+					   Style="{StaticResource MaterialHeadline4}"
+					   HorizontalAlignment="Center"
+					   Margin="0,0,5,0"
+					   FontSize="34"
+					   FontWeight="Bold" />
+			<TextBlock Text="I used to be addicted to soap, but I'm clean now."
+					   x:Uid="Home_Text"
+					   Style="{StaticResource MaterialBody2}" />
+			<Button Content="Welcome"
+					Command="{Binding NavigateToOnboarding}"
+					VerticalAlignment="Bottom"
+					HorizontalAlignment="Center"
+					Margin="0,20,0,40" />
+		</StackPanel>
 
 		<Button Content="Jokes"
+				Grid.Row="1"
 				Command="{Binding NavigateToJokes}"
 				VerticalAlignment="Bottom"
 				HorizontalAlignment="Center"
-				Background="White"
-				Foreground="Black"
-				Margin="0,0,0,40" />
+				Margin="0,0,0,20" />
+
 	</Grid>
 </Page>

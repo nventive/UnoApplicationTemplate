@@ -14,7 +14,6 @@ namespace ApplicationTemplate.Presentation
 {
 	class DadJokesPageViewModel : ViewModel
 	{
-
 		public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());

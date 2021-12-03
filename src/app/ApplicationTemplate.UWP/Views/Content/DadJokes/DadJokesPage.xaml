@@ -43,16 +43,15 @@
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
 
+		
 		<dl:DataLoaderView Source="{Binding Jokes}"
 						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
 						   Grid.Row="1">
-			<DataTemplate>
+			<DataTemplate >
 				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshJokes}"
 								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
 								IndicatorColor="{StaticResource MaterialPrimaryColor}">
-					<ListView ItemsSource="{Binding Data}"
-							  Header="{Binding}"
-							  Background="{StaticResource MaterialSurfaceColor}">
+					<ListView ItemsSource="{Binding Data}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<Grid>
@@ -62,6 +61,7 @@
 									</Grid.RowDefinitions>
 
 									<Grid Grid.Row="0"
+										  Margin="0,10"
 										  Padding="0, 15">
 										<Grid.ColumnDefinitions>
 											<ColumnDefinition Width="*" />
@@ -76,7 +76,7 @@
 											<TextBlock Text="Mock"
 													   Grid.Row="0"
 													   FontSize="16"
-													   Margin="0,15, 0, 5"
+													   Margin="0,5"
 													   FontWeight="SemiBold"
 													   Style="{StaticResource MaterialCaption}" />
 
@@ -92,10 +92,6 @@
 													  Grid.Column="1" />
 
 									</Grid>
-									<StackPanel Grid.Column="1">
-									<Rectangle Height="15"
-												   Fill="{StaticResource ApplicationPageBackgroundThemeBrush}" />
-									</StackPanel>
 								</Grid>
 							</DataTemplate>
 						</ListView.ItemTemplate>

@@ -13,5 +13,10 @@ namespace ApplicationTemplate.Presentation
 		{
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesPageViewModel());
 		});
+
+		public IDynamicCommand NavigateToOnboarding => this.GetCommandFromTask(async ct =>
+		{
+			await this.GetService<IStackNavigator>().Navigate(ct, () => new OnboardingPageViewModel());
+		});
 	}
 }

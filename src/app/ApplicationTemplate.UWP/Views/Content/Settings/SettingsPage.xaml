@@ -97,8 +97,8 @@
 						  ue:MultipleTapExtension.TapCount="3">
 						<TextBlock Style="{StaticResource MaterialCaption}">
 							<Run Text="Version"
-									x:Uid="Settings_Version" />
-							<Run Text="{Binding VersionNumber}" />	
+								 x:Uid="Settings_Version" />
+							<Run Text="{Binding VersionNumber}" />
 						</TextBlock>
 					</Grid>
 

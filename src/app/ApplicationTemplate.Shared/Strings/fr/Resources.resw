@@ -217,7 +217,7 @@
     <value>Continuer</value>
   </data>
   <data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
-    <value>Passer</value>
+    <value>Passer le tutoriel</value>
   </data>
   <data name="Menu_Home.Text" xml:space="preserve">
     <value>Blagues</value>
@@ -247,13 +247,10 @@
     <value>Mot de passe oublié?</value>
   </data>
   <data name="Home_Title.Text" xml:space="preserve">
-    <value>Accueil</value>
+    <value>Les blagues de papa</value>
   </data>
-  <data name="Home_Posts.Content" xml:space="preserve">
-    <value>Articles</value>
-  </data>
-  <data name="Home_Settings.Content" xml:space="preserve">
-    <value>Paramètres</value>
+  <data name="Home_Text.Text" xml:space="preserve">
+    <value>J'étais accro au savon avant, maintenant je suis propre.</value>
   </data>
   <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
     <value>Mot de passe oublié</value>

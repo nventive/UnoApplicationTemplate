@@ -25,9 +25,8 @@
 		</Grid.RowDefinitions>
 
 		<CommandBar Content="Filters"
-					
+					Grid.Row="0"
 					x:Uid="DadJokesFiltersPage_CommandBar" />
-
 
 		<StackPanel Grid.Row="1" Margin="20,25,20,0">
 			<Grid>

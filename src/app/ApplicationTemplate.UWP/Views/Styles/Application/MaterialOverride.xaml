@@ -21,7 +21,7 @@
 			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
 
 			<Color x:Key="MaterialBackgroundColor">#F4F4F4</Color>
-			<Color x:Key="MaterialOnBackgroundColor">#00000061</Color>
+			<Color x:Key="MaterialOnBackgroundColor">#000000</Color>
 
 			<Color x:Key="MaterialSurfaceColor">#FFFFFF</Color>
 			<Color x:Key="MaterialOnSurfaceColor">#000000</Color>
