@@ -261,8 +261,8 @@
   <data name="EditPost_Save.Content" xml:space="preserve">
     <value>Save</value>
   </data>
-  <data name="EditPost_Delete.Content" xml:space="preserve">
-    <value>Delete</value>
+  <data name="EditPost_Cancel.Content" xml:space="preserve">
+    <value>Cancel</value>
   </data>
   <data name="SessionExpired_DialogTitle" xml:space="preserve">
     <value>Session Expired</value>

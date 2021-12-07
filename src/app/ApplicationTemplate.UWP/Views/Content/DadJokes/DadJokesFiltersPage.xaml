@@ -22,6 +22,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
 		<CommandBar Content="Filters"
@@ -31,6 +32,7 @@
 		<StackPanel Grid.Row="1" Margin="20,25,20,0">
 			<Grid>
 				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
@@ -50,7 +52,18 @@
 					<CheckBox x:Name="created_by"
 							  Content="Created by"/>
 				</StackPanel>
+
+				<StackPanel HorizontalAlignment="Right"
+							VerticalAlignment="Bottom"
+							Grid.Row="3">
+					<Button Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
+							Content="Filter"
+							Margin="0,0,5,0"
+							Style="{StaticResource OutlinedExecutingButtonStyle}" />
+				</StackPanel>
 			</Grid>
+			
 		</StackPanel>
+		
 	</Grid>
 </Page>

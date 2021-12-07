@@ -20,6 +20,10 @@
 			<Color x:Key="MaterialPrimaryColor">#595397</Color>
 			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
 
+			<Color x:Key="MaterialSecondaryColor">#67E5AD
+			</Color>
+			<Color x:Key="MaterialOnSecondaryColor">#FFFFFF</Color>
+
 			<Color x:Key="MaterialBackgroundColor">#F4F4F4</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#000000</Color>
 
