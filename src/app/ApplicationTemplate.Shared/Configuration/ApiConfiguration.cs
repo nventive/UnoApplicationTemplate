@@ -33,8 +33,8 @@ namespace ApplicationTemplate
 		/// <returns>The updated <see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
 		{
-			// For example purpose: the following line loads the ChuckNorrisEndpoint configuration section and make IOptions<ChuckNorrisEndpointOptions> available for DI.
-			services.BindOptionsToConfiguration<ChuckNorrisEndpointOptions>(configuration);
+			// For example purpose: the following line loads the DadJokesEndpoint configuration section and make IOptions<DadJokesEndpointOptions> available for DI.
+			services.BindOptionsToConfiguration<DadJokesEndpointOptions>(configuration);
 
 			services
 				.AddMainHandler()
@@ -48,7 +48,7 @@ namespace ApplicationTemplate
 				.AddAuthenticationEndpoint(configuration)
 				.AddPostEndpoint(configuration)
 				.AddUserProfileEndpoint(configuration)
-				.AddChuckNorrisEndpoint(configuration);
+				.AddDadJokesEndpoint(configuration);
 
 			return services;
 		}
@@ -77,17 +77,9 @@ namespace ApplicationTemplate
 				);
 		}
 
-		private static IServiceCollection AddChuckNorrisEndpoint(this IServiceCollection services, IConfiguration configuration)
+		private static IServiceCollection AddDadJokesEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services
-				.AddSingleton<IErrorResponseInterpreter<ChuckNorrisErrorResponse>>(s => new ErrorResponseInterpreter<ChuckNorrisErrorResponse>(
-					(request, response, deserializedResponse) => deserializedResponse.Message != null,
-					(request, response, deserializedResponse) => new ChuckNorrisException(deserializedResponse.Message)
-				))
-				.AddTransient<ExceptionInterpreterHandler<ChuckNorrisErrorResponse>>()
-				.AddEndpoint<IChuckNorrisEndpoint, ChuckNorrisEndpointMock>(configuration, "ChuckNorrisEndpoint", b => b
-					.AddHttpMessageHandler<ExceptionInterpreterHandler<ChuckNorrisErrorResponse>>()
-				);
+			return services.AddEndpoint<IDadJokesEndpoint, DadJokesEndpointMock>(configuration, "DadJokesEndpoint");
 		}
 
 		private static IServiceCollection AddEndpoint<TInterface, TMock>(

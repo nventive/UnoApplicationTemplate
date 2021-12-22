@@ -4,39 +4,35 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:uc="using:Nventive.View.Converters"
+	  xmlns:u="using:Nventive.View.Controls"
 	  mc:Ignorable="d">
 
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+	<Grid Background="Blue">
 
 		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
+			<RowDefinition Height="0.9*" />
+			<RowDefinition Height="0.1*" />
 		</Grid.RowDefinitions>
 
-		<TextBlock Text="Welcome"
-				   x:Uid="Welcome_Title"
-				   Style="{StaticResource MaterialHeadline3}"
-				   Margin="20,40,20,20" />
-
-		<StackPanel Margin="20,0,20,20"
-					Grid.Row="1">
-			<Button Content="Login"
-					x:Uid="Welcome_Login"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToLoginPage}" />
-
-			<Button Content="Create account"
-					x:Uid="Welcome_CreateAccount"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToCreateAccountPage}" />
-
-			<Button Content="Continue"
-					x:Uid="Welcome_Continue"
-					HorizontalAlignment="Stretch"
-					Margin="0,4"
-					Command="{Binding NavigateToHomePage}" />
+		<StackPanel HorizontalAlignment="Center"
+					VerticalAlignment="Center"
+					Grid.Row="0">
+			<TextBlock Text="Dad's app jokes"
+					   x:Uid="Home_Title"
+					   Style="{StaticResource MaterialHeadline4}"
+					   HorizontalAlignment="Center"
+					   Margin="0,0,5,0"
+					   FontSize="34"
+					   FontWeight="Bold" />
+			<TextBlock Text="I used to be addicted to soap, but I'm clean now."
+					   x:Uid="Home_Text"
+					   Style="{StaticResource MaterialBody2}" />
+			<Button Content="Welcome"
+					Command="{Binding NavigateToOnboarding}"
+					VerticalAlignment="Bottom"
+					HorizontalAlignment="Center"
+					Margin="0,20,0,40" />
 		</StackPanel>
 	</Grid>
 </Page>

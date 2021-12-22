@@ -14,6 +14,13 @@ namespace ApplicationTemplate.Presentation
 {
 	class DadJokesPageViewModel : ViewModel
 	{
+		public DadJokesPageViewModel()
+		{
+		}
+
+		public string pt { get; }
+
+
 		public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
@@ -21,25 +28,25 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand RefreshJokes => this.GetCommandFromDataLoaderRefresh(Jokes);
 
-		public IDataLoader<ChuckNorrisItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
+		public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
 			// Dispose the previous ItemViewModels when Quotes produces new values
 			.DisposePreviousData()
 			.TriggerOnNetworkReconnection()
+			.TriggerFromObservable(this.GetService<IDadJokesService>().GetAndObservePostTypeFilter().Skip(1))
 		);
 
-		public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<ChuckNorrisItemViewModel>(async (ct, item) =>
+		public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<DadJokesItemViewModel>(async (ct, item) =>
 		{
-			await this.GetService<IChuckNorrisService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
+			await this.GetService<IDadJokesService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
 		});
 
-		private async Task<ChuckNorrisItemViewModel[]> LoadJokes(CancellationToken ct, IDataLoaderRequest request)
+		private async Task<DadJokesItemViewModel[]> LoadJokes(CancellationToken ct, IDataLoaderRequest request)
 		{
 			await SetupFavoritesUpdate(ct);
-
-			var quotes = await this.GetService<IChuckNorrisService>().Search(ct, "aaa");
+			var quotes = await this.GetService<IDadJokesService>().FetchData(ct);
 
 			return quotes
-				.Select(q => this.GetChild(() => new ChuckNorrisItemViewModel(this, q), q.Id))
+				.Select(q => this.GetChild(() => new DadJokesItemViewModel(this, q), q.Id))
 				.ToArray();
 		}
 
@@ -50,7 +57,7 @@ namespace ApplicationTemplate.Presentation
 			if (!TryGetDisposable(FavoritesKey, out var _))
 			{
 				// Get the observable list of favorites.
-				var favorites = await this.GetService<IChuckNorrisService>().GetFavorites(ct);
+				var favorites = await this.GetService<IDadJokesService>().GetFavorites(ct);
 
 				// Subscribe to the observable list to update the current items.
 				var subscription = favorites
@@ -60,7 +67,7 @@ namespace ApplicationTemplate.Presentation
 				AddDisposable(FavoritesKey, subscription);
 			}
 
-			void UpdateItemViewModels(IChangeSet<ChuckNorrisQuote> changeSet)
+			void UpdateItemViewModels(IChangeSet<DadJokesQuote> changeSet)
 			{
 				var quotesVMs = Jokes.State.Data;
 				if (quotesVMs != null && quotesVMs.Any())

@@ -1,6 +1,7 @@
 ﻿using System;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation
@@ -11,7 +12,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 
-			await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
+			await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
 		});
 
 		public OnboardingItemViewModel[] OnboardingItems { get; } = new[]

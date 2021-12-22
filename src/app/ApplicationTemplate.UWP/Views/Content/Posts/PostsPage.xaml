@@ -64,6 +64,7 @@
 
 			<Button Background="Transparent"
 					Command="{Binding NavigateToNewPost}"
+					CommandParameter="{Binding}"
 					VerticalAlignment="Bottom"
 					HorizontalAlignment="Right">
 				<Border Width="56"

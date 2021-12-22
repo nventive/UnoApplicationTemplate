@@ -9,27 +9,30 @@
     <Import_RootNamespace>ApplicationTemplate</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)Business\Entities\ChuckNorrisQuote.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\Entities\DadJokesQuote.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IAuthenticationService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Business\IChuckNorrisService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\ChuckNorrisService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\IDadJokesService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\DadJokesService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\UserProfileService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IUserProfileService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\ChuckNorrisData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\ChuckNorrisErrorResponse.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\ChuckNorrisResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\PostTypes.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\DadJokes\DadJokesErrorResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\DadJokes\DadJokesResponse.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\DadJokes\DadJokeChildData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\DadJokes\DadJokeContentData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\DadJokes\DadJokesData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\ErrorData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\UserProfileData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\IAuthenticationEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\IUserProfileEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\AuthenticationEndpointMock.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Client\Exceptions\ChuckNorrisException.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Client\IChuckNorrisEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Exceptions\DadJokesException.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\IDadJokesEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\ChuckNorrisEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\UserProfileEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConfigurationSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\DiagnosticsConfiguration.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Configuration\ChuckNorrisEndpointOptions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\DadJokesEndpointOptions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\EndpointOptions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ErrorConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\FluentValidationLanguageManager.cs" />
@@ -74,10 +77,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\CreateAccountFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\LoginFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\ForgotPasswordFormViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Presentation\ChuckNorris\ChuckNorrisFavoritesPageViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Presentation\ChuckNorris\ChuckNorrisItemViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Presentation\ChuckNorris\ChuckNorrisSearchPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesFiltersPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\CultureDiagnosticsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\DiagnosticsCountersService.cs" />
@@ -96,7 +97,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Posts\PostsPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\LoginPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\ViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Welcome\HomePageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Welcome\WelcomePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\ForgotPasswordPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\CreateAccountPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Settings\SettingsPageViewModel.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\EnvironmentPickerPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\NetworkDiagnosticsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\SettingsDiagnosticsViewModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Welcome\WelcomePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Welcome\OnboardingPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Welcome\OnboardingItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IPostService.cs" />

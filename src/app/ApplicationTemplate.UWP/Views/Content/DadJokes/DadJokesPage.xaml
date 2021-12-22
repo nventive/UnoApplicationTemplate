@@ -73,14 +73,14 @@
 												<RowDefinition Height="Auto" />
 											</Grid.RowDefinitions>
 
-											<TextBlock Text="Mock"
+											<TextBlock Text="{Binding Quote.Title}"
 													   Grid.Row="0"
 													   FontSize="16"
 													   Margin="0,5"
 													   FontWeight="SemiBold"
 													   Style="{StaticResource MaterialCaption}" />
 
-											<TextBlock Text="{Binding Quote.Value}"
+											<TextBlock Text="{Binding Quote.Selftext}"
 													   Grid.Row="1"
 													   Style="{StaticResource MaterialBody1}" />
 

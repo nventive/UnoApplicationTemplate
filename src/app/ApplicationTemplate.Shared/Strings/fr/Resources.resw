@@ -339,10 +339,10 @@
   <data name="ForgotPassword_Reset.Content" xml:space="preserve">
     <value>Réinitialiser</value>
   </data>
-  <data name="ChuckNorrisSearch_CommandBar" xml:space="preserve">
+  <data name="DadJokesSearch_CommandBar" xml:space="preserve">
     <value>Citations</value>
   </data>
-  <data name="ChuckNorrisSearch_SearchTerm.PlaceholderText" xml:space="preserve">
+  <data name="DadJokesSearch_SearchTerm.PlaceholderText" xml:space="preserve">
     <value>Entrer un mot clé</value>
   </data>
   <data name="Profile_CommandBar" xml:space="preserve">

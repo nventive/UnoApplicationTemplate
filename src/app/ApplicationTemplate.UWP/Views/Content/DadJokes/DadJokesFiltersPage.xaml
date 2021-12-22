@@ -3,9 +3,7 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:dl="using:Chinook.DataLoader"
-	  xmlns:ue="using:Nventive.View.Extensions"
-	  xmlns:u="using:Nventive.View.Controls"
+		xmlns:cv="using:ApplicationTemplate.Views"
 	  mc:Ignorable="d">
 
 	<Page.Resources>
@@ -15,6 +13,8 @@
 					   VerticalAlignment="Center"
 					   HorizontalAlignment="Center" />
 		</DataTemplate>
+
+		<cv:FiltersConverter x:Key="FiltersConverter" />
 	</Page.Resources>
 
 	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
@@ -29,11 +29,10 @@
 					Grid.Row="0"
 					x:Uid="DadJokesFiltersPage_CommandBar" />
 
-		<StackPanel Grid.Row="1" Margin="20,25,20,0">
+		<StackPanel Grid.Row="1"
+					Margin="20,25,20,0">
 			<Grid>
 				<Grid.RowDefinitions>
-					<RowDefinition Height="Auto" />
-					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 					<RowDefinition Height="Auto" />
 				</Grid.RowDefinitions>
@@ -45,25 +44,61 @@
 
 				<StackPanel Grid.Row="1">
 					<CheckBox x:Name="newJokes"
-							  Content="New" />
+							  Content="Most awards" />
+				</StackPanel>
+			</Grid>
+
+			<Grid Margin="0,15">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="Auto" />
+				</Grid.RowDefinitions>
+
+				<TextBlock Text="Type of posts"
+						   Style="{StaticResource MaterialSubtitle1}"
+						   Margin="0, 15" />
+
+				<StackPanel Grid.Row="1">
+					<RadioButton x:Name="new_posts"
+								 GroupName="Posts type"
+								 Command="{Binding HandleCheck}"
+								 CommandParameter="New"
+								 IsChecked="{Binding PostTypeFilter, Converter={StaticResource FiltersConverter}, ConverterParameter=New}"
+								 Content="New posts" />
 				</StackPanel>
 
 				<StackPanel Grid.Row="2">
-					<CheckBox x:Name="created_by"
-							  Content="Created by"/>
+					<RadioButton x:Name="hot"
+								 GroupName="Posts type"
+								 Command="{Binding HandleCheck}"
+								 CommandParameter="Hot"
+								 IsChecked="{Binding PostTypeFilter, Converter={StaticResource FiltersConverter}, ConverterParameter=Hot}"
+								 Content="Hot posts" />
+				</StackPanel>
+
+				<StackPanel Grid.Row="3">
+					<RadioButton x:Name="rising"
+								 GroupName="Posts type"
+								 Command="{Binding HandleCheck}"
+								 CommandParameter="Rising"
+								 IsChecked="{Binding PostTypeFilter, Converter={StaticResource FiltersConverter}, ConverterParameter=Rising}"
+								 Content="Rising posts" />
 				</StackPanel>
 
 				<StackPanel HorizontalAlignment="Right"
 							VerticalAlignment="Bottom"
-							Grid.Row="3">
-					<Button Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
+							Grid.Row="4">
+					<Button Command="{Binding FiltersAndNavigate}"
 							Content="Filter"
 							Margin="0,0,5,0"
 							Style="{StaticResource OutlinedExecutingButtonStyle}" />
 				</StackPanel>
 			</Grid>
-			
+
 		</StackPanel>
-		
+
 	</Grid>
 </Page>

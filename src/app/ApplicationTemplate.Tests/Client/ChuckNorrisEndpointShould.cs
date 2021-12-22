@@ -6,7 +6,7 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class ChuckNorrisEndpointShould : IntegrationTestBase<IChuckNorrisEndpoint>
+	public class DadJokesEndpointShould : IntegrationTestBase<IDadJokesEndpoint>
 	{
 		[Fact]
 		public async Task GetAll()

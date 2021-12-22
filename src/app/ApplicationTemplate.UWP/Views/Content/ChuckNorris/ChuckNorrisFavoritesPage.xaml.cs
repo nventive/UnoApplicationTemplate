@@ -7,9 +7,9 @@ namespace ApplicationTemplate.Views.Content
 	/// <summary>
 	/// An empty page that can be used on its own or navigated to within a Frame.
 	/// </summary>
-	public sealed partial class ChuckNorrisFavoritesPage : Page
+	public sealed partial class DadJokesFavoritesPage : Page
 	{
-		public ChuckNorrisFavoritesPage()
+		public DadJokesFavoritesPage()
 		{
 			this.InitializeComponent();
 		}

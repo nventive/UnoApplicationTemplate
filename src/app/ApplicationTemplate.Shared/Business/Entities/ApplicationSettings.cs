@@ -13,6 +13,6 @@ namespace ApplicationTemplate.Business
 
 		public bool IsOnboardingCompleted { get; }
 
-		public ImmutableDictionary<string, ChuckNorrisQuote> FavoriteQuotes { get; } = ImmutableDictionary<string, ChuckNorrisQuote>.Empty;
+		public ImmutableDictionary<string, DadJokesQuote> FavoriteQuotes { get; } = ImmutableDictionary<string, DadJokesQuote>.Empty;
 	}
 }

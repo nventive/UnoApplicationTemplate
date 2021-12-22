@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Reactive.Linq;
+using System.Reactive.Subjects;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
@@ -10,45 +11,58 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Business
 {
-	public sealed class ChuckNorrisService : IChuckNorrisService, IDisposable
+	public sealed class DadJokesService : IDadJokesService, IDisposable
 	{
 		private readonly IApplicationSettingsService _applicationSettingsService;
-		private readonly IChuckNorrisEndpoint _chuckNorrisEndpoint;
-		private SourceList<ChuckNorrisQuote> _favouriteQuotes;
+		private readonly IDadJokesEndpoint _dadJokesEndpoint;
+		private SourceList<DadJokesQuote> _favouriteQuotes;
+		private ReplaySubject<PostTypes> _postType;
 
-		public ChuckNorrisService(IApplicationSettingsService applicationSettingsService, IChuckNorrisEndpoint chuckNorrisEndpoint)
+		public DadJokesService(IApplicationSettingsService applicationSettingsService, IDadJokesEndpoint DadJokesEndpoint)
 		{
 			_applicationSettingsService = applicationSettingsService ?? throw new ArgumentNullException(nameof(applicationSettingsService));
-			_chuckNorrisEndpoint = chuckNorrisEndpoint ?? throw new ArgumentNullException(nameof(chuckNorrisEndpoint));
+			_dadJokesEndpoint = DadJokesEndpoint ?? throw new ArgumentNullException(nameof(DadJokesEndpoint));
+			_postType = new ReplaySubject<PostTypes>(1);
+			_postType.OnNext(PostTypes.Hot);
 		}
 
-		public async Task<ChuckNorrisQuote[]> Search(CancellationToken ct, string searchTerm)
+		public async Task<DadJokesQuote[]> FetchData(CancellationToken ct)
 		{
-			// If the search term does not contain at least 3 characters, the API returns an exception.
-			// It must be handle on app side.
-			if (string.IsNullOrEmpty(searchTerm) || searchTerm.Length < 3)
-			{
-				return Array.Empty<ChuckNorrisQuote>();
-			}
+			var pt = await _postType.FirstAsync();
 
-			var response = await _chuckNorrisEndpoint.Search(ct, searchTerm);
+			var postType = pt.ToRedditFilter();
+
+			var response = await _dadJokesEndpoint.FetchData(ct, postType);
 
 			var settings = await _applicationSettingsService.GetCurrent(ct);
 
 			return response
-				.Quotes
+				.Data
+				.Children
 				.Safe()
-				.Select(d => new ChuckNorrisQuote(d, settings.FavoriteQuotes.ContainsKey(d.Id)))
+				.Where(d => d.Data.Distinguished != "moderator")
+				.Select(d => new DadJokesQuote(d.Data, settings.FavoriteQuotes.ContainsKey(d.Data.Id)))
 				.ToArray();
+
 		}
 
-		public async Task<IObservableList<ChuckNorrisQuote>> GetFavorites(CancellationToken ct)
+		public ReplaySubject<PostTypes> GetAndObservePostTypeFilter()
+		{
+			return _postType;
+		}
+
+		public void SetPostTypeFilter(PostTypes pt)
+		{
+			_postType.OnNext(pt);
+		}
+
+		public async Task<IObservableList<DadJokesQuote>> GetFavorites(CancellationToken ct)
 		{
 			var source = await GetFavouriteQuotesSource(ct);
 			return source.AsObservableList();
 		}
 
-		public async Task SetIsFavorite(CancellationToken ct, ChuckNorrisQuote quote, bool isFavorite)
+		public async Task SetIsFavorite(CancellationToken ct, DadJokesQuote quote, bool isFavorite)
 		{
 			if (quote is null)
 			{
@@ -81,13 +95,13 @@ namespace ApplicationTemplate.Business
 			}
 		}
 
-		private async Task<SourceList<ChuckNorrisQuote>> GetFavouriteQuotesSource(CancellationToken ct)
+		private async Task<SourceList<DadJokesQuote>> GetFavouriteQuotesSource(CancellationToken ct)
 		{
 			if (_favouriteQuotes == null)
 			{
 				var settings = await _applicationSettingsService.GetCurrent(ct);
 
-				_favouriteQuotes = new SourceList<ChuckNorrisQuote>();
+				_favouriteQuotes = new SourceList<DadJokesQuote>();
 				_favouriteQuotes.AddRange(settings.FavoriteQuotes.Values);
 			}
 

@@ -40,7 +40,6 @@ namespace ApplicationTemplate.Presentation
 
 		public IDataLoader Posts => this.GetDataLoader(GetPosts, d => d.WithTrigger(_deletePostTrigger));
 
-
 		private async Task<ImmutableList<PostData>> GetPosts(CancellationToken ct)
 		{
 			if (_onGetPostsCalled != null)
