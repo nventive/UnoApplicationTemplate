@@ -1,12 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate.Views.Content
+namespace ApplicationTemplate.Views.Content;
+
+public sealed partial class CreateAccountPage : Page
 {
-	public sealed partial class CreateAccountPage : Page
+	public CreateAccountPage()
 	{
-		public CreateAccountPage()
-		{
-			this.InitializeComponent();
-		}
+		this.InitializeComponent();
 	}
 }

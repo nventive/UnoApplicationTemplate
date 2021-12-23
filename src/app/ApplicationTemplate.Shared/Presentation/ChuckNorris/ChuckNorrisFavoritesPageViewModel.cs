@@ -14,38 +14,37 @@ using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using DynamicData;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class ChuckNorrisFavoritesPageViewModel : ViewModel
 {
-	public class ChuckNorrisFavoritesPageViewModel : ViewModel
+	public IDynamicCommand RefreshQuotes => this.GetCommandFromDataLoaderRefresh(Quotes);
+
+	public IDataLoader Quotes => this.GetDataLoader(LoadQuotes, c => c
+		.UpdateOnCollectionChanged()
+	);
+
+	public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<ChuckNorrisItemViewModel>(async (ct, item) =>
 	{
-		public IDynamicCommand RefreshQuotes => this.GetCommandFromDataLoaderRefresh(Quotes);
+		await this.GetService<IChuckNorrisService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
 
-		public IDataLoader Quotes => this.GetDataLoader(LoadQuotes, c => c
-			.UpdateOnCollectionChanged()
-		);
+		item.IsFavorite = !item.IsFavorite;
+	});
 
-		public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<ChuckNorrisItemViewModel>(async (ct, item) =>
-		{
-			await this.GetService<IChuckNorrisService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
+	private async Task<ReadOnlyObservableCollection<ChuckNorrisItemViewModel>> LoadQuotes(CancellationToken ct, IDataLoaderRequest request)
+	{
+		var quotes = await this.GetService<IChuckNorrisService>().GetFavorites(ct);
 
-			item.IsFavorite = !item.IsFavorite;
-		});
+		// This is an observable list that will dynamically remove items when we unfavorite. We could use 'quotes.Items' if we don't want the list to remove items directly.
+		quotes
+			.Connect()
+			.Transform(q => this.GetChild(() => new ChuckNorrisItemViewModel(this, q), q.Id))
+			.ObserveOn(this.GetService<IDispatcherScheduler>())
+			.Bind(out var list)
+			.DisposeMany()
+			.Subscribe()
+			.DisposeWithNextLoad(request);
 
-		private async Task<ReadOnlyObservableCollection<ChuckNorrisItemViewModel>> LoadQuotes(CancellationToken ct, IDataLoaderRequest request)
-		{
-			var quotes = await this.GetService<IChuckNorrisService>().GetFavorites(ct);
-
-			// This is an observable list that will dynamically remove items when we unfavorite. We could use 'quotes.Items' if we don't want the list to remove items directly.
-			quotes
-				.Connect()
-				.Transform(q => this.GetChild(() => new ChuckNorrisItemViewModel(this, q), q.Id))
-				.ObserveOn(this.GetService<IDispatcherScheduler>())
-				.Bind(out var list)
-				.DisposeMany()
-				.Subscribe()
-				.DisposeWithNextLoad(request);
-
-			return list;
-		}
+		return list;
 	}
 }

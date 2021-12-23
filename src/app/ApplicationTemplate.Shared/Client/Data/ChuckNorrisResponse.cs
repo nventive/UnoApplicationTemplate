@@ -4,13 +4,12 @@ using System.Text;
 using GeneratedSerializers;
 using Uno;
 
-namespace ApplicationTemplate.Client
+namespace ApplicationTemplate.Client;
+
+[GeneratedImmutable]
+public partial class ChuckNorrisResponse
 {
-	[GeneratedImmutable]
-	public partial class ChuckNorrisResponse
-	{
-		[EqualityHash]
-		[SerializationProperty("result")]
-		public ChuckNorrisData[] Quotes { get; }
-	}
+	[EqualityHash]
+	[SerializationProperty("result")]
+	public ChuckNorrisData[] Quotes { get; }
 }

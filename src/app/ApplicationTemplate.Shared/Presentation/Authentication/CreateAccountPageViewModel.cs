@@ -5,33 +5,32 @@ using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate.Presentation
-{
-	public class CreateAccountPageViewModel : ViewModel
-	{
-		public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
+namespace ApplicationTemplate.Presentation;
 
-		public string[] Donuts =>
-		new[]
-		{
+public class CreateAccountPageViewModel : ViewModel
+{
+	public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
+
+	public string[] Donuts =>
+	new[]
+	{
 			"Cinnamon Twist",
 			"Old-fashioned",
 			"Jelly",
 			"Double Glaze",
 			"Cream Filled",
 			"Apple Fritter"
-		};
+	};
 
-		public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
+	public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
+	{
+		var validationResult = await Form.Validate(ct);
+
+		if (validationResult.IsValid)
 		{
-			var validationResult = await Form.Validate(ct);
+			await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), Form.Password);
 
-			if (validationResult.IsValid)
-			{
-				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), Form.Password);
-
-				await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new HomePageViewModel());
-			}
-		});
-	}
+			await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new HomePageViewModel());
+		}
+	});
 }

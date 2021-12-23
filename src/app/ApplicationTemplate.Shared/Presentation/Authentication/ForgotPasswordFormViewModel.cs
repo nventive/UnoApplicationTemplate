@@ -4,27 +4,26 @@ using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 
-namespace ApplicationTemplate.Presentation
-{
-	public class ForgotPasswordFormViewModel : ViewModel
-	{
-		public ForgotPasswordFormViewModel()
-		{
-			this.AddValidation(this.GetProperty(x => x.Email));
-		}
+namespace ApplicationTemplate.Presentation;
 
-		public string Email
-		{
-			get => this.Get<string>();
-			set => this.Set(value);
-		}
+public class ForgotPasswordFormViewModel : ViewModel
+{
+	public ForgotPasswordFormViewModel()
+	{
+		this.AddValidation(this.GetProperty(x => x.Email));
 	}
 
-	public class ForgotPasswordFormValidator : AbstractValidator<ForgotPasswordFormViewModel>
+	public string Email
 	{
-		public ForgotPasswordFormValidator()
-		{
-			RuleFor(x => x.Email).NotEmpty().EmailAddress();
-		}
+		get => this.Get<string>();
+		set => this.Set(value);
+	}
+}
+
+public class ForgotPasswordFormValidator : AbstractValidator<ForgotPasswordFormViewModel>
+{
+	public ForgotPasswordFormValidator()
+	{
+		RuleFor(x => x.Email).NotEmpty().EmailAddress();
 	}
 }

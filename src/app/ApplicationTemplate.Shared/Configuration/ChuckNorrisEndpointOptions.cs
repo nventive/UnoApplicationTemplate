@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+public class ChuckNorrisEndpointOptions : EndpointOptions
 {
-	public class ChuckNorrisEndpointOptions : EndpointOptions
-	{
-	}
 }

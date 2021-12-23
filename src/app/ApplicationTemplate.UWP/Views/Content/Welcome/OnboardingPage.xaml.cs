@@ -1,12 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate.Views.Content
+namespace ApplicationTemplate.Views.Content;
+
+public sealed partial class OnboardingPage : Page
 {
-	public sealed partial class OnboardingPage : Page
+	public OnboardingPage()
 	{
-		public OnboardingPage()
-		{
-			this.InitializeComponent();
-		}
+		this.InitializeComponent();
 	}
 }

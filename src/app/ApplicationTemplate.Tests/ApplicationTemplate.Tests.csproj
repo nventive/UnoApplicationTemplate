@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <LangVersion>10.0</LangVersion>
     <TargetFramework>net461</TargetFramework>
     <IsPackable>false</IsPackable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>

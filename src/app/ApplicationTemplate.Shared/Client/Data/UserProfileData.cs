@@ -4,17 +4,16 @@ using System.Text;
 using Uno;
 using Windows.UI.Xaml.Data;
 
-namespace ApplicationTemplate.Client
+namespace ApplicationTemplate.Client;
+
+[Bindable]
+[GeneratedImmutable]
+public partial class UserProfileData
 {
-	[Bindable]
-	[GeneratedImmutable]
-	public partial class UserProfileData
-	{
-		[EqualityKey]
-		public string Id { get; }
+	[EqualityKey]
+	public string Id { get; }
 
-		public string FirstName { get; }
+	public string FirstName { get; }
 
-		public string LastName { get; }
-	}
+	public string LastName { get; }
 }

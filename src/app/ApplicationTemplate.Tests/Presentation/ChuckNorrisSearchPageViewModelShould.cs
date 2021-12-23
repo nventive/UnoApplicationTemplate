@@ -13,159 +13,158 @@ using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
-namespace ApplicationTemplate.Tests
+namespace ApplicationTemplate.Tests;
+
+public class ChuckNorrisSearchPageViewModelShould : NavigationTestsBase
 {
-	public class ChuckNorrisSearchPageViewModelShould : NavigationTestsBase
+	private void MockingGetFavorites(Mock<IChuckNorrisService> mock)
 	{
-		private void MockingGetFavorites(Mock<IChuckNorrisService> mock)
+		mock
+			.Setup(m => m.GetFavorites(It.IsAny<CancellationToken>()))
+			.ReturnsAsync(new SourceList<ChuckNorrisQuote>().AsObservableList());
+	}
+
+	// Basic class configuration
+	private void ChuckNorrisSearchPageViewModelShould_Configuration(IHostBuilder host)
+	{
+		host.ConfigureServices(services =>
 		{
-			mock
-				.Setup(m => m.GetFavorites(It.IsAny<CancellationToken>()))
-				.ReturnsAsync(new SourceList<ChuckNorrisQuote>().AsObservableList());
+				// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
+				ReplaceWithMock<IChuckNorrisService>(services, mock =>
+			{
+				MockingGetFavorites(mock);
+			});
+		});
+	}
+
+	[Theory]
+	[InlineData("")]
+	[InlineData("a")]
+	[InlineData("aa")]
+	public async Task ReturnEmptyCriterion_WhenProvidedSearchTermIsTooShort(string searchTerm)
+	{
+		// Arrange
+		var viewModel = new ChuckNorrisSearchPageViewModel();
+		InitializeServices(ChuckNorrisSearchPageViewModelShould_Configuration);
+
+		// Act
+		viewModel.SearchTerm = searchTerm;
+		var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
+
+		// Assert
+		quotes.Should().BeEmpty();
+	}
+
+	[Fact]
+	public async Task UpdateSearchTermProperty()
+	{
+		// Arrange
+		var anything = "Anything";
+		var searchPageViewModelMock = new Mock<ChuckNorrisSearchPageViewModel>();
+
+		// Act
+		searchPageViewModelMock.Object.SearchTerm = anything;
+
+		// Assert
+		searchPageViewModelMock.Object.SearchTerm
+			.Should().Be(anything);
+	}
+
+	[Fact]
+	public async Task CheckForSearchMethod_WhenQuotesAreLoading()
+	{
+		// Arrange
+		InitializeServices(Configure);
+		var viewModel = new ChuckNorrisSearchPageViewModel();
+
+		// Act
+		viewModel.SearchTerm = "dog";
+		var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
+
+		// Assert
+		using (new AssertionScope())
+		{
+			quotes.Should()
+				.NotBeNull()
+				.And
+				.NotBeEmpty();
+
+			quotes.All(q => q.Quote.Value.ToUpperInvariant().Contains("DOG"))
+				.Should().BeTrue("All quotes found searching for search term 'dog' should contain 'dog' ");
 		}
 
-		// Basic class configuration
-		private void ChuckNorrisSearchPageViewModelShould_Configuration(IHostBuilder host)
+		void Configure(IHostBuilder host)
 		{
 			host.ConfigureServices(services =>
 			{
-				// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-				ReplaceWithMock<IChuckNorrisService>(services, mock =>
+					// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
+					ReplaceWithMock<IChuckNorrisService>(services, mock =>
 				{
+					mock
+						.Setup(m => m.Search(It.IsAny<CancellationToken>(), It.IsAny<string>()))
+						.ReturnsAsync(new ChuckNorrisQuote[]
+						{
+							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("0").WithValue("Something something dog"), false),
+							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1203").WithValue("Dog something"), false)
+						});
+
 					MockingGetFavorites(mock);
 				});
 			});
 		}
+	}
 
-		[Theory]
-		[InlineData("")]
-		[InlineData("a")]
-		[InlineData("aa")]
-		public async Task ReturnEmptyCriterion_WhenProvidedSearchTermIsTooShort(string searchTerm)
+	[Fact]
+	public async Task ReturnDifferentResults_ForMultipleSearchMethodCall()
+	{
+		// Arrange
+		InitializeServices(Configure);
+
+		var viewModel = new ChuckNorrisSearchPageViewModel();
+
+		// Act
+		viewModel.SearchTerm = "dog";
+		var firstQuotes = await viewModel.Quotes.Load(DefaultCancellationToken);
+
+		viewModel.SearchTerm = "cat";
+		var secondQuotes = await viewModel.Quotes.Load(DefaultCancellationToken);
+
+		// Assert
+		using (new AssertionScope())
 		{
-			// Arrange
-			var viewModel = new ChuckNorrisSearchPageViewModel();
-			InitializeServices(ChuckNorrisSearchPageViewModelShould_Configuration);
+			firstQuotes.Length
+				.Should().Be(3);
 
-			// Act
-			viewModel.SearchTerm = searchTerm;
-			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
-
-			// Assert
-			quotes.Should().BeEmpty();
+			secondQuotes.Length
+				.Should().Be(1);
 		}
 
-		[Fact]
-		public async Task UpdateSearchTermProperty()
+		void Configure(IHostBuilder host)
 		{
-			// Arrange
-			var anything = "Anything";
-			var searchPageViewModelMock = new Mock<ChuckNorrisSearchPageViewModel>();
-
-			// Act
-			searchPageViewModelMock.Object.SearchTerm = anything;
-
-			// Assert
-			searchPageViewModelMock.Object.SearchTerm
-				.Should().Be(anything);
-		}
-
-		[Fact]
-		public async Task CheckForSearchMethod_WhenQuotesAreLoading()
-		{
-			// Arrange
-			InitializeServices(Configure);
-			var viewModel = new ChuckNorrisSearchPageViewModel();
-
-			// Act
-			viewModel.SearchTerm = "dog";
-			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken);
-
-			// Assert
-			using (new AssertionScope())
+			host.ConfigureServices(services =>
 			{
-				quotes.Should()
-					.NotBeNull()
-					.And
-					.NotBeEmpty();
-
-				quotes.All(q => q.Quote.Value.ToUpperInvariant().Contains("DOG"))
-					.Should().BeTrue("All quotes found searching for search term 'dog' should contain 'dog' ");
-			}
-
-			void Configure(IHostBuilder host)
-			{
-				host.ConfigureServices(services =>
-				{
 					// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
 					ReplaceWithMock<IChuckNorrisService>(services, mock =>
-					{
-						mock
-							.Setup(m => m.Search(It.IsAny<CancellationToken>(), It.IsAny<string>()))
-							.ReturnsAsync(new ChuckNorrisQuote[]
-							{
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("0").WithValue("Something something dog"), false),
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1203").WithValue("Dog something"), false)
-							});
-
-						MockingGetFavorites(mock);
-					});
-				});
-			}
-		}
-
-		[Fact]
-		public async Task ReturnDifferentResults_ForMultipleSearchMethodCall()
-		{
-			// Arrange
-			InitializeServices(Configure);
-
-			var viewModel = new ChuckNorrisSearchPageViewModel();
-
-			// Act
-			viewModel.SearchTerm = "dog";
-			var firstQuotes = await viewModel.Quotes.Load(DefaultCancellationToken);
-
-			viewModel.SearchTerm = "cat";
-			var secondQuotes = await viewModel.Quotes.Load(DefaultCancellationToken);
-
-			// Assert
-			using (new AssertionScope())
-			{
-				firstQuotes.Length
-					.Should().Be(3);
-
-				secondQuotes.Length
-					.Should().Be(1);
-			}
-
-			void Configure(IHostBuilder host)
-			{
-				host.ConfigureServices(services =>
 				{
-					// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-					ReplaceWithMock<IChuckNorrisService>(services, mock =>
-					{
-						mock
-							.Setup(m => m.Search(It.IsAny<CancellationToken>(), "dog"))
-							.ReturnsAsync(new ChuckNorrisQuote[]
-							{
+					mock
+						.Setup(m => m.Search(It.IsAny<CancellationToken>(), "dog"))
+						.ReturnsAsync(new ChuckNorrisQuote[]
+						{
 							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1"), false),
 							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("3"), false),
 							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1204"), false)
-							});
+						});
 
-						mock
-							.Setup(m => m.Search(It.IsAny<CancellationToken>(), "cat"))
-							.ReturnsAsync(new ChuckNorrisQuote[]
-							{
+					mock
+						.Setup(m => m.Search(It.IsAny<CancellationToken>(), "cat"))
+						.ReturnsAsync(new ChuckNorrisQuote[]
+						{
 							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1"), false)
-							});
+						});
 
-						MockingGetFavorites(mock);
-					});
+					MockingGetFavorites(mock);
 				});
-			}
+			});
 		}
 	}
 }

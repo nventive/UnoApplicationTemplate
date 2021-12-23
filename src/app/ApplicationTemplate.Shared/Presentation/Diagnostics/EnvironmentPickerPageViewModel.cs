@@ -5,50 +5,49 @@ using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class EnvironmentPickerPageViewModel : ViewModel
 {
-	public class EnvironmentPickerPageViewModel : ViewModel
+	private readonly string _currentEnvironment;
+
+	public EnvironmentPickerPageViewModel(string currentEnvironment)
 	{
-		private readonly string _currentEnvironment;
+		_currentEnvironment = currentEnvironment;
+	}
 
-		public EnvironmentPickerPageViewModel(string currentEnvironment)
+	public string SelectedEnvironment
+	{
+		get => this.Get(_currentEnvironment);
+		set => this.Set(value);
+	}
+
+	public bool RequiresRestart
+	{
+		get => this.Get<bool>();
+		set => this.Set(value);
+	}
+
+	public IEnumerable<string> Environments => this.GetFromTask(GetEnvironments);
+
+	public IDynamicCommand SelectEnvironment => this.GetCommandFromTask<string>(async (ct, environment) =>
+	{
+		if (_currentEnvironment == environment)
 		{
-			_currentEnvironment = currentEnvironment;
+			await this.GetService<IStackNavigator>().NavigateBack(ct);
+
+			return;
 		}
 
-		public string SelectedEnvironment
-		{
-			get => this.Get(_currentEnvironment);
-			set => this.Set(value);
-		}
-
-		public bool RequiresRestart
-		{
-			get => this.Get<bool>();
-			set => this.Set(value);
-		}
-
-		public IEnumerable<string> Environments => this.GetFromTask(GetEnvironments);
-
-		public IDynamicCommand SelectEnvironment => this.GetCommandFromTask<string>(async (ct, environment) =>
-		{
-			if (_currentEnvironment == environment)
-			{
-				await this.GetService<IStackNavigator>().NavigateBack(ct);
-
-				return;
-			}
-
-			AppSettingsConfiguration.AppEnvironment.SetCurrent(environment);
+		AppSettingsConfiguration.AppEnvironment.SetCurrent(environment);
 
 			// TODO #173219 : Disable back button
 
 			RequiresRestart = true;
-		});
+	});
 
-		private Task<string[]> GetEnvironments(CancellationToken ct)
-		{
-			return Task.FromResult(AppSettingsConfiguration.AppEnvironment.GetAll());
-		}
+	private Task<string[]> GetEnvironments(CancellationToken ct)
+	{
+		return Task.FromResult(AppSettingsConfiguration.AppEnvironment.GetAll());
 	}
 }

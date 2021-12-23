@@ -1,12 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate.Views.Content
+namespace ApplicationTemplate.Views.Content;
+
+public sealed partial class HomePage : Page
 {
-	public sealed partial class HomePage : Page
+	public HomePage()
 	{
-		public HomePage()
-		{
-			this.InitializeComponent();
-		}
+		this.InitializeComponent();
 	}
 }

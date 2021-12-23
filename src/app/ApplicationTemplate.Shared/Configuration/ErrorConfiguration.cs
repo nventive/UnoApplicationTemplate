@@ -12,36 +12,36 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Uno.Extensions;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+/// <summary>
+/// This class is used for error configuration.
+/// - Handles unhandled exceptions.
+/// - Handles command exceptions.
+/// </summary>
+public static class ErrorConfiguration
 {
 	/// <summary>
-	/// This class is used for error configuration.
-	/// - Handles unhandled exceptions.
-	/// - Handles command exceptions.
+	/// Adds the error handlers to the <see cref="IServiceCollection"/>.
 	/// </summary>
-	public static class ErrorConfiguration
+	/// <param name="services">Service collection.</param>
+	/// <returns><see cref="IServiceCollection"/>.</returns>
+	public static IServiceCollection AddErrorHandling(this IServiceCollection services)
 	{
-		/// <summary>
-		/// Adds the error handlers to the <see cref="IServiceCollection"/>.
-		/// </summary>
-		/// <param name="services">Service collection.</param>
-		/// <returns><see cref="IServiceCollection"/>.</returns>
-		public static IServiceCollection AddErrorHandling(this IServiceCollection services)
+		return services.AddSingleton<IDynamicCommandErrorHandler>(s => new DynamicCommandErrorHandler(
+			(ct, command, exception) => HandleCommandException(ct, command, exception, s)
+		));
+	}
+
+	public static void OnUnhandledException(Exception exception, bool isTerminating, IServiceProvider services)
+	{
+		if (exception == null)
 		{
-			return services.AddSingleton<IDynamicCommandErrorHandler>(s => new DynamicCommandErrorHandler(
-				(ct, command, exception) => HandleCommandException(ct, command, exception, s)
-			));
+			return;
 		}
 
-		public static void OnUnhandledException(Exception exception, bool isTerminating, IServiceProvider services)
-		{
-			if (exception == null)
-			{
-				return;
-			}
-
-			var logger = services.GetRequiredService<ILogger<CoreStartup>>();
-			logger.LogError(exception, "An unhandled exception occurred. StackTrace: {StackTrace}", exception.StackTrace);
+		var logger = services.GetRequiredService<ILogger<CoreStartup>>();
+		logger.LogError(exception, "An unhandled exception occurred. StackTrace: {StackTrace}", exception.StackTrace);
 
 #if (IncludeFirebaseAnalytics)
 			if (!isTerminating)
@@ -74,42 +74,41 @@ namespace ApplicationTemplate
 //+:cnd:noEmit
 			}
 #endif
-		}
+	}
 
-		private static async Task HandleCommandException(CancellationToken ct, IDynamicCommand command, Exception exception, IServiceProvider services)
+	private static async Task HandleCommandException(CancellationToken ct, IDynamicCommand command, Exception exception, IServiceProvider services)
+	{
+		if (exception?.IsOrContainsExceptionType<OperationCanceledException>() ?? false)
 		{
-			if (exception?.IsOrContainsExceptionType<OperationCanceledException>() ?? false)
-			{
-				return;
-			}
-
-			var messageDialogService = services.GetRequiredService<IMessageDialogService>();
-			var stringLocalizer = services.GetRequiredService<IStringLocalizer>();
-
-			var titleResourceKey = string.Empty;
-			var bodyResourceKey = string.Empty;
-
-			if (exception.IsOrContainsExceptionType<NoNetworkException>())
-			{
-				titleResourceKey = $"NoNetwork_Error_DialogTitle";
-				bodyResourceKey = $"NoNetwork_Error_DialogBody";
-			}
-			else
-			{
-				titleResourceKey = $"{command.Name}_Error_DialogTitle";
-				bodyResourceKey = $"{command.Name}_Error_DialogBody";
-			}
-
-			var title = stringLocalizer[titleResourceKey];
-			var body = stringLocalizer[bodyResourceKey];
-
-			title = title.ResourceNotFound ? stringLocalizer["Default_Error_DialogTitle"] : title;
-			body = body.ResourceNotFound ? stringLocalizer["Default_Error_DialogBody"] : body;
-
-			await messageDialogService.ShowMessage(ct, m => m
-				.Title(title)
-				.Content(body)
-			);
+			return;
 		}
+
+		var messageDialogService = services.GetRequiredService<IMessageDialogService>();
+		var stringLocalizer = services.GetRequiredService<IStringLocalizer>();
+
+		var titleResourceKey = string.Empty;
+		var bodyResourceKey = string.Empty;
+
+		if (exception.IsOrContainsExceptionType<NoNetworkException>())
+		{
+			titleResourceKey = $"NoNetwork_Error_DialogTitle";
+			bodyResourceKey = $"NoNetwork_Error_DialogBody";
+		}
+		else
+		{
+			titleResourceKey = $"{command.Name}_Error_DialogTitle";
+			bodyResourceKey = $"{command.Name}_Error_DialogBody";
+		}
+
+		var title = stringLocalizer[titleResourceKey];
+		var body = stringLocalizer[bodyResourceKey];
+
+		title = title.ResourceNotFound ? stringLocalizer["Default_Error_DialogTitle"] : title;
+		body = body.ResourceNotFound ? stringLocalizer["Default_Error_DialogBody"] : body;
+
+		await messageDialogService.ShowMessage(ct, m => m
+			.Title(title)
+			.Content(body)
+		);
 	}
 }

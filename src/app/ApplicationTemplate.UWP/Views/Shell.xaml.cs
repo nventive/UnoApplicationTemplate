@@ -3,29 +3,28 @@ using Nventive.ExtendedSplashScreen;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+public sealed partial class Shell : UserControl
 {
-	public sealed partial class Shell : UserControl
+	public Shell(IActivatedEventArgs e)
 	{
-		public Shell(IActivatedEventArgs e)
-		{
-			this.InitializeComponent();
+		this.InitializeComponent();
 
-			Instance = this;
+		Instance = this;
 
-//-:cnd:noEmit
+		//-:cnd:noEmit
 #if WINDOWS_UWP
-//+:cnd:noEmit
-			AppExtendedSplashScreen.SplashScreen = e?.SplashScreen;
-//-:cnd:noEmit
+		//+:cnd:noEmit
+		AppExtendedSplashScreen.SplashScreen = e?.SplashScreen;
+		//-:cnd:noEmit
 #endif
-//+:cnd:noEmit
-		}
-
-		public static Shell Instance { get; private set; }
-
-		public IExtendedSplashScreen ExtendedSplashScreen => this.AppExtendedSplashScreen;
-
-		public MultiFrame NavigationMultiFrame => this.RootNavigationMultiFrame;
+		//+:cnd:noEmit
 	}
+
+	public static Shell Instance { get; private set; }
+
+	public IExtendedSplashScreen ExtendedSplashScreen => this.AppExtendedSplashScreen;
+
+	public MultiFrame NavigationMultiFrame => this.RootNavigationMultiFrame;
 }

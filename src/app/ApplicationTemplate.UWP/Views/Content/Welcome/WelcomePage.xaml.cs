@@ -1,12 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate.Views.Content
+namespace ApplicationTemplate.Views.Content;
+
+public sealed partial class WelcomePage : Page
 {
-	public sealed partial class WelcomePage : Page
+	public WelcomePage()
 	{
-		public WelcomePage()
-		{
-			this.InitializeComponent();
-		}
+		this.InitializeComponent();
 	}
 }

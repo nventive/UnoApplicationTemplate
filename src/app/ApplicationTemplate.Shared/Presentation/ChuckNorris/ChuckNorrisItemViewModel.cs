@@ -4,24 +4,23 @@ using System.Text;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class ChuckNorrisItemViewModel : ViewModel
 {
-	public class ChuckNorrisItemViewModel : ViewModel
+	public ChuckNorrisItemViewModel(IViewModel parent, ChuckNorrisQuote quote)
 	{
-		public ChuckNorrisItemViewModel(IViewModel parent, ChuckNorrisQuote quote)
-		{
-			Parent = parent;
-			Quote = quote;
-		}
+		Parent = parent;
+		Quote = quote;
+	}
 
-		public IViewModel Parent { get; }
+	public IViewModel Parent { get; }
 
-		public ChuckNorrisQuote Quote { get; }
+	public ChuckNorrisQuote Quote { get; }
 
-		public bool IsFavorite
-		{
-			get => this.Get(initialValue: Quote.IsFavorite);
-			set => this.Set(value);
-		}
+	public bool IsFavorite
+	{
+		get => this.Get(initialValue: Quote.IsFavorite);
+		set => this.Set(value);
 	}
 }

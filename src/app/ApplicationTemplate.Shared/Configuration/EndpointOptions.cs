@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate
-{
-	public class EndpointOptions
-	{
-		public Uri Url { get; set; }
+namespace ApplicationTemplate;
 
-		public bool EnableMock { get; set; }
-	}
+public class EndpointOptions
+{
+	public Uri Url { get; set; }
+
+	public bool EnableMock { get; set; }
 }

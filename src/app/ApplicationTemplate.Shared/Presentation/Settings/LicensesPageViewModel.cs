@@ -7,44 +7,43 @@ using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class LicensesPageViewModel : ViewModel
 {
-	public class LicensesPageViewModel : ViewModel
+	private const string LicensesFileName = "ThirdPartySoftwareLicenses.txt";
+
+	public string Licenses => this.GetFromTask(GetLicenses, initialValue: string.Empty);
+
+	private async Task<string> GetLicenses(CancellationToken ct)
 	{
-		private const string LicensesFileName = "ThirdPartySoftwareLicenses.txt";
+		var assembly = GetType().Assembly;
 
-		public string Licenses => this.GetFromTask(GetLicenses, initialValue: string.Empty);
+		var actualResourceName = assembly
+			.GetManifestResourceNames()?.FirstOrDefault(name => name
+			.EndsWith(LicensesFileName, StringComparison.OrdinalIgnoreCase)
+		);
 
-		private async Task<string> GetLicenses(CancellationToken ct)
+		if (actualResourceName == null)
 		{
-			var assembly = GetType().Assembly;
-
-			var actualResourceName = assembly
-				.GetManifestResourceNames()?.FirstOrDefault(name => name
-				.EndsWith(LicensesFileName, StringComparison.OrdinalIgnoreCase)
-			);
-
-			if (actualResourceName == null)
-			{
-//-:cnd:noEmit
+			//-:cnd:noEmit
 #if __PRODUCTION__
 //+:cnd:noEmit
 				return string.Empty;
 //-:cnd:noEmit
 #else
-//+:cnd:noEmit
-				return $"Couldn't locate '{LicensesFileName}'. Please generate it using the GenerateThirdPartySoftwareLicenses script available in the project.";
-//-:cnd:noEmit
+			//+:cnd:noEmit
+			return $"Couldn't locate '{LicensesFileName}'. Please generate it using the GenerateThirdPartySoftwareLicenses script available in the project.";
+			//-:cnd:noEmit
 #endif
-//+:cnd:noEmit
-			}
+			//+:cnd:noEmit
+		}
 
-			var resourceStream = assembly.GetManifestResourceStream(actualResourceName);
+		var resourceStream = assembly.GetManifestResourceStream(actualResourceName);
 
-			using (var streamReader = new StreamReader(resourceStream))
-			{
-				return await streamReader.ReadToEndAsync();
-			}
+		using (var streamReader = new StreamReader(resourceStream))
+		{
+			return await streamReader.ReadToEndAsync();
 		}
 	}
 }

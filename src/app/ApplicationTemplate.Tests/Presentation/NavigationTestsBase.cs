@@ -12,58 +12,57 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Xunit;
 
-namespace ApplicationTemplate.Tests
+namespace ApplicationTemplate.Tests;
+
+/// <summary>
+/// Gives access to navigation methods.
+/// </summary>
+public class NavigationTestsBase : IntegrationTestBase
 {
-	/// <summary>
-	/// Gives access to navigation methods.
-	/// </summary>
-	public class NavigationTestsBase : IntegrationTestBase
+	protected TViewModel GetAndAssertCurrentViewModel<TViewModel>()
 	{
-		protected TViewModel GetAndAssertCurrentViewModel<TViewModel>()
-		{
-			var viewModel = GetCurrentViewModel();
+		var viewModel = GetCurrentViewModel();
 
-			return Assert.IsType<TViewModel>(viewModel);
-		}
+		return Assert.IsType<TViewModel>(viewModel);
+	}
 
-		protected IViewModel GetCurrentViewModel()
-		{
-			return GetService<IStackNavigator>().State.Stack.LastOrDefault()?.ViewModel as IViewModel;
-		}
+	protected IViewModel GetCurrentViewModel()
+	{
+		return GetService<IStackNavigator>().State.Stack.LastOrDefault()?.ViewModel as IViewModel;
+	}
 
-		protected async Task NavigateAndClear(CancellationToken ct, Func<ViewModel> vmBuilder)
-		{
-			await GetCurrentViewModel().GetService<ISectionsNavigator>().NavigateAndClear(ct, vmBuilder);
-		}
+	protected async Task NavigateAndClear(CancellationToken ct, Func<ViewModel> vmBuilder)
+	{
+		await GetCurrentViewModel().GetService<ISectionsNavigator>().NavigateAndClear(ct, vmBuilder);
+	}
 
-		protected async Task Navigate(CancellationToken ct, Func<ViewModel> vmBuilder)
-		{
-			await GetCurrentViewModel().GetService<ISectionsNavigator>().Navigate(ct, vmBuilder);
-		}
+	protected async Task Navigate(CancellationToken ct, Func<ViewModel> vmBuilder)
+	{
+		await GetCurrentViewModel().GetService<ISectionsNavigator>().Navigate(ct, vmBuilder);
+	}
 
-		/// <summary>
-		/// This method can be helpful when a test depends on navigation. (e.g. picker).
-		/// </summary>
-		/// <typeparam name="TViewModel">The target ViewModel.</typeparam>
-		/// <param name="actionOnNavigation">The action to execute after navigating to the target ViewModel.</param>
-		/// <returns><see cref="IDisposable"/>The subscription of the <see cref="ISectionsNavigator"/> observer.</returns>
-		protected IDisposable SubscribeToNavigation<TViewModel>(Action actionOnNavigation)
-			where TViewModel : IViewModel
-		{
-			var navigatorService = GetService<ISectionsNavigator>();
+	/// <summary>
+	/// This method can be helpful when a test depends on navigation. (e.g. picker).
+	/// </summary>
+	/// <typeparam name="TViewModel">The target ViewModel.</typeparam>
+	/// <param name="actionOnNavigation">The action to execute after navigating to the target ViewModel.</param>
+	/// <returns><see cref="IDisposable"/>The subscription of the <see cref="ISectionsNavigator"/> observer.</returns>
+	protected IDisposable SubscribeToNavigation<TViewModel>(Action actionOnNavigation)
+		where TViewModel : IViewModel
+	{
+		var navigatorService = GetService<ISectionsNavigator>();
 
-			return navigatorService
-				.ObserveActiveSectionLastPageType()
-				.Select(type =>
+		return navigatorService
+			.ObserveActiveSectionLastPageType()
+			.Select(type =>
+			{
+				if (type == typeof(TViewModel))
 				{
-					if (type == typeof(TViewModel))
-					{
-						actionOnNavigation();
-					}
+					actionOnNavigation();
+				}
 
-					return Unit.Default;
-				})
-				.Subscribe();
-		}
+				return Unit.Default;
+			})
+			.Subscribe();
 	}
 }

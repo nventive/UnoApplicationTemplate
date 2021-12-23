@@ -1,12 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate.Views.Content
+namespace ApplicationTemplate.Views.Content;
+
+public sealed partial class ForgotPasswordPage : Page
 {
-	public sealed partial class ForgotPasswordPage : Page
+	public ForgotPasswordPage()
 	{
-		public ForgotPasswordPage()
-		{
-			this.InitializeComponent();
-		}
+		this.InitializeComponent();
 	}
 }

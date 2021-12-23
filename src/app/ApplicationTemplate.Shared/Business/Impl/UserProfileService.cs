@@ -8,26 +8,25 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Business
+namespace ApplicationTemplate.Business;
+
+public partial class UserProfileService : IUserProfileService
 {
-	public partial class UserProfileService : IUserProfileService
+	private readonly IUserProfileEndpoint _profileEndpoint;
+
+	public UserProfileService(IUserProfileEndpoint profileEndpoint)
 	{
-		private readonly IUserProfileEndpoint _profileEndpoint;
+		_profileEndpoint = profileEndpoint ?? throw new ArgumentNullException(nameof(profileEndpoint));
+	}
 
-		public UserProfileService(IUserProfileEndpoint profileEndpoint)
-		{
-			_profileEndpoint = profileEndpoint ?? throw new ArgumentNullException(nameof(profileEndpoint));
-		}
+	public async Task<UserProfileData> GetCurrent(CancellationToken ct)
+	{
+		return await _profileEndpoint.Get(ct);
+	}
 
-		public async Task<UserProfileData> GetCurrent(CancellationToken ct)
-		{
-			return await _profileEndpoint.Get(ct);
-		}
-
-		/// <inheritdoc/>
-		public async Task Update(CancellationToken ct, UserProfileData userProfile)
-		{
-			await _profileEndpoint.Update(ct, userProfile);
-		}
+	/// <inheritdoc/>
+	public async Task Update(CancellationToken ct, UserProfileData userProfile)
+	{
+		await _profileEndpoint.Update(ct, userProfile);
 	}
 }

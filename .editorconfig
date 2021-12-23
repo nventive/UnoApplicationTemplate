@@ -41,6 +41,9 @@ indent_size = 2
 dotnet_sort_system_directives_first = true
 dotnet_separate_import_directive_groups = false
 
+# Use C# 10 file-scoped namespaces
+csharp_style_namespace_declarations=file_scoped:suggestion
+
 # Avoid the this. keyword
 dotnet_style_qualification_for_field = false:suggestion
 dotnet_style_qualification_for_property = false:suggestion

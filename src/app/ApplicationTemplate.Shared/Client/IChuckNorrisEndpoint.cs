@@ -5,17 +5,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 
-namespace ApplicationTemplate.Client
+namespace ApplicationTemplate.Client;
+
+public interface IChuckNorrisEndpoint
 {
-	public interface IChuckNorrisEndpoint
-	{
-		/// <summary>
-		/// Returns a list of quotes that match the <paramref name="searchTerm"/>.
-		/// </summary>
-		/// <param name="ct"><see cref="CancellationToken"/></param>
-		/// <param name="searchTerm">Search term</param>
-		/// <returns>List of quotes</returns>
-		[Get("/search")]
-		Task<ChuckNorrisResponse> Search(CancellationToken ct, [AliasAs("query")] string searchTerm);
-	}
+	/// <summary>
+	/// Returns a list of quotes that match the <paramref name="searchTerm"/>.
+	/// </summary>
+	/// <param name="ct"><see cref="CancellationToken"/></param>
+	/// <param name="searchTerm">Search term</param>
+	/// <returns>List of quotes</returns>
+	[Get("/search")]
+	Task<ChuckNorrisResponse> Search(CancellationToken ct, [AliasAs("query")] string searchTerm);
 }
