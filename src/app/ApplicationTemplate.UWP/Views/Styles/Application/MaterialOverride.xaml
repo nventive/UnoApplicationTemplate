@@ -33,6 +33,11 @@
 
 		<ResourceDictionary x:Key="Dark">
 			<Color x:Key="MaterialPrimaryColor">#FF839DDA</Color>
+			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
+
+			<Color x:Key="MaterialSecondaryColor">#67E5AD
+			</Color>
+			<Color x:Key="MaterialOnSecondaryColor">#FFFFFF</Color>
 			
 			<Color x:Key="MaterialBackgroundColor">#FF111111</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#FFEFEFEF</Color>
