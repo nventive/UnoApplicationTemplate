@@ -55,12 +55,12 @@ namespace ApplicationTemplate
 
 		private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IUserProfileEndpoint, UserProfileEndpointMock>(configuration, "UserProfileEndpoint");
+			return services.AddEndpoint<IUserProfileEndpoint>(configuration, "UserProfileEndpoint");
 		}
 
 		private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IAuthenticationEndpoint, AuthenticationEndpointMock>(configuration, "AuthenticationEndpoint");
+			return services.AddEndpoint<IAuthenticationEndpoint>(configuration, "AuthenticationEndpoint");
 		}
 
 		private static IServiceCollection AddPostEndpoint(this IServiceCollection services, IConfiguration configuration)
@@ -71,7 +71,7 @@ namespace ApplicationTemplate
 					(request, response, deserializedResponse) => new PostEndpointException(deserializedResponse)
 				))
 				.AddTransient<ExceptionInterpreterHandler<PostErrorResponse>>()
-				.AddEndpoint<IPostEndpoint, PostEndpointMock>(configuration, "PostEndpoint", b => b
+				.AddEndpoint<IPostEndpoint>(configuration, "PostEndpoint", b => b
 					.AddHttpMessageHandler<ExceptionInterpreterHandler<PostErrorResponse>>()
 					.AddHttpMessageHandler<AuthenticationTokenHandler<AuthenticationData>>()
 				);
@@ -79,23 +79,22 @@ namespace ApplicationTemplate
 
 		private static IServiceCollection AddDadJokesEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IDadJokesEndpoint, DadJokesEndpointMock>(configuration, "DadJokesEndpoint");
+			return services.AddEndpoint<IDadJokesEndpoint>(configuration, "DadJokesEndpoint");
 		}
 
-		private static IServiceCollection AddEndpoint<TInterface, TMock>(
+		private static IServiceCollection AddEndpoint<TInterface>(
 			this IServiceCollection services,
 			IConfiguration configuration,
 			string name,
 			Func<IHttpClientBuilder, IHttpClientBuilder> configure = null
 		)
 			where TInterface : class
-			where TMock : class, TInterface
 		{
 			var options = configuration.GetSection(name).Get<EndpointOptions>();
 
 			if (options.EnableMock)
 			{
-				services.AddSingleton<TInterface, TMock>();
+				services.AddSingleton<TInterface>();
 			}
 			else
 			{

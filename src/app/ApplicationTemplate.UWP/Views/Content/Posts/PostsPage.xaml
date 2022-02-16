@@ -9,7 +9,8 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" x:Name="PostPage">
+	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}"
+		  x:Name="PostPage">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -40,7 +41,8 @@
 												   Opacity="0.6"
 												   Foreground="#000000"
 												   Style="{StaticResource MaterialBody2}" />
-										<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+										<StackPanel Orientation="Horizontal"
+													HorizontalAlignment="Right">
 											<Button Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
 													CommandParameter="{Binding}"
 													Content="Delete"
@@ -52,7 +54,7 @@
 													Content="Edit"
 													Style="{StaticResource ExecutingButtonStyle}"
 													Grid.Row="1" />
-											
+
 										</StackPanel>
 									</StackPanel>
 								</DataTemplate>
