@@ -43,11 +43,11 @@
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
 
-		
+
 		<dl:DataLoaderView Source="{Binding Jokes}"
 						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
 						   Grid.Row="1">
-			<DataTemplate >
+			<DataTemplate>
 				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshJokes}"
 								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
 								IndicatorColor="{StaticResource MaterialPrimaryColor}">
@@ -90,7 +90,6 @@
 													  CommandParameter="{Binding}"
 													  HorizontalAlignment="Center"
 													  Grid.Column="1" />
-
 									</Grid>
 								</Grid>
 							</DataTemplate>

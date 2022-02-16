@@ -20,7 +20,6 @@ namespace ApplicationTemplate.Presentation
 
 		public string pt { get; }
 
-
 		public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
