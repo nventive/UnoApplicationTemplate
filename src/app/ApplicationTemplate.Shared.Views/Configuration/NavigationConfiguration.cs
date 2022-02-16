@@ -28,11 +28,10 @@ namespace ApplicationTemplate.Views
 
 		private static IReadOnlyDictionary<Type, Type> GetPageRegistrations() => new Dictionary<Type, Type>()
 		{
-			{ typeof(HomePageViewModel), typeof(HomePage) },
+			{ typeof(WelcomePageViewModel), typeof(WelcomePage) },
 			{ typeof(PostsPageViewModel), typeof(PostsPage) },
 			{ typeof(EditPostPageViewModel), typeof(EditPostPage) },
 			{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
-			{ typeof(WelcomePageViewModel), typeof(WelcomePage) },
 			{ typeof(CreateAccountPageViewModel), typeof(CreateAccountPage) },
 			{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
 			{ typeof(LoginPageViewModel), typeof(LoginPage) },
@@ -42,8 +41,8 @@ namespace ApplicationTemplate.Views
 			{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
 			{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
 			{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
-			{ typeof(ChuckNorrisSearchPageViewModel), typeof(ChuckNorrisSearchPage) },
-			{ typeof(ChuckNorrisFavoritesPageViewModel), typeof(ChuckNorrisFavoritesPage) },
+			{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
+			{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
 		};
 
 		private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)

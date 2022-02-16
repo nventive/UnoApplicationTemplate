@@ -6,9 +6,9 @@ using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Presentation
 {
-	public class ChuckNorrisItemViewModel : ViewModel
+	public class DadJokesItemViewModel : ViewModel
 	{
-		public ChuckNorrisItemViewModel(IViewModel parent, ChuckNorrisQuote quote)
+		public DadJokesItemViewModel(IViewModel parent, DadJokesQuote quote)
 		{
 			Parent = parent;
 			Quote = quote;
@@ -16,7 +16,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IViewModel Parent { get; }
 
-		public ChuckNorrisQuote Quote { get; }
+		public DadJokesQuote Quote { get; }
 
 		public bool IsFavorite
 		{

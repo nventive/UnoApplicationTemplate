@@ -5,7 +5,6 @@
 
 	<Style x:Key="DefaultHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">
-
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Background"

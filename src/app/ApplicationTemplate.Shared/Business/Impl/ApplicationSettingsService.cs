@@ -44,7 +44,7 @@ namespace ApplicationTemplate.Business
 		}
 
 		/// <inheritdoc />
-		public async Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, ChuckNorrisQuote> quotes)
+		public async Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, DadJokesQuote> quotes)
 		{
 			await Update(ct, s => s.WithFavoriteQuotes(quotes));
 		}
@@ -53,7 +53,7 @@ namespace ApplicationTemplate.Business
 		public async Task DiscardUserSettings(CancellationToken ct)
 		{
 			await Update(ct, s => s
-				.WithFavoriteQuotes(ImmutableDictionary<string, ChuckNorrisQuote>.Empty)
+				.WithFavoriteQuotes(ImmutableDictionary<string, DadJokesQuote>.Empty)
 				.WithAuthenticationData(default(AuthenticationData))
 			);
 		}

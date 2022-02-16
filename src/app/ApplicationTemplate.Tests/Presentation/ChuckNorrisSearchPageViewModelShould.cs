@@ -15,22 +15,22 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class ChuckNorrisSearchPageViewModelShould : NavigationTestsBase
+	public class DadJokesSearchPageViewModelShould : NavigationTestsBase
 	{
-		private void MockingGetFavorites(Mock<IChuckNorrisService> mock)
+		private void MockingGetFavorites(Mock<IDadJokesService> mock)
 		{
 			mock
 				.Setup(m => m.GetFavorites(It.IsAny<CancellationToken>()))
-				.ReturnsAsync(new SourceList<ChuckNorrisQuote>().AsObservableList());
+				.ReturnsAsync(new SourceList<DadJokesQuote>().AsObservableList());
 		}
 
 		// Basic class configuration
-		private void ChuckNorrisSearchPageViewModelShould_Configuration(IHostBuilder host)
+		private void DadJokesSearchPageViewModelShould_Configuration(IHostBuilder host)
 		{
 			host.ConfigureServices(services =>
 			{
 				// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-				ReplaceWithMock<IChuckNorrisService>(services, mock =>
+				ReplaceWithMock<IDadJokesService>(services, mock =>
 				{
 					MockingGetFavorites(mock);
 				});
@@ -44,8 +44,8 @@ namespace ApplicationTemplate.Tests
 		public async Task ReturnEmptyCriterion_WhenProvidedSearchTermIsTooShort(string searchTerm)
 		{
 			// Arrange
-			var viewModel = new ChuckNorrisSearchPageViewModel();
-			InitializeServices(ChuckNorrisSearchPageViewModelShould_Configuration);
+			var viewModel = new DadJokesSearchPageViewModel();
+			InitializeServices(DadJokesSearchPageViewModelShould_Configuration);
 
 			// Act
 			viewModel.SearchTerm = searchTerm;
@@ -60,7 +60,7 @@ namespace ApplicationTemplate.Tests
 		{
 			// Arrange
 			var anything = "Anything";
-			var searchPageViewModelMock = new Mock<ChuckNorrisSearchPageViewModel>();
+			var searchPageViewModelMock = new Mock<DadJokesSearchPageViewModel>();
 
 			// Act
 			searchPageViewModelMock.Object.SearchTerm = anything;
@@ -75,7 +75,7 @@ namespace ApplicationTemplate.Tests
 		{
 			// Arrange
 			InitializeServices(Configure);
-			var viewModel = new ChuckNorrisSearchPageViewModel();
+			var viewModel = new DadJokesSearchPageViewModel();
 
 			// Act
 			viewModel.SearchTerm = "dog";
@@ -98,14 +98,14 @@ namespace ApplicationTemplate.Tests
 				host.ConfigureServices(services =>
 				{
 					// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-					ReplaceWithMock<IChuckNorrisService>(services, mock =>
+					ReplaceWithMock<IDadJokesService>(services, mock =>
 					{
 						mock
 							.Setup(m => m.Search(It.IsAny<CancellationToken>(), It.IsAny<string>()))
-							.ReturnsAsync(new ChuckNorrisQuote[]
+							.ReturnsAsync(new DadJokesQuote[]
 							{
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("0").WithValue("Something something dog"), false),
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1203").WithValue("Dog something"), false)
+							new DadJokesQuote(new DadJokesData.Builder().WithId("0").WithValue("Something something dog"), false),
+							new DadJokesQuote(new DadJokesData.Builder().WithId("1203").WithValue("Dog something"), false)
 							});
 
 						MockingGetFavorites(mock);
@@ -120,7 +120,7 @@ namespace ApplicationTemplate.Tests
 			// Arrange
 			InitializeServices(Configure);
 
-			var viewModel = new ChuckNorrisSearchPageViewModel();
+			var viewModel = new DadJokesSearchPageViewModel();
 
 			// Act
 			viewModel.SearchTerm = "dog";
@@ -144,22 +144,22 @@ namespace ApplicationTemplate.Tests
 				host.ConfigureServices(services =>
 				{
 					// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-					ReplaceWithMock<IChuckNorrisService>(services, mock =>
+					ReplaceWithMock<IDadJokesService>(services, mock =>
 					{
 						mock
 							.Setup(m => m.Search(It.IsAny<CancellationToken>(), "dog"))
-							.ReturnsAsync(new ChuckNorrisQuote[]
+							.ReturnsAsync(new DadJokesQuote[]
 							{
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1"), false),
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("3"), false),
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1204"), false)
+							new DadJokesQuote(new DadJokesData.Builder().WithId("1"), false),
+							new DadJokesQuote(new DadJokesData.Builder().WithId("3"), false),
+							new DadJokesQuote(new DadJokesData.Builder().WithId("1204"), false)
 							});
 
 						mock
 							.Setup(m => m.Search(It.IsAny<CancellationToken>(), "cat"))
-							.ReturnsAsync(new ChuckNorrisQuote[]
+							.ReturnsAsync(new DadJokesQuote[]
 							{
-							new ChuckNorrisQuote(new ChuckNorrisData.Builder().WithId("1"), false)
+							new DadJokesQuote(new DadJokesData.Builder().WithId("1"), false)
 							});
 
 						MockingGetFavorites(mock);

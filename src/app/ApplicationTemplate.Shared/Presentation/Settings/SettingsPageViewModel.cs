@@ -58,11 +58,6 @@ namespace ApplicationTemplate.Presentation
 			}));
 		});
 
-		public IDynamicCommand NavigateToLicensesPage => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new LicensesPageViewModel());
-		});
-
 		public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>
 		{
 			var url = this.GetService<IStringLocalizer>()["PrivacyPolicyUrl"];
@@ -75,11 +70,6 @@ namespace ApplicationTemplate.Presentation
 			var url = this.GetService<IStringLocalizer>()["TermsAndConditionsUrl"];
 
 			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
-		});
-
-		public IDynamicCommand NavigateToWebViewPage => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new WebViewPageViewModel("Nventive", new Uri("http://www.nventive.com")));
 		});
 
 		private async Task<UserProfileData> GetUserProfile(CancellationToken ct)

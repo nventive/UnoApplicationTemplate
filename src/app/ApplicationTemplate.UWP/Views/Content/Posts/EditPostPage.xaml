@@ -16,7 +16,7 @@
 
 		<CommandBar Content="{Binding Title}" />
 
-		<StackPanel Margin="20,0,20,10"
+		<StackPanel Margin="20,30,20,10"
 					Grid.Row="1">
 
 			<StackPanel DataContext="{Binding Form}">
@@ -26,6 +26,10 @@
 										  PropertyName="Title"
 										  Margin="0,4">
 					<TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 Background="{StaticResource MaterialSurfaceColor}"
+							 CornerRadius="4"
+							 PlaceholderText="Joke's title"
+							 Style="{StaticResource MaterialBody1}"
 							 FontSize="16" />
 				</local:DataValidationView>
 
@@ -34,24 +38,29 @@
 										  PropertyName="Body"
 										  Margin="0,4">
 					<TextBox Text="{Binding Body, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 Background="{StaticResource MaterialSurfaceColor}"
+							 CornerRadius="4"
+							 PlaceholderText="Write the joke"
+							 Style="{StaticResource MaterialBody1}"
 							 FontSize="16" />
 				</local:DataValidationView>
 			</StackPanel>
 
-			<Button Content="Save"
-					x:Uid="EditPost_Save"
-					Command="{Binding Save}"
-					Style="{StaticResource ExecutingButtonStyle}"
-					HorizontalAlignment="Stretch"
-					Margin="0,4" />
-
-			<Button Content="Delete"
-					x:Uid="EditPost_Delete"
-					Command="{Binding Delete}"
-					Style="{StaticResource ExecutingButtonStyle}"
-					Visibility="{Binding IsNewPost, Converter={StaticResource TrueToCollapsed}, FallbackValue=Collapsed}"
-					HorizontalAlignment="Stretch"
-					Margin="0,4" />
+			<StackPanel Orientation="Horizontal"
+						HorizontalAlignment="Right">
+				<Button Content="Cancel"
+						x:Uid="EditPost_Cancel"
+						Command="{Binding Cancel}"
+						Style="{StaticResource OutlinedExecutingButtonStyle}"
+						HorizontalAlignment="Stretch"
+						Margin="5" />
+				<Button Content="Save"
+						x:Uid="EditPost_Save"
+						Command="{Binding Save}"
+						Style="{StaticResource ExecutingButtonStyle}"
+						HorizontalAlignment="Stretch"
+						Margin="5" />
+			</StackPanel>
 		</StackPanel>
 	</Grid>
 </Page>

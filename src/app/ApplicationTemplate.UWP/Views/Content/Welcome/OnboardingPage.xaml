@@ -6,12 +6,13 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:uc="using:Nventive.View.Converters"
 	  xmlns:u="using:Nventive.View.Controls"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  mc:Ignorable="d">
 
 	<Page.Resources>
 		<ResourceDictionary>
 			<uc:PartitionConverter x:Key="SelectedIndexToButtonContent"
-								   DefaultValue="Skip"
+								   DefaultValue="Skip tutorial"
 								   x:Uid="Onboarding_Skip">
 				<uc:IntervalPartition LowerBound="2"
 									  InRangeValue="Continue"
@@ -19,47 +20,75 @@
 			</uc:PartitionConverter>
 
 			<DataTemplate x:Key="OnboardingItemTemplate">
-				<Grid Background="Black">
-					<TextBlock Text="{Binding PrimaryText}"
-							   Style="{StaticResource MaterialHeadline3}"
-							   Foreground="White"
-							   Margin="40"
-							   HorizontalAlignment="Center" />
+
+				<Grid Height="370">
+
+					<Grid.RowDefinitions>
+						<RowDefinition Height="0.7*" />
+						<RowDefinition Height="0.3*" />
+					</Grid.RowDefinitions>
 
 					<Image Source="{Binding ImageUrl}"
-						   Stretch="Uniform"
-						   Margin="20"
+						   Grid.Row="0"
+						   Stretch="UniformToFill"
+						   Margin="20,0"
 						   VerticalAlignment="Center" />
+					<StackPanel Grid.Row="1"
+								Margin="20,0"
+								Background="{StaticResource MaterialSurfaceColor}">
+						<TextBlock Text="{Binding PrimaryText}"
+								   Style="{StaticResource MaterialBody2}"
+								   Foreground="{StaticResource MaterialOnSurfaceColor}"
+								   Padding="15"
+								   VerticalAlignment="Top"
+								   HorizontalAlignment="Center" />
+					</StackPanel>
 				</Grid>
 			</DataTemplate>
 
 			<DataTemplate x:Key="OnboardingIndexIndicatorTemplate">
-				<Rectangle Fill="Gray"
-						   Width="20"
-						   Height="10" />
+				<StackPanel Margin="0,20">
+					<Ellipse  Fill="#B6A8FB"
+							  Margin="5,0,5,0"
+							  Width="12"
+							  Height="12" />
+				</StackPanel>
 			</DataTemplate>
 
 			<DataTemplate x:Key="OnboardingSelectedIndexIndicatorTemplate">
-				<Rectangle Fill="White"
-						   Width="20"
-						   Height="10" />
+				<StackPanel Margin="0,20">
+
+					<Ellipse  Fill="{StaticResource MaterialPrimaryColor}"
+							  Margin="5,0,5,0"
+							  Width="12"
+							  Height="12" />
+				</StackPanel>
 			</DataTemplate>
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
-		<u:ImageSlideshow x:Name="OnboardingSlideshow"
-						  ItemsSource="{Binding OnboardingItems}"
-						  ItemTemplate="{StaticResource OnboardingItemTemplate}"
-						  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
-						  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
+	<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
 
-		<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
-				Command="{Binding NavigateToWelcomePage}"
-				VerticalAlignment="Bottom"
-				HorizontalAlignment="Center"
-				Background="White"
-				Foreground="Black"
-				Margin="0,0,0,40" />
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<StackPanel Grid.Row="0">
+			<HyperlinkButton Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
+							 Foreground="{StaticResource MaterialOnSurfaceColor}"
+							 FontSize="14"
+							 Command="{Binding NavigateToJokes}"
+							 VerticalAlignment="Top"
+							 Grid.Row="0"
+							 HorizontalAlignment="Right"
+							 Margin="0,20,20,0" />
+
+			<u:ImageSlideshow x:Name="OnboardingSlideshow"
+							  Grid.Row="1"
+							  ItemsSource="{Binding OnboardingItems}"
+							  ItemTemplate="{StaticResource OnboardingItemTemplate}"
+							  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
+							  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
+		</StackPanel>
 	</Grid>
 </Page>

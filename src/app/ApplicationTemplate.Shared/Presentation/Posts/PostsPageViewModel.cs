@@ -14,10 +14,17 @@ namespace ApplicationTemplate.Presentation
 	{
 		private readonly Func<Task> _onGetPostsCalled;
 
+		private readonly ManualDataLoaderTrigger _deletePostTrigger = new ManualDataLoaderTrigger();
+
 		public PostsPageViewModel(Func<Task> onGetPostsCalled = null)
 		{
 			_onGetPostsCalled = onGetPostsCalled;
 		}
+
+		public IDynamicCommand DeletePost => this.GetCommandFromTask<PostData>(async (ct, post) =>
+		{
+			await this.GetService<IPostService>().Delete(ct, post.Id);
+		});
 
 		public IDynamicCommand NavigateToNewPost => this.GetCommandFromTask(async ct =>
 		{
@@ -31,7 +38,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand RefreshPosts => this.GetCommandFromDataLoaderRefresh(Posts);
 
-		public IDataLoader Posts => this.GetDataLoader(GetPosts);
+		public IDataLoader Posts => this.GetDataLoader(GetPosts, d => d.WithTrigger(_deletePostTrigger));
 
 		private async Task<ImmutableList<PostData>> GetPosts(CancellationToken ct)
 		{

@@ -17,17 +17,27 @@
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
-			<Color x:Key="MaterialPrimaryColor">#FF274A9D</Color>
+			<Color x:Key="MaterialPrimaryColor">#595397</Color>
+			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
 
-			<Color x:Key="MaterialBackgroundColor">#FFFCFCFC</Color>
-			<Color x:Key="MaterialOnBackgroundColor">#FF444444</Color>
+			<Color x:Key="MaterialSecondaryColor">#67E5AD
+			</Color>
+			<Color x:Key="MaterialOnSecondaryColor">#FFFFFF</Color>
 
-			<Color x:Key="MaterialSurfaceColor">#FFEDEDED</Color>
-			<Color x:Key="MaterialOnSurfaceColor">#FF222222</Color>
+			<Color x:Key="MaterialBackgroundColor">#F4F4F4</Color>
+			<Color x:Key="MaterialOnBackgroundColor">#000000</Color>
+
+			<Color x:Key="MaterialSurfaceColor">#FFFFFF</Color>
+			<Color x:Key="MaterialOnSurfaceColor">#000000</Color>
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Dark">
 			<Color x:Key="MaterialPrimaryColor">#FF839DDA</Color>
+			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
+
+			<Color x:Key="MaterialSecondaryColor">#67E5AD
+			</Color>
+			<Color x:Key="MaterialOnSecondaryColor">#FFFFFF</Color>
 			
 			<Color x:Key="MaterialBackgroundColor">#FF111111</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#FFEFEFEF</Color>
