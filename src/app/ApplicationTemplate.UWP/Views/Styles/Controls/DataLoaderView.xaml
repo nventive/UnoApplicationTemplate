@@ -43,37 +43,35 @@
 
 	<!-- Error State -->
 	<DataTemplate x:Key="DataLoaderViewErrorTemplate">
-		<StackPanel VerticalAlignment="Center"
-					HorizontalAlignment="Stretch">
-			<!-- Title -->
-			<TextBlock Text="Error"
-					   Style="{StaticResource MaterialHeadline6}"
-					   TextAlignment="Center"
-					   Margin="32,44,32,0" />
+		<Grid Background="{StaticResource MaterialBackgroundBrush}">
+			<StackPanel VerticalAlignment="Center"
+						HorizontalAlignment="Stretch">
 
-			<!-- Inner message -->
-			<Grid Background="Black"
-				  Padding="8"
-				  HorizontalAlignment="Center"
-				  Margin="32,12,32,0">
-				<TextBlock Text="{Binding Error.Message}"
-						   Style="{StaticResource MaterialBody1}"
-						   Foreground="White" />
-			</Grid>
+				<!-- Image -->
+				<Image Source="ms-appx:///Assets/Error_Template_Icon.png"
+				   Height="226"
+				   Width="210"
+				   Margin="4,0" />
+				
+				<!-- Title -->
+				<TextBlock Text="Something went wrong"
+						   Style="{StaticResource Headline5}"
+						   TextAlignment="Center"
+						   Margin="0,0,0,8" />
 
-			<!-- Message -->
-			<TextBlock Text="Please try again later."
-					   Style="{StaticResource MaterialBody2}"
-					   TextAlignment="Center"
-					   Margin="32,12,32,0" />
+				<!-- Message -->
+				<TextBlock Text="Please try again."
+						   Style="{StaticResource Body1}"
+						   TextAlignment="Center" />
 
-			<!-- Try Again Button -->
-			<Button Content="Try Again"
-					HorizontalAlignment="Center"
-					Style="{StaticResource ExecutingButtonStyle}"
-					Command="{Binding View.RefreshCommand}"
-					Margin="16,32,16,0" />
-		</StackPanel>
+				<!-- Try Again Button -->
+				<Button Content="RELOAD PAGE"
+						HorizontalAlignment="Stretch"
+						Style="{StaticResource ExecutingButtonStyle}"
+						Command="{Binding View.RefreshCommand}"
+						Margin="22,24,22,0" />
+			</StackPanel>
+		</Grid>
 	</DataTemplate>
 
 	<Style x:Key="DefaultDataLoaderViewStyle"
@@ -187,7 +185,7 @@
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Empty_NoError_Loading">
-									<VisualState.Setters>										
+									<VisualState.Setters>
 										<Setter Target="RefreshPresenter.Visibility"
 												Value="Visible" />
 										<Setter Target="RefreshingIndicator.IsActive"

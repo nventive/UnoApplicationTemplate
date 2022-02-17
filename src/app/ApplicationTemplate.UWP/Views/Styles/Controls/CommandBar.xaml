@@ -20,11 +20,11 @@
 		   xamarin:BasedOn="{StaticResource NativeDefaultCommandBar}">
 		<!-- COMMON SETTERS -->
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
 
 		<!-- StatusBarThickness Padding set here in order to fix those two known issues:
 				On iOS the content will be underneath the CommandBar

@@ -81,6 +81,10 @@
     <Content Include="Entitlements.plist" />
     <BundleResource Include="Resources\Fonts\segmdl2.ttf" />
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\Fonts\Guillon-Regular.ttf" />
+    <BundleResource Include="Resources\Fonts\Guillon-Bold.ttf" />
+    <BundleResource Include="Resources\Fonts\Guillon-SemiBold.ttf" />
+    <BundleResource Include="Resources\Fonts\Guillon-Black.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

@@ -167,6 +167,10 @@
   <ItemGroup>
     <AndroidAsset Include="Assets\Fonts\segmdl2.ttf" />
     <AndroidAotProfile Include="$(MSBuildThisFileDirectory)custom.aprof" />
+    <AndroidAsset Include="Assets\Fonts\Guillon-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Guillon-Bold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Guillon-SemiBold.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Guillon-Black.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>

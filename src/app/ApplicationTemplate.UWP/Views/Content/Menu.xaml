@@ -8,7 +8,7 @@
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource MaterialSurfaceBrush}">
+		  Background="{StaticResource MaterialOnBackgroundBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 
@@ -64,21 +64,24 @@
 			<ColumnDefinition Width="*" />
 		</Grid.ColumnDefinitions>
 
-		<RadioButton Content="Home"
-					 x:Uid="Menu_Home"
-					 HorizontalAlignment="Center"
-					 Command="{Binding ShowHome}" />
+		<Button Content="Home"
+				x:Uid="Menu_Home"
+				HorizontalAlignment="Center"
+				Command="{Binding ShowHome}"
+				Style="{StaticResource MenuButtonStyle}"/>
 
-		<RadioButton Content="Posts"
-					 x:Uid="Menu_Posts"
-					 HorizontalAlignment="Center"
-					 Command="{Binding ShowPosts}"
-					 Grid.Column="1" />
+		<Button Content="Posts"
+				x:Uid="Menu_Posts"
+				HorizontalAlignment="Center"
+				Command="{Binding ShowPosts}"
+				Style="{StaticResource MenuButtonStyle}"
+				Grid.Column="1" />
 
-		<RadioButton Content="Settings"
-					 x:Uid="Menu_Settings"
-					 HorizontalAlignment="Center"
-					 Command="{Binding ShowSettings}"
-					 Grid.Column="2" />
+		<Button Content="Settings"
+				x:Uid="Menu_Settings"
+				HorizontalAlignment="Center"
+				Command="{Binding ShowSettings}"
+				Style="{StaticResource MenuButtonStyle}"
+				Grid.Column="2" />
 	</Grid>
 </local:AttachableUserControl>
