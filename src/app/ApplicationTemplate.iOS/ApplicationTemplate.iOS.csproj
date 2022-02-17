@@ -85,6 +85,8 @@
     <BundleResource Include="Resources\Fonts\Guillon-Bold.ttf" />
     <BundleResource Include="Resources\Fonts\Guillon-SemiBold.ttf" />
     <BundleResource Include="Resources\Fonts\Guillon-Black.ttf" />
+    <BundleResource Include="Resources\Fonts\Roboto-Regular.ttf" />
+    <BundleResource Include="Resources\Fonts\Roboto-Medium.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

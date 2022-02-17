@@ -8,6 +8,12 @@
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily02}" />
+		<Setter Property="FontWeight"
+				Value="Bold" />
+		<Setter Property="FontSize"
+				Value="14" />
 		<Setter Property="Padding"
 				Value="16,12" />
 		<Setter Property="CornerRadius"
@@ -26,12 +32,10 @@
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<Storyboard>
-										<DoubleAnimation Duration="0:0:0.1"
-														 To="{StaticResource MaterialPrimaryPressedBrush}"
-														 Storyboard.TargetName="BackgroundBorder"
-														 Storyboard.TargetProperty="Background" />
-									</Storyboard>
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Background"
+												Value="{StaticResource MaterialPrimaryPressedBrush}" />
+									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
