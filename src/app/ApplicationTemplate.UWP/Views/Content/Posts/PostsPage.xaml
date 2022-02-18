@@ -41,7 +41,8 @@
 												   Opacity="0.6"
 												   Foreground="#000000"
 												   Style="{StaticResource MaterialBody2}" />
-										<StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+										<StackPanel Orientation="Horizontal"
+													HorizontalAlignment="Right">
 											<Button Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
 													CommandParameter="{Binding}"
 													Content="Delete"
@@ -52,8 +53,7 @@
 													CommandParameter="{Binding}"
 													Content="Edit"
 													Style="{StaticResource ExecutingButtonStyle}"
-													Grid.Row="1" />
-											
+													Grid.Row="1" />											
 										</StackPanel>
 									</StackPanel>
 								</DataTemplate>
