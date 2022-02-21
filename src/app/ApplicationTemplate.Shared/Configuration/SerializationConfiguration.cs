@@ -21,10 +21,12 @@ using Nventive.Persistence;
 [assembly: JsonSerializableType(typeof(Refit.ProblemDetails))]
 [assembly: JsonSerializableType(typeof(PostData))]
 [assembly: JsonSerializableType(typeof(PostData[]))]
-[assembly: JsonSerializableType(typeof(ChuckNorrisResponse))]
-[assembly: JsonSerializableType(typeof(ChuckNorrisErrorResponse))]
+[assembly: JsonSerializableType(typeof(DadJokesResponse))]
+[assembly: JsonSerializableType(typeof(DadJokesErrorResponse))]
 [assembly: JsonSerializableType(typeof(UserProfileData))]
-[assembly: JsonSerializableType(typeof(ChuckNorrisQuote))]
+[assembly: JsonSerializableType(typeof(DadJokesData))]
+[assembly: JsonSerializableType(typeof(DadJokeChildData))]
+[assembly: JsonSerializableType(typeof(DadJokeContentData))]
 
 namespace ApplicationTemplate
 {

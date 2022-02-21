@@ -12,17 +12,17 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests
 {
-	public class ChuckNorrisFavoritesPageViewModelShould : NavigationTestsBase
+	public class DadJokesFavoritesPageViewModelShould : NavigationTestsBase
 	{
 		[Fact]
 		public async Task ReturnNoResults()
 		{
 			// Arrange
-			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisFavoritesPageViewModel());
-			var viewModel = (ChuckNorrisFavoritesPageViewModel)GetCurrentViewModel();
+			await NavigateAndClear(DefaultCancellationToken, () => new DadJokesFavoritesPageViewModel());
+			var viewModel = (DadJokesFavoritesPageViewModel)GetCurrentViewModel();
 
 			// Act
-			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken) as ReadOnlyObservableCollection<ChuckNorrisItemViewModel>;
+			var quotes = await viewModel.Quotes.Load(DefaultCancellationToken) as ReadOnlyObservableCollection<DadJokesItemViewModel>;
 
 			// Assert
 			quotes.Should().BeNullOrEmpty();
@@ -32,8 +32,8 @@ namespace ApplicationTemplate.Tests
 		public async Task ReturnFavourited()
 		{
 			// Arrange
-			var mockChuckNorrisService = new Mock<IChuckNorrisService>();
-			var searchViewModel = new ChuckNorrisSearchPageViewModel();
+			var mockDadJokesService = new Mock<IDadJokesService>();
+			var searchViewModel = new DadJokesSearchPageViewModel();
 
 			searchViewModel.SearchTerm = "dog";
 			var searchedQuotes = await searchViewModel.Quotes.Load(DefaultCancellationToken);
@@ -42,10 +42,10 @@ namespace ApplicationTemplate.Tests
 			// Act
 			await searchViewModel.ToggleIsFavorite.Execute(firstQuoteVm);
 
-			await NavigateAndClear(DefaultCancellationToken, () => new ChuckNorrisFavoritesPageViewModel());
-			var favouritesViewModel = (ChuckNorrisFavoritesPageViewModel)GetCurrentViewModel();
+			await NavigateAndClear(DefaultCancellationToken, () => new DadJokesFavoritesPageViewModel());
+			var favouritesViewModel = (DadJokesFavoritesPageViewModel)GetCurrentViewModel();
 
-			var favouritedQuotes = await favouritesViewModel.Quotes.Load(DefaultCancellationToken) as ReadOnlyObservableCollection<ChuckNorrisItemViewModel>;
+			var favouritedQuotes = await favouritesViewModel.Quotes.Load(DefaultCancellationToken) as ReadOnlyObservableCollection<DadJokesItemViewModel>;
 
 			// ReadOnlyObservableCollection does not load its content directly. Waiting for the CollectionChanged is a workaround to wait for its content to be loaded.
 			var tcs = new TaskCompletionSource<Unit>();

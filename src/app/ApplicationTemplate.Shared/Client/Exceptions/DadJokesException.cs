@@ -4,18 +4,18 @@ using System.Text;
 
 namespace ApplicationTemplate.Client
 {
-	public class ChuckNorrisException : Exception
+	public class DadJokesException : Exception
 	{
-		public ChuckNorrisException()
+		public DadJokesException()
 		{
 		}
 
-		public ChuckNorrisException(string message)
+		public DadJokesException(string message)
 			: base(message)
 		{
 		}
 
-		public ChuckNorrisException(string message, Exception innerException)
+		public DadJokesException(string message, Exception innerException)
 			: base(message, innerException)
 		{
 		}

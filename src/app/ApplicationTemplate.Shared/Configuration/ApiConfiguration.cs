@@ -33,8 +33,8 @@ namespace ApplicationTemplate
 		/// <returns>The updated <see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
 		{
-			// For example purpose: the following line loads the ChuckNorrisEndpoint configuration section and make IOptions<ChuckNorrisEndpointOptions> available for DI.
-			services.BindOptionsToConfiguration<ChuckNorrisEndpointOptions>(configuration);
+			// For example purpose: the following line loads the DadJokesEndpoint configuration section and make IOptions<DadJokesEndpointOptions> available for DI.
+			services.BindOptionsToConfiguration<DadJokesEndpointOptions>(configuration);
 
 			services
 				.AddMainHandler()
@@ -48,19 +48,19 @@ namespace ApplicationTemplate
 				.AddAuthenticationEndpoint(configuration)
 				.AddPostEndpoint(configuration)
 				.AddUserProfileEndpoint(configuration)
-				.AddChuckNorrisEndpoint(configuration);
+				.AddDadJokesEndpoint(configuration);
 
 			return services;
 		}
 
 		private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IUserProfileEndpoint, UserProfileEndpointMock>(configuration, "UserProfileEndpoint");
+			return services.AddEndpoint<IUserProfileEndpoint>(configuration, "UserProfileEndpoint");
 		}
 
 		private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IAuthenticationEndpoint, AuthenticationEndpointMock>(configuration, "AuthenticationEndpoint");
+			return services.AddEndpoint<IAuthenticationEndpoint>(configuration, "AuthenticationEndpoint");
 		}
 
 		private static IServiceCollection AddPostEndpoint(this IServiceCollection services, IConfiguration configuration)
@@ -71,39 +71,30 @@ namespace ApplicationTemplate
 					(request, response, deserializedResponse) => new PostEndpointException(deserializedResponse)
 				))
 				.AddTransient<ExceptionInterpreterHandler<PostErrorResponse>>()
-				.AddEndpoint<IPostEndpoint, PostEndpointMock>(configuration, "PostEndpoint", b => b
+				.AddEndpoint<IPostEndpoint>(configuration, "PostEndpoint", b => b
 					.AddHttpMessageHandler<ExceptionInterpreterHandler<PostErrorResponse>>()
 					.AddHttpMessageHandler<AuthenticationTokenHandler<AuthenticationData>>()
 				);
 		}
 
-		private static IServiceCollection AddChuckNorrisEndpoint(this IServiceCollection services, IConfiguration configuration)
+		private static IServiceCollection AddDadJokesEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services
-				.AddSingleton<IErrorResponseInterpreter<ChuckNorrisErrorResponse>>(s => new ErrorResponseInterpreter<ChuckNorrisErrorResponse>(
-					(request, response, deserializedResponse) => deserializedResponse.Message != null,
-					(request, response, deserializedResponse) => new ChuckNorrisException(deserializedResponse.Message)
-				))
-				.AddTransient<ExceptionInterpreterHandler<ChuckNorrisErrorResponse>>()
-				.AddEndpoint<IChuckNorrisEndpoint, ChuckNorrisEndpointMock>(configuration, "ChuckNorrisEndpoint", b => b
-					.AddHttpMessageHandler<ExceptionInterpreterHandler<ChuckNorrisErrorResponse>>()
-				);
+			return services.AddEndpoint<IDadJokesEndpoint>(configuration, "DadJokesEndpoint");
 		}
 
-		private static IServiceCollection AddEndpoint<TInterface, TMock>(
+		private static IServiceCollection AddEndpoint<TInterface>(
 			this IServiceCollection services,
 			IConfiguration configuration,
 			string name,
 			Func<IHttpClientBuilder, IHttpClientBuilder> configure = null
 		)
 			where TInterface : class
-			where TMock : class, TInterface
 		{
 			var options = configuration.GetSection(name).Get<EndpointOptions>();
 
 			if (options.EnableMock)
 			{
-				services.AddSingleton<TInterface, TMock>();
+				services.AddSingleton<TInterface>();
 			}
 			else
 			{

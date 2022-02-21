@@ -74,11 +74,11 @@ namespace ApplicationTemplate
 
 			if (currentSettings.IsOnboardingCompleted)
 			{
-				await section.Navigate(ct, () => new HomePageViewModel());
+				await section.Navigate(ct, () => new DadJokesPageViewModel());
 			}
 			else
 			{
-				await section.Navigate(ct, () => new OnboardingPageViewModel());
+				await section.Navigate(ct, () => new WelcomePageViewModel());
 			}
 //-:cnd:noEmit
 #if __MOBILE__ || WINDOWS_UWP

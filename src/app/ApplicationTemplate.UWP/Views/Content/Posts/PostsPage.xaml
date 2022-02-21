@@ -9,57 +9,77 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}"
+		  x:Name="PostPage">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
 		<CommandBar Content="Posts"
+					Grid.Row="0"
 					x:Uid="Posts_CommandBar" />
 
-		<Button Content="New post"
-				x:Uid="Posts_NewPost"
-				Command="{Binding NavigateToNewPost}"
-				Margin="0,4"
-				HorizontalAlignment="Stretch"
-				Grid.Row="1" />
+		<Grid Grid.Row="1">
+			<dl:DataLoaderView Source="{Binding Posts}"
+							   Height="475"
+							   RefreshCommand="{Binding RefreshPosts}">
+				<DataTemplate>
+					<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
+									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
+									IndicatorColor="Black">
+						<ListView ItemsSource="{Binding Data}"
+								  Header="{Binding}">
+							<ListView.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Padding="0,15">
+										<TextBlock Text="{Binding Title}"
+												   Margin="0,0,5,0"
+												   Style="{StaticResource MaterialSubtitle1}" />
+										<TextBlock Text="{Binding Body}"
+												   Opacity="0.6"
+												   Foreground="#000000"
+												   Style="{StaticResource MaterialBody2}" />
+										<StackPanel Orientation="Horizontal"
+													HorizontalAlignment="Right">
+											<Button Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
+													CommandParameter="{Binding}"
+													Content="Delete"
+													Margin="0,0,5,0"
+													Style="{StaticResource OutlinedExecutingButtonStyle}"
+													Grid.Row="0" />
+											<Button Command="{Binding ElementName=PostPage, Path=DataContext.NavigateToPost}"
+													CommandParameter="{Binding}"
+													Content="Edit"
+													Style="{StaticResource ExecutingButtonStyle}"
+													Grid.Row="1" />
 
-		<StackPanel Orientation="Horizontal"
-					Margin="12,0,0,0"
-					Grid.Row="2">
-			
-			<TextBlock Text="Example of an image"
-					   Style="{StaticResource MaterialSubtitle1}"/>
-			<Image Source="ms-appx:///Assets/Image_Example.png"
-				   Height="20"
-				   Width="20"
-				   Margin="4,0" />
-		</StackPanel>
+										</StackPanel>
+									</StackPanel>
+								</DataTemplate>
+							</ListView.ItemTemplate>
+						</ListView>
+					</u:SwipeRefresh>
+				</DataTemplate>
+			</dl:DataLoaderView>
 
-		<dl:DataLoaderView Source="{Binding Posts}"
-						   RefreshCommand="{Binding RefreshPosts}"
-						   Margin="0,12,0,0"
-						   Grid.Row="3">
-			<DataTemplate>
-				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
-								IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
-								IndicatorColor="Black">
-					<ListView ItemsSource="{Binding Data}"
-							  ue:ListViewBaseExtensions.Command="{Binding Parent.NavigateToPost}"
-							  IsItemClickEnabled="True">
-						<ListView.ItemTemplate>
-							<DataTemplate>
-								<TextBlock Text="{Binding Title}"
-										   Style="{StaticResource MaterialBody1}"/>
-							</DataTemplate>
-						</ListView.ItemTemplate>
-					</ListView>
-				</u:SwipeRefresh>
-			</DataTemplate>
-		</dl:DataLoaderView>
+			<Button Background="Transparent"
+					Command="{Binding NavigateToNewPost}"
+					CommandParameter="{Binding}"
+					VerticalAlignment="Bottom"
+					HorizontalAlignment="Right">
+				<Border Width="56"
+						Height="56"
+						CornerRadius="50"
+						Background="{StaticResource MaterialSecondaryColor}">
+
+					<Path Fill="{StaticResource MaterialOnSecondaryColor}"
+						  Width="24"
+						  Height="24"
+						  Data="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+				</Border>
+			</Button>
+		</Grid>
 	</Grid>
 </Page>

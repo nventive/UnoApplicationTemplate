@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Text;
+using ApplicationTemplate.Presentation;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -18,24 +19,24 @@ namespace ApplicationTemplate.Presentation
 		/// </summary>
 		private Type[] _viewModelsWithBottomMenu = new Type[]
 		{
-			typeof(HomePageViewModel),
+			typeof(DadJokesPageViewModel),
 			typeof(PostsPageViewModel),
 			typeof(SettingsPageViewModel),
 		};
 
 		public IDynamicCommand ShowHome => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new HomePageViewModel());
+			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesPageViewModel());
 		});
 
 		public IDynamicCommand ShowPosts => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Posts", () => new PostsPageViewModel());
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new PostsPageViewModel());
 		});
 
 		public IDynamicCommand ShowSettings => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Settings", () => new SettingsPageViewModel());
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new SettingsPageViewModel());
 		});
 
 		public string MenuState

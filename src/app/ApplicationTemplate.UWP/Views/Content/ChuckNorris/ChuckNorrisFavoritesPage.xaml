@@ -1,4 +1,4 @@
-﻿<Page x:Class="ApplicationTemplate.Views.Content.ChuckNorrisFavoritesPage"
+﻿<Page x:Class="ApplicationTemplate.Views.Content.DadJokesFavoritesPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -25,7 +25,7 @@
 		</Grid.RowDefinitions>
 
 		<CommandBar Content="Favorite Quotes"
-					x:Uid="ChuckNorrisFavorites_CommandBar" />
+					x:Uid="DadJokesFavorites_CommandBar" />
 
 		<dl:DataLoaderView Source="{Binding Quotes}"
 						   EmptyTemplate="{StaticResource QuotesEmptyTemplate}"

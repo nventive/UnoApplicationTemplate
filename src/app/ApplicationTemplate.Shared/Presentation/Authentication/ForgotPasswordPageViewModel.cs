@@ -19,7 +19,7 @@ namespace ApplicationTemplate.Presentation
 			{
 				await this.GetService<IAuthenticationService>().ResetPassword(ct, Form.Email.Trim());
 
-				await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new HomePageViewModel());
+				await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
 			}
 		});
 	}

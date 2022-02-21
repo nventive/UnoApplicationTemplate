@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using GeneratedSerializers;
 using Uno;
 
 namespace ApplicationTemplate.Client
 {
 	[GeneratedImmutable]
-	public partial class ChuckNorrisErrorResponse
+	public partial class DadJokesResponse
 	{
 		[EqualityHash]
-		public string Message { get; }
+		public DadJokesData Data { get; }
 	}
 }

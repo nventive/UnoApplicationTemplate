@@ -7,15 +7,15 @@ using Refit;
 
 namespace ApplicationTemplate.Client
 {
-	public interface IChuckNorrisEndpoint
+	public interface IDadJokesEndpoint
 	{
 		/// <summary>
-		/// Returns a list of quotes that match the <paramref name="searchTerm"/>.
+		/// Returns a list of dad jokes based on /r/dadjokes.
 		/// </summary>
 		/// <param name="ct"><see cref="CancellationToken"/></param>
-		/// <param name="searchTerm">Search term</param>
+		/// <param name="typePost"><see cref="string"/></param>
 		/// <returns>List of quotes</returns>
-		[Get("/search")]
-		Task<ChuckNorrisResponse> Search(CancellationToken ct, [AliasAs("query")] string searchTerm);
+		[Get("/{typePost}.json")]
+		Task<DadJokesResponse> FetchData(CancellationToken ct, string typePost);
 	}
 }
