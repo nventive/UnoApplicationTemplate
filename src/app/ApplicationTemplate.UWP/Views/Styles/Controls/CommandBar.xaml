@@ -20,11 +20,11 @@
 		   xamarin:BasedOn="{StaticResource NativeDefaultCommandBar}">
 		<!-- COMMON SETTERS -->
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
-				Value="{StaticResource MaterialOnPrimaryColor}" />
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryColor}" />
+				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnPrimaryColor}" />
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="FontSize"
 				Value="20" />
 

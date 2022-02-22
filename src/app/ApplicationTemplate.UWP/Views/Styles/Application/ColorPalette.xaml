@@ -12,8 +12,5 @@
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
 		</ResourceDictionary>
-
-		<ResourceDictionary x:Key="Dark">
-		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

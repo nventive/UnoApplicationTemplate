@@ -8,8 +8,16 @@
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily02}" />
+		<Setter Property="FontWeight"
+				Value="Bold" />
+		<Setter Property="FontSize"
+				Value="14" />
 		<Setter Property="Padding"
 				Value="16,12" />
+		<Setter Property="CornerRadius"
+				Value="4" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
@@ -17,14 +25,17 @@
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Background"
+												Value="{StaticResource MaterialPrimaryHoverBrush}" />
+									</VisualState.Setters>
+								</VisualState>
 								<VisualState x:Name="Pressed">
-									<Storyboard>
-										<DoubleAnimation Duration="0:0:0.1"
-														 To="0.8"
-														 Storyboard.TargetName="BackgroundBorder"
-														 Storyboard.TargetProperty="Opacity" />
-									</Storyboard>
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Background"
+												Value="{StaticResource MaterialPrimaryPressedBrush}" />
+									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
@@ -37,7 +48,7 @@
 
 						<Border x:Name="BackgroundBorder"
 								Background="{TemplateBinding Background}"
-								CornerRadius="4"
+								CornerRadius="{TemplateBinding CornerRadius}"
 								BorderThickness="1" />
 
 						<Grid Margin="{TemplateBinding Padding}"
@@ -129,6 +140,20 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+	</Style>
+
+	<Style x:Key="MenuButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="Background"
+				Value="{StaticResource MaterialOnBackgroundBrush}" />
+		<Setter Property="Padding"
+				Value="8,14" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily01}" />
+		<Setter Property="FontSize"
+				Value="12" />
 	</Style>
 
 	<!-- Set a default implicit style for buttons -->

@@ -8,7 +8,7 @@
 	  xmlns:u="using:Nventive.View.Controls"
 	  mc:Ignorable="d">
 
-	<Grid Background="Blue">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="0.9*" />

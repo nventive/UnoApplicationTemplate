@@ -17,33 +17,27 @@
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
-			<Color x:Key="MaterialPrimaryColor">#595397</Color>
+			<Color x:Key="MaterialPrimaryColor">#0D59CD</Color>
 			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
+			<Color x:Key="MaterialPrimaryDarkColor">#0A447D</Color>
+			<Color x:Key="MaterialPrimaryLightColor">#0A68C8</Color>
+			<Color x:Key="MaterialPrimaryAccentColor">#F9423A</Color>
 
-			<Color x:Key="MaterialSecondaryColor">#67E5AD
-			</Color>
-			<Color x:Key="MaterialOnSecondaryColor">#FFFFFF</Color>
+			<Color x:Key="MaterialSecondaryColor">#5BC5F2</Color>
+			<Color x:Key="MaterialOnSecondaryColor">#001E60</Color>
+			<Color x:Key="MaterialSecondaryDarkColor">#4FB0D2</Color>
+			<Color x:Key="MaterialSecondaryLightColor">#68D2F8</Color>
 
-			<Color x:Key="MaterialBackgroundColor">#F4F4F4</Color>
-			<Color x:Key="MaterialOnBackgroundColor">#000000</Color>
+			<Color x:Key="MaterialBackgroundColor">#F5FAFF</Color>
+			<Color x:Key="MaterialOnBackgroundColor">#001E60</Color>
 
 			<Color x:Key="MaterialSurfaceColor">#FFFFFF</Color>
-			<Color x:Key="MaterialOnSurfaceColor">#000000</Color>
-		</ResourceDictionary>
+			<Color x:Key="MaterialOnSurfaceColor">#001E60</Color>
 
-		<ResourceDictionary x:Key="Dark">
-			<Color x:Key="MaterialPrimaryColor">#FF839DDA</Color>
-			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
-
-			<Color x:Key="MaterialSecondaryColor">#67E5AD
-			</Color>
-			<Color x:Key="MaterialOnSecondaryColor">#FFFFFF</Color>
-			
-			<Color x:Key="MaterialBackgroundColor">#FF111111</Color>
-			<Color x:Key="MaterialOnBackgroundColor">#FFEFEFEF</Color>
-
-			<Color x:Key="MaterialSurfaceColor">#FF333333</Color>
-			<Color x:Key="MaterialOnSurfaceColor">#FFFAFAFA</Color>
+			<Color x:Key="MaterialErrorColor">#D93B27</Color>
+			<Color x:Key="MaterialOnErrorColor">#FDEFED</Color>
+			<Color x:Key="MaterialSuccessColor">#59DF9F</Color>
+			<Color x:Key="MaterialOnSuccessColor">#105132</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

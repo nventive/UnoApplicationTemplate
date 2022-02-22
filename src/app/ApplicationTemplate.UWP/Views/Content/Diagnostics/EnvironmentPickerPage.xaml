@@ -6,9 +6,9 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  mc:Ignorable="d"
-	  Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+	  Background="{StaticResource MaterialBackgroundBrush}">
 
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
