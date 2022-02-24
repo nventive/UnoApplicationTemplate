@@ -53,8 +53,7 @@
 													CommandParameter="{Binding}"
 													Content="Edit"
 													Style="{StaticResource ExecutingButtonStyle}"
-													Grid.Row="1" />
-
+													Grid.Row="1" />											
 										</StackPanel>
 									</StackPanel>
 								</DataTemplate>

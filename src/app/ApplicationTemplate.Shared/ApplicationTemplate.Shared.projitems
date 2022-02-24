@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\AuthenticationEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Exceptions\DadJokesException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\IDadJokesEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\ChuckNorrisEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\UserProfileEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConfigurationSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\DiagnosticsConfiguration.cs" />
@@ -140,6 +141,9 @@
     <Folder Include="$(MSBuildThisFileDirectory)Framework\Serialization\" />
     <Folder Include="$(MSBuildThisFileDirectory)Presentation\Posts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Presentation\Welcome\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Client\Mock\ChuckNorrisEndpointMock.Search.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.production.json" />
