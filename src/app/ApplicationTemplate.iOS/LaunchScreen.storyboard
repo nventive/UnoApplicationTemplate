@@ -25,8 +25,7 @@
 							<constraint firstAttribute="centerY" secondItem="65" secondAttribute="centerY" id="80"/>
 							<constraint firstAttribute="centerX" secondItem="65" secondAttribute="centerX" id="81"/>
 						</constraints>
-						<color key="backgroundColor" colorSpace="calibratedRGB" red="0.15294117647058825" green="0.29019607843137257" blue="0.615686274509804" alpha="1"/>
-						<color key="tintColor" colorSpace="calibratedRGB" red="0.15294117647058825" green="0.29019607843137257" blue="0.615686274509804" alpha="1"/>
+						<color key="backgroundColor" colorSpace="calibratedRGB" red="0.051" green="0.349" blue="0.804" alpha="1"/>
 					</view>
 				</viewController>
 				<placeholder placeholderIdentifier="IBFirstResponder" id="7" userLabel="First Responder" sceneMemberID="firstResponder"/>
