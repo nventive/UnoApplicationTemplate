@@ -49,9 +49,7 @@
 
 				<!-- Image -->
 				<Image Source="ms-appx:///Assets/Error_Template_Icon.png"
-				   Height="226"
-				   Width="210"
-				   Margin="4,0" />
+				   Margin="102,0" />
 				
 				<!-- Title -->
 				<TextBlock Text="Something went wrong"

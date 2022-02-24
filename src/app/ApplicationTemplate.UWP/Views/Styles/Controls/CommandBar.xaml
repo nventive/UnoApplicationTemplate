@@ -25,6 +25,8 @@
 				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="FontSize"
+				Value="20" />
 
 		<!-- StatusBarThickness Padding set here in order to fix those two known issues:
 				On iOS the content will be underneath the CommandBar
@@ -87,7 +89,7 @@
 		</win:Setter>
 
 		<win:Setter Property="Height"
-					Value="40"/>
+					Value="55"/>
 
 		<!-- Simplified CommandBar template that adds support for Uno.UI.CommandBarExtensions.NavigationCommand on Windows. -->
 		<win:Setter Property="Template">

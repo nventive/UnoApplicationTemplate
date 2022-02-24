@@ -49,6 +49,6 @@ namespace ApplicationTemplate.Business
 		/// <param name="ct"><see cref="CancellationToken"/></param>
 		/// <param name="quotes">Favorite quotes</param>
 		/// <returns><see cref="Task"/></returns>
-		Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, ChuckNorrisQuote> quotes);
+		Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, DadJokesQuote> quotes);
 	}
 }

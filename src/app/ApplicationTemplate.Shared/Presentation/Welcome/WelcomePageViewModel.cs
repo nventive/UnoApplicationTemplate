@@ -1,27 +1,18 @@
 ﻿using System;
+using System.Threading.Tasks;
+using ApplicationTemplate.Presentation;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
+using MallardMessageHandlers;
 
 namespace ApplicationTemplate.Presentation
 {
 	public partial class WelcomePageViewModel : ViewModel
 	{
-		public IDynamicCommand NavigateToHomePage => this.GetCommandFromTask(async ct =>
+		public IDynamicCommand NavigateToOnboarding => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new HomePageViewModel());
-		});
-
-		public IDynamicCommand NavigateToLoginPage => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new LoginPageViewModel(async ct2 =>
-			{
-				await this.GetService<IStackNavigator>().NavigateAndClear(ct2, () => new HomePageViewModel());
-			}));
-		});
-
-		public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new OnboardingPageViewModel());
 		});
 	}
 }

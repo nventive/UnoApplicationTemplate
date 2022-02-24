@@ -49,16 +49,9 @@ namespace ApplicationTemplate.Presentation
 			}
 		});
 
-		public IDynamicCommand Delete => this.GetCommandFromTask(async ct =>
+		public IDynamicCommand Cancel => this.GetCommandFromTask(async ct =>
 		{
-			var post = Form.GetPost();
-
-			if (post.Exists)
-			{
-				await this.GetService<IPostService>().Delete(ct, post.Id);
-
-				await this.GetService<IStackNavigator>().NavigateBack(ct);
-			}
+			await this.GetService<IStackNavigator>().NavigateBack(ct);
 		});
 
 		private async Task OnBackRequested(CancellationToken ct)

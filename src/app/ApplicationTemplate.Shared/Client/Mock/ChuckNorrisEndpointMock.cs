@@ -8,18 +8,18 @@ using Refit;
 
 namespace ApplicationTemplate.Client
 {
-	public class ChuckNorrisEndpointMock : BaseMock, IChuckNorrisEndpoint
+	public class DadJokesEndpointMock : BaseMock, IDadJokesEndpoint
 	{
-		public ChuckNorrisEndpointMock(IObjectSerializer serializer)
+		public DadJokesEndpointMock(IObjectSerializer serializer)
 			: base(serializer)
 		{
 		}
 
-		public async Task<ChuckNorrisResponse> Search(CancellationToken ct, [AliasAs("query")] string searchTerm)
+		public async Task<DadJokesResponse> FetchData(CancellationToken ct, string typePost)
 		{
 			await Task.Delay(TimeSpan.FromSeconds(2));
 
-			return await GetTaskFromEmbeddedResource<ChuckNorrisResponse>();
+			return await GetTaskFromEmbeddedResource<DadJokesResponse>();
 		}
 	}
 }

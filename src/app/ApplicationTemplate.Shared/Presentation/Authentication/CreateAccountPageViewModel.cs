@@ -30,7 +30,7 @@ namespace ApplicationTemplate.Presentation
 			{
 				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), Form.Password);
 
-				await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new HomePageViewModel());
+				await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
 			}
 		});
 	}

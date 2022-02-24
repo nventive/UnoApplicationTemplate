@@ -39,7 +39,7 @@ namespace ApplicationTemplate
 				.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 				.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
 				.AddSingleton<IPostService, PostService>()
-				.AddSingleton<IChuckNorrisService, ChuckNorrisService>()
+				.AddSingleton<IDadJokesService, DadJokesService>()
 				.AddSingleton<IAuthenticationService, AuthenticationService>()
 				.AddSingleton<IUserProfileService, UserProfileService>()
 				.AddSingleton<DiagnosticsCountersService>();

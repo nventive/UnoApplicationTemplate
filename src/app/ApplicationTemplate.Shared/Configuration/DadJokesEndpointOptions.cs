@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ApplicationTemplate
 {
-	public class ChuckNorrisEndpointOptions : EndpointOptions
+	public class DadJokesEndpointOptions : EndpointOptions
 	{
 	}
 }

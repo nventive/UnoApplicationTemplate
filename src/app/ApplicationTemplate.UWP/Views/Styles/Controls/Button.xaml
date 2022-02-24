@@ -8,6 +8,12 @@
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="Background"
 				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily02}" />
+		<Setter Property="FontWeight"
+				Value="Bold" />
+		<Setter Property="FontSize"
+				Value="14" />
 		<Setter Property="Padding"
 				Value="16,12" />
 		<Setter Property="CornerRadius"
@@ -26,12 +32,10 @@
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
-									<Storyboard>
-										<DoubleAnimation Duration="0:0:0.1"
-														 To="{StaticResource MaterialPrimaryPressedBrush}"
-														 Storyboard.TargetName="BackgroundBorder"
-														 Storyboard.TargetProperty="Background" />
-									</Storyboard>
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Background"
+												Value="{StaticResource MaterialPrimaryPressedBrush}" />
+									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Disabled">
 									<VisualState.Setters>
@@ -44,7 +48,8 @@
 
 						<Border x:Name="BackgroundBorder"
 								Background="{TemplateBinding Background}"
-								CornerRadius="{TemplateBinding CornerRadius}" />
+								CornerRadius="{TemplateBinding CornerRadius}"
+								BorderThickness="1" />
 
 						<Grid Margin="{TemplateBinding Padding}"
 							  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -54,6 +59,7 @@
 											  ContentTransitions="{TemplateBinding ContentTransitions}"
 											  ContentTemplate="{TemplateBinding ContentTemplate}"
 											  AutomationProperties.AccessibilityView="Raw"
+											  Typography.Capitals="AllSmallCaps"
 											  Opacity="{Binding Command.IsExecuting, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource TrueToTransparent}}" />
 
 							<ProgressRing IsActive="{Binding Command.IsExecuting, RelativeSource={RelativeSource Mode=TemplatedParent}}"
@@ -62,6 +68,74 @@
 										  Width="16"
 										  Height="16"/>
 						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	
+	<Style x:Key="OutlinedExecutingButtonStyle"
+		   TargetType="Button">
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialPrimaryColor}" />
+		<Setter Property="Background"
+				Value="{StaticResource MaterialSurfaceColor}" />
+		<Setter Property="FontSize"
+				Value="14" />
+		<Setter Property="FontWeight"
+				Value="SemiBold" />
+		<Setter Property="Padding"
+				Value="16,12" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid>
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver" />
+								<VisualState x:Name="Pressed">
+									<Storyboard>
+										<DoubleAnimation Duration="0:0:0.1"
+														 To="0.8"
+														 Storyboard.TargetName="BackgroundBorder"
+														 Storyboard.TargetProperty="Opacity" />
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Disabled">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Opacity"
+												Value="0.8" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="BackgroundBorder"
+								BorderBrush="{StaticResource MaterialPrimaryColor}"
+								BorderThickness="1"
+								Background="{StaticResource MaterialSurfaceColor}"
+								CornerRadius="4">
+
+							<Grid Margin="{TemplateBinding Padding}"
+								  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+								  VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+								<ContentPresenter x:Name="ContentPresenter"
+												  Content="{TemplateBinding Content}"
+												  ContentTransitions="{TemplateBinding ContentTransitions}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  AutomationProperties.AccessibilityView="Raw"
+												  Typography.Capitals="AllSmallCaps"
+												  Opacity="{Binding Command.IsExecuting, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource TrueToTransparent}}" />
+
+								<ProgressRing IsActive="{Binding Command.IsExecuting, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+											  Opacity="{Binding Command.IsExecuting, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource TrueToOpaque}}"
+											  Foreground="{TemplateBinding Foreground}"
+											  Width="16"
+											  Height="16" />
+							</Grid>
+						</Border>
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

@@ -93,6 +93,7 @@
     <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
+    <PackageReference Include="System.Reactive" Version="5.0.0" />
     <PackageReference Include="Xamarin.AndroidX.Lifecycle.LiveData" Version="2.1.0" />
     <PackageReference Include="Xamarin.Build.Download" Version="0.10.0" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
@@ -107,8 +108,8 @@
     <PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
     <PackageReference Include="Uno.Material" Version="1.0.0-dev.812" />
     <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools" Version="6.1.0-build.205.g2e0e348372" />
-    <PackageReference Include="Uno.UI" Version="3.10.0-dev.655" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.10.0-dev.655" />
+    <PackageReference Include="Uno.UI" Version="3.11.6" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.11.6" />
     <PackageReference Include="Uno.Injectable" Version="1.34.0-dev.175" />
     <PackageReference Include="Uno.CodeGen" Version="1.34.0-dev.175" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.32" />
@@ -171,6 +172,8 @@
     <AndroidAsset Include="Assets\Fonts\Guillon-Bold.ttf" />
     <AndroidAsset Include="Assets\Fonts\Guillon-SemiBold.ttf" />
     <AndroidAsset Include="Assets\Fonts\Guillon-Black.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Roboto-Medium.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Roboto-Regular.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
