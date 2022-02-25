@@ -23,6 +23,11 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background-Mustaches.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background-Mustaches.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background-Mustaches.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background_Mustaches_Light.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background_Mustaches_Light.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background_Mustaches_Light.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background_Mustaches_Light.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background_Mustaches_Light.scale-400.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-200.png" />

@@ -135,8 +135,6 @@
 				Value="20" />
 		<Setter Property="FontStyle"
 				Value="Normal" />
-		<Setter Property="FontWeight"
-				Value="SemiBold" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialPrimaryDarkBrush}" />
 		<Setter Property="LineHeight"

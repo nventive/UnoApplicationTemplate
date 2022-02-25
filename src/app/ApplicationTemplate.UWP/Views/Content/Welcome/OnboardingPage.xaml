@@ -12,54 +12,51 @@
 	<Page.Resources>
 		<ResourceDictionary>
 			<uc:PartitionConverter x:Key="SelectedIndexToButtonContent"
-								   DefaultValue="Skip tutorial"
+								   DefaultValue="SKIP"
 								   x:Uid="Onboarding_Skip">
 				<uc:IntervalPartition LowerBound="2"
-									  InRangeValue="Continue"
+									  InRangeValue="CONTINUE"
 									  x:Uid="Onboarding_Continue" />
 			</uc:PartitionConverter>
 
+			<uc:PartitionConverter x:Key="SelectedIndexToButtonStyle"
+								   DefaultValue="{StaticResource MaterialTextButtonStyle}">
+				<uc:IntervalPartition LowerBound="2"
+									  InRangeValue="{StaticResource MaterialContainedButtonStyle}" />
+			</uc:PartitionConverter>
+
 			<DataTemplate x:Key="OnboardingItemTemplate">
-
-				<Grid Height="370">
-
-					<Grid.RowDefinitions>
-						<RowDefinition Height="0.7*" />
-						<RowDefinition Height="0.3*" />
-					</Grid.RowDefinitions>
+				<StackPanel Margin="20,0"
+							VerticalAlignment="Center">
 
 					<Image Source="{Binding ImageUrl}"
-						   Grid.Row="0"
-						   Stretch="UniformToFill"
-						   Margin="20,0"
-						   VerticalAlignment="Center" />
-					<StackPanel Grid.Row="1"
-								Margin="20,0"
-								Background="{StaticResource MaterialSurfaceColor}">
-						<TextBlock Text="{Binding PrimaryText}"
-								   Style="{StaticResource MaterialBody2}"
-								   Foreground="{StaticResource MaterialOnSurfaceColor}"
-								   Padding="15"
-								   VerticalAlignment="Top"
-								   HorizontalAlignment="Center" />
-					</StackPanel>
-				</Grid>
+						   Margin="0,0,0,-40"
+						   Width="223"
+						   HorizontalAlignment="Center"/>
+
+					<TextBlock Text="{Binding PrimaryText}"
+							   Style="{StaticResource Headline6}"
+							   Foreground="{StaticResource MaterialOnSecondaryBrush}"
+							   Width="300"
+							   Margin="0,8"
+							   HorizontalTextAlignment="Center"
+						       HorizontalAlignment="Center" />
+				</StackPanel>
 			</DataTemplate>
 
 			<DataTemplate x:Key="OnboardingIndexIndicatorTemplate">
-				<StackPanel Margin="0,20">
-					<Ellipse  Fill="#B6A8FB"
-							  Margin="5,0,5,0"
+				<StackPanel Margin="0,56">
+					<Ellipse  Fill="{StaticResource MaterialSecondaryDraggedBrush}"
+							  Margin="8,0,8,0"
 							  Width="12"
 							  Height="12" />
 				</StackPanel>
 			</DataTemplate>
 
 			<DataTemplate x:Key="OnboardingSelectedIndexIndicatorTemplate">
-				<StackPanel Margin="0,20">
-
-					<Ellipse  Fill="{StaticResource MaterialPrimaryColor}"
-							  Margin="5,0,5,0"
+				<StackPanel Margin="0,56">
+					<Ellipse  Fill="{StaticResource MaterialSecondaryBrush}"
+							  Margin="8,0,8,0"
 							  Width="12"
 							  Height="12" />
 				</StackPanel>
@@ -67,28 +64,31 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
+	<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
+		  Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<StackPanel Grid.Row="0">
-			<HyperlinkButton Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
-							 Foreground="{StaticResource MaterialOnSurfaceColor}"
-							 FontSize="14"
-							 Command="{Binding NavigateToJokes}"
-							 VerticalAlignment="Top"
-							 Grid.Row="0"
-							 HorizontalAlignment="Right"
-							 Margin="0,20,20,0" />
+		<Image Source="ms-appx:///Assets/Background_Mustaches_Light.png"
+			   Stretch="UniformToFill"
+			   Grid.RowSpan="2"/>
 
-			<u:ImageSlideshow x:Name="OnboardingSlideshow"
-							  Grid.Row="1"
-							  ItemsSource="{Binding OnboardingItems}"
-							  ItemTemplate="{StaticResource OnboardingItemTemplate}"
-							  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
-							  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
-		</StackPanel>
+		<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
+				Style="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonStyle}}"
+				FontSize="14"
+				Command="{Binding NavigateToJokes}"
+				VerticalAlignment="Top"
+				HorizontalAlignment="Right"
+				Margin="0,24,24,0" />
+
+		<u:ImageSlideshow x:Name="OnboardingSlideshow"
+						  Grid.Row="1"
+						  ItemsSource="{Binding OnboardingItems}"
+						  ItemTemplate="{StaticResource OnboardingItemTemplate}"
+						  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
+						  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
 	</Grid>
 </Page>

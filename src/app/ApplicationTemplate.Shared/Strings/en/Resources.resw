@@ -214,10 +214,10 @@
     <value>New post</value>
   </data>
   <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
-    <value>Continue</value>
+    <value>CONTINUE</value>
   </data>
   <data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
-    <value>Skip tutorial</value>
+    <value>SKIP</value>
   </data>
   <data name="Menu_Home.Text" xml:space="preserve">
     <value>Jokes</value>

@@ -214,10 +214,10 @@
     <value>Créer article</value>
   </data>
   <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
-    <value>Continuer</value>
+    <value>CONTINUER</value>
   </data>
   <data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
-    <value>Passer le tutoriel</value>
+    <value>PASSER</value>
   </data>
   <data name="Menu_Home.Text" xml:space="preserve">
     <value>Blagues</value>
