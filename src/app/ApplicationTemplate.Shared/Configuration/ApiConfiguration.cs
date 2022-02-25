@@ -100,10 +100,7 @@ namespace ApplicationTemplate
 			else
 			{
 				var httpClientBuilder = services
-					.AddRefitHttpClient<TInterface>(settings: serviceProvider => new RefitSettings()
-					{
-						ContentSerializer = new ObjectSerializerToContentSerializerAdapter(serviceProvider.GetRequiredService<IObjectSerializer>()),
-					})
+					.AddRefitHttpClient<TInterface>()
 					.ConfigurePrimaryHttpMessageHandler(serviceProvider => serviceProvider.GetRequiredService<HttpMessageHandler>())
 					.ConfigureHttpClient((serviceProvider, client) =>
 					{

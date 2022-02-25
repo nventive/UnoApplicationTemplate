@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GeneratedSerializers;
-using Uno;
-
-namespace ApplicationTemplate.Client
+﻿namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
-	public partial class DadJokesResponse
+	public record DadJokesResponse
 	{
-		[EqualityHash]
+		public DadJokesResponse(DadJokesData data)
+		{
+			Data = data;
+		}
+
 		public DadJokesData Data { get; }
 	}
 }

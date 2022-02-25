@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using ApplicationTemplate.Presentation;
+using Chinook.SectionsNavigation;
 using Xunit;
 
 namespace ApplicationTemplate.Tests
@@ -7,39 +10,58 @@ namespace ApplicationTemplate.Tests
 	public partial class NavigationShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task NavigateEverywhere()
+		public async Task MenuNavigationShould()
 		{
-			await AssertNavigateFromTo<OnboardingPageViewModel, WelcomePageViewModel>(p => p.NavigateToWelcomePage);
+			// Arrange
+			Func<MenuViewModel> vmBuilder = () => new MenuViewModel();
 
-			await AssertNavigateFromTo<WelcomePageViewModel, CreateAccountPageViewModel>(p => p.NavigateToCreateAccountPage);
+			await AssertNavigateFromTo<MenuViewModel, SettingsPageViewModel>(vmBuilder, p => p.ShowSettings);
 
-			await AssertNavigateFromTo<CreateAccountPageViewModel, WelcomePageViewModel>(p => p.NavigateBack);
+			await AssertNavigateFromTo<MenuViewModel, PostsPageViewModel>(vmBuilder, p => p.ShowPosts);
 
-			await AssertNavigateFromTo<WelcomePageViewModel, LoginPageViewModel>(p => p.NavigateToLoginPage);
+			await AssertNavigateFromTo<MenuViewModel, DadJokesPageViewModel>(vmBuilder, p => p.ShowHome);
+		}
 
-			await AssertNavigateFromTo<LoginPageViewModel, WelcomePageViewModel>(p => p.NavigateBack);
+		[Fact]
+		public async Task OnboardingAndWelcomePageNavigationShould()
+		{
+			await AssertNavigateFromTo<WelcomePageViewModel, OnboardingPageViewModel>(() => new WelcomePageViewModel(), p => p.NavigateToOnboarding);
 
-			await AssertNavigateFromTo<WelcomePageViewModel, HomePageViewModel>(p => p.NavigateToHomePage);
+			await AssertNavigateFromTo<OnboardingPageViewModel, DadJokesPageViewModel>(() => new OnboardingPageViewModel(), p => p.NavigateToJokes);
+		}
 
-			await AssertNavigateFromTo<HomePageViewModel, PostsPageViewModel>(p => p.NavigateToPostsPage);
+		[Fact]
+		public async Task LoginNavigationShould()
+		{
+			var loginVM = await AssertNavigateFromTo<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage);
 
-			await AssertNavigateFromTo<PostsPageViewModel, EditPostPageViewModel>(p => p.NavigateToNewPost);
+			await AssertNavigateTo<SettingsPageViewModel>(() => loginVM.NavigateBack);
+		}
 
-			await AssertNavigateFromTo<EditPostPageViewModel, PostsPageViewModel>(p => p.NavigateBack);
+		[Fact]
+		public async Task SettingsNavigationShould()
+		{
+			// Arrange
+			Func<SettingsPageViewModel> vmBuilder = () => new SettingsPageViewModel();
+			var settingsVM = (SettingsPageViewModel) await NavigateAndClear(DefaultCancellationToken, vmBuilder);
 
-			await AssertNavigateFromTo<PostsPageViewModel, EditPostPageViewModel>(p => p.NavigateToNewPost);
+			// Act and assert
+			var diagnosticsVM = await AssertNavigateTo<DiagnosticsPageViewModel>(() => settingsVM.NavigateToDiagnosticsPage);
 
-			await AssertNavigateFromTo<EditPostPageViewModel, PostsPageViewModel>(p => p.NavigateBack);
+			settingsVM = await AssertNavigateTo<SettingsPageViewModel>(() => diagnosticsVM.NavigateBack);
+		}
 
-			await AssertNavigateFromTo<PostsPageViewModel, HomePageViewModel>(p => p.NavigateBack);
+		[Fact]
+		public async Task DiagnosticsNavigationShould()
+		{
+			// Arrange
+			var settingsViewModel = (SettingsPageViewModel) await NavigateAndClear(DefaultCancellationToken, () => new SettingsPageViewModel());
 
-			await AssertNavigateFromTo<HomePageViewModel, SettingsPageViewModel>(p => p.NavigateToSettingsPage);
-
-			await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(p => p.NavigateToDiagnosticsPage);
-
-			await AssertNavigateFromTo<DiagnosticsPageViewModel, SettingsPageViewModel>(p => p.NavigateBack);
-
-			await AssertNavigateFromTo<SettingsPageViewModel, HomePageViewModel>(p => p.NavigateBack);
+			// Act and assert
+			await AssertNavigateFromToAfter<DiagnosticsPageViewModel, SettingsPageViewModel>(
+				() => settingsViewModel.NavigateToDiagnosticsPage,
+				p => p.NavigateBack
+			);
 		}
 	}
 }

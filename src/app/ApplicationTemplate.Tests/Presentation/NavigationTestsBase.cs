@@ -28,17 +28,22 @@ namespace ApplicationTemplate.Tests
 
 		protected IViewModel GetCurrentViewModel()
 		{
-			return GetService<IStackNavigator>().State.Stack.LastOrDefault()?.ViewModel as IViewModel;
+			return (IViewModel) GetService<ISectionsNavigator>().GetActiveViewModel();
 		}
 
-		protected async Task NavigateAndClear(CancellationToken ct, Func<ViewModel> vmBuilder)
+		protected async Task<ViewModel> NavigateAndClear(CancellationToken ct, Func<ViewModel> vmBuilder)
 		{
-			await GetCurrentViewModel().GetService<ISectionsNavigator>().NavigateAndClear(ct, vmBuilder);
+			return await GetCurrentViewModel().GetService<ISectionsNavigator>().NavigateAndClear(ct, vmBuilder);
 		}
 
-		protected async Task Navigate(CancellationToken ct, Func<ViewModel> vmBuilder)
+		protected async Task<ViewModel> Navigate(CancellationToken ct, Func<ViewModel> vmBuilder)
 		{
-			await GetCurrentViewModel().GetService<ISectionsNavigator>().Navigate(ct, vmBuilder);
+			return await GetCurrentViewModel().GetService<ISectionsNavigator>().Navigate(ct, vmBuilder);
+		}
+
+		protected async Task NavigateBack(CancellationToken ct)
+		{
+			await GetCurrentViewModel().GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
 		}
 
 		/// <summary>
@@ -64,6 +69,43 @@ namespace ApplicationTemplate.Tests
 					return Unit.Default;
 				})
 				.Subscribe();
+		}
+
+		protected async Task<TDestinationViewModel> AssertNavigateFromTo<TSourceViewModel, TDestinationViewModel>(Func<TSourceViewModel> sourceVMBuilder, Func<TSourceViewModel, IDynamicCommand> navigationCommand)
+			where TSourceViewModel : ViewModel
+		{
+			// Arrange
+			TSourceViewModel viewModel = (TSourceViewModel) await NavigateAndClear(DefaultCancellationToken, sourceVMBuilder);
+
+			// Act
+			await navigationCommand(viewModel).Execute();
+
+			// Assert
+			return GetAndAssertCurrentViewModel<TDestinationViewModel>();
+		}
+
+		protected async Task<TDestinationViewModel> AssertNavigateFromToAfter<TSourceViewModel, TDestinationViewModel>(Func<IDynamicCommand> arrange, Func<TSourceViewModel, IDynamicCommand> act)
+			where TSourceViewModel : ViewModel
+		{
+			// Arrange
+			await arrange().Execute();
+
+			// Act
+			var viewModel = GetAndAssertCurrentViewModel<TSourceViewModel>();
+
+			await act(viewModel).Execute();
+
+			// Assert
+			return GetAndAssertCurrentViewModel<TDestinationViewModel>();
+		}
+
+		protected async Task<TDestinationViewModel> AssertNavigateTo<TDestinationViewModel>(Func<IDynamicCommand> act)
+		{
+			// Act
+			await act().Execute();
+
+			// Assert
+			return GetAndAssertCurrentViewModel<TDestinationViewModel>();
 		}
 	}
 }
