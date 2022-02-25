@@ -4,14 +4,21 @@
 	<!-- Background color -->
 	<item>
 		<shape>
-			<solid android:color="@color/primaryColor" />
+			<solid android:color="@color/backgroundColor" />
 		</shape>
+	</item>
+
+	<!-- Background image -->
+	<item>
+		<bitmap
+			android:src="@drawable/background_mustaches"
+			android:gravity="center"/>
 	</item>
 	
 	<!-- Centered logo -->
 	<item>
 		<bitmap
-			android:src="@drawable/logo_0"
+			android:src="@drawable/body"
 			android:gravity="center" />
 	</item>
 </layer-list>

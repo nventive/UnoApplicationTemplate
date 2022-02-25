@@ -18,6 +18,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background-Mustaches.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background-Mustaches.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background-Mustaches.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background-Mustaches.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background-Mustaches.scale-400.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-200.png" />
@@ -28,5 +33,15 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_FirstScreen_Icon.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_FirstScreen_Icon.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_FirstScreen_Icon.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_FirstScreen_Icon.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_FirstScreen_Icon.scale-400.png" />
   </ItemGroup>
 </Project>
