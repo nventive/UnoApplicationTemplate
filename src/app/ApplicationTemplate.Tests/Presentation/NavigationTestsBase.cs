@@ -28,7 +28,7 @@ namespace ApplicationTemplate.Tests
 
 		protected IViewModel GetCurrentViewModel()
 		{
-			return (IViewModel) GetService<ISectionsNavigator>().GetActiveViewModel();
+			return (IViewModel) GetService<ISectionsNavigator>().GetActiveStackNavigator().GetActiveViewModel();
 		}
 
 		protected async Task<ViewModel> NavigateAndClear(CancellationToken ct, Func<ViewModel> vmBuilder)
