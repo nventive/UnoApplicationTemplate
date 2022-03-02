@@ -276,59 +276,23 @@
   <data name="Licenses_CommandBar" xml:space="preserve">
     <value>Licenses</value>
   </data>
-  <data name="CreateAccount_FirstName.PlaceholderText" xml:space="preserve">
-    <value>First Name</value>
+  <data name="CreateAccount_Title.Text" xml:space="preserve">
+    <value>Join the fun!</value>
   </data>
-  <data name="CreateAccount_LastName.PlaceholderText" xml:space="preserve">
-    <value>Last Name</value>
+  <data name="CreateAccount_Subtitle.Text" xml:space="preserve">
+    <value>Only 2 seconds to create an account</value>
   </data>
   <data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
-    <value>Email</value>
-  </data>
-  <data name="CreateAccount_PhoneNumber.PlaceholderText" xml:space="preserve">
-    <value>Phone Number (000) 000-0000</value>
-  </data>
-  <data name="CreateAccount_SecondaryPhoneNumber.PlaceholderText" xml:space="preserve">
-    <value>Secondary Phone Number (000) 000-0000 (optional)</value>
-  </data>
-  <data name="CreateAccount_DateOfBirth.PlaceholderText" xml:space="preserve">
-    <value>Date of Birth</value>
-  </data>
-  <data name="CreateAccount_PostalCode.PlaceholderText" xml:space="preserve">
-    <value>Postal Code A0A 0A0</value>
+    <value>Enter an email</value>
   </data>
   <data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
-    <value>Password</value>
-  </data>
-  <data name="CreateAccount_TermsOfServices.Content" xml:space="preserve">
-    <value>I agree to the terms of service</value>
-  </data>
-  <data name="CreateAccount_ConfirmPassword.PlaceholderText" xml:space="preserve">
-    <value>Confirm Password</value>
+    <value>Choose a password</value>
   </data>
   <data name="CreateAccount_Confirm.Content" xml:space="preserve">
-    <value>Create account</value>
-  </data>
-  <data name="CreateAccount_PhoneNumberValidation" xml:space="preserve">
-    <value>Please provide a complete phone number.</value>
-  </data>
-  <data name="CreateAccount_PostalValidation" xml:space="preserve">
-    <value>Please provide a complete postal code.</value>
-  </data>
-  <data name="CreateAccount_DateOfBirthValidation" xml:space="preserve">
-    <value>You must be 18+ years old to create an account.</value>
+    <value>CREATE AN ACCOUNT</value>
   </data>
   <data name="CreateAccount_PasswordValidation" xml:space="preserve">
     <value>Password must be 8 chracters or more and contain at least 1 number.</value>
-  </data>
-  <data name="CreateAccount_PasswordConfirmValidation" xml:space="preserve">
-    <value>Passwords don't match</value>
-  </data>
-  <data name="CreateAccount_FavoriteDonutsValidation" xml:space="preserve">
-    <value>You need to provide at least 3 type of donuts.</value>
-  </data>
-  <data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
-    <value>You must accepts terms of service to create an account.</value>
   </data>
   <data name="ForgotPassword_Email.PlaceholderText" xml:space="preserve">
     <value>Email</value>

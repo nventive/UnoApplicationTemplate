@@ -68,7 +68,7 @@
 		<Setter Property="FontWeight"
 				Value="Bold" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="62" />
 		<Setter Property="CharacterSpacing"

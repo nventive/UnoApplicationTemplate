@@ -151,6 +151,51 @@
 		</win:Setter>
 	</Style>
 
+	<Style x:Key="TransparentCommandBarStyle"
+		   TargetType="CommandBar"
+		   xamarin:BasedOn="{StaticResource DefaultCommandBarStyle}">
+
+		<Setter Property="Background"
+				Value="Transparent" />
+		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
+				Value="{StaticResource MaterialSurfaceBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialSurfaceBrush}" />
+
+		<!-- ANDROID SETTERS -->
+		<android:Setter Property="toolkit:UIElementExtensions.Elevation"
+						Value="0" />
+
+		<!-- IOS SETTERS -->
+		<ios:Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="CommandBar">
+					<!-- 
+						Context:
+						On iOS, all pages share the same UINavigationBar instance.
+						During a transition from two pages with different CommandBar colors, the shared UINavigationBar bar instance can only display one of those colors.
+					
+						Example:
+						Page A has an opaque CommandBar and Page B has a transparent CommandBar.
+						When transitioning from Page A to Page B, the shared UINavigationBar instance becomes transparent, which reveals a white space at the top of Page A.
+					
+						Solution:
+						To circumvent this issue, we duplicate the background color of the UINavigationBar with this Border.
+						Note that this only works because we're not using semi-transparent background colors (which would add up and look off). 
+					-->
+					<Grid>
+						<Border BorderBrush="{TemplateBinding Background}"
+								BorderThickness="{TemplateBinding Padding}"
+								Background="{TemplateBinding Background}">
+							<NativeCommandBarPresenter Height="55" />
+						</Border>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</ios:Setter>
+	</Style>
+
+
 	<!-- Default Style -->
 	<Style TargetType="CommandBar"
 		   BasedOn="{StaticResource DefaultCommandBarStyle}" />

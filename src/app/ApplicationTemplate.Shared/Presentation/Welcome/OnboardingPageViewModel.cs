@@ -10,7 +10,6 @@ namespace ApplicationTemplate.Presentation
 	{
 		public IDynamicCommand NavigateToJokes => this.GetCommandFromTask(async ct =>
 		{
-
 			await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
 			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 		});

@@ -11,17 +11,6 @@ namespace ApplicationTemplate.Presentation
 	{
 		public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
 
-		public string[] Donuts =>
-		new[]
-		{
-			"Cinnamon Twist",
-			"Old-fashioned",
-			"Jelly",
-			"Double Glaze",
-			"Cream Filled",
-			"Apple Fritter"
-		};
-
 		public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
 		{
 			var validationResult = await Form.Validate(ct);

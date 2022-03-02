@@ -74,7 +74,7 @@ namespace ApplicationTemplate
 
 			if (currentSettings.IsOnboardingCompleted)
 			{
-				await section.Navigate(ct, () => new DadJokesPageViewModel());
+				await section.Navigate(ct, () => new CreateAccountPageViewModel());
 			}
 			else
 			{
