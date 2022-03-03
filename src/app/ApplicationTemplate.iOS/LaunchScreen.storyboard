@@ -18,7 +18,7 @@
 						<autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
 						<subviews>
 							<imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Assets/splashscreen_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="65">
-								<rect key="frame" x="141.5" y="348" width="412" height="412"/>
+								<rect key="frame" x="141.5" y="348" width="280" height="280"/>
 							</imageView>
 						</subviews>
 						<constraints>

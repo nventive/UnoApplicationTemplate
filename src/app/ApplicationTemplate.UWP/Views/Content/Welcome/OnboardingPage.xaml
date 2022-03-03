@@ -20,28 +20,34 @@
 			</uc:PartitionConverter>
 
 			<uc:PartitionConverter x:Key="SelectedIndexToButtonStyle"
-								   DefaultValue="{StaticResource MaterialTextButtonStyle}">
+								   DefaultValue="{StaticResource MaterialTextWithArrowButtonStyle}">
 				<uc:IntervalPartition LowerBound="2"
-									  InRangeValue="{StaticResource MaterialContainedButtonStyle}" />
+									  InRangeValue="{StaticResource MaterialContainedWithArrowButtonStyle}" />
 			</uc:PartitionConverter>
 
 			<DataTemplate x:Key="OnboardingItemTemplate">
-				<StackPanel Margin="20,0"
-							VerticalAlignment="Center">
+				<Grid Margin="20,0">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="*" />
+						<RowDefinition Height="*" />
+					</Grid.RowDefinitions>
 
 					<Image Source="{Binding ImageUrl}"
 						   Margin="0,0,0,-40"
 						   Width="223"
+						   VerticalAlignment="Bottom"
 						   HorizontalAlignment="Center"/>
 
 					<TextBlock Text="{Binding PrimaryText}"
+							   Grid.Row="1"
 							   Style="{StaticResource Headline6}"
 							   Foreground="{StaticResource MaterialOnSecondaryBrush}"
 							   Width="300"
 							   Margin="0,8"
+							   VerticalAlignment="Top"
 							   HorizontalTextAlignment="Center"
-						       HorizontalAlignment="Center" />
-				</StackPanel>
+							   HorizontalAlignment="Center" />
+				</Grid>
 			</DataTemplate>
 
 			<DataTemplate x:Key="OnboardingIndexIndicatorTemplate">

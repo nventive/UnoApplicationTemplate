@@ -48,5 +48,15 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_FirstScreen_Icon.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_FirstScreen_Icon.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_FirstScreen_Icon.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_SecondScreen_Icon.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_SecondScreen_Icon.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_SecondScreen_Icon.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_SecondScreen_Icon.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_SecondScreen_Icon.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_ThirdScreen_Icon.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_ThirdScreen_Icon.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_ThirdScreen_Icon.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_ThirdScreen_Icon.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_ThirdScreen_Icon.scale-400.png" />
   </ItemGroup>
 </Project>

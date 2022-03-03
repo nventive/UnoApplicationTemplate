@@ -244,34 +244,19 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\Background_Mustaches.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Background_Mustaches.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\Background_Mustaches.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\Background_Mustaches.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\Background_Mustaches.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\Body.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Body.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xhdpi\Body.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\Body.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\Body.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\Logo.png" />
   </ItemGroup>
   <Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" Condition="Exists('..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems')" />
   <Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
