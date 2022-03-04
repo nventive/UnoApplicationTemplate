@@ -10,7 +10,7 @@ namespace ApplicationTemplate.Tests
 	public partial class NavigationShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task MenuNavigationShould()
+		public async Task NavigateToDifferentMenuSections()
 		{
 			// Arrange
 			Func<MenuViewModel> vmBuilder = () => new MenuViewModel();
@@ -23,15 +23,15 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task OnboardingAndWelcomePageNavigationShould()
+		public async Task NavigateFromWelcomePageToDadJokesPage()
 		{
-			await AssertNavigateFromTo<WelcomePageViewModel, OnboardingPageViewModel>(() => new WelcomePageViewModel(), p => p.NavigateToOnboarding);
+			var onboardingViewModel = await AssertNavigateFromTo<WelcomePageViewModel, OnboardingPageViewModel>(() => new WelcomePageViewModel(), p => p.NavigateToOnboarding);
 
-			await AssertNavigateFromTo<OnboardingPageViewModel, DadJokesPageViewModel>(() => new OnboardingPageViewModel(), p => p.NavigateToJokes);
+			await AssertNavigateTo<DadJokesPageViewModel>(() => onboardingViewModel.NavigateToJokes);
 		}
 
 		[Fact]
-		public async Task LoginNavigationShould()
+		public async Task NavigateToLoginPageAndBack()
 		{
 			var loginVM = await AssertNavigateFromTo<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage);
 
@@ -39,29 +39,14 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task SettingsNavigationShould()
+		public async Task NavigateToDiagnosticsPageAndBack()
 		{
-			// Arrange
-			Func<SettingsPageViewModel> vmBuilder = () => new SettingsPageViewModel();
-			var settingsVM = (SettingsPageViewModel) await NavigateAndClear(DefaultCancellationToken, vmBuilder);
-
-			// Act and assert
-			var diagnosticsVM = await AssertNavigateTo<DiagnosticsPageViewModel>(() => settingsVM.NavigateToDiagnosticsPage);
-
-			settingsVM = await AssertNavigateTo<SettingsPageViewModel>(() => diagnosticsVM.NavigateBack);
-		}
-
-		[Fact]
-		public async Task DiagnosticsNavigationShould()
-		{
-			// Arrange
-			var settingsViewModel = (SettingsPageViewModel) await NavigateAndClear(DefaultCancellationToken, () => new SettingsPageViewModel());
-
-			// Act and assert
-			await AssertNavigateFromToAfter<DiagnosticsPageViewModel, SettingsPageViewModel>(
-				() => settingsViewModel.NavigateToDiagnosticsPage,
-				p => p.NavigateBack
+			var diagnosticsViewModel = await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(
+				() => new SettingsPageViewModel(),
+				p => p.NavigateToDiagnosticsPage
 			);
+
+			await AssertNavigateTo<SettingsPageViewModel>(() => diagnosticsViewModel.NavigateBack);
 		}
 	}
 }

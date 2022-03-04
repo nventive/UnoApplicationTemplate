@@ -19,6 +19,11 @@ namespace ApplicationTemplate.Tests
 	/// </summary>
 	public class NavigationTestsBase : IntegrationTestBase
 	{
+		/// <summary>
+		/// This method can be used to assert that the current ViewModel is a TViewModel.
+		/// </summary>
+		/// <typeparam name="TViewModel">The expected ViewModel type.</typeparam>
+		/// <returns>The instance of TViewModel.</returns>
 		protected TViewModel GetAndAssertCurrentViewModel<TViewModel>()
 		{
 			var viewModel = GetCurrentViewModel();
@@ -26,21 +31,42 @@ namespace ApplicationTemplate.Tests
 			return Assert.IsType<TViewModel>(viewModel);
 		}
 
+		/// <summary>
+		/// This method can be used to get the current ViewModel.
+		/// </summary>
+		/// <returns>The current ViewModel.</returns>
 		protected IViewModel GetCurrentViewModel()
 		{
 			return (IViewModel) GetService<ISectionsNavigator>().GetActiveStackNavigator().GetActiveViewModel();
 		}
 
+		/// <summary>
+		/// The method can be used to navigate to a new page and clear navigation stack.
+		/// </summary>
+		/// <param name="ct">The cancellation token.</param>
+		/// <param name="vmBuilder">The ViewModel builder.</param>
+		/// <returns>A task containing the destination view model.</returns>
 		protected async Task<ViewModel> NavigateAndClear(CancellationToken ct, Func<ViewModel> vmBuilder)
 		{
 			return await GetCurrentViewModel().GetService<ISectionsNavigator>().NavigateAndClear(ct, vmBuilder);
 		}
 
+		/// <summary>
+		/// The method can be used to navigate to a new page.
+		/// </summary>
+		/// <param name="ct">The cancellation token.</param>
+		/// <param name="vmBuilder">The ViewModel builder.</param>
+		/// <returns>A task containing the destination view model.</returns>
 		protected async Task<ViewModel> Navigate(CancellationToken ct, Func<ViewModel> vmBuilder)
 		{
 			return await GetCurrentViewModel().GetService<ISectionsNavigator>().Navigate(ct, vmBuilder);
 		}
 
+		/// <summary>
+		/// This method can be used to go to the previous page or modal.
+		/// </summary>
+		/// <param name="ct">The cancellation token.</param>
+		/// <returns>A task that when completed will go to the previous page or modal.</returns>
 		protected async Task NavigateBack(CancellationToken ct)
 		{
 			await GetCurrentViewModel().GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
@@ -71,6 +97,14 @@ namespace ApplicationTemplate.Tests
 				.Subscribe();
 		}
 
+		/// <summary>
+		/// This method can be used to assert if a command provides the given destination.
+		/// </summary>
+		/// <typeparam name="TSourceViewModel">The source ViewModel type.</typeparam>
+		/// <typeparam name="TDestinationViewModel">The destination ViewModel type.</typeparam>
+		/// <param name="sourceVMBuilder">The source ViewModel builder.</param>
+		/// <param name="navigationCommand">A function that returns a command to execute before asserting the destination is TDestinationViewModel</param>
+		/// <returns>A task that when completed will contain the destination ViewModel.</returns>
 		protected async Task<TDestinationViewModel> AssertNavigateFromTo<TSourceViewModel, TDestinationViewModel>(Func<TSourceViewModel> sourceVMBuilder, Func<TSourceViewModel, IDynamicCommand> navigationCommand)
 			where TSourceViewModel : ViewModel
 		{
@@ -84,21 +118,12 @@ namespace ApplicationTemplate.Tests
 			return GetAndAssertCurrentViewModel<TDestinationViewModel>();
 		}
 
-		protected async Task<TDestinationViewModel> AssertNavigateFromToAfter<TSourceViewModel, TDestinationViewModel>(Func<IDynamicCommand> arrange, Func<TSourceViewModel, IDynamicCommand> act)
-			where TSourceViewModel : ViewModel
-		{
-			// Arrange
-			await arrange().Execute();
-
-			// Act
-			var viewModel = GetAndAssertCurrentViewModel<TSourceViewModel>();
-
-			await act(viewModel).Execute();
-
-			// Assert
-			return GetAndAssertCurrentViewModel<TDestinationViewModel>();
-		}
-
+		/// <summary>
+		/// This method will assert that the TDestinationViewModel is the current ViewModel after executing the IDynamicCommand.
+		/// </summary>
+		/// <typeparam name="TDestinationViewModel">The expected ViewModel type</typeparam>
+		/// <param name="act">The IDynamicCommand provider.</param>
+		/// <returns>A task that when completed will contain the expected ViewModel.</returns>
 		protected async Task<TDestinationViewModel> AssertNavigateTo<TDestinationViewModel>(Func<IDynamicCommand> act)
 		{
 			// Act
