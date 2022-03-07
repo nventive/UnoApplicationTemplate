@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\AuthenticationEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Exceptions\DadJokesException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\IDadJokesEndpoint.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\DadJokesEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\UserProfileEndpointMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ConfigurationSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\DiagnosticsConfiguration.cs" />
@@ -143,5 +144,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.production.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Client\Mock\DadJokesEndpointMock.FetchData.json" />
   </ItemGroup>
 </Project>

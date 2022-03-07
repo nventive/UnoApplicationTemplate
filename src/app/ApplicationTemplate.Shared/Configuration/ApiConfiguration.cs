@@ -55,12 +55,12 @@ namespace ApplicationTemplate
 
 		private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IUserProfileEndpoint>(configuration, "UserProfileEndpoint");
+			return services.AddEndpoint<IUserProfileEndpoint, UserProfileEndpointMock>(configuration, "UserProfileEndpoint");
 		}
 
 		private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IAuthenticationEndpoint>(configuration, "AuthenticationEndpoint");
+			return services.AddEndpoint<IAuthenticationEndpoint, AuthenticationEndpointMock>(configuration, "AuthenticationEndpoint");
 		}
 
 		private static IServiceCollection AddPostEndpoint(this IServiceCollection services, IConfiguration configuration)
@@ -71,7 +71,7 @@ namespace ApplicationTemplate
 					(request, response, deserializedResponse) => new PostEndpointException(deserializedResponse)
 				))
 				.AddTransient<ExceptionInterpreterHandler<PostErrorResponse>>()
-				.AddEndpoint<IPostEndpoint>(configuration, "PostEndpoint", b => b
+				.AddEndpoint<IPostEndpoint, PostEndpointMock>(configuration, "PostEndpoint", b => b
 					.AddHttpMessageHandler<ExceptionInterpreterHandler<PostErrorResponse>>()
 					.AddHttpMessageHandler<AuthenticationTokenHandler<AuthenticationData>>()
 				);
@@ -79,30 +79,28 @@ namespace ApplicationTemplate
 
 		private static IServiceCollection AddDadJokesEndpoint(this IServiceCollection services, IConfiguration configuration)
 		{
-			return services.AddEndpoint<IDadJokesEndpoint>(configuration, "DadJokesEndpoint");
+			return services.AddEndpoint<IDadJokesEndpoint, DadJokesEndpointMock>(configuration, "DadJokesEndpoint");
 		}
 
-		private static IServiceCollection AddEndpoint<TInterface>(
+		private static IServiceCollection AddEndpoint<TInterface, TMock>(
 			this IServiceCollection services,
 			IConfiguration configuration,
 			string name,
 			Func<IHttpClientBuilder, IHttpClientBuilder> configure = null
 		)
 			where TInterface : class
+			where TMock : class, TInterface
 		{
 			var options = configuration.GetSection(name).Get<EndpointOptions>();
 
 			if (options.EnableMock)
 			{
-				services.AddSingleton<TInterface>();
+				services.AddSingleton<TInterface, TMock>();
 			}
 			else
 			{
 				var httpClientBuilder = services
-					.AddRefitHttpClient<TInterface>(settings: serviceProvider => new RefitSettings()
-					{
-						ContentSerializer = new ObjectSerializerToContentSerializerAdapter(serviceProvider.GetRequiredService<IObjectSerializer>()),
-					})
+					.AddRefitHttpClient<TInterface>()
 					.ConfigurePrimaryHttpMessageHandler(serviceProvider => serviceProvider.GetRequiredService<HttpMessageHandler>())
 					.ConfigureHttpClient((serviceProvider, client) =>
 					{

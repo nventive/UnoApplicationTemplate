@@ -1,5 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using ApplicationTemplate.Presentation;
+using Chinook.SectionsNavigation;
 using Xunit;
 
 namespace ApplicationTemplate.Tests
@@ -7,39 +10,43 @@ namespace ApplicationTemplate.Tests
 	public partial class NavigationShould : NavigationTestsBase
 	{
 		[Fact]
-		public async Task NavigateEverywhere()
+		public async Task NavigateToDifferentMenuSections()
 		{
-			await AssertNavigateFromTo<OnboardingPageViewModel, WelcomePageViewModel>(p => p.NavigateToWelcomePage);
+			// Arrange
+			Func<MenuViewModel> vmBuilder = () => new MenuViewModel();
 
-			await AssertNavigateFromTo<WelcomePageViewModel, CreateAccountPageViewModel>(p => p.NavigateToCreateAccountPage);
+			await AssertNavigateFromTo<MenuViewModel, SettingsPageViewModel>(vmBuilder, p => p.ShowSettings);
 
-			await AssertNavigateFromTo<CreateAccountPageViewModel, WelcomePageViewModel>(p => p.NavigateBack);
+			await AssertNavigateFromTo<MenuViewModel, PostsPageViewModel>(vmBuilder, p => p.ShowPosts);
 
-			await AssertNavigateFromTo<WelcomePageViewModel, LoginPageViewModel>(p => p.NavigateToLoginPage);
+			await AssertNavigateFromTo<MenuViewModel, DadJokesPageViewModel>(vmBuilder, p => p.ShowHome);
+		}
 
-			await AssertNavigateFromTo<LoginPageViewModel, WelcomePageViewModel>(p => p.NavigateBack);
+		[Fact]
+		public async Task NavigateFromWelcomePageToDadJokesPage()
+		{
+			var onboardingViewModel = await AssertNavigateFromTo<WelcomePageViewModel, OnboardingPageViewModel>(() => new WelcomePageViewModel(), p => p.NavigateToOnboarding);
 
-			await AssertNavigateFromTo<WelcomePageViewModel, HomePageViewModel>(p => p.NavigateToHomePage);
+			await AssertNavigateTo<DadJokesPageViewModel>(() => onboardingViewModel.NavigateToJokes);
+		}
 
-			await AssertNavigateFromTo<HomePageViewModel, PostsPageViewModel>(p => p.NavigateToPostsPage);
+		[Fact]
+		public async Task NavigateToLoginPageAndBack()
+		{
+			var loginVM = await AssertNavigateFromTo<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage);
 
-			await AssertNavigateFromTo<PostsPageViewModel, EditPostPageViewModel>(p => p.NavigateToNewPost);
+			await AssertNavigateTo<SettingsPageViewModel>(() => loginVM.NavigateBack);
+		}
 
-			await AssertNavigateFromTo<EditPostPageViewModel, PostsPageViewModel>(p => p.NavigateBack);
+		[Fact]
+		public async Task NavigateToDiagnosticsPageAndBack()
+		{
+			var diagnosticsViewModel = await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(
+				() => new SettingsPageViewModel(),
+				p => p.NavigateToDiagnosticsPage
+			);
 
-			await AssertNavigateFromTo<PostsPageViewModel, EditPostPageViewModel>(p => p.NavigateToNewPost);
-
-			await AssertNavigateFromTo<EditPostPageViewModel, PostsPageViewModel>(p => p.NavigateBack);
-
-			await AssertNavigateFromTo<PostsPageViewModel, HomePageViewModel>(p => p.NavigateBack);
-
-			await AssertNavigateFromTo<HomePageViewModel, SettingsPageViewModel>(p => p.NavigateToSettingsPage);
-
-			await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(p => p.NavigateToDiagnosticsPage);
-
-			await AssertNavigateFromTo<DiagnosticsPageViewModel, SettingsPageViewModel>(p => p.NavigateBack);
-
-			await AssertNavigateFromTo<SettingsPageViewModel, HomePageViewModel>(p => p.NavigateBack);
+			await AssertNavigateTo<SettingsPageViewModel>(() => diagnosticsViewModel.NavigateBack);
 		}
 	}
 }
