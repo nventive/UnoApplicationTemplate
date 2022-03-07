@@ -29,31 +29,6 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task NavigateToNewPost()
-		{
-			// Arrange
-			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
-			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
-
-			// Act
-			await viewModel.NavigateToNewPost.Execute();
-
-			// Assert
-			var currentViewModel = GetCurrentViewModel();
-			using (new AssertionScope())
-			{
-				currentViewModel.Should().NotBeNull();
-				currentViewModel.Should().BeOfType<EditPostPageViewModel>();
-			}
-
-			using (new AssertionScope())
-			{
-				var editPostVm = currentViewModel as EditPostPageViewModel;
-				editPostVm.IsNewPost.Should().BeTrue();
-			}
-		}
-
-		[Fact]
 		public async Task NavigateToEditPost()
 		{
 			// Arrange

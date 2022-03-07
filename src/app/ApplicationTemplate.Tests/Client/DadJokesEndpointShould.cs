@@ -12,11 +12,12 @@ namespace ApplicationTemplate.Tests
 		public async Task GetAll()
 		{
 			// Act
-			var result = await SUT.Search(DefaultCancellationToken, "test");
+			var result = await SUT.FetchData(DefaultCancellationToken, "hot");
 
 			// Assert
 			result.Should().NotBeNull();
-			result.Quotes.Should().NotBeNullOrEmpty();
+			result.Data.Should().NotBeNull();
+			result.Data.Children.Should().NotBeNullOrEmpty();
 		}
 	}
 }
