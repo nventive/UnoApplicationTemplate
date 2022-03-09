@@ -22,7 +22,7 @@ trigger:
 resources:
   containers:
     - container: windows
-      image: nventive/vs_build-tools:16.9.6
+      image: nventive/vs_build-tools:16.11.9
 
 variables:
 - template: build/variables.yml
