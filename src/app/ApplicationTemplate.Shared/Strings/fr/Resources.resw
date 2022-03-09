@@ -214,10 +214,10 @@
     <value>Créer article</value>
   </data>
   <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
-    <value>Continuer</value>
+    <value>CONTINUER</value>
   </data>
   <data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
-    <value>Passer le tutoriel</value>
+    <value>PASSER</value>
   </data>
   <data name="Menu_Home.Text" xml:space="preserve">
     <value>Blagues</value>
@@ -246,11 +246,8 @@
   <data name="Login_ForgotPassword.Content" xml:space="preserve">
     <value>Mot de passe oublié?</value>
   </data>
-  <data name="Home_Title.Text" xml:space="preserve">
-    <value>Les blagues de papa</value>
-  </data>
   <data name="Home_Text.Text" xml:space="preserve">
-    <value>J'étais accro au savon avant, maintenant je suis propre.</value>
+    <value>&quot;Bienvenue au Club de l'Assomption.&#x0A;Je pense que nous savons tous pourquoi nous sommes ici.&quot;</value>
   </data>
   <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
     <value>Mot de passe oublié</value>

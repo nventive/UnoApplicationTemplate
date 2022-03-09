@@ -4,23 +4,14 @@
 	<!-- Background color -->
 	<item>
 		<shape>
-			<solid android:color="@color/primaryColor"/>
+			<solid android:color="@color/backgroundColor" />
 		</shape>
 	</item>
-
-	<!-- Background image -->
-	<!-- TODO: Do we want to provide a background image? -->
-	<!--<item>
-		<bitmap
-			android:src="@drawable/splashscreen_background"
-			android:gravity="center"
-            android:tileMode="repeat"/>
-	</item>-->
-
+	
 	<!-- Centered logo -->
 	<item>
 		<bitmap
-			android:src="@drawable/splashscreen_icon"
-			android:gravity="center"/>
+			android:src="@drawable/logo"
+			android:gravity="center" />
 	</item>
 </layer-list>

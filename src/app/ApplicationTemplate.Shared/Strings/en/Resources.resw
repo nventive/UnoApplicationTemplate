@@ -214,10 +214,10 @@
     <value>New post</value>
   </data>
   <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
-    <value>Continue</value>
+    <value>CONTINUE</value>
   </data>
   <data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
-    <value>Skip tutorial</value>
+    <value>SKIP</value>
   </data>
   <data name="Menu_Home.Text" xml:space="preserve">
     <value>Jokes</value>
@@ -246,11 +246,8 @@
   <data name="Login_ForgotPassword.Content" xml:space="preserve">
     <value>Forgot password?</value>
   </data>
-  <data name="Home_Title.Text" xml:space="preserve">
-    <value>Dad's app jokes</value>
-  </data>
   <data name="Home_Text.Text" xml:space="preserve">
-    <value>I used to be addicted to soap, but I'm clean now.</value>
+    <value>&quot;Welcome to the Assumption Club.&#x0A;I think we all know why we are here.&quot;</value>
   </data>
   <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
     <value>Forgot Password</value>

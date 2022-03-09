@@ -10,16 +10,16 @@ namespace ApplicationTemplate.Presentation
 	{
 		public IDynamicCommand NavigateToJokes => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 
 			await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
+			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 		});
 
 		public OnboardingItemViewModel[] OnboardingItems { get; } = new[]
 		{
-			new OnboardingItemViewModel("Donec faucibus erat vitae dui mattis lacinia. Nullam varius ultricies libero, sit amet tristique ex maximus ut. Donec erat felis, tempus sodales dolor ut, consequat maximus lacus.", "ms-appx:///Assets/Placeholder.png"),
-			new OnboardingItemViewModel("Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean eleifend sem eu orci pulvinar rutrum. Morbi quis nisi ac augue venenatis faucibus.", "ms-appx:///Assets/Placeholder.png"),
-			new OnboardingItemViewModel("Pellentesque a pharetra libero. Nunc rhoncus leo auctor ipsum placerat pharetra venenatis placerat eros. Aenean tincidunt consequat tincidunt. Pellentesque eu orci dapibus dui consequat elementum ultrices non quam. Nulla et fermentum dui. Fusce aliquam nec erat quis tincidunt.", "ms-appx:///Assets/Placeholder.png"),
+			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
+			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
+			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png"),
 		};
 
 		public static implicit operator OnboardingPageViewModel(OnboardingItemViewModel v)

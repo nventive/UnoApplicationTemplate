@@ -18,15 +18,14 @@
 						<autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
 						<subviews>
 							<imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Assets/splashscreen_icon.png" translatesAutoresizingMaskIntoConstraints="NO" id="65">
-								<rect key="frame" x="141.5" y="348" width="92" height="116"/>
+								<rect key="frame" x="141.5" y="348" width="280" height="280"/>
 							</imageView>
 						</subviews>
 						<constraints>
 							<constraint firstAttribute="centerY" secondItem="65" secondAttribute="centerY" id="80"/>
 							<constraint firstAttribute="centerX" secondItem="65" secondAttribute="centerX" id="81"/>
 						</constraints>
-						<color key="backgroundColor" colorSpace="calibratedRGB" red="0.15294117647058825" green="0.29019607843137257" blue="0.615686274509804" alpha="1"/>
-						<color key="tintColor" colorSpace="calibratedRGB" red="0.15294117647058825" green="0.29019607843137257" blue="0.615686274509804" alpha="1"/>
+						<color key="backgroundColor" colorSpace="calibratedRGB" red="0" green="0.118" blue="0.376" alpha="1"/>
 					</view>
 				</viewController>
 				<placeholder placeholderIdentifier="IBFirstResponder" id="7" userLabel="First Responder" sceneMemberID="firstResponder"/>

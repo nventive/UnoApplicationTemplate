@@ -78,7 +78,7 @@ namespace ApplicationTemplate
 			}
 			else
 			{
-				await section.Navigate(ct, () => new WelcomePageViewModel());
+				await section.Navigate(ct, () => new OnboardingPageViewModel());
 			}
 //-:cnd:noEmit
 #if __MOBILE__ || WINDOWS_UWP
