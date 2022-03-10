@@ -90,6 +90,7 @@
     <BundleResource Include="Resources\Fonts\Guillon-Black.ttf" />
     <BundleResource Include="Resources\Fonts\Roboto-Regular.ttf" />
     <BundleResource Include="Resources\Fonts\Roboto-Medium.ttf" />
+    <BundleResource Include="Resources\Fonts\Guillon-Light.ttf" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="mscorlib" />

@@ -74,7 +74,10 @@ namespace ApplicationTemplate
 
 			if (currentSettings.IsOnboardingCompleted)
 			{
-				await section.Navigate(ct, () => new CreateAccountPageViewModel());
+				await section.Navigate(ct, () => new LoginPageViewModel(async ct2 =>
+				{
+					await sectionsNavigator.NavigateBackOrCloseModal(ct2);
+				}));
 			}
 			else
 			{

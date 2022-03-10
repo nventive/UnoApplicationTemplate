@@ -15,7 +15,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var validationResult = await Form.Validate(ct);
 
-			if (validationResult.IsValid)
+			if (validationResult.IsValid && Form.PasswordHasEightCharacters && Form.PasswordHasNumber && Form.PasswordHasUppercase)
 			{
 				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), Form.Password);
 

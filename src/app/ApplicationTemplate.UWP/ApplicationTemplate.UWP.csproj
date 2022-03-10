@@ -509,6 +509,9 @@
   <ItemGroup>
     <Content Include="Assets\Fonts\Roboto-Medium.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Guillon-Light.ttf" />
+  </ItemGroup>
   <Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" Condition="Exists('..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems')" />
   <Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

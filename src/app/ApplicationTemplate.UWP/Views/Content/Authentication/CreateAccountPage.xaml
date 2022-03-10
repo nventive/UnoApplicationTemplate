@@ -5,11 +5,78 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
+	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:android="http://nventive.com/android"
 	  xmlns:ios="http://nventive.com/ios"
-	  mc:Ignorable="d ios android">
+	  mc:Ignorable="d ios android"
+      ue:BindableVisualState.VisualStateName="{Binding Form.PasswordHasEightCharacters}"
+      ue:BindableVisualState.VisualStateName2="{Binding Form.PasswordHasNumber}"
+      ue:BindableVisualState.VisualStateName3="{Binding Form.PasswordHasUppercase}">
 
 	<Grid Background="{StaticResource MaterialOnBackgroundBrush}">
+
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="PasswordHasEightCharacters">
+
+				<VisualState x:Name="True">
+					<VisualState.Setters>
+						<Setter Target="HasEightCharactersPathControl.Style"
+								Value="{StaticResource SuccessCheckPathControlStyle}" />
+						<Setter Target="HasEightCharactersText.Margin"
+								Value="0,8" />
+					</VisualState.Setters>
+				</VisualState>
+
+				<VisualState x:Name="False">
+					<VisualState.Setters>
+						<Setter Target="HasEightCharactersPathControl.Style"
+								Value="{StaticResource ErrorXPathControlStyle}" />
+						<Setter Target="HasEightCharactersText.Margin"
+								Value="0,8" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+			<VisualStateGroup x:Name="PasswordHasNumber">
+
+				<VisualState x:Name="True">
+					<VisualState.Setters>
+						<Setter Target="HasNumberPathControl.Style"
+								Value="{StaticResource SuccessCheckPathControlStyle}" />
+						<Setter Target="HasNumberText.Margin"
+								Value="0,8" />
+					</VisualState.Setters>
+				</VisualState>
+
+				<VisualState x:Name="False">
+					<VisualState.Setters>
+						<Setter Target="HasNumberPathControl.Style"
+								Value="{StaticResource ErrorXPathControlStyle}" />
+						<Setter Target="HasNumberText.Margin"
+								Value="0,8" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+			<VisualStateGroup x:Name="PasswordHasUppercase">
+
+				<VisualState x:Name="True">
+					<VisualState.Setters>
+						<Setter Target="HasUppercasePathControl.Style"
+								Value="{StaticResource SuccessCheckPathControlStyle}" />
+						<Setter Target="HasUppercaseText.Margin"
+								Value="0,8" />
+					</VisualState.Setters>
+				</VisualState>
+
+				<VisualState x:Name="False">
+					<VisualState.Setters>
+						<Setter Target="HasUppercasePathControl.Style"
+								Value="{StaticResource ErrorXPathControlStyle}" />
+						<Setter Target="HasUppercaseText.Margin"
+								Value="0,8" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -75,6 +142,54 @@
 								 android:ImeOptions="Next"
 								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
 				</local:DataValidationView>
+
+				<!-- Password Validation Hints -->
+				<Grid>
+					<Grid.RowDefinitions>
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+						<RowDefinition Height="Auto" />
+					</Grid.RowDefinitions>
+
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
+
+					<u:PathControl x:Name="HasEightCharactersPathControl"
+								   Style="{StaticResource CirclePathControlStyle}"
+								   Margin="9,9" />
+
+					<u:PathControl x:Name="HasNumberPathControl"
+								   Style="{StaticResource CirclePathControlStyle}"
+								   Grid.Row="1"
+								   Margin="9,9" />
+
+					<u:PathControl x:Name="HasUppercasePathControl"
+								   Style="{StaticResource CirclePathControlStyle}"
+								   Grid.Row="2"
+								   Margin="9,9" />
+
+					<TextBlock x:Name="HasEightCharactersText"
+							   Text="8 characters minimum"
+							   x:Uid="CreateAccount_Password_Validation1"
+							   Grid.Column="1"
+							   Style="{StaticResource Body3}" />
+
+					<TextBlock x:Name="HasNumberText"
+							   Text="One number"
+							   x:Uid="CreateAccount_Password_Validation2"
+							   Grid.Column="1"
+							   Grid.Row="1"
+							   Style="{StaticResource Body3}" />
+
+					<TextBlock x:Name="HasUppercaseText"
+							   Text="One uppercase character"
+							   x:Uid="CreateAccount_Password_Validation3"							   
+							   Grid.Column="1"
+							   Grid.Row="2"
+							   Style="{StaticResource Body3}" />
+				</Grid>
 
 				<Button x:Name="ConfirmButton"
 						x:Uid="CreateAccount_Confirm"

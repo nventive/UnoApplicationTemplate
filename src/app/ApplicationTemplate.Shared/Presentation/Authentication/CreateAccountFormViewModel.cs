@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
@@ -16,12 +17,27 @@ namespace ApplicationTemplate.Presentation
 		public CreateAccountFormViewModel()
 		{
 			this.AddValidation(this.GetProperty(x => x.Email));
-			this.AddValidation(this.GetProperty(x => x.Password));
 		}
 
 		public string Email
 		{
 			get => this.Get<string>();
+			set => this.Set(value);
+		}
+		public bool PasswordHasEightCharacters
+		{
+			get => this.GetFromObservable(ObservePasswordHasEightCharacters());
+			set => this.Set(value);
+		}
+		public bool PasswordHasNumber
+		{
+			get => this.GetFromObservable(ObservePasswordHasNumber());
+			set => this.Set(value);
+		}
+
+		public bool PasswordHasUppercase
+		{
+			get => this.GetFromObservable(ObservePasswordHasUppercase());
 			set => this.Set(value);
 		}
 
@@ -30,35 +46,37 @@ namespace ApplicationTemplate.Presentation
 			get => this.Get<string>();
 			set => this.Set(value);
 		}
+
+		private IObservable<bool> ObservePasswordHasEightCharacters()
+		{
+			return this.GetProperty(x => x.Password)
+				.Observe()
+				.Select(password => password.Length >= 8 ? true : false);
+		}
+
+		private IObservable<bool> ObservePasswordHasNumber()
+		{
+			return this.GetProperty(x => x.Password)
+				.Observe()
+				.Select(password => password.Any(char.IsDigit) ? true : false);
+		}
+
+		private IObservable<bool> ObservePasswordHasUppercase()
+		{
+			return this.GetProperty(x => x.Password)
+				.Observe()
+				.Select(password => password.Any(char.IsUpper) ? true : false);
+		}
 	}
 
 	public class CreateAccountFormValidator : AbstractValidator<CreateAccountFormViewModel>
 	{
+
 		public CreateAccountFormValidator(IStringLocalizer localizer)
 		{
-			var myPassword = string.Empty;
-
 			RuleFor(x => x.Email)
 				.NotEmpty()
 				.EmailAddress();
-
-			RuleFor(x => x.Password)
-				.NotEmpty()
-				.Must(password =>
-				{
-					if (password == null)
-					{
-						return false;
-					}
-
-					myPassword = password;
-
-					var longerThan8 = password?.Length >= 8;
-					var containsNumber = password.Any(char.IsDigit);
-
-					return longerThan8 && containsNumber;
-				})
-				.WithMessage(localizer["CreateAccount_PasswordValidation"]);
 		}
 	}
 }

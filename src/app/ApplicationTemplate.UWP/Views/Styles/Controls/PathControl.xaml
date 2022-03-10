@@ -49,8 +49,8 @@
 			</Setter.Value>
 		</Setter>
 	</Style>
-
-	<!--  Home navigation Paths -->
+    
+    <!--  Home navigation Paths -->
 	<!--  Home section -->
 	<Style x:Key="OutlinedHomePathControlStyle"
 		   TargetType="u:PathControl">
@@ -157,6 +157,83 @@
 						  MaxHeight="{TemplateBinding MaxHeight}"
 						  MaxWidth="{TemplateBinding MaxWidth}"
 						  Data="M19.14 13.4399C19.18 13.1399 19.2 12.8299 19.2 12.4999C19.2 12.1799 19.18 11.8599 19.13 11.5599L21.16 9.9799C21.34 9.8399 21.39 9.5699 21.28 9.3699L19.36 6.0499C19.24 5.8299 18.99 5.7599 18.77 5.8299L16.38 6.7899C15.88 6.4099 15.35 6.0899 14.76 5.8499L14.4 3.3099C14.36 3.0699 14.16 2.8999 13.92 2.8999H10.08C9.83999 2.8999 9.64999 3.0699 9.60999 3.3099L9.24999 5.8499C8.65999 6.0899 8.11999 6.4199 7.62999 6.7899L5.23999 5.8299C5.01999 5.7499 4.76999 5.8299 4.64999 6.0499L2.73999 9.3699C2.61999 9.5799 2.65999 9.8399 2.85999 9.9799L4.88999 11.5599C4.83999 11.8599 4.79999 12.1899 4.79999 12.4999C4.79999 12.8099 4.81999 13.1399 4.86999 13.4399L2.83999 15.0199C2.65999 15.1599 2.60999 15.4299 2.71999 15.6299L4.63999 18.9499C4.75999 19.1699 5.00999 19.2399 5.22999 19.1699L7.61999 18.2099C8.11999 18.5899 8.64999 18.9099 9.23999 19.1499L9.59999 21.6899C9.64999 21.9299 9.83999 22.0999 10.08 22.0999H13.92C14.16 22.0999 14.36 21.9299 14.39 21.6899L14.75 19.1499C15.34 18.9099 15.88 18.5899 16.37 18.2099L18.76 19.1699C18.98 19.2499 19.23 19.1699 19.35 18.9499L21.27 15.6299C21.39 15.4099 21.34 15.1599 21.15 15.0199L19.14 13.4399ZM12 16.0999C10.02 16.0999 8.39999 14.4799 8.39999 12.4999C8.39999 10.5199 10.02 8.8999 12 8.8999C13.98 8.8999 15.6 10.5199 15.6 12.4999C15.6 14.4799 13.98 16.0999 12 16.0999Z" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>
+
+	<!--  SuccessCheckPathControlStyle -->
+	<Style x:Key="SuccessCheckPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialSuccessBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="15" />
+		<Setter Property="Width"
+				Value="15" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="M6.99998 0.833336C3.31998 0.833336 0.333313 3.82 0.333313 7.5C0.333313 11.18 3.31998 14.1667 6.99998 14.1667C10.68 14.1667 13.6666 11.18 13.6666 7.5C13.6666 3.82 10.68 0.833336 6.99998 0.833336ZM5.66665 10.8333L2.33331 7.5L3.27331 6.56L5.66665 8.94667L10.7266 3.88667L11.6666 4.83334L5.66665 10.8333Z"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--  ErrorXPathControlStyle -->
+	<Style x:Key="ErrorXPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialErrorBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="15" />
+		<Setter Property="Width"
+				Value="15" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="M6.99998 0.833334C3.31331 0.833334 0.333313 3.81333 0.333313 7.5C0.333313 11.1867 3.31331 14.1667 6.99998 14.1667C10.6866 14.1667 13.6666 11.1867 13.6666 7.5C13.6666 3.81333 10.6866 0.833334 6.99998 0.833334ZM10.3333 9.89333L9.39331 10.8333L6.99998 8.44L4.60665 10.8333L3.66665 9.89333L6.05998 7.5L3.66665 5.10667L4.60665 4.16667L6.99998 6.56L9.39331 4.16667L10.3333 5.10667L7.93998 7.5L10.3333 9.89333Z"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- CirclePathControlStyle -->
+	<Style x:Key="CirclePathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialSurfaceBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="2" />
+		<Setter Property="Width"
+				Value="2" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="M-2,0a2,2 0 1,0 4,0a2,2 0 1,0 -4,0"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
