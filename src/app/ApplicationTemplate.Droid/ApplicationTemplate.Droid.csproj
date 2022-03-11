@@ -19,7 +19,7 @@
     <AndroidResgenFile>Resources\Resource.Designer.cs</AndroidResgenFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
     <AndroidUseLatestPlatformSdk>False</AndroidUseLatestPlatformSdk>
-    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
     <AndroidManifest>Properties\AndroidManifest.xml</AndroidManifest>
     <AndroidUseIntermediateDesignerFile>True</AndroidUseIntermediateDesignerFile>
     <ResourcesDirectory>..\ApplicationTemplate.Shared\Strings</ResourcesDirectory>
@@ -77,7 +77,6 @@
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidPackageFormat>aab</AndroidPackageFormat>
     <AndroidUseAapt2>true</AndroidUseAapt2>
-    <EnableNETAnalyzers>false</EnableNETAnalyzers>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />
@@ -112,8 +111,8 @@
     <PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
     <PackageReference Include="Uno.Material" Version="1.0.0-dev.812" />
     <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools" Version="6.1.0-build.205.g2e0e348372" />
-    <PackageReference Include="Uno.UI" Version="3.11.6" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.11.6" />
+    <PackageReference Include="Uno.UI" Version="3.11.9" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.11.9" />
     <PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
     <PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.32" />
