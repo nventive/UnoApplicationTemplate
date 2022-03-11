@@ -6,16 +6,43 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:u="using:Nventive.View.Controls"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  xmlns:android="http://nventive.com/android"
 	  xmlns:ios="http://nventive.com/ios"
 	  mc:Ignorable="d ios android"
-      ue:BindableVisualState.VisualStateName="{Binding Form.PasswordHasEightCharacters}"
-      ue:BindableVisualState.VisualStateName2="{Binding Form.PasswordHasNumber}"
-      ue:BindableVisualState.VisualStateName3="{Binding Form.PasswordHasUppercase}">
+      ue:BindableVisualState.VisualStateName="{Binding PasswordIsEntered}">
 
-	<Grid Background="{StaticResource MaterialOnBackgroundBrush}">
+	<Grid Background="{StaticResource MaterialOnBackgroundBrush}"
+		  toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
 
 		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="PasswordIsEntered">
+
+				<VisualState x:Name="True">
+					<VisualState.Setters>
+						<Setter Target="CircleHasEightCharactersPathControl.Opacity"
+								Value="1" />
+						<Setter Target="CircleHasNumberPathControl.Opacity"
+								Value="1" />
+						<Setter Target="CircleHasUppercasePathControl.Opacity"
+								Value="1" />
+					</VisualState.Setters>
+				</VisualState>
+
+				<VisualState x:Name="False">
+					<VisualState.Setters>
+						<Setter Target="CircleHasEightCharactersPathControl.Opacity"
+								Value="0" />
+						<Setter Target="CircleHasNumberPathControl.Opacity"
+								Value="0" />
+						<Setter Target="CircleHasUppercasePathControl.Opacity"
+								Value="0" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+
+		<!--<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="PasswordHasEightCharacters">
 
 				<VisualState x:Name="True">
@@ -76,21 +103,31 @@
 					</VisualState.Setters>
 				</VisualState>
 			</VisualStateGroup>
-		</VisualStateManager.VisualStateGroups>
+		</VisualStateManager.VisualStateGroups>-->
 
 		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
+		<!-- Background -->
 		<Image Source="ms-appx:///Assets/Background_Mustaches.png"
 			   Stretch="UniformToFill"
-			   Grid.RowSpan="2"/>
+			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch"
+			   Grid.RowSpan="3" />
 
-		<CommandBar Style="{StaticResource TransparentCommandBarStyle}"></CommandBar>
+		<!-- Back button -->
+		<Button Style="{StaticResource LeftArrowButtonStyle}"
+				Command="{Binding NavigateBack}"
+				Margin="0,24"
+				HorizontalAlignment="Left" />
+
 
 		<ScrollViewer Grid.Row="1">
-			<StackPanel Margin="43,0">
+			<StackPanel Margin="43,0"
+					    ue:InputPaneExtensions.PanIntoView="True">
 				<TextBlock Text="Join the fun!"
 						   x:Uid="CreateAccount_Title"
 						   Margin="22,0"
@@ -129,7 +166,8 @@
 				<local:DataValidationView Model="{Binding Form}"
 										  PropertyName="Password"
 										  Margin="0,4"
-										  Background="{StaticResource MaterialSurfaceBrush}">
+										  Background="{StaticResource MaterialSurfaceBrush}"
+										  ue:ControlExtensions.GotFocusCommand="{Binding [OnPasswordFocus]}">
 					<PasswordBox x:Name="PasswordField"
 								 x:Uid="CreateAccount_Password"
 								 PlaceholderText="Choose a password"
@@ -156,17 +194,58 @@
 						<ColumnDefinition Width="*" />
 					</Grid.ColumnDefinitions>
 
-					<u:PathControl x:Name="HasEightCharactersPathControl"
-								   Style="{StaticResource CirclePathControlStyle}"
+					<!--
+					<Ellipse x:Name="CircleHasEightCharactersPathControl"
+							 Width="2"
+							 Height="2"
+							 Fill="{StaticResource MaterialSurfaceBrush}"
+							 Visibility="{Binding PasswordIsEntered, Converter={StaticResource TrueToCollapsed}, FallbackValue=Visible}"
+							 Margin="9,9" />
+
+					<Ellipse x:Name="CircleasNumberPathControl"
+							 Grid.Row="1"
+							 Width="2"
+							 Height="2"
+							 Fill="{StaticResource MaterialSurfaceBrush}"
+							 Visibility="{Binding PasswordIsEntered, Converter={StaticResource TrueToCollapsed}, FallbackValue=Visible}"
+							 Margin="9,9" />
+
+					<Ellipse x:Name="CircleHasUppercasePathControl"
+							 Grid.Row="2"
+							 Width="2"
+							 Height="2"
+							 Fill="{StaticResource MaterialSurfaceBrush}"
+							 Visibility="{Binding PasswordIsEntered, Converter={StaticResource TrueToCollapsed}, FallbackValue=Visible}"
+							 Margin="9,9" />
+					-->
+					<u:PathControl x:Name="XHasEightCharactersPathControl"
+								   Style="{StaticResource ErrorXPathControlStyle}"
+								   Visibility="{Binding Form.PasswordHasEightCharacters, Converter={StaticResource TrueToCollapsed}, FallbackValue=Visible}"
 								   Margin="9,9" />
 
-					<u:PathControl x:Name="HasNumberPathControl"
-								   Style="{StaticResource CirclePathControlStyle}"
+					<u:PathControl x:Name="XHasNumberPathControl"
+								   Style="{StaticResource ErrorXPathControlStyle}"
+								   Visibility="{Binding Form.PasswordHasNumber, Converter={StaticResource TrueToCollapsed}, FallbackValue=Visible}"
 								   Grid.Row="1"
 								   Margin="9,9" />
 
-					<u:PathControl x:Name="HasUppercasePathControl"
-								   Style="{StaticResource CirclePathControlStyle}"
+					<u:PathControl x:Name="XHasUppercasePathControl"
+								   Style="{StaticResource ErrorXPathControlStyle}"
+								   Visibility="{Binding Form.PasswordHasUppercase, Converter={StaticResource TrueToCollapsed}, FallbackValue=Visible}"
+								   Grid.Row="2"
+								   Margin="9,9" />
+
+					<u:PathControl Style="{StaticResource SuccessCheckPathControlStyle}"
+								   Visibility="{Binding Form.PasswordHasEightCharacters}"
+								   Margin="9,9" />
+
+					<u:PathControl Style="{StaticResource SuccessCheckPathControlStyle}"
+								   Visibility="{Binding Form.PasswordHasNumber}"
+								   Grid.Row="1"
+								   Margin="9,9" />
+
+					<u:PathControl Style="{StaticResource SuccessCheckPathControlStyle}"
+								   Visibility="{Binding Form.PasswordHasUppercase}"
 								   Grid.Row="2"
 								   Margin="9,9" />
 
@@ -174,6 +253,7 @@
 							   Text="8 characters minimum"
 							   x:Uid="CreateAccount_Password_Validation1"
 							   Grid.Column="1"
+							   Margin="0,8"
 							   Style="{StaticResource Body3}" />
 
 					<TextBlock x:Name="HasNumberText"
@@ -181,6 +261,7 @@
 							   x:Uid="CreateAccount_Password_Validation2"
 							   Grid.Column="1"
 							   Grid.Row="1"
+							   Margin="0,8"
 							   Style="{StaticResource Body3}" />
 
 					<TextBlock x:Name="HasUppercaseText"
@@ -188,6 +269,7 @@
 							   x:Uid="CreateAccount_Password_Validation3"							   
 							   Grid.Column="1"
 							   Grid.Row="2"
+							   Margin="0,8"
 							   Style="{StaticResource Body3}" />
 				</Grid>
 
@@ -197,7 +279,7 @@
 						Command="{Binding CreateAccount}"
 						Style="{StaticResource ExecutingButtonStyle}"
 						HorizontalAlignment="Stretch"
-						Margin="0,32,0,80" />
+						Margin="0,32" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

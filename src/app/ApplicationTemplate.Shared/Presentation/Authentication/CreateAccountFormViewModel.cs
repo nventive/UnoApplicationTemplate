@@ -24,11 +24,13 @@ namespace ApplicationTemplate.Presentation
 			get => this.Get<string>();
 			set => this.Set(value);
 		}
+
 		public bool PasswordHasEightCharacters
 		{
 			get => this.GetFromObservable(ObservePasswordHasEightCharacters());
 			set => this.Set(value);
 		}
+
 		public bool PasswordHasNumber
 		{
 			get => this.GetFromObservable(ObservePasswordHasNumber());

@@ -151,23 +151,6 @@
 		</win:Setter>
 	</Style>
 
-	<Style x:Key="TransparentCommandBarStyle"
-		   TargetType="CommandBar"
-		   xamarin:BasedOn="{StaticResource DefaultCommandBarStyle}">
-
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-
-		<!-- ANDROID SETTERS -->
-		<android:Setter Property="toolkit:UIElementExtensions.Elevation"
-						Value="0" />
-	</Style>
-
-
 	<!-- Default Style -->
 	<Style TargetType="CommandBar"
 		   BasedOn="{StaticResource DefaultCommandBarStyle}" />
