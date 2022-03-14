@@ -65,6 +65,7 @@ namespace ApplicationTemplate
 		{
 			var applicationSettingsService = services.GetRequiredService<IApplicationSettingsService>();
 			var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
+			var authenticationService = services.GetRequiredService<IAuthenticationService>();
 
 			var section = await sectionsNavigator.SetActiveSection(ct, "Home");
 
@@ -74,10 +75,24 @@ namespace ApplicationTemplate
 
 			if (currentSettings.IsOnboardingCompleted)
 			{
-				await section.Navigate(ct, () => new LoginPageViewModel(async ct2 =>
-				{
-					await sectionsNavigator.NavigateBackOrCloseModal(ct2);
-				}));
+				authenticationService
+					.GetAndObserveIsAuthenticated()
+					.SkipWhileSelectMany(async (ct, s) =>
+					{
+						if (s)
+						{
+							await services.GetRequiredService<IStackNavigator>().Navigate(ct, () => new DadJokesPageViewModel());
+						}
+						else
+						{
+							await section.Navigate(ct, () => new LoginPageViewModel(async ct2 =>
+							{
+								await sectionsNavigator.NavigateBackOrCloseModal(ct2);
+							}));
+						}
+					})
+					.Subscribe(_ => { }, e => Logger.LogError(e, "Failed to execute navigation after onboarding."))
+					.DisposeWith(_neverDisposed);
 			}
 			else
 			{
