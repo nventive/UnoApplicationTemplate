@@ -32,6 +32,7 @@ namespace ApplicationTemplate.Views
 			{ typeof(PostsPageViewModel), typeof(PostsPage) },
 			{ typeof(EditPostPageViewModel), typeof(EditPostPage) },
 			{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
+			{ typeof(HttpTracingDiagnosticsPageViewModel), typeof(HttpTracingDiagnosticsPage) },
 			{ typeof(CreateAccountPageViewModel), typeof(CreateAccountPage) },
 			{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
 			{ typeof(LoginPageViewModel), typeof(LoginPage) },

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -37,6 +38,7 @@ namespace ApplicationTemplate
 					var manager = new BackButtonManager();
 
 					var sectionsNavigator = s.GetRequiredService<ISectionsNavigator>();
+
 					manager.AddHandler(new BackButtonHandler(
 						name: "DefaultSectionsNavigatorHandler",
 						canHandle: () => sectionsNavigator.CanNavigateBackOrCloseModal(),

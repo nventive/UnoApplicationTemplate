@@ -130,21 +130,34 @@ namespace ApplicationTemplate
 		private static IServiceCollection AddMainHandler(this IServiceCollection services)
 		{
 			return services.AddTransient<HttpMessageHandler>(s =>
+			{
+				var handler =
 //-:cnd:noEmit
 #if __IOS__
 //+:cnd:noEmit
-				new NSUrlSessionHandler()
+					new NSUrlSessionHandler();
 //-:cnd:noEmit
 #elif __ANDROID__
 //+:cnd:noEmit
-				new Xamarin.Android.Net.AndroidClientHandler()
+					new Xamarin.Android.Net.AndroidClientHandler();
 //-:cnd:noEmit
 #else
 //+:cnd:noEmit
-				new HttpClientHandler()
+					new HttpClientHandler();
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
+
+#if DEBUG
+				return new HttpTracerHandler(s.GetService<IHttpTracingService>())
+				{
+					InnerHandler = handler
+				};
+#else
+				return handler;
+#endif
+			}
+
 			);
 		}
 
@@ -224,7 +237,6 @@ namespace ApplicationTemplate
 			where T : class
 		{
 			services.AddSingleton(serviceProvider => RequestBuilder.ForType<T>(settings?.Invoke(serviceProvider)));
-
 			return services
 				.AddHttpClient(typeof(T).FullName)
 				.AddTypedClient((client, serviceProvider) => RestService.For(client, serviceProvider.GetService<IRequestBuilder<T>>()));

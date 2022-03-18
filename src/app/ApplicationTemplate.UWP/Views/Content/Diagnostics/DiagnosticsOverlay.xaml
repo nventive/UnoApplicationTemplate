@@ -215,6 +215,10 @@
 						Content="Theme"
 						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
+				<Button Command="{Binding NavigateToHttpTracingDiagnosticsPage}"
+						Content="Http"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
+
 				<Button Command="{Binding ToggleMore}"
 						Style="{StaticResource DiagnosticsOverlayButtonStyle}">
 					<Grid>

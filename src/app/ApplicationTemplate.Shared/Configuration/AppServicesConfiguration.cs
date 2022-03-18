@@ -36,6 +36,7 @@ namespace ApplicationTemplate
 			return services
 				.AddXamarinEssentials()
 				.AddMessageDialog()
+				.AddSingleton<IHttpTracingService, HttpTracingService>()
 				.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 				.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
 				.AddSingleton<IPostService, PostService>()

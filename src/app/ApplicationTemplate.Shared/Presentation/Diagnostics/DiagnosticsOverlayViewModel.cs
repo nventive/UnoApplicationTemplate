@@ -1,8 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
+using Chinook.StackNavigation;
+using Uno.Extensions;
+using Uno.Logging;
 
 namespace ApplicationTemplate.Presentation
 {
@@ -20,6 +23,18 @@ namespace ApplicationTemplate.Presentation
 		public IDynamicCommand NavigateToDiagnosticsPage => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new DiagnosticsPageViewModel());
+		});
+
+		public IDynamicCommand NavigateToHttpTracingDiagnosticsPage => this.GetCommandFromTask(async ct =>
+		{
+			if (this.GetService<ISectionsNavigator>().GetActiveViewModel() is HttpTracingDiagnosticsPageViewModel vm)
+			{
+				await vm.NavigateBack.Execute(ct);
+			}
+			else
+			{
+				await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new HttpTracingDiagnosticsPageViewModel());
+			}
 		});
 
 		public bool IsDiagnosticsOverlayEnabled => DiagnosticsConfiguration.DiagnosticsOverlay.GetIsEnabled();

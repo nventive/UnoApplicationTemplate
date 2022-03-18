@@ -1,0 +1,41 @@
+﻿<Page x:Class="ApplicationTemplate.Views.Content.HttpTracingDiagnosticsPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:local="using:ApplicationTemplate.Views.Content"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="60" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<CommandBar Content="Http Logs" />
+			
+		<StackPanel Orientation="Horizontal"
+					Grid.Row="1"
+					Padding="12">
+			<TextBlock Text="Processing Status" Width="150" TextAlignment="Center"/>
+			<TextBlock Text="URI" Width="300" TextAlignment="Center"/>
+			<TextBlock Text="Method" Width="60" TextAlignment="Center"/>
+			<TextBlock Text="Response Status" Width="150" TextAlignment="Center"/>
+			<TextBlock Text="Time sent" Width="200" TextAlignment="Center"/>
+			<TextBlock Text="Time received" Width="200" TextAlignment="Center"/>
+		</StackPanel>
+		
+		<ListView ItemsSource="{Binding Logs}"
+				  Grid.Row="2"
+				  Padding="0"
+				  Margin="0">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<local:HttpLogItemControl DataContext="{Binding}"/>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+	</Grid>
+</Page>

@@ -25,5 +25,9 @@
 											  ValueIfEmpty="Visible"
 											  ValueIfNotEmpty="Collapsed"  />
 
+	<uc:FromNullableToCustomValueConverter x:Key="NullToCollapsed"
+										   ValueIfNull="Collapsed"
+										   ValueIfNotNull="Visible"/>
+
 	<converters:DebugConverter x:Key="debug" />
 </ResourceDictionary>

@@ -12,7 +12,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Business\Entities\DadJokesQuote.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IAuthenticationService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IDadJokesService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\IHttpTracingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\DadJokesService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\HttpTracingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\Impl\UserProfileService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\IUserProfileService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Business\PostTypes.cs" />
@@ -22,7 +24,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\DadJokes\DadJokeContentData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\DadJokes\DadJokesData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\ErrorData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\Http\HttpLog.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\Http\HttpRequestContent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Data\Http\HttpResponseContent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\UserProfileData.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Client\Http\HttpTracerHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\IAuthenticationEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\IUserProfileEndpoint.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Mock\AuthenticationEndpointMock.cs" />
@@ -41,6 +47,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationCoreConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_Configuration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\CollectionTracking\CollectionOperation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\CollectionTracking\CollectionTracking.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Configuration\IConfigurationExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\OnDataLostDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\AnalyticsDataLoaderStrategy.cs" />
@@ -49,6 +57,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicData\IChangeSet.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\NetworkReconnectionDataLoaderTrigger.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicMvvm\IViewModel.Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicMvvm\ObservableCollectionFromObservableAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\ObjectSerializerToContentSerializerAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\ObjectSerializerToResponseContentDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\PostErrorResponse.cs" />
@@ -82,6 +91,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\CultureDiagnosticsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\DiagnosticsCountersService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\HttpLogItemViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\HttpTracingDiagnosticsPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\ISectionsNavigator.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\SectionsNavigatorState.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\ValidatorExtensions.cs" />

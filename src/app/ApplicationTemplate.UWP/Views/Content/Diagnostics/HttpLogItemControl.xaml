@@ -1,0 +1,211 @@
+﻿<UserControl x:Class="ApplicationTemplate.Views.Content.HttpLogItemControl"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d">
+
+	<StackPanel Visibility="{Binding Data.Request, Converter={StaticResource NullToCollapsed}}">
+
+		<StackPanel Orientation="Horizontal">
+			<Border Width="150"
+					BorderBrush="{StaticResource ButtonBorderThemeBrush}"
+					BorderThickness="1"
+					Padding="10">
+				<TextBlock Text="{Binding Data.Status}"
+						   TextAlignment="Center"/>
+			</Border>
+
+			<Border Width="300"
+					BorderBrush="{StaticResource ButtonBorderThemeBrush}"
+					BorderThickness="1"
+					Padding="10">
+				<TextBlock Text="{Binding Data.Request.Uri}"/>
+			</Border>
+
+			<Border Width="60"
+					BorderBrush="{StaticResource ButtonBorderThemeBrush}"
+					BorderThickness="1"
+					Padding="10">
+				<TextBlock Text="{Binding Data.Request.Method}"
+						   TextAlignment="Center"/>
+			</Border>
+
+			<Border	Width="150"
+					BorderBrush="{StaticResource ButtonBorderThemeBrush}"
+					BorderThickness="1"
+					Padding="10">
+				<TextBlock Text="{Binding Data.Response.StatusCode}"
+						   TextAlignment="Center"/>
+			</Border>
+
+			<Border Width="200"
+					BorderBrush="{StaticResource ButtonBorderThemeBrush}"
+					BorderThickness="1"
+					Padding="10">
+				<TextBlock Text="{Binding Data.Request.TimeStart}"
+						   TextAlignment="Center"/>
+			</Border>
+
+			<Border Width="200"
+					BorderBrush="{StaticResource ButtonBorderThemeBrush}"
+					BorderThickness="1"
+					Padding="10">
+				<TextBlock Text="{Binding Data.Response.TimeReceived}"
+						   TextAlignment="Center"/>
+			</Border>
+		</StackPanel>
+
+		<StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<Button Command="{Binding SwitchRequestDetailsVisibility}">
+					<Grid>
+						<TextBlock Text="Show Request Details"
+								   Visibility="{Binding IsRequestDetailsVisible, Converter={StaticResource TrueToCollapsed}}"/>
+						<TextBlock Text="Close Request Details"
+								   Visibility="{Binding IsRequestDetailsVisible, Converter={StaticResource TrueToVisible}}"/>
+					</Grid>
+				</Button>
+
+				<Button Command="{Binding SwitchResponseDetailsVisibility}"
+						Visibility="{Binding Data.Response, Converter={StaticResource NullToCollapsed}}">
+					<Grid>
+						<TextBlock Text="Show Response Details"
+								   Visibility="{Binding IsResponseDetailsVisible, Converter={StaticResource TrueToCollapsed}}"/>
+						<TextBlock Text="Close Response Details"
+								   Visibility="{Binding IsResponseDetailsVisible, Converter={StaticResource TrueToVisible}}"/>
+					</Grid>
+				</Button>
+			</StackPanel>
+
+			<Border BorderBrush="{StaticResource ButtonBorderThemeBrush}"
+					BorderThickness="2"
+					Padding="10"
+					Visibility="{Binding IsRequestDetailsVisible, Converter={StaticResource TrueToVisible}}">
+				<StackPanel>
+					<StackPanel>
+						<TextBlock Text="Body:" />
+						<Button Command="{Binding ChangeRequestBodyVisibility}">
+							<Grid>
+								<TextBlock Text="Open"
+										   Visibility="{Binding IsRequestBodyVisible, Converter={StaticResource TrueToCollapsed}, Mode=TwoWay}"/>
+								<TextBlock Text="Close"
+										   Visibility="{Binding IsRequestBodyVisible, Converter={StaticResource TrueToVisible}, Mode=TwoWay}"/>
+							</Grid>
+						</Button>
+					</StackPanel>
+					
+					<ScrollViewer MaxHeight="500"
+									Visibility="{Binding IsRequestBodyVisible}">
+						<TextBlock Text="{Binding Data.Request.Body}"
+												TextWrapping="Wrap"/>
+					</ScrollViewer>
+
+					<StackPanel>
+						<TextBlock Text="Headers:" />
+						<Button Command="{Binding ChangeRequestHeadersVisibility}">
+							<Grid>
+								<TextBlock Text="Open"
+										   Visibility="{Binding IsRequestHeaderVisible, Converter={StaticResource TrueToCollapsed}, Mode=TwoWay}"/>
+								<TextBlock Text="Close"
+										   Visibility="{Binding IsRequestHeaderVisible, Converter={StaticResource TrueToVisible}, Mode=TwoWay}"/>
+							</Grid>
+						</Button>
+					</StackPanel>
+
+					<GridView ItemsSource="{Binding Data.Request.Headers}"
+							  Visibility="{Binding IsRequestHeaderVisible, Converter={StaticResource TrueToVisible}}"
+							  IsHitTestVisible="False">
+
+						<GridView.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel Margin="0" HorizontalAlignment="Left"/>
+							</ItemsPanelTemplate>
+						</GridView.ItemsPanel>
+
+						<GridView.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock>
+										<Run Text="{Binding Key}"/>
+										<Run Text=": "/>
+										<Run Text="{Binding Value}"/>
+									</TextBlock>
+								</StackPanel>
+							</DataTemplate>
+						</GridView.ItemTemplate>
+					</GridView>
+
+				</StackPanel>
+			</Border>
+
+			<Border BorderBrush="{StaticResource ButtonBorderThemeBrush}"
+					BorderThickness="2"
+					Padding="10"
+					Visibility="{Binding IsResponseDetailsVisible, Converter={StaticResource TrueToVisible}}">
+				<StackPanel>
+					<TextBlock>
+						<Run Text="Status: " />
+						<Run Text="{Binding Data.Response.StatusCode}" />
+					</TextBlock>
+
+					<StackPanel>
+						<TextBlock Text="Body:" />
+						<Button Command="{Binding ChangeResponseBodyVisibility}">
+							<Grid>
+								<TextBlock Text="Open"
+										   Visibility="{Binding IsResponseBodyVisible, Converter={StaticResource TrueToCollapsed}, Mode=TwoWay}"/>
+								<TextBlock Text="Close"
+										   Visibility="{Binding IsResponseBodyVisible, Converter={StaticResource TrueToVisible}, Mode=TwoWay}"/>
+							</Grid>
+						</Button>
+					</StackPanel>
+					
+					
+					<ScrollViewer MaxHeight="500"
+								  Visibility="{Binding IsResponseBodyVisible}">
+						<TextBlock Text="{Binding Data.Response.Body}"
+												TextWrapping="Wrap"/>
+					</ScrollViewer>
+
+					<StackPanel>
+						<TextBlock Text="Headers:" />
+						<Button Command="{Binding ChangeResponseHeadersVisibility}">
+							<Grid>
+								<TextBlock Text="Open"
+										   Visibility="{Binding IsResponseHeaderVisible, Converter={StaticResource TrueToCollapsed}, Mode=TwoWay}"/>
+								<TextBlock Text="Close"
+										   Visibility="{Binding IsResponseHeaderVisible, Converter={StaticResource TrueToVisible}, Mode=TwoWay}"/>
+							</Grid>
+						</Button>
+					</StackPanel>
+
+					<GridView ItemsSource="{Binding Data.Response.Headers}"
+							  Visibility="{Binding IsResponseHeaderVisible, Converter={StaticResource TrueToVisible}}"
+							  IsHitTestVisible="False"
+							  MaxWidth="300">
+
+						<GridView.ItemsPanel>
+							<ItemsPanelTemplate>
+								<StackPanel Margin="0" HorizontalAlignment="Left"/>
+							</ItemsPanelTemplate>
+						</GridView.ItemsPanel>
+						
+						<GridView.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal">
+									<TextBlock>
+										<Run Text="{Binding Key}"/>
+										<Run Text=": "/>
+										<Run Text="{Binding Value}"/>
+									</TextBlock>
+								</StackPanel>
+							</DataTemplate>
+						</GridView.ItemTemplate>
+					</GridView>
+				</StackPanel>
+			</Border>
+
+		</StackPanel>
+	</StackPanel>
+</UserControl>
