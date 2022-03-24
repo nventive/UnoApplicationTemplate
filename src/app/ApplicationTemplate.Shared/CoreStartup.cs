@@ -82,13 +82,7 @@ namespace ApplicationTemplate
 				}
 				else
 				{
-					await section.Navigate(ct, () => new LoginPageViewModel(
-						async ct2 =>
-						{
-							await sectionsNavigator.NavigateBackOrCloseModal(ct2);
-						},
-						false)
-					);
+					await section.Navigate(ct, () => new LoginPageViewModel(isFirstLogin: false));
 				}
 			}
 			else

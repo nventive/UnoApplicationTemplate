@@ -222,13 +222,13 @@
 		<Setter Property="Stretch"
 				Value="Uniform" />
 		<Setter Property="Height"
-				Value="2" />
+				Value="4" />
 		<Setter Property="Width"
-				Value="2" />
+				Value="4" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="u:PathControl">
-					<Path Data="M-2,0a2,2 0 1,0 4,0a2,2 0 1,0 -4,0"
+					<Path Data="M-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0"
 						  Stretch="{TemplateBinding Stretch}"
 						  Width="{TemplateBinding Width}"
 						  Height="{TemplateBinding Height}"

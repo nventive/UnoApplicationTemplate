@@ -8,14 +8,9 @@ namespace ApplicationTemplate.Presentation
 {
 	public partial class OnboardingPageViewModel : ViewModel
 	{
-		public IDynamicCommand NavigateToJokes => this.GetCommandFromTask(async ct =>
+		public IDynamicCommand NavigateToLogin => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(async ct2 =>
-				{
-					await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct2);
-				},
-				true
-			));
+			await this.GetService<IStackNavigator>().Navigate(ct, () => new LoginPageViewModel(isFirstLogin: true));
 			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 		});
 

@@ -77,6 +77,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\CreateAccountFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\LoginFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\ForgotPasswordFormViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\PasswordState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesFiltersPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesPageViewModel.cs" />
