@@ -314,7 +314,7 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="Padding"
-				Value="16,12,16,12" />
+				Value="16,6,16,6" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="BorderBrush"
@@ -455,7 +455,7 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="Padding"
-				Value="16,12,16,12" />
+				Value="16,6,16,6" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="FontFamily"

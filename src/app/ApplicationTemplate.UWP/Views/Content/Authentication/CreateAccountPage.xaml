@@ -28,7 +28,7 @@
 			<!-- Back button -->
 			<Button Style="{StaticResource LeftArrowButtonStyle}"
 					Command="{Binding NavigateBack}"
-					Margin="0,24"
+					Margin="6,24"
 					HorizontalAlignment="Left" />
 
 			<ScrollViewer Grid.Row="1"
@@ -77,7 +77,6 @@
 									 Style="{StaticResource DefaultPasswordBoxStyle}"
 									 ios:ReturnKeyType="Next"
 									 android:ImeOptions="Next"
-									 ue:ControlExtensions.GotFocusCommand="{Binding [OnPasswordFocus]}"
 									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
 					</local:DataValidationView>
 
@@ -95,16 +94,19 @@
 						</Grid.ColumnDefinitions>
 
 						<u:PathControl x:Name="XHasEightCharactersPathControl"
+									   VerticalAlignment="Center"
 									   Style="{Binding Form.PasswordHasEightCharacters, Converter={StaticResource PasswordStateToIconStyle}}"
 									   Margin="{Binding Form.PasswordHasEightCharacters, Converter={StaticResource PasswordStateToIconMargin}}" />
 
 						<u:PathControl x:Name="XHasNumberPathControl"
 									   Style="{Binding Form.PasswordHasNumber, Converter={StaticResource PasswordStateToIconStyle}}"
+									   VerticalAlignment="Center"
 									   Grid.Row="1"
 									   Margin="{Binding Form.PasswordHasNumber, Converter={StaticResource PasswordStateToIconMargin}}" />
 
 						<u:PathControl x:Name="XHasUppercasePathControl"
 									   Style="{Binding Form.PasswordHasUppercase, Converter={StaticResource PasswordStateToIconStyle}}"
+									   VerticalAlignment="Center"
 									   Grid.Row="2"
 									   Margin="{Binding Form.PasswordHasUppercase, Converter={StaticResource PasswordStateToIconMargin}}" />
 
@@ -132,6 +134,7 @@
 								   Style="{StaticResource Body3}" />
 					</Grid>
 
+					<!-- Confirm button -->
 					<Button x:Name="ConfirmButton"
 							x:Uid="CreateAccount_Confirm"
 							Content="CREATE AN ACCOUNT"
