@@ -246,6 +246,15 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   <data name="Login_Subtitle2" xml:space="preserve">
     <value>"Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact."</value>
   </data>
+  <data name="Login_Title2" xml:space="preserve">
+    <value>Ravi de&#x0A;te revoir !</value>
+  </data>
+  <data name="Login_Subtitle1" xml:space="preserve">
+    <value>&quot;Bienvenue au Club de l'Assomption.&#x0A;Je pense que nous savons tous pourquoi nous sommes ici.&quot;</value>
+  </data>
+  <data name="Login_Subtitle2" xml:space="preserve">
+    <value>&quot;Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact.&quot;</value>
+  </data>
   <data name="Login_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
   </data>
