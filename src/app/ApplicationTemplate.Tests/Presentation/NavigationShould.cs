@@ -28,11 +28,9 @@ namespace ApplicationTemplate.Tests
 		}
 
 		[Fact]
-		public async Task NavigateFromOnboardingToDadJokesPage()
+		public async Task NavigateFromOnboardingToLoginPage()
 		{
-			var loginViewModel = await AssertNavigateFromTo<OnboardingPageViewModel, LoginPageViewModel>(() => new OnboardingPageViewModel(), p => p.NavigateToLogin);
-
-			await AssertNavigateTo<LoginPageViewModel>(() => loginViewModel.Login);
+			await AssertNavigateFromTo<OnboardingPageViewModel, LoginPageViewModel>(() => new OnboardingPageViewModel(), p => p.NavigateToLogin);
 		}
 
 		[Fact]
