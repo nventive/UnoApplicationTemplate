@@ -213,6 +213,9 @@
   <data name="Posts_NewPost.Content" xml:space="preserve">
     <value>Créer article</value>
   </data>
+  <data name="Onboarding_Content" xml:space="preserve">
+    <value>Obtenez votre dose de bonne humeur tous les jours. Lisez les dernières et meilleures blagues de papa !</value>
+  </data>
   <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
     <value>CONTINUER</value>
   </data>
@@ -228,8 +231,17 @@
   <data name="Menu_Settings.Content" xml:space="preserve">
     <value>Paramètres</value>
   </data>
-  <data name="Login_CommandBar.Content" xml:space="preserve">
-    <value>Connexion</value>
+  <data name="Login_Title1" xml:space="preserve">
+    <value>Bienvenue&#x0A;à bord !</value>
+  </data>
+  <data name="Login_Title2" xml:space="preserve">
+    <value>Ravi de&#x0A;te revoir !</value>
+  </data>
+  <data name="Login_Subtitle1" xml:space="preserve">
+    <value>&quot;Bienvenue au Club de l'Assomption.&#x0A;Je pense que nous savons tous pourquoi nous sommes ici.&quot;</value>
+  </data>
+  <data name="Login_Subtitle2" xml:space="preserve">
+    <value>&quot;Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact.&quot;</value>
   </data>
   <data name="Login_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
@@ -238,13 +250,16 @@
     <value>Mot de passe</value>
   </data>
   <data name="Login_Login.Content" xml:space="preserve">
-    <value>Se connecter</value>
+    <value>SE CONNECTER</value>
   </data>
   <data name="Login_CreateAccount.Content" xml:space="preserve">
-    <value>Créer un compte</value>
+    <value>CRÉER UN COMPTE</value>
   </data>
   <data name="Login_ForgotPassword.Content" xml:space="preserve">
-    <value>Mot de passe oublié?</value>
+    <value>Mot de passe oublié ?</value>
+  </data>
+  <data name="Login_Google.Content" xml:space="preserve">
+    <value>CONTINUER AVEC GOOGLE</value>
   </data>
   <data name="Home_Text.Text" xml:space="preserve">
     <value>&quot;Bienvenue au Club de l'Assomption.&#x0A;Je pense que nous savons tous pourquoi nous sommes ici.&quot;</value>
@@ -277,7 +292,7 @@
     <value>Licenses</value>
   </data>
   <data name="CreateAccount_Title.Text" xml:space="preserve">
-    <value>Rejoignez le plaisir!</value>
+    <value>Viens te divertir !</value>
   </data>
 	<data name="CreateAccount_Subtitle.Text" xml:space="preserve">
     <value>Seulement 2 secondes pour créer un compte</value>
@@ -320,6 +335,12 @@
   </data>
   <data name="ValidationNotEmpty_Email" xml:space="preserve">
     <value>Le courriel ne doit pas être vide.</value>
+  </data>
+  <data name="ValidationNotEmpty_Password" xml:space="preserve">
+    <value>Le mot de passe ne doit pas être vide.</value>
+  </data>
+	<data name="ValidationError_Email" xml:space="preserve">
+    <value>Quelque chose est incorrect, veuillez vérifier votre courriel.</value>
   </data>
   <data name="DadJokesFiltersPage_CommandBar.Content" xml:space="preserve">
     <value>Filtres</value>

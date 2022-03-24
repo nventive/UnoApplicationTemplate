@@ -53,9 +53,11 @@ namespace ApplicationTemplate.Presentation
 		public IDynamicCommand NavigateToLoginPage => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new LoginPageViewModel(async ct2 =>
-			{
-				await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct2);
-			}));
+				{
+					await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct2);
+				},
+				false
+			));
 		});
 
 		public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>

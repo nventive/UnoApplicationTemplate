@@ -25,6 +25,12 @@ namespace ApplicationTemplate.Presentation
 			set => this.Set(value);
 		}
 
+		public string Password
+		{
+			get => this.Get<string>();
+			set => this.Set(value);
+		}
+
 		public bool PasswordHasEightCharacters
 		{
 			get => this.GetFromObservable(ObservePasswordHasEightCharacters());
@@ -43,9 +49,9 @@ namespace ApplicationTemplate.Presentation
 			set => this.Set(value);
 		}
 
-		public string Password
+		public bool PasswordIsEmpty
 		{
-			get => this.Get<string>();
+			get => this.GetFromObservable(ObservePasswordIsEmpty());
 			set => this.Set(value);
 		}
 
@@ -53,32 +59,41 @@ namespace ApplicationTemplate.Presentation
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password => password.Length >= 8 ? true : false);
+				.Select(password => password.Length >= 8);
 		}
 
 		private IObservable<bool> ObservePasswordHasNumber()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password => password.Any(char.IsDigit) ? true : false);
+				.Select(password => password.Any(char.IsDigit));
 		}
 
 		private IObservable<bool> ObservePasswordHasUppercase()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password => password.Any(char.IsUpper) ? true : false);
+				.Select(password => password.Any(char.IsUpper));
+		}
+
+		private IObservable<bool> ObservePasswordIsEmpty()
+		{
+			var temp = Password.IsNullOrEmpty();
+			return this.GetProperty(x => x.Password)
+				.Observe()
+				.Select(password => password.IsNullOrEmpty());
 		}
 	}
 
 	public class CreateAccountFormValidator : AbstractValidator<CreateAccountFormViewModel>
 	{
-
 		public CreateAccountFormValidator(IStringLocalizer localizer)
 		{
 			RuleFor(x => x.Email)
 				.NotEmpty()
-				.EmailAddress();
+				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
+				.EmailAddress()
+				.WithMessage(_ => localizer["ValidationError_Email"]);
 		}
 	}
 }

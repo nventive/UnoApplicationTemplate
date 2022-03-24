@@ -64,6 +64,7 @@
 						<Border x:Name="ErrorBorder"
 								Opacity="0"
 								BorderBrush="{StaticResource MaterialErrorBrush}"
+								CornerRadius="4"
 								BorderThickness="2" />
 
 						<Grid x:Name="Errors"

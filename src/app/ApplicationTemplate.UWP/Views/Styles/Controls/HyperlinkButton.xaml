@@ -6,7 +6,7 @@
 	<Style x:Key="DefaultHyperlinkButtonStyle"
 		   TargetType="HyperlinkButton">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource MaterialOnBackgroundMediumBrush}" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="BorderThickness"
@@ -14,17 +14,17 @@
 		<Setter Property="Padding"
 				Value="0" />
 		<Setter Property="MinHeight"
-				Value="44" />
+				Value="17" />
 		<Setter Property="HorizontalAlignment"
 				Value="Left" />
 		<Setter Property="VerticalAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily02}" />
 		<Setter Property="FontSize"
-				Value="14" />
-		<Setter Property="FontWeight"
-				Value="Bold" />
+				Value="12" />
 		<Setter Property="UseSystemFocusVisuals"
 				Value="True" />
 
