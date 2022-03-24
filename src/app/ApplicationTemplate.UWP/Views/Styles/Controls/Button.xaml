@@ -159,8 +159,6 @@
 
 	<Style x:Key="TextButtonStyle"
 		   TargetType="Button">
-		<Setter Property="Height"
-				Value="40" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnBackgroundMediumBrush}" />
 		<Setter Property="Background"

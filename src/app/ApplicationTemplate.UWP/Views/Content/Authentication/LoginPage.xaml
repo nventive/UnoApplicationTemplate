@@ -75,7 +75,7 @@
 						Command="{Binding NavigateToForgotPasswordPage}"
 						Style="{StaticResource TextButtonStyle}"
 						FontStyle="Normal"
-						Margin="42,4" />
+						Margin="42,0" />
 
 				<Button x:Name="LoginButton"
 						x:Uid="Login_Login"
