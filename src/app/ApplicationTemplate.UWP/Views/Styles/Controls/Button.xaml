@@ -387,12 +387,14 @@
 
 		<Setter Property="Background"
 				Value="Transparent" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="Padding"
-				Value="8,6" />
+				Value="6,8" />
 		<Setter Property="BorderBrush"
 				Value="Transparent" />
 
@@ -406,6 +408,7 @@
 						  VerticalAlignment="{TemplateBinding VerticalAlignment}"
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
+						  Padding="{TemplateBinding Padding}"
 						  BorderThickness="1"
 						  CornerRadius="4">
 						<VisualStateManager.VisualStateGroups>
@@ -416,24 +419,8 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
-
-						<ContentPresenter x:Name="ContentPresenter"
-										  BorderBrush="{TemplateBinding BorderBrush}"
-										  BorderThickness="{TemplateBinding BorderThickness}"
-										  Content="{TemplateBinding Content}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  Padding="{TemplateBinding Padding}"
-										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw" />
-						<Grid Grid.Column="1">
-							<u:PathControl Style="{StaticResource LeftArrowPathControlStyle}" />
-						</Grid>
+						<u:PathControl Style="{StaticResource LeftArrowPathControlStyle}"
+										   Foreground="{TemplateBinding Foreground}" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

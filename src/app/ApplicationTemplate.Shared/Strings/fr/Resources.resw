@@ -232,16 +232,19 @@
     <value>Paramètres</value>
   </data>
   <data name="Login_Title1" xml:space="preserve">
-    <value>Bienvenue&#x0A;à bord !</value>
+    <value>Bienvenue
+à bord !</value>
   </data>
   <data name="Login_Title2" xml:space="preserve">
-    <value>Ravi de&#x0A;te revoir !</value>
+    <value>Ravi de
+te revoir !</value>
   </data>
   <data name="Login_Subtitle1" xml:space="preserve">
-    <value>&quot;Bienvenue au Club de l'Assomption.&#x0A;Je pense que nous savons tous pourquoi nous sommes ici.&quot;</value>
+    <value>"Bienvenue au Club de l'Assomption.
+Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="Login_Subtitle2" xml:space="preserve">
-    <value>&quot;Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact.&quot;</value>
+    <value>"Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact."</value>
   </data>
   <data name="Login_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
@@ -262,7 +265,8 @@
     <value>CONTINUER AVEC GOOGLE</value>
   </data>
   <data name="Home_Text.Text" xml:space="preserve">
-    <value>&quot;Bienvenue au Club de l'Assomption.&#x0A;Je pense que nous savons tous pourquoi nous sommes ici.&quot;</value>
+    <value>"Bienvenue au Club de l'Assomption.
+Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
     <value>Mot de passe oublié</value>
@@ -294,7 +298,7 @@
   <data name="CreateAccount_Title.Text" xml:space="preserve">
     <value>Viens te divertir !</value>
   </data>
-	<data name="CreateAccount_Subtitle.Text" xml:space="preserve">
+  <data name="CreateAccount_Subtitle.Text" xml:space="preserve">
     <value>Seulement 2 secondes pour créer un compte</value>
   </data>
   <data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
@@ -339,7 +343,7 @@
   <data name="ValidationNotEmpty_Password" xml:space="preserve">
     <value>Le mot de passe ne doit pas être vide.</value>
   </data>
-	<data name="ValidationError_Email" xml:space="preserve">
+  <data name="ValidationError_Email" xml:space="preserve">
     <value>Quelque chose est incorrect, veuillez vérifier votre courriel.</value>
   </data>
   <data name="DadJokesFiltersPage_CommandBar.Content" xml:space="preserve">
@@ -347,5 +351,14 @@
   </data>
   <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
     <value>Blagues</value>
+  </data>
+  <data name="Password_Validation1.Text" xml:space="preserve">
+    <value>8 caractères minimum</value>
+  </data>
+  <data name="Password_Validation2.Text" xml:space="preserve">
+    <value>Un nombre</value>
+  </data>
+  <data name="Password_Validation3.Text" xml:space="preserve">
+    <value>Un caractère majuscule</value>
   </data>
 </root>

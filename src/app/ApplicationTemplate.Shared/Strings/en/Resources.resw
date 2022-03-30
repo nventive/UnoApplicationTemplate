@@ -240,11 +240,11 @@ on board!</value>
 you again!</value>
   </data>
   <data name="Login_Subtitle1" xml:space="preserve">
-    <value>&quot;Welcome to the Assumption Club.
-I think we all know why we are here.&quot;</value>
+    <value>"Welcome to the Assumption Club.
+I think we all know why we are here."</value>
   </data>
-	<data name="Login_Subtitle2" xml:space="preserve">
-    <value>&quot;What do you call it when an Apple user looks you in the eye? iContact.&quot;</value>
+  <data name="Login_Subtitle2" xml:space="preserve">
+    <value>"What do you call it when an Apple user looks you in the eye? iContact."</value>
   </data>
   <data name="Login_Email.PlaceholderText" xml:space="preserve">
     <value>Email</value>
@@ -351,5 +351,14 @@ I think we all know why we are here."</value>
   </data>
   <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
     <value>Jokes</value>
+  </data>
+  <data name="Password_Validation1.Text" xml:space="preserve">
+    <value>8 characters minimum</value>
+  </data>
+  <data name="Password_Validation2.Text" xml:space="preserve">
+    <value>One number</value>
+  </data>
+  <data name="Password_Validation3.Text" xml:space="preserve">
+    <value>One uppercase character</value>
   </data>
 </root>

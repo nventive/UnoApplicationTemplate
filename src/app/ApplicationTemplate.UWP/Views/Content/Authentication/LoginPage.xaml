@@ -19,11 +19,11 @@
 			   HorizontalAlignment="Stretch"
 			   VerticalAlignment="Stretch" />
 
-		<ScrollViewer VerticalAlignment="Center">
-			<StackPanel>
+		<ScrollViewer>
+			<StackPanel VerticalAlignment="Center">
 				<TextBlock Text="{Binding Title}"
 						   x:Uid="Login_Title"
-						   Margin="30,0"
+						   Margin="22,32,22,0"
 						   Style="{StaticResource Headline2}"
 						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
 						   HorizontalTextAlignment="Center"
@@ -103,7 +103,7 @@
 						Content="CONTINUE WITH GOOGLE"
 						Style="{StaticResource GoogleButtonStyle}"
 						HorizontalAlignment="Stretch"
-						Margin="42,0" />
+						Margin="42,0,42,32" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>
