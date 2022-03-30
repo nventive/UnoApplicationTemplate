@@ -177,10 +177,10 @@
 						<RowDefinition Height="Auto" />
 					</Grid.RowDefinitions>
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="*" />
+					</Grid.ColumnDefinitions>
 
 					<u:PathControl x:Name="XHasEightCharactersPathControl"
 									   VerticalAlignment="Center"

@@ -267,7 +267,7 @@ I think we all know why we are here."</value>
   <data name="Home_Text.Text" xml:space="preserve">
     <value>"Welcome to the Assumption Club.
 I think we all know why we are here."</value>
-  </data>
+  </data>  
   <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
     <value>Forgot Password</value>
   </data>
@@ -352,11 +352,18 @@ I think we all know why we are here."</value>
   <data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
     <value>You must accepts terms of service to create an account.</value>
   </data>
+  <data name="ForgotPassword_Title.Text" xml:space="preserve">
+    <value>Oh no,
+it’s happening !</value>
+  </data>  
+  <data name="ForgotPassword_Subtitle.Text" xml:space="preserve">
+    <value>We’ll send you a link to reset your password by email.</value>
+  </data>
   <data name="ForgotPassword_Email.PlaceholderText" xml:space="preserve">
     <value>Email</value>
   </data>
   <data name="ForgotPassword_Reset.Content" xml:space="preserve">
-    <value>Reset</value>
+    <value>SEND A MAGIC LINK</value>
   </data>
   <data name="DadJokesSearch_CommandBar" xml:space="preserve">
     <value>Quotes</value>
@@ -390,6 +397,24 @@ I think we all know why we are here."</value>
   </data>
   <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
     <value>Jokes</value>
+  </data>
+  <data name="SentEmailConfirmation_Title.Text" xml:space="preserve">
+    <value>Email sent!</value>
+  </data>
+  <data name="SentEmailConfirmation_Subtitle.Text" xml:space="preserve">
+    <value>You can now go in your email to restart your account.You can now go in your email to restart your account.</value>
+  </data>
+  <data name="ResetPassword_Title.Text" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ResetPassword_Subitle.Text" xml:space="preserve">
+    <value>Welcome back, choose a new password that you can easily remember.</value>
+  </data>
+  <data name="ResetPassword_Password.Placeholder" xml:space="preserve">
+    <value>Choose a new password</value>
+  </data>
+  <data name="ResetPassword_Reset.Content" xml:space="preserve">
+    <value>SAVE MY PASSWORD</value>
   </data>
   <data name="Password_Validation1.Text" xml:space="preserve">
     <value>8 characters minimum</value>

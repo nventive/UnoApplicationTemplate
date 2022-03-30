@@ -112,6 +112,12 @@
     <Compile Include="Views\Content\Authentication\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Content\Authentication\ResetPasswordPage.xaml.cs">
+      <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\Authentication\SentEmailConfirmationPage.xaml.cs">
+      <DependentUpon>SentEmailConfirmationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Content\ChuckNorris\ChuckNorrisFavoritesPage.xaml.cs">
       <DependentUpon>ChuckNorrisFavoritesPage.xaml</DependentUpon>
     </Compile>
@@ -296,6 +302,14 @@
     <Page Include="Views\Content\Authentication\LoginPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Content\Authentication\ResetPasswordPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Content\Authentication\SentEmailConfirmationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Content\ChuckNorris\ChuckNorrisFavoritesPage.xaml">
       <Generator>MSBuild:Compile</Generator>

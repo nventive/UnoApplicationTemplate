@@ -277,9 +277,6 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
     <value>"Bienvenue au Club de l'Assomption.
 Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
-  <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
-    <value>Mot de passe oublié</value>
-  </data>
   <data name="EditPost_NewPost" xml:space="preserve">
     <value>Nouvel article</value>
   </data>
@@ -361,11 +358,17 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   <data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
     <value>Vous devez accepter les conditions d'utilisation pour créer un compte.</value>
   </data>
+  <data name="ForgotPassword_Title.Text" xml:space="preserve">
+    <value>Oh non,&#x0A;ça se passe !</value>
+  </data>
+  <data name="ForgotPassword_Subtitle.Text" xml:space="preserve">
+    <value>Nous vous enverrons un lien pour réinitialiser votre mot de passe par courriel.</value>
+  </data>
   <data name="ForgotPassword_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
   </data>
   <data name="ForgotPassword_Reset.Content" xml:space="preserve">
-    <value>Réinitialiser</value>
+    <value>ENVOYER UN LIEN MAGIQUE</value>
   </data>
   <data name="DadJokesSearch_CommandBar" xml:space="preserve">
     <value>Citations</value>
@@ -399,6 +402,24 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
     <value>Blagues</value>
+  </data>
+  <data name="SentEmailConfirmation_Title.Text" xml:space="preserve">
+    <value>Courriel envoyé !</value>
+  </data>
+  <data name="SentEmailConfirmation_Subtitle.Text" xml:space="preserve">
+    <value>Vous pouvez maintenant aller dans votre courriel pour redémarrer votre compte.</value>
+  </data>
+  <data name="ResetPassword_Title.Text" xml:space="preserve">
+    <value>Réinitialiser le mot de passe</value>
+  </data>
+  <data name="ResetPassword_Subitle.Text" xml:space="preserve">
+    <value>Bienvenue, choisissez un nouveau mot de passe dont vous vous souviendrez facilement.</value>
+  </data>
+  <data name="ResetPassword_Password.Placeholder" xml:space="preserve">
+    <value>Choisissez un nouveau mot de passe</value>
+  </data>
+  <data name="ResetPassword_Reset.Content" xml:space="preserve">
+    <value>ENREGISTRER MON MOT DE PASSE</value>
   </data>
   <data name="Password_Validation1.Text" xml:space="preserve">
     <value>8 caractères minimum</value>

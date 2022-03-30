@@ -11,6 +11,18 @@ namespace ApplicationTemplate.Presentation
 	{
 		public ForgotPasswordFormViewModel Form => this.GetChild(() => new ForgotPasswordFormViewModel());
 
+		public IDynamicCommand SendLink => this.GetCommandFromTask(async ct =>
+		{
+			var validationResult = await Form.Validate(ct);
+
+			//TODO : Send link to email
+
+			if (validationResult.IsValid)
+			{
+				await this.GetService<IStackNavigator>().Navigate(ct, () => new SentEmailConfirmationPageViewModel());
+			}
+		});
+
 		public IDynamicCommand ResetPassword => this.GetCommandFromTask(async ct =>
 		{
 			var validationResult = await Form.Validate(ct);

@@ -50,6 +50,11 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Letters.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Letters.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Letters.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Letters.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Letters.scale-400.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Logo.scale-200.png" />
