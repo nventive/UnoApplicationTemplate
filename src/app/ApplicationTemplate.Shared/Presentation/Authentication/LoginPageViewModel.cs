@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -13,21 +14,26 @@ namespace ApplicationTemplate.Presentation
 	{
 		public LoginPageViewModel(bool isFirstLogin)
 		{
-			this.Title = isFirstLogin ? this.GetService<IStringLocalizer>()["Login_Title1"] : this.GetService<IStringLocalizer>()["Login_Title2"];
-			this.Quote = isFirstLogin ? this.GetService<IStringLocalizer>()["Login_Subtitle1"] : this.GetService<IStringLocalizer>()["Login_Subtitle2"];
+			IsFirstLogin = isFirstLogin;
 		}
 
 		public LoginFormViewModel Form => this.GetChild(() => new LoginFormViewModel());
 
 		public string Title
 		{
-			get => this.Get<string>();
+			get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_Title1"] : this.GetService<IStringLocalizer>()["Login_Title2"];
 			set => this.Set(value);
 		}
 
 		public string Quote
 		{
-			get => this.Get<string>();
+			get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_Subtitle1"] : this.GetService<IStringLocalizer>()["Login_Subtitle2"];
+			set => this.Set(value);
+		}
+
+		public bool IsFirstLogin
+		{
+			get => this.Get<bool>();
 			set => this.Set(value);
 		}
 
@@ -38,7 +44,7 @@ namespace ApplicationTemplate.Presentation
 			if (validationResult.IsValid)
 			{
 				await this.GetService<IAuthenticationService>().Login(ct, Form.Email.Trim(), Form.Password);
-				await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesPageViewModel());
+				await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
 			}
 		});
 
