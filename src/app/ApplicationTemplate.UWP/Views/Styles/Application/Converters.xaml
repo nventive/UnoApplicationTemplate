@@ -26,21 +26,4 @@
 											  ValueIfNotEmpty="Collapsed"  />
 
 	<converters:DebugConverter x:Key="debug" />
-
-	<!-- Create  -->
-	<converters:FromPasswordStateToCustomValueConverter x:Key="PasswordStateToIconStyle"
-														DefaultValue="{StaticResource CirclePathControlStyle}"
-														ValidValue="{StaticResource SuccessCheckPathControlStyle}"
-														InvalidValue="{StaticResource ErrorXPathControlStyle}" />
-
-	<converters:FromPasswordStateToCustomValueConverter x:Key="PasswordStateToIconMargin"
-														DefaultValue="9,4,9,4"
-														ValidValue="9,4,9,4"
-														InvalidValue="9,4,9,4" />
-
-	<converters:FromPasswordStateToCustomValueConverter x:Key="PasswordStateToMargin"
-														DefaultValue="0,0"
-														ValidValue="0,4,0,4"
-														InvalidValue="0,4,0,4" />
-
 </ResourceDictionary>
