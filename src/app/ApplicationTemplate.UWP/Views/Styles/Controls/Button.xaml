@@ -429,6 +429,78 @@
 		</Setter>
 	</Style>
 
+	<Style x:Key="MaterialContainedButtonStyle"
+		   TargetType="Button">
+
+		<Setter Property="Height"
+				Value="40" />
+		<Setter Property="Background"
+				Value="{StaticResource MaterialPrimaryBrush}" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Center" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Center" />
+		<Setter Property="Padding"
+				Value="16,6,16,6" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily02SemiBold}" />
+		<Setter Property="FontSize"
+				Value="14" />
+		<Setter Property="CharacterSpacing"
+				Value="1.25" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="Button">
+					<Grid x:Name="RootGrid"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+						  VerticalAlignment="{TemplateBinding VerticalAlignment}">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="CommonStates">
+								<VisualState x:Name="Normal" />
+								<VisualState x:Name="PointerOver">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Opacity"
+												Value="0.04" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Pressed">
+									<VisualState.Setters>
+										<Setter Target="BackgroundBorder.Opacity"
+												Value="0.1" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<Border x:Name="BackgroundBorder"
+								Background="{TemplateBinding Background}"
+								BorderBrush="{TemplateBinding Background}"
+								BorderThickness="1"
+								CornerRadius="4" />
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  BorderBrush="{TemplateBinding BorderBrush}"
+										  BorderThickness="{TemplateBinding BorderThickness}"
+										  Content="{TemplateBinding Content}"
+										  ContentTransitions="{TemplateBinding ContentTransitions}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  Padding="{TemplateBinding Padding}"
+										  FontFamily="{TemplateBinding FontFamily}"
+										  FontSize="{TemplateBinding FontSize}"
+										  CharacterSpacing="{TemplateBinding CharacterSpacing}"
+										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+										  AutomationProperties.AccessibilityView="Raw" />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
 
 	<Style x:Key="MaterialContainedWithArrowButtonStyle"
 		   TargetType="Button">
@@ -826,6 +898,16 @@
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
+	</Style>
+
+	<Style x:Key="MaterialSecondaryContainedButtonStyle"
+		   TargetType="Button"
+		   BasedOn="{StaticResource MaterialContainedButtonStyle}">
+
+		<Setter Property="Background"
+				Value="{StaticResource MaterialSecondaryBrush}" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialOnSecondaryBrush}" />
 	</Style>
 
 	<Style TargetType="Button"

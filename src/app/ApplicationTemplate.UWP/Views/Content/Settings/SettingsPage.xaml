@@ -26,84 +26,166 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<CommandBar Content="Settings"
-					x:Uid="Settings_CommandBar" />
+		<CommandBar Content="Profile"
+					x:Uid="Profile_CommandBar" />
 
-		<StackPanel Margin="20,0,20,20"
-					Grid.Row="1">
-			<Grid>
+		<ScrollViewer Grid.Row="1">
 
-				<Grid.RowDefinitions>
-					<RowDefinition Height="0.9*" />
-					<RowDefinition Height="0.1*" />
-				</Grid.RowDefinitions>
-
-				<StackPanel Grid.Row="0"
-							Margin="0, 20">
-					<dl:DataLoaderView Source="{Binding UserProfile}"
-									   Grid.Row="0"
-									   EmptyTemplate="{StaticResource UserEmptyTemplate}">
-						<DataTemplate>
-							<StackPanel>
-
-								<TextBlock FontSize="24"
-										   Style="{StaticResource MaterialHeadline6}">
-									<Run Text="{Binding Data.LastName}"
-										 FontWeight="Bold" />
-									<Run Text="{Binding Data.FirstName}"
-										 FontWeight="Bold" />
+			<StackPanel>
+				<dl:DataLoaderView Source="{Binding UserProfile}"
+										   Grid.Row="0"
+										   EmptyTemplate="{StaticResource UserEmptyTemplate}">
+					<DataTemplate>
+						<StackPanel Margin="24">
+							<!-- Name and Lastname -->
+								<TextBlock Style="{StaticResource Headline5}">
+									<Run Text="{Binding Data.LastName}" />
+									<Run Text="{Binding Data.FirstName}" />
 								</TextBlock>
-								<Button Content="Change password"
+
+								<!-- Email -->
+								<TextBlock Text="Email"
+											Margin="0,16,0,0"
+											Style="{StaticResource Subtitle2}" />
+								<TextBlock Text="{Binding Data.Email}"
+											Style="{StaticResource Body2}" />
+
+								<Rectangle Margin="0,16"
+											Height="1"
+											HorizontalAlignment="Stretch"
+											Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+
+								<!-- Password -->
+								<TextBlock Text="Password"
+											Margin="0,16,0,0"
+											Style="{StaticResource Subtitle2}" />
+								<TextBlock Text="{Binding Data.Password}"
+											Style="{StaticResource Body2}" />
+
+								<!-- Change password -->
+								<Button Content="CHANGE PASSWORD"
 										x:Uid="Settings_ChangePassword"
-										Margin="0,20,0,4"
+										Margin="0,16,0,0"
 										HorizontalAlignment="Left"
-										Style="{StaticResource OutlinedExecutingButtonStyle}"
+										Style="{StaticResource MaterialContainedButtonStyle}"
 										Command="{Binding Parent.NavigateToEditProfilePage}" />
 
-								<Button Content="Logout"
-										x:Uid="Settings_Logout"
-										HorizontalAlignment="Left"
-										Margin="0,4"
-										Style="{StaticResource OutlinedExecutingButtonStyle}"
-										Command="{Binding Parent.Logout}" />
-							</StackPanel>
-						</DataTemplate>
-					</dl:DataLoaderView>
+						</StackPanel>
+					</DataTemplate>
+				</dl:DataLoaderView>
+					
+				<Rectangle Margin="0,16"
+							Height="1"
+							HorizontalAlignment="Stretch"
+							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
+				<StackPanel Margin="24,16">
+
+					<!-- Version -->
+					<TextBlock Style="{StaticResource Subtitle2}">
+						<Run Text="DAD Jokes - Version" />
+						<Run Text="{Binding VersionNumber}" />
+					</TextBlock>
+					<TextBlock Text="This application makes use of the dadjokes API from Dadjokes.io, which contains thousands of jokes."
+								Style="{StaticResource Body2}"
+								Foreground="{StaticResource MaterialOnSurfaceMediumBrush}" />
+
+					<!-- Replay tutorial -->
+					<Button Content="REPLAY TUTORIAL"
+							x:Uid="Settings_ReplayTutorial"
+							Margin="0,16,0,0"
+							HorizontalAlignment="Left"
+							Style="{StaticResource MaterialSecondaryContainedButtonStyle}" />
+				</StackPanel>
+
+				<Rectangle Height="1"
+							HorizontalAlignment="Stretch"
+							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+
+				<!-- Notification -->
+				<StackPanel Margin="24,16">
+					<TextBlock Text="Notification"
+							   Style="{StaticResource Subtitle2}" />
+					<TextBlock Text="I agree to receive notifications when there are new jokes."
+								Style="{StaticResource Body2}" />
+				</StackPanel>
+
+				<Rectangle Height="1"
+							HorizontalAlignment="Stretch"
+							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+
+				<!-- Dark Mode  -->
+				<StackPanel Margin="24,16">
+					<TextBlock Text="Dark mode"
+							   Style="{StaticResource Subtitle2}" />
+				</StackPanel>
+
+				<Rectangle Height="1"
+							HorizontalAlignment="Stretch"
+							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+
+				<!-- Privacy policy  -->
+				<StackPanel Margin="24,16">
+					<TextBlock Text="Privacy policy"
+							   Style="{StaticResource Subtitle2}" />
+				</StackPanel>
+
+				<Rectangle Height="1"
+							HorizontalAlignment="Stretch"
+							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+
+				<!-- Terms & conditions  -->
+				<StackPanel Margin="24,16">
+					<TextBlock Text="Terms &amp; conditions"
+							   Style="{StaticResource Subtitle2}" />
+				</StackPanel>
+				
+				<Rectangle Height="1"
+							HorizontalAlignment="Stretch"
+							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+			</StackPanel>
+
+			<!--
+
+						<Button Content="Logout"
+											x:Uid="Settings_Logout"
+											HorizontalAlignment="Left"
+											Margin="0,4"
+											Style="{StaticResource OutlinedExecutingButtonStyle}"
+											Command="{Binding Parent.Logout}" />
 					<Rectangle HorizontalAlignment="Stretch"
-							   Margin="0, 30, 0, 20"
-							   Fill="#000000"
-							   Opacity="0.1"
-							   Height="1" />
+							Margin="0, 30, 0, 20"
+							Fill="#000000"
+							Opacity="0.1"
+							Height="1" />
 
-					<HyperlinkButton Content="Privacy Policy"
-									 x:Uid="Settings_PrivacyPolicy"
-									 HorizontalAlignment="Left"
-									 Command="{Binding NavigateToPrivacyPolicyPage}" />
+				<HyperlinkButton Content="Privacy Policy"
+									x:Uid="Settings_PrivacyPolicy"
+									HorizontalAlignment="Left"
+									Command="{Binding NavigateToPrivacyPolicyPage}" />
 
-					<HyperlinkButton Content="Terms and Conditions"
-									 x:Uid="Settings_TermsAndConditions"
-									 HorizontalAlignment="Left"
-									 Command="{Binding NavigateToTermsAndConditionsPage}" />
-				</StackPanel>
+				<HyperlinkButton Content="Terms and Conditions"
+									x:Uid="Settings_TermsAndConditions"
+									HorizontalAlignment="Left"
+									Command="{Binding NavigateToTermsAndConditionsPage}" />
+			</StackPanel>
 
 
-				<StackPanel Grid.Row="1"
-							HorizontalAlignment="Center"
-							VerticalAlignment="Bottom">
+			<StackPanel Grid.Row="1"
+								HorizontalAlignment="Center"
+								VerticalAlignment="Bottom">
 
-					<Grid Background="Transparent"
-						  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
-						  ue:MultipleTapExtension.TapCount="3">
-						<TextBlock Style="{StaticResource MaterialCaption}">
-							<Run Text="Version"
-								 x:Uid="Settings_Version" />
-							<Run Text="{Binding VersionNumber}" />
-						</TextBlock>
-					</Grid>
+				<Grid Background="Transparent"
+							  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
+							  ue:MultipleTapExtension.TapCount="3">
+					<TextBlock Style="{StaticResource MaterialCaption}">
+								<Run Text="Version"
+									 x:Uid="Settings_Version" />
+								<Run Text="{Binding VersionNumber}" />
+					</TextBlock>
+				</Grid>
 
-				</StackPanel>
-			</Grid>
-		</StackPanel>
+			</StackPanel>-->
+		</ScrollViewer>
 	</Grid>
 </Page>
