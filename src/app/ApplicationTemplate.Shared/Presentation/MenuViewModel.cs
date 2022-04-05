@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
 using ApplicationTemplate.Presentation;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -14,6 +16,15 @@ namespace ApplicationTemplate.Presentation
 {
 	public partial class MenuViewModel : ViewModel
 	{
+		public enum Section
+		{
+			DadJokes,
+			Posts,
+			Settings
+		}
+
+		[Inject] private ISectionsNavigator _navigator;
+
 		/// <summary>
 		/// The list of ViewModel types on which the bottom menu should be visible.
 		/// </summary>
@@ -24,52 +35,40 @@ namespace ApplicationTemplate.Presentation
 			typeof(SettingsPageViewModel),
 		};
 
-		public IDynamicCommand ShowHome => this.GetCommandFromTask(async ct =>
+		public string MenuState => this.GetFromObservable(ObserveMenuState(), initialValue: "Closed");
+
+		public IDynamicCommand ShowHomeSection => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesPageViewModel());
+			await _navigator.SetActiveSection(ct, nameof(Section.DadJokes), () => new DadJokesPageViewModel());
 		});
 
-		public IDynamicCommand ShowPosts => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new PostsPageViewModel());
-		});
+		public IDynamicCommand ShowPostsSection => this.GetCommandFromTask(async ct =>
+			await _navigator.SetActiveSection(ct, nameof(Section.Posts), () => new PostsPageViewModel()));
 
-		public IDynamicCommand ShowSettings => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new SettingsPageViewModel());
-		});
+		public IDynamicCommand ShowSettingsSection => this.GetCommandFromTask(async ct =>
+			await _navigator.SetActiveSection(ct, nameof(Section.Settings), () => new SettingsPageViewModel()));
 
-		public string MenuState
-		{
-			get => this.GetFromObservable(ObserveMenuState(), initialValue: "Closed");
-		}
+		public bool IsHomeSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.DadJokes), initialValue: false);
 
-		private IObservable<string> ObserveMenuState()
-		{
-			return this.GetService<ISectionsNavigator>()
+		public bool IsPostsSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.Posts), initialValue: false);
+
+		public bool IsSettingsSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.Settings), initialValue: false);
+
+		private IObservable<string> ObserveMenuState() =>
+			_navigator
 				.ObserveCurrentState()
 				.Select(state =>
 				{
-					var vmType = GetViewModelType(state);
+					var vmType = state.GetViewModelType();
 					return _viewModelsWithBottomMenu.Contains(vmType) ? "Open" : "Closed";
 				})
 				.DistinctUntilChanged()
 				// On iOS, when Visual states are changed too fast, they break. This is a workaround for this bug.
 				.ThrottleOrImmediate(TimeSpan.FromMilliseconds(350), Scheduler.Default);
 
-			Type GetViewModelType(SectionsNavigatorState currentState)
-			{
-				switch (currentState.LastRequestState)
-				{
-					case NavigatorRequestState.Processing:
-						return currentState.GetNextViewModelType();
-					case NavigatorRequestState.Processed:
-					case NavigatorRequestState.FailedToProcess:
-						return currentState.GetLastViewModelType();
-					default:
-						throw new NotSupportedException($"The request state {currentState.LastRequestState} is not supported.");
-				}
-			}
-		}
+		private IObservable<bool> GetAndObserveIsSectionActive(Section section) =>
+			_navigator
+				.ObserveActiveSectionName()
+				.Select(activeSectionAsString => Enum.TryParse<Section>(activeSectionAsString, out var activeSection) && section == activeSection);
 	}
 }
