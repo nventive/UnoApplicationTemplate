@@ -2,7 +2,7 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:u="using:Nventive.View.Controls">
 	
-	<!-- KNOWN ISSUE : It is impossible to add a color resource in a setter. -->
+	<!-- KNOWN ISSUE : It is impossible to add a StaticResource in a setter in this file. -->
 	<SolidColorBrush x:Key="OnBackgroundPathControlBrush"
 					 Color="{ThemeResource MaterialOnBackgroundColor}" />
 
