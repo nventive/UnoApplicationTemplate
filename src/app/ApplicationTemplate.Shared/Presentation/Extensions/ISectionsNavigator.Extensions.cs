@@ -23,22 +23,5 @@ namespace Chinook.SectionsNavigation
 					var state = args.EventArgs.CurrentState;
 					return state.ActiveSection.Name;
 				});
-
-		/// <summary>
-		/// Determines if the section navigator can navigate back.
-		/// </summary>
-		/// <param name="sectionsNavigator"><see cref="ISectionsNavigator"/>.</param>
-		/// <returns>.</returns>
-		public static bool CanNavigateBackOrCloseDismissableModal(this ISectionsNavigator sectionsNavigator)
-		{
-			var modalNavigator = sectionsNavigator.State.ActiveModal;
-			if (modalNavigator != null)
-			{
-				return modalNavigator.CanNavigateBack();
-			}
-
-			// If the active section isn't a modal, use the default behavior.
-			return sectionsNavigator.CanNavigateBackOrCloseModal();
-		}
 	}
 }
