@@ -14,7 +14,7 @@
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
 		<CommandBar Content="Posts"
@@ -23,7 +23,6 @@
 
 		<Grid Grid.Row="1">
 			<dl:DataLoaderView Source="{Binding Posts}"
-							   Height="475"
 							   RefreshCommand="{Binding RefreshPosts}">
 				<DataTemplate>
 					<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
@@ -67,6 +66,7 @@
 					Command="{Binding NavigateToNewPost}"
 					CommandParameter="{Binding}"
 					VerticalAlignment="Bottom"
+					Margin="0,0,0,80"
 					HorizontalAlignment="Right">
 				<Border Width="56"
 						Height="56"

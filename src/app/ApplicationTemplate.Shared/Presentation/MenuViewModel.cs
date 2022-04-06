@@ -18,7 +18,7 @@ namespace ApplicationTemplate.Presentation
 	{
 		public enum Section
 		{
-			DadJokes,
+			Home,
 			Posts,
 			Settings
 		}
@@ -39,7 +39,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand ShowHomeSection => this.GetCommandFromTask(async ct =>
 		{
-			await _navigator.SetActiveSection(ct, nameof(Section.DadJokes), () => new DadJokesPageViewModel());
+			await _navigator.SetActiveSection(ct, nameof(Section.Home), () => new DadJokesPageViewModel());
 		});
 
 		public IDynamicCommand ShowPostsSection => this.GetCommandFromTask(async ct =>
@@ -48,7 +48,7 @@ namespace ApplicationTemplate.Presentation
 		public IDynamicCommand ShowSettingsSection => this.GetCommandFromTask(async ct =>
 			await _navigator.SetActiveSection(ct, nameof(Section.Settings), () => new SettingsPageViewModel()));
 
-		public bool IsHomeSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.DadJokes), initialValue: false);
+		public bool IsHomeSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.Home), initialValue: false);
 
 		public bool IsPostsSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.Posts), initialValue: false);
 
