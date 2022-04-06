@@ -2,6 +2,7 @@
 <Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <LangVersion>9.0</LangVersion>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -127,7 +128,7 @@
     <PackageReference Include="Chinook.BackButtonManager" Version="0.3.0-dev.22" />
     <PackageReference Include="Chinook.BackButtonManager.Uno" Version="0.3.0-dev.22" />
     <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.2.0-dev.11" />
-    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.2.0-dev.24" />
+    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.3.0-dev.33" />
     <PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.View.Uno" Version="0.2.0-dev.9" />
