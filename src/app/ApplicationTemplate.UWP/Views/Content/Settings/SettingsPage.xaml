@@ -80,7 +80,27 @@
 									 x:Uid="Settings_PrivacyPolicy"
 									 HorizontalAlignment="Left"
 									 Command="{Binding NavigateToPrivacyPolicyPage}" />
+					<Grid Margin="0,4"
+						  Background="{StaticResource MaterialSurfaceColor}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
 
+						<TextBlock Text="Dark mode"
+								   Foreground="{StaticResource MaterialOnSurfaceColor}"
+								   VerticalAlignment="Center" />
+
+						<ToggleSwitch HorizontalAlignment="Right"
+									  VerticalAlignment="Center"
+									  Width="50"
+									  MinWidth="50"
+									  Foreground="{StaticResource MaterialPrimaryDarkBrush}"
+									  Background="{StaticResource MaterialOnSurfaceColor}"
+									  BorderBrush="{StaticResource MaterialOnSurfaceColor}"
+									  IsOn="{Binding IsThemeChangeEnabled, Mode=TwoWay}"
+									  Grid.Column="1" />
+					</Grid>
 					<HyperlinkButton Content="Terms and Conditions"
 									 x:Uid="Settings_TermsAndConditions"
 									 HorizontalAlignment="Left"

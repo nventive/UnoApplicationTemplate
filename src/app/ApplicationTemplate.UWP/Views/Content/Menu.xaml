@@ -8,7 +8,7 @@
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource MaterialOnBackgroundBrush}">
+		  Background="{StaticResource MaterialPrimaryBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 
@@ -66,7 +66,7 @@
 
 		<Button Grid.Column="0"
 				Command="{Binding ShowHome}"
-				Background="{StaticResource MaterialOnBackgroundColor}"
+				Background="{StaticResource MaterialPrimaryBrush}"
 				HorizontalAlignment="Center">
 			<Grid>
 				<Grid.RowDefinitions>

@@ -22,7 +22,7 @@
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialOnBackgroundBrush}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="FontSize"

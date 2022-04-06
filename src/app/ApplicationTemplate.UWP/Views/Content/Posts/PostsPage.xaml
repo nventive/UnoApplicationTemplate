@@ -39,7 +39,7 @@
 												   Style="{StaticResource MaterialSubtitle1}" />
 										<TextBlock Text="{Binding Body}"
 												   Opacity="0.6"
-												   Foreground="#000000"
+												   Foreground="{StaticResource MaterialOnSurfaceColor}"
 												   Style="{StaticResource MaterialBody2}" />
 										<StackPanel Orientation="Horizontal"
 													HorizontalAlignment="Right">
