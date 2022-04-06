@@ -15,11 +15,11 @@ namespace ApplicationTemplate.Tests
 			// Arrange
 			Func<MenuViewModel> vmBuilder = () => new MenuViewModel();
 
-			await AssertNavigateFromTo<MenuViewModel, SettingsPageViewModel>(vmBuilder, p => p.ShowSettings);
+			await AssertNavigateFromTo<MenuViewModel, SettingsPageViewModel>(vmBuilder, p => p.ShowSettingsSection);
 
-			await AssertNavigateFromTo<MenuViewModel, PostsPageViewModel>(vmBuilder, p => p.ShowPosts);
+			await AssertNavigateFromTo<MenuViewModel, PostsPageViewModel>(vmBuilder, p => p.ShowPostsSection);
 
-			await AssertNavigateFromTo<MenuViewModel, DadJokesPageViewModel>(vmBuilder, p => p.ShowHome);
+			await AssertNavigateFromTo<MenuViewModel, DadJokesPageViewModel>(vmBuilder, p => p.ShowHomeSection);
 		}
 
 		[Fact]
