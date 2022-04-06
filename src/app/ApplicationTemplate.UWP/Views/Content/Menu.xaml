@@ -10,7 +10,7 @@
 							 mc:Ignorable="uloc">
 
 	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource MaterialOnBackgroundBrush}">
+		  Background="{StaticResource MaterialPrimaryBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 

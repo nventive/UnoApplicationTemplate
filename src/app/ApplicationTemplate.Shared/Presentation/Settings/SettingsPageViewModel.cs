@@ -10,6 +10,7 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
+using Windows.UI.Xaml;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
 
@@ -17,6 +18,22 @@ namespace ApplicationTemplate.Presentation
 {
 	public partial class SettingsPageViewModel : ViewModel
 	{
+
+		public SettingsPageViewModel()
+		{
+			AddDisposable(this.GetProperty(x => x.IsThemeChangeEnabled)
+				.Observe()
+				.SelectManyDisposePrevious((e, ct) => OnThemeSwitchButtonChange())
+				.Subscribe()
+			);
+		}
+
+		public bool IsThemeChangeEnabled
+		{
+			get => this.Get(initialValue: false);
+			set => this.Set(value);
+		}
+
 		public string VersionNumber => this.Get(GetVersionNumber);
 
 		public IDataLoader<UserProfileData> UserProfile => this.GetDataLoader(GetUserProfile, db => db
@@ -77,6 +94,24 @@ namespace ApplicationTemplate.Presentation
 		private string GetVersionNumber()
 		{
 			return this.GetService<IAppInfo>().VersionString;
+		}
+
+		private async Task OnThemeSwitchButtonChange()
+		{
+			// Set theme for window root.
+			if (Windows.UI.Xaml.Window.Current.Content is FrameworkElement root)
+			{
+				switch (root.ActualTheme)
+				{
+					case ElementTheme.Default:
+					case ElementTheme.Light:
+						root.RequestedTheme = ElementTheme.Dark;
+						break;
+					case ElementTheme.Dark:
+						root.RequestedTheme = ElementTheme.Light;
+						break;
+				}
+			}
 		}
 	}
 }
