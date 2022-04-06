@@ -1,6 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:u="using:Nventive.View.Controls">
+	
+	<!-- KNOWN ISSUE : It is impossible to add a StaticResource in a setter in this file. -->
+	<SolidColorBrush x:Key="OnBackgroundPathControlBrush"
+					 Color="{ThemeResource MaterialOnBackgroundColor}" />
 
 	<!--<Style x:Key="PlayButtonPathControlStyle"
 		   TargetType="u:PathControl">
