@@ -1,12 +1,13 @@
-﻿schedules:
-- cron: "30 08 * * Mon-Fri" # Format is "Minutes Hours DayOfMonth Month DayOfWeet" in UTC (that's why 08 is 3h EST)
-  displayName: 'Nightly weekdays build - 3:30 EST'
-  always: false # If nothing changed, don't start a new run.
-  branches:
-    include:
-      - master
-      - release/*
-      - feature/*
+﻿# Use this to schedule a build at defined days and times
+# schedules:
+# - cron: "30 08 * * Mon-Fri" # Format is "Minutes Hours DayOfMonth Month DayOfWeet" in UTC (that's why 08 is 3h EST)
+#   displayName: 'Nightly weekdays build - 3:30 EST'
+#   always: false # If nothing changed, don't start a new run.
+#   branches:
+#     include:
+#       - master
+#       - release/*
+#       - feature/*
 pr:
  branches:
    include:
