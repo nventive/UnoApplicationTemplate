@@ -63,17 +63,6 @@ namespace ApplicationTemplate.Tests
 		}
 
 		/// <summary>
-		/// The method can be used to navigate to a new page.
-		/// </summary>
-		/// <param name="ct">The cancellation token.</param>
-		/// <param name="vmBuilder">The ViewModel builder.</param>
-		/// <returns>A task containing the destination view model.</returns>
-		protected async Task<ViewModel> SetActiveSection(CancellationToken ct, string sectionName, Func<ViewModel> vmBuilder)
-		{
-			return await GetCurrentViewModel().GetService<ISectionsNavigator>().SetActiveSection(ct, sectionName, vmBuilder);
-		}
-
-		/// <summary>
 		/// This method can be used to go to the previous page or modal.
 		/// </summary>
 		/// <param name="ct">The cancellation token.</param>
