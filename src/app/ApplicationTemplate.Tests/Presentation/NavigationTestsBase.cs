@@ -63,6 +63,17 @@ namespace ApplicationTemplate.Tests
 		}
 
 		/// <summary>
+		/// The method can be used to navigate to a new page.
+		/// </summary>
+		/// <param name="ct">The cancellation token.</param>
+		/// <param name="vmBuilder">The ViewModel builder.</param>
+		/// <returns>A task containing the destination view model.</returns>
+		protected async Task<ViewModel> SetActiveSection(CancellationToken ct, string sectionName, Func<ViewModel> vmBuilder)
+		{
+			return await GetCurrentViewModel().GetService<ISectionsNavigator>().SetActiveSection(ct, sectionName, vmBuilder);
+		}
+
+		/// <summary>
 		/// This method can be used to go to the previous page or modal.
 		/// </summary>
 		/// <param name="ct">The cancellation token.</param>
@@ -98,23 +109,20 @@ namespace ApplicationTemplate.Tests
 		}
 
 		/// <summary>
-		/// This method can be used to assert if a command provides the given destination.
+		/// Navigates from the <typeparamref name="TSourceViewModel"/> to the <typeparamref name="TDestinationViewModel"/>
+		/// by executing the specified <paramref name="navigationCommand"/>.
 		/// </summary>
-		/// <typeparam name="TSourceViewModel">The source ViewModel type.</typeparam>
-		/// <typeparam name="TDestinationViewModel">The destination ViewModel type.</typeparam>
-		/// <param name="sourceVMBuilder">The source ViewModel builder.</param>
-		/// <param name="navigationCommand">A function that returns a command to execute before asserting the destination is TDestinationViewModel</param>
-		/// <returns>A task that when completed will contain the destination ViewModel.</returns>
-		protected async Task<TDestinationViewModel> AssertNavigateFromTo<TSourceViewModel, TDestinationViewModel>(Func<TSourceViewModel> sourceVMBuilder, Func<TSourceViewModel, IDynamicCommand> navigationCommand)
-			where TSourceViewModel : ViewModel
+		/// <typeparam name="TSourceViewModel">Type of the source ViewModel</typeparam>
+		/// <typeparam name="TDestinationViewModel">Type of the destination ViewModel</typeparam>
+		/// <param name="navigationCommand">Navigationg command to </param>
+		/// <returns>Destination ViewModel</returns>
+		protected async Task<TDestinationViewModel> AssertNavigateFromTo<TSourceViewModel, TDestinationViewModel>(Func<TSourceViewModel, IDynamicCommand> navigationCommand)
+			where TSourceViewModel : IViewModel
 		{
-			// Arrange
-			TSourceViewModel viewModel = (TSourceViewModel) await NavigateAndClear(DefaultCancellationToken, sourceVMBuilder);
+			var viewModel = GetAndAssertCurrentViewModel<TSourceViewModel>();
 
-			// Act
 			await navigationCommand(viewModel).Execute();
 
-			// Assert
 			return GetAndAssertCurrentViewModel<TDestinationViewModel>();
 		}
 

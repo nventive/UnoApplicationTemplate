@@ -38,9 +38,7 @@ namespace ApplicationTemplate.Presentation
 		public string MenuState => this.GetFromObservable(ObserveMenuState(), initialValue: "Closed");
 
 		public IDynamicCommand ShowHomeSection => this.GetCommandFromTask(async ct =>
-		{
-			await _navigator.SetActiveSection(ct, nameof(Section.Home), () => new DadJokesPageViewModel());
-		});
+			await _navigator.SetActiveSection(ct, nameof(Section.Home), () => new DadJokesPageViewModel()));
 
 		public IDynamicCommand ShowPostsSection => this.GetCommandFromTask(async ct =>
 			await _navigator.SetActiveSection(ct, nameof(Section.Posts), () => new PostsPageViewModel()));
