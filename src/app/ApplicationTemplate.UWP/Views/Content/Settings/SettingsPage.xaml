@@ -81,7 +81,7 @@
 									 HorizontalAlignment="Left"
 									 Command="{Binding NavigateToPrivacyPolicyPage}" />
 					<Grid Margin="0,4"
-						  Background="{StaticResource MaterialSurfaceColor}">
+						  Background="{StaticResource MaterialSurfaceBrush}">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
