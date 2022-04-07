@@ -15,17 +15,17 @@ namespace ApplicationTemplate.Tests
 			// Arrange
 			Func<MenuViewModel> vmBuilder = () => new MenuViewModel();
 
-			await AssertNavigateFromTo<MenuViewModel, SettingsPageViewModel>(p => p.ShowSettingsSection);
+			await AssertNavigateFromTo<MenuViewModel, SettingsPageViewModel>(vmBuilder, p => p.ShowSettingsSection);
 
-			await AssertNavigateFromTo<MenuViewModel, PostsPageViewModel>(p => p.ShowPostsSection);
+			await AssertNavigateFromTo<MenuViewModel, PostsPageViewModel>(vmBuilder, p => p.ShowPostsSection);
 
-			await AssertNavigateFromTo<MenuViewModel, DadJokesPageViewModel>(p => p.ShowHomeSection);
+			await AssertNavigateFromTo<MenuViewModel, DadJokesPageViewModel>(vmBuilder, p => p.ShowHomeSection);
 		}
 
 		[Fact]
 		public async Task NavigateFromWelcomePageToDadJokesPage()
 		{
-			var onboardingViewModel = await AssertNavigateFromTo<WelcomePageViewModel, OnboardingPageViewModel>(p => p.NavigateToOnboarding);
+			var onboardingViewModel = await AssertNavigateFromTo<WelcomePageViewModel, OnboardingPageViewModel>(() => new WelcomePageViewModel(), p => p.NavigateToOnboarding);
 
 			await AssertNavigateTo<DadJokesPageViewModel>(() => onboardingViewModel.NavigateToJokes);
 		}
@@ -33,7 +33,7 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task NavigateToLoginPageAndBack()
 		{
-			var loginVM = await AssertNavigateFromTo<SettingsPageViewModel, LoginPageViewModel>(p => p.NavigateToLoginPage);
+			var loginVM = await AssertNavigateFromTo<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage);
 
 			await AssertNavigateTo<SettingsPageViewModel>(() => loginVM.NavigateBack);
 		}
@@ -42,6 +42,7 @@ namespace ApplicationTemplate.Tests
 		public async Task NavigateToDiagnosticsPageAndBack()
 		{
 			var diagnosticsViewModel = await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(
+				() => new SettingsPageViewModel(),
 				p => p.NavigateToDiagnosticsPage
 			);
 
