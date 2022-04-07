@@ -1,6 +1,6 @@
 ﻿namespace ApplicationTemplate.Client
 {
-	public class DadJokesResponse
+	public record DadJokesResponse
 	{
 		public DadJokesResponse(DadJokesData data)
 		{

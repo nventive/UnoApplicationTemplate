@@ -16,7 +16,25 @@ namespace ApplicationTemplate.Presentation
 	{
 		public CreateAccountFormViewModel()
 		{
+			this.AddValidation(this.GetProperty(x => x.FirstName));
+			this.AddValidation(this.GetProperty(x => x.LastName));
 			this.AddValidation(this.GetProperty(x => x.Email));
+			this.AddValidation(this.GetProperty(x => x.PhoneNumber));
+			this.AddValidation(this.GetProperty(x => x.PostalCode));
+			this.AddValidation(this.GetProperty(x => x.DateOfBirth));
+			this.AddValidation(this.GetProperty(x => x.AgreeToTermsOfServices));
+		}
+
+		public string FirstName
+		{
+			get => this.Get<string>();
+			set => this.Set(value);
+		}
+
+		public string LastName
+		{
+			get => this.Get<string>();
+			set => this.Set(value);
 		}
 
 		public string Email
@@ -31,66 +49,96 @@ namespace ApplicationTemplate.Presentation
 			set => this.Set(value);
 		}
 
-		public PasswordState PasswordHasEightCharacters
+		public string PhoneNumber
 		{
-			get => this.GetFromObservable(ObservePasswordHasEightCharacters(), initialValue: PasswordState.Unedited);
+			get => this.Get<string>();
 			set => this.Set(value);
 		}
 
-		public PasswordState PasswordHasNumber
+		public string PostalCode
 		{
-			get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: PasswordState.Unedited);
+			get => this.Get<string>();
 			set => this.Set(value);
 		}
 
-		public PasswordState PasswordHasUppercase
+		public DateTimeOffset DateOfBirth
 		{
-			get => this.GetFromObservable(ObservePasswordHasUppercase(), initialValue: PasswordState.Unedited);
+			get => this.Get<DateTimeOffset>(initialValue: DateTimeOffset.Now);
 			set => this.Set(value);
 		}
 
-		private IObservable<PasswordState> ObservePasswordHasEightCharacters()
+		public object[] FavoriteDadNames
+		{
+			get => this.Get(initialValue: Array.Empty<object>());
+			set => this.Set(value);
+		}
+
+		public bool AgreeToTermsOfServices
+		{
+			get => this.Get<bool>();
+			set => this.Set(value);
+		}
+
+		public bool? PasswordHasEightCharacters
+		{
+			get => this.GetFromObservable(ObservePasswordHasEightCharacters(), initialValue: null);
+			set => this.Set(value);
+		}
+
+		public bool? PasswordHasNumber
+		{
+			get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
+			set => this.Set(value);
+		}
+
+		public bool? PasswordHasUppercase
+		{
+			get => this.GetFromObservable(ObservePasswordHasUppercase(), initialValue: null);
+			set => this.Set(value);
+		}
+
+		private IObservable<bool?> ObservePasswordHasEightCharacters()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password =>
+				.Select<string, bool?>(password =>
 				{
 					if (password.IsNullOrEmpty())
 					{
-						return PasswordState.Unedited;
+						return null;
 					}
 
-					return password.Length >= 8 ? PasswordState.Valid : PasswordState.Invalid;
+					return password.Length >= 8;
 				});
 		}
 
-		private IObservable<PasswordState> ObservePasswordHasNumber()
+		private IObservable<bool?> ObservePasswordHasNumber()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password =>
+				.Select<string, bool?>(password =>
 				{
 					if (password.IsNullOrEmpty())
 					{
-						return PasswordState.Unedited;
+						return null;
 					}
 
-					return password.Any(char.IsDigit) ? PasswordState.Valid : PasswordState.Invalid;
+					return password.Any(char.IsDigit);
 				});
 		}
 
-		private IObservable<PasswordState> ObservePasswordHasUppercase()
+		private IObservable<bool?> ObservePasswordHasUppercase()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password =>
+				.Select<string, bool?>(password =>
 				{
 					if (password.IsNullOrEmpty())
 					{
-						return PasswordState.Unedited;
+						return null;
 					}
 
-					return password.Any(char.IsUpper) ? PasswordState.Valid : PasswordState.Invalid;
+					return password.Any(char.IsUpper);
 				});
 		}
 	}
@@ -99,11 +147,45 @@ namespace ApplicationTemplate.Presentation
 	{
 		public CreateAccountFormValidator(IStringLocalizer localizer)
 		{
+			RuleFor(x => x.FirstName).NotEmpty();
+			RuleFor(x => x.LastName).NotEmpty();
+
 			RuleFor(x => x.Email)
 				.NotEmpty()
 				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
 				.EmailAddress()
 				.WithMessage(_ => localizer["ValidationError_Email"]);
+
+			RuleFor(x => x.PhoneNumber)
+				.NotEmpty()
+				.MustBePhoneNumber()
+				.WithMessage(localizer["CreateAccount_PhoneNumberValidation"]);
+
+			RuleFor(x => x.PostalCode)
+				.NotEmpty()
+				.Length(7)
+				.WithMessage(localizer["CreateAccount_PostalValidation"]); // "A1A 1A1".Length = 7
+
+			RuleFor(x => x.DateOfBirth)
+				.NotEmpty()
+				.MustBe18OrOlder()
+				.WithMessage(localizer["CreateAccount_DateOfBirthValidation"]);
+
+			RuleFor(x => x.FavoriteDadNames)
+				.Must(favDadNames =>
+				{
+					if (favDadNames == null)
+					{
+						return false;
+					}
+					return favDadNames.Length >= 1;
+				})
+				.WithMessage(localizer["CreateAccount_FavoriteDadNameValidation"]);
+
+			RuleFor(x => x.AgreeToTermsOfServices)
+				.Equal(true)
+				.WithMessage(localizer["CreateAccount_TermsOfServiceValidation"]);
+
 		}
 	}
 }

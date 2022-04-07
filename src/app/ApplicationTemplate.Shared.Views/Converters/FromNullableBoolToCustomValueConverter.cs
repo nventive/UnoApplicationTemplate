@@ -4,7 +4,7 @@ using Nventive.View.Converters;
 
 namespace ApplicationTemplate.Views
 {
-	public class FromPasswordStateToCustomValueConverter : ConverterBase
+	public class FromNullableBoolToCustomValueConverter : ConverterBase
 	{
 		public object DefaultValue { get; set; }
 
@@ -14,15 +14,15 @@ namespace ApplicationTemplate.Views
 
 		protected override object Convert(object value, Type targetType, object parameter)
 		{
-			if (value is PasswordState passwordState)
+			if (value is bool?)
 			{
-				switch (passwordState)
+				switch (value)
 				{
-					case PasswordState.Unedited:
+					case null:
 						return DefaultValue;
-					case PasswordState.Invalid:
+					case false:
 						return InvalidValue;
-					case PasswordState.Valid:
+					case true:
 						return ValidValue;
 				}
 			}

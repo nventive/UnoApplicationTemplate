@@ -11,16 +11,25 @@ namespace ApplicationTemplate.Presentation
 	{
 		public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
 
+		public string[] DadNames =>
+		new[]
+		{
+			"Dad",
+			"Papa",
+			"Pa",
+			"Pop",
+			"Father",
+			"Padre",
+			"Père",
+			"Papi",
+		};
+
+
 		public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
 		{
 			var validationResult = await Form.Validate(ct);
 
-			if (
-				validationResult.IsValid &&
-				Form.PasswordHasEightCharacters == PasswordState.Valid &&
-				Form.PasswordHasNumber == PasswordState.Valid &&
-				Form.PasswordHasUppercase == PasswordState.Valid
-			)
+			if (validationResult.IsValid && Form.PasswordHasEightCharacters == true && Form.PasswordHasNumber == true && Form.PasswordHasUppercase == true)
 			{
 				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), Form.Password);
 

@@ -14,7 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_ViewConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FiltersConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DebugConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Converters\FromPasswordStateToCustomValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Startup.cs" />
   </ItemGroup>
