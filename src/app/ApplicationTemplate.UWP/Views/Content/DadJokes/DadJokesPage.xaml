@@ -24,7 +24,7 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Margin="0">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
