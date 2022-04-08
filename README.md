@@ -15,7 +15,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 1. If you want to uninstall the template, run the following command.
 
-    `dotnet new -u`
+    `dotnet new -u ./`
 
     This will list you the list of installed templates, look for this template and copy the command with the absolute path like this. (Note the quotes added, otherwise it doesn't work)
 
