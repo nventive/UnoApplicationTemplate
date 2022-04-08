@@ -82,6 +82,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\CultureDiagnosticsViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Diagnostics\DiagnosticsCountersService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\ISectionsNavigator.Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\SectionsNavigatorState.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\ValidatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\SectionNavigatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\IViewModel.Extensions.cs" />
