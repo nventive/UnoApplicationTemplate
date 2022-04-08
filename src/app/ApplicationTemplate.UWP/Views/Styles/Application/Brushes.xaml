@@ -6,6 +6,10 @@
 					xmlns:ios="http://nventive.com/ios"
 					mc:Ignorable="xamarin android ios">
 
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="MaterialOverride.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
 	<!-- ResourceDictionary containing only 1 item doesn't work if that item refers Material resources. -->
 	<x:Int32 x:Key="BrushesWorkaround">0</x:Int32>
 
