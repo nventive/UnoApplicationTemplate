@@ -29,7 +29,7 @@
 	<Style x:Key="SkipOnboardingPathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnBackgroundBrush}" />
+				Value="{StaticResource OnBackgroundPathControlBrush}" />
 		<Setter Property="Stretch"
 				Value="Uniform" />
 		<Setter Property="Height"
