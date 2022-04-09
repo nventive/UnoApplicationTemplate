@@ -5,8 +5,9 @@
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					mc:Ignorable="not_win">
 
-	<Style x:Key="MaterialCalendarViewStyle"
-		   TargetType="CalendarView">
+	<Style x:Key="CalendarViewStyle"
+		   TargetType="CalendarView"
+		   BasedOn="{StaticResource MaterialCalendarViewStyle}">
 		<Setter Property="FocusBorderBrush"
 				Value="{ThemeResource MaterialPrimaryFocusedBrush}" />
 		<Setter Property="SelectedHoverBorderBrush"
@@ -16,13 +17,13 @@
 		<Setter Property="SelectedBorderBrush"
 				Value="{ThemeResource MaterialPrimaryBrush}" />
 		<Setter Property="HoverBorderBrush"
-				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
+				Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
 		<Setter Property="PressedBorderBrush"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
 		<Setter Property="CalendarItemBorderBrush"
-				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
+				Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
 		<Setter Property="TodayForeground"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource MaterialSurfaceBrush}" />
 		<Setter Property="BlackoutForeground"
 				Value="{ThemeResource MaterialOnSurfaceBrush}" />
 		<win:Setter Property="SelectedForeground"
@@ -36,15 +37,15 @@
 		<Setter Property="CalendarItemForeground"
 				Value="{ThemeResource MaterialOnSurfaceBrush}" />
 		<Setter Property="OutOfScopeBackground"
-				Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
-		<Setter Property="CalendarItemBackground"
 				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
+		<Setter Property="CalendarItemBackground"
+				Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
 		<Setter Property="Foreground"
 				Value="{ThemeResource MaterialOnSurfaceBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
+				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
+				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
 		<Setter Property="DayItemFontFamily"
 				Value="{StaticResource FontFamily01}" />
 		<Setter Property="DayItemFontSize"
@@ -70,7 +71,7 @@
 		<win:Setter Property="BorderThickness"
 					Value="1" />
 		<Setter Property="HorizontalAlignment"
-				Value="Left" />
+				Value="Stretch" />
 		<Setter Property="VerticalAlignment"
 				Value="Center" />
 		<Setter Property="HorizontalContentAlignment"
@@ -90,9 +91,9 @@
 		<not_win:Setter Property="SelectedBackground"
 						Value="{ThemeResource MaterialPrimaryBrush}" />
 		<not_win:Setter Property="TodaySelectedBackground"
-						Value="{ThemeResource MaterialPrimaryBrush}" />
+						Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
 		<not_win:Setter Property="TodayBackground"
-						Value="Transparent" />
+						Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
 	</Style>
 
 </ResourceDictionary>

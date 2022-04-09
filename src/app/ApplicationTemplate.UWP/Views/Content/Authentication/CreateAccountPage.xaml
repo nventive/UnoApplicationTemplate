@@ -122,23 +122,26 @@
 				</local:DataValidationView>
 
 				<!-- Birth Day -->
-				<local:DataValidationView Model="{Binding Form}"
-										  PropertyName="DateOfBirth"
-										  Margin="42,0">
-					<StackPanel>
+				<StackPanel Margin="42,0">
 
-						<!-- Label -->
-						<TextBlock Text="Date of Birth"
-								   Style="{StaticResource Subtitle2}"
-								   Foreground="{StaticResource MaterialSurfaceBrush}" />
+					<!-- Label -->
+					<TextBlock Text="Date of Birth"
+								Style="{StaticResource Subtitle2}"
+								Foreground="{StaticResource MaterialSurfaceBrush}"
+								Margin="0,0,0,4" />
 
+					<local:DataValidationView Model="{Binding Form}"
+											PropertyName="DateOfBirth">
 						<!-- DatePicker -->
 						<CalendarDatePicker x:Name="BirthDayField"
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-											Style="{StaticResource MaterialCalendarDatePickerStyle}"
-											Margin="0,4,0,0"/>
-					</StackPanel>
-				</local:DataValidationView>
+											Style="{StaticResource CalendarDatePickerStyle}"
+											HorizontalAlignment="Stretch"
+											Background="{StaticResource MaterialSurfaceBrush}"
+											Foreground="{StaticResource MaterialOnSurfaceBrush}"
+											Height="56" />
+					</local:DataValidationView>
+				</StackPanel>
 
 				<!-- Postal Code -->
 				<local:DataValidationView Model="{Binding Form}"
@@ -228,17 +231,17 @@
 								   Style="{StaticResource Body3}" />
 				</Grid>
 
-				<!-- Top 3 Favorite Dad names -->
-				<local:DataValidationView Model="{Binding Form}"
-										  PropertyName="FavoriteDadNames"
-										  Margin="42,12">
-					<StackPanel>
+				<StackPanel Margin="42,12">
 
-						<!-- Label -->
-						<TextBlock Text="Favorite Dad nickname (pick at least 1)"
-								   Style="{StaticResource Subtitle2}"
-								   Foreground="{StaticResource MaterialSurfaceBrush}" />
+					<!-- Label -->
+					<TextBlock Text="Favorite Dad nickname (pick at least 1)"
+								Style="{StaticResource Subtitle2}"
+								Foreground="{StaticResource MaterialSurfaceBrush}"
+								Margin="0,0,0,4" />
 
+					<!-- Top 3 Favorite Dad names -->
+					<local:DataValidationView Model="{Binding Form}"
+												PropertyName="FavoriteDadNames">
 						<!-- List -->
 						<Grid Background="{StaticResource MaterialSurfaceBrush}"
 							  CornerRadius="4">
@@ -246,11 +249,10 @@
 										ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
 										ItemContainerStyle="{StaticResource CheckedListViewItemStyle}"
 										SelectionMode="Multiple"
-										IsItemClickEnabled="True"
-										Margin="0,4,0,0" />	
+										IsItemClickEnabled="True" />	
 						</Grid>
-					</StackPanel>
-				</local:DataValidationView>
+					</local:DataValidationView>
+				</StackPanel>
 
 				<!-- Terms of Service Agreement -->
 				<local:DataValidationView Model="{Binding Form}"
@@ -273,7 +275,7 @@
 							Command="{Binding CreateAccount}"
 							Style="{StaticResource ExecutingButtonStyle}"
 							HorizontalAlignment="Stretch"
-							Margin="42,32" />
+							Margin="42,12,42,32" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

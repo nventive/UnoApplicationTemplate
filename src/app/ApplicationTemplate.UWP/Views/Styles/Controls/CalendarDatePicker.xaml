@@ -4,20 +4,20 @@
 					xmlns:not_win="http://uno.ui/not_win"
 					mc:Ignorable="not_win">
 
-	<Style x:Key="MaterialCalendarDatePickerStyle"
+	<Style x:Key="CalendarDatePickerStyle"
 		   TargetType="CalendarDatePicker">
 		<Setter Property="Foreground"
-				Value="{ThemeResource CalendarDatePickerForeground}" />
+				Value="{ThemeResource MaterialOnSurfaceBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
+				Value="{ThemeResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{ThemeResource CalendarDatePickerBorderBrush}" />
+				Value="{ThemeResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderThickness"
 				Value="{ThemeResource CalendarDatePickerBorderThemeThickness}" />
 		<Setter Property="CalendarViewStyle"
-				Value="{StaticResource MaterialCalendarViewStyle}" />
+				Value="{StaticResource CalendarViewStyle}" />
 		<Setter Property="HorizontalAlignment"
-				Value="Left" />
+				Value="Stretch" />
 		<Setter Property="VerticalAlignment"
 				Value="Center" />
 		<Setter Property="Height"
