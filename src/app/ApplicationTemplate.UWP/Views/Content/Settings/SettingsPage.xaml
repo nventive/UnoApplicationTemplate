@@ -8,18 +8,7 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
-	<Page.Resources>
-		<DataTemplate x:Key="UserEmptyTemplate">
-			<Button Content="Login"
-					x:Uid="Settings_Login"
-					HorizontalAlignment="Left"
-					Margin="0,4"
-					Style="{StaticResource OutlinedExecutingButtonStyle}"
-					Command="{Binding Parent.NavigateToLoginPage}" />
-		</DataTemplate>
-	</Page.Resources>
-
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource MaterialSurfaceBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -27,7 +16,7 @@
 		</Grid.RowDefinitions>
 
 		<CommandBar Content="Profile"
-					x:Uid="Profile_CommandBar" />
+					x:Uid="Settings_CommandBar" />
 
 		<ScrollViewer Grid.Row="1">
 
@@ -38,32 +27,33 @@
 					<DataTemplate>
 						<StackPanel Margin="24">
 							<!-- Name and Lastname -->
-								<TextBlock Style="{StaticResource Headline5}">
-									<Run Text="{Binding Data.LastName}" />
-									<Run Text="{Binding Data.FirstName}" />
-								</TextBlock>
+							<TextBlock Style="{StaticResource Headline5}">
+									<Run Text="Name" />
+									<Run Text="Lastname" />
+							</TextBlock>
 
-								<!-- Email -->
-								<TextBlock Text="Email"
+							<!-- Email -->
+							<TextBlock Text="Email"
+										   x:Uid="Settings_Email"
 											Margin="0,16,0,0"
 											Style="{StaticResource Subtitle2}" />
-								<TextBlock Text="{Binding Data.Email}"
+							<TextBlock Text="name@nventive.com"
 											Style="{StaticResource Body2}" />
 
-								<Rectangle Margin="0,16"
+							<Rectangle Margin="0,16"
 											Height="1"
 											HorizontalAlignment="Stretch"
 											Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
-								<!-- Password -->
-								<TextBlock Text="Password"
-											Margin="0,16,0,0"
+							<!-- Password -->
+							<TextBlock Text="Password"
+										   x:Uid="Settings_Password"
 											Style="{StaticResource Subtitle2}" />
-								<TextBlock Text="{Binding Data.Password}"
+							<TextBlock Text="xxxxxxxx"
 											Style="{StaticResource Body2}" />
 
-								<!-- Change password -->
-								<Button Content="CHANGE PASSWORD"
+							<!-- Change password -->
+							<Button Content="CHANGE PASSWORD"
 										x:Uid="Settings_ChangePassword"
 										Margin="0,16,0,0"
 										HorizontalAlignment="Left"
@@ -73,9 +63,8 @@
 						</StackPanel>
 					</DataTemplate>
 				</dl:DataLoaderView>
-					
-				<Rectangle Margin="0,16"
-							Height="1"
+
+				<Rectangle Height="1"
 							HorizontalAlignment="Stretch"
 							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
@@ -83,11 +72,14 @@
 
 					<!-- Version -->
 					<TextBlock Style="{StaticResource Subtitle2}">
-						<Run Text="DAD Jokes - Version" />
+						<Run Text="DAD Jokes - Version"
+							 x:Uid="Settings_Version" />
 						<Run Text="{Binding VersionNumber}" />
 					</TextBlock>
+
 					<TextBlock Text="This application makes use of the dadjokes API from Dadjokes.io, which contains thousands of jokes."
-								Style="{StaticResource Body2}"
+								x:Uid="Settings_Version_Details"
+							    Style="{StaticResource Body2}"
 								Foreground="{StaticResource MaterialOnSurfaceMediumBrush}" />
 
 					<!-- Replay tutorial -->
@@ -103,89 +95,70 @@
 							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
 				<!-- Notification -->
-				<StackPanel Margin="24,16">
-					<TextBlock Text="Notification"
-							   Style="{StaticResource Subtitle2}" />
-					<TextBlock Text="I agree to receive notifications when there are new jokes."
-								Style="{StaticResource Body2}" />
-				</StackPanel>
+				<Grid Margin="24,16,20,16">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<StackPanel>
+						<TextBlock Text="Notification"
+								   x:Uid="Settings_Notification"
+								   Style="{StaticResource Subtitle2}" />
+						<TextBlock Text="I agree to receive notifications when there are new jokes."
+								   x:Uid="Settings_Notification_Details"
+									Style="{StaticResource Body2}" />
+					</StackPanel>
+
+					<ToggleSwitch Grid.Column="1"
+								  Margin="20,0,0,0" />
+				</Grid>
 
 				<Rectangle Height="1"
 							HorizontalAlignment="Stretch"
 							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
 				<!-- Dark Mode  -->
-				<StackPanel Margin="24,16">
+				<Grid Margin="24,18,20,18">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
 					<TextBlock Text="Dark mode"
+							   x:Uid="Settings_DarkMode"
 							   Style="{StaticResource Subtitle2}" />
-				</StackPanel>
+
+					<ToggleSwitch Grid.Column="1"
+								  Margin="20,0,0,0" />
+				</Grid>
 
 				<Rectangle Height="1"
-							HorizontalAlignment="Stretch"
-							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+						   HorizontalAlignment="Stretch"
+						   Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
 				<!-- Privacy policy  -->
-				<StackPanel Margin="24,16">
-					<TextBlock Text="Privacy policy"
-							   Style="{StaticResource Subtitle2}" />
-				</StackPanel>
+				<Button Content="Privacy policy"
+						x:Uid="Settings_PrivacyPolicy"
+						Command="{Binding NavigateToPrivacyPolicyPage}"
+						Style="{StaticResource SettingsButtonStyle}"
+						Margin="24,0,32,0" />
 
 				<Rectangle Height="1"
 							HorizontalAlignment="Stretch"
 							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
 				<!-- Terms & conditions  -->
-				<StackPanel Margin="24,16">
-					<TextBlock Text="Terms &amp; conditions"
-							   Style="{StaticResource Subtitle2}" />
-				</StackPanel>
-				
+				<Button Content="Terms &amp; conditions"
+						x:Uid="Settings_TermsAndConditions"
+						Command="{Binding NavigateToTermsAndConditionsPage}"
+						Style="{StaticResource SettingsButtonStyle}"
+						Margin="24,0,32,0" />
+
 				<Rectangle Height="1"
 							HorizontalAlignment="Stretch"
 							Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 			</StackPanel>
-
-			<!--
-
-						<Button Content="Logout"
-											x:Uid="Settings_Logout"
-											HorizontalAlignment="Left"
-											Margin="0,4"
-											Style="{StaticResource OutlinedExecutingButtonStyle}"
-											Command="{Binding Parent.Logout}" />
-					<Rectangle HorizontalAlignment="Stretch"
-							Margin="0, 30, 0, 20"
-							Fill="#000000"
-							Opacity="0.1"
-							Height="1" />
-
-				<HyperlinkButton Content="Privacy Policy"
-									x:Uid="Settings_PrivacyPolicy"
-									HorizontalAlignment="Left"
-									Command="{Binding NavigateToPrivacyPolicyPage}" />
-
-				<HyperlinkButton Content="Terms and Conditions"
-									x:Uid="Settings_TermsAndConditions"
-									HorizontalAlignment="Left"
-									Command="{Binding NavigateToTermsAndConditionsPage}" />
-			</StackPanel>
-
-
-			<StackPanel Grid.Row="1"
-								HorizontalAlignment="Center"
-								VerticalAlignment="Bottom">
-
-				<Grid Background="Transparent"
-							  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
-							  ue:MultipleTapExtension.TapCount="3">
-					<TextBlock Style="{StaticResource MaterialCaption}">
-								<Run Text="Version"
-									 x:Uid="Settings_Version" />
-								<Run Text="{Binding VersionNumber}" />
-					</TextBlock>
-				</Grid>
-
-			</StackPanel>-->
 		</ScrollViewer>
 	</Grid>
 </Page>

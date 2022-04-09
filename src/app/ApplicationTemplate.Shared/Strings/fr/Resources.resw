@@ -171,29 +171,29 @@
   <data name="CreateAccount_CommandBar.Content" xml:space="preserve">
     <value>Créer un compte</value>
   </data>
-  <data name="Settings_Login.Content" xml:space="preserve">
-    <value>Se connecter</value>
+  <data name="Settings_Password.Text" xml:space="preserve">
+    <value>Mot de passe</value>
   </data>
-  <data name="Settings_Logout.Content" xml:space="preserve">
-    <value>Se déconnecter</value>
+  <data name="Settings_Version_Details.Text" xml:space="preserve">
+    <value>Cette application utilise l'API dadjokes de Dadjokes.io, qui contient des milliers de blagues.</value>
   </data>
   <data name="Settings_CommandBar.Content" xml:space="preserve">
-    <value>Paramètres</value>
+    <value>Profile</value>
   </data>
-  <data name="Settings_Licenses.Content" xml:space="preserve">
-    <value>Licenses</value>
+  <data name="Settings_Email.Text" xml:space="preserve">
+    <value>Adresse courriel</value>
   </data>
   <data name="Settings_PrivacyPolicy.Content" xml:space="preserve">
     <value>Politique de confidentialité</value>
   </data>
   <data name="Settings_TermsAndConditions.Content" xml:space="preserve">
-    <value>Termes et conditions</value>
+    <value>Termes &amp; conditions</value>
   </data>
-  <data name="Settings_EditProfile.Content" xml:space="preserve">
-    <value>Modifier le profil</value>
+  <data name="Settings_ChangePassword.Content" xml:space="preserve">
+    <value>CHANGER LE MOT DE PASSE</value>
   </data>
   <data name="Settings_Version.Text" xml:space="preserve">
-    <value>Version</value>
+    <value>DAD Jokes - Version</value>
   </data>
   <data name="Welcome_Title.Text" xml:space="preserve">
     <value>Bienvenue</value>
@@ -245,15 +245,6 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="Login_Subtitle2" xml:space="preserve">
     <value>"Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact."</value>
-  </data>
-  <data name="Login_Title2" xml:space="preserve">
-    <value>Ravi de&#x0A;te revoir !</value>
-  </data>
-  <data name="Login_Subtitle1" xml:space="preserve">
-    <value>&quot;Bienvenue au Club de l'Assomption.&#x0A;Je pense que nous savons tous pourquoi nous sommes ici.&quot;</value>
-  </data>
-  <data name="Login_Subtitle2" xml:space="preserve">
-    <value>&quot;Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact.&quot;</value>
   </data>
   <data name="Login_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
@@ -359,7 +350,8 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
     <value>Vous devez accepter les conditions d'utilisation pour créer un compte.</value>
   </data>
   <data name="ForgotPassword_Title.Text" xml:space="preserve">
-    <value>Oh non,&#x0A;ça se passe !</value>
+    <value>Oh non,
+ça se passe !</value>
   </data>
   <data name="ForgotPassword_Subtitle.Text" xml:space="preserve">
     <value>Nous vous enverrons un lien pour réinitialiser votre mot de passe par courriel.</value>
@@ -429,5 +421,17 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="Password_Validation3.Text" xml:space="preserve">
     <value>Un caractère majuscule</value>
+  </data>
+  <data name="Settings_DarkMode.Text" xml:space="preserve">
+    <value>Mode sombre</value>
+  </data>
+  <data name="Settings_Notification.Text" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Settings_Notification_Details.Text" xml:space="preserve">
+    <value>J'accepte de recevoir des notifications lorsqu'il y a de nouvelles blagues.</value>
+  </data>
+  <data name="Settings_ReplayTutorial.Content" xml:space="preserve">
+    <value>REJOUER LE TUTORIEL</value>
   </data>
 </root>

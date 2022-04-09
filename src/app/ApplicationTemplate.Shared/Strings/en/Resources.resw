@@ -171,29 +171,29 @@
   <data name="CreateAccount_CommandBar.Content" xml:space="preserve">
     <value>Create Account</value>
   </data>
-  <data name="Settings_Login.Content" xml:space="preserve">
-    <value>Login</value>
+  <data name="Settings_Password.Text" xml:space="preserve">
+    <value>Password</value>
   </data>
-  <data name="Settings_Logout.Content" xml:space="preserve">
-    <value>Logout</value>
+  <data name="Settings_Version_Details.Text" xml:space="preserve">
+    <value>This application makes use of the dadjokes API from Dadjokes.io, which contains thousands of jokes.</value>
   </data>
   <data name="Settings_CommandBar.Content" xml:space="preserve">
-    <value>Settings</value>
+    <value>Profile</value>
   </data>
-  <data name="Settings_Licenses.Content" xml:space="preserve">
-    <value>Licenses</value>
+  <data name="Settings_Email.Text" xml:space="preserve">
+    <value>Email</value>
   </data>
   <data name="Settings_PrivacyPolicy.Content" xml:space="preserve">
     <value>Privacy Policy</value>
   </data>
   <data name="Settings_TermsAndConditions.Content" xml:space="preserve">
-    <value>Terms and Conditions</value>
+    <value>Terms &amp; conditions</value>
   </data>
-  <data name="Settings_EditProfile.Content" xml:space="preserve">
-    <value>Edit profile</value>
+  <data name="Settings_ChangePassword.Content" xml:space="preserve">
+    <value>CHANGE PASSWORD</value>
   </data>
   <data name="Settings_Version.Text" xml:space="preserve">
-    <value>Version</value>
+    <value>DAD Jokes - Version</value>
   </data>
   <data name="Welcome_Title.Text" xml:space="preserve">
     <value>Welcome</value>
@@ -354,8 +354,8 @@ I think we all know why we are here."</value>
   </data>
   <data name="ForgotPassword_Title.Text" xml:space="preserve">
     <value>Oh no,
-it’s happening !</value>
-  </data>  
+it's happening!</value>
+  </data>
   <data name="ForgotPassword_Subtitle.Text" xml:space="preserve">
     <value>We’ll send you a link to reset your password by email.</value>
   </data>
@@ -424,5 +424,17 @@ it’s happening !</value>
   </data>
   <data name="Password_Validation3.Text" xml:space="preserve">
     <value>One uppercase character</value>
+  </data>
+  <data name="Settings_DarkMode.Text" xml:space="preserve">
+    <value>Dark mode</value>
+  </data>
+  <data name="Settings_Notification.Text" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Settings_Notification_Details.Text" xml:space="preserve">
+    <value>I agree to receive notifications when there are new jokes.</value>
+  </data>
+  <data name="Settings_ReplayTutorial.Content" xml:space="preserve">
+    <value>REPLAY TUTORIAL</value>
   </data>
 </root>

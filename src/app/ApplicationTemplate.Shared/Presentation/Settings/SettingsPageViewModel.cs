@@ -38,12 +38,7 @@ namespace ApplicationTemplate.Presentation
 			}
 		});
 
-		public IDynamicCommand NavigateToDiagnosticsPage => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new DiagnosticsPageViewModel());
-		});
-
-		public IDynamicCommand NavigateToEditProfilePage => this.GetCommandFromTask(async ct =>
+		public IDynamicCommand NavigateToResetPasswordPage => this.GetCommandFromTask(async ct =>
 		{
 			var userProfile = UserProfile.State.Data;
 

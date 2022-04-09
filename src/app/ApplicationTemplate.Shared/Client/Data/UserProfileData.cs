@@ -18,7 +18,5 @@ namespace ApplicationTemplate.Client
 		public string LastName { get; }
 
 		public string Email { get; }
-
-		public string Password { get; }
 	}
 }

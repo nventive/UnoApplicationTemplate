@@ -49,7 +49,7 @@
 		<Setter Property="FontWeight"
 				Value="Bold" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		<Setter Property="LineHeight"
 				Value="112" />
 		<Setter Property="CharacterSpacing"
@@ -87,7 +87,7 @@
 		<Setter Property="FontWeight"
 				Value="Bold" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		<Setter Property="LineHeight"
 				Value="56" />
 	</Style>
@@ -104,7 +104,7 @@
 		<Setter Property="FontWeight"
 				Value="SemiBold" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		<Setter Property="LineHeight"
 				Value="36" />
 	</Style>
@@ -136,7 +136,7 @@
 		<Setter Property="FontStyle"
 				Value="Normal" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
@@ -153,7 +153,7 @@
 		<Setter Property="FontStyle"
 				Value="Normal" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
@@ -170,7 +170,7 @@
 		<Setter Property="FontStyle"
 				Value="Normal" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
@@ -204,7 +204,7 @@
 		<Setter Property="FontStyle"
 				Value="Normal" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		<Setter Property="LineHeight"
 				Value="20" />
 		<Setter Property="CharacterSpacing"
@@ -240,7 +240,7 @@
 		<Setter Property="FontWeight"
 				Value="SemiBold" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryDarkBrush}" />
+				Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
 		<Setter Property="LineHeight"
 				Value="16" />
 		<Setter Property="CharacterSpacing"
