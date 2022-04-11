@@ -13,13 +13,18 @@ namespace ApplicationTemplate.Tests
 		public async Task NavigateToDifferentMenuSections()
 		{
 			// Arrange
-			Func<MenuViewModel> vmBuilder = () => new MenuViewModel();
+			MenuViewModel vmBuilder = new MenuViewModel();
 
-			await AssertNavigateFromTo<MenuViewModel, SettingsPageViewModel>(vmBuilder, p => p.ShowSettings);
+			var menuViewModel = await AssertNavigateFromTo<OnboardingPageViewModel, DadJokesPageViewModel>(
+				() => new OnboardingPageViewModel(),
+				p => p.NavigateToJokes
+			);
 
-			await AssertNavigateFromTo<MenuViewModel, PostsPageViewModel>(vmBuilder, p => p.ShowPosts);
+			await AssertNavigateTo<PostsPageViewModel>(() => vmBuilder.ShowPostsSection);
 
-			await AssertNavigateFromTo<MenuViewModel, DadJokesPageViewModel>(vmBuilder, p => p.ShowHome);
+			await AssertNavigateTo<SettingsPageViewModel>(() => vmBuilder.ShowSettingsSection);
+
+			await AssertNavigateTo<DadJokesPageViewModel>(() => vmBuilder.ShowHomeSection);
 		}
 
 		[Fact]

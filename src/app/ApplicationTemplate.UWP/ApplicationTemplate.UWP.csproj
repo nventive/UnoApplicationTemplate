@@ -160,6 +160,7 @@
     <Compile Include="Views\Content\Welcome\OnboardingPage.xaml.cs">
       <DependentUpon>OnboardingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\MenuRadioButton.cs" />
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -451,6 +452,10 @@
     <Page Include="Views\Styles\Controls\ListViewItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\Controls\MenuRadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\Controls\PasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
