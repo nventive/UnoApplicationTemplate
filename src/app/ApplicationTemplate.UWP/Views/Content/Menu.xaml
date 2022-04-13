@@ -10,7 +10,7 @@
 							 mc:Ignorable="uloc">
 
 	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource MaterialPrimaryBrush}">
+		  Background="{StaticResource MaterialPrimaryDarkBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 
@@ -68,29 +68,29 @@
 
 		<c:MenuRadioButton UncheckedIconStyle="{StaticResource OutlinedHomePathControlStyle}"
 						   CheckedIconStyle="{StaticResource FilledHomePathControlStyle}"
+						   Foreground="{StaticResource MaterialOnPrimaryBrush}"
 						   Content="Jokes"
 						   x:Uid="Menu_Home"
-						   uloc:Localize="Content"	
-						   Foreground="white"
+						   uloc:Localize="Content"
 						   Command="{Binding ShowHomeSection}"
 						   IsChecked="{Binding IsHomeSectionActive}" />
 
 		<c:MenuRadioButton UncheckedIconStyle="{StaticResource OutlinedPostsPathControlStyle}"
 						   CheckedIconStyle="{StaticResource FilledPostsPathControlStyle}"
+						   Foreground="{StaticResource MaterialOnPrimaryBrush}"
 						   Content="Posts"
 						   x:Uid="Menu_Posts"
 						   uloc:Localize="Content"
-						   Foreground="white"
 						   Command="{Binding ShowPostsSection}"
 						   IsChecked="{Binding IsPostsSectionActive}"
 						   Grid.Column="1" />
 
 		<c:MenuRadioButton UncheckedIconStyle="{StaticResource OutlinedSettingsPathControlStyle}"
 						   CheckedIconStyle="{StaticResource FilledSettingsPathControlStyle}"
+						   Foreground="{StaticResource MaterialOnPrimaryBrush}"
 						   Content="Settings"
 						   x:Uid="Menu_Settings"
 						   uloc:Localize="Content"
-						   Foreground="white"
 						   Command="{Binding ShowSettingsSection}"
 						   IsChecked="{Binding IsSettingsSectionActive}"
 						   Grid.Column="2" />

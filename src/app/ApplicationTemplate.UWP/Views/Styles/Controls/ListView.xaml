@@ -33,6 +33,8 @@
 			within the safe zone. Important to support devices with round corners or notches (iPhone X, Essential Phone) -->
 		<Setter Property="toolkit:VisibleBoundsPadding.PaddingMask"
 				Value="All" />
+		<Setter Property="Background"
+				Value="{StaticResource MaterialBackgroundBrush}" />
 		<Setter Property="IsTabStop"
 				Value="False" />
 		<Setter Property="TabNavigation"

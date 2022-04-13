@@ -27,9 +27,7 @@
 		<Setter Property="Background"
 				Value="{StaticResource MaterialSurfaceColor}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceColor}" />
-		<Setter Property="Opacity"
-				Value="0.61" />
+				Value="{StaticResource MaterialPrimaryAccentBrush}" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"

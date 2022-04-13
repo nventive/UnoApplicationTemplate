@@ -52,10 +52,10 @@
 			<Color x:Key="MaterialSecondaryDarkColor">#FA825D</Color>
 			<Color x:Key="MaterialSecondaryLightColor">#FDC9B8</Color>
 
-			<Color x:Key="MaterialBackgroundColor">#121821</Color>
+			<Color x:Key="MaterialBackgroundColor">#1C2025</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#FFF</Color>
 
-			<Color x:Key="MaterialSurfaceColor">#121212</Color>
+			<Color x:Key="MaterialSurfaceColor">#2C3034</Color>
 			<Color x:Key="MaterialOnSurfaceColor">#FFF</Color>
 
 			<Color x:Key="MaterialErrorColor">#E8897D</Color>

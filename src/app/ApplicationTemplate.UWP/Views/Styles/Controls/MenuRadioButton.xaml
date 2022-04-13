@@ -6,11 +6,6 @@
 
 	<Style x:Key="DefaultMenuRadioButtonStyle"
 		   TargetType="c:MenuRadioButton">
-
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceMediumBrush}" />
-		<Setter Property="Background"
-				Value="Transparent" />
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
 		<Setter Property="VerticalAlignment"
@@ -49,17 +44,18 @@
 									<VisualState.Setters>
 										<Setter Target="ContentPresenter.FontWeight"
 												Value="Bold" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{StaticResource MaterialPrimaryBrush}" />
-										<Setter Target="Root.Background"
-												Value="{StaticResource MaterialOnPrimaryBrush}" />
 										<Setter Target="CheckedIcon.Visibility"
 												Value="Visible" />
 										<Setter Target="UncheckedIcon.Visibility"
 												Value="Collapsed" />
 									</VisualState.Setters>
 								</VisualState>
-								<VisualState x:Name="Unchecked" />
+								<VisualState x:Name="Unchecked">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Foreground"
+												Value="{StaticResource MaterialOnPrimaryMedEmphasisBrush}" />
+									</VisualState.Setters>
+								</VisualState>
 								<VisualState x:Name="Indeterminate" />
 							</VisualStateGroup>
 
@@ -88,7 +84,7 @@
 							<!-- CheckedIcon -->
 							<u:PathControl x:Name="CheckedIcon"
 										   Style="{TemplateBinding CheckedIconStyle}"
-										   Foreground="{StaticResource MaterialPrimaryBrush}"
+										   Foreground="{TemplateBinding Foreground}"
 										   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										   Visibility="Collapsed" />
 

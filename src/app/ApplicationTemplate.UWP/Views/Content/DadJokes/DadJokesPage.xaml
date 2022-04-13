@@ -24,7 +24,8 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Margin="0">
+	<Grid Margin="0"
+		  Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -38,7 +39,7 @@
 				<AppBarButton Command="{Binding NavigateToFilters}">
 					<PathIcon Data="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z"
 							  HorizontalAlignment="Center"
-							  Foreground="{StaticResource MaterialOnPrimaryColor}" />
+							  Foreground="{StaticResource MaterialOnPrimaryBrush}" />
 				</AppBarButton>
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
@@ -54,7 +55,7 @@
 					<ListView ItemsSource="{Binding Data}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
-								<Grid>
+								<Grid Background="{StaticResource MaterialSurfaceBrush}">
 									<Grid.RowDefinitions>
 										<RowDefinition Height="Auto" />
 										<RowDefinition Height="Auto" />
@@ -75,17 +76,16 @@
 
 											<TextBlock Text="{Binding Quote.Title}"
 													   Grid.Row="0"
-													   FontSize="16"
 													   Margin="0,5"
-													   FontWeight="SemiBold"
-													   Style="{StaticResource MaterialCaption}" />
+													   Style="{StaticResource Subtitle2}" />
 
 											<TextBlock Text="{Binding Quote.Selftext}"
 													   Grid.Row="1"
-													   Style="{StaticResource MaterialBody1}" />
+													   Style="{StaticResource Headline6}" />
 
 										</Grid>
 										<ToggleButton IsChecked="{Binding IsFavorite}"
+													  Background="Transparent"
 													  Command="{Binding Parent.ToggleIsFavorite}"
 													  CommandParameter="{Binding}"
 													  HorizontalAlignment="Center"

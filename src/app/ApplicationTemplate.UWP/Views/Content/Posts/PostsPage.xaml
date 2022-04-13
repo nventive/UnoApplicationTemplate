@@ -9,8 +9,8 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}"
-		  x:Name="PostPage">
+	<Grid x:Name="PostPage"
+		  Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -27,19 +27,17 @@
 				<DataTemplate>
 					<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
 									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
-									IndicatorColor="Black">
-						<ListView ItemsSource="{Binding Data}"
-								  Header="{Binding}">
+									IndicatorColor="{StaticResource MaterialPrimaryLightBrush}">
+						<ListView ItemsSource="{Binding Data}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
-									<StackPanel Padding="0,15">
+									<StackPanel Padding="0,15"
+												Background="{StaticResource MaterialSurfaceBrush}">
 										<TextBlock Text="{Binding Title}"
-												   Margin="0,0,5,0"
-												   Style="{StaticResource MaterialSubtitle1}" />
+												   Margin="0,0,0,5"
+												   Style="{StaticResource Subtitle2}" />
 										<TextBlock Text="{Binding Body}"
-												   Opacity="0.6"
-												   Foreground="{StaticResource MaterialOnSurfaceColor}"
-												   Style="{StaticResource MaterialBody2}" />
+												   Style="{StaticResource Body2}" />
 										<StackPanel Orientation="Horizontal"
 													HorizontalAlignment="Right">
 											<Button Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
