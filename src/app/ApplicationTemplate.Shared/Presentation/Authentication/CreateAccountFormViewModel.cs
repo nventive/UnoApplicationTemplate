@@ -171,17 +171,6 @@ namespace ApplicationTemplate.Presentation
 				.MustBe18OrOlder()
 				.WithMessage(localizer["CreateAccount_DateOfBirthValidation"]);
 
-			RuleFor(x => x.FavoriteDadNames)
-				.Must(favDadNames =>
-				{
-					if (favDadNames == null)
-					{
-						return false;
-					}
-					return favDadNames.Length >= 1;
-				})
-				.WithMessage(localizer["CreateAccount_FavoriteDadNameValidation"]);
-
 			RuleFor(x => x.AgreeToTermsOfServices)
 				.Equal(true)
 				.WithMessage(localizer["CreateAccount_TermsOfServiceValidation"]);

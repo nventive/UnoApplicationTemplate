@@ -126,7 +126,6 @@
 						<!-- DatePicker -->
 						<CalendarDatePicker x:Name="BirthDayField"
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-											Style="{StaticResource CalendarDatePickerStyle}"
 											HorizontalAlignment="Stretch"
 											Background="{StaticResource MaterialSurfaceBrush}"
 											Foreground="{StaticResource MaterialOnSurfaceBrush}"

@@ -25,8 +25,7 @@
 	</Style>
 
 	<Style x:Key="CalendarViewStyle"
-		   TargetType="CalendarView"
-		   BasedOn="{StaticResource MaterialCalendarViewStyle}">
+		   TargetType="CalendarView">
 		<Setter Property="CalendarViewDayItemStyle"
 				Value="{StaticResource CalendarViewDayItemStyle}" />
 		<Setter Property="FocusBorderBrush"

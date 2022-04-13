@@ -15,10 +15,7 @@ namespace ApplicationTemplate.Tests
 			// Arrange
 			MenuViewModel vmBuilder = new MenuViewModel();
 
-			var menuViewModel = await AssertNavigateFromTo<OnboardingPageViewModel, DadJokesPageViewModel>(
-				() => new OnboardingPageViewModel(),
-				p => p.NavigateToJokes
-			);
+			await AssertNavigateFromTo<OnboardingPageViewModel, LoginPageViewModel>(() => new OnboardingPageViewModel(), p => p.NavigateToLogin);
 
 			await AssertNavigateTo<PostsPageViewModel>(() => vmBuilder.ShowPostsSection);
 
