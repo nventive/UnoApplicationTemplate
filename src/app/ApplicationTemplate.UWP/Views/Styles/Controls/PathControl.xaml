@@ -162,8 +162,6 @@
 		</Setter>
 	</Style>
 
-</ResourceDictionary>
-
 	<!--  SuccessCheckPathControlStyle -->
 	<Style x:Key="SuccessCheckPathControlStyle"
 		   TargetType="u:PathControl">
