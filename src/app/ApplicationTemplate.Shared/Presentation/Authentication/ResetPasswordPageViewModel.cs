@@ -16,66 +16,66 @@ namespace ApplicationTemplate.Presentation
 			set => this.Set(value);
 		}
 
-		public PasswordState PasswordHasEightCharacters
+		public bool? PasswordHasEightCharacters
 		{
-			get => this.GetFromObservable(ObservePasswordHasEightCharacters(), initialValue: PasswordState.Unedited);
+			get => this.GetFromObservable(ObservePasswordHasEightCharacters(), initialValue: null);
 			set => this.Set(value);
 		}
 
-		public PasswordState PasswordHasNumber
+		public bool? PasswordHasNumber
 		{
-			get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: PasswordState.Unedited);
+			get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
 			set => this.Set(value);
 		}
 
-		public PasswordState PasswordHasUppercase
+		public bool? PasswordHasUppercase
 		{
-			get => this.GetFromObservable(ObservePasswordHasUppercase(), initialValue: PasswordState.Unedited);
+			get => this.GetFromObservable(ObservePasswordHasUppercase(), initialValue: null);
 			set => this.Set(value);
 		}
 
-		private IObservable<PasswordState> ObservePasswordHasEightCharacters()
+		private IObservable<bool?> ObservePasswordHasEightCharacters()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password =>
+				.Select<string, bool?>(password =>
 				{
 					if (password.IsNullOrEmpty())
 					{
-						return PasswordState.Unedited;
+						return null;
 					}
 
-					return password.Length >= 8 ? PasswordState.Valid : PasswordState.Invalid;
+					return password.Length >= 8;
 				});
 		}
 
-		private IObservable<PasswordState> ObservePasswordHasNumber()
+		private IObservable<bool?> ObservePasswordHasNumber()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password =>
+				.Select<string, bool?>(password =>
 				{
 					if (password.IsNullOrEmpty())
 					{
-						return PasswordState.Unedited;
+						return null;
 					}
 
-					return password.Any(char.IsDigit) ? PasswordState.Valid : PasswordState.Invalid;
+					return password.Any(char.IsDigit);
 				});
 		}
 
-		private IObservable<PasswordState> ObservePasswordHasUppercase()
+		private IObservable<bool?> ObservePasswordHasUppercase()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
-				.Select(password =>
+				.Select<string, bool?>(password =>
 				{
 					if (password.IsNullOrEmpty())
 					{
-						return PasswordState.Unedited;
+						return null;
 					}
 
-					return password.Any(char.IsUpper) ? PasswordState.Valid : PasswordState.Invalid;
+					return password.Any(char.IsUpper);
 				});
 		}
 	}

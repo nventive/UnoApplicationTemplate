@@ -51,7 +51,7 @@ namespace ApplicationTemplate.Presentation
 
 		public string PhoneNumber
 		{
-			get => this.GetFromObservable(ObservePasswordIsEmpty());
+			get => this.Get<string>();
 			set => this.Set(value);
 		}
 

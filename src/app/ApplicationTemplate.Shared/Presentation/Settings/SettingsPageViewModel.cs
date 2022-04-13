@@ -40,14 +40,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand NavigateToResetPasswordPage => this.GetCommandFromTask(async ct =>
 		{
-			var userProfile = UserProfile.State.Data;
-
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new EditProfilePageViewModel(userProfile));
-		});
-
-		public IDynamicCommand NavigateToLoginPage => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new LoginPageViewModel(isFirstLogin: false));
+			await this.GetService<IStackNavigator>().Navigate(ct, () => new ResetPasswordPageViewModel());
 		});
 
 		public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>
