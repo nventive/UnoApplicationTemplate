@@ -7,6 +7,7 @@
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:converters="using:ApplicationTemplate.Views"
+	  xmlns:behaviors="using:ApplicationTemplate.Views.Behaviors"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  xmlns:android="http://nventive.com/android"
 	  xmlns:ios="http://nventive.com/ios"
@@ -65,7 +66,6 @@
 					<TextBox PlaceholderText="First Name"
 							 x:Uid="CreateAccount_FirstName"
 							 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Style="{StaticResource TextBoxStyle}"
 							 IsSpellCheckEnabled="False"
 							 ios:ReturnKeyType="Next"
 							 android:ImeOptions="Next"
@@ -80,7 +80,6 @@
 							 PlaceholderText="Last Name"
 							 x:Uid="CreateAccount_LastName"
 							 Text="{Binding Form.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Style="{StaticResource TextBoxStyle}"
 							 IsSpellCheckEnabled="False"
 							 ios:ReturnKeyType="Next"
 							 android:ImeOptions="Next"
@@ -95,40 +94,32 @@
 								 PlaceholderText="Enter an email"
 								 x:Uid="CreateAccount_Email"
 								 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 Style="{StaticResource TextBoxStyle}"
 								 InputScope="EmailSmtpAddress"
 								 IsSpellCheckEnabled="False"
 								 ios:ReturnKeyType="Next"
 								 android:ImeOptions="Next"
-								 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
+								 ue:TextBoxBehavior.NextControl="{Binding ElementName=PhoneNumberField}" />
 				</local:DataValidationView>
 
 				<!-- Phone Number -->
 				<local:DataValidationView Model="{Binding Form}"
 										  PropertyName="PhoneNumber"
 										  Margin="42,12">
-					<!-- Todo adding formating (000) 000-0000 -->
 					<TextBox x:Name="PhoneNumberField"
 							 PlaceholderText="Phone Number (000) 000-0000"
 							 x:Uid="CreateAccount_PhoneNumber"
 							 Text="{Binding Form.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Style="{StaticResource TextBoxStyle}"
-							 InputScope="Number"
 							 MaxLength="14"
+							 behaviors:FormattingTextBoxBehavior.TextFormat="(000) 000-0000"
+							 behaviors:FormattingTextBoxBehavior.IsEnabled="True"
 							 IsSpellCheckEnabled="False"
-							 ios:ReturnKeyType="Next"
-							 android:ImeOptions="Next"
-							 ue:TextBoxBehavior.NextControl="{Binding ElementName=SecondaryPhoneNumberField}" />
+							 ios:ReturnKeyType="Done"
+							 android:ImeOptions="Done"
+						     ue:TextBoxBehavior.DismissKeyboardOnEnter="True" />
 				</local:DataValidationView>
 
 				<!-- Birth Day -->
 				<StackPanel Margin="42,0">
-
-					<!-- Label -->
-					<TextBlock Text="Date of Birth"
-								Style="{StaticResource Subtitle2}"
-								Foreground="{StaticResource MaterialSurfaceBrush}"
-								Margin="0,0,0,4" />
 
 					<local:DataValidationView Model="{Binding Form}"
 											PropertyName="DateOfBirth">
@@ -139,6 +130,7 @@
 											HorizontalAlignment="Stretch"
 											Background="{StaticResource MaterialSurfaceBrush}"
 											Foreground="{StaticResource MaterialOnSurfaceBrush}"
+											Header="Date of Birth"
 											Height="56" />
 					</local:DataValidationView>
 				</StackPanel>
@@ -148,15 +140,15 @@
 										  PropertyName="PostalCode"
 										  Margin="42,12">
 
-					<!-- Todo adding formating A0A 0A0 -->
 					<TextBox x:Name="PostalCodeField"
 							 PlaceholderText="Postal Code A0A 0A0"
 							 x:Uid="CreateAccount_PostalCode"
 							 Text="{Binding Form.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Style="{StaticResource TextBoxStyle}"
 							 InputScope="EmailSmtpAddress"
 							 IsSpellCheckEnabled="False"
 							 MaxLength="7"
+							 behaviors:FormattingTextBoxBehavior.TextFormat="A0A 0A0"
+							 behaviors:FormattingTextBoxBehavior.IsEnabled="True"
 							 ios:ReturnKeyType="Next"
 							 android:ImeOptions="Next"
 							 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
@@ -172,8 +164,8 @@
 									 PlaceholderText="Choose a password"
 									 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 									 Style="{StaticResource DefaultPasswordBoxStyle}"
-									 ios:ReturnKeyType="Next"
-									 android:ImeOptions="Next"
+									 ios:ReturnKeyType="Done"
+									 android:ImeOptions="Done"
 									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
 				</local:DataValidationView>
 
@@ -248,7 +240,7 @@
 							<ListView ItemsSource="{Binding DadNames}"
 										ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
 										ItemContainerStyle="{StaticResource CheckedListViewItemStyle}"
-										SelectionMode="Multiple"
+										SelectionMode="Single"
 										IsItemClickEnabled="True" />	
 						</Grid>
 					</local:DataValidationView>
