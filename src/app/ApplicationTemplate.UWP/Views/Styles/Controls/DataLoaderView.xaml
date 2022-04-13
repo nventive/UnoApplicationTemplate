@@ -4,7 +4,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 
 	<DataTemplate x:Key="DataLoaderViewEmptyTemplate">
-		<Grid>
+		<Grid Background="{StaticResource MaterialBackgroundBrush}">
 			<TextBlock Text="Nothing to show here"
 					   Style="{StaticResource MaterialBody1}"
 					   HorizontalAlignment="Center"
@@ -53,12 +53,14 @@
 				
 				<!-- Title -->
 				<TextBlock Text="Something went wrong"
+						   Foreground="{StaticResource MaterialOnBackgroundBrush}"
 						   Style="{StaticResource Headline5}"
 						   TextAlignment="Center"
 						   Margin="0,0,0,8" />
 
 				<!-- Message -->
 				<TextBlock Text="Please try again."
+						   Foreground="{StaticResource MaterialOnBackgroundMediumBrush}"
 						   Style="{StaticResource Body1}"
 						   TextAlignment="Center" />
 
@@ -215,7 +217,8 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Margin="{TemplateBinding Padding}" />
+										  Background="{StaticResource MaterialBackgroundBrush}"
+										  Padding="{TemplateBinding Padding}" />
 
 						<ContentPresenter x:Name="EmptyPresenter"
 										  Content="{TemplateBinding State}"
@@ -223,7 +226,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Margin="{TemplateBinding Padding}" />
+										  Padding="{TemplateBinding Padding}" />
 
 						<ContentPresenter x:Name="ErrorPresenter"
 										  Content="{TemplateBinding State}"
@@ -231,7 +234,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Margin="{TemplateBinding Padding}" />
+										  Padding="{TemplateBinding Padding}" />
 
 						<!-- TODO: Make it a dismissable toast -->
 						<ContentPresenter x:Name="ErrorNotificationPresenter"
@@ -240,7 +243,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Margin="{TemplateBinding Padding}" />
+										  Padding="{TemplateBinding Padding}" />
 
 						<ProgressRing x:Name="LoadingIndicator"
 									  Foreground="Black"
@@ -255,13 +258,11 @@
 							  IsHitTestVisible="False">
 							<Grid x:Name="RefreshPresenter"
 								  Visibility="Collapsed"
-								  Background="#88000000"
 								  HorizontalAlignment="Center"
 								  VerticalAlignment="Center"
 								  Padding="16"
 								  CornerRadius="8">
 								<ProgressRing x:Name="RefreshingIndicator"
-											  Foreground="White"
 											  IsActive="False"
 											  Width="20"
 											  Height="20" />
