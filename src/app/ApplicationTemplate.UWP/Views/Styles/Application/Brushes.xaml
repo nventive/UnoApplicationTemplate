@@ -10,6 +10,8 @@
 	<x:Int32 x:Key="BrushesWorkaround">0</x:Int32>
 
 	<!-- Primary brushes -->
+	<SolidColorBrush x:Key="MaterialPrimaryBrush"
+					 Color="{ThemeResource MaterialPrimaryColor}" />
 	<SolidColorBrush x:Key="MaterialPrimaryDarkBrush"
 					 Color="{ThemeResource MaterialPrimaryDarkColor}" />
 	<SolidColorBrush x:Key="MaterialPrimaryLightBrush"
@@ -57,6 +59,8 @@
 
 	
 	<!-- Secondary brushes -->
+	<SolidColorBrush x:Key="MaterialSecondaryBrush"
+					 Color="{ThemeResource MaterialSecondaryColor}" />
 	<SolidColorBrush x:Key="MaterialSecondaryDarkBrush"
 					 Color="{ThemeResource MaterialSecondaryDarkColor}" />
 	<SolidColorBrush x:Key="MaterialSecondaryLightBrush"
