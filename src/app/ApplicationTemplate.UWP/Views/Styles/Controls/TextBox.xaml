@@ -77,12 +77,7 @@
 								<VisualState x:Name="Focused" />
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="ButtonStates">
-								<VisualState x:Name="ButtonVisible">
-									<VisualState.Setters>
-										<Setter Target="DeleteButton.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="ButtonVisible" />
 								<VisualState x:Name="ButtonCollapsed" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>

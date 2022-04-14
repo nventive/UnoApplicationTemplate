@@ -22,6 +22,7 @@ namespace ApplicationTemplate.Presentation
 			this.AddValidation(this.GetProperty(x => x.PhoneNumber));
 			this.AddValidation(this.GetProperty(x => x.PostalCode));
 			this.AddValidation(this.GetProperty(x => x.DateOfBirth));
+			//this.AddValidation(this.GetProperty(x => x.FavoriteDadNames));
 			this.AddValidation(this.GetProperty(x => x.AgreeToTermsOfServices));
 		}
 
@@ -170,6 +171,17 @@ namespace ApplicationTemplate.Presentation
 				.NotEmpty()
 				.MustBe18OrOlder()
 				.WithMessage(localizer["CreateAccount_DateOfBirthValidation"]);
+
+			//RuleFor(x => x.FavoriteDadNames)
+			//	.Must(favDadNames =>
+			//	{
+			//		if (favDadNames == null)
+			//		{
+			//			return false;
+			//		}
+			//		return favDadNames.Length >= 1;
+			//	})
+			//	.WithMessage(localizer["CreateAccount_FavoriteDadNameValidation"]);
 
 			RuleFor(x => x.AgreeToTermsOfServices)
 				.Equal(true)

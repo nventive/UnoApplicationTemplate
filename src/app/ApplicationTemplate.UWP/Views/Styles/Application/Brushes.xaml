@@ -9,6 +9,11 @@
 	<!-- ResourceDictionary containing only 1 item doesn't work if that item refers Material resources. -->
 	<x:Int32 x:Key="BrushesWorkaround">0</x:Int32>
 
+	<!-- Trasnparent brush -->
+	<SolidColorBrush x:Key="TransparentBrush"
+					 Color="White"
+					 Opacity="0" />
+
 	<!-- Primary brushes -->
 	<SolidColorBrush x:Key="MaterialPrimaryBrush"
 					 Color="{ThemeResource MaterialPrimaryColor}" />
