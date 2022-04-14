@@ -232,7 +232,7 @@
 
 						<ContentPresenter x:Name="ContentPresenter"
 										  Content="{TemplateBinding State}"
-										  ContentTemplate="{TemplateBinding ErrorTemplate}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
