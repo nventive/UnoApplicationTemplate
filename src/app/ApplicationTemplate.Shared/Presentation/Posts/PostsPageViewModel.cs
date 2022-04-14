@@ -6,13 +6,14 @@ using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation
 {
 	public partial class PostsPageViewModel : ViewModel
 	{
-		private readonly Func<Task> _onGetPostsCalled;
+		private readonly Func<Task> _onGetPostsCalled;  
 
 		private readonly ManualDataLoaderTrigger _deletePostTrigger = new ManualDataLoaderTrigger();
 
@@ -28,12 +29,12 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand NavigateToNewPost => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new EditPostPageViewModel());
+			await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new EditPostPageViewModel());
 		});
 
 		public IDynamicCommand NavigateToPost => this.GetCommandFromTask<PostData>(async (ct, post) =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new EditPostPageViewModel(post));
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new EditPostPageViewModel(post));
 		});
 
 		public IDynamicCommand RefreshPosts => this.GetCommandFromDataLoaderRefresh(Posts);

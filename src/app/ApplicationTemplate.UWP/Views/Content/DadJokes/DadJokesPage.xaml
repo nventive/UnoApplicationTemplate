@@ -43,7 +43,6 @@
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
 
-
 		<dl:DataLoaderView Source="{Binding Jokes}"
 						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
 						   Grid.Row="1">

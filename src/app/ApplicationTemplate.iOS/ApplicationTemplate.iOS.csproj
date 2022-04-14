@@ -39,7 +39,8 @@
     <!--#if (IncludeFirebaseAnalytics)
 		<FirebaseCrashlyticsUploadSymbolsEnabled>True</FirebaseCrashlyticsUploadSymbolsEnabled>
 		#endif -->
-  </PropertyGroup>
+		<MtouchSdkVersion>15.0</MtouchSdkVersion>
+	</PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
@@ -58,7 +59,7 @@
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-  </PropertyGroup>
+    </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <OutputPath>bin\iPhone\Release</OutputPath>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
