@@ -3,21 +3,39 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation
 {
 	public class LoginPageViewModel : ViewModel
 	{
-		private readonly Func<CancellationToken, Task> _onSuccessfulLogin;
-
-		public LoginPageViewModel(Func<CancellationToken, Task> onSuccessfulLogin)
+		public LoginPageViewModel(bool isFirstLogin)
 		{
-			_onSuccessfulLogin = onSuccessfulLogin ?? throw new ArgumentNullException(nameof(onSuccessfulLogin));
+			IsFirstLogin = isFirstLogin;
 		}
 
 		public LoginFormViewModel Form => this.GetChild(() => new LoginFormViewModel());
+
+		public string Title
+		{
+			get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_Title1"] : this.GetService<IStringLocalizer>()["Login_Title2"];
+			set => this.Set(value);
+		}
+
+		public string Quote
+		{
+			get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_Subtitle1"] : this.GetService<IStringLocalizer>()["Login_Subtitle2"];
+			set => this.Set(value);
+		}
+
+		public bool IsFirstLogin
+		{
+			get => this.Get<bool>();
+			set => this.Set(value);
+		}
 
 		public IDynamicCommand Login => this.GetCommandFromTask(async ct =>
 		{
@@ -26,9 +44,13 @@ namespace ApplicationTemplate.Presentation
 			if (validationResult.IsValid)
 			{
 				await this.GetService<IAuthenticationService>().Login(ct, Form.Email.Trim(), Form.Password);
-
-				await _onSuccessfulLogin.Invoke(ct);
+				await NavigateToHome.Execute();
 			}
+		});
+
+		public IDynamicCommand NavigateToHome => this.GetCommandFromTask(async ct =>
+		{
+			await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
 		});
 
 		public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>

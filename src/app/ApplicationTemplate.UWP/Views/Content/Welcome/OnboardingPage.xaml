@@ -70,31 +70,31 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
-		  Background="{StaticResource MaterialBackgroundBrush}">
-
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Image Source="ms-appx:///Assets/Background_Mustaches_Light.png"
-			   Stretch="UniformToFill"
-			   Grid.RowSpan="2" />
+			   Stretch="UniformToFill"/>
 
-		<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
-				Style="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonStyle}}"
-				FontSize="14"
-				Command="{Binding NavigateToJokes}"
-				VerticalAlignment="Top"
-				HorizontalAlignment="Right"
-				Margin="0,24,24,0" />
+		<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
 
-		<u:ImageSlideshow x:Name="OnboardingSlideshow"
-						  Grid.Row="1"
-						  ItemsSource="{Binding OnboardingItems}"
-						  ItemTemplate="{StaticResource OnboardingItemTemplate}"
-						  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
-						  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
+			<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
+					Style="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonStyle}}"
+					FontSize="14"
+					Command="{Binding NavigateToLogin}"
+					VerticalAlignment="Top"
+					HorizontalAlignment="Right"
+					Margin="0,24,24,0" />
+
+			<u:ImageSlideshow x:Name="OnboardingSlideshow"
+							  Grid.Row="1"
+							  ItemsSource="{Binding OnboardingItems}"
+							  ItemTemplate="{StaticResource OnboardingItemTemplate}"
+							  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
+							  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
+		</Grid>
 	</Grid>
 </Page>

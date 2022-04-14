@@ -57,6 +57,9 @@
 		<string>Fonts/Guillon-Bold.ttf</string>
 		<string>Fonts/Guillon-Regular.ttf</string>
 		<string>Fonts/Guillon-SemiBold.ttf</string>
+		<string>Fonts/Guillon-Light.ttf</string>
+		<string>Fonts/Roboto-Regular.ttf</string>
+		<string>Fonts/Roboto-Medium.ttf</string>
 	</array>
 	<key>CFBundleIconFiles</key>
 	<array/>

@@ -9,7 +9,6 @@ namespace ApplicationTemplate.Client
 	[GeneratedImmutable]
 	public partial class DadJokesData
 	{
-
 		public DadJokesData(DadJokeChildData[] children)
 		{
 			Children = children;

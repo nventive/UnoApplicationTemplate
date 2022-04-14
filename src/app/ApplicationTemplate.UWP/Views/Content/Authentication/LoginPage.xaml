@@ -5,72 +5,105 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
+	  xmlns:u="using:Nventive.View.Controls"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  xmlns:android="http://nventive.com/android"
 	  xmlns:ios="http://nventive.com/ios"
 	  mc:Ignorable="d ios android">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
+		<!-- Background -->
+		<Image Source="ms-appx:///Assets/Background_Mustaches_Light.png"
+			   Stretch="UniformToFill"
+			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch" />
 
-		<CommandBar Content="Login"
-					x:Uid="Login_CommandBar" />
+		<ScrollViewer>
+			<StackPanel VerticalAlignment="Center">
+				<TextBlock Text="{Binding Title}"
+						   x:Uid="Login_Title"
+						   Margin="22,32,22,0"
+						   Style="{StaticResource Headline2}"
+						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
+						   HorizontalTextAlignment="Center"
+						   HorizontalAlignment="Center" />
 
-		<ScrollViewer Grid.Row="1">
-			<StackPanel Margin="20,0,20,20">
+				<TextBlock Text="{Binding Quote}"
+						   x:Uid="Login_Subtitle"
+						   Style="{StaticResource Body1}"
+						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
+						   FontStyle="Italic"
+						   Margin="42,16,42,24"
+						   HorizontalTextAlignment="Center"
+						   HorizontalAlignment="Center" />
 
 				<!-- Email -->
 				<local:DataValidationView Model="{Binding Form}"
 										  PropertyName="Email"
-										  Margin="0,4">
-					<TextBox PlaceholderText="Email"
+										  Margin="42,4">
+					<TextBox x:Name="EmailField"
+							 PlaceholderText="Email"
+							 x:Uid="Login_Email"
 							 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource TextBoxStyle}"
 							 InputScope="EmailSmtpAddress"
 							 IsSpellCheckEnabled="False"
 							 ios:ReturnKeyType="Next"
 							 android:ImeOptions="Next"
-							 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}"
-							 x:Uid="Login_Email"
-							 FontSize="16" />
+							 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
 				</local:DataValidationView>
 
 				<!-- Password -->
 				<local:DataValidationView Model="{Binding Form}"
-										  PropertyName="Password"
-										  Margin="0,4">
+											  PropertyName="Password"
+											  Margin="42,4,42,0"
+											  Background="{StaticResource MaterialSurfaceBrush}">
 					<PasswordBox x:Name="PasswordField"
+							     x:Uid="Login_Password"
 								 PlaceholderText="Password"
 								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 ios:ReturnKeyType="Done"
-								 android:ImeOptions="Done"
-								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True"
-								 ue:PasswordBoxBehavior.EnterCommand="{Binding Login}"
-								 x:Uid="Login_Password"
-								 FontSize="16" />
+								 Style="{StaticResource DefaultPasswordBoxStyle}"
+								 ios:ReturnKeyType="Next"
+								 android:ImeOptions="Next"
+								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
 				</local:DataValidationView>
 
-				<HyperlinkButton Content="Forgot password?"
-								 x:Uid="Login_ForgotPassword"
-								 HorizontalAlignment="Right"
-								 VerticalContentAlignment="Top"
-								 Command="{Binding NavigateToForgotPasswordPage}"
-								 Margin="0,4" />
+				<Button Content="Forgot password ?"
+						x:Uid="Login_ForgotPassword"
+						HorizontalAlignment="Left"
+						Command="{Binding NavigateToForgotPasswordPage}"
+						Style="{StaticResource TextButtonStyle}"
+						FontStyle="Normal"
+						Margin="42,0" />
 
-				<Button Command="{Binding Login}"
-						Content="Login"
+				<Button x:Name="LoginButton"
 						x:Uid="Login_Login"
+						Content="LOG IN"
+						Command="{Binding Login}"
 						Style="{StaticResource ExecutingButtonStyle}"
 						HorizontalAlignment="Stretch"
-						Margin="0,4" />
+						Margin="42,24,42,16" />
 
-				<Button Command="{Binding NavigateToCreateAccountPage}"
-						Content="Create account"
+				<Button x:Name="CreateAccountButton"
 						x:Uid="Login_CreateAccount"
+						Content="CREATE ACCOUNT"
+						Command="{Binding NavigateToCreateAccountPage}"
+						Style="{StaticResource MaterialOutlinedButtonStyle}"
 						HorizontalAlignment="Stretch"
-						Margin="0,4" />
+						Margin="42,0" />
+
+				<Rectangle Margin="42,32"
+						   Height="1"
+						   HorizontalAlignment="Stretch"
+						   Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+
+				<Button x:Name="GoogleLoginButton"
+						x:Uid="Login_Google"
+						Content="CONTINUE WITH GOOGLE"
+						Style="{StaticResource GoogleButtonStyle}"
+						HorizontalAlignment="Stretch"
+						Margin="42,0,42,32" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

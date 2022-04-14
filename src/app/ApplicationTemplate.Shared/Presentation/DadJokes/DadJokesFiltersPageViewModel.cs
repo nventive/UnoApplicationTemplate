@@ -26,7 +26,6 @@ namespace ApplicationTemplate.Presentation
 			{
 				return await ptArg.FirstAsync();
 			}
-
 		}
 
 		public IDynamicCommand HandleCheck => this.GetCommand((string pt) =>

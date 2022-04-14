@@ -26,5 +26,4 @@
 											  ValueIfNotEmpty="Collapsed"  />
 
 	<converters:DebugConverter x:Key="debug" />
-
 </ResourceDictionary>

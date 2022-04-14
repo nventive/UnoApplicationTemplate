@@ -213,6 +213,9 @@
   <data name="Posts_NewPost.Content" xml:space="preserve">
     <value>New post</value>
   </data>
+  <data name="Onboarding_Content" xml:space="preserve">
+    <value>Get your shot of good humor everyday. Read the latest and greatest dad jokes!</value>
+  </data>
   <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
     <value>CONTINUE</value>
   </data>
@@ -228,8 +231,20 @@
   <data name="Menu_Settings.Content" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="Login_CommandBar.Content" xml:space="preserve">
-    <value>Login</value>
+  <data name="Login_Title1" xml:space="preserve">
+    <value>Welcome
+on board!</value>
+  </data>
+  <data name="Login_Title2" xml:space="preserve">
+    <value>Nice to see
+you again!</value>
+  </data>
+  <data name="Login_Subtitle1" xml:space="preserve">
+    <value>"Welcome to the Assumption Club.
+I think we all know why we are here."</value>
+  </data>
+  <data name="Login_Subtitle2" xml:space="preserve">
+    <value>"What do you call it when an Apple user looks you in the eye? iContact."</value>
   </data>
   <data name="Login_Email.PlaceholderText" xml:space="preserve">
     <value>Email</value>
@@ -238,16 +253,20 @@
     <value>Password</value>
   </data>
   <data name="Login_Login.Content" xml:space="preserve">
-    <value>Login</value>
+    <value>LOG IN</value>
   </data>
   <data name="Login_CreateAccount.Content" xml:space="preserve">
-    <value>Create account</value>
+    <value>CREATE ACCOUNT</value>
+  </data>
+  <data name="Login_Google.Content" xml:space="preserve">
+    <value>CONTINUE WITH GOOGLE</value>
   </data>
   <data name="Login_ForgotPassword.Content" xml:space="preserve">
     <value>Forgot password?</value>
   </data>
   <data name="Home_Text.Text" xml:space="preserve">
-    <value>&quot;Welcome to the Assumption Club.&#x0A;I think we all know why we are here.&quot;</value>
+    <value>"Welcome to the Assumption Club.
+I think we all know why we are here."</value>
   </data>
   <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
     <value>Forgot Password</value>
@@ -282,14 +301,17 @@
   <data name="CreateAccount_LastName.PlaceholderText" xml:space="preserve">
     <value>Last Name</value>
   </data>
+  <data name="CreateAccount_Title.Text" xml:space="preserve">
+    <value>Join the fun!</value>
+  </data>
+  <data name="CreateAccount_Subtitle.Text" xml:space="preserve">
+    <value>Only 2 seconds to create an account</value>
+  </data>
   <data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
-    <value>Email</value>
+    <value>Enter an email</value>
   </data>
   <data name="CreateAccount_PhoneNumber.PlaceholderText" xml:space="preserve">
     <value>Phone Number (000) 000-0000</value>
-  </data>
-  <data name="CreateAccount_SecondaryPhoneNumber.PlaceholderText" xml:space="preserve">
-    <value>Secondary Phone Number (000) 000-0000 (optional)</value>
   </data>
   <data name="CreateAccount_DateOfBirth.PlaceholderText" xml:space="preserve">
     <value>Date of Birth</value>
@@ -298,16 +320,16 @@
     <value>Postal Code A0A 0A0</value>
   </data>
   <data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
-    <value>Password</value>
+    <value>Choose a password</value>
   </data>
   <data name="CreateAccount_TermsOfServices.Content" xml:space="preserve">
     <value>I agree to the terms of service</value>
   </data>
-  <data name="CreateAccount_ConfirmPassword.PlaceholderText" xml:space="preserve">
-    <value>Confirm Password</value>
-  </data>
   <data name="CreateAccount_Confirm.Content" xml:space="preserve">
-    <value>Create account</value>
+    <value>CREATE AN ACCOUNT</value>
+  </data>
+  <data name="CreateAccount_PasswordValidation" xml:space="preserve">
+    <value>Password must be 8 chracters or more and contain at least 1 number.</value>
   </data>
   <data name="CreateAccount_PhoneNumberValidation" xml:space="preserve">
     <value>Please provide a complete phone number.</value>
@@ -324,8 +346,8 @@
   <data name="CreateAccount_PasswordConfirmValidation" xml:space="preserve">
     <value>Passwords don't match</value>
   </data>
-  <data name="CreateAccount_FavoriteDonutsValidation" xml:space="preserve">
-    <value>You need to provide at least 3 type of donuts.</value>
+  <data name="CreateAccount_FavoriteDadNameValidation" xml:space="preserve">
+    <value>You need to provide at least 1 name.</value>
   </data>
   <data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
     <value>You must accepts terms of service to create an account.</value>
@@ -357,10 +379,25 @@
   <data name="ValidationNotEmpty_Email" xml:space="preserve">
     <value>The email must not be empty.</value>
   </data>
+  <data name="ValidationNotEmpty_Password" xml:space="preserve">
+    <value>The password must not be empty.</value>
+  </data>
+  <data name="ValidationError_Email" xml:space="preserve">
+    <value>Something is wrong, try to verify your email.</value>
+  </data>
   <data name="DadJokesFiltersPage_CommandBar.Content" xml:space="preserve">
     <value>Filters</value>
   </data>
   <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
     <value>Jokes</value>
+  </data>
+  <data name="Password_Validation1.Text" xml:space="preserve">
+    <value>8 characters minimum</value>
+  </data>
+  <data name="Password_Validation2.Text" xml:space="preserve">
+    <value>One number</value>
+  </data>
+  <data name="Password_Validation3.Text" xml:space="preserve">
+    <value>One uppercase character</value>
   </data>
 </root>

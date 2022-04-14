@@ -33,8 +33,14 @@ namespace ApplicationTemplate.Presentation
 		public LoginFormValidator(IStringLocalizer localizer)
 		{
 			// This is an example of overriding one specific validation error message
-			RuleFor(x => x.Email).NotEmpty().WithMessage(_ => localizer["ValidationNotEmpty_Email"]).EmailAddress();
-			RuleFor(x => x.Password).NotEmpty();
+			RuleFor(x => x.Email)
+				.NotEmpty()
+				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
+				.EmailAddress()
+				.WithMessage(_ => localizer["ValidationError_Email"]);
+			RuleFor(x => x.Password)
+				.NotEmpty()
+				.WithMessage(_ => localizer["ValidationNotEmpty_Password"]);
 		}
 	}
 }
