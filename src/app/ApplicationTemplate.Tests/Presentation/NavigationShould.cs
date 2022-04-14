@@ -15,14 +15,13 @@ namespace ApplicationTemplate.Tests
 			// Arrange
 			MenuViewModel vmBuilder = new MenuViewModel();
 
-			await AssertNavigateFromTo<OnboardingPageViewModel, LoginPageViewModel>(() => new OnboardingPageViewModel(), p => p.NavigateToLogin);
+			await AssertNavigateFromTo<LoginPageViewModel, DadJokesPageViewModel>(() => new LoginPageViewModel(isFirstLogin: false), p => p.NavigateToHome);
 
 			await AssertNavigateTo<PostsPageViewModel>(() => vmBuilder.ShowPostsSection);
 
 			await AssertNavigateTo<SettingsPageViewModel>(() => vmBuilder.ShowSettingsSection);
 
-			// TODO : Make this test pass
-			// await AssertNavigateTo<DadJokesPageViewModel>(() => vmBuilder.ShowHomeSection);
+			await AssertNavigateTo<DadJokesPageViewModel>(() => vmBuilder.ShowHomeSection);
 		}
 
 		[Fact]

@@ -44,8 +44,13 @@ namespace ApplicationTemplate.Presentation
 			if (validationResult.IsValid)
 			{
 				await this.GetService<IAuthenticationService>().Login(ct, Form.Email.Trim(), Form.Password);
-				await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
+				await NavigateToHome.Execute();
 			}
+		});
+
+		public IDynamicCommand NavigateToHome => this.GetCommandFromTask(async ct =>
+		{
+			await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
 		});
 
 		public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
