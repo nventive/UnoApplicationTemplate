@@ -68,7 +68,11 @@
 		<Setter Property="FontWeight"
 				Value="Bold" />
 		<Setter Property="Foreground"
+<<<<<<< HEAD
 				Value="{StaticResource MaterialOnSurfaceBrush}" />
+=======
+				Value="{StaticResource MaterialSurfaceBrush}" />
+>>>>>>> master
 		<Setter Property="LineHeight"
 				Value="62" />
 		<Setter Property="CharacterSpacing"
@@ -209,6 +213,23 @@
 				Value="20" />
 		<Setter Property="CharacterSpacing"
 				Value="0.25" />
+	</Style>
+
+	<Style x:Key="Body3"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource DefaultTypo}">
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily01Light}" />
+		<Setter Property="FontSize"
+				Value="12" />
+		<Setter Property="FontWeight"
+				Value="Light" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="17" />
+		<Setter Property="CharacterSpacing"
+				Value="0.4" />
 	</Style>
 	
 	<Style x:Key="ButtonText"

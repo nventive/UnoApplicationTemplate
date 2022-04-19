@@ -9,12 +9,19 @@
     <Import_RootNamespace>ApplicationTemplate.Views</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.Android.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ViewServicesConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_ViewConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FiltersConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DebugConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\FrameworkElementExtension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -33,6 +40,11 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Google_Icon.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Google_Icon.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Google_Icon.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Google_Icon.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Google_Icon.scale-400.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-200.png" />

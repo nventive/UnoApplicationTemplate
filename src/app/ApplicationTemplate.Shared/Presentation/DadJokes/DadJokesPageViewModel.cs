@@ -12,14 +12,8 @@ using DynamicData;
 
 namespace ApplicationTemplate.Presentation
 {
-	class DadJokesPageViewModel : ViewModel
+	public partial class DadJokesPageViewModel : ViewModel
 	{
-		public DadJokesPageViewModel()
-		{
-		}
-
-		public string pt { get; }
-
 		public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());

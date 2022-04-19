@@ -18,93 +18,25 @@
 		Find the latest supported styles here:
 		https://github.com/unoplatform/uno/tree/master/src/Uno.UI/UI/Xaml/Style/Generic
 	-->
-
-	<!-- For TextBox delete button and PasswordBox reveal button -->
-	<Style x:Key="DeleteOrRevealButtonStyle"
-		   TargetType="Button">
-
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Foreground"
-				Value="Black" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource SymbolThemeFontFamily}" />
-		<Setter Property="Padding"
-				Value="0" />
-		<Setter Property="MinHeight"
-				Value="20" />
-		<Setter Property="MinWidth"
-				Value="40" />
-		<Setter Property="VerticalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Right" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Border x:Name="RootBorder"
-							Background="{TemplateBinding Background}">
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver">
-									<VisualState.Setters>
-										<Setter Target="RootBorder.Opacity"
-												Value="0.6" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Pressed">
-									<VisualState.Setters>
-										<Setter Target="RootBorder.Opacity"
-												Value="0.6" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="RootBorder.Opacity"
-												Value="0.5" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<TextBlock x:Name="GlyphElement"
-								   Foreground="{TemplateBinding Foreground}"
-								   FontStyle="Normal"
-								   FontSize="16"
-								   Margin="{TemplateBinding Padding}"
-								   Text="{TemplateBinding Content}"
-								   FontFamily="{TemplateBinding FontFamily}"
-								   AutomationProperties.AccessibilityView="Raw"
-								   VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-								   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
-					</Border>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
+	
 	<!-- Styles -->
 	<Style x:Key="TextBoxStyle"
 		   TargetType="TextBox">
 
 		<Setter Property="MinHeight"
-				Value="48" />
+				Value="56" />
 		<Setter Property="Foreground"
-				Value="Black" />
+				Value="{StaticResource MaterialOnSurfaceMediumBrush}" />
 		<Setter Property="Background"
-				Value="Transparent" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderBrush"
-				Value="DimGray" />
+				Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 		<Setter Property="SelectionHighlightColor"
-				Value="DimGray" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderThickness"
-				Value="0,0,0,1" />
+				Value="0.5" />
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily02}" />
 		<Setter Property="FontWeight"
 				Value="Medium" />
 		<Setter Property="FontSize"
@@ -124,13 +56,14 @@
 		<Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
 				Value="False" />
 		<Setter Property="Padding"
-				Value="0" />
+				Value="16,0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="TextBox">
 					<Grid x:Name="RootGrid"
-						  Background="{TemplateBinding Background}">
+						  Background="{TemplateBinding Background}"
+						  CornerRadius="4">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Disabled">
@@ -144,12 +77,7 @@
 								<VisualState x:Name="Focused" />
 							</VisualStateGroup>
 							<VisualStateGroup x:Name="ButtonStates">
-								<VisualState x:Name="ButtonVisible">
-									<VisualState.Setters>
-										<Setter Target="DeleteButton.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="ButtonVisible" />
 								<VisualState x:Name="ButtonCollapsed" />
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
@@ -166,8 +94,9 @@
 						<Border BorderThickness="{TemplateBinding BorderThickness}"
 								BorderBrush="{TemplateBinding BorderBrush}"
 								Grid.Row="1"
+								CornerRadius="4"
 								Grid.ColumnSpan="2"
-								Margin="0,0,20,0" />
+								Padding="16,0,16,0" />
 
 						<Grid Grid.Row="1">
 							<ScrollViewer x:Name="ContentElement"
@@ -181,6 +110,7 @@
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Margin="{TemplateBinding BorderThickness}"
 										  Padding="{TemplateBinding Padding}"
+										  Foreground="{TemplateBinding Foreground}"
 										  IsTabStop="False"
 										  AutomationProperties.AccessibilityView="Raw"
 										  ZoomMode="Disabled" />
@@ -195,20 +125,6 @@
 											IsHitTestVisible="False"
 											VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
 						</Grid>
-
-						<!-- Workaround for iOS in order to be able to delete the content if a IsEnabled property is set on the TextBox -->
-						<!-- Task #113012 : Need to be removed when userecho is fixed : https://feedback.nventive.com/communities/1/topics/2387-ios-textbox-cleartext-button-is-always-disabled -->
-						<!--  -->
-						<Button x:Name="DeleteButton"
-								Content="&#xE10A;"
-								Style="{StaticResource DeleteOrRevealButtonStyle}"
-								IsEnabled="{TemplateBinding IsEnabled}"
-								HorizontalContentAlignment="Right"
-								IsTabStop="False"
-								Opacity="0"
-								Padding="0,0,20,0"
-								Grid.Row="1"
-								Grid.Column="1" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
@@ -217,5 +133,5 @@
 
 	<!-- Default Style -->
 	<Style TargetType="TextBox"
-		   BasedOn="{StaticResource MaterialOutlinedTextBoxStyle}" />
+		   BasedOn="{StaticResource TextBoxStyle}" />
 </ResourceDictionary>

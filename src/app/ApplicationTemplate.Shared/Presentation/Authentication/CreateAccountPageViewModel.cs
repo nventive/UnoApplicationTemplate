@@ -11,22 +11,25 @@ namespace ApplicationTemplate.Presentation
 	{
 		public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
 
-		public string[] Donuts =>
+		public string[] DadNames =>
 		new[]
 		{
-			"Cinnamon Twist",
-			"Old-fashioned",
-			"Jelly",
-			"Double Glaze",
-			"Cream Filled",
-			"Apple Fritter"
+			"Dad",
+			"Papa",
+			"Pa",
+			"Pop",
+			"Father",
+			"Padre",
+			"Père",
+			"Papi",
 		};
+
 
 		public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
 		{
 			var validationResult = await Form.Validate(ct);
 
-			if (validationResult.IsValid)
+			if (validationResult.IsValid && Form.PasswordHasEightCharacters == true && Form.PasswordHasNumber == true && Form.PasswordHasUppercase == true)
 			{
 				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), Form.Password);
 

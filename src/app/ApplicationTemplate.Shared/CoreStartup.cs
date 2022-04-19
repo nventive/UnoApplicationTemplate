@@ -65,6 +65,7 @@ namespace ApplicationTemplate
 		{
 			var applicationSettingsService = services.GetRequiredService<IApplicationSettingsService>();
 			var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
+			var authenticationService = services.GetRequiredService<IAuthenticationService>();
 
 			var section = await sectionsNavigator.SetActiveSection(ct, "Home");
 
@@ -74,7 +75,15 @@ namespace ApplicationTemplate
 
 			if (currentSettings.IsOnboardingCompleted)
 			{
-				await section.Navigate(ct, () => new DadJokesPageViewModel());
+				var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);
+				if (isAuthenticated)
+				{
+					await services.GetRequiredService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
+				}
+				else
+				{
+					await section.Navigate(ct, () => new LoginPageViewModel(isFirstLogin: false));
+				}
 			}
 			else
 			{
@@ -168,7 +177,7 @@ namespace ApplicationTemplate
 					return;
 				}
 
-				#if (IncludeFirebaseAnalytics)
+#if (IncludeFirebaseAnalytics)
 //-:cnd:noEmit
 #if __ANDROID__
 //+:cnd:noEmit
@@ -184,7 +193,7 @@ namespace ApplicationTemplate
 
 				OnError(exception, e.IsTerminating);
 
-				#if (IncludeFirebaseAnalytics)
+#if (IncludeFirebaseAnalytics)
 //-:cnd:noEmit
 #if __ANDROID__
 //+:cnd:noEmit

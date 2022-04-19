@@ -213,6 +213,9 @@
   <data name="Posts_NewPost.Content" xml:space="preserve">
     <value>Créer article</value>
   </data>
+  <data name="Onboarding_Content" xml:space="preserve">
+    <value>Obtenez votre dose de bonne humeur tous les jours. Lisez les dernières et meilleures blagues de papa !</value>
+  </data>
   <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
     <value>CONTINUER</value>
   </data>
@@ -228,8 +231,20 @@
   <data name="Menu_Settings.Content" xml:space="preserve">
     <value>Paramètres</value>
   </data>
-  <data name="Login_CommandBar.Content" xml:space="preserve">
-    <value>Connexion</value>
+  <data name="Login_Title1" xml:space="preserve">
+    <value>Bienvenue
+à bord !</value>
+  </data>
+  <data name="Login_Title2" xml:space="preserve">
+    <value>Ravi de
+te revoir !</value>
+  </data>
+  <data name="Login_Subtitle1" xml:space="preserve">
+    <value>"Bienvenue au Club de l'Assomption.
+Je pense que nous savons tous pourquoi nous sommes ici."</value>
+  </data>
+  <data name="Login_Subtitle2" xml:space="preserve">
+    <value>"Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact."</value>
   </data>
   <data name="Login_Email.PlaceholderText" xml:space="preserve">
     <value>Courriel</value>
@@ -238,16 +253,20 @@
     <value>Mot de passe</value>
   </data>
   <data name="Login_Login.Content" xml:space="preserve">
-    <value>Se connecter</value>
+    <value>SE CONNECTER</value>
   </data>
   <data name="Login_CreateAccount.Content" xml:space="preserve">
-    <value>Créer un compte</value>
+    <value>CRÉER UN COMPTE</value>
   </data>
   <data name="Login_ForgotPassword.Content" xml:space="preserve">
-    <value>Mot de passe oublié?</value>
+    <value>Mot de passe oublié ?</value>
+  </data>
+  <data name="Login_Google.Content" xml:space="preserve">
+    <value>CONTINUER AVEC GOOGLE</value>
   </data>
   <data name="Home_Text.Text" xml:space="preserve">
-    <value>&quot;Bienvenue au Club de l'Assomption.&#x0A;Je pense que nous savons tous pourquoi nous sommes ici.&quot;</value>
+    <value>"Bienvenue au Club de l'Assomption.
+Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
     <value>Mot de passe oublié</value>
@@ -276,20 +295,23 @@
   <data name="Licenses_CommandBar" xml:space="preserve">
     <value>Licenses</value>
   </data>
+  <data name="CreateAccount_Title.Text" xml:space="preserve">
+    <value>Viens te divertir !</value>
+  </data>
+  <data name="CreateAccount_Subtitle.Text" xml:space="preserve">
+    <value>Seulement 2 secondes pour créer un compte</value>
+  </data>
   <data name="CreateAccount_FirstName.PlaceholderText" xml:space="preserve">
-    <value>Prenom</value>
+    <value>Prénom</value>
   </data>
   <data name="CreateAccount_LastName.PlaceholderText" xml:space="preserve">
     <value>Nom de famille</value>
   </data>
   <data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
-    <value>Courriel</value>
+    <value>Entrer un courriel</value>
   </data>
   <data name="CreateAccount_PhoneNumber.PlaceholderText" xml:space="preserve">
     <value>Numéro de téléphone (000) 000-0000</value>
-  </data>
-  <data name="CreateAccount_SecondaryPhoneNumber.PlaceholderText" xml:space="preserve">
-    <value>Second numéro de téléphone (000) 000-0000 (optionel)</value>
   </data>
   <data name="CreateAccount_DateOfBirth.PlaceholderText" xml:space="preserve">
     <value>Date de naissance</value>
@@ -298,16 +320,16 @@
     <value>Code Postal A0A 0A0</value>
   </data>
   <data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
-    <value>Mot de passe</value>
-  </data>
-  <data name="CreateAccount_ConfirmPassword.PlaceholderText" xml:space="preserve">
-    <value>Confirmer mot de passe</value>
+    <value>Choisir un mot de passe</value>
   </data>
   <data name="CreateAccount_TermsOfServices.Content" xml:space="preserve">
     <value>Je consent au modalités de service</value>
   </data>
   <data name="CreateAccount_Confirm.Content" xml:space="preserve">
-    <value>Créer un compte</value>
+    <value>CRÉER UN COMPTE</value>
+  </data>
+  <data name="CreateAccount_PasswordValidation" xml:space="preserve">
+    <value>Le mot de passe doit être composé de 8 caractères ou plus et contenir au moins 1 chiffre.</value>
   </data>
   <data name="CreateAccount_PhoneNumberValidation" xml:space="preserve">
     <value>Veuillez fournir un numéro de téléphone complet.</value>
@@ -324,8 +346,8 @@
   <data name="CreateAccount_PasswordConfirmValidation" xml:space="preserve">
     <value>Les mots de passe ne correspondent pas</value>
   </data>
-  <data name="CreateAccount_FavoriteDonutsValidation" xml:space="preserve">
-    <value>Vous devez fournir au moins 3 types de beignes.</value>
+  <data name="CreateAccount_FavoriteDadNameValidation" xml:space="preserve">
+    <value>Vous devez fournir au moins 1 nom.</value>
   </data>
   <data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
     <value>Vous devez accepter les conditions d'utilisation pour créer un compte.</value>
@@ -357,10 +379,25 @@
   <data name="ValidationNotEmpty_Email" xml:space="preserve">
     <value>Le courriel ne doit pas être vide.</value>
   </data>
+  <data name="ValidationNotEmpty_Password" xml:space="preserve">
+    <value>Le mot de passe ne doit pas être vide.</value>
+  </data>
+  <data name="ValidationError_Email" xml:space="preserve">
+    <value>Quelque chose est incorrect, veuillez vérifier votre courriel.</value>
+  </data>
   <data name="DadJokesFiltersPage_CommandBar.Content" xml:space="preserve">
     <value>Filtres</value>
   </data>
   <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
     <value>Blagues</value>
+  </data>
+  <data name="Password_Validation1.Text" xml:space="preserve">
+    <value>8 caractères minimum</value>
+  </data>
+  <data name="Password_Validation2.Text" xml:space="preserve">
+    <value>Un nombre</value>
+  </data>
+  <data name="Password_Validation3.Text" xml:space="preserve">
+    <value>Un caractère majuscule</value>
   </data>
 </root>

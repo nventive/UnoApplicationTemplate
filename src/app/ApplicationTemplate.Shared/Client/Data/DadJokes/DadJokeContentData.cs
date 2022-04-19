@@ -32,4 +32,3 @@ namespace ApplicationTemplate.Client
 		public bool IsFavorite { get; }
 	}
 }
-

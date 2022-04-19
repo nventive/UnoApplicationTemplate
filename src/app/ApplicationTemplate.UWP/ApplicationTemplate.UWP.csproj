@@ -191,7 +191,7 @@
     <PackageReference Include="Reactive.Annex.Uno" Version="0.3.0-dev.18" />
     <PackageReference Include="Uno.Material" Version="1.0.0-dev.812" />
     <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools" Version="6.1.0-build.205.g2e0e348372" />
-    <PackageReference Include="Uno.UI" Version="3.11.6" />
+    <PackageReference Include="Uno.UI" Version="3.11.9" />
     <PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
     <PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
     <PackageReference Include="Chinook.DynamicMvvm" Version="0.7.0-dev.75" />
@@ -397,6 +397,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Styles\Controls\CalendarView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Styles\Controls\CheckBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -508,6 +512,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Assets\Fonts\Roboto-Medium.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Fonts\Guillon-Light.ttf" />
   </ItemGroup>
   <Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" Condition="Exists('..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems')" />
   <Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />

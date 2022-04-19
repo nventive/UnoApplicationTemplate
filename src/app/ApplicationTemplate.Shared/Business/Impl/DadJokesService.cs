@@ -43,7 +43,6 @@ namespace ApplicationTemplate.Business
 				.Where(d => d.Data.Distinguished != "moderator")
 				.Select(d => new DadJokesQuote(d.Data, settings.FavoriteQuotes.ContainsKey(d.Data.Id)))
 				.ToArray();
-
 		}
 
 		public ReplaySubject<PostTypes> GetAndObservePostTypeFilter()

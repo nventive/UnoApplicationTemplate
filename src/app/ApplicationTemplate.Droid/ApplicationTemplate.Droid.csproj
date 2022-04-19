@@ -111,8 +111,8 @@
     <PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
     <PackageReference Include="Uno.Material" Version="1.0.0-dev.812" />
     <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools" Version="6.1.0-build.205.g2e0e348372" />
-    <PackageReference Include="Uno.UI" Version="3.11.6" />
-    <PackageReference Include="Uno.UI.RemoteControl" Version="3.11.6" />
+    <PackageReference Include="Uno.UI" Version="3.11.9" />
+    <PackageReference Include="Uno.UI.RemoteControl" Version="3.11.9" />
     <PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
     <PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.32" />
@@ -177,6 +177,7 @@
     <AndroidAsset Include="Assets\Fonts\Guillon-Black.ttf" />
     <AndroidAsset Include="Assets\Fonts\Roboto-Medium.ttf" />
     <AndroidAsset Include="Assets\Fonts\Roboto-Regular.ttf" />
+    <AndroidAsset Include="Assets\Fonts\Guillon-Light.ttf" />
     <None Include="Properties\AndroidManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -247,10 +248,10 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-mdpi\Logo.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-hdpi\Logo.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xhdpi\Logo.png" />

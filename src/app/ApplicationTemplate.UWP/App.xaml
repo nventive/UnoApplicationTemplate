@@ -22,6 +22,7 @@
 				<ResourceDictionary Source="Views/Styles/Controls/AsyncWebView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/Button.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/MenuRadioButton.xaml" />
+				<ResourceDictionary Source="Views/Styles/Controls/CalendarView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/CheckBox.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/ComboBox.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/CommandBar.xaml" />

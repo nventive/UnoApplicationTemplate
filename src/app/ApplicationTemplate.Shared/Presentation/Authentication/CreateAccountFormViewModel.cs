@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
@@ -19,11 +20,10 @@ namespace ApplicationTemplate.Presentation
 			this.AddValidation(this.GetProperty(x => x.LastName));
 			this.AddValidation(this.GetProperty(x => x.Email));
 			this.AddValidation(this.GetProperty(x => x.PhoneNumber));
-			this.AddValidation(this.GetProperty(x => x.SecondaryPhoneNumber));
 			this.AddValidation(this.GetProperty(x => x.PostalCode));
 			this.AddValidation(this.GetProperty(x => x.DateOfBirth));
-			this.AddValidation(this.GetProperty(x => x.Password));
-			this.AddValidation(this.GetProperty(x => x.ConfirmPassword));
+			// TODO : https://dev.azure.com/nventive/Practice%20committees/_workitems/edit/251910
+			//this.AddValidation(this.GetProperty(x => x.FavoriteDadNames));
 			this.AddValidation(this.GetProperty(x => x.AgreeToTermsOfServices));
 		}
 
@@ -45,13 +45,13 @@ namespace ApplicationTemplate.Presentation
 			set => this.Set(value);
 		}
 
-		public string PhoneNumber
+		public string Password
 		{
 			get => this.Get<string>();
 			set => this.Set(value);
 		}
 
-		public string SecondaryPhoneNumber
+		public string PhoneNumber
 		{
 			get => this.Get<string>();
 			set => this.Set(value);
@@ -69,19 +69,7 @@ namespace ApplicationTemplate.Presentation
 			set => this.Set(value);
 		}
 
-		public string Password
-		{
-			get => this.Get<string>();
-			set => this.Set(value);
-		}
-
-		public string ConfirmPassword
-		{
-			get => this.Get<string>();
-			set => this.Set(value);
-		}
-
-		public object[] FavoriteDonuts
+		public object[] FavoriteDadNames
 		{
 			get => this.Get(initialValue: Array.Empty<object>());
 			set => this.Set(value);
@@ -92,27 +80,86 @@ namespace ApplicationTemplate.Presentation
 			get => this.Get<bool>();
 			set => this.Set(value);
 		}
+
+		public bool? PasswordHasEightCharacters
+		{
+			get => this.GetFromObservable(ObservePasswordHasEightCharacters(), initialValue: null);
+			set => this.Set(value);
+		}
+
+		public bool? PasswordHasNumber
+		{
+			get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
+			set => this.Set(value);
+		}
+
+		public bool? PasswordHasUppercase
+		{
+			get => this.GetFromObservable(ObservePasswordHasUppercase(), initialValue: null);
+			set => this.Set(value);
+		}
+
+		private IObservable<bool?> ObservePasswordHasEightCharacters()
+		{
+			return this.GetProperty(x => x.Password)
+				.Observe()
+				.Select<string, bool?>(password =>
+				{
+					if (password.IsNullOrEmpty())
+					{
+						return null;
+					}
+
+					return password.Length >= 8;
+				});
+		}
+
+		private IObservable<bool?> ObservePasswordHasNumber()
+		{
+			return this.GetProperty(x => x.Password)
+				.Observe()
+				.Select<string, bool?>(password =>
+				{
+					if (password.IsNullOrEmpty())
+					{
+						return null;
+					}
+
+					return password.Any(char.IsDigit);
+				});
+		}
+
+		private IObservable<bool?> ObservePasswordHasUppercase()
+		{
+			return this.GetProperty(x => x.Password)
+				.Observe()
+				.Select<string, bool?>(password =>
+				{
+					if (password.IsNullOrEmpty())
+					{
+						return null;
+					}
+
+					return password.Any(char.IsUpper);
+				});
+		}
 	}
 
 	public class CreateAccountFormValidator : AbstractValidator<CreateAccountFormViewModel>
 	{
 		public CreateAccountFormValidator(IStringLocalizer localizer)
 		{
-			var myPassword = string.Empty;
-
 			RuleFor(x => x.FirstName).NotEmpty();
 			RuleFor(x => x.LastName).NotEmpty();
 
 			RuleFor(x => x.Email)
 				.NotEmpty()
-				.EmailAddress();
+				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
+				.EmailAddress()
+				.WithMessage(_ => localizer["ValidationError_Email"]);
 
 			RuleFor(x => x.PhoneNumber)
 				.NotEmpty()
-				.MustBePhoneNumber()
-				.WithMessage(localizer["CreateAccount_PhoneNumberValidation"]);
-
-			RuleFor(x => x.SecondaryPhoneNumber)
 				.MustBePhoneNumber()
 				.WithMessage(localizer["CreateAccount_PhoneNumberValidation"]);
 
@@ -126,43 +173,21 @@ namespace ApplicationTemplate.Presentation
 				.MustBe18OrOlder()
 				.WithMessage(localizer["CreateAccount_DateOfBirthValidation"]);
 
-			RuleFor(x => x.Password)
-				.NotEmpty()
-				.Must(password =>
-				{
-					if (password == null)
-					{
-						return false;
-					}
-
-					myPassword = password;
-
-					var longerThan8 = password?.Length >= 8;
-					var containsNumber = password.Any(char.IsDigit);
-
-					return longerThan8 && containsNumber;
-				})
-				.WithMessage(localizer["CreateAccount_PasswordValidation"]);
-
-			RuleFor(x => x.ConfirmPassword)
-				.NotEmpty()
-				.Must(confrimPasswor => confrimPasswor == myPassword)
-				.WithMessage(localizer["CreateAccount_PasswordConfirmValidation"]);
-
-			RuleFor(x => x.FavoriteDonuts)
-				.Must(favDonuts =>
-				{
-					if (favDonuts == null)
-					{
-						return false;
-					}
-					return favDonuts.Length >= 3;
-				})
-				.WithMessage(localizer["CreateAccount_FavoriteDonutsValidation"]);
+			//RuleFor(x => x.FavoriteDadNames)
+			//	.Must(favDadNames =>
+			//	{
+			//		if (favDadNames == null)
+			//		{
+			//			return false;
+			//		}
+			//		return favDadNames.Length >= 1;
+			//	})
+			//	.WithMessage(localizer["CreateAccount_FavoriteDadNameValidation"]);
 
 			RuleFor(x => x.AgreeToTermsOfServices)
 				.Equal(true)
 				.WithMessage(localizer["CreateAccount_TermsOfServiceValidation"]);
+
 		}
 	}
 }

@@ -12,6 +12,7 @@
 	<android:FontFamily x:Key="SymbolThemeFontFamily">ms-appx:///Assets/Fonts/segmdl2.ttf#Segoe MDL2 Assets</android:FontFamily>
 
 	<FontFamily x:Key="FontFamily01">ms-appx:///Assets/Fonts/Guillon-Regular.ttf#Guillon</FontFamily>
+	<FontFamily x:Key="FontFamily01Light">ms-appx:///Assets/Fonts/Guillon-Light.ttf#Guillon Light</FontFamily>
 	<FontFamily x:Key="FontFamily01SemiBold">ms-appx:///Assets/Fonts/Guillon-SemiBold.ttf#Guillon Demi</FontFamily>
 	<FontFamily x:Key="FontFamily01Bold">ms-appx:///Assets/Fonts/Guillon-Bold.ttf#Guillon</FontFamily>
 	<FontFamily x:Key="FontFamily01ExtraBold">ms-appx:///Assets/Fonts/Guillon-Black.ttf#Guillon Black</FontFamily>
