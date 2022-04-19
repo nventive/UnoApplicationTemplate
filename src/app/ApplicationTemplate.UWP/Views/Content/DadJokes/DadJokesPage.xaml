@@ -5,7 +5,7 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:dl="using:Chinook.DataLoader"
 	  xmlns:ue="using:Nventive.View.Extensions"
-	  xmlns:u="using:Nventive.View.Controls"
+	  xmlns:u="using:ApplicationTemplate.View.Controls"
 	  mc:Ignorable="d">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
