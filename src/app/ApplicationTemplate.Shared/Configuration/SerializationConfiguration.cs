@@ -1,7 +1,5 @@
 ﻿using System;
 using ApplicationTemplate;
-using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
 using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
@@ -15,17 +13,7 @@ using Nventive.Persistence;
 [assembly: JsonSerializableType(typeof(bool))]
 [assembly: JsonSerializableType(typeof(string))]
 [assembly: JsonSerializableType(typeof(string[]))]
-[assembly: JsonSerializableType(typeof(AuthenticationToken))]
-[assembly: JsonSerializableType(typeof(AuthenticationData))]
-[assembly: JsonSerializableType(typeof(ApplicationSettings))]
 [assembly: JsonSerializableType(typeof(Refit.ProblemDetails))]
-[assembly: JsonSerializableType(typeof(PostData))]
-[assembly: JsonSerializableType(typeof(PostData[]))]
-[assembly: JsonSerializableType(typeof(DadJokesErrorResponse))]
-[assembly: JsonSerializableType(typeof(UserProfileData))]
-[assembly: JsonSerializableType(typeof(DadJokesData))]
-[assembly: JsonSerializableType(typeof(DadJokeChildData))]
-[assembly: JsonSerializableType(typeof(DadJokeContentData))]
 
 namespace ApplicationTemplate
 {

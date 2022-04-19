@@ -6,7 +6,6 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ApplicationTemplate;
-using ApplicationTemplate.Business;
 using ApplicationTemplate.Presentation;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
@@ -36,13 +35,7 @@ namespace ApplicationTemplate
 			return services
 				.AddXamarinEssentials()
 				.AddMessageDialog()
-				.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
-				.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
-				.AddSingleton<IPostService, PostService>()
-				.AddSingleton<IDadJokesService, DadJokesService>()
-				.AddSingleton<IAuthenticationService, AuthenticationService>()
-				.AddSingleton<IUserProfileService, UserProfileService>()
-				.AddSingleton<DiagnosticsCountersService>();
+				.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler());
 		}
 
 		private static IServiceCollection AddXamarinEssentials(this IServiceCollection services)

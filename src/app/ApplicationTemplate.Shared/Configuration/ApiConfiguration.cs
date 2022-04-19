@@ -6,8 +6,6 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate;
-using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
 using GeneratedSerializers;
 using MallardMessageHandlers;
 using Microsoft.Extensions.Configuration;
@@ -40,46 +38,12 @@ namespace ApplicationTemplate
 				.AddMainHandler()
 				.AddNetworkExceptionHandler()
 				.AddExceptionHubHandler()
-				.AddAuthenticationTokenHandler()
 #if (IncludeFirebaseAnalytics)
 				.AddFirebaseHandler()
 #endif
-				.AddResponseContentDeserializer()
-				.AddAuthenticationEndpoint(configuration)
-				.AddPostEndpoint(configuration)
-				.AddUserProfileEndpoint(configuration)
-				.AddDadJokesEndpoint(configuration);
+				.AddResponseContentDeserializer();
 
 			return services;
-		}
-
-		private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services, IConfiguration configuration)
-		{
-			return services.AddEndpoint<IUserProfileEndpoint, UserProfileEndpointMock>(configuration, "UserProfileEndpoint");
-		}
-
-		private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services, IConfiguration configuration)
-		{
-			return services.AddEndpoint<IAuthenticationEndpoint, AuthenticationEndpointMock>(configuration, "AuthenticationEndpoint");
-		}
-
-		private static IServiceCollection AddPostEndpoint(this IServiceCollection services, IConfiguration configuration)
-		{
-			return services
-				.AddSingleton<IErrorResponseInterpreter<PostErrorResponse>>(s => new ErrorResponseInterpreter<PostErrorResponse>(
-					(request, response, deserializedResponse) => deserializedResponse.Error != null,
-					(request, response, deserializedResponse) => new PostEndpointException(deserializedResponse)
-				))
-				.AddTransient<ExceptionInterpreterHandler<PostErrorResponse>>()
-				.AddEndpoint<IPostEndpoint, PostEndpointMock>(configuration, "PostEndpoint", b => b
-					.AddHttpMessageHandler<ExceptionInterpreterHandler<PostErrorResponse>>()
-					.AddHttpMessageHandler<AuthenticationTokenHandler<AuthenticationData>>()
-				);
-		}
-
-		private static IServiceCollection AddDadJokesEndpoint(this IServiceCollection services, IConfiguration configuration)
-		{
-			return services.AddEndpoint<IDadJokesEndpoint, DadJokesEndpointMock>(configuration, "DadJokesEndpoint");
 		}
 
 		private static IServiceCollection AddEndpoint<TInterface, TMock>(
@@ -165,13 +129,6 @@ namespace ApplicationTemplate
 			return services
 				.AddSingleton<IExceptionHub>(new ExceptionHub())
 				.AddTransient<ExceptionHubHandler>();
-		}
-
-		private static IServiceCollection AddAuthenticationTokenHandler(this IServiceCollection services)
-		{
-			return services
-				.AddSingleton<IAuthenticationTokenProvider<AuthenticationData>>(s => s.GetRequiredService<IAuthenticationService>())
-				.AddTransient<AuthenticationTokenHandler<AuthenticationData>>();
 		}
 
 #if (IncludeFirebaseAnalytics)

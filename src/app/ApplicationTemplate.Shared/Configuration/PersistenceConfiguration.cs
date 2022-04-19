@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reactive.Concurrency;
 using System.Text;
-using ApplicationTemplate.Business;
 using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
@@ -22,8 +21,7 @@ namespace ApplicationTemplate
 		/// <returns><see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddPersistence(this IServiceCollection services)
 		{
-			return services
-				.AddSingleton(s => CreateSecureDataPersister(s, defaultValue: ApplicationSettings.Default));
+			return services;
 		}
 
 		private static IObservableDataPersister<T> CreateSecureDataPersister<T>(IServiceProvider services, T defaultValue = default(T))

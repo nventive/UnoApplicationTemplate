@@ -103,62 +103,8 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Views\Content\Authentication\CreateAccountPage.xaml.cs">
-      <DependentUpon>CreateAccountPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Authentication\ForgotPasswordPage.xaml.cs">
-      <DependentUpon>ForgotPasswordPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Authentication\LoginPage.xaml.cs">
-      <DependentUpon>LoginPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\DadJokes\DadJokesFavoritesPage.xaml.cs">
-      <DependentUpon>DadJokesFavoritesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\DadJokes\DadJokesSearchPage.xaml.cs">
-      <DependentUpon>DadJokesSearchPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\DadJokes\DadJokesFiltersPage.xaml.cs">
-      <DependentUpon>DadJokesFiltersPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\Content\DadJokes\DadJokesPage.xaml.cs">
       <DependentUpon>DadJokesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Diagnostics\DiagnosticsOverlay.xaml.cs">
-      <DependentUpon>DiagnosticsOverlay.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Diagnostics\DiagnosticsPage.xaml.cs">
-      <DependentUpon>DiagnosticsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Diagnostics\EnvironmentPickerPage.xaml.cs">
-      <DependentUpon>EnvironmentPickerPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Menu.xaml.cs">
-      <DependentUpon>Menu.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Posts\EditPostPage.xaml.cs">
-      <DependentUpon>EditPostPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Posts\PostsPage.xaml.cs">
-      <DependentUpon>PostsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Settings\EditProfilePage.xaml.cs">
-      <DependentUpon>EditProfilePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Settings\LicensesPage.xaml.cs">
-      <DependentUpon>LicensesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Settings\SettingsPage.xaml.cs">
-      <DependentUpon>SettingsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Settings\WebViewPage.xaml.cs">
-      <DependentUpon>WebViewPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Welcome\WelcomePage.xaml.cs">
-      <DependentUpon>WelcomePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\Welcome\OnboardingPage.xaml.cs">
-      <DependentUpon>OnboardingPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
@@ -284,79 +230,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="Views\Content\Authentication\CreateAccountPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Authentication\ForgotPasswordPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Authentication\LoginPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\DadJokes\DadJokesFavoritesPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\DadJokes\DadJokesSearchPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\DadJokes\DadJokesFiltersPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\Content\DadJokes\DadJokesPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Diagnostics\DiagnosticsOverlay.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Diagnostics\DiagnosticsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Diagnostics\EnvironmentPickerPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Menu.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Posts\EditPostPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Posts\PostsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Settings\EditProfilePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Settings\LicensesPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Settings\SettingsPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Settings\WebViewPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Content\Welcome\WelcomePage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\Welcome\OnboardingPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -3,7 +3,6 @@ using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Business;
 using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
 using Chinook.DataLoader;
@@ -55,43 +54,20 @@ namespace ApplicationTemplate
 
 				NotifyUserOnSessionExpired(services);
 
-				services.GetRequiredService<DiagnosticsCountersService>().Start();
-
 				await ExecuteInitialNavigation(CancellationToken.None, services);
 			}
 		}
 
 		private async Task ExecuteInitialNavigation(CancellationToken ct, IServiceProvider services)
 		{
-			var applicationSettingsService = services.GetRequiredService<IApplicationSettingsService>();
 			var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
-			var authenticationService = services.GetRequiredService<IAuthenticationService>();
 
 			var section = await sectionsNavigator.SetActiveSection(ct, "Home");
 
-			var navigationController = sectionsNavigator.State.ActiveSection;
-
-			var currentSettings = await applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
-
-			if (currentSettings.IsOnboardingCompleted)
-			{
-				var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);
-				if (isAuthenticated)
-				{
-					await services.GetRequiredService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
-				}
-				else
-				{
-					await section.Navigate(ct, () => new LoginPageViewModel(isFirstLogin: false));
-				}
-			}
-			else
-			{
-				await section.Navigate(ct, () => new OnboardingPageViewModel());
-			}
-//-:cnd:noEmit
+			await services.GetRequiredService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
+			//-:cnd:noEmit
 #if __MOBILE__ || WINDOWS_UWP
-//+:cnd:noEmit
+			//+:cnd:noEmit
 			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 
 			_ = dispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplashScreen);
@@ -107,21 +83,7 @@ namespace ApplicationTemplate
 
 		private void NotifyUserOnSessionExpired(IServiceProvider services)
 		{
-			var authenticationService = services.GetRequiredService<IAuthenticationService>();
 			var messageDialogService = services.GetRequiredService<IMessageDialogService>();
-
-			authenticationService
-				.ObserveSessionExpired()
-				.SkipWhileSelectMany(async (ct, s) =>
-				{
-					await messageDialogService.ShowMessage(ct, mb => mb
-						.TitleResource("SessionExpired_DialogTitle")
-						.ContentResource("SessionExpired_DialogBody")
-						.OkCommand()
-					);
-				})
-				.Subscribe(_ => { }, e => Logger.LogError(e, "Failed to notify user of session expiration."))
-				.DisposeWith(_neverDisposed);
 		}
 
 		private static void InitializeLoggerFactories(IServiceProvider services)

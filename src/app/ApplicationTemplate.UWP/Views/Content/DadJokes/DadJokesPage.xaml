@@ -8,43 +8,17 @@
 	  xmlns:u="using:Nventive.View.Controls"
 	  mc:Ignorable="d">
 
-	<Page.Resources>
-		<DataTemplate x:Key="JokesEmptyTemplate">
-			<Grid>
-
-				<StackPanel VerticalAlignment="Center"
-							HorizontalAlignment="Stretch"
-							Visibility="{Binding Jokes, Converter={StaticResource EmptyStringToCollapsed}, FallbackValue=Collapsed}">
-
-					<TextBlock Text="No results found for"
-							   HorizontalAlignment="Center"
-							   Style="{StaticResource MaterialBody1}" />
-				</StackPanel>
-			</Grid>
-		</DataTemplate>
-	</Page.Resources>
-
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="1*" />
+			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
 		<CommandBar Content="Jokes"
-					Grid.Row="0"
-					x:Uid="DadJokesPage_CommandBar">
-			<CommandBar.PrimaryCommands>
-				<AppBarButton Command="{Binding NavigateToFilters}">
-					<PathIcon Data="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z"
-							  HorizontalAlignment="Center"
-							  Foreground="{StaticResource MaterialOnPrimaryColor}" />
-				</AppBarButton>
-			</CommandBar.PrimaryCommands>
-		</CommandBar>
+					x:Uid="DadJokesPage_CommandBar" />
 
 		<dl:DataLoaderView Source="{Binding Jokes}"
-						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
 						   Grid.Row="1">
 			<DataTemplate>
 				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshJokes}"
@@ -53,44 +27,7 @@
 					<ListView ItemsSource="{Binding Data}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
-								<Grid>
-									<Grid.RowDefinitions>
-										<RowDefinition Height="Auto" />
-										<RowDefinition Height="Auto" />
-									</Grid.RowDefinitions>
-
-									<Grid Grid.Row="0"
-										  Margin="0,10"
-										  Padding="0, 15">
-										<Grid.ColumnDefinitions>
-											<ColumnDefinition Width="*" />
-											<ColumnDefinition Width="Auto" />
-										</Grid.ColumnDefinitions>
-										<Grid Grid.Column="0">
-											<Grid.RowDefinitions>
-												<RowDefinition Height="Auto" />
-												<RowDefinition Height="Auto" />
-											</Grid.RowDefinitions>
-
-											<TextBlock Text="{Binding Quote.Title}"
-													   Grid.Row="0"
-													   FontSize="16"
-													   Margin="0,5"
-													   FontWeight="SemiBold"
-													   Style="{StaticResource MaterialCaption}" />
-
-											<TextBlock Text="{Binding Quote.Selftext}"
-													   Grid.Row="1"
-													   Style="{StaticResource MaterialBody1}" />
-
-										</Grid>
-										<ToggleButton IsChecked="{Binding IsFavorite}"
-													  Command="{Binding Parent.ToggleIsFavorite}"
-													  CommandParameter="{Binding}"
-													  HorizontalAlignment="Center"
-													  Grid.Column="1" />
-									</Grid>
-								</Grid>
+								<TextBlock Text="{Binding}" />
 							</DataTemplate>
 						</ListView.ItemTemplate>
 					</ListView>

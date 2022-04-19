@@ -1,5 +1,4 @@
 ﻿using System;
-using ApplicationTemplate.Business;
 using Nventive.View.Converters;
 
 namespace ApplicationTemplate.Views
@@ -11,10 +10,7 @@ namespace ApplicationTemplate.Views
 	{
 		protected override object Convert(object value, Type targetType, object parameter)
 		{
-			var param = (PostTypes)Enum.Parse(typeof(PostTypes), (string)parameter, true);
-			var val = (PostTypes)value;
-
-			return param == val;
+			return 1 == 1;
 		}
 
 		protected override object ConvertBack(object value, Type targetType, object parameter)
