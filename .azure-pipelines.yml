@@ -114,13 +114,6 @@ stages:
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
 
-# - stage: Azure
-#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-#   dependsOn: Build_Production
-
-#   jobs:
-#   - template: build/stage-release-wasm.yml
-
 - stage: AppStore
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production

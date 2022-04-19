@@ -6,7 +6,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
 using Uno;
-#if WINDOWS_UWP || __WASM__
+#if WINDOWS_UWP
 using Windows.UI.Xaml;
 #elif __ANDROID__ || __IOS__
 using Windows.UI.Xaml;
