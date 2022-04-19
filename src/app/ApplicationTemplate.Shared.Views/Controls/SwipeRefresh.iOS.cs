@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Media;
 using Microsoft.Extensions.Logging;
 using Uno.Logging;
 using Uno.Disposables;
+using Nventive.View;
 
 namespace ApplicationTemplate.View.Controls
 {

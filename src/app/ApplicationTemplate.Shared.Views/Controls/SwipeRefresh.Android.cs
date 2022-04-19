@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using Android.Views;
 using Android.Widget;
+using Nventive.View;
 using Uno.Disposables;
 using Uno.Extensions;
 using Uno.UI;

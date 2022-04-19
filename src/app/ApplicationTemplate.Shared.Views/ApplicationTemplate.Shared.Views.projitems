@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ViewServicesConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_ViewConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\ActionDisposable.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\NativeSwipeRefresh.Android.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\NativeSwipeRefresh.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\SizeExtensions.cs" />
