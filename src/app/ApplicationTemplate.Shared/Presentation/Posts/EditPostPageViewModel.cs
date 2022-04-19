@@ -45,13 +45,13 @@ namespace ApplicationTemplate.Presentation
 					await this.GetService<IPostService>().Create(ct, post);
 				}
 
-				await this.GetService<IStackNavigator>().NavigateBack(ct);
+				await this.GetService<ISectionsNavigator>().NavigateBack(ct);
 			}
 		});
 
 		public IDynamicCommand Cancel => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().NavigateBack(ct);
+			await this.GetService<ISectionsNavigator>().NavigateBack(ct);
 		});
 
 		private async Task OnBackRequested(CancellationToken ct)

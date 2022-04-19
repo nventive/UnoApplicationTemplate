@@ -67,9 +67,7 @@ namespace ApplicationTemplate
 			var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
 			var authenticationService = services.GetRequiredService<IAuthenticationService>();
 
-			var section = await sectionsNavigator.SetActiveSection(ct, "Home");
-
-			var navigationController = sectionsNavigator.State.ActiveSection;
+			await sectionsNavigator.SetActiveSection(ct, "Login");
 
 			var currentSettings = await applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
 
@@ -78,16 +76,16 @@ namespace ApplicationTemplate
 				var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);
 				if (isAuthenticated)
 				{
-					await services.GetRequiredService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
+					await sectionsNavigator.SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 				}
 				else
 				{
-					await section.Navigate(ct, () => new LoginPageViewModel(isFirstLogin: false));
+					await sectionsNavigator.Navigate(ct, () => new LoginPageViewModel(isFirstLogin: false));
 				}
 			}
 			else
 			{
-				await section.Navigate(ct, () => new OnboardingPageViewModel());
+				await sectionsNavigator.Navigate(ct, () => new OnboardingPageViewModel());
 			}
 //-:cnd:noEmit
 #if __MOBILE__ || WINDOWS_UWP
@@ -119,6 +117,8 @@ namespace ApplicationTemplate
 						.ContentResource("SessionExpired_DialogBody")
 						.OkCommand()
 					);
+
+					await services.GetRequiredService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: true);
 				})
 				.Subscribe(_ => { }, e => Logger.LogError(e, "Failed to notify user of session expiration."))
 				.DisposeWith(_neverDisposed);
