@@ -40,7 +40,3 @@ To generate this file, following the following steps:
 ### UWP
 
 
-
-### WASM
-
-

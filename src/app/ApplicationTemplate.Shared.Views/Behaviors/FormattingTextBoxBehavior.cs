@@ -1,4 +1,4 @@
-﻿#if NETFX_CORE || __ANDROID__ || __IOS__ || __WASM__
+﻿#if NETFX_CORE || __ANDROID__ || __IOS__
 using System;
 using System.Linq;
 using System.Collections.Generic;
