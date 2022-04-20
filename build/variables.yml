@@ -75,7 +75,6 @@ variables:
   AndroidArtifactName: Android
   iOSArtifactName: iOS
   UWPArtifactName: UWP
-  WASMArtifactName: WASM
   TestsArtifactName: Tests
 
   # Path where packages (nuget or app packages) will be copied to.

@@ -84,25 +84,3 @@ jobs:
         iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
         iosCertificateFile: ${{ parameters.iosCertificateFile }}
         iosCertificatePassword: $(AppleCertificatePassword)
-
-  # - job: On_Linux
-  #   strategy:
-  #     maxParallel: 1
-  #     matrix:
-  #       Wasm:
-  #         ApplicationConfiguration: Release_WASM
-  #         ApplicationPlatform: Any CPU
-  #         ArtifactName: $(WASMArtifactName)
-  #         ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-
-  #   container: unoplatform/wasm-build:2.2
-
-  #   pool:
-  #     vmImage: 'ubuntu-18.04'
-
-  #   variables:
-  #     NUGET_PACKAGES: $(build.sourcesdirectory)/.nuget
-  #     SkipUnknowFrameworks: True
-
-  #   steps:
-  #     - template: steps-build-wasm.yml
