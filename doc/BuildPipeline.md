@@ -24,8 +24,6 @@ This file is the template used for our different build stages. Due to the constr
 
 Those 2 jobs rely on the same template for the actual build steps.
 
-**Note**: The WASM portion of this template is not fully functional yet, but it would be running on Linux.
-
 ## [steps-build.yml](../build/steps-build.yml)
 This is where the exact build steps are defined. The sequence is fairly classic for a .Net application:
 1. Install and run [GitVersion](https://gitversion.net/) to calculate the semantic version based on the Git history
