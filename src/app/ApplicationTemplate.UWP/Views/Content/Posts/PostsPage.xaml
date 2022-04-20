@@ -27,7 +27,7 @@
 				<DataTemplate>
 					<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
 									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
-									IndicatorColor="{StaticResource MaterialPrimaryLightBrush}">
+									IndicatorColor="Black">
 						<ListView ItemsSource="{Binding Data}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
