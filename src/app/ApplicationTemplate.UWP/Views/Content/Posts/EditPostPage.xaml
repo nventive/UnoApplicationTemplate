@@ -29,7 +29,7 @@
 							 Background="{StaticResource MaterialSurfaceColor}"
 							 CornerRadius="4"
 							 PlaceholderText="Joke's title"
-							 Style="{StaticResource MaterialBody1}"
+							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 							 FontSize="16" />
 				</local:DataValidationView>
 
@@ -41,7 +41,7 @@
 							 Background="{StaticResource MaterialSurfaceColor}"
 							 CornerRadius="4"
 							 PlaceholderText="Write the joke"
-							 Style="{StaticResource MaterialBody1}"
+							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 							 FontSize="16" />
 				</local:DataValidationView>
 			</StackPanel>

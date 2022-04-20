@@ -112,11 +112,11 @@
     <Compile Include="Views\Content\Authentication\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\ChuckNorris\ChuckNorrisFavoritesPage.xaml.cs">
-      <DependentUpon>ChuckNorrisFavoritesPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\DadJokes\DadJokesFavoritesPage.xaml.cs">
+      <DependentUpon>DadJokesFavoritesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\ChuckNorris\ChuckNorrisSearchPage.xaml.cs">
-      <DependentUpon>ChuckNorrisSearchPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\DadJokes\DadJokesSearchPage.xaml.cs">
+      <DependentUpon>DadJokesSearchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\DadJokes\DadJokesFiltersPage.xaml.cs">
       <DependentUpon>DadJokesFiltersPage.xaml</DependentUpon>
@@ -160,7 +160,6 @@
     <Compile Include="Views\Content\Welcome\OnboardingPage.xaml.cs">
       <DependentUpon>OnboardingPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\MenuRadioButton.cs" />
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -297,11 +296,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\ChuckNorris\ChuckNorrisFavoritesPage.xaml">
+    <Page Include="Views\Content\DadJokes\DadJokesFavoritesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\ChuckNorris\ChuckNorrisSearchPage.xaml">
+    <Page Include="Views\Content\DadJokes\DadJokesSearchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
