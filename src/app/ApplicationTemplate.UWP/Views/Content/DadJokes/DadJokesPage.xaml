@@ -5,7 +5,7 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:dl="using:Chinook.DataLoader"
 	  xmlns:ue="using:Nventive.View.Extensions"
-	  xmlns:u="using:Nventive.View.Controls"
+	  xmlns:u="using:ApplicationTemplate.View.Controls"
 	  mc:Ignorable="d">
 
 	<Page.Resources>
@@ -43,14 +43,14 @@
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
 
+		<u:SwipeRefresh RefreshCommand="{Binding RefreshJokes}"
+						IsRefreshing="{Binding RefreshJokes.IsExecuting}"
+						IndicatorColor="{StaticResource MaterialPrimaryColor}"
+						Grid.Row="1">
+			<dl:DataLoaderView Source="{Binding Jokes}"
+							   EmptyTemplate="{StaticResource JokesEmptyTemplate}">
+				<DataTemplate>
 
-		<dl:DataLoaderView Source="{Binding Jokes}"
-						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
-						   Grid.Row="1">
-			<DataTemplate>
-				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshJokes}"
-								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
-								IndicatorColor="{StaticResource MaterialPrimaryColor}">
 					<ListView ItemsSource="{Binding Data}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
@@ -95,8 +95,8 @@
 							</DataTemplate>
 						</ListView.ItemTemplate>
 					</ListView>
-				</u:SwipeRefresh>
-			</DataTemplate>
-		</dl:DataLoaderView>
+				</DataTemplate>
+			</dl:DataLoaderView>
+		</u:SwipeRefresh>
 	</Grid>
 </Page>

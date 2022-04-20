@@ -1,0 +1,81 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:xamarin="http://nventive.com/xamarin"
+					xmlns:ios="http://nventive.com/ios"
+					xmlns:android="http://nventive.com/android"
+					xmlns:u="using:ApplicationTemplate.View.Controls"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					mc:Ignorable="ios android xamarin">
+
+	<win:Style TargetType="u:SwipeRefresh">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:SwipeRefresh">
+					<ScrollViewer x:Name="PART_ScrollViewer"
+								  HorizontalScrollBarVisibility="Disabled"
+								  HorizontalScrollMode="Disabled"
+								  VerticalScrollBarVisibility="Hidden"
+								  VerticalScrollMode="Auto"
+								  VerticalSnapPointsAlignment="Near"
+								  VerticalSnapPointsType="MandatorySingle">
+						<VisualStateManager.VisualStateGroups>
+							<VisualStateGroup x:Name="Swipe">
+								<VisualState x:Name="Swiping" />
+								<VisualState x:Name="Swiped">
+									<Storyboard>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ProgressRing"
+																	   Storyboard.TargetProperty="IsActive">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="True" />
+										</ObjectAnimationUsingKeyFrames>
+										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_ProgressRing"
+																	   Storyboard.TargetProperty="Visibility">
+											<DiscreteObjectKeyFrame KeyTime="0"
+																	Value="Visible" />
+										</ObjectAnimationUsingKeyFrames>
+									</Storyboard>
+								</VisualState>
+								<VisualState x:Name="Released" />
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<u:SnapPanel x:Name="PART_SnapPanel"
+										 Orientation="Vertical">
+							<Grid x:Name="PART_RefreshContainer"
+								  u:SnapPanel.Anchor="None"
+								  u:SnapPanel.RelativeSize="100">
+								<ProgressRing x:Name="PART_ProgressRing"
+											  HorizontalAlignment="Center"
+											  VerticalAlignment="Center"
+											  Foreground="{TemplateBinding IndicatorColor}"
+											  IsActive="False"
+											  Visibility="Visible" />
+							</Grid>
+
+							<ContentPresenter u:SnapPanel.Anchor="Near"
+											  u:SnapPanel.IsInitiallySnapped="True"
+											  u:SnapPanel.RelativeSize="*"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}" />
+						</u:SnapPanel>
+					</ScrollViewer>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</win:Style>
+
+	<android:Style TargetType="u:SwipeRefresh">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:SwipeRefresh">
+					<Grid>
+						<u:NativeSwipeRefresh />
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</android:Style>
+
+</ResourceDictionary>
