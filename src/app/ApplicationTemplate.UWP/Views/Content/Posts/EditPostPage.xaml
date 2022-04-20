@@ -4,6 +4,7 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:uc="using:Nventive.View.Converters"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  mc:Ignorable="d">
 
@@ -14,7 +15,15 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<CommandBar Content="{Binding Title}" />
+		<CommandBar Content="{Binding Title}">
+			<toolkit:CommandBarExtensions.NavigationCommand>
+				<AppBarButton Command="{Binding Cancel}">
+					<AppBarButton.Icon>
+						<BitmapIcon UriSource="ms-appx:///Assets/CommandBarCommands/closeIcon.png" />
+					</AppBarButton.Icon>
+				</AppBarButton>
+			</toolkit:CommandBarExtensions.NavigationCommand>
+		</CommandBar>
 
 		<StackPanel Margin="20,30,20,10"
 					Grid.Row="1">
@@ -29,7 +38,7 @@
 							 Background="{StaticResource MaterialSurfaceColor}"
 							 CornerRadius="4"
 							 PlaceholderText="Joke's title"
-							 Style="{StaticResource MaterialBody1}"
+							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 							 FontSize="16" />
 				</local:DataValidationView>
 
@@ -41,7 +50,7 @@
 							 Background="{StaticResource MaterialSurfaceColor}"
 							 CornerRadius="4"
 							 PlaceholderText="Write the joke"
-							 Style="{StaticResource MaterialBody1}"
+							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 							 FontSize="16" />
 				</local:DataValidationView>
 			</StackPanel>
