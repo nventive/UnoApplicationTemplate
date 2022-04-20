@@ -38,6 +38,7 @@
 				<ResourceDictionary Source="Views/Styles/Controls/PasswordBox.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/PathControl.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/RadioButton.xaml" />
+				<ResourceDictionary Source="Views/Styles/Controls/RefreshContainer.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/SwipeRefresh.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/TextBlock.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/TextBox.xaml" />

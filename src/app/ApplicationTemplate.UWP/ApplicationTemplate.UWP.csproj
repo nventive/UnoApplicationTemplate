@@ -326,10 +326,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Styles\Controls\MenuRadioButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Styles\Controls\PasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -341,6 +337,10 @@
     <Page Include="Views\Styles\Controls\RadioButton.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Styles\Controls\RefreshContainer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\Controls\SwipeRefresh.xaml">
       <Generator>MSBuild:Compile</Generator>
