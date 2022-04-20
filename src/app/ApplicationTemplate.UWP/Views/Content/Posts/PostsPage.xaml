@@ -28,8 +28,7 @@
 					<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
 									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
 									IndicatorColor="Black">
-						<ListView ItemsSource="{Binding Data}"
-								  Header="{Binding}">
+						<ListView ItemsSource="{Binding Data}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 									<StackPanel Padding="0,15">
