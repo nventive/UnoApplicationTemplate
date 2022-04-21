@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:u="using:Nventive.View.Controls"
-					xmlns:uloc="http://nventive.com/localization/1.0"
 					xmlns:c="using:ApplicationTemplate.Views.Controls">
 
 	<Style x:Key="DefaultMenuRadioButtonStyle"

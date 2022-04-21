@@ -50,17 +50,17 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand NavigateToHome => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
+			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 		});
 
 		public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 		});
 
 		public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new ForgotPasswordPageViewModel());
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ForgotPasswordPageViewModel());
 		});
 	}
 }

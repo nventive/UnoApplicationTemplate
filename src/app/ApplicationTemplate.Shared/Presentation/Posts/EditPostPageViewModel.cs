@@ -17,7 +17,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			IsNewPost = post == null;
 			Title = post == null ? this.GetService<IStringLocalizer>()["EditPost_NewPost"] : post.Title;
-			Form = this.AttachChild(new PostFormViewModel(post ?? PostData.Default));
+			Form = this.AttachChild(new PostFormViewModel(post));
 
 			this.RegisterBackHandler(OnBackRequested);
 		}
@@ -45,13 +45,13 @@ namespace ApplicationTemplate.Presentation
 					await this.GetService<IPostService>().Create(ct, post);
 				}
 
-				await this.GetService<IStackNavigator>().NavigateBack(ct);
+				await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
 			}
 		});
 
 		public IDynamicCommand Cancel => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().NavigateBack(ct);
+			await OnBackRequested(ct);
 		});
 
 		private async Task OnBackRequested(CancellationToken ct)
