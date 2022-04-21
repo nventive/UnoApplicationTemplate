@@ -88,16 +88,16 @@
 						</Grid.ColumnDefinitions>
 
 						<TextBlock Text="Dark mode"
-								   Foreground="{StaticResource MaterialOnSurfaceColor}"
+								   Foreground="{StaticResource MaterialOnSurfaceBrush}"
 								   VerticalAlignment="Center" />
 
 						<ToggleSwitch HorizontalAlignment="Right"
 									  VerticalAlignment="Center"
 									  Width="50"
 									  MinWidth="50"
-									  Foreground="{StaticResource MaterialPrimaryDarkBrush}"
-									  Background="{StaticResource MaterialOnSurfaceColor}"
-									  BorderBrush="{StaticResource MaterialOnSurfaceColor}"
+									  Foreground="{StaticResource MaterialOnSurfaceBrush}"
+									  Background="{StaticResource MaterialOnSurfaceBrush}"
+									  BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
 									  IsOn="{Binding IsThemeChangeEnabled, Mode=TwoWay}"
 									  Grid.Column="1" />
 					</Grid>
