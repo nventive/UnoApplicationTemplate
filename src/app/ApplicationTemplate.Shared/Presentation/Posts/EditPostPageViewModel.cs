@@ -8,16 +8,20 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
+using Uno;
 
 namespace ApplicationTemplate.Presentation
 {
-	public class EditPostPageViewModel : ViewModel
+	public partial class EditPostPageViewModel : ViewModel
 	{
+		[Inject] private ISectionsNavigator _sectionsNavigator;
+		[Inject] private IPostService _postService;
+
 		public EditPostPageViewModel(PostData post = null)
 		{
 			IsNewPost = post == null;
 			Title = post == null ? this.GetService<IStringLocalizer>()["EditPost_NewPost"] : post.Title;
-			Form = this.AttachChild(new PostFormViewModel(post ?? PostData.Default));
+			Form = this.AttachChild(new PostFormViewModel(post));
 
 			this.RegisterBackHandler(OnBackRequested);
 		}
@@ -38,20 +42,20 @@ namespace ApplicationTemplate.Presentation
 
 				if (post.Exists)
 				{
-					await this.GetService<IPostService>().Update(ct, post.Id, post);
+					await _postService.Update(ct, post.Id, post);
 				}
 				else
 				{
-					await this.GetService<IPostService>().Create(ct, post);
+					await _postService.Create(ct, post);
 				}
 
-				await this.GetService<ISectionsNavigator>().NavigateBack(ct);
+				await _sectionsNavigator.NavigateBackOrCloseModal(ct);
 			}
 		});
 
 		public IDynamicCommand Cancel => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<ISectionsNavigator>().NavigateBack(ct);
+			await OnBackRequested(ct);
 		});
 
 		private async Task OnBackRequested(CancellationToken ct)
@@ -66,7 +70,7 @@ namespace ApplicationTemplate.Presentation
 
 			if (result == MessageDialogResult.Ok)
 			{
-				await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
+				await _sectionsNavigator.NavigateBackOrCloseModal(ct);
 			}
 		}
 	}
