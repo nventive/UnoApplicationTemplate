@@ -19,13 +19,13 @@ namespace ApplicationTemplate.Presentation
 
 		public string Title
 		{
-			get => this.Get(_post.Title);
+			get => this.Get(_post?.Title);
 			set => this.Set(value);
 		}
 
 		public string Body
 		{
-			get => this.Get(_post.Body);
+			get => this.Get(_post?.Body);
 			set => this.Set(value);
 		}
 

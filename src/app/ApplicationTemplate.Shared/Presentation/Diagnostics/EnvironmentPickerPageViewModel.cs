@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation
@@ -34,7 +35,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			if (_currentEnvironment == environment)
 			{
-				await this.GetService<IStackNavigator>().NavigateBack(ct);
+				await this.GetService<ISectionsNavigator>().NavigateBack(ct);
 
 				return;
 			}
