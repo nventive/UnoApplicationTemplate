@@ -236,7 +236,6 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Background="{StaticResource MaterialBackgroundBrush}"
 										  Padding="{TemplateBinding Padding}" />
 
 						<ContentPresenter x:Name="EmptyPresenter"

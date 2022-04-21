@@ -24,7 +24,7 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -48,11 +48,12 @@
 			<DataTemplate>
 				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshJokes}"
 								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
-								IndicatorColor="{StaticResource MaterialPrimaryColor}">
-					<ListView ItemsSource="{Binding Data}">
+								IndicatorColor="{StaticResource MaterialPrimaryBrush}">
+					<ListView ItemsSource="{Binding Data}"
+							  Background="{StaticResource MaterialBackgroundBrush}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
-								<Grid>
+								<Grid Background="{StaticResource MaterialSurfaceBrush}">
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="*" />
 										<ColumnDefinition Width="Auto" />

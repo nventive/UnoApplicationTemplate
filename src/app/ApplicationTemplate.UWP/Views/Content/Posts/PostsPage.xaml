@@ -9,8 +9,7 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}"
-		  x:Name="PostPage">
+	<Grid x:Name="PostPage">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -21,7 +20,8 @@
 					Grid.Row="0"
 					x:Uid="Posts_CommandBar" />
 
-		<Grid Grid.Row="1">
+		<Grid Grid.Row="1"
+			  Background="{StaticResource MaterialBackgroundBrush}">
 			<dl:DataLoaderView Source="{Binding Posts}"
 							   RefreshCommand="{Binding RefreshPosts}">
 				<DataTemplate>
