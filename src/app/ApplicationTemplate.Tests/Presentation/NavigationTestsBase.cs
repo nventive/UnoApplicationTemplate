@@ -48,7 +48,7 @@ namespace ApplicationTemplate.Tests
 		/// <returns>A task containing the destination view model.</returns>
 		protected async Task<ViewModel> NavigateAndClear(CancellationToken ct, Func<ViewModel> vmBuilder)
 		{
-			return await GetCurrentViewModel().GetService<ISectionsNavigator>().NavigateAndClear(ct, vmBuilder);
+			return await GetService<ISectionsNavigator>().NavigateAndClear(ct, vmBuilder);
 		}
 
 		/// <summary>
@@ -68,10 +68,9 @@ namespace ApplicationTemplate.Tests
 		/// <param name="ct">The cancellation token.</param>
 		/// <param name="sectionName">A string of the next section name.</param>
 		/// <param name="vmBuilder">The ViewModel builder.</param>
-		/// <returns>A task containing the actived section.</returns>
-		protected async Task<ViewModel> Navigate(CancellationToken ct, string sectionName, Func<ViewModel> vmBuilder)
+		protected async Task SetActiveSection(CancellationToken ct, string sectionName, Func<ViewModel> vmBuilder)
 		{
-			return (ViewModel)await GetCurrentViewModel().GetService<ISectionsNavigator>().SetActiveSection(ct, sectionName, vmBuilder);
+			await GetService<ISectionsNavigator>().SetActiveSection(ct, sectionName, vmBuilder);
 		}
 
 		/// <summary>
@@ -121,6 +120,28 @@ namespace ApplicationTemplate.Tests
 			where TSourceViewModel : ViewModel
 		{
 			// Arrange
+			TSourceViewModel viewModel = (TSourceViewModel) await NavigateAndClear(DefaultCancellationToken, sourceVMBuilder);
+
+			// Act
+			await navigationCommand(viewModel).Execute();
+
+			// Assert
+			return GetAndAssertCurrentViewModel<TDestinationViewModel>();
+		}
+
+		/// <summary>
+		/// This method can be used to assert if a command provides the given destination.
+		/// </summary>
+		/// <typeparam name="TSourceViewModel">The source ViewModel type.</typeparam>
+		/// <typeparam name="TDestinationViewModel">The destination ViewModel type.</typeparam>
+		/// <param name="sourceVMBuilder">The source ViewModel builder.</param>
+		/// <param name="navigationCommand">A function that returns a command to execute before asserting the destination is TDestinationViewModel</param>
+		/// <returns>A task that when completed will contain the destination ViewModel.</returns>
+		protected async Task<TDestinationViewModel> AssertSetActiceSection<TSourceViewModel, TDestinationViewModel>(Func<TSourceViewModel> sourceVMBuilder, Func<TSourceViewModel, IDynamicCommand> navigationCommand, string sectionSource)
+			where TSourceViewModel : ViewModel
+		{
+			// Arrange
+			await SetActiveSection(DefaultCancellationToken, sectionSource, sourceVMBuilder);
 			TSourceViewModel viewModel = (TSourceViewModel) await NavigateAndClear(DefaultCancellationToken, sourceVMBuilder);
 
 			// Act
