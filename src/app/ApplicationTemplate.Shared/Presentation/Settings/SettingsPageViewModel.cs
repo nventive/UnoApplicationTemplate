@@ -52,7 +52,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand NavigateToLoginPage => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false));
+			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: false);
 		});
 
 		public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>

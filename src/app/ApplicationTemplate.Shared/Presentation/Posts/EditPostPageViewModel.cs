@@ -20,7 +20,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			IsNewPost = post == null;
 			Title = post == null ? this.GetService<IStringLocalizer>()["EditPost_NewPost"] : post.Title;
-			Form = this.AttachChild(new PostFormViewModel(post ?? PostData.Default));
+			Form = this.AttachChild(new PostFormViewModel(post));
 
 			this.RegisterBackHandler(OnBackRequested);
 		}
@@ -48,7 +48,7 @@ namespace ApplicationTemplate.Presentation
 					await this.GetService<IPostService>().Create(ct, post);
 				}
 
-				await _sectionsNavigator.NavigateBackOrCloseModal(ct);
+				await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
 			}
 		});
 

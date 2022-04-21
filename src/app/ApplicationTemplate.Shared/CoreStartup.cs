@@ -17,6 +17,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Nventive.ExtendedSplashScreen;
 using Uno.Disposables;
+using Uno.Extensions;
 using Windows.UI.Core;
 
 namespace ApplicationTemplate
@@ -118,10 +119,27 @@ namespace ApplicationTemplate
 						.OkCommand()
 					);
 
+					var navigationController = services.GetRequiredService<ISectionsNavigator>();
+
+					foreach (var modal in navigationController.State.Modals)
+					{
+						await navigationController.CloseModal(CancellationToken.None);
+					}
+
+					foreach (var stack in navigationController.State.Sections)
+					{
+						await ClearNavigationStack(CancellationToken.None, stack.Value);
+					}
+
 					await services.GetRequiredService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: true);
 				})
 				.Subscribe(_ => { }, e => Logger.LogError(e, "Failed to notify user of session expiration."))
 				.DisposeWith(_neverDisposed);
+		}
+
+		private static async Task ClearNavigationStack(CancellationToken ct, ISectionStackNavigator stack)
+		{
+			await stack.Clear(ct);
 		}
 
 		private static void InitializeLoggerFactories(IServiceProvider services)
