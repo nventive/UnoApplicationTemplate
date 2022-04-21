@@ -33,7 +33,14 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task NavigateFromSettingsToLoginPage()
 		{
-			await AssertSetActiceSection<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage, sectionSource: "Settings");
+			// Arrange
+			var sourceSection = "Settings";
+
+			// Act
+			var currentSection = await AssertSetActiceSection<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage, sourceSection);
+
+			// Assert
+			Assert.NotEqual(sourceSection, currentSection);
 		}
 
 		[Fact]
