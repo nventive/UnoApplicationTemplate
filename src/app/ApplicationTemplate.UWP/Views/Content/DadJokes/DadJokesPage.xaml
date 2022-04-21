@@ -35,9 +35,10 @@
 					x:Uid="DadJokesPage_CommandBar">
 			<CommandBar.PrimaryCommands>
 				<AppBarButton Command="{Binding NavigateToFilters}">
-					<PathIcon Data="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z"
-							  HorizontalAlignment="Center"
-							  Foreground="{StaticResource MaterialOnPrimaryColor}" />
+					<AppBarButton.Icon>
+						<BitmapIcon UriSource="ms-appx:///Assets/CommandBarCommands/filter.png"
+									Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+					</AppBarButton.Icon>
 				</AppBarButton>
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
