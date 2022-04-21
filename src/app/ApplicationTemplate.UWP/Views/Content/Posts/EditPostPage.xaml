@@ -14,7 +14,15 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
-		<CommandBar Content="{Binding Title}" />
+		<CommandBar Content="{Binding Title}">
+			<toolkit:CommandBarExtensions.NavigationCommand>
+				<AppBarButton Command="{Binding Cancel}">
+					<AppBarButton.Icon>
+						<BitmapIcon UriSource="ms-appx:///Assets/CommandBarCommands/closeIcon.png" />
+					</AppBarButton.Icon>
+				</AppBarButton>
+			</toolkit:CommandBarExtensions.NavigationCommand>
+		</CommandBar>
 
 		<StackPanel Margin="20,30,20,10"
 					Grid.Row="1">
