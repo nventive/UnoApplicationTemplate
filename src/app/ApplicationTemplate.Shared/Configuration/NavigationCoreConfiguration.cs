@@ -25,7 +25,7 @@ namespace ApplicationTemplate
 //-:cnd:noEmit
 #if NETFRAMEWORK
 //+:cnd:noEmit
-			services.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Home", "Posts", "Settings"));
+			services.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Login", "Home", "Posts", "Settings"));
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
