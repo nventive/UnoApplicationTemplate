@@ -8,15 +8,11 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
-using Uno;
 
 namespace ApplicationTemplate.Presentation
 {
-	public partial class EditPostPageViewModel : ViewModel
+	public class EditPostPageViewModel : ViewModel
 	{
-		[Inject] private ISectionsNavigator _sectionsNavigator;
-		[Inject] private IPostService _postService;
-
 		public EditPostPageViewModel(PostData post = null)
 		{
 			IsNewPost = post == null;
@@ -42,14 +38,14 @@ namespace ApplicationTemplate.Presentation
 
 				if (post.Exists)
 				{
-					await _postService.Update(ct, post.Id, post);
+					await this.GetService<IPostService>().Update(ct, post.Id, post);
 				}
 				else
 				{
-					await _postService.Create(ct, post);
+					await this.GetService<IPostService>().Create(ct, post);
 				}
 
-				await _sectionsNavigator.NavigateBackOrCloseModal(ct);
+				await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
 			}
 		});
 
@@ -70,7 +66,7 @@ namespace ApplicationTemplate.Presentation
 
 			if (result == MessageDialogResult.Ok)
 			{
-				await _sectionsNavigator.NavigateBackOrCloseModal(ct);
+				await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
 			}
 		}
 	}
