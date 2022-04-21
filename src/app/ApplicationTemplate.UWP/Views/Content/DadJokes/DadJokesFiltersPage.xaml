@@ -17,7 +17,7 @@
 		<cv:FiltersConverter x:Key="FiltersConverter" />
 	</Page.Resources>
 
-	<Grid>
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
