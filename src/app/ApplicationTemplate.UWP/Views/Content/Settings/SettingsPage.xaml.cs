@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Views.Content
 {
@@ -7,6 +8,24 @@ namespace ApplicationTemplate.Views.Content
 		public SettingsPage()
 		{
 			this.InitializeComponent();
+		}
+
+		private void OnThemeButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+			// Set theme for window root.
+			if (Windows.UI.Xaml.Window.Current.Content is FrameworkElement root)
+			{
+				switch (root.ActualTheme)
+				{
+					case ElementTheme.Default:
+					case ElementTheme.Light:
+						root.RequestedTheme = ElementTheme.Dark;
+						break;
+					case ElementTheme.Dark:
+						root.RequestedTheme = ElementTheme.Light;
+						break;
+				}
+			}
 		}
 	}
 }

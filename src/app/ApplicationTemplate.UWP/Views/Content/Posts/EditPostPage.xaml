@@ -35,7 +35,7 @@
 										  PropertyName="Title"
 										  Margin="0,4">
 					<TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Background="{StaticResource MaterialSurfaceColor}"
+							 Background="{StaticResource MaterialSurfaceBrush}"
 							 CornerRadius="4"
 							 PlaceholderText="Joke's title"
 							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
@@ -47,7 +47,7 @@
 										  PropertyName="Body"
 										  Margin="0,4">
 					<TextBox Text="{Binding Body, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Background="{StaticResource MaterialSurfaceColor}"
+							 Background="{StaticResource MaterialSurfaceBrush}"
 							 CornerRadius="4"
 							 PlaceholderText="Write the joke"
 							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"

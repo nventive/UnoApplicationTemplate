@@ -9,7 +9,7 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid>
 
 		<nav:MultiFrame x:Name="RootNavigationMultiFrame"
 						CommaSeparatedSectionsFrameNames="Login,Home,Posts,Settings" />

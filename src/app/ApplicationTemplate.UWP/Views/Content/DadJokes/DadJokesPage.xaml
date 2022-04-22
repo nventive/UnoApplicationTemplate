@@ -4,7 +4,6 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:dl="using:Chinook.DataLoader"
-	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:u="using:Nventive.View.Controls"
 	  mc:Ignorable="d">
 
@@ -24,7 +23,7 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid>
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -37,7 +36,7 @@
 				<AppBarButton Command="{Binding NavigateToFilters}">
 					<PathIcon Data="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z"
 							  HorizontalAlignment="Center"
-							  Foreground="{StaticResource MaterialOnPrimaryColor}" />
+							  Foreground="{StaticResource MaterialOnPrimaryBrush}" />
 				</AppBarButton>
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
@@ -48,11 +47,12 @@
 			<DataTemplate>
 				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshJokes}"
 								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
-								IndicatorColor="{StaticResource MaterialPrimaryColor}">
-					<ListView ItemsSource="{Binding Data}">
+								IndicatorColor="{StaticResource MaterialPrimaryBrush}">
+					<ListView ItemsSource="{Binding Data}"
+							  Background="{StaticResource MaterialBackgroundBrush}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
-								<Grid>
+								<Grid Background="{StaticResource MaterialSurfaceBrush}">
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="*" />
 										<ColumnDefinition Width="Auto" />
