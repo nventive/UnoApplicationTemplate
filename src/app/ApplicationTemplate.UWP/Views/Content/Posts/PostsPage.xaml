@@ -25,10 +25,11 @@
 			<dl:DataLoaderView Source="{Binding Posts}"
 							   RefreshCommand="{Binding RefreshPosts}">
 				<DataTemplate>
-					<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
+					<u:SwipeRefresh x:Name="RefreshContent"
+									RefreshCommand="{Binding Parent.RefreshPosts}"
 									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
-									IndicatorColor="Black">
-						<ListView ItemsSource="{Binding Data}">
+									IndicatorColor="{StaticResource MaterialPrimaryColor}">
+						<ListView ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 									<StackPanel Padding="0,15">

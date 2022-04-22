@@ -46,10 +46,11 @@
 						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
 						   Grid.Row="1">
 			<DataTemplate>
-				<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshJokes}"
+				<u:SwipeRefresh x:Name="RefreshContent"
+								RefreshCommand="{Binding Parent.RefreshJokes}"
 								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
 								IndicatorColor="{StaticResource MaterialPrimaryColor}">
-					<ListView ItemsSource="{Binding Data}">
+					<ListView ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<Grid>
