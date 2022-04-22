@@ -6,6 +6,8 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:dl="using:Chinook.DataLoader"
+	  xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+	  xmlns:core="using:Microsoft.Xaml.Interactions.Core"
 	  mc:Ignorable="d">
 
 	<Page.Resources>
@@ -76,31 +78,15 @@
 							   Opacity="0.1"
 							   Height="1" />
 
+					<Button Click="OnThemeButtonClicked"
+							Content="Toggle between theme"
+							Grid.Column="1" />
+
 					<HyperlinkButton Content="Privacy Policy"
 									 x:Uid="Settings_PrivacyPolicy"
 									 HorizontalAlignment="Left"
 									 Command="{Binding NavigateToPrivacyPolicyPage}" />
-					<Grid Margin="0,4"
-						  Background="{StaticResource MaterialSurfaceBrush}">
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
 
-						<TextBlock Text="Dark mode"
-								   Foreground="{StaticResource MaterialOnSurfaceBrush}"
-								   VerticalAlignment="Center" />
-
-						<ToggleSwitch HorizontalAlignment="Right"
-									  VerticalAlignment="Center"
-									  Width="50"
-									  MinWidth="50"
-									  Foreground="{StaticResource MaterialOnSurfaceBrush}"
-									  Background="{StaticResource MaterialOnSurfaceBrush}"
-									  BorderBrush="{StaticResource MaterialOnSurfaceBrush}"
-									  IsOn="{Binding IsThemeChangeEnabled, Mode=TwoWay}"
-									  Grid.Column="1" />
-					</Grid>
 					<HyperlinkButton Content="Terms and Conditions"
 									 x:Uid="Settings_TermsAndConditions"
 									 HorizontalAlignment="Left"
