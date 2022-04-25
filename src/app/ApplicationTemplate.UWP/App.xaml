@@ -33,7 +33,6 @@
 				<ResourceDictionary Source="Views/Styles/Controls/GridViewHeaderItem.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/GridViewItem.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/HyperlinkButton.xaml" />
-				<ResourceDictionary Source="Views/Styles/Controls/ImagePresenter.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/ListView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/ListViewHeaderItem.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/ListViewItem.xaml" />
