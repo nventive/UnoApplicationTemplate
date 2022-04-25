@@ -23,9 +23,13 @@ namespace ApplicationTemplate.Views.Helpers
 
 		public static T FindFirstChild<T>(this DependencyObject element, int? childLevelLimit = null, bool includeCurrent = true)
 			where T :
+//-:cnd:noEmit
 #if HAS_UNO
+//+:cnd:noEmit
 			class,
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 			DependencyObject
 		{
 			return element.FindFirstChild<T>(x => true, childLevelLimit, includeCurrent);
@@ -33,9 +37,13 @@ namespace ApplicationTemplate.Views.Helpers
 
 		public static T FindFirstChild<T>(this DependencyObject element, Func<T, bool> selector, int? childLevelLimit = null, bool includeCurrent = true)
 			where T :
+//-:cnd:noEmit
 #if HAS_UNO
+//+:cnd:noEmit
 			class,
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 			DependencyObject
 		{
 			return InnerFindFirstChild(new[] { element }.Trim(), selector, childLevelLimit, includeCurrent);
@@ -43,9 +51,13 @@ namespace ApplicationTemplate.Views.Helpers
 
 		private static T InnerFindFirstChild<T>(IEnumerable<DependencyObject> elements, Func<T, bool> selector, int? childLevelLimit, bool includeCurrentLevel)
 			where T :
+//-:cnd:noEmit
 #if HAS_UNO
+//+:cnd:noEmit
 			class,
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 			DependencyObject
 		{
 			if (elements.None() || (childLevelLimit.HasValue && childLevelLimit <= 0))
@@ -65,9 +77,13 @@ namespace ApplicationTemplate.Views.Helpers
 
 		public static T FindFirstParent<T>(this DependencyObject element, bool includeCurrent = true)
 			where T :
+//-:cnd:noEmit
 #if HAS_UNO
+//+:cnd:noEmit
 			class,
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 			DependencyObject
 		{
 			return element.GetParentHierarchy(includeCurrent).OfType<T>().FirstOrDefault();
@@ -75,9 +91,13 @@ namespace ApplicationTemplate.Views.Helpers
 
 		public static T FindFirstParent<T>(this DependencyObject element, Func<T, bool> selector, bool includeCurrent = true)
 			where T :
+//-:cnd:noEmit
 #if HAS_UNO
+//+:cnd:noEmit
 			class,
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 			DependencyObject
 		{
 			return element.GetParentHierarchy(includeCurrent).OfType<T>().FirstOrDefault(selector);
@@ -100,9 +120,13 @@ namespace ApplicationTemplate.Views.Helpers
 
 		public static IEnumerable<T> FindAllChildren<T>(this DependencyObject element, int? childLevelLimit = null, bool includeCurrent = true)
 			where T :
+//-:cnd:noEmit
 #if HAS_UMBRELLA_UI
+//+:cnd:noEmit
 			class,
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 			DependencyObject
 		{
 			return element.FindAllChildren<T>(x => true, childLevelLimit, includeCurrent);
@@ -110,9 +134,13 @@ namespace ApplicationTemplate.Views.Helpers
 
 		public static IEnumerable<T> FindAllChildren<T>(this DependencyObject element, Func<T, bool> selector, int? childLevelLimit = null, bool includeCurrent = true)
 			where T :
+//-:cnd:noEmit
 #if HAS_UMBRELLA_UI
+//+:cnd:noEmit
 			class,
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 			DependencyObject
 		{
 			return InnerFindAllChildren<T>(element, selector, childLevelLimit, includeCurrent);
