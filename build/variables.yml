@@ -62,6 +62,9 @@ variables:
   # Solution to build
   SolutionFileName: ApplicationTemplate.sln
 
+  # Paths to file
+  InfoPlistPath: $(BuildSourceDirectory)/src/app/ApplicationTemplate.iOS/Info.plist
+
   # Pool names
   windowsPoolName: 'windows 1809'
   macOSPoolName: 'macOS'
