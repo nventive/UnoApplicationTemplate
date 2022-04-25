@@ -32,13 +32,15 @@
 
 		<CommandBar Content="Jokes"
 					x:Uid="DadJokesPage_CommandBar">
-			<CommandBar.PrimaryCommands>
+			<!-- Feature hidden until we work on this phase 2 task for adjustments -->
+			<!-- https://nventive.visualstudio.com/Practice%20committees/_workitems/edit/245444 -->
+			<!--<CommandBar.PrimaryCommands>
 				<AppBarButton Command="{Binding NavigateToFilters}">
 					<PathIcon Data="M10 18H14V16H10V18ZM3 6V8H21V6H3ZM6 13H18V11H6V13Z"
 							  HorizontalAlignment="Center"
 							  Foreground="{StaticResource MaterialOnPrimaryBrush}" />
 				</AppBarButton>
-			</CommandBar.PrimaryCommands>
+			</CommandBar.PrimaryCommands>-->
 		</CommandBar>
 
 		<dl:DataLoaderView Source="{Binding Jokes}"
