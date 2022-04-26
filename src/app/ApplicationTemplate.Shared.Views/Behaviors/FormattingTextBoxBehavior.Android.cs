@@ -1,4 +1,6 @@
-﻿#if __ANDROID__
+﻿//-:cnd:noEmit
+#if __ANDROID__
+//+:cnd:noEmit
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -126,4 +128,6 @@ namespace ApplicationTemplate.Views.Behaviors
 		}
 	}
 }
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit

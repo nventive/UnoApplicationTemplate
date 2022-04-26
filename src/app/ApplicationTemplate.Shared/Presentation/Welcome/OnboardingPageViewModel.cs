@@ -12,7 +12,7 @@ namespace ApplicationTemplate.Presentation
 	{
 		public IDynamicCommand NavigateToLogin => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(isFirstLogin: true));
+			await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(isFirstLogin: true));
 			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 		});
 

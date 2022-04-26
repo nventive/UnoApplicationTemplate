@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation
@@ -21,7 +22,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand NavigateToEnvironmentPickerPage => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new EnvironmentPickerPageViewModel(CurrentEnvironment));
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new EnvironmentPickerPageViewModel(CurrentEnvironment));
 		});
 
 		public string CurrentEnvironment

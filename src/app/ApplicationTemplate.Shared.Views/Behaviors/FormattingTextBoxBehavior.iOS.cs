@@ -1,4 +1,6 @@
-﻿#if __IOS__
+﻿//-:cnd:noEmit
+#if __IOS__
+//+:cnd:noEmit
 using System;
 using Foundation;
 using Microsoft.Extensions.Logging;
@@ -145,4 +147,6 @@ namespace ApplicationTemplate.Views.Behaviors
 		}
 	}
 }
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit

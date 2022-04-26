@@ -6,12 +6,18 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
 using Uno;
-#if WINDOWS_UWP || __WASM__
+//-:cnd:noEmit
+#if WINDOWS_UWP
+//+:cnd:noEmit
 using Windows.UI.Xaml;
+//-:cnd:noEmit
 #elif __ANDROID__ || __IOS__
+//+:cnd:noEmit
 using Windows.UI.Xaml;
 using FrameworkElement = Windows.UI.Xaml.FrameworkElement;
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 
 namespace ApplicationTemplate.Views.Helpers
 {
@@ -113,17 +119,25 @@ namespace ApplicationTemplate.Views.Helpers
 
 		private static IObservable<bool> GetIsLoadedObservable(FrameworkElement element, bool mustStartLoaded, bool detectIsLoaded)
 		{
+//-:cnd:noEmit
 #if __ANDROID__
+//+:cnd:noEmit
             var parent = (element as Android.Views.View).Parent;
 
 			return element.ObserveIsLoaded(detectIsLoaded ? parent != null : mustStartLoaded);
+//-:cnd:noEmit
 #elif __IOS__
+//+:cnd:noEmit
 			var parent = (element as UIKit.UIView).Superview;
 
 			return element.ObserveIsLoaded(detectIsLoaded ? parent != null : mustStartLoaded);
+//-:cnd:noEmit
 #else
+//+:cnd:noEmit
 			return element.ObserveIsLoaded(detectIsLoaded ? element.Parent != null : mustStartLoaded);
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
 		}
 
 		private static IObservable<bool> ObserveIsLoaded(this FrameworkElement element, bool? initialValue = null)

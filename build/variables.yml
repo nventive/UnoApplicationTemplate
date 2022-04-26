@@ -63,11 +63,11 @@ variables:
   SolutionFileName: ApplicationTemplate.sln
 
   # Pool names
-  windowsPoolName: 'windows 1809'
+  windowsPoolName: 'windows 2022'
   macOSPoolName: 'macOS'
 
   # Versions to use
-  NUGET_VERSION: 5.11.0
+  NUGET_VERSION: 6.1.0
   XAMARIN_IOS_VERSION: 15.0
 
   # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
@@ -75,7 +75,6 @@ variables:
   AndroidArtifactName: Android
   iOSArtifactName: iOS
   UWPArtifactName: UWP
-  WASMArtifactName: WASM
   TestsArtifactName: Tests
 
   # Path where packages (nuget or app packages) will be copied to.

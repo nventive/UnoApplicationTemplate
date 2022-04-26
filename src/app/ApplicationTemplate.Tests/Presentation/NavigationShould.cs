@@ -21,8 +21,7 @@ namespace ApplicationTemplate.Tests
 
 			await AssertNavigateTo<SettingsPageViewModel>(() => vmBuilder.ShowSettingsSection);
 
-			// TODO : Make this test pass
-			// await AssertNavigateTo<DadJokesPageViewModel>(() => vmBuilder.ShowHomeSection);
+			await AssertNavigateTo<DadJokesPageViewModel>(() => vmBuilder.ShowHomeSection);
 		}
 
 		[Fact]
@@ -34,7 +33,14 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task NavigateFromSettingsToLoginPage()
 		{
-			await AssertNavigateFromTo<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage);
+			// Arrange
+			var sourceSection = "Settings";
+
+			// Act
+			var currentSection = await AssertSetActiceSection<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage, sourceSection);
+
+			// Assert
+			Assert.NotEqual(sourceSection, currentSection);
 		}
 
 		[Fact]

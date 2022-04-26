@@ -15,6 +15,40 @@
 	<x:Int32 x:Key="ToggleSwitchWorkaround">0</x:Int32>
 
 
+	<android:Style x:Key="NativeDefaultToggleSwitch"
+				   TargetType="ToggleSwitch">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleSwitch">
+					<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
+										  Enabled="{TemplateBinding IsEnabled}"
+										  Text="{TemplateBinding Header}"
+										  TextColor="{TemplateBinding Foreground}"
+										  ThumbTint="{TemplateBinding BorderBrush}"
+										  TrackTint="{TemplateBinding Background}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</android:Style>
+
+<ios:Style x:Key="NativeDefaultToggleSwitch"
+			   TargetType="ToggleSwitch">
+		<!-- Ensures the UISwitch's shadow doesn't get clipped. -->
+		<Setter Property="ClipsToBounds"
+				Value="False" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="ToggleSwitch">
+					<BindableUISwitch IsOn="{TemplateBinding IsOn, Mode=TwoWay}"
+									  Enabled="{TemplateBinding IsEnabled}"
+									  TintColorBrush="{TemplateBinding BorderBrush}"
+									  OnTintColorBrush="{TemplateBinding Background}"
+									  ThumbTintColorBrush="{TemplateBinding Foreground}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</ios:Style>
+	
 	<Style TargetType="ToggleSwitch"
 		   BasedOn="{StaticResource MaterialToggleSwitchStyle}" />
 

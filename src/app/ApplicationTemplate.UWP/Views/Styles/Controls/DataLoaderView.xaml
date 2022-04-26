@@ -4,7 +4,7 @@
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
 
 	<DataTemplate x:Key="DataLoaderViewEmptyTemplate">
-		<Grid>
+		<Grid Background="{StaticResource MaterialBackgroundBrush}">
 			<TextBlock Text="Nothing to show here"
 					   Style="{StaticResource MaterialBody1}"
 					   HorizontalAlignment="Center"
@@ -48,17 +48,38 @@
 						HorizontalAlignment="Stretch">
 
 				<!-- Image -->
-				<Image Source="ms-appx:///Assets/Error_Template_Icon.png"
-				   Margin="102,0" />
-				
+				<Canvas Width="210"
+						Height="226">
+					<Path Data="M161.087 137.31C154.619 123.885 143.013 113.612 128.822 108.752C114.632 103.893 99.0199 104.844 85.4203 111.396C71.8207 117.948 61.3477 129.566 56.3053 143.692C51.2628 157.819 52.0639 173.297 58.5324 186.722L96.9561 168.209C95.3346 164.844 95.1338 160.964 96.3978 157.423C97.6618 153.882 100.287 150.97 103.696 149.327C107.105 147.685 111.019 147.446 114.576 148.664C118.133 149.883 121.042 152.458 122.663 155.823L161.087 137.31Z"
+						  Fill="{StaticResource MaterialPrimaryBrush}" />
+					<Path Data="M76.6396 93.8353C73.4782 94.0898 68.3839 95.0594 63.1202 97.1576C57.7809 99.2859 52.2122 102.597 48.3263 107.558C44.42 112.544 42.5807 117.57 40.941 122.051C40.5603 123.091 40.1903 124.102 39.8077 125.077C37.7771 130.248 35.3813 134.47 29.1682 137.112C19.9939 141.014 12.1851 141.633 8.57617 141.435C8.09582 141.409 7.70656 141.682 7.52148 142.037C7.33351 142.398 7.33523 142.89 7.67384 143.266C8.88388 144.612 10.7093 146.378 12.8601 147.954C15.0051 149.526 17.5127 150.937 20.0835 151.528C23.2563 152.257 25.6042 152.53 27.1956 152.587C27.1977 152.59 27.1998 152.593 27.202 152.597C27.2145 152.616 27.2264 152.639 27.2361 152.665C27.241 152.677 27.245 152.69 27.2482 152.701L25.1468 154.386C24.4653 154.932 24.6485 156.112 25.617 156.282C31.3861 157.292 45.2999 156.848 62.3599 148.073C79.9299 139.036 88.8189 128.705 91.2975 124.258C96.3201 125.091 109.939 124.577 127.957 116.468C145.451 108.594 154.469 97.9891 157.274 92.8475C157.745 91.9843 156.936 91.1058 156.084 91.2983L153.457 91.8918C153.45 91.8822 153.443 91.8714 153.436 91.8596C153.426 91.8426 153.418 91.8253 153.411 91.8087C153.408 91.8026 153.406 91.7967 153.404 91.7908C153.403 91.787 153.402 91.7833 153.401 91.7799C154.348 90.4997 155.597 88.4929 157.004 85.5574C158.145 83.1789 158.603 80.3381 158.711 77.681C158.819 75.0168 158.575 72.4887 158.277 70.7036C158.193 70.204 157.81 69.8961 157.41 69.8184C157.017 69.7419 156.561 69.8762 156.283 70.2683C154.188 73.2142 148.838 78.9355 140.069 83.6787C134.13 86.8909 129.336 86.1337 124.026 84.4992C123.025 84.1913 122.004 83.8506 120.954 83.5001C116.427 81.9901 111.35 80.2964 105.016 80.2439C98.7151 80.1917 92.6549 82.4831 87.663 85.3325C82.7418 88.1415 78.8087 91.5214 76.6396 93.8353Z"
+						  Fill="{StaticResource MaterialSecondaryBrush}" />
+					<Rectangle Canvas.Top="74"
+							   Canvas.Left="22"
+							   Width="67"
+							   Height="5"
+							   Fill="{StaticResource MaterialPrimaryAccentBrush}">
+						<Rectangle.RenderTransform>
+							<RotateTransform CenterX="34.6439"
+											 CenterY="65.7733"
+											 Angle="34" />
+						</Rectangle.RenderTransform>
+					</Rectangle>
+					<Path Data="M104.911 7.73653C107.201 3.59431 112.566 2.33468 116.46 5.02525L159.726 34.9211C163.62 37.6116 164.339 43.076 161.274 46.6828L114.438 101.804L69.9172 71.0406L104.911 7.73653Z"
+						  Stroke="{StaticResource MaterialPrimaryAccentBrush}"
+						  StrokeThickness="5" />
+				</Canvas>
+
 				<!-- Title -->
 				<TextBlock Text="Something went wrong"
+						   Foreground="{StaticResource MaterialOnBackgroundBrush}"
 						   Style="{StaticResource Headline5}"
 						   TextAlignment="Center"
 						   Margin="0,0,0,8" />
 
 				<!-- Message -->
 				<TextBlock Text="Please try again."
+						   Foreground="{StaticResource MaterialOnBackgroundMediumBrush}"
 						   Style="{StaticResource Body1}"
 						   TextAlignment="Center" />
 
@@ -215,7 +236,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Margin="{TemplateBinding Padding}" />
+										  Padding="{TemplateBinding Padding}" />
 
 						<ContentPresenter x:Name="EmptyPresenter"
 										  Content="{TemplateBinding State}"
@@ -223,7 +244,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Margin="{TemplateBinding Padding}" />
+										  Padding="{TemplateBinding Padding}" />
 
 						<ContentPresenter x:Name="ErrorPresenter"
 										  Content="{TemplateBinding State}"
@@ -231,7 +252,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Margin="{TemplateBinding Padding}" />
+										  Padding="{TemplateBinding Padding}" />
 
 						<!-- TODO: Make it a dismissable toast -->
 						<ContentPresenter x:Name="ErrorNotificationPresenter"
@@ -240,7 +261,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Visibility="Collapsed"
-										  Margin="{TemplateBinding Padding}" />
+										  Padding="{TemplateBinding Padding}" />
 
 						<ProgressRing x:Name="LoadingIndicator"
 									  Foreground="Black"
@@ -255,13 +276,11 @@
 							  IsHitTestVisible="False">
 							<Grid x:Name="RefreshPresenter"
 								  Visibility="Collapsed"
-								  Background="#88000000"
 								  HorizontalAlignment="Center"
 								  VerticalAlignment="Center"
 								  Padding="16"
 								  CornerRadius="8">
 								<ProgressRing x:Name="RefreshingIndicator"
-											  Foreground="White"
 											  IsActive="False"
 											  Width="20"
 											  Height="20" />
