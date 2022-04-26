@@ -10,7 +10,7 @@
 
 				<!-- Uno material -->
 				<MaterialColors xmlns="using:Uno.Material"
-								ColorPaletteOverrideSource="ms-appx:///Views/Styles/Application/MaterialOverride.xaml" />
+								OverrideSource="ms-appx:///Views/Styles/Application/MaterialOverride.xaml" />
 				<MaterialResources xmlns="using:Uno.Material" />
 
 				<ResourceDictionary Source="Views/Styles/Application/ColorPalette.xaml" />

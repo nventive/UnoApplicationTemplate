@@ -9,7 +9,9 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
-	<Grid x:Name="PostPage">
+	<Grid x:Name="PostPage"
+		  Margin="{StaticResource BottomBarNavNeededMargin}"
+		  Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -20,15 +22,15 @@
 					Grid.Row="0"
 					x:Uid="Posts_CommandBar" />
 
-		<Grid Grid.Row="1"
-			  Background="{StaticResource MaterialBackgroundBrush}">
+		<Grid Grid.Row="1">
 			<dl:DataLoaderView Source="{Binding Posts}"
 							   RefreshCommand="{Binding RefreshPosts}">
 				<DataTemplate>
-					<u:SwipeRefresh RefreshCommand="{Binding Parent.RefreshPosts}"
+					<u:SwipeRefresh x:Name="RefreshContent"
+									RefreshCommand="{Binding Parent.RefreshPosts}"
 									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
-									IndicatorColor="{StaticResource MaterialPrimaryBrush}">
-						<ListView ItemsSource="{Binding Data}">
+									IndicatorColor="{StaticResource MaterialPrimaryColor}">
+						<ListView ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 									<StackPanel Padding="0,15"
