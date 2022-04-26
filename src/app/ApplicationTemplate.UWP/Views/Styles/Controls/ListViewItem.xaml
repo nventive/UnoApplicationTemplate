@@ -17,8 +17,6 @@
 	<!-- Style for Windows.UI.Xaml.Controls.ListViewItem -->
 	<Style TargetType="ListViewItem"
 		   x:Key="BareboneListViewItemStyle">
-		<Setter Property="Background"
-				Value="{StaticResource ApplicationPageBackgroundThemeBrush}" />
 		<Setter Property="TabNavigation"
 				Value="Local" />
 		<Setter Property="IsHoldingEnabled"
@@ -94,7 +92,6 @@
 								   Opacity="0"
 								   Control.IsTemplateFocusTarget="True" />
 						<Grid x:Name="ContentPresenterGrid"
-							  Background="{StaticResource MaterialSurfaceColor}"
 							  Margin="0,0,0,15">
 							<Grid.RenderTransform>
 								<TranslateTransform x:Name="ContentPresenterTranslateTransform" />
@@ -102,7 +99,6 @@
 							<ContentPresenter x:Name="ContentPresenter"
 											  ContentTransitions="{TemplateBinding ContentTransitions}"
 											  ContentTemplate="{TemplateBinding ContentTemplate}"
-											  Background="{StaticResource MaterialSurfaceColor}"
 											  xamarin:ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
 											  Content="{TemplateBinding Content}"
 											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"

@@ -41,7 +41,6 @@
 						</DoubleAnimation>
 					</Storyboard>
 				</VisualState>
-
 				<VisualState x:Name="Closed" />
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
@@ -67,7 +66,7 @@
 						   CheckedIconStyle="{StaticResource FilledHomePathControlStyle}"
 						   Content="Jokes"
 						   x:Uid="Menu_Home"
-						   Foreground="white"
+						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 						   Command="{Binding ShowHomeSection}"
 						   IsChecked="{Binding IsHomeSectionActive}" />
 
@@ -75,7 +74,7 @@
 						   CheckedIconStyle="{StaticResource FilledPostsPathControlStyle}"
 						   Content="Posts"
 						   x:Uid="Menu_Posts"
-						   Foreground="white"
+						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 						   Command="{Binding ShowPostsSection}"
 						   IsChecked="{Binding IsPostsSectionActive}"
 						   Grid.Column="1" />
@@ -84,7 +83,7 @@
 						   CheckedIconStyle="{StaticResource FilledSettingsPathControlStyle}"
 						   Content="Settings"
 						   x:Uid="Menu_Settings"
-						   Foreground="white"
+						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 						   Command="{Binding ShowSettingsSection}"
 						   IsChecked="{Binding IsSettingsSectionActive}"
 						   Grid.Column="2" />

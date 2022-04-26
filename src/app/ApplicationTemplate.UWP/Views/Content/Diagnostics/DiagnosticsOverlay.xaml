@@ -108,6 +108,7 @@
 	</UserControl.Resources>
 
 	<Grid>
+
 		<Grid Background="#AA000000"
 			  BorderThickness="1"
 			  BorderBrush="#000000"
