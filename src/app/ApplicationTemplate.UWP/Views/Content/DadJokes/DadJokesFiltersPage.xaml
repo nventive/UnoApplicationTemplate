@@ -17,7 +17,7 @@
 		<cv:FiltersConverter x:Key="FiltersConverter" />
 	</Page.Resources>
 
-	<Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -58,7 +58,7 @@
 				</Grid.RowDefinitions>
 
 				<TextBlock Text="Type of posts"
-						   Style="{StaticResource MaterialSubtitle1}"
+						   Style="{StaticResource Subtitle1}"
 						   Margin="0, 15" />
 
 				<StackPanel Grid.Row="1">

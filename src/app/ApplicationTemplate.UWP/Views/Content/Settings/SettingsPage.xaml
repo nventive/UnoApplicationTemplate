@@ -1,7 +1,6 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.SettingsPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
@@ -75,6 +74,10 @@
 							   Fill="#000000"
 							   Opacity="0.1"
 							   Height="1" />
+
+					<Button Click="OnThemeButtonClicked"
+							Content="Toggle between themes"
+							Grid.Column="1" />
 
 					<HyperlinkButton Content="Privacy Policy"
 									 x:Uid="Settings_PrivacyPolicy"

@@ -92,9 +92,9 @@
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryColor}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceColor}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="FontWeight"
@@ -129,9 +129,9 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Border x:Name="BackgroundBorder"
-								BorderBrush="{StaticResource MaterialPrimaryColor}"
+								BorderBrush="{StaticResource MaterialPrimaryBrush}"
 								BorderThickness="1"
-								Background="{StaticResource MaterialSurfaceColor}"
+								Background="{StaticResource MaterialSurfaceBrush}"
 								CornerRadius="4">
 
 							<Grid Margin="{TemplateBinding Padding}"

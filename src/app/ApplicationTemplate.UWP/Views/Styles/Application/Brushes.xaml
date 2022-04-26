@@ -41,27 +41,29 @@
 	<SolidColorBrush x:Key="MaterialOnPrimaryBrush"
 					 Color="{ThemeResource MaterialOnPrimaryColor}" />
 	<SolidColorBrush x:Key="MaterialOnPrimaryLowBrush"
-					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
 					 Opacity="0.62" />
 	<SolidColorBrush x:Key="MaterialOnPrimaryMediumBrush"
-					 Color="{ThemeResource MaterialPrimaryColor}"
-					 Opacity="0.26" />
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="0.75" />
 	<SolidColorBrush x:Key="MaterialOnPrimaryHoverBrush"
-					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
 					 Opacity="0.96" />
 	<SolidColorBrush x:Key="MaterialOnPrimaryFocusedBrush"
-					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
 					 Opacity="0.88" />
 	<SolidColorBrush x:Key="MaterialOnPrimarySelectedBrush"
-					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
 					 Opacity="0.92" />
 	<SolidColorBrush x:Key="MaterialOnPrimaryPressedBrush"
-					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
 					 Opacity="0.9" />
 	<SolidColorBrush x:Key="MaterialOnPrimaryDraggedBrush"
-					 Color="{ThemeResource MaterialPrimaryColor}"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
 					 Opacity="0.92" />
-
+	<SolidColorBrush x:Key="MaterialOnPrimaryDisabledBrush"
+					 Color="{ThemeResource MaterialOnPrimaryColor}"
+					 Opacity="0.38" />
 
 	<!-- Secondary brushes -->
 	<SolidColorBrush x:Key="MaterialSecondaryBrush"
@@ -87,14 +89,12 @@
 	<SolidColorBrush x:Key="MaterialSecondaryDraggedBrush"
 					 Color="{ThemeResource MaterialSecondaryColor}"
 					 Opacity="0.25" />
-	<SolidColorBrush x:Key="MaterialOnSecondaryBrush"
-					 Color="{ThemeResource MaterialOnSecondaryColor}" />
-	<SolidColorBrush x:Key="MaterialOnSecondaryLowBrush"
-					 Color="{ThemeResource MaterialOnSecondaryColor}"
-					 Opacity="0.38" />
 	<SolidColorBrush x:Key="MaterialOnSecondaryMediumBrush"
 					 Color="{ThemeResource MaterialOnSecondaryColor}"
-					 Opacity="0.74" />
+					 Opacity="0.75" />
+	<SolidColorBrush x:Key="MaterialOnSecondaryDisabledBrush"
+					 Color="{ThemeResource MaterialOnSecondaryColor}"
+					 Opacity="0.38" />
 	<SolidColorBrush x:Key="MaterialOnSecondaryHoverBrush"
 					 Color="{ThemeResource MaterialOnSecondaryColor}"
 					 Opacity="0.04" />
@@ -108,9 +108,9 @@
 					 Color="{ThemeResource MaterialOnSecondaryColor}"
 					 Opacity="0.1" />
 	<SolidColorBrush x:Key="MaterialOnSecondaryDraggedBrush"
-					 Color="{ThemeResource MaterialSecondaryColor}"
-					 Opacity="0.08" />
-
+					 Color="{ThemeResource MaterialOnSecondaryColor}"
+					 Opacity="0.25" />
+	
 	<!-- Background brushes -->
 	<SolidColorBrush x:Key="MaterialBackgroundBrush"
 					 Color="{ThemeResource MaterialBackgroundColor}" />
@@ -133,7 +133,7 @@
 					 Opacity="0.38" />
 	<SolidColorBrush x:Key="MaterialOnSurfaceMediumBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
-					 Opacity="0.6" />
+					 Opacity="0.75" />
 	<SolidColorBrush x:Key="MaterialOnSurfaceHoverBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
 					 Opacity="0.04" />
@@ -155,6 +155,12 @@
 					 Color="{ThemeResource MaterialErrorColor}" />
 	<SolidColorBrush x:Key="MaterialOnErrorBrush"
 					 Color="{ThemeResource MaterialOnErrorColor}" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceMedEmphasisBrush"
+					 Color="{ThemeResource MaterialOnSecondaryColor}"
+					 Opacity="0.6" />
+	<SolidColorBrush x:Key="MaterialOnSurfaceDisabledBrush"
+					 Color="{ThemeResource MaterialOnSecondaryColor}"
+					 Opacity="0.38" />
 
 	<!-- Success brushes -->
 	<SolidColorBrush x:Key="MaterialSuccessBrush"

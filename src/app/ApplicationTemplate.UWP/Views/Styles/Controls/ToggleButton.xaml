@@ -15,11 +15,9 @@
 		   x:Key="DeaultToggleButtonStyle">
 
 		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceColor}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceColor}" />
-		<Setter Property="Opacity"
-				Value="0.61" />
+				Value="{StaticResource MaterialPrimaryAccentBrush}" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"
