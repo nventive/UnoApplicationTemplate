@@ -69,6 +69,24 @@ steps:
   inputs:
     provProfileSecureFile: ${{ parameters.iosProvisioningProfileFile }}
 
+# Since xamarin iOS 15, we need to bump the version prior to msbuild as it doesn't work through msbuild
+- task: UpdateiOSVersionInfoPlist@1
+  displayName: "Bump iOS version"
+  condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
+  inputs:
+    infoPlistPath: $(InfoPlistPath)
+    bundleShortVersionString: '$(MajorMinorPatch)'
+    bundleVersion: '$(PreReleaseNumber)' 
+
+# Since xamarin iOS 15, bundle identifier needs to be changed prior to build task or it will fail as "mismatch bundle identifier"
+- task: ios-bundle-identifier@1
+  displayName: "Replace iOS bundle identifier"
+  condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
+  inputs:
+    sourcePath: $(InfoPlistPath)
+    bundleIdentifier: $(ApplicationIdentifier)
+    printFile: true
+
 - task: MSBuild@1
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
   inputs:
@@ -78,6 +96,7 @@ steps:
     msbuildArchitecture: x86
     msbuildArguments: >
       /p:PackageVersion=$(SemVer)
+      /p:ApplicationBuildNumber=$(PreReleaseNumber)
       /p:ApplicationEnvironment=$(ApplicationEnvironment)
       /p:ApplicationVersion=$(MajorMinorPatch)
       /p:AndroidSigningKeyStore=$(keyStore.secureFilePath)
