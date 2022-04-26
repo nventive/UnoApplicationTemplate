@@ -96,6 +96,7 @@ steps:
     msbuildArchitecture: x86
     msbuildArguments: >
       /p:PackageVersion=$(SemVer)
+      /p:ApplicationBuildNumber=$(PreReleaseNumber)
       /p:ApplicationEnvironment=$(ApplicationEnvironment)
       /p:ApplicationVersion=$(MajorMinorPatch)
       /p:AndroidSigningKeyStore=$(keyStore.secureFilePath)
