@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
+using FluentValidation.Validators;
 
 namespace ApplicationTemplate.Presentation
 {
@@ -24,7 +25,11 @@ namespace ApplicationTemplate.Presentation
 	{
 		public ForgotPasswordFormValidator()
 		{
-			RuleFor(x => x.Email).NotEmpty().EmailAddress();
+#pragma warning disable CS0618 // EmailValidationMode.Net4xRegex validates for A@A.A. Default mode is only checking for A@A
+			RuleFor(x => x.Email)
+				.NotEmpty()
+				.EmailAddress(EmailValidationMode.Net4xRegex);
+#pragma warning restore CS0618 // Type or member is obsolete
 		}
 	}
 }

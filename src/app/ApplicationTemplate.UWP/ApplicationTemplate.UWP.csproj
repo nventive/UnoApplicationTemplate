@@ -185,7 +185,7 @@
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
     <PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
     <PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.21" />
-    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.2" />
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.4" />
     <PackageReference Include="Refit" Version="4.7.51" />
     <PackageReference Include="GeneratedSerializers.Json" Version="1.0.0-dev.30" />
     <PackageReference Include="Reactive.Annex.Uno" Version="0.5.0-dev.29" />
