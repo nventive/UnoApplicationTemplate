@@ -18,7 +18,8 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}"
+		  Margin="{StaticResource BottomBarNavNeededMargin}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

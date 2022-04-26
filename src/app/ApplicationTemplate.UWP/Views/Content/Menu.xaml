@@ -7,7 +7,7 @@
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource MaterialPrimaryBrush}">
+		  Background="{StaticResource MaterialOnBackgroundBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 

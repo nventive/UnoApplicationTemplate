@@ -5,7 +5,9 @@
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:dl="using:Chinook.DataLoader"
 	  xmlns:u="using:Nventive.View.Controls"
-	  mc:Ignorable="d">
+	  xmlns:android="http://nventive.com/android"
+	  xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  mc:Ignorable="d android">
 
 	<Page.Resources>
 		<DataTemplate x:Key="JokesEmptyTemplate">
@@ -23,7 +25,8 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}"
+		  Margin="{StaticResource BottomBarNavNeededMargin}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -52,7 +55,8 @@
 								RefreshCommand="{Binding Parent.RefreshJokes}"
 								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
 								IndicatorColor="{StaticResource MaterialPrimaryColor}">
-					<ListView ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}">
+					<ListView android:ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}"
+							  not_android:ItemsSource="{Binding Data}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<Grid Background="{StaticResource MaterialSurfaceBrush}">
