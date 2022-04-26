@@ -44,7 +44,6 @@
 						   x:Uid="Login_Title"
 						   Margin="22,32,22,0"
 						   Style="{StaticResource Headline2}"
-						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
 						   HorizontalTextAlignment="Center"
 						   HorizontalAlignment="Center"
 						   FontSize="54"/>

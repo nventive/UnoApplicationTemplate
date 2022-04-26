@@ -27,17 +27,8 @@
 		<!-- Background -->
 		<Image Source="ms-appx:///Assets/Background-Mustaches.png"
 			   Stretch="UniformToFill"
-			   Grid.RowSpan="2"
 			   HorizontalAlignment="Stretch"
 			   VerticalAlignment="Stretch" />
-
-		<!-- Back button -->
-		<Button toolkit:VisibleBoundsPadding.PaddingMask="Top"
-				Style="{StaticResource LeftArrowButtonStyle}"
-				Command="{Binding NavigateBack}"
-				Margin="16,46,16,0"
-				HorizontalAlignment="Left"
-				VerticalAlignment="Top"/>
 
 		<ScrollViewer toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
 			<StackPanel VerticalAlignment="Center"
@@ -46,6 +37,7 @@
 							x:Uid="CreateAccount_Title"
 							Margin="22,0"
 							Style="{StaticResource Headline2}"
+							Foreground="{StaticResource MaterialSurfaceBrush}"
 							HorizontalTextAlignment="Center"
 							HorizontalAlignment="Center" />
 
@@ -275,5 +267,13 @@
 							Margin="42,12,42,0" />
 			</StackPanel>
 		</ScrollViewer>
+
+		<!-- Back button -->
+		<Button toolkit:VisibleBoundsPadding.PaddingMask="Top"
+				Style="{StaticResource LeftArrowButtonStyle}"
+				Command="{Binding NavigateBack}"
+				Margin="16,36,16,0"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"/>
 	</Grid>
 </Page>
