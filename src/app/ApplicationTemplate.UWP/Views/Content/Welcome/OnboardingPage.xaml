@@ -87,7 +87,7 @@
 					Command="{Binding NavigateToLogin}"
 					VerticalAlignment="Top"
 					HorizontalAlignment="Right"
-					Margin="0,24,24,0" />
+					Margin="24" />
 
 			<u:ImageSlideshow x:Name="OnboardingSlideshow"
 							  Grid.Row="1"

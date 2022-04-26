@@ -24,11 +24,6 @@
 
 	<Grid Background="{StaticResource MaterialOnBackgroundBrush}">
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="Auto" />
-			<RowDefinition Height="*" />
-		</Grid.RowDefinitions>
-
 		<!-- Background -->
 		<Image Source="ms-appx:///Assets/Background-Mustaches.png"
 			   Stretch="UniformToFill"
@@ -37,13 +32,16 @@
 			   VerticalAlignment="Stretch" />
 
 		<!-- Back button -->
-		<Button Style="{StaticResource LeftArrowButtonStyle}"
+		<Button toolkit:VisibleBoundsPadding.PaddingMask="Top"
+				Style="{StaticResource LeftArrowButtonStyle}"
 				Command="{Binding NavigateBack}"
-				Margin="16,56,16,0"
-				HorizontalAlignment="Left" />
+				Margin="16,46,16,0"
+				HorizontalAlignment="Left"
+				VerticalAlignment="Top"/>
 
-		<ScrollViewer Grid.Row="1">
-			<StackPanel VerticalAlignment="Center">
+		<ScrollViewer toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
+			<StackPanel VerticalAlignment="Center"
+						Margin="0,32">
 				<TextBlock Text="Join the fun!"
 							x:Uid="CreateAccount_Title"
 							Margin="22,0"
@@ -121,6 +119,13 @@
 				<!-- Birth Day -->
 				<StackPanel Margin="42,0">
 
+					<!-- Label -->
+					<TextBlock Text="Date of birth"
+							   x:Uid="CreateAccount_DateOfBirth"
+								Style="{StaticResource Subtitle2}"
+								Foreground="{StaticResource MaterialSurfaceBrush}"
+								Margin="0,0,0,4" />
+
 					<local:DataValidationView Model="{Binding Form}"
 											PropertyName="DateOfBirth">
 						<!-- DatePicker -->
@@ -128,9 +133,8 @@
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 											HorizontalAlignment="Stretch"
 											Background="{StaticResource MaterialSurfaceBrush}"
-											Foreground="{StaticResource MaterialOnSurfaceBrush}"
-											Header="Date of Birth"
-											Height="56" />
+											Foreground="{StaticResource MaterialOnSurfaceBrush}">
+						</CalendarDatePicker>
 					</local:DataValidationView>
 				</StackPanel>
 
@@ -225,7 +229,8 @@
 				<StackPanel Margin="42,12">
 
 					<!-- Label -->
-					<TextBlock Text="Favorite Dad nickname (pick at least 1)"
+					<TextBlock Text="Favorite dad nickname (pick at least 1)"
+							   x:Uid="CreateAccount_FavoriteDadNames"
 								Style="{StaticResource Subtitle2}"
 								Foreground="{StaticResource MaterialSurfaceBrush}"
 								Margin="0,0,0,4" />
@@ -240,7 +245,7 @@
 										ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
 										ItemContainerStyle="{StaticResource CheckedListViewItemStyle}"
 										SelectionMode="Single"
-										IsItemClickEnabled="True" />	
+										IsItemClickEnabled="True" />
 						</Grid>
 					</local:DataValidationView>
 				</StackPanel>
@@ -252,7 +257,8 @@
 
 					<!-- Checkbox -->
 					<CheckBox x:Name="TermsOfServiceCheckBox"
-							  Content="I agree to terms of services"
+							  Content="I agree to the terms of services"
+							  x:Uid="CreateAccount_TermsOfServices"
 							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							  Style="{StaticResource MaterialLightCheckBoxStyle}"
 							  Foreground="{StaticResource MaterialSurfaceBrush}"
@@ -266,7 +272,7 @@
 							Command="{Binding CreateAccount}"
 							Style="{StaticResource ExecutingButtonStyle}"
 							HorizontalAlignment="Stretch"
-							Margin="42,12,42,32" />
+							Margin="42,12,42,0" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>
