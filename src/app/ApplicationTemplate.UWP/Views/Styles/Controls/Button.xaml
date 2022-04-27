@@ -868,7 +868,7 @@
 		<Setter Property="Padding"
 				Value="10,8,10,8" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSecondaryBrush}" />
+				Value="{StaticResource MaterialOnSurfaceBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderThickness"

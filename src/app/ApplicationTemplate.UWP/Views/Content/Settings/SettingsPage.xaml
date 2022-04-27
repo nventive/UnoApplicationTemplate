@@ -184,7 +184,8 @@
 						Margin="24,16"
 						HorizontalAlignment="Left"
 						Command="{Binding Logout}"
-						Style="{StaticResource MaterialContainedButtonStyle}" />
+						Style="{StaticResource MaterialContainedButtonStyle}"
+						Background="{StaticResource MaterialErrorBrush}" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

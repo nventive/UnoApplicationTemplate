@@ -9,15 +9,14 @@
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  xmlns:android="http://nventive.com/android"
 	  xmlns:ios="http://nventive.com/ios"
-	  xmlns:not_win="http://uno.ui/not_win"
-	  mc:Ignorable="d ios android not_win">
+	  mc:Ignorable="d ios android">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup>
 
-				<not_win:VisualState x:Name="BiggerFont">
+				<VisualState x:Name="BiggerFont">
 
 					<!-- This represents bigger phones than iPhone 5, SE -->
 					<VisualState.StateTriggers>
@@ -29,7 +28,7 @@
 						<Setter Target="Title.FontSize"
 								Value="60" />
 					</VisualState.Setters>
-				</not_win:VisualState>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 
