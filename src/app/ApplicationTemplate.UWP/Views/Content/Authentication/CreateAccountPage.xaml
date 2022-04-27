@@ -125,8 +125,7 @@
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 											HorizontalAlignment="Stretch"
 											Background="{StaticResource MaterialSurfaceBrush}"
-											Foreground="{StaticResource MaterialOnSurfaceBrush}">
-						</CalendarDatePicker>
+											Foreground="{StaticResource MaterialOnSurfaceBrush}" />
 					</local:DataValidationView>
 				</StackPanel>
 
