@@ -23,7 +23,7 @@ trigger:
 resources:
   containers:
     - container: windows
-      image: nventive/vs_build-tools:16.11.9
+      image: nventive/vs_build-tools:17.1.1
 
 variables:
 - template: build/variables.yml
@@ -113,13 +113,6 @@ stages:
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-
-# - stage: Azure
-#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-#   dependsOn: Build_Production
-
-#   jobs:
-#   - template: build/stage-release-wasm.yml
 
 - stage: AppStore
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))

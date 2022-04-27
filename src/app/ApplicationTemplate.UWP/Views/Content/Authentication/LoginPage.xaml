@@ -13,21 +13,40 @@
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup>
+
+				<VisualState x:Name="BiggerFont">
+
+					<!-- This represents bigger phones than iPhone 5, SE -->
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowHeight="630" />
+					</VisualState.StateTriggers>
+
+					<!-- We change the font size as a workaround to respect design on small and big phones -->
+					<VisualState.Setters>
+						<Setter Target="Login_Title.FontSize"
+								Value="60" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+
 		<!-- Background -->
 		<Image Source="ms-appx:///Assets/Background_Mustaches_Light.png"
 			   Stretch="UniformToFill"
 			   HorizontalAlignment="Stretch"
 			   VerticalAlignment="Stretch" />
 
-		<ScrollViewer>
+		<ScrollViewer toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
 			<StackPanel VerticalAlignment="Center">
 				<TextBlock Text="{Binding Title}"
 						   x:Uid="Login_Title"
 						   Margin="22,32,22,0"
 						   Style="{StaticResource Headline2}"
-						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
 						   HorizontalTextAlignment="Center"
-						   HorizontalAlignment="Center" />
+						   HorizontalAlignment="Center"
+						   FontSize="54"/>
 
 				<TextBlock Text="{Binding Quote}"
 						   x:Uid="Login_Subtitle"
@@ -47,7 +66,7 @@
 							 x:Uid="Login_Email"
 							 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 Style="{StaticResource TextBoxStyle}"
-							 InputScope="EmailSmtpAddress"
+							 InputScope="EmailNameOrAddress"
 							 IsSpellCheckEnabled="False"
 							 ios:ReturnKeyType="Next"
 							 android:ImeOptions="Next"

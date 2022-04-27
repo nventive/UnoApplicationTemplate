@@ -7,6 +7,7 @@ using ApplicationTemplate;
 using ApplicationTemplate.Business;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using DynamicData;
 
@@ -16,7 +17,7 @@ namespace ApplicationTemplate.Presentation
 	{
 		public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
 		});
 
 		public IDynamicCommand RefreshJokes => this.GetCommandFromDataLoaderRefresh(Jokes);

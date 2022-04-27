@@ -92,9 +92,9 @@
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryColor}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceColor}" />
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="FontWeight"
@@ -129,9 +129,9 @@
 						</VisualStateManager.VisualStateGroups>
 
 						<Border x:Name="BackgroundBorder"
-								BorderBrush="{StaticResource MaterialPrimaryColor}"
+								BorderBrush="{StaticResource MaterialPrimaryBrush}"
 								BorderThickness="1"
-								Background="{StaticResource MaterialSurfaceColor}"
+								Background="{StaticResource MaterialSurfaceBrush}"
 								CornerRadius="4">
 
 							<Grid Margin="{TemplateBinding Padding}"
@@ -396,7 +396,7 @@
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
 		<Setter Property="Padding"
-				Value="6,8" />
+				Value="8,6" />
 		<Setter Property="BorderBrush"
 				Value="Transparent" />
 
@@ -612,7 +612,7 @@
 		<Setter Property="MinWidth"
 				Value="30" />
 		<Setter Property="Background"
-				Value="{StaticResource TransparentColorBrush}" />
+				Value="{StaticResource TransparentBrush}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="VerticalAlignment"
@@ -623,26 +623,18 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="Button">
 					<Grid x:Name="ButtonLayoutGrid"
-						  Background="Transparent">
+						  Background="{TemplateBinding Background}">
 						<VisualStateManager.VisualStateGroups>
 							<VisualStateGroup x:Name="CommonStates">
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver" />
 								<VisualState x:Name="Pressed">
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="ButtonLayoutGrid"
-														 Storyboard.TargetProperty="Opacity"
-														 To="0.5"
-														 Duration="0" />
-									</Storyboard>
-								</VisualState>
-								<VisualState x:Name="Disabled">
-									<Storyboard>
-										<DoubleAnimation Storyboard.TargetName="ButtonLayoutGrid"
-														 Storyboard.TargetProperty="Opacity"
-														 To="0.25"
-														 Duration="0" />
-									</Storyboard>
+									<VisualState.Setters>
+										<Setter Target="ButtonLayoutGrid.Opacity"
+												Value="0.5" />
+										<Setter Target="ButtonLayoutGrid.Opacity"
+												Value="0.25" />
+									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>

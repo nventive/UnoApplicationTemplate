@@ -1,13 +1,10 @@
 ﻿<local:AttachableUserControl x:Class="ApplicationTemplate.Views.Content.Menu"
 							 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-							 xmlns:uloc="http://nventive.com/localization/1.0"
 							 xmlns:local="using:ApplicationTemplate.Views"
 							 xmlns:ne="using:Nventive.View.Extensions"
 							 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 							 xmlns:c="using:ApplicationTemplate.Views.Controls"
-							 ne:BindableVisualState.VisualStateName="{Binding MenuState}"
-							 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-							 mc:Ignorable="uloc">
+							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
 		  Background="{StaticResource MaterialOnBackgroundBrush}">
@@ -44,7 +41,6 @@
 						</DoubleAnimation>
 					</Storyboard>
 				</VisualState>
-
 				<VisualState x:Name="Closed" />
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
@@ -70,8 +66,7 @@
 						   CheckedIconStyle="{StaticResource FilledHomePathControlStyle}"
 						   Content="Jokes"
 						   x:Uid="Menu_Home"
-						   uloc:Localize="Content"	
-						   Foreground="white"
+						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 						   Command="{Binding ShowHomeSection}"
 						   IsChecked="{Binding IsHomeSectionActive}" />
 
@@ -79,8 +74,7 @@
 						   CheckedIconStyle="{StaticResource FilledPostsPathControlStyle}"
 						   Content="Posts"
 						   x:Uid="Menu_Posts"
-						   uloc:Localize="Content"
-						   Foreground="white"
+						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 						   Command="{Binding ShowPostsSection}"
 						   IsChecked="{Binding IsPostsSectionActive}"
 						   Grid.Column="1" />
@@ -89,8 +83,7 @@
 						   CheckedIconStyle="{StaticResource FilledSettingsPathControlStyle}"
 						   Content="Settings"
 						   x:Uid="Menu_Settings"
-						   uloc:Localize="Content"
-						   Foreground="white"
+						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 						   Command="{Binding ShowSettingsSection}"
 						   IsChecked="{Binding IsSettingsSectionActive}"
 						   Grid.Column="2" />

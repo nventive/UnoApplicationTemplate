@@ -3,6 +3,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation
@@ -31,7 +32,7 @@ namespace ApplicationTemplate.Presentation
 			{
 				await this.GetService<IAuthenticationService>().ResetPassword(ct, Form.Email.Trim());
 
-				await this.GetService<IStackNavigator>().NavigateAndClear(ct, () => new DadJokesPageViewModel());
+				await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 			}
 		});
 	}

@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ViewServicesConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_ViewConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\MenuRadioButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FiltersConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DebugConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
@@ -35,6 +36,16 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background_Mustaches_Light.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background_Mustaches_Light.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Background_Mustaches_Light.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\closeIcon.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\closeIcon.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\closeIcon.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\closeIcon.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\closeIcon.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\filter.scale-100.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\filter.scale-150.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\filter.scale-200.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\filter.scale-300.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\CommandBarCommands\filter.scale-400.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Error_Template_Icon.scale-200.png" />

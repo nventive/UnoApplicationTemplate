@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -36,7 +37,7 @@ namespace ApplicationTemplate.Presentation
 		public IDynamicCommand FiltersAndNavigate => this.GetCommandFromTask(async ct =>
 		{
 			this.GetService<IDadJokesService>().SetPostTypeFilter(PostTypeFilter);
-			await this.GetService<IStackNavigator>().NavigateBack(ct);
+			await this.GetService<ISectionsNavigator>().NavigateBack(ct);
 		});
 
 		public PostTypes PostTypeFilter

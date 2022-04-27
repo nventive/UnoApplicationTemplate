@@ -1,4 +1,6 @@
-﻿#if NETFX_CORE || __ANDROID__ || __IOS__ || __WASM__
+﻿//-:cnd:noEmit
+#if NETFX_CORE || __ANDROID__ || __IOS__
+//+:cnd:noEmit
 using System;
 using System.Linq;
 using System.Collections.Generic;
@@ -464,4 +466,6 @@ namespace ApplicationTemplate.Views.Behaviors
 		}
 	}
 }
+//-:cnd:noEmit
 #endif
+//+:cnd:noEmit
