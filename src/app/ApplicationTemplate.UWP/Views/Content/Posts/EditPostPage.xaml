@@ -60,13 +60,13 @@
 				<Button Content="Cancel"
 						x:Uid="EditPost_Cancel"
 						Command="{Binding Cancel}"
-						Style="{StaticResource OutlinedExecutingButtonStyle}"
+						Style="{StaticResource MaterialOutlinedButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="5" />
 				<Button Content="Save"
 						x:Uid="EditPost_Save"
 						Command="{Binding Save}"
-						Style="{StaticResource ExecutingButtonStyle}"
+						Style="{StaticResource MaterialContainedButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="5" />
 			</StackPanel>

@@ -16,9 +16,9 @@
 	<Page.Resources>
 		<ResourceDictionary>
 			<converters:FromNullableBoolToCustomValueConverter x:Key="NullableBoolToIconStyle"
-																DefaultValue="{StaticResource CirclePathControlStyle}"
-																ValidValue="{StaticResource SuccessCheckPathControlStyle}"
-																InvalidValue="{StaticResource ErrorXPathControlStyle}" />
+															   DefaultValue="{StaticResource CirclePathControlStyle}"
+															   ValidValue="{StaticResource SuccessCheckPathControlStyle}"
+															   InvalidValue="{StaticResource ErrorXPathControlStyle}" />
 		</ResourceDictionary>
 	</Page.Resources>
 
@@ -45,24 +45,24 @@
 		<ScrollViewer Grid.Row="1">
 			<StackPanel VerticalAlignment="Center">
 				<TextBlock Text="Join the fun!"
-							x:Uid="CreateAccount_Title"
-							Margin="22,0"
-							Style="{StaticResource Headline2}"
-							HorizontalTextAlignment="Center"
-							HorizontalAlignment="Center" />
+						   x:Uid="CreateAccount_Title"
+						   Margin="22,0"
+						   Style="{StaticResource Headline2}"
+						   HorizontalTextAlignment="Center"
+						   HorizontalAlignment="Center" />
 
 				<TextBlock Text="Only 2 seconds to create an account"
-							x:Uid="CreateAccount_Subtitle"
-							Style="{StaticResource Body1}"
-							Foreground="{StaticResource MaterialSurfaceBrush}"
-							Margin="42,16,42,32"
-							HorizontalTextAlignment="Center"
-							HorizontalAlignment="Center" />
+						   x:Uid="CreateAccount_Subtitle"
+						   Style="{StaticResource Body1}"
+						   Foreground="{StaticResource MaterialSurfaceBrush}"
+						   Margin="42,16,42,32"
+						   HorizontalTextAlignment="Center"
+						   HorizontalAlignment="Center" />
 
 				<!-- First Name -->
 				<local:DataValidationView Model="{Binding Form}"
 										  PropertyName="FirstName"
-										 Margin="42,0">
+										  Margin="42,0">
 					<TextBox PlaceholderText="First Name"
 							 x:Uid="CreateAccount_FirstName"
 							 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -88,17 +88,17 @@
 
 				<!-- Email -->
 				<local:DataValidationView Model="{Binding Form}"
-											  PropertyName="Email"
-											  Margin="42,0">
+										  PropertyName="Email"
+										  Margin="42,0">
 					<TextBox x:Name="EmailField"
-								 PlaceholderText="Enter an email"
-								 x:Uid="CreateAccount_Email"
-								 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 InputScope="EmailSmtpAddress"
-								 IsSpellCheckEnabled="False"
-								 ios:ReturnKeyType="Next"
-								 android:ImeOptions="Next"
-								 ue:TextBoxBehavior.NextControl="{Binding ElementName=PhoneNumberField}" />
+							 PlaceholderText="Enter an email"
+							 x:Uid="CreateAccount_Email"
+							 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 InputScope="EmailSmtpAddress"
+							 IsSpellCheckEnabled="False"
+							 ios:ReturnKeyType="Next"
+							 android:ImeOptions="Next"
+							 ue:TextBoxBehavior.NextControl="{Binding ElementName=PhoneNumberField}" />
 				</local:DataValidationView>
 
 				<!-- Phone Number -->
@@ -115,14 +115,14 @@
 							 IsSpellCheckEnabled="False"
 							 ios:ReturnKeyType="Done"
 							 android:ImeOptions="Done"
-						     ue:TextBoxBehavior.DismissKeyboardOnEnter="True" />
+							 ue:TextBoxBehavior.DismissKeyboardOnEnter="True" />
 				</local:DataValidationView>
 
 				<!-- Birth Day -->
 				<StackPanel Margin="42,0">
 
 					<local:DataValidationView Model="{Binding Form}"
-											PropertyName="DateOfBirth">
+											  PropertyName="DateOfBirth">
 						<!-- DatePicker -->
 						<CalendarDatePicker x:Name="BirthDayField"
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -155,17 +155,17 @@
 
 				<!-- Password -->
 				<local:DataValidationView Model="{Binding Form}"
-											  PropertyName="Password"
-											  Margin="42,0"
-											  Background="{StaticResource MaterialSurfaceBrush}">
+										  PropertyName="Password"
+										  Margin="42,0"
+										  Background="{StaticResource MaterialSurfaceBrush}">
 					<PasswordBox x:Name="PasswordField"
-									 x:Uid="CreateAccount_Password"
-									 PlaceholderText="Choose a password"
-									 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-									 Style="{StaticResource DefaultPasswordBoxStyle}"
-									 ios:ReturnKeyType="Done"
-									 android:ImeOptions="Done"
-									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
+								 x:Uid="CreateAccount_Password"
+								 PlaceholderText="Choose a password"
+								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 Style="{StaticResource DefaultPasswordBoxStyle}"
+								 ios:ReturnKeyType="Done"
+								 android:ImeOptions="Done"
+								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
 				</local:DataValidationView>
 
 				<!-- Password Validation Hints -->
@@ -182,65 +182,65 @@
 					</Grid.ColumnDefinitions>
 
 					<u:PathControl x:Name="XHasEightCharactersPathControl"
-									   VerticalAlignment="Center"
-									   Style="{Binding Form.PasswordHasEightCharacters, Converter={StaticResource NullableBoolToIconStyle}}"
-									   Margin="9,4,9,4" />
+								   VerticalAlignment="Center"
+								   Style="{Binding Form.PasswordHasEightCharacters, Converter={StaticResource NullableBoolToIconStyle}}"
+								   Margin="9,4,9,4" />
 
 					<u:PathControl x:Name="XHasNumberPathControl"
-									   Style="{Binding Form.PasswordHasNumber, Converter={StaticResource NullableBoolToIconStyle}}"
-									   VerticalAlignment="Center"
-									   Grid.Row="1"
-									   Margin="9,4,9,4" />
+								   Style="{Binding Form.PasswordHasNumber, Converter={StaticResource NullableBoolToIconStyle}}"
+								   VerticalAlignment="Center"
+								   Grid.Row="1"
+								   Margin="9,4,9,4" />
 
 					<u:PathControl x:Name="XHasUppercasePathControl"
-									   Style="{Binding Form.PasswordHasUppercase, Converter={StaticResource NullableBoolToIconStyle}}"
-									   VerticalAlignment="Center"
-									   Grid.Row="2"
-									   Margin="9,4,9,4" />
+								   Style="{Binding Form.PasswordHasUppercase, Converter={StaticResource NullableBoolToIconStyle}}"
+								   VerticalAlignment="Center"
+								   Grid.Row="2"
+								   Margin="9,4,9,4" />
 
 					<TextBlock x:Name="HasEightCharactersText"
-								   Text="8 characters minimum"
-								   x:Uid="Password_Validation1"
-								   Grid.Column="1"
-								   Margin="0,4,0,4"
-								   Style="{StaticResource Body3}" />
+							   Text="8 characters minimum"
+							   x:Uid="Password_Validation1"
+							   Grid.Column="1"
+							   Margin="0,4,0,4"
+							   Style="{StaticResource Body3}" />
 
 					<TextBlock x:Name="HasNumberText"
-								   Text="One number"
-								   x:Uid="Password_Validation2"
-								   Grid.Column="1"
-								   Grid.Row="1"
-								   Margin="0,4,0,4"
-								   Style="{StaticResource Body3}" />
+							   Text="One number"
+							   x:Uid="Password_Validation2"
+							   Grid.Column="1"
+							   Grid.Row="1"
+							   Margin="0,4,0,4"
+							   Style="{StaticResource Body3}" />
 
 					<TextBlock x:Name="HasUppercaseText"
-								   Text="One uppercase character"
-								   x:Uid="Password_Validation3"							   
-								   Grid.Column="1"
-								   Grid.Row="2"
-								   Margin="0,4,0,4"
-								   Style="{StaticResource Body3}" />
+							   Text="One uppercase character"
+							   x:Uid="Password_Validation3"
+							   Grid.Column="1"
+							   Grid.Row="2"
+							   Margin="0,4,0,4"
+							   Style="{StaticResource Body3}" />
 				</Grid>
 
 				<StackPanel Margin="42,12">
 
 					<!-- Label -->
 					<TextBlock Text="Favorite Dad nickname (pick at least 1)"
-								Style="{StaticResource Subtitle2}"
-								Foreground="{StaticResource MaterialSurfaceBrush}"
-								Margin="0,0,0,4" />
+							   Style="{StaticResource Subtitle2}"
+							   Foreground="{StaticResource MaterialSurfaceBrush}"
+							   Margin="0,0,0,4" />
 
 					<!-- Top 3 Favorite Dad names -->
 					<local:DataValidationView Model="{Binding Form}"
-												PropertyName="FavoriteDadNames">
+											  PropertyName="FavoriteDadNames">
 						<!-- List -->
 						<Grid Background="{StaticResource MaterialSurfaceBrush}"
 							  CornerRadius="4">
 							<ListView ItemsSource="{Binding DadNames}"
-										ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
-										ItemContainerStyle="{StaticResource CheckedListViewItemStyle}"
-										SelectionMode="Single"
-										IsItemClickEnabled="True" />	
+									  ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
+									  ItemContainerStyle="{StaticResource CheckedListViewItemStyle}"
+									  SelectionMode="Single"
+									  IsItemClickEnabled="True" />
 						</Grid>
 					</local:DataValidationView>
 				</StackPanel>
@@ -256,17 +256,17 @@
 							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							  Style="{StaticResource MaterialLightCheckBoxStyle}"
 							  Foreground="{StaticResource MaterialSurfaceBrush}"
-							  HorizontalAlignment="Left"/>
+							  HorizontalAlignment="Left" />
 				</local:DataValidationView>
 
 				<!-- Confirm button -->
 				<Button x:Name="ConfirmButton"
-							x:Uid="CreateAccount_Confirm"
-							Content="CREATE AN ACCOUNT"
-							Command="{Binding CreateAccount}"
-							Style="{StaticResource ExecutingButtonStyle}"
-							HorizontalAlignment="Stretch"
-							Margin="42,12,42,32" />
+						x:Uid="CreateAccount_Confirm"
+						Content="CREATE AN ACCOUNT"
+						Command="{Binding CreateAccount}"
+						Style="{StaticResource MaterialContainedButtonStyle}"
+						HorizontalAlignment="Stretch"
+						Margin="42,12,42,32" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

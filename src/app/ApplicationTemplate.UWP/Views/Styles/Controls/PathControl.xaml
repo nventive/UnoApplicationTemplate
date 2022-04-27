@@ -24,31 +24,6 @@
 			</Setter.Value>
 		</Setter>
 	</Style>-->
-
-	<!--  SkipOnboardingPathControlStyle -->
-	<Style x:Key="SkipOnboardingPathControlStyle"
-		   TargetType="u:PathControl">
-		<Setter Property="Foreground"
-				Value="{StaticResource OnBackgroundPathControlBrush}" />
-		<Setter Property="Stretch"
-				Value="Uniform" />
-		<Setter Property="Height"
-				Value="12" />
-		<Setter Property="Width"
-				Value="8" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="u:PathControl">
-					<Path Data="M2.00003 0L0.590027 1.41L5.17003 6L0.590027 10.59L2.00003 12L8.00003 6L2.00003 0Z"
-						  Stretch="{TemplateBinding Stretch}"
-						  Width="{TemplateBinding Width}"
-						  Height="{TemplateBinding Height}"
-						  Fill="{TemplateBinding Foreground}"
-						  HorizontalAlignment="Stretch" />
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
     
     <!--  Home navigation Paths -->
 	<!--  Home section -->
@@ -252,6 +227,31 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="u:PathControl">
 					<Path Data="M7.41 1.41L6 0L0 6L6 12L7.41 10.59L2.83 6L7.41 1.41Z"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--  RightArrowPathControlStyle -->
+	<Style x:Key="RightArrowPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{StaticResource OnBackgroundPathControlBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="12" />
+		<Setter Property="Width"
+				Value="8" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="M2.00003 0L0.590027 1.41L5.17003 6L0.590027 10.59L2.00003 12L8.00003 6L2.00003 0Z"
 						  Stretch="{TemplateBinding Stretch}"
 						  Width="{TemplateBinding Width}"
 						  Height="{TemplateBinding Height}"
