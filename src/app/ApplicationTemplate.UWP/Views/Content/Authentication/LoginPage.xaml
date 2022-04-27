@@ -9,14 +9,15 @@
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  xmlns:android="http://nventive.com/android"
 	  xmlns:ios="http://nventive.com/ios"
-	  mc:Ignorable="d ios android">
+	  xmlns:not_win="http://uno.ui/not_win"
+	  mc:Ignorable="d ios android not_win">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup>
 
-				<VisualState x:Name="BiggerFont">
+				<not_win:VisualState x:Name="BiggerFont">
 
 					<!-- This represents bigger phones than iPhone 5, SE -->
 					<VisualState.StateTriggers>
@@ -25,10 +26,10 @@
 
 					<!-- We change the font size as a workaround to respect design on small and big phones -->
 					<VisualState.Setters>
-						<Setter Target="Login_Title.FontSize"
+						<Setter Target="Title.FontSize"
 								Value="60" />
 					</VisualState.Setters>
-				</VisualState>
+				</not_win:VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 
@@ -40,7 +41,8 @@
 
 		<ScrollViewer toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
 			<StackPanel VerticalAlignment="Center">
-				<TextBlock Text="{Binding Title}"
+				<TextBlock x:Name="Title"
+						   Text="{Binding Title}"						   
 						   x:Uid="Login_Title"
 						   Margin="22,32,22,0"
 						   Style="{StaticResource Headline2}"

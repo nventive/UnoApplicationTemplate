@@ -16,7 +16,7 @@
 	<Page.Resources>
 		<ResourceDictionary>
 			<converters:FromNullableBoolToCustomValueConverter x:Key="NullableBoolToIconStyle"
-																DefaultValue="{StaticResource CirclePathControlStyle}"
+																DefaultValue="{StaticResource LightCirclePathControlStyle}"
 																ValidValue="{StaticResource SuccessCheckPathControlStyle}"
 																InvalidValue="{StaticResource ErrorXPathControlStyle}" />
 		</ResourceDictionary>

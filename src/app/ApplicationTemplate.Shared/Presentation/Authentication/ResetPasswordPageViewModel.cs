@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
 using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation
@@ -78,5 +80,14 @@ namespace ApplicationTemplate.Presentation
 					return password.Any(char.IsUpper);
 				});
 		}
+
+		public IDynamicCommand ConfirmReset => this.GetCommandFromTask(async ct =>
+		{
+			if (PasswordHasEightCharacters == true && PasswordHasNumber == true && PasswordHasUppercase == true)
+			{
+				await Task.Delay(500);
+				await this.GetService<ISectionsNavigator>().NavigateBack(ct);
+			}
+		});
 	}
 }

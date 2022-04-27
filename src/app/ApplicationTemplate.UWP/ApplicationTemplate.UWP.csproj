@@ -118,7 +118,7 @@
     <Compile Include="Views\Content\Authentication\SentEmailConfirmationPage.xaml.cs">
       <DependentUpon>SentEmailConfirmationPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\ChuckNorris\DadJokesFavoritesPage.xaml.cs">
+    <Compile Include="Views\Content\DadJokes\DadJokesFavoritesPage.xaml.cs">
       <DependentUpon>DadJokesFavoritesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\DadJokes\DadJokesSearchPage.xaml.cs">

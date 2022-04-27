@@ -18,9 +18,11 @@ namespace ApplicationTemplate.Client
 			_serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
 		}
 
-		public async Task CreateAccount(CancellationToken ct, string email, string password)
+		public async Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password)
 		{
 			await Task.Delay(TimeSpan.FromSeconds(2));
+
+			return CreateAuthenticationData();
 		}
 
 		public async Task ResetPassword(CancellationToken ct, string email)

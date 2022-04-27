@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Threading;
+using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -10,11 +12,34 @@ namespace ApplicationTemplate.Presentation
 {
 	public partial class OnboardingPageViewModel : ViewModel
 	{
-		public IDynamicCommand NavigateToLogin => this.GetCommandFromTask(async ct =>
+		public OnboardingPageViewModel(bool isFromSettingsPage = false)
 		{
-			await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(isFirstLogin: true));
-			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
+			this.IsFromSettingsPage = isFromSettingsPage;
+		}
+
+		public bool IsFromSettingsPage
+		{
+			get => this.Get<bool>();
+			set => this.Set(value);
+		}
+
+		public IDynamicCommand NavigateToNextPage => this.GetCommandFromTask(async ct =>
+		{
+			if (this.IsFromSettingsPage)
+			{
+				await this.GetService<ISectionsNavigator>().NavigateBack(ct);
+			}
+			else
+			{
+				await this.NavigateToLogin(ct);
+			}
 		});
+
+		public async Task NavigateToLogin(CancellationToken ct)
+		{
+			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: false);
+			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
+		}
 
 		public OnboardingItemViewModel[] OnboardingItems { get; } = new[]
 		{

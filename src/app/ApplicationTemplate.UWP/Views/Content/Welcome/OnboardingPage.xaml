@@ -84,7 +84,7 @@
 			<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
 					Style="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonStyle}}"
 					FontSize="14"
-					Command="{Binding NavigateToLogin}"
+					Command="{Binding NavigateToNextPage}"
 					VerticalAlignment="Top"
 					HorizontalAlignment="Right"
 					Margin="24" />

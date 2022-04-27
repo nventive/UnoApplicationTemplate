@@ -64,9 +64,13 @@ namespace ApplicationTemplate.Business
 		}
 
 		/// <inheritdoc/>
-		public async Task CreateAccount(CancellationToken ct, string email, string password)
+		public async Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password)
 		{
-			await _authenticationEndpoint.CreateAccount(ct, email, password);
+			var authenticationData = await _authenticationEndpoint.CreateAccount(ct, email, password);
+
+			await _applicationSettingsService.SetAuthenticationData(ct, authenticationData);
+
+			return authenticationData;
 		}
 
 		/// <inheritdoc/>

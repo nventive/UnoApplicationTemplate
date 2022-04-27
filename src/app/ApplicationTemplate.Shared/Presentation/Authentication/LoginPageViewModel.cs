@@ -6,6 +6,7 @@ using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using FluentValidation;
+using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation
 {

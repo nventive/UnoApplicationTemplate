@@ -10,6 +10,7 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
+using Windows.UI.Xaml;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
 
@@ -35,12 +36,18 @@ namespace ApplicationTemplate.Presentation
 			if (logout == MessageDialogResult.Accept)
 			{
 				await this.GetService<IAuthenticationService>().Logout(ct);
+				await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: true);
 			}
 		});
 
 		public IDynamicCommand NavigateToResetPasswordPage => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<IStackNavigator>().Navigate(ct, () => new ResetPasswordPageViewModel());
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ResetPasswordPageViewModel());
+		});
+
+		public IDynamicCommand NavigateToOnboardingPage => this.GetCommandFromTask(async ct =>
+		{
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new OnboardingPageViewModel(isFromSettingsPage: true));
 		});
 
 		public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>

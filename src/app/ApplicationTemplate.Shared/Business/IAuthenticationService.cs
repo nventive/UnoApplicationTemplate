@@ -44,13 +44,13 @@ namespace ApplicationTemplate.Business
 		Task Logout(CancellationToken ct);
 
 		/// <summary>
-		/// Creates a user account.
+		/// Creates a user account an logs the user in using the provided <paramref name="email"/> and <paramref name="password"/>.
 		/// </summary>
 		/// <param name="ct"><see cref="CancellationToken"/></param>
 		/// <param name="email">Email</param>
 		/// <param name="password">Password</param>
 		/// <returns><see cref="Task"/></returns>
-		Task CreateAccount(CancellationToken ct, string email, string password);
+		Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password);
 
 		/// <summary>
 		/// Resets the password.

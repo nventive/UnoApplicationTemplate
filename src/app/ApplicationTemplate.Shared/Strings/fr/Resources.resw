@@ -183,10 +183,10 @@
   <data name="Settings_Email.Text" xml:space="preserve">
     <value>Adresse courriel</value>
   </data>
-  <data name="Settings_PrivacyPolicy.Content" xml:space="preserve">
+  <data name="Settings_PrivacyPolicy.Text" xml:space="preserve">
     <value>Politique de confidentialité</value>
   </data>
-  <data name="Settings_TermsAndConditions.Content" xml:space="preserve">
+  <data name="Settings_TermsAndConditions.Text" xml:space="preserve">
     <value>Termes &amp; conditions</value>
   </data>
   <data name="Settings_ChangePassword.Content" xml:space="preserve">
@@ -436,5 +436,8 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="Settings_ReplayTutorial.Content" xml:space="preserve">
     <value>REJOUER LE TUTORIEL</value>
+  </data>
+  <data name="Settings_Logout.Content" xml:space="preserve">
+    <value>SE DÉCONNECTER</value>
   </data>
 </root>
