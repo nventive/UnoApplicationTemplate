@@ -16,11 +16,18 @@ namespace ApplicationTemplate.Presentation
 			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 		});
 
-		public OnboardingItemViewModel[] OnboardingItems { get; } = new[]
+		public OnboardingItemViewModel[] OnboardingItems { get; } = new OnboardingItemViewModel[]
 		{
+#if __ANDROID__ || __IOS__
 			new OnboardingItemViewModel(ResourceLoader.GetForViewIndependentUse().GetString("Onboarding_Content"), "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
 			new OnboardingItemViewModel(ResourceLoader.GetForViewIndependentUse().GetString("Onboarding_Content"), "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
 			new OnboardingItemViewModel(ResourceLoader.GetForViewIndependentUse().GetString("Onboarding_Content"), "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png"),
+#endif
+#if WINDOWS_UWP
+			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
+			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
+			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png"),
+#endif
 		};
 
 		public static implicit operator OnboardingPageViewModel(OnboardingItemViewModel v)
