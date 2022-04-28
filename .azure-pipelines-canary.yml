@@ -1,0 +1,45 @@
+trigger: # Start a new run as soon as a "canaries/build/(...)" branch is created.
+  branches:
+    include:
+      - canaries/build/*
+
+resources:
+  containers:
+    - container: windows
+      image: nventive/vs_build-tools:16.11.9
+      
+variables:
+- template: build/variables.yml
+
+# Build the project using the desired parameters (in this case same as staging), but update all nuget packages to latest.
+stages:
+- stage: Build_Canary
+  condition: and(ne(variables['IsLightBuild'], 'true'), eq(variables['IsCanary'], 'true'))
+  dependsOn: []
+  jobs:
+  - template: build/stage-build.yml
+    parameters:
+      applicationEnvironment: Staging
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Internal.Android'
+      iosProvisioningProfileFile: $(InternalProvisioningProfile)
+      iosCertificateFile: $(InternalCertificate)
+      iosVariableGroup: 'ApplicationTemplate.Internal.iOS'
+      removeHyperlinksFromReleaseNotes: true
+
+- stage: AppCenter_Canary
+  condition: and(succeeded(), eq(variables['IsCanary'], 'true'))
+  dependsOn: Build_Canary
+
+  jobs:
+  - template: build/stage-release-appcenter.yml
+    parameters:
+      applicationEnvironment: Staging
+      deploymentEnvironment: AppCenter
+      appCenterUWPSlug: $(AppCenterUWPSlug_Canary)
+      appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
+      appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Internal.Android'
+      appCenterServiceConnectionName: $(AppCenterCanaryServiceConnection)
+      appCenterDistributionGroup: $(AppCenterCanaryDistributionGroup)
