@@ -37,7 +37,7 @@ namespace ApplicationTemplate.Presentation
 
 		public async Task NavigateToLogin(CancellationToken ct)
 		{
-			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: false);
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new LoginPageViewModel(isFirstLogin: true));
 			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 		}
 
