@@ -17,8 +17,29 @@ parameters:
 - name: iosVariableGroup
   type: string
   default: ''
+- name: additionalReleaseNotesFile
+  type: string
+  default: 'Canary.md'
+- name: removeHyperlinksFromReleaseNotes
+  type: boolean
+  default: false
 
 jobs:
+  - job: On_Windows_ReleaseNotes
+    pool:
+      name: $(windowsPoolName)
+    variables:
+      ArtifactName: ReleaseNotes_${{ parameters.applicationEnvironment }}
+      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+
+    container: windows
+
+    steps:
+      - template: steps-build-release-notes.yml
+        parameters:
+          additionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
+          removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
+
   - job: On_Windows # Build UWP and Android on a windows machine
     strategy:
       maxParallel: 3
@@ -38,13 +59,13 @@ jobs:
           ApplicationPlatform: Any CPU
           ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-          
+
     pool:
       name: $(windowsPoolName)
 
     variables:
     - group: ${{ parameters.androidVariableGroup }}
-    
+
     container: windows
 
     steps:
@@ -60,12 +81,12 @@ jobs:
           ApplicationConfiguration: Release_iOS
           ApplicationPlatform: Any CPU
           ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}   
+          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
     pool:
       name: $(macOSPoolName)
       demands:
         - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
-      
+
     variables:
     - name: SkipUnknownFrameworks
       value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library

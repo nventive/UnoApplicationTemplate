@@ -1,8 +1,21 @@
+schedules:
+- cron: "00 05 * * Mon-Fri" # Format is "Minutes Hours DayOfMonth Month DayOfWeet" in UTC (that's why 05 is 1h EST)
+  displayName: 'Nightly weekdays build - 1:00 EST'
+  always: true # Start a new run even if the code didn't change (because packages might have changed).
+  branches:
+    include:
+      - canaries/dev
+
+trigger: # Start a new run as soon as canaries/dev changes.
+  branches:
+    include:
+      - canaries/dev
+
 pool:
   name: Windows 1809
 
 variables:
-- SolutionFileName: ApplicationTemplate.sln
+ SolutionFileName: ApplicationTemplate.sln
 
 steps:
 - checkout: self
@@ -33,9 +46,11 @@ steps:
     nugetVersion: 'dev,beta,stable'
     allowDowngrade: true
     packageAuthor: 'nventive'
+    ignorePackages: 'GeneratedSerializers.Json;Nventive.View.Uno;BiometryService'
     useVersionOverrides: true
     versionOverridesFile: 'https://raw.githubusercontent.com/nventive/Canary/master/version-overrides.json'
 
 - task: PostBuildCleanup@3
   displayName: 'Clean Agent Directories'
   condition: always()
+  
