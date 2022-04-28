@@ -17,10 +17,10 @@
 	<!-- Primary brushes -->
 	<SolidColorBrush x:Key="MaterialPrimaryBrush"
 					 Color="{ThemeResource MaterialPrimaryColor}" />
-	<SolidColorBrush x:Key="MaterialPrimaryVariantDarkBrush"
-					 Color="{ThemeResource MaterialPrimaryVariantDarkColor}" />
+	<SolidColorBrush x:Key="MaterialPrimaryDarkBrush"
+					 Color="{ThemeResource MaterialPrimaryDarkColor}" />
 	<SolidColorBrush x:Key="MaterialPrimaryLightBrush"
-					 Color="{ThemeResource MaterialPrimaryVariantLightColor}" />
+					 Color="{ThemeResource MaterialPrimaryLightColor}" />
 	<SolidColorBrush x:Key="MaterialPrimaryAccentBrush"
 					 Color="{ThemeResource MaterialPrimaryAccentColor}" />
 	<SolidColorBrush x:Key="MaterialPrimaryHoverBrush"
@@ -68,10 +68,10 @@
 	<!-- Secondary brushes -->
 	<SolidColorBrush x:Key="MaterialSecondaryBrush"
 					 Color="{ThemeResource MaterialSecondaryColor}" />
-	<SolidColorBrush x:Key="MaterialSecondaryVariantDarkBrush"
-					 Color="{ThemeResource MaterialSecondaryVariantDarkColor}" />
-	<SolidColorBrush x:Key="MaterialSecondaryVariantLightBrush"
-					 Color="{ThemeResource MaterialSecondaryVariantLightColor}" />
+	<SolidColorBrush x:Key="MaterialSecondaryDarkBrush"
+					 Color="{ThemeResource MaterialSecondaryDarkColor}" />
+	<SolidColorBrush x:Key="MaterialSecondaryLightBrush"
+					 Color="{ThemeResource MaterialSecondaryLightColor}" />
 	<SolidColorBrush x:Key="MaterialSecondaryAccentBrush"
 					 Color="{ThemeResource MaterialSecondaryAccentColor}" />
 	<SolidColorBrush x:Key="MaterialSecondaryHoverBrush"

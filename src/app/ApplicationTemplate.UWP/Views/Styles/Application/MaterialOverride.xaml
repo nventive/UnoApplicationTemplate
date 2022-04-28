@@ -19,14 +19,14 @@
 		<ResourceDictionary x:Key="Light">
 			<Color x:Key="MaterialPrimaryColor">#0D59CD</Color>
 			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
-			<Color x:Key="MaterialPrimaryVariantDarkColor">#0A447D</Color>
-			<Color x:Key="MaterialPrimaryVariantLightColor">#0A68C8</Color>
+			<Color x:Key="MaterialPrimaryDarkColor">#0A447D</Color>
+			<Color x:Key="MaterialPrimaryLightColor">#0A68C8</Color>
 			<Color x:Key="MaterialPrimaryAccentColor">#F9423A</Color>
 
 			<Color x:Key="MaterialSecondaryColor">#5BC5F2</Color>
 			<Color x:Key="MaterialOnSecondaryColor">#001E60</Color>
-			<Color x:Key="MaterialSecondaryVariantDarkColor">#4FB0D2</Color>
-			<Color x:Key="MaterialSecondaryVariantLightColor">#68D2F8</Color>
+			<Color x:Key="MaterialSecondaryDarkColor">#4FB0D2</Color>
+			<Color x:Key="MaterialSecondaryLightColor">#68D2F8</Color>
 
 			<Color x:Key="MaterialBackgroundColor">#F5FAFF</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#001E60</Color>

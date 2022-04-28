@@ -11,16 +11,10 @@
 
 	<Grid>
 
-		<Grid.RowDefinitions>
-			<RowDefinition Height="*" />
-			<RowDefinition Height="Auto" />
-		</Grid.RowDefinitions>
-		
 		<nav:MultiFrame x:Name="RootNavigationMultiFrame"
 						CommaSeparatedSectionsFrameNames="Login,Home,Posts,Settings" />
 
 		<local:Menu x:Name="Menu"
-					Grid.Row="1"
 					DataContext="{Binding Menu}"
 					VerticalAlignment="Bottom" />
 

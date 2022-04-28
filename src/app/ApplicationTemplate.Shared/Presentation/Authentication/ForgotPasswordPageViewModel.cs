@@ -16,7 +16,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var validationResult = await Form.Validate(ct);
 
-			//TODO : Send link to email
+			// Send link here
 
 			if (validationResult.IsValid)
 			{

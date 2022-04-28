@@ -88,9 +88,9 @@ namespace ApplicationTemplate
 			{
 				await sectionsNavigator.Navigate(ct, () => new OnboardingPageViewModel());
 			}
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if __MOBILE__ || WINDOWS_UWP
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 
 			_ = dispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplashScreen);
@@ -99,9 +99,9 @@ namespace ApplicationTemplate
 			{
 				Shell.Instance.ExtendedSplashScreen.Dismiss();
 			}
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 		}
 
 		private void NotifyUserOnSessionExpired(IServiceProvider services)
@@ -157,18 +157,18 @@ namespace ApplicationTemplate
 		{
 			void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
 
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if WINDOWS_UWP || __ANDROID__ || __IOS__
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			Windows.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
 			{
 				OnError(e.Exception);
 				e.Handled = true;
 			};
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
-			//-:cnd:noEmit
+//+:cnd:noEmit
+//-:cnd:noEmit
 #if __ANDROID__
 //+:cnd:noEmit
 			Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser += (s, e) =>
@@ -178,7 +178,7 @@ namespace ApplicationTemplate
 			};
 //-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 
 			TaskScheduler.UnobservedTaskException += (s, e) =>
 			{

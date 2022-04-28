@@ -279,12 +279,12 @@
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																		   Storyboard.TargetProperty="Fill">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																		Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
+																		Value="{StaticResource MaterialPrimaryDarkBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobBounds"
 																		   Storyboard.TargetProperty="Stroke">
 											<DiscreteObjectKeyFrame KeyTime="0"
-																		Value="{StaticResource MaterialPrimaryVariantDarkBrush}" />
+																		Value="{StaticResource MaterialPrimaryDarkBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Storyboard.TargetName="SwitchKnobOn"
 																	   Storyboard.TargetProperty="Opacity">
