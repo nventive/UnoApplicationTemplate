@@ -253,10 +253,7 @@
 					<!-- Checkbox -->
 					<CheckBox x:Name="TermsOfServiceCheckBox"
 							  Content="I agree to terms of services"
-							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							  Style="{StaticResource MaterialLightCheckBoxStyle}"
-							  Foreground="{StaticResource MaterialSurfaceBrush}"
-							  HorizontalAlignment="Left"/>
+							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 				</local:DataValidationView>
 
 				<!-- Confirm button -->
