@@ -6,6 +6,8 @@
 #   branches:
 #     include:
 #       - master
+#       - main
+#       - develop
 #       - release/*
 #       - feature/*
 pr:
@@ -23,14 +25,13 @@ trigger:
 resources:
   containers:
     - container: windows
-      image: nventive/vs_build-tools:17.1.1
+      image: nventive/vs_build-tools:16.11.9
 
 variables:
 - template: build/variables.yml
 
 stages:
 - stage: Build_Staging
-  condition: eq(variables['IsCanary'], 'false')
   jobs:
   - template: build/stage-build.yml
     parameters:
@@ -54,21 +55,6 @@ stages:
       iosCertificateFile: $(AppStoreCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
-# Build steps for the Canary
-# Build the project the same as prod and QA builds, but update all nuget packages to latest
-- stage: Build_Canary
-  condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['IsCanary'], 'true'))
-  dependsOn: []
-  jobs:
-  - template: build/stage-build.yml
-    parameters:
-      applicationEnvironment: Staging
-      androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      iosProvisioningProfileFile: $(InternalProvisioningProfile)
-      iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
-    
 - stage: AppCenter_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Staging
@@ -83,6 +69,8 @@ stages:
       appCenterAndroidSlug: $(AppCenterAndroidSlug)
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      appCenterServiceConnectionName: $(AppCenterServiceConnection)
+      appCenterDistributionGroup: $(AppCenterDistributionGroup)
 
 - stage: AppCenter_Production
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
@@ -98,21 +86,8 @@ stages:
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
       androidKeyStoreFile: $(GooglePlayKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
-
-- stage: AppCenter_Canary
-  condition: and(succeeded(), eq(variables['IsCanary'], 'true'))
-  dependsOn: Build_Canary
-
-  jobs:
-  - template: build/stage-release-appcenter.yml
-    parameters:
-      applicationEnvironment: Staging
-      deploymentEnvironment: AppCenter
-      appCenterUWPSlug: $(AppCenterUWPSlug_Canary)
-      appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
-      androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      appCenterServiceConnectionName: $(AppCenterServiceConnection)
+      appCenterDistributionGroup: $(AppCenterDistributionGroup)
 
 - stage: AppStore
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
@@ -120,7 +95,7 @@ stages:
 
   jobs:
   - template: build/stage-release-appstore.yml
-    parameters:    
+    parameters:
       applicationEnvironment: Production
       deploymentEnvironment: AppStore
 
@@ -130,6 +105,6 @@ stages:
 
   jobs:
   - template: build/stage-release-googleplay.yml
-    parameters:    
+    parameters:
       applicationEnvironment: Production
       deploymentEnvironment: GooglePlay

@@ -41,6 +41,7 @@ variables:
   GooglePlayServiceConnection: GooglePlay-nventive-ApplicationTemplate
   AppCenterServiceConnection: AppCenter-nventive-framework
   AppStoreServiceConnection: AppStore-nventive
+  AppCenterCanaryServiceConnection: AppCenter-nventive-framework
 
   # AppCenter slugs
   # The "app slug" corresponds to the identifiers of the app in AppCenter; to find it, navigate to the app in a browser and;
@@ -55,6 +56,10 @@ variables:
   AppCenteriOSSlug_Canary: 'nventive-framework/Application-Template-Canary'
   AppCenterUWPSlug_Canary: 'nventive-framework/Application-Template-Canary-2'
 
+  # AppCenter Distribution Groups
+  AppCenterDistributionGroup: '00000000-0000-0000-0000-000000000000'
+  AppCenterCanaryDistributionGroup: '00000000-0000-0000-0000-000000000000'
+
   # Azure subscription
   # AzureSubscriptionName:
   # AzureStorageAccountName:
@@ -66,7 +71,7 @@ variables:
   InfoPlistPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.iOS/Info.plist
 
   # Pool names
-  windowsPoolName: 'windows 2022'
+  windowsPoolName: 'windows 1809'
   macOSPoolName: 'macOS'
 
   # Versions to use

@@ -25,7 +25,6 @@ namespace ApplicationTemplate.Presentation
 			"Papi",
 		};
 
-
 		public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
 		{
 			var validationResult = await Form.Validate(ct);

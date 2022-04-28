@@ -248,12 +248,9 @@
 
 					<!-- Checkbox -->
 					<CheckBox x:Name="TermsOfServiceCheckBox"
-							  Content="I agree to the terms of services"
-							  x:Uid="CreateAccount_TermsOfServices"
-							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							  Style="{StaticResource MaterialLightCheckBoxStyle}"
-							  Foreground="{StaticResource MaterialSurfaceBrush}"
-							  HorizontalAlignment="Left"/>
+							  Content="I agree to terms of services"
+                              x:Uid="CreateAccount_TermsOfServices"
+							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 				</local:DataValidationView>
 
 				<!-- Confirm button -->
