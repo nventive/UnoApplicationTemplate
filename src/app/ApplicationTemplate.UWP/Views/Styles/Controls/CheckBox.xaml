@@ -2,11 +2,11 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- ResourceDictionary containing only 1 item doesn't work if that item refers Material resources. -->
-	<Style x:Key="DafaultStyle"
+	<Style x:Key="DefaultStyle"
 		   BasedOn="{StaticResource MaterialCheckBoxStyle}"
 		   TargetType="CheckBox" />
 
 	<!-- Default Style -->
 	<Style TargetType="CheckBox"
-			   BasedOn="{StaticResource DafaultStyle}" />
+		   BasedOn="{StaticResource DefaultStyle}" />
 </ResourceDictionary>
