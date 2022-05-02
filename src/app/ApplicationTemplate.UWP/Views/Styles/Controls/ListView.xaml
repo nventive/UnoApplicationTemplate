@@ -18,52 +18,12 @@
 	-->
 
 	<Style TargetType="ListView"
+		   BasedOn="{StaticResource MaterialListViewStyle}"
 		   x:Key="DefaultListViewStyle">
 		<!-- This toolkit property overrides the padding and sets one that will make sure items are visible
 			within the safe zone. Important to support devices with round corners or notches (iPhone X, Essential Phone) -->
 		<Setter Property="toolkit:VisibleBoundsPadding.PaddingMask"
 				Value="All" />
-		<Setter Property="IsTabStop"
-				Value="False" />
-		<Setter Property="TabNavigation"
-				Value="Once" />
-		<Setter Property="IsSwipeEnabled"
-				Value="True" />
-		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.VerticalScrollBarVisibility"
-				Value="Auto" />
-		<Setter Property="ScrollViewer.HorizontalScrollMode"
-				Value="Disabled" />
-		<Setter Property="ScrollViewer.IsHorizontalRailEnabled"
-				Value="False" />
-		<Setter Property="ScrollViewer.VerticalScrollMode"
-				Value="Enabled" />
-		<Setter Property="ScrollViewer.IsVerticalRailEnabled"
-				Value="True" />
-		<!--ZoomMode attached property is currently not supported-->
-		<!--<Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />-->
-		<Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
-				Value="False" />
-		<Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
-				Value="True" />
-		<Setter Property="ItemContainerTransitions">
-			<Setter.Value>
-				<TransitionCollection>
-					<AddDeleteThemeTransition />
-					<ContentThemeTransition />
-					<ReorderThemeTransition />
-					<EntranceThemeTransition IsStaggeringEnabled="False" />
-				</TransitionCollection>
-			</Setter.Value>
-		</Setter>
-		<Setter Property="ItemsPanel">
-			<Setter.Value>
-				<ItemsPanelTemplate>
-					<ItemsStackPanel Orientation="Vertical" />
-				</ItemsPanelTemplate>
-			</Setter.Value>
-		</Setter>
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ListView">
