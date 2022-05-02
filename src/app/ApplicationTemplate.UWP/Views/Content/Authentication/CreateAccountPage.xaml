@@ -251,7 +251,6 @@
 							  Content="I agree to the terms of services"
 							  x:Uid="CreateAccount_TermsOfServices"
 							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							  Style="{StaticResource MaterialLightCheckBoxStyle}"
 							  Foreground="{StaticResource MaterialSurfaceBrush}"
 							  HorizontalAlignment="Left"/>
 				</local:DataValidationView>
