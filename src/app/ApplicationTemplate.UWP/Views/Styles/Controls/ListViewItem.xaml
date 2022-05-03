@@ -170,7 +170,7 @@
 							<RowDefinition Height="*" />
 							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
-<!--
+
 						<ContentPresenter x:Name="Content"
 										  Margin="16,0,0,0"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
@@ -179,8 +179,7 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  TextWrapping="Wrap" />-->
-
+										  TextWrapping="Wrap" />
 						<!-- CheckBox -->
 						<CheckBox x:Name="CheckBox"
 								  Content="{TemplateBinding Content}"

@@ -27,7 +27,12 @@ namespace ApplicationTemplate.Presentation
 		{
 			if (this.IsFromSettingsPage)
 			{
-				await this.GetService<ISectionsNavigator>().NavigateBack(ct);
+				// Forward navigation to navigate back to LoginPage
+				// Remove LoginPage for navigation stack
+				await this.GetService<ISectionsNavigator>().RemovePrevious(ct);
+				await this.GetService<ISectionsNavigator>().Navigate(ct, () => new SettingsPageViewModel());
+				// Remove OnboardingPage for navigation stack
+				await this.GetService<ISectionsNavigator>().RemovePrevious(ct);
 			}
 			else
 			{

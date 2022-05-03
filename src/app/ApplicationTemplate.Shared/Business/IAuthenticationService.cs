@@ -44,7 +44,7 @@ namespace ApplicationTemplate.Business
 		Task Logout(CancellationToken ct);
 
 		/// <summary>
-		/// Creates a user account an logs the user in using the provided <paramref name="email"/> and <paramref name="password"/>.
+		/// Creates a user account and logs the user in using the provided <paramref name="email"/> and <paramref name="password"/>.
 		/// </summary>
 		/// <param name="ct"><see cref="CancellationToken"/></param>
 		/// <param name="email">Email</param>

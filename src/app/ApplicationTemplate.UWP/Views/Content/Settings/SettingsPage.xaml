@@ -56,7 +56,6 @@
 									x:Uid="Settings_ChangePassword"
 									Margin="0,16,0,0"
 									HorizontalAlignment="Left"
-									Style="{StaticResource MaterialContainedButtonStyle}"
 									Command="{Binding Parent.NavigateToResetPasswordPage}" />
 
 						</StackPanel>
@@ -87,7 +86,7 @@
 							Margin="0,16,0,0"
 							HorizontalAlignment="Left"
 							Command="{Binding NavigateToOnboardingPage}"
-							Style="{StaticResource MaterialSecondaryContainedButtonStyle}" />
+							Style="{StaticResource MaterialContainedSecondaryButtonStyle}" />
 				</StackPanel>
 
 				<Rectangle Height="1"
@@ -184,7 +183,6 @@
 						Margin="24,16"
 						HorizontalAlignment="Left"
 						Command="{Binding Logout}"
-						Style="{StaticResource MaterialContainedButtonStyle}"
 						Background="{StaticResource MaterialErrorBrush}" />
 			</StackPanel>
 		</ScrollViewer>

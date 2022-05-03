@@ -67,7 +67,7 @@
 							 x:Uid="Login_Email"
 							 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 Style="{StaticResource TextBoxStyle}"
-							 InputScope="EmailNameOrAddress"
+							 InputScope="EmailSmtpAddress"
 							 IsSpellCheckEnabled="False"
 							 ios:ReturnKeyType="Next"
 							 android:ImeOptions="Next"
@@ -101,7 +101,6 @@
 						x:Uid="Login_Login"
 						Content="LOG IN"
 						Command="{Binding Login}"
-						Style="{StaticResource ExecutingButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="42,24,42,16" />
 

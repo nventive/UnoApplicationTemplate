@@ -250,6 +250,7 @@
 					<CheckBox x:Name="TermsOfServiceCheckBox"
 							  Content="I agree to terms of services"
                               x:Uid="CreateAccount_TermsOfServices"
+							  Foreground="{StaticResource MaterialSurfaceBrush}"
 							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
 				</local:DataValidationView>
 
@@ -258,7 +259,6 @@
 							x:Uid="CreateAccount_Confirm"
 							Content="CREATE AN ACCOUNT"
 							Command="{Binding CreateAccount}"
-							Style="{StaticResource ExecutingButtonStyle}"
 							HorizontalAlignment="Stretch"
 							Margin="42,12,42,0" />
 			</StackPanel>

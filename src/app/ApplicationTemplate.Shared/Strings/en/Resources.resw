@@ -413,7 +413,7 @@ it's happening!</value>
   <data name="ResetPassword_Subitle.Text" xml:space="preserve">
     <value>Welcome back, choose a new password that you can easily remember.</value>
   </data>
-  <data name="ResetPassword_Password.Placeholder" xml:space="preserve">
+  <data name="ResetPassword_Password.PlaceholderText" xml:space="preserve">
     <value>Choose a new password</value>
   </data>
   <data name="ResetPassword_Reset.Content" xml:space="preserve">

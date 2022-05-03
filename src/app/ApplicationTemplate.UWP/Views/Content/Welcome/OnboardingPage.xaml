@@ -43,7 +43,6 @@
 							   Style="{StaticResource Headline6}"
 							   Foreground="{StaticResource MaterialOnSecondaryBrush}"
 							   Width="300"
-							   Margin="0,8"
 							   VerticalAlignment="Top"
 							   HorizontalTextAlignment="Center"
 							   HorizontalAlignment="Center" />
@@ -73,7 +72,9 @@
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Image Source="ms-appx:///Assets/Background_Mustaches_Light.png"
-			   Stretch="UniformToFill"/>
+			   Stretch="UniformToFill"
+			   HorizontalAlignment="Stretch"
+			   VerticalAlignment="Stretch" />
 
 		<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
 			<Grid.RowDefinitions>
