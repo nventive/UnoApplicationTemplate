@@ -4,7 +4,6 @@
 							 xmlns:ne="using:Nventive.View.Extensions"
 							 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 							 xmlns:c="using:ApplicationTemplate.Views.Controls"
-							 xmlns:u="using:Nventive.View.Controls"
 							 xmlns:utu="using:Uno.Toolkit.UI"
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
@@ -17,9 +16,7 @@
 					<VisualTransition From="Open"
 									  To="Closed">
 						<Storyboard>
-
 							<!--CloseTranslateAnimation.To is set in code behind-->
-
 							<DoubleAnimation x:Name="CloseTranslateAnimation"
 											 Storyboard.TargetName="MenuRoot"
 											 Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"

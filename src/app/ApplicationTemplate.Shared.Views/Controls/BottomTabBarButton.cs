@@ -3,13 +3,10 @@ using Windows.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Views.Controls
 {
-	/// <summary>
-	/// Radio button with optional icon, used in the menu.
-	/// </summary>
 	public partial class BottomTabBarButton : Button
 	{
 		/// <summary>
-		/// Gets or sets the icon style on top of the RadioButton's text (Content).
+		/// Gets or sets the icon style for the TabBar button.
 		/// </summary>
 		public Style IconStyle
 		{

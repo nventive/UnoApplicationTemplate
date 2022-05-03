@@ -3,7 +3,7 @@
 					xmlns:u="using:Nventive.View.Controls"
 					xmlns:c="using:ApplicationTemplate.Views.Controls">
 
-	<Style x:Key="DefaultMenuRadioButtonStyle"
+	<Style x:Key="DefaultBottomTabBarButtonStyle"
 		   TargetType="c:BottomTabBarButton">
 
 		<Setter Property="Background"
@@ -27,35 +27,13 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="c:BottomTabBarButton">
 
-					
+
 					<Grid x:Name="Root"
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
 						  BorderThickness="{TemplateBinding BorderThickness}"
 						  Padding="{TemplateBinding Padding}">
-						
-						<!--<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="PointerStates">
-								<VisualState x:Name="Selected">
-									<VisualState.Setters>
-										<Setter Target="Icon.Foreground"
-												Value="{ThemeResource MaterialOnPrimarySelectedBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource MaterialOnPrimarySelectedBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="PointerOverSelected" />
-								<VisualState x:Name="PressedSelected">
-									<VisualState.Setters>
-										<Setter Target="Icon.Foreground"
-												Value="{ThemeResource MaterialOnPrimarySelectedBrush}" />
-										<Setter Target="ContentPresenter.Foreground"
-												Value="{ThemeResource MaterialOnPrimarySelectedBrush}" />
-									</VisualState.Setters>
-								</VisualState>
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>-->
-						
+
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*" />
 							<RowDefinition Height="25" />
@@ -87,6 +65,6 @@
 	</Style>
 
 	<Style TargetType="c:BottomTabBarButton"
-		   BasedOn="{StaticResource DefaultMenuRadioButtonStyle}" />
+		   BasedOn="{StaticResource DefaultBottomTabBarButtonStyle}" />
 
 </ResourceDictionary>
