@@ -162,7 +162,7 @@
 									 x:Uid="CreateAccount_Password"
 									 PlaceholderText="Choose a password"
 									 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-									 Style="{StaticResource DefaultPasswordBoxStyle}"
+								 Style="{StaticResource MaterialOutlinedPasswordBoxStyle}"
 									 ios:ReturnKeyType="Done"
 									 android:ImeOptions="Done"
 									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
