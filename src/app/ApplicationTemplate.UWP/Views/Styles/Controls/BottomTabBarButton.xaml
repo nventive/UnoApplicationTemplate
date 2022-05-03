@@ -26,8 +26,6 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="c:BottomTabBarButton">
-
-
 					<Grid x:Name="Root"
 						  Background="{TemplateBinding Background}"
 						  BorderBrush="{TemplateBinding BorderBrush}"
@@ -36,14 +34,12 @@
 
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*" />
-							<RowDefinition Height="25" />
 							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 
 						<!-- Icon -->
 						<u:PathControl x:Name="Icon"
 									   VerticalAlignment="Bottom"
-									   Grid.Row="1"
 									   Style="{TemplateBinding IconStyle}"
 									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
@@ -57,7 +53,7 @@
 								   VerticalAlignment="Bottom"
 								   AutomationProperties.AccessibilityView="Raw"
 								   Margin="0,5"
-								   Grid.Row="2" />
+								   Grid.Row="1" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
