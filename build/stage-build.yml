@@ -93,13 +93,6 @@ jobs:
     - group: ${{ parameters.iosVariableGroup }}
 
     steps:
-    - task: UseDotNet@2
-      displayName: 'Install .Net Core runtime 2.1.x'
-      inputs:
-        version: 2.1.x
-        packageType: 'runtime'
-        installationPath: '$(Agent.ToolsDirectory)/dotnet'
-        
     - template: steps-build.yml
       parameters:
         iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
