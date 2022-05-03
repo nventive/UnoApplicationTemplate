@@ -52,7 +52,7 @@
     
     <!--  Home navigation Paths -->
 	<!--  Home section -->
-	<Style x:Key="OutlinedHomePathControlStyle"
+	<Style x:Key="HomePathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Template">
 			<Setter.Value>
@@ -89,7 +89,7 @@
 	</Style>
 
 	<!--  Posts section -->
-	<Style x:Key="OutlinedPostsPathControlStyle"
+	<Style x:Key="PostsPathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Template">
 			<Setter.Value>
@@ -126,7 +126,7 @@
 	</Style>
 
 	<!--  Settings section -->
-	<Style x:Key="OutlinedSettingsPathControlStyle"
+	<Style x:Key="SettingsPathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Template">
 			<Setter.Value>
