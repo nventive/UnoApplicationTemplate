@@ -20,10 +20,6 @@
 	<Style TargetType="ListView"
 		   BasedOn="{StaticResource MaterialListViewStyle}"
 		   x:Key="DefaultListViewStyle">
-		<!-- This toolkit property overrides the padding and sets one that will make sure items are visible
-			within the safe zone. Important to support devices with round corners or notches (iPhone X, Essential Phone) -->
-		<Setter Property="toolkit:VisibleBoundsPadding.PaddingMask"
-				Value="All" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ListView">
