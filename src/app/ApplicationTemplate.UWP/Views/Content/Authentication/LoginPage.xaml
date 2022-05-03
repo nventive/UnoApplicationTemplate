@@ -56,14 +56,13 @@
 
 				<!-- Password -->
 				<local:DataValidationView Model="{Binding Form}"
-											  PropertyName="Password"
-											  Margin="42,4,42,0"
-											  Background="{StaticResource MaterialSurfaceBrush}">
+										  PropertyName="Password"
+										  Margin="42,4,42,0"
+										  Background="{StaticResource MaterialSurfaceBrush}">
 					<PasswordBox x:Name="PasswordField"
-							     x:Uid="Login_Password"
+								 x:Uid="Login_Password"
 								 PlaceholderText="Password"
 								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 Style="{StaticResource DefaultPasswordBoxStyle}"
 								 ios:ReturnKeyType="Next"
 								 android:ImeOptions="Next"
 								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
