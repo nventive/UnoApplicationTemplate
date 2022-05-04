@@ -9,7 +9,7 @@
 	<Page.Resources>
 		<DataTemplate x:Key="QuotesEmptyTemplate">
 			<TextBlock Text="You don't have any favorites"
-					   Style="{StaticResource MaterialBody1}"
+					   Style="{StaticResource Body1}"
 					   VerticalAlignment="Center"
 					   HorizontalAlignment="Center" />
 		</DataTemplate>

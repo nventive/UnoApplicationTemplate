@@ -6,7 +6,7 @@
 	<DataTemplate x:Key="DataLoaderViewEmptyTemplate">
 		<Grid Background="{StaticResource MaterialBackgroundBrush}">
 			<TextBlock Text="Nothing to show here"
-					   Style="{StaticResource MaterialBody1}"
+					   Style="{StaticResource Body1}"
 					   HorizontalAlignment="Center"
 					   VerticalAlignment="Top"
 					   Margin="0,44,0,0" />
@@ -23,7 +23,7 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<TextBlock Style="{StaticResource MaterialBody1}"
+			<TextBlock Style="{StaticResource Body1}"
 					   Foreground="White"
 					   HorizontalAlignment="Left"
 					   VerticalAlignment="Center">
