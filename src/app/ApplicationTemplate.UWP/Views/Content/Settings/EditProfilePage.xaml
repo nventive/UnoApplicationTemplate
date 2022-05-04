@@ -30,8 +30,7 @@
 							 x:Uid="Profile_FirstName"
 							 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 ios:ReturnKeyType="Next"
-							 android:ImeOptions="Next"
-							 FontSize="16" />
+							 android:ImeOptions="Next" />
 				</local:DataValidationView>
 
 				<!-- Last name -->
@@ -42,8 +41,7 @@
 							 x:Uid="Profile_LastName"
 							 Text="{Binding Form.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 ue:TextBoxBehavior.DismissKeyboardOnEnter="True"
-							 ue:TextBoxBehavior.EnterCommand="{Binding UpdateProfile}"
-							 FontSize="16" />
+							 ue:TextBoxBehavior.EnterCommand="{Binding UpdateProfile}" />
 				</local:DataValidationView>
 
 				<Button Command="{Binding UpdateProfile}"

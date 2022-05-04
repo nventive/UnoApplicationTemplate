@@ -35,10 +35,8 @@
 										  PropertyName="Title"
 										  Margin="0,4">
 					<TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Background="{StaticResource MaterialSurfaceBrush}"
 							 CornerRadius="4"
 							 PlaceholderText="Joke's title"
-							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
 							 FontSize="16" />
 				</local:DataValidationView>
 
@@ -47,11 +45,7 @@
 										  PropertyName="Body"
 										  Margin="0,4">
 					<TextBox Text="{Binding Body, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Background="{StaticResource MaterialSurfaceBrush}"
-							 CornerRadius="4"
-							 PlaceholderText="Write the joke"
-							 Style="{StaticResource MaterialOutlinedTextBoxStyle}"
-							 FontSize="16" />
+							 PlaceholderText="Write the joke" />
 				</local:DataValidationView>
 			</StackPanel>
 

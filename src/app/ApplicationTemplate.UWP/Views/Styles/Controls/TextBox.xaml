@@ -13,6 +13,7 @@
 	
 	<!-- Styles -->
 	<Style x:Key="TextBoxStyle"
+		   BasedOn="{StaticResource MaterialOutlinedTextBoxStyle}"
 		   TargetType="TextBox">
 
 		<Setter Property="MinHeight"
@@ -24,7 +25,7 @@
 		<Setter Property="BorderBrush"
 				Value="{StaticResource MaterialOnSurfaceLowBrush}" />
 		<Setter Property="SelectionHighlightColor"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource MaterialPrimaryBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0.5" />
 		<Setter Property="FontFamily"
@@ -33,94 +34,8 @@
 				Value="Medium" />
 		<Setter Property="FontSize"
 				Value="16" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="ScrollViewer.HorizontalScrollMode"
-				Value="Auto" />
-		<Setter Property="ScrollViewer.VerticalScrollMode"
-				Value="Auto" />
-		<Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
-				Value="Hidden" />
-		<Setter Property="ScrollViewer.VerticalScrollBarVisibility"
-				Value="Hidden" />
-		<Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
-				Value="False" />
-		<Setter Property="Padding"
-				Value="16,0" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="TextBox">
-					<Grid x:Name="RootGrid"
-						  Background="{TemplateBinding Background}"
-						  CornerRadius="4">
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Disabled">
-									<VisualState.Setters>
-										<Setter Target="RootGrid.Opacity"
-												Value="0.5" />
-									</VisualState.Setters>
-								</VisualState>
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Focused" />
-							</VisualStateGroup>
-							<VisualStateGroup x:Name="ButtonStates">
-								<VisualState x:Name="ButtonVisible" />
-								<VisualState x:Name="ButtonCollapsed" />
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="*" />
-							<ColumnDefinition Width="Auto" />
-						</Grid.ColumnDefinitions>
-						<Grid.RowDefinitions>
-							<RowDefinition Height="Auto" />
-							<RowDefinition Height="*" />
-						</Grid.RowDefinitions>
-
-						<Border BorderThickness="{TemplateBinding BorderThickness}"
-								BorderBrush="{TemplateBinding BorderBrush}"
-								Grid.Row="1"
-								CornerRadius="4"
-								Grid.ColumnSpan="2"
-								Padding="16,0,16,0" />
-
-						<Grid Grid.Row="1">
-							<ScrollViewer x:Name="ContentElement"
-										  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
-										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  Margin="{TemplateBinding BorderThickness}"
-										  Padding="{TemplateBinding Padding}"
-										  Foreground="{TemplateBinding Foreground}"
-										  IsTabStop="False"
-										  AutomationProperties.AccessibilityView="Raw"
-										  ZoomMode="Disabled" />
-
-							<ContentControl x:Name="PlaceholderTextContentPresenter"
-											Content="{TemplateBinding PlaceholderText}"
-											Foreground="{TemplateBinding Foreground}"
-											FontWeight="Normal"
-											Margin="{TemplateBinding BorderThickness}"
-											Padding="{TemplateBinding Padding}"
-											IsTabStop="False"
-											IsHitTestVisible="False"
-											VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-						</Grid>
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+		<Setter Property="CornerRadius"
+				Value="4" />
 	</Style>
 
 	<!-- Default Style -->
