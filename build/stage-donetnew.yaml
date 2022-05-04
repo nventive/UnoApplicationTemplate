@@ -1,0 +1,16 @@
+jobs:
+  - job: On_Windows_Dotnet_New
+    pool:
+      name: 'Windows 2022' # .Net 6 is required for the dotnet new to work properly because of this bug: https://github.com/dotnet/templating/pull/2939
+    container: windowsNet6
+    
+    steps:    
+    - script: dotnet new -i $(Build.SourcesDirectory)
+      displayName: 'Install UnoApplicationTemplate'
+
+    - script: dotnet new nv-mobile -n GeneratedApp
+      displayName: 'Generate project using dotnet new'
+
+    - publish: GeneratedApp
+      displayName: 'Publish GeneratedApp folder'
+      artifact: GeneratedApp
