@@ -14,19 +14,6 @@
 	******************************************************************
 	-->
 
-	<Style x:Key="Headline1"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline1}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01Bold}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="LineHeight"
-				Value="112" />
-		<Setter Property="CharacterSpacing"
-				Value="-1.5" />
-	</Style>
-
 	<Style x:Key="Headline2"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialHeadline2}">
@@ -38,26 +25,6 @@
 				Value="62" />
 		<Setter Property="CharacterSpacing"
 				Value="-0.5" />
-	</Style>
-
-	<Style x:Key="Headline3"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline3}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01Bold}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="LineHeight"
-				Value="56" />
-	</Style>
-
-	<Style x:Key="Headline4"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline4}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
 	</Style>
 
 	<Style x:Key="Headline5"
@@ -163,12 +130,4 @@
 				Value="0.4" />
 	</Style>
 
-	<Style x:Key="ButtonText"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialButtonText}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01SemiBold}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-	</Style>
 </ResourceDictionary>
