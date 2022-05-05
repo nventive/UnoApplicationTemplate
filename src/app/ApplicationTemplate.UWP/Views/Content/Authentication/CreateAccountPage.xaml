@@ -37,7 +37,7 @@
 						   x:Uid="CreateAccount_Title"
 						   Margin="22,0"
 						   Style="{StaticResource Headline2}"
-                           Foreground="{StaticResource MaterialSurfaceBrush}"
+               Foreground="{StaticResource MaterialSurfaceBrush}"
 						   HorizontalTextAlignment="Center"
 						   HorizontalAlignment="Center" />
 
@@ -220,10 +220,10 @@
 
 					<!-- Label -->
 					<TextBlock Text="Favorite dad nickname (pick at least 1)"
-							   x:Uid="CreateAccount_FavoriteDadNames"
-                               Style="{StaticResource Subtitle2}"
-                               Foreground="{StaticResource MaterialSurfaceBrush}"
-                               Margin="0,0,0,4" />
+							       x:Uid="CreateAccount_FavoriteDadNames"
+                     Style="{StaticResource Subtitle2}"
+                     Foreground="{StaticResource MaterialSurfaceBrush}"
+                     Margin="0,0,0,4" />
 
 					<!-- Top 3 Favorite Dad names -->
 					<local:DataValidationView Model="{Binding Form}"
