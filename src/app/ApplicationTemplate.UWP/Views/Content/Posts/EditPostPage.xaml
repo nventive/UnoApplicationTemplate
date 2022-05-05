@@ -36,6 +36,7 @@
 										  Margin="0,4">
 					<TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 CornerRadius="4"
+							 x:Uid="EditPost_JokeTitle"
 							 PlaceholderText="Joke's title"
 							 FontSize="16" />
 				</local:DataValidationView>
@@ -45,6 +46,7 @@
 										  PropertyName="Body"
 										  Margin="0,4">
 					<TextBox Text="{Binding Body, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 x:Uid="EditPost_JokeContent"
 							 PlaceholderText="Write the joke" />
 				</local:DataValidationView>
 			</StackPanel>
