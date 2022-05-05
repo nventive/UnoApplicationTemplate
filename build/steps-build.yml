@@ -11,6 +11,15 @@ parameters:
 - name: iosProvisioningProfileFile
   type: string
   default: ''
+- name: pathToSrc
+  type: string
+  default: ''
+- name: solutionFileName
+  type: string
+  default: ''
+- name: pathToInfoPlist
+  type: string
+  default: ''
 
 steps:
 - task: UseDotNet@2
@@ -19,6 +28,12 @@ steps:
     version: 2.1.x
     packageType: 'runtime'
     installationPath: '$(Agent.ToolsDirectory)/dotnet'
+
+#-if false
+- download: current
+  condition: eq('GeneratedApp.sln', '${{ parameters.solutionFileName }}')
+  artifact: GeneratedApp
+#-endif
 
 - task: gitversion/setup@0
   inputs:
@@ -34,7 +49,7 @@ steps:
 - task: MSBuild@1
   displayName: 'Restore solution packages'
   inputs:
-    solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
+    solution: '${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}'
     msbuildLocationMethod: version
     msbuildVersion: latest
     msbuildArchitecture: x86
@@ -74,7 +89,7 @@ steps:
   displayName: "Bump iOS version"
   condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
   inputs:
-    infoPlistPath: $(InfoPlistPath)
+    infoPlistPath: ${{ parameters.pathToInfoPlist }}
     bundleShortVersionString: '$(MajorMinorPatch)'
     bundleVersion: '$(PreReleaseNumber)' 
 
@@ -83,14 +98,14 @@ steps:
   displayName: "Replace iOS bundle identifier"
   condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
   inputs:
-    sourcePath: $(InfoPlistPath)
+    sourcePath: ${{ parameters.pathToInfoPlist }}
     bundleIdentifier: $(ApplicationIdentifier)
     printFile: true
 
 - task: MSBuild@1
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
   inputs:
-    solution: $(Build.SourcesDirectory)/src/$(SolutionFileName)
+    solution: '${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}'
     msbuildLocationMethod: version
     msbuildVersion: latest
     msbuildArchitecture: x86
@@ -114,7 +129,7 @@ steps:
     logProjectEvents: false
     createLogFile: false
 
-- script: dotnet test $(Build.SourcesDirectory)/src/$(SolutionFileName) /p:Configuration=$(ApplicationConfiguration) /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=$(Build.SourcesDirectory)/src/coverage /p:ExcludeByFile="**/*.g.cs" /p:Exclude="[*]*.Tests.*" --logger trx --no-build
+- script: dotnet test ${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }} /p:Configuration=$(ApplicationConfiguration) /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=${{ parameters.pathToSrc }}/coverage /p:ExcludeByFile="**/*.g.cs" /p:Exclude="[*]*.Tests.*" --logger trx --no-build
   displayName: 'Run tests'
   condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
 
@@ -130,11 +145,21 @@ steps:
   condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
   inputs:
     codeCoverageTool: 'Cobertura'
-    summaryFileLocation: "$(Build.SourcesDirectory)/src/coverage.cobertura.xml"
+    summaryFileLocation: "${{ parameters.pathToSrc }}/coverage.cobertura.xml"
 
 - publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
   artifact: $(ArtifactName)
+
+#-if false
+- task: DeleteFiles@1
+  displayName: "Remove downloaded artifacts (GeneratedApp folder)"
+  condition: always()
+  inputs:
+    SourceFolder: $(Pipeline.Workspace)/GeneratedApp
+    RemoveSourceFolder: true
+    Contents: '**'
+#-endif
 
 - task: PostBuildCleanup@3
   displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'

@@ -23,6 +23,15 @@ parameters:
 - name: removeHyperlinksFromReleaseNotes
   type: boolean
   default: false
+- name: pathToSrc
+  type: string
+  default: '$(Build.SourcesDirectory)/src'
+- name: solutionFileName
+  type: string
+  default: '$(SolutionFileName)'
+- name: pathToInfoPlist
+  type: string
+  default: '$(InfoPlistPath)'
 
 jobs:
   - job: On_Windows_ReleaseNotes
@@ -71,6 +80,8 @@ jobs:
     steps:
       - template: steps-build.yml
         parameters:
+          pathToSrc: ${{ parameters.pathToSrc }}
+          solutionFileName: ${{ parameters.solutionFileName }}
           androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
 
   - job: On_Mac # Build iOS on a mac
@@ -93,15 +104,11 @@ jobs:
     - group: ${{ parameters.iosVariableGroup }}
 
     steps:
-    - task: UseDotNet@2
-      displayName: 'Install .Net Core runtime 2.1.x'
-      inputs:
-        version: 2.1.x
-        packageType: 'runtime'
-        installationPath: '$(Agent.ToolsDirectory)/dotnet'
-        
     - template: steps-build.yml
       parameters:
+        pathToSrc: ${{ parameters.pathToSrc }}
+        solutionFileName: ${{ parameters.solutionFileName }}
+        pathToInfoPlist: ${{ parameters.pathToInfoPlist }}
         iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
         iosCertificateFile: ${{ parameters.iosCertificateFile }}
         iosCertificatePassword: $(AppleCertificatePassword)
