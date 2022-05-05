@@ -20,7 +20,8 @@ namespace ApplicationTemplate.Presentation
 
 			if (validationResult.IsValid)
 			{
-				await this.GetService<IStackNavigator>().Navigate(ct, () => new SentEmailConfirmationPageViewModel());
+				await this.GetService<ISectionsNavigator>().Navigate(ct, () => new SentEmailConfirmationPageViewModel());
+				await this.GetService<ISectionsNavigator>().RemovePrevious(ct);
 			}
 		});
 

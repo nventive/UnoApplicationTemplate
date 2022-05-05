@@ -157,51 +157,6 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="LeftArrowButtonStyle"
-		   TargetType="Button">
-
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Padding"
-				Value="8,6" />
-		<Setter Property="BorderBrush"
-				Value="Transparent" />
-
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="Button">
-					<Grid x:Name="RootGrid"
-						  Width="{TemplateBinding Width}"
-						  Height="{TemplateBinding Height}"
-						  HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-						  VerticalAlignment="{TemplateBinding VerticalAlignment}"
-						  Background="{TemplateBinding Background}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  Padding="{TemplateBinding Padding}"
-						  BorderThickness="1"
-						  CornerRadius="4">
-						<VisualStateManager.VisualStateGroups>
-							<VisualStateGroup x:Name="CommonStates">
-								<VisualState x:Name="Normal" />
-								<VisualState x:Name="PointerOver" />
-								<VisualState x:Name="Pressed" />
-							</VisualStateGroup>
-						</VisualStateManager.VisualStateGroups>
-
-						<u:PathControl Style="{StaticResource LeftArrowPathControlStyle}"
-										   Foreground="{TemplateBinding Foreground}" />
-					</Grid>
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
 	<Style x:Key="RightArrowButtonStyle"
 		   TargetType="Button">
 

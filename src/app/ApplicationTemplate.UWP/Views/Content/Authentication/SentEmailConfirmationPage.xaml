@@ -15,38 +15,39 @@
 			   HorizontalAlignment="Stretch"
 			   VerticalAlignment="Stretch" />
 
-		<StackPanel toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
-					VerticalAlignment="Center"
-				    Margin="57,0">
-			<!-- Image -->
-			<Image Source="ms-appx:///Assets/Letters.png" />
+		<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			
+			<CommandBar Style="{StaticResource TransparentCommandBarStyle}"
+						toolkit:CommandBarExtensions.BackButtonForeground="{StaticResource MaterialOnSurfaceBrush}" />
+		
+			<StackPanel Grid.Row="1"
+						VerticalAlignment="Center"
+						Margin="57,0">
+				<!-- Image -->
+				<Image Source="ms-appx:///Assets/Letters.png" />
 
-			<!-- Title -->
-			<TextBlock Text="Email sent!"
-					   x:Uid="SentEmailConfirmation_Title"
-					   Style="{StaticResource Headline3}"
-					   Foreground="{StaticResource MaterialOnSurfaceBrush}"
-					   HorizontalTextAlignment="Center"
-					   HorizontalAlignment="Center" />
+				<!-- Title -->
+				<TextBlock Text="Email sent!"
+						   x:Uid="SentEmailConfirmation_Title"
+						   Style="{StaticResource Headline3}"
+						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
+						   HorizontalTextAlignment="Center"
+						   HorizontalAlignment="Center" />
 
-			<!-- Subtitle -->
-			<TextBlock Text="You can now go in your email to restart your account."
-					   x:Uid="SentEmailConfirmation_Subtitle"
-					   Style="{StaticResource Body1}"
-					   Foreground="{StaticResource MaterialOnSurfaceBrush}"
-					   Margin="0,16"
-					   Width="230"
-					   HorizontalTextAlignment="Center"
-					   HorizontalAlignment="Center" />
-		</StackPanel>
-
-		<!-- Back button -->
-		<Button toolkit:VisibleBoundsPadding.PaddingMask="Top"
-				Style="{StaticResource LeftArrowButtonStyle}"
-				Foreground="{StaticResource MaterialOnSurfaceBrush}"
-				Command="{Binding NavigateBackToLogin}"
-				Margin="16,36,16,0"
-				HorizontalAlignment="Left"
-				VerticalAlignment="Top" />
+				<!-- Subtitle -->
+				<TextBlock Text="You can now go in your email to restart your account."
+						   x:Uid="SentEmailConfirmation_Subtitle"
+						   Style="{StaticResource Body1}"
+						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
+						   Margin="0,16"
+						   Width="230"
+						   HorizontalTextAlignment="Center"
+						   HorizontalAlignment="Center" />
+			</StackPanel>
+		</Grid>
 	</Grid>
 </Page>
