@@ -8,6 +8,9 @@
 			<ResourceDictionary.MergedDictionaries>
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
+				<!-- Load Toolkit resources -->
+				<ToolkitResources xmlns="using:Uno.Toolkit.UI" />
+				
 				<!-- Uno material -->
 				<MaterialColors xmlns="using:Uno.Material"
 								OverrideSource="ms-appx:///Views/Styles/Application/MaterialOverride.xaml" />
@@ -21,7 +24,7 @@
 
 				<ResourceDictionary Source="Views/Styles/Controls/AsyncWebView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/Button.xaml" />
-				<ResourceDictionary Source="Views/Styles/Controls/MenuRadioButton.xaml" />
+				<ResourceDictionary Source="Views/Styles/Controls/BottomTabBarButton.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/CalendarView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/CheckBox.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/ComboBox.xaml" />
