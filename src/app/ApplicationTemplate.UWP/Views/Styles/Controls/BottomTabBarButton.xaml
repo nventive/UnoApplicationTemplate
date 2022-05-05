@@ -43,7 +43,6 @@
 									   Style="{TemplateBinding IconStyle}"
 									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
 
-
 						<!-- Label -->
 						<TextBlock x:Name="ContentPresenter"
 								   Text="{TemplateBinding Content}"
