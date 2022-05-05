@@ -59,13 +59,14 @@
 							  not_android:ItemsSource="{Binding Data}">
 						<ListView.ItemTemplate>
 							<DataTemplate>
-								<Grid Background="{StaticResource MaterialSurfaceBrush}">
+								<Grid Background="{StaticResource MaterialSurfaceBrush}"
+									  Margin="8,12">
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="*" />
 										<ColumnDefinition Width="Auto" />
 									</Grid.ColumnDefinitions>
 
-									<StackPanel Margin="0,16">
+									<StackPanel Padding="16">
 										<TextBlock Text="{Binding Quote.Title}"
 												   Grid.Row="0"
 												   FontSize="16"
