@@ -27,7 +27,7 @@ namespace ApplicationTemplate.Tests
 		[Fact]
 		public async Task NavigateFromOnboardingToLoginPage()
 		{
-			await AssertNavigateFromTo<OnboardingPageViewModel, LoginPageViewModel>(() => new OnboardingPageViewModel(), p => p.NavigateToLogin);
+			await AssertNavigateFromTo<OnboardingPageViewModel, LoginPageViewModel>(() => new OnboardingPageViewModel(), p => p.NavigateToNextPage);
 		}
 
 		[Fact]
@@ -37,21 +37,10 @@ namespace ApplicationTemplate.Tests
 			var sourceSection = "Settings";
 
 			// Act
-			var currentSection = await AssertSetActiceSection<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToLoginPage, sourceSection);
+			var currentSection = await AssertSetActiceSection<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.Logout, sourceSection);
 
 			// Assert
 			Assert.NotEqual(sourceSection, currentSection);
-		}
-
-		[Fact]
-		public async Task NavigateToDiagnosticsPageAndBack()
-		{
-			var diagnosticsViewModel = await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(
-				() => new SettingsPageViewModel(),
-				p => p.NavigateToDiagnosticsPage
-			);
-
-			await AssertNavigateTo<SettingsPageViewModel>(() => diagnosticsViewModel.NavigateBack);
 		}
 	}
 }
