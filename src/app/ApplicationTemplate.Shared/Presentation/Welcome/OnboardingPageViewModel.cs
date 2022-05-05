@@ -9,16 +9,6 @@ namespace ApplicationTemplate.Presentation
 {
 	public partial class OnboardingPageViewModel : ViewModel
 	{
-		public OnboardingPageViewModel()
-		{
-			OnboardingItems = new OnboardingItemViewModel[]
-			{
-				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
-				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
-				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png"),
-			};
-		}
-
 		public IDynamicCommand NavigateToLogin => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(isFirstLogin: true));
@@ -27,8 +17,12 @@ namespace ApplicationTemplate.Presentation
 
 		public OnboardingItemViewModel[] OnboardingItems
 		{
-			get => this.Get<OnboardingItemViewModel[]>();
-			set => this.Set(value);
+			get => new[]
+			{
+				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
+				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
+				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png")
+			};
 		}
 
 		public static implicit operator OnboardingPageViewModel(OnboardingItemViewModel v)
