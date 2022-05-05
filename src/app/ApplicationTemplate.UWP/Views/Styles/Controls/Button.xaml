@@ -70,7 +70,7 @@
 											  ContentTransitions="{TemplateBinding ContentTransitions}"
 											  ContentTemplate="{TemplateBinding ContentTemplate}"
 											  Padding="{TemplateBinding Padding}"
-									 		  FontFamily="{TemplateBinding FontFamily}"
+											  FontFamily="{TemplateBinding FontFamily}"
 											  FontSize="{TemplateBinding FontSize}"
 											  CharacterSpacing="{TemplateBinding CharacterSpacing}"
 											  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -84,6 +84,6 @@
 	</Style>
 
 	<Style TargetType="Button"
-		   BasedOn="{StaticResource MaterialContainedButtonStyle}"/>
+		   BasedOn="{StaticResource MaterialContainedButtonStyle}" />
 
 </ResourceDictionary>

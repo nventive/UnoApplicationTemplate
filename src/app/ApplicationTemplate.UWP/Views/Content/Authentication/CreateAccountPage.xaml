@@ -37,11 +37,15 @@
 			   VerticalAlignment="Stretch" />
 
 		<!-- Back button -->
-		<Button Style="{StaticResource LeftArrowButtonStyle}"
+		<Button Style="{StaticResource MaterialButtonIconStyle}"
 				Command="{Binding NavigateBack}"
 				Margin="16,56,16,0"
-				HorizontalAlignment="Left" />
-
+				HorizontalAlignment="Left">
+			<Button.Content>
+				<u:PathControl x:Name="CreateAccountLeftArrow"
+							   Style="{StaticResource LeftArrowPathControlStyle}" />
+			</Button.Content>
+		</Button>
 		<ScrollViewer Grid.Row="1">
 			<StackPanel VerticalAlignment="Center">
 				<TextBlock Text="Join the fun!"
