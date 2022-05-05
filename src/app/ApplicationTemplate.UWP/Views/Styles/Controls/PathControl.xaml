@@ -237,31 +237,6 @@
 		</Setter>
 	</Style>
 
-	<!-- LeftArrowPathControlStyle -->
-	<Style x:Key="LeftArrowPathControlStyle"
-		   TargetType="u:PathControl">
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
-		<Setter Property="Stretch"
-				Value="Uniform" />
-		<Setter Property="Height"
-				Value="12" />
-		<Setter Property="Width"
-				Value="8" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="u:PathControl">
-					<Path Data="M7.41 1.41L6 0L0 6L6 12L7.41 10.59L2.83 6L7.41 1.41Z"
-						  Stretch="{TemplateBinding Stretch}"
-						  Width="{TemplateBinding Width}"
-						  Height="{TemplateBinding Height}"
-						  Fill="{TemplateBinding Foreground}"
-						  HorizontalAlignment="Stretch" />
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</Style>
-
 	<!-- RevealPathControlStyle -->
 	<Style x:Key="RevealPathControlStyle"
 		   TargetType="u:PathControl">
