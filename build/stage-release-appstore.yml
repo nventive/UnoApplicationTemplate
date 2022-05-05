@@ -2,7 +2,7 @@
   applicationEnvironment: '' # e.g. "Staging", "Production"
   deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
 
-jobs: 
+jobs:
 - deployment: AppStore_iOS
 
   pool:
@@ -11,7 +11,7 @@ jobs:
       - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
 
   environment: ${{ parameters.deploymentEnvironment }}
-    
+
   variables:
   - group: ApplicationTemplate.Distribution.AppStore
   - name: artifactName
@@ -36,7 +36,7 @@ jobs:
             shouldSkipWaitingForProcessing: true
             teamId: $(AppleTeamId)
             teamName: $(AppleTeamName)
-        
+
         - task: DeleteFiles@1
           displayName: "Remove downloaded artifacts"
           condition: always()

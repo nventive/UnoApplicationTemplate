@@ -1,0 +1,26 @@
+parameters:
+- name: additionalReleaseNotesFile
+  type: string
+  default: 'Canary.md'
+- name: removeHyperlinksFromReleaseNotes
+  type: boolean
+  default: false
+
+steps:
+- powershell: New-Item -Path '$(ArtifactName)' -ItemType Directory
+  displayName: Create ReleaseNotes folder
+
+- task: nventiveReleaseNotesCompiler@5
+  displayName: 'Compile Release Notes'
+  inputs:
+    EnvironmentName: $(ApplicationEnvironment)
+    AdditionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
+    OutputFilePath: '$(ArtifactName)/ReleaseNotes.md'
+    CreateTruncatedVersion: true
+    TruncatedOutputFilePath: '$(ArtifactName)/ReleaseNotes-Excerpt.md'
+    CharacterLimit: 5000
+    RemoveHyperlinks: ${{ parameters.removeHyperlinksFromReleaseNotes }}
+
+- publish: $(ArtifactName)
+  displayName: 'Publish Release Notes'
+  artifact: $(ArtifactName)

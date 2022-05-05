@@ -32,13 +32,33 @@
             "**/*.lock.json",
             "**/.vs/**",
             "**/.git/**",
-            "template-scripts/**"
+            "template-scripts/**",
+            "**/stage-dotnetnew.yaml"
+          ],
+          "copyOnly": [
+            "**/*.aprof" 
           ]
         }
       ]
     }
   ],
   "SpecialCustomOperations": {
+    "**/*.yml": {
+      "operations": [
+        {
+          "type": "conditional",
+          "configuration": {
+            "if": [ "#-if" ],
+            "else": [ "#-else" ],
+            "elseif": [ "#-elseif" ],
+            "endif": [ "#-endif" ],
+            "trim": true,
+            "wholeLine": true,
+            "evaluator": "C++"
+          }
+        }
+      ]
+    },
     "**/*.projitems": {
       "operations": [
         {
