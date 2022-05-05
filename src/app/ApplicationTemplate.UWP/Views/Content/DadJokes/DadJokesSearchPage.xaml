@@ -19,7 +19,7 @@
 
 					<TextBlock Text="Enter keywords to search"
 							   HorizontalAlignment="Center"
-							   Style="{StaticResource MaterialBody1}" />
+							   Style="{StaticResource Body1}"/>
 
 					<Button Content="My favorites quotes"
 							Command="{Binding Parent.NavigateToFavoriteQuotes}"
@@ -33,12 +33,12 @@
 
 					<TextBlock Text="No results found for"
 							   HorizontalAlignment="Center"
-							   Style="{StaticResource MaterialBody1}" />
+							   Style="{StaticResource Body1}"/>
 
 					<TextBlock Text="{Binding Request.Context[SearchTerm]}"
 							   HorizontalAlignment="Center"
 							   Margin="0,8,0,0"
-							   Style="{StaticResource MaterialBody1}"
+							   Style="{StaticResource Body1}"
 							   FontWeight="Bold" />
 				</StackPanel>
 			</Grid>
@@ -94,8 +94,8 @@
 									</Grid.ColumnDefinitions>
 
 									<TextBlock Text="{Binding Quote.Value}"
-											   Style="{StaticResource MaterialBody1}" />
-
+											   Style="{StaticResource Body1}"/>
+									
 									<TextBlock Text="{Binding IsFavorite}"
 											   Grid.Column="1"
 											   Margin="4,0,0,0"
