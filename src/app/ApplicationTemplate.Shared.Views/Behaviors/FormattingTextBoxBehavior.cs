@@ -2,31 +2,31 @@
 #if NETFX_CORE || __ANDROID__ || __IOS__
 //+:cnd:noEmit
 using System;
-using System.Linq;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Text;
+using Uno.Extensions;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Core;
-using Uno.Extensions;
 
 namespace ApplicationTemplate.Views.Behaviors
 {
 	/// <summary>
 	/// This text box behavior allows you to format the input text based on specified format. 
 	/// The specified format follows the following convention:
-	///'#' allows anycharacters
-	///'A' : capital letter
+	/// '#' allows anycharacters
+	/// 'A' : capital letter
 	/// 'a' : lower case letter
-	///'0' : digit
-	///'N' : Capital alphanumeric
-	///'n' : lower case alphanumeric
-	///Example of formats: 
-	///- (000) 000-000 = Phone number
-	///- 0000 0000 0000 0000  = credit card
-	///- A0A 0A0 = code postal
+	/// '0' : digit
+	/// 'N' : Capital alphanumeric
+	/// 'n' : lower case alphanumeric
+	/// Example of formats: 
+	/// - (000) 000-000 = Phone number
+	/// - 0000 0000 0000 0000  = credit card
+	/// - A0A 0A0 = code postal
 	/// </summary>
 	public partial class FormattingTextBoxBehavior
 	{
@@ -53,7 +53,7 @@ namespace ApplicationTemplate.Views.Behaviors
 		}
 
 		public static readonly DependencyProperty TextFormatProperty =
-			DependencyProperty.RegisterAttached("TextFormat", typeof(string), typeof(FormattingTextBoxBehavior), new PropertyMetadata("", OnTextFormatChanged));
+			DependencyProperty.RegisterAttached("TextFormat", typeof(string), typeof(FormattingTextBoxBehavior), new PropertyMetadata(string.Empty, OnTextFormatChanged));
 
 		private static void OnTextFormatChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
 		{

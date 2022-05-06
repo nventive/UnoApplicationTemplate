@@ -48,7 +48,7 @@
 									</Grid.ColumnDefinitions>
 
 									<TextBlock Text="{Binding Quote.Value}"
-											   Style="{StaticResource Body1}"/>
+											   Style="{StaticResource Body1}" />
 
 									<ToggleButton IsChecked="{Binding IsFavorite}"
 												  Command="{Binding Parent.ToggleIsFavorite}"
