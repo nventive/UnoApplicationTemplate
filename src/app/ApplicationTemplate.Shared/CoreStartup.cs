@@ -249,10 +249,12 @@ namespace ApplicationTemplate
 
 		private async Task ObserveCurrentViewModel(CancellationToken ct, IServiceProvider services)
 		{
+			var dispatcher = services.GetRequiredService<CoreDispatcher>();
+
 			services
 				.GetRequiredService<ISectionsNavigator>()
 				.ObserveProcessedState()
-				.Select(state =>
+				.Select(async (state) =>
 				{
 					var vmType = state.CurrentState.GetViewModelType();
 					if (Window.Current.Content is FrameworkElement root)
@@ -261,14 +263,14 @@ namespace ApplicationTemplate
 						{
 							if (vmType == typeof(OnboardingPageViewModel) || vmType == typeof(LoginPageViewModel))
 							{
-								Shell.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+								await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
 								{
 									Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
 								});
 							}
 							else
 							{
-								Shell.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+								await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
 								{
 									Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
 								});
@@ -278,14 +280,14 @@ namespace ApplicationTemplate
 						{
 							if (vmType == typeof(OnboardingPageViewModel) || vmType == typeof(LoginPageViewModel))
 							{
-								Shell.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+								await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
 								{
 									Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
 								});
 							}
 							else
 							{
-								Shell.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+								await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
 								{
 									Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
 								});
