@@ -18,7 +18,7 @@
 
 		<CommandBar Content="Profile"
 					x:Uid="Profile_CommandBar" />
-		
+
 		<ScrollViewer Grid.Row="1">
 			<StackPanel Margin="20,0,20,20">
 
@@ -49,7 +49,7 @@
 				<Button Command="{Binding UpdateProfile}"
 						x:Uid="Profile_Save"
 						Content="Save"
-						Style="{StaticResource ExecutingButtonStyle}"
+						Style="{StaticResource MaterialContainedButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="0,4" />
 			</StackPanel>

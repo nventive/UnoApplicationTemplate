@@ -19,10 +19,16 @@
 									  x:Uid="Onboarding_Continue" />
 			</uc:PartitionConverter>
 
-			<uc:PartitionConverter x:Key="SelectedIndexToButtonStyle"
-								   DefaultValue="{StaticResource MaterialTextWithArrowButtonStyle}">
+			<uc:PartitionConverter x:Key="SelectedIndexToButtonBackground"
+								   DefaultValue="{StaticResource TransparentBrush}">
 				<uc:IntervalPartition LowerBound="2"
-									  InRangeValue="{StaticResource MaterialContainedWithArrowButtonStyle}" />
+									  InRangeValue="{StaticResource MaterialPrimaryBrush}" />
+			</uc:PartitionConverter>
+
+			<uc:PartitionConverter x:Key="SelectedIndexToButtonForeground"
+								   DefaultValue="{StaticResource MaterialOnSurfaceBrush}">
+				<uc:IntervalPartition LowerBound="2"
+									  InRangeValue="{StaticResource MaterialOnPrimaryBrush}" />
 			</uc:PartitionConverter>
 
 			<DataTemplate x:Key="OnboardingItemTemplate">
@@ -81,13 +87,31 @@
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
-			<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
-					Style="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonStyle}}"
+			<Button Style="{StaticResource MaterialButtonIconStyle}"
 					FontSize="14"
+					Foreground="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonForeground}}"
 					Command="{Binding NavigateToLogin}"
 					VerticalAlignment="Top"
-					HorizontalAlignment="Right"
-					Margin="0,24,24,0" />
+					HorizontalAlignment="Right">
+				<Button.Content>
+					<Grid CornerRadius="5"
+						  Margin="0,24,24,0"
+						  Padding="10,8"
+						  Background="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonBackground}}">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Text="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}" />
+						<u:PathControl x:Name="OnboardingRightArrow"
+									   Grid.Column="1"
+									   Margin="5,0"
+									   Style="{StaticResource RightArrowPathControlStyle}"
+									   Foreground="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonForeground}}" />
+					</Grid>
+				</Button.Content>
+			</Button>
 
 			<u:ImageSlideshow x:Name="OnboardingSlideshow"
 							  Grid.Row="1"
