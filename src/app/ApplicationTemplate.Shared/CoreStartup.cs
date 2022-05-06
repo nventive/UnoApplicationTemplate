@@ -19,6 +19,7 @@ using Nventive.ExtendedSplashScreen;
 using Uno.Disposables;
 using Uno.Extensions;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace ApplicationTemplate
 {
@@ -57,6 +58,15 @@ namespace ApplicationTemplate
 				NotifyUserOnSessionExpired(services);
 
 				services.GetRequiredService<DiagnosticsCountersService>().Start();
+
+//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
+//+:cnd:noEmit
+				// StatusBar color depending on current ViewModel
+				await ObserveCurrentViewModel(CancellationToken.None, services);
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
 
 				await ExecuteInitialNavigation(CancellationToken.None, services);
 			}
@@ -235,6 +245,57 @@ namespace ApplicationTemplate
 		protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
 		{
 			return serviceProvider.GetRequiredService<ILogger<CoreStartup>>();
+		}
+
+		private async Task ObserveCurrentViewModel(CancellationToken ct, IServiceProvider services)
+		{
+			services
+				.GetRequiredService<ISectionsNavigator>()
+				.ObserveProcessedState()
+				.Select(state =>
+				{
+					var vmType = state.CurrentState.GetViewModelType();
+					if (Window.Current.Content is FrameworkElement root)
+					{
+						if (root.ActualTheme == ElementTheme.Dark)
+						{
+							if (vmType == typeof(OnboardingPageViewModel) || vmType == typeof(LoginPageViewModel))
+							{
+								Shell.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+								{
+									Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
+								});
+							}
+							else
+							{
+								Shell.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+								{
+									Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+								});
+							}
+						}
+						else
+						{
+							if (vmType == typeof(OnboardingPageViewModel) || vmType == typeof(LoginPageViewModel))
+							{
+								Shell.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+								{
+									Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+								});
+							}
+							else
+							{
+								Shell.Instance.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+								{
+									Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
+								});
+							}
+						}
+					}
+					return vmType;
+				})
+				.Subscribe()
+				.DisposeWith(_neverDisposed);
 		}
 	}
 }
