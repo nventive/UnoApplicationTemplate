@@ -9,7 +9,7 @@ using Uno.UI;
 namespace ApplicationTemplate
 {
 	/// <summary>
-	/// This class abstracts the startup of the actual app (UWP, iOS, Android, WebAssembly and not test projects).
+	/// This class abstracts the startup of the actual app (UWP, iOS, Android and not test projects).
 	/// This abstract class is responsible for building the host of the application as well as startup diagnostics.
 	/// The implementator class is responsible for the application-specific code that initializes the application's services.
 	/// </summary>

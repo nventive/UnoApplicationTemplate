@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Presentation
 {
-	class DadJokesFiltersPageViewModel : ViewModel
+	public class DadJokesFiltersPageViewModel : ViewModel
 	{
 		public DadJokesFiltersPageViewModel()
 		{

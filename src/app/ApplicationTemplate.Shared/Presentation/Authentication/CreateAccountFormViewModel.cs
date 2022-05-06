@@ -187,7 +187,6 @@ namespace ApplicationTemplate.Presentation
 			RuleFor(x => x.AgreeToTermsOfServices)
 				.Equal(true)
 				.WithMessage(localizer["CreateAccount_TermsOfServiceValidation"]);
-
 		}
 	}
 }

@@ -74,7 +74,6 @@ namespace ApplicationTemplate.Views.Behaviors
 				// length filter last, otherwise these filtered characters would count toward the length limit. 
 				new Android.Text.InputFilterLengthFilter(textFormat.Length)
 			};
-
 		}
 
 		/// <summary>
@@ -103,6 +102,7 @@ namespace ApplicationTemplate.Views.Behaviors
 				_stringFormat = stringFormat;
 				_targetTextBox = targetTextBox;
 			}
+
 			public Java.Lang.ICharSequence FilterFormatted(Java.Lang.ICharSequence source, int start, int end, Android.Text.ISpanned dest, int dstart, int dend)
 			{
 				if (source.Length() == 0)

@@ -78,7 +78,7 @@
 										  Opacity="{Binding Command.IsExecuting, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource TrueToOpaque}}"
 										  Foreground="{TemplateBinding Foreground}"
 										  Width="16"
-										  Height="16"/>
+										  Height="16" />
 						</Grid>
 					</Grid>
 				</ControlTemplate>
@@ -819,6 +819,6 @@
 	</Style>
 
 	<Style TargetType="Button"
-		   BasedOn="{StaticResource MaterialContainedButtonStyle}"/>
+		   BasedOn="{StaticResource MaterialContainedButtonStyle}" />
 
 </ResourceDictionary>
