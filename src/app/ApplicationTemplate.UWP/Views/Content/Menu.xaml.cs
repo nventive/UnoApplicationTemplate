@@ -11,6 +11,5 @@ namespace ApplicationTemplate.Views.Content
 		{
 			this.InitializeComponent();
 		}
-
 	}
 }

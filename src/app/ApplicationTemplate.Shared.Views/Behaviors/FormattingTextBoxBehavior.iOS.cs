@@ -2,6 +2,7 @@
 #if __IOS__
 //+:cnd:noEmit
 using System;
+using ApplicationTemplate.Views.Helpers;
 using Foundation;
 using Microsoft.Extensions.Logging;
 using UIKit;
@@ -9,7 +10,6 @@ using Uno.Extensions;
 using Uno.Logging;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using ApplicationTemplate.Views.Helpers;
 
 namespace ApplicationTemplate.Views.Behaviors
 {

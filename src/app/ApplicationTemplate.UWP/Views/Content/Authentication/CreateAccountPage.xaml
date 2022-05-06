@@ -37,11 +37,15 @@
 			   VerticalAlignment="Stretch" />
 
 		<!-- Back button -->
-		<Button Style="{StaticResource LeftArrowButtonStyle}"
+		<Button Style="{StaticResource MaterialButtonIconStyle}"
 				Command="{Binding NavigateBack}"
 				Margin="16,56,16,0"
-				HorizontalAlignment="Left" />
-
+				HorizontalAlignment="Left">
+			<Button.Content>
+				<u:PathControl x:Name="CreateAccountLeftArrow"
+							   Style="{StaticResource LeftArrowPathControlStyle}" />
+			</Button.Content>
+		</Button>
 		<ScrollViewer Grid.Row="1">
 			<StackPanel VerticalAlignment="Center">
 				<TextBlock Text="Join the fun!"
@@ -162,7 +166,7 @@
 								 x:Uid="CreateAccount_Password"
 								 PlaceholderText="Choose a password"
 								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 Style="{StaticResource MaterialOutlinedPasswordBoxStyle}"
+								 Style="{StaticResource DefaultPasswordBoxStyle}"
 								 ios:ReturnKeyType="Done"
 								 android:ImeOptions="Done"
 								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
@@ -253,7 +257,10 @@
 					<!-- Checkbox -->
 					<CheckBox x:Name="TermsOfServiceCheckBox"
 							  Content="I agree to terms of services"
-							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							  Style="{StaticResource MaterialLightCheckBoxStyle}"
+							  Foreground="{StaticResource MaterialSurfaceBrush}"
+							  HorizontalAlignment="Left" />
 				</local:DataValidationView>
 
 				<!-- Confirm button -->
@@ -261,7 +268,7 @@
 						x:Uid="CreateAccount_Confirm"
 						Content="CREATE AN ACCOUNT"
 						Command="{Binding CreateAccount}"
-						Style="{StaticResource ExecutingButtonStyle}"
+						Style="{StaticResource MaterialContainedButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="42,12,42,32" />
 			</StackPanel>
