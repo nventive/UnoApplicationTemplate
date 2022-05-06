@@ -20,7 +20,7 @@
 			</uc:PartitionConverter>
 
 			<uc:PartitionConverter x:Key="SelectedIndexToButtonBackground"
-								   DefaultValue="Transparent">
+								   DefaultValue="{StaticResource TransparentBrush}">
 				<uc:IntervalPartition LowerBound="2"
 									  InRangeValue="{StaticResource MaterialPrimaryBrush}" />
 			</uc:PartitionConverter>
