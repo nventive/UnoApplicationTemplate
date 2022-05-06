@@ -33,13 +33,11 @@ namespace ApplicationTemplate.Presentation
 	{
 		public LoginFormValidator(IStringLocalizer localizer)
 		{
-#pragma warning disable CS0618 // EmailValidationMode.Net4xRegex validates for A@A.A. Default mode is only checking for A@A
 			RuleFor(x => x.Email)
 				.NotEmpty()
 				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
-				.EmailAddress(EmailValidationMode.Net4xRegex)
+				.EmailAddress()
 				.WithMessage(_ => localizer["ValidationError_Email"]);
-#pragma warning restore CS0618 // Type or member is obsolete
 			RuleFor(x => x.Password)
 				.NotEmpty()
 				.WithMessage(_ => localizer["ValidationNotEmpty_Password"]);
