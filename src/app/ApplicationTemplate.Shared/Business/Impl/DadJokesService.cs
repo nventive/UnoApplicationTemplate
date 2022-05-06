@@ -18,10 +18,10 @@ namespace ApplicationTemplate.Business
 		private SourceList<DadJokesQuote> _favouriteQuotes;
 		private ReplaySubject<PostTypes> _postType;
 
-		public DadJokesService(IApplicationSettingsService applicationSettingsService, IDadJokesEndpoint DadJokesEndpoint)
+		public DadJokesService(IApplicationSettingsService applicationSettingsService, IDadJokesEndpoint dadJokesEndpoint)
 		{
 			_applicationSettingsService = applicationSettingsService ?? throw new ArgumentNullException(nameof(applicationSettingsService));
-			_dadJokesEndpoint = DadJokesEndpoint ?? throw new ArgumentNullException(nameof(DadJokesEndpoint));
+			_dadJokesEndpoint = dadJokesEndpoint ?? throw new ArgumentNullException(nameof(dadJokesEndpoint));
 			_postType = new ReplaySubject<PostTypes>(1);
 			_postType.OnNext(PostTypes.Hot);
 		}

@@ -20,7 +20,7 @@
 
 					<TextBlock Text="No results found for"
 							   HorizontalAlignment="Center"
-							   Style="{StaticResource MaterialBody1}" />
+							   Style="{StaticResource Body1}" />
 				</StackPanel>
 			</Grid>
 		</DataTemplate>
@@ -70,14 +70,12 @@
 									<StackPanel Padding="16">
 										<TextBlock Text="{Binding Quote.Title}"
 												   Grid.Row="0"
-												   FontSize="16"
 												   Margin="0,5"
-												   FontWeight="SemiBold"
-												   Style="{StaticResource MaterialCaption}" />
+												   Style="{StaticResource Subtitle2}" />
 
 										<TextBlock Text="{Binding Quote.Selftext}"
 												   Grid.Row="1"
-												   Style="{StaticResource MaterialBody1}" />
+												   Style="{StaticResource Headline6}" />
 									</StackPanel>
 
 									<ToggleButton IsChecked="{Binding IsFavorite}"

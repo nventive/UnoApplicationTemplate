@@ -46,7 +46,6 @@
 							 PlaceholderText="Email"
 							 x:Uid="Login_Email"
 							 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Style="{StaticResource TextBoxStyle}"
 							 InputScope="EmailSmtpAddress"
 							 IsSpellCheckEnabled="False"
 							 ios:ReturnKeyType="Next"

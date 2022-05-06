@@ -340,9 +340,6 @@ I think we all know why we are here."</value>
   <data name="CreateAccount_DateOfBirthValidation" xml:space="preserve">
     <value>You must be 18+ years old to create an account.</value>
   </data>
-  <data name="CreateAccount_PasswordValidation" xml:space="preserve">
-    <value>Password must be 8 chracters or more and contain at least 1 number.</value>
-  </data>
   <data name="CreateAccount_PasswordConfirmValidation" xml:space="preserve">
     <value>Passwords don't match</value>
   </data>
@@ -399,5 +396,11 @@ I think we all know why we are here."</value>
   </data>
   <data name="Password_Validation3.Text" xml:space="preserve">
     <value>One uppercase character</value>
+  </data>
+  <data name="EditPost_JokeContent.PlaceholderText" xml:space="preserve">
+    <value>Write the joke</value>
+  </data>
+  <data name="EditPost_JokeTitle.PlaceholderText" xml:space="preserve">
+    <value>Joke's title</value>
   </data>
 </root>

@@ -46,12 +46,6 @@ namespace ApplicationTemplate.Presentation
 		public IDynamicCommand ShowSettingsSection => this.GetCommandFromTask(async ct =>
 			await _navigator.SetActiveSection(ct, nameof(Section.Settings), () => new SettingsPageViewModel()));
 
-		public bool IsHomeSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.Home), initialValue: true);
-
-		public bool IsPostsSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.Posts), initialValue: false);
-
-		public bool IsSettingsSectionActive => this.GetFromObservable(GetAndObserveIsSectionActive(Section.Settings), initialValue: false);
-
 		private IObservable<string> ObserveMenuState() =>
 			_navigator
 				.ObserveCurrentState()
@@ -63,10 +57,5 @@ namespace ApplicationTemplate.Presentation
 				.DistinctUntilChanged()
 				// On iOS, when Visual states are changed too fast, they break. This is a workaround for this bug.
 				.ThrottleOrImmediate(TimeSpan.FromMilliseconds(350), Scheduler.Default);
-
-		private IObservable<bool> GetAndObserveIsSectionActive(Section section) =>
-			_navigator
-				.ObserveActiveSectionName()
-				.Select(activeSectionAsString => Enum.TryParse<Section>(activeSectionAsString, out var activeSection) && section == activeSection);
 	}
 }

@@ -47,7 +47,7 @@
 							<StackPanel>
 
 								<TextBlock FontSize="24"
-										   Style="{StaticResource MaterialHeadline6}">
+										   Style="{StaticResource Headline6}">
 									<Run Text="{Binding Data.LastName}"
 										 FontWeight="Bold" />
 									<Run Text="{Binding Data.FirstName}"
@@ -99,7 +99,7 @@
 					<Grid Background="Transparent"
 						  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
 						  ue:MultipleTapExtension.TapCount="3">
-						<TextBlock Style="{StaticResource MaterialCaption}">
+						<TextBlock Style="{StaticResource Subtitle2}">
 							<Run Text="Version"
 								 x:Uid="Settings_Version" />
 							<Run Text="{Binding VersionNumber}" />
