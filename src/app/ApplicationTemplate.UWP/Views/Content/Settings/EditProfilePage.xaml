@@ -18,7 +18,7 @@
 
 		<CommandBar Content="Profile"
 					x:Uid="Profile_CommandBar" />
-		
+
 		<ScrollViewer Grid.Row="1">
 			<StackPanel Margin="20,0,20,20">
 
@@ -31,7 +31,7 @@
 							 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 ios:ReturnKeyType="Next"
 							 android:ImeOptions="Next"
-							 FontSize="16" />
+							 ue:TextBoxBehavior.NextControl="{Binding ElementName=LastName}" />
 				</local:DataValidationView>
 
 				<!-- Last name -->
@@ -39,17 +39,17 @@
 										  PropertyName="LastName"
 										  Margin="0,4">
 					<TextBox PlaceholderText="Last name"
+							 x:Name="LastName"
 							 x:Uid="Profile_LastName"
 							 Text="{Binding Form.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 ue:TextBoxBehavior.DismissKeyboardOnEnter="True"
-							 ue:TextBoxBehavior.EnterCommand="{Binding UpdateProfile}"
-							 FontSize="16" />
+							 ue:TextBoxBehavior.EnterCommand="{Binding UpdateProfile}" />
 				</local:DataValidationView>
 
 				<Button Command="{Binding UpdateProfile}"
 						x:Uid="Profile_Save"
 						Content="Save"
-						Style="{StaticResource ExecutingButtonStyle}"
+						Style="{StaticResource MaterialContainedButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="0,4" />
 			</StackPanel>

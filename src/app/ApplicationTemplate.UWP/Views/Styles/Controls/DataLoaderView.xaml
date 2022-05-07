@@ -6,7 +6,7 @@
 	<DataTemplate x:Key="DataLoaderViewEmptyTemplate">
 		<Grid Background="{StaticResource MaterialBackgroundBrush}">
 			<TextBlock Text="Nothing to show here"
-					   Style="{StaticResource MaterialBody1}"
+					   Style="{StaticResource Body1}"
 					   HorizontalAlignment="Center"
 					   VerticalAlignment="Top"
 					   Margin="0,44,0,0" />
@@ -23,7 +23,7 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<TextBlock Style="{StaticResource MaterialBody1}"
+			<TextBlock Style="{StaticResource Body1}"
 					   Foreground="White"
 					   HorizontalAlignment="Left"
 					   VerticalAlignment="Center">
@@ -35,7 +35,7 @@
 			<Button Content="Try Again"
 					Background="#990000"
 					HorizontalAlignment="Center"
-					Style="{StaticResource ExecutingButtonStyle}"
+					Style="{StaticResource MaterialContainedButtonStyle}"
 					Command="{Binding View.RefreshCommand}"
 					Grid.Column="1" />
 		</Grid>
@@ -86,7 +86,7 @@
 				<!-- Try Again Button -->
 				<Button Content="RELOAD PAGE"
 						HorizontalAlignment="Stretch"
-						Style="{StaticResource ExecutingButtonStyle}"
+						Style="{StaticResource MaterialContainedButtonStyle}"
 						Command="{Binding View.RefreshCommand}"
 						Margin="22,24,22,0" />
 			</StackPanel>

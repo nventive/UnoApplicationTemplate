@@ -36,7 +36,7 @@
 						   Margin="0,0,0,-40"
 						   Width="223"
 						   VerticalAlignment="Bottom"
-						   HorizontalAlignment="Center"/>
+						   HorizontalAlignment="Center" />
 
 					<TextBlock Text="{Binding PrimaryText}"
 							   Grid.Row="1"

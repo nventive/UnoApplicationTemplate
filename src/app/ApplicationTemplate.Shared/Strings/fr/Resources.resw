@@ -340,9 +340,6 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   <data name="CreateAccount_DateOfBirthValidation" xml:space="preserve">
     <value>Vous devez avoir 18+ ans pour créer un compte.</value>
   </data>
-  <data name="CreateAccount_PasswordValidation" xml:space="preserve">
-    <value>Le mot de passe doit être composé de 8 caractères ou plus et contenir au moins 1 chiffre.</value>
-  </data>
   <data name="CreateAccount_PasswordConfirmValidation" xml:space="preserve">
     <value>Les mots de passe ne correspondent pas</value>
   </data>
@@ -439,5 +436,11 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="Settings_Logout.Content" xml:space="preserve">
     <value>SE DÉCONNECTER</value>
+  </data>
+  <data name="EditPost_JokeContent.PlaceholderText" xml:space="preserve">
+    <value>Raconte la blague</value>
+  </data>
+  <data name="EditPost_JokeTitle.PlaceholderText" xml:space="preserve">
+    <value>Titre de la blague</value>
   </data>
 </root>

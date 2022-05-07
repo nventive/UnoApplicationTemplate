@@ -82,7 +82,7 @@
 			<Setter.Value>
 				<DataTemplate>
 					<TextBlock Text="{Binding}"
-							   Style="{StaticResource MaterialHeadline5}" />
+							   Style="{StaticResource Headline6}" />
 				</DataTemplate>
 			</Setter.Value>
 		</Setter>

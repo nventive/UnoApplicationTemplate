@@ -205,7 +205,8 @@
 								   x:Uid="Password_Validation1"
 								   Grid.Column="1"
 								   Margin="0,4,0,4"
-								   Style="{StaticResource Body3}" />
+								   Style="{StaticResource Body3}"
+								   Foreground="{StaticResource MaterialSurfaceBrush}" />
 
 						<TextBlock x:Name="HasNumberText"
 								   Text="One number"
@@ -213,7 +214,8 @@
 								   Grid.Column="1"
 								   Grid.Row="1"
 								   Margin="0,4,0,4"
-								   Style="{StaticResource Body3}" />
+								   Style="{StaticResource Body3}" 
+								   Foreground="{StaticResource MaterialSurfaceBrush}" />
 
 						<TextBlock x:Name="HasUppercaseText"
 								   Text="One uppercase character"
@@ -221,7 +223,8 @@
 								   Grid.Column="1"
 								   Grid.Row="2"
 								   Margin="0,4,0,4"
-								   Style="{StaticResource Body3}" />
+								   Style="{StaticResource Body3}" 
+								   Foreground="{StaticResource MaterialSurfaceBrush}" />
 					</Grid>
 
 					<StackPanel Margin="42,12">
@@ -253,13 +256,14 @@
 											  PropertyName="AgreeToTermsOfServices"
 											  Margin="42,0">
 
-						<!-- Checkbox -->
-						<CheckBox x:Name="TermsOfServiceCheckBox"
-								  Content="I agree to terms of services"
-								  x:Uid="CreateAccount_TermsOfServices"
-								  Foreground="{StaticResource MaterialSurfaceBrush}"
-								  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-					</local:DataValidationView>
+					<!-- Checkbox -->
+					<CheckBox x:Name="TermsOfServiceCheckBox"
+							  Content="I agree to terms of services"
+                              x:Uid="CreateAccount_TermsOfServices"
+							  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							  Foreground="{StaticResource MaterialSurfaceBrush}"
+							  HorizontalAlignment="Left" />
+				</local:DataValidationView>
 
 					<!-- Confirm button -->
 					<Button x:Name="ConfirmButton"

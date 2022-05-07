@@ -4,6 +4,7 @@
 							 xmlns:ne="using:Nventive.View.Extensions"
 							 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 							 xmlns:c="using:ApplicationTemplate.Views.Controls"
+							 xmlns:utu="using:Uno.Toolkit.UI"
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
@@ -15,7 +16,7 @@
 					<VisualTransition From="Open"
 									  To="Closed">
 						<Storyboard>
-							<!-- CloseTranslateAnimation.To is set in code behind -->
+							<!--CloseTranslateAnimation.To is set in code behind-->
 							<DoubleAnimation x:Name="CloseTranslateAnimation"
 											 Storyboard.TargetName="MenuRoot"
 											 Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
@@ -44,48 +45,32 @@
 				<VisualState x:Name="Closed" />
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
-
 		<Grid.RenderTransform>
 			<!-- MenuTranslateTransform.Y is set in code behind -->
 			<TranslateTransform x:Name="MenuTranslateTransform"
-								Y="80" />
+								Y="100" />
 		</Grid.RenderTransform>
-		<Grid.RowDefinitions>
-			<RowDefinition Height="75" />
-			<!-- SafeAreaRow.Height is set in code behind -->
-			<RowDefinition x:Name="SafeAreaRow"
-						   Height="0" />
-		</Grid.RowDefinitions>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-			<ColumnDefinition Width="*" />
-		</Grid.ColumnDefinitions>
-
-		<c:MenuRadioButton UncheckedIconStyle="{StaticResource OutlinedHomePathControlStyle}"
-						   CheckedIconStyle="{StaticResource FilledHomePathControlStyle}"
-						   Content="Jokes"
-						   x:Uid="Menu_Home"
-						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
-						   Command="{Binding ShowHomeSection}"
-						   IsChecked="{Binding IsHomeSectionActive}" />
-
-		<c:MenuRadioButton UncheckedIconStyle="{StaticResource OutlinedPostsPathControlStyle}"
-						   CheckedIconStyle="{StaticResource FilledPostsPathControlStyle}"
-						   Content="Posts"
-						   x:Uid="Menu_Posts"
-						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
-						   Command="{Binding ShowPostsSection}"
-						   IsChecked="{Binding IsPostsSectionActive}"
-						   Grid.Column="1" />
-
-		<c:MenuRadioButton UncheckedIconStyle="{StaticResource OutlinedSettingsPathControlStyle}"
-						   CheckedIconStyle="{StaticResource FilledSettingsPathControlStyle}"
-						   Content="Settings"
-						   x:Uid="Menu_Settings"
-						   Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
-						   Command="{Binding ShowSettingsSection}"
-						   IsChecked="{Binding IsSettingsSectionActive}"
-						   Grid.Column="2" />
+		<utu:TabBar>
+			<utu:TabBar.Items>
+				<utu:TabBarItem Command="{Binding ShowHomeSection}">
+					<c:BottomTabBarButton IconStyle="{StaticResource HomePathControlStyle}"
+										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Content="Jokes"
+										  x:Uid="Menu_Home" />
+				</utu:TabBarItem>
+				<utu:TabBarItem Command="{Binding ShowPostsSection}">
+					<c:BottomTabBarButton IconStyle="{StaticResource PostsPathControlStyle}"
+										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Content="Posts"
+										  x:Uid="Menu_Posts" />
+				</utu:TabBarItem>
+				<utu:TabBarItem Command="{Binding ShowSettingsSection}">
+					<c:BottomTabBarButton IconStyle="{StaticResource SettingsPathControlStyle}"
+										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Content="Settings"
+										  x:Uid="Menu_Settings" />
+				</utu:TabBarItem>
+			</utu:TabBar.Items>
+		</utu:TabBar>
 	</Grid>
 </local:AttachableUserControl>

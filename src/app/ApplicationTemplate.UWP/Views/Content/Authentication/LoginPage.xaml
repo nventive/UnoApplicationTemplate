@@ -66,7 +66,6 @@
 							 PlaceholderText="Email"
 							 x:Uid="Login_Email"
 							 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 Style="{StaticResource TextBoxStyle}"
 							 InputScope="EmailSmtpAddress"
 							 IsSpellCheckEnabled="False"
 							 ios:ReturnKeyType="Next"
@@ -88,13 +87,11 @@
 								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
 				</local:DataValidationView>
 
-				<Button Content="Forgot password ?"
-						x:Uid="Login_ForgotPassword"
-						HorizontalAlignment="Left"
-						Command="{Binding NavigateToForgotPasswordPage}"
-						Style="{StaticResource TextButtonStyle}"
-						FontStyle="Normal"
-						Margin="42,0" />
+				<HyperlinkButton Content="Forgot password ?"
+								 x:Uid="Login_ForgotPassword"
+								 Command="{Binding NavigateToForgotPasswordPage}"
+								 Foreground="{StaticResource MaterialOnBackgroundMediumBrush}"
+								 Margin="42,0" />
 
 				<Button x:Name="LoginButton"
 						x:Uid="Login_Login"
