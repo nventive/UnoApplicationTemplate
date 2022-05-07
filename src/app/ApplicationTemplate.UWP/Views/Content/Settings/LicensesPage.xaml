@@ -18,7 +18,7 @@
 		<ScrollViewer Grid.Row="1"
 					  Padding="10">
 			<TextBlock Text="{Binding Licenses}"
-					   Style="{StaticResource MaterialBody1}"
+					   Style="{StaticResource Body1}"
 					   TextTrimming="Clip"
 					   TextWrapping="Wrap" />
 		</ScrollViewer>

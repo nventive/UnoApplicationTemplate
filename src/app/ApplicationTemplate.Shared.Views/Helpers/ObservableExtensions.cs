@@ -261,4 +261,3 @@ namespace ApplicationTemplate.Views.Helpers
 		}
 	}
 }
-

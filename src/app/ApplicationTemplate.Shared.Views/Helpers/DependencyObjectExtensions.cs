@@ -120,13 +120,6 @@ namespace ApplicationTemplate.Views.Helpers
 
 		public static IEnumerable<T> FindAllChildren<T>(this DependencyObject element, int? childLevelLimit = null, bool includeCurrent = true)
 			where T :
-//-:cnd:noEmit
-#if HAS_UMBRELLA_UI
-//+:cnd:noEmit
-			class,
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
 			DependencyObject
 		{
 			return element.FindAllChildren<T>(x => true, childLevelLimit, includeCurrent);
@@ -134,13 +127,6 @@ namespace ApplicationTemplate.Views.Helpers
 
 		public static IEnumerable<T> FindAllChildren<T>(this DependencyObject element, Func<T, bool> selector, int? childLevelLimit = null, bool includeCurrent = true)
 			where T :
-//-:cnd:noEmit
-#if HAS_UMBRELLA_UI
-//+:cnd:noEmit
-			class,
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
 			DependencyObject
 		{
 			return InnerFindAllChildren<T>(element, selector, childLevelLimit, includeCurrent);
@@ -151,7 +137,6 @@ namespace ApplicationTemplate.Views.Helpers
 			where T :
 			DependencyObject
 		{
-
 			IEnumerable<T> innerChildren = null;
 			// should we check the current object?
 			if (includeCurrentLevel)
@@ -184,7 +169,6 @@ namespace ApplicationTemplate.Views.Helpers
 								.GetChildrenInternal(count)
 								.SelectMany(child => InnerFindAllChildren(child, selector, childLevelLimit.HasValue ? childLevelLimit - 1 : null, true));
 			return innerChildren.Concat(otherChilds);
-
 		}
 
 		private static IEnumerable<DependencyObject> GetChildrenInternal(this DependencyObject reference, int count)
@@ -194,6 +178,5 @@ namespace ApplicationTemplate.Views.Helpers
 				yield return VisualTreeHelper.GetChild(reference, i);
 			}
 		}
-
 	}
 }

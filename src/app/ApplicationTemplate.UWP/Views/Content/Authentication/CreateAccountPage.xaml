@@ -31,10 +31,14 @@
 			   VerticalAlignment="Stretch" />
 
 		<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
 
 			<CommandBar Style="{StaticResource TransparentCommandBarStyle}" />
 
-			<ScrollViewer>
+			<ScrollViewer Grid.Row="1">
 				<StackPanel VerticalAlignment="Center"
 							Margin="0,32">
 					<TextBlock Text="Join the fun!"
@@ -152,20 +156,19 @@
 								 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
 					</local:DataValidationView>
 
-					<!-- Password -->
-					<local:DataValidationView Model="{Binding Form}"
-												  PropertyName="Password"
-												  Margin="42,0"
-												  Background="{StaticResource MaterialSurfaceBrush}">
-						<PasswordBox x:Name="PasswordField"
-										 x:Uid="CreateAccount_Password"
-										 PlaceholderText="Choose a password"
-										 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-										 Style="{StaticResource DefaultPasswordBoxStyle}"
-										 ios:ReturnKeyType="Done"
-										 android:ImeOptions="Done"
-										 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
-					</local:DataValidationView>
+				<!-- Password -->
+				<local:DataValidationView Model="{Binding Form}"
+										  PropertyName="Password"
+										  Margin="42,0"
+										  Background="{StaticResource MaterialSurfaceBrush}">
+					<PasswordBox x:Name="PasswordField"
+								 x:Uid="CreateAccount_Password"
+								 PlaceholderText="Choose a password"
+								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 ios:ReturnKeyType="Done"
+								 android:ImeOptions="Done"
+								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
+				</local:DataValidationView>
 
 					<!-- Password Validation Hints -->
 					<Grid Margin="42,12">
@@ -202,7 +205,8 @@
 									   x:Uid="Password_Validation1"
 									   Grid.Column="1"
 									   Margin="0,4,0,4"
-									   Style="{StaticResource Body3}" />
+									   Style="{StaticResource Body3}"
+									   Foreground="{StaticResource MaterialSurfaceBrush}" />
 
 						<TextBlock x:Name="HasNumberText"
 									   Text="One number"
@@ -210,7 +214,8 @@
 									   Grid.Column="1"
 									   Grid.Row="1"
 									   Margin="0,4,0,4"
-									   Style="{StaticResource Body3}" />
+									   Style="{StaticResource Body3}" 
+									   Foreground="{StaticResource MaterialSurfaceBrush}" />
 
 						<TextBlock x:Name="HasUppercaseText"
 									   Text="One uppercase character"
@@ -218,7 +223,8 @@
 									   Grid.Column="1"
 									   Grid.Row="2"
 									   Margin="0,4,0,4"
-									   Style="{StaticResource Body3}" />
+									   Style="{StaticResource Body3}" 
+									   Foreground="{StaticResource MaterialSurfaceBrush}" />
 					</Grid>
 
 					<StackPanel Margin="42,12">
@@ -259,15 +265,14 @@
 								  HorizontalAlignment="Left"/>
 					</local:DataValidationView>
 
-					<!-- Confirm button -->
-					<Button x:Name="ConfirmButton"
-								x:Uid="CreateAccount_Confirm"
-								Content="CREATE AN ACCOUNT"
-								Command="{Binding CreateAccount}"
-								Style="{StaticResource ExecutingButtonStyle}"
-								HorizontalAlignment="Stretch"
-								Margin="42,12,42,0" />
-				</StackPanel>
+				<!-- Confirm button -->
+				<Button x:Name="ConfirmButton"
+						x:Uid="CreateAccount_Confirm"
+						Content="CREATE AN ACCOUNT"
+						Command="{Binding CreateAccount}"
+						HorizontalAlignment="Stretch"
+						Margin="42,12,42,0" />
+			</StackPanel>
 			</ScrollViewer>
 		</Grid>
 	</Grid>

@@ -37,24 +37,24 @@
 												Background="{StaticResource MaterialSurfaceBrush}">
 										<TextBlock Text="{Binding Title}"
 												   Margin="0,0,5,0"
-												   Style="{StaticResource MaterialSubtitle1}" />
+												   Style="{StaticResource Subtitle1}" />
 										<TextBlock Text="{Binding Body}"
 												   Opacity="0.6"
 												   Foreground="{StaticResource MaterialOnSurfaceBrush}"
-												   Style="{StaticResource MaterialBody2}" />
+												   Style="{StaticResource Body2}" />
 										<StackPanel Orientation="Horizontal"
 													HorizontalAlignment="Right">
 											<Button Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
 													CommandParameter="{Binding}"
 													Content="Delete"
 													Margin="0,0,5,0"
-													Style="{StaticResource OutlinedExecutingButtonStyle}"
+													Style="{StaticResource MaterialOutlinedButtonStyle}"
 													Grid.Row="0" />
 											<Button Command="{Binding ElementName=PostPage, Path=DataContext.NavigateToPost}"
 													CommandParameter="{Binding}"
 													Content="Edit"
-													Style="{StaticResource ExecutingButtonStyle}"
-													Grid.Row="1" />											
+													Style="{StaticResource MaterialContainedButtonStyle}"
+													Grid.Row="1" />
 										</StackPanel>
 									</StackPanel>
 								</DataTemplate>
@@ -65,10 +65,10 @@
 			</dl:DataLoaderView>
 
 			<Button Background="Transparent"
+					Style="{StaticResource MaterialFabStyle}"
 					Command="{Binding NavigateToNewPost}"
 					CommandParameter="{Binding}"
 					VerticalAlignment="Bottom"
-					Margin="0,0,0,80"
 					HorizontalAlignment="Right">
 				<Border Width="56"
 						Height="56"

@@ -80,9 +80,11 @@ jobs:
         steps:
 
         - download: current
+          displayName: "Download artifact" 
           artifact: $(artifactName)
 
         - download: current
+          displayName: "Download release notes" 
           artifact: $(releaseNotesArtifactName)
 
         - task: AppCenterDistribute@3
@@ -133,27 +135,12 @@ jobs:
           steps:
 
           - download: current
+            displayName: "Download artifact" 
             artifact: $(artifactName)
 
           - download: current
+            displayName: "Download release notes" 
             artifact: $(releaseNotesArtifactName)
-
-          - task: DownloadSecureFile@1
-            name: keyStore
-            displayName: "Download keystore from secure files"
-            inputs:
-              secureFile: ${{ parameters.androidKeyStoreFile }}
-
-          - task: InstallBundletool@1
-
-          - task: AabConvertToUniversalApk@1
-            inputs:
-              aabFilePath: '$(Pipeline.Workspace)/$(artifactName)/*-Signed.aab'
-              keystoreFilePath: '$(keyStore.secureFilePath)'
-              keystorePassword: '$(AndroidSigningStorePass)'
-              keystoreAlias: '$(AndroidSigningKeyAlias)'
-              keystoreAliasPassword: '$(AndroidSigningKeyPass)'
-              outputFolder: '$(Pipeline.Workspace)/$(artifactName)'
 
           - task: AppCenterDistribute@3
             displayName: Deploy Android to AppCenter
@@ -161,7 +148,7 @@ jobs:
               serverEndpoint: ${{ parameters.appCenterServiceConnectionName }}
               distributionGroupId: ${{ parameters.appCenterDistributionGroup }}
               appSlug: ${{ parameters.appCenterAndroidSlug }}
-              appFile: '$(Pipeline.Workspace)/$(artifactName)/*.apk'
+              appFile: '$(Pipeline.Workspace)/$(artifactName)/*.aab'
               releaseNotesOption: file
               releaseNotesFile: "$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md"
               isSilent: true
