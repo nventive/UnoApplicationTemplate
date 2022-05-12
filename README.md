@@ -6,16 +6,11 @@ This is a mobile app project template using [Uno Platform](https://github.com/un
 
 We use `dotnet` project templates to easily create new projects. It simplifies the **project renaming** and supports **conditional inclusions**.
 
-### Installing and uninstalling the template
+### Installing the template
 
-1. In order to install the template, clone this repository on your machine and open a command prompt at the root of the project and run the following command 
+1. In order to install the template, clone this repository on your machine, open a command prompt at its root, and run the following command
 
    `dotnet new -i ./`
-
-
-1. If you want to uninstall the template, run the following command.
-
-    `dotnet new -u ./`
 
     This will list you the list of installed templates, look for this template and copy the command with the absolute path like this. (Note the quotes added, otherwise it doesn't work)
 
@@ -23,7 +18,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 ### Running the template to generate a new project
 
-1. To run the template and create a new project, run the following command.
+1. To run the template and create a new project, run the following command in the root folder that will contain the new project.
 
     `dotnet new nv-mobile -n MyProjectName`
 
@@ -33,6 +28,11 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
     - To add Firebase Analytics: `dotnet new nv-mobile -n MyProjectName --include-firebase-analytics` (or -fa)
 
 [Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
+
+### Uninstalling the template
+1. If you want to uninstall the template, run the following command.
+
+    `dotnet new -u ./`
 
 ## Documentation
 
