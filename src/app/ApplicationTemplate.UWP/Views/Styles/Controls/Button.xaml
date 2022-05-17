@@ -2,7 +2,8 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:u="using:Nventive.View.Controls">
 
-	<Style x:Key="MaterialTextWithArrowButtonStyle"
+	<!-- This style is used instead of MaterialTextButtonStyle to show the icon to the right of the text -->
+	<Style x:Key="MaterialTextWithRightArrowButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Height"
@@ -84,7 +85,8 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialContainedWithArrowButtonStyle"
+	<!-- This style is used instead of MaterialContainedButtonStyle to show the icon to the right of the text -->
+	<Style x:Key="MaterialContainedWithRightArrowButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Height"

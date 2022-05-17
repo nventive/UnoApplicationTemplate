@@ -19,9 +19,9 @@
 			</uc:PartitionConverter>
 
 			<uc:PartitionConverter x:Key="SelectedIndexToButtonStyle"
-								   DefaultValue="{StaticResource MaterialTextWithArrowButtonStyle}">
+								   DefaultValue="{StaticResource MaterialTextWithRightArrowButtonStyle}">
 				<uc:IntervalPartition LowerBound="2"
-									  InRangeValue="{StaticResource MaterialContainedWithArrowButtonStyle}" />
+									  InRangeValue="{StaticResource MaterialContainedWithRightArrowButtonStyle}" />
 			</uc:PartitionConverter>
 
 			<DataTemplate x:Key="OnboardingItemTemplate">

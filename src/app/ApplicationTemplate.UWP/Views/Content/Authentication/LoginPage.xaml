@@ -23,7 +23,7 @@
 						<AdaptiveTrigger MinWindowHeight="630" />
 					</VisualState.StateTriggers>
 
-					<!-- We change the font size as a workaround to respect design on small and big phones -->
+					<!-- We change the font size to adapt the design for small and big phones -->
 					<VisualState.Setters>
 						<Setter Target="Login_Title.FontSize"
 								Value="60" />
@@ -38,15 +38,16 @@
 			   HorizontalAlignment="Stretch"
 			   VerticalAlignment="Stretch" />
 
-		<ScrollViewer toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
-			<StackPanel VerticalAlignment="Center">
+		<ScrollViewer>
+			<StackPanel toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
+						VerticalAlignment="Center">
 				<TextBlock Text="{Binding Title}"
 						   x:Uid="Login_Title"
 						   Margin="22,32,22,0"
 						   Style="{StaticResource Headline2}"
 						   HorizontalTextAlignment="Center"
 						   HorizontalAlignment="Center"
-						   FontSize="54"/>
+						   FontSize="54" />
 
 				<TextBlock Text="{Binding Quote}"
 						   x:Uid="Login_Subtitle"
@@ -88,7 +89,8 @@
 
 				<HyperlinkButton Content="Forgot password ?"
 								 x:Uid="Login_ForgotPassword"
-								 Command="{Binding NavigateToForgotPasswordPage}"                                                                                                                                                                                                                                                                        
+								 Command="{Binding NavigateToForgotPasswordPage}"
+								 Foreground="{StaticResource MaterialOnBackgroundMediumBrush}"                                                                                                                                                                                                                                                                      
 								 Margin="42,0" />
 
 				<Button x:Name="LoginButton"
