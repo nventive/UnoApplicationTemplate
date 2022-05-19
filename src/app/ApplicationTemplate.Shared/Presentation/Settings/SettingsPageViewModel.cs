@@ -35,24 +35,13 @@ namespace ApplicationTemplate.Presentation
 			if (logout == MessageDialogResult.Accept)
 			{
 				await this.GetService<IAuthenticationService>().Logout(ct);
+				await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: true);
 			}
 		});
 
-		public IDynamicCommand NavigateToDiagnosticsPage => this.GetCommandFromTask(async ct =>
+		public IDynamicCommand NavigateToOnboardingPage => this.GetCommandFromTask(async ct =>
 		{
-			await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new DiagnosticsPageViewModel());
-		});
-
-		public IDynamicCommand NavigateToEditProfilePage => this.GetCommandFromTask(async ct =>
-		{
-			var userProfile = UserProfile.State.Data;
-
-			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new EditProfilePageViewModel(userProfile));
-		});
-
-		public IDynamicCommand NavigateToLoginPage => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: false);
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new OnboardingPageViewModel(isFromSettingsPage: true));
 		});
 
 		public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>
@@ -66,7 +55,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var url = this.GetService<IStringLocalizer>()["TermsAndConditionsUrl"];
 
-			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
+			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.SystemPreferred);
 		});
 
 		private async Task<UserProfileData> GetUserProfile(CancellationToken ct)

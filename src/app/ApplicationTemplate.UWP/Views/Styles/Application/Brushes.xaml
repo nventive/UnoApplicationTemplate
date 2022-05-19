@@ -140,7 +140,7 @@
 	<SolidColorBrush x:Key="MaterialOnSurfaceFocusedBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
 					 Opacity="0.12" />
-	<SolidColorBrush x:Key="MaterialOnSurfaceSelectedCBrush"
+	<SolidColorBrush x:Key="MaterialOnSurfaceSelectedBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
 					 Opacity="0.08" />
 	<SolidColorBrush x:Key="MaterialOnSurfacePressedBrush"
@@ -167,4 +167,21 @@
 					 Color="{ThemeResource MaterialSuccessColor}" />
 	<SolidColorBrush x:Key="MaterialOnSuccessBrush"
 					 Color="{ThemeResource MaterialOnSuccessColor}" />
+
+	<!-- ToggeSwitch Brushes -->
+
+	<!-- Toggle On -->
+	<StaticResource x:Key="MaterialToggleSwitchOnBackgroundBrush"
+					ResourceKey="MaterialOnSurfaceLowBrush" />
+
+	<!-- Toggle Off -->
+	<StaticResource x:Key="MaterialToggleSwitchOffBackgroundBrush"
+					ResourceKey="MaterialOnSurfaceLowBrush" />
+
+	<!-- Toggle On Disabled -->
+	<StaticResource x:Key="MaterialToggleSwitchOnLowButtonBrush"
+					ResourceKey="MaterialOnSurfaceMediumBrush" />
+	<StaticResource x:Key="MaterialToggleSwitchOnLowBackgroundBrush"
+					ResourceKey="MaterialOnSurfaceSelectedBrush" />
+
 </ResourceDictionary>

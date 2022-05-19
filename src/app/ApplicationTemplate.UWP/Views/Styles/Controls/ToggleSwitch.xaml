@@ -13,42 +13,47 @@
 	
 	<!-- ResourceDictionary containing only 1 item doesn't work if that item refers Material resources. -->
 	<x:Int32 x:Key="ToggleSwitchWorkaround">0</x:Int32>
+	
+	<!-- Default native ToggleSwitch styles -->
 
+	<ios:Style x:Key="MaterialToggleSwitchStyle"
+			   BasedOn="{StaticResource MaterialToggleSwitchStyle}"
+			   TargetType="ToggleSwitch">
+		<Setter Property="Foreground"
+				Value="{ThemeResource MaterialPrimaryBrush}" />
+		<Setter Property="Background"
+				Value="{ThemeResource MaterialOnSecondaryDisabledBrush}" />
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="HorizontalAlignment"
+				Value="Right" />
+		<Setter Property="MinWidth"
+				Value="34" />
+	</ios:Style>
 
-	<android:Style x:Key="NativeDefaultToggleSwitch"
-				   TargetType="ToggleSwitch">
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="ToggleSwitch">
-					<BindableSwitchCompat Checked="{TemplateBinding IsOn, Mode=TwoWay}"
-										  Enabled="{TemplateBinding IsEnabled}"
-										  Text="{TemplateBinding Header}"
-										  TextColor="{TemplateBinding Foreground}"
-										  ThumbTint="{TemplateBinding BorderBrush}"
-										  TrackTint="{TemplateBinding Background}" />
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
+	<android:Style x:Key="MaterialToggleSwitchStyle"
+				   TargetType="ToggleSwitch"
+				   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
+		<Setter Property="MinHeight"
+				Value="14" />
+		<Setter Property="Padding"
+				Value="0" />
+		<Setter Property="MinWidth"
+				Value="34" />
 	</android:Style>
 
-<ios:Style x:Key="NativeDefaultToggleSwitch"
+	<win:Style x:Key="MaterialToggleSwitchStyle"
+			   BasedOn="{StaticResource MaterialToggleSwitchStyle}"
 			   TargetType="ToggleSwitch">
-		<!-- Ensures the UISwitch's shadow doesn't get clipped. -->
-		<Setter Property="ClipsToBounds"
-				Value="False" />
-		<Setter Property="Template">
-			<Setter.Value>
-				<ControlTemplate TargetType="ToggleSwitch">
-					<BindableUISwitch IsOn="{TemplateBinding IsOn, Mode=TwoWay}"
-									  Enabled="{TemplateBinding IsEnabled}"
-									  TintColorBrush="{TemplateBinding BorderBrush}"
-									  OnTintColorBrush="{TemplateBinding Background}"
-									  ThumbTintColorBrush="{TemplateBinding Foreground}" />
-				</ControlTemplate>
-			</Setter.Value>
-		</Setter>
-	</ios:Style>
-	
+		<Setter Property="Foreground"
+				Value="{ThemeResource MaterialPrimaryBrush}" />
+		<Setter Property="Background"
+				Value="{ThemeResource MaterialOnSecondaryDisabledBrush}" />
+		<Setter Property="BorderBrush"
+				Value="{ThemeResource MaterialOnPrimaryBrush}" />
+	</win:Style>
+
+
 	<Style TargetType="ToggleSwitch"
 		   BasedOn="{StaticResource MaterialToggleSwitchStyle}" />
 

@@ -90,7 +90,7 @@
 			<Button Style="{StaticResource MaterialButtonIconStyle}"
 					FontSize="14"
 					Foreground="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonForeground}}"
-					Command="{Binding NavigateToLogin}"
+					Command="{Binding NavigateToNextPage}"
 					VerticalAlignment="Top"
 					HorizontalAlignment="Right">
 				<Button.Content>
