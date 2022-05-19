@@ -21,6 +21,8 @@
 				Value="{StaticResource FontFamily01Bold}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="FontWeight"
+				Value="Bold" />
 		<Setter Property="LineHeight"
 				Value="62" />
 		<Setter Property="CharacterSpacing"
