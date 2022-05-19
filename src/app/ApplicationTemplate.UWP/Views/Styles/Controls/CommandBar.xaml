@@ -132,7 +132,7 @@
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSurfaceBrush}" />
 	</Style>
-
+	
 	<!-- Default Style -->
 	<Style TargetType="CommandBar"
 		   BasedOn="{StaticResource DefaultCommandBarStyle}" />

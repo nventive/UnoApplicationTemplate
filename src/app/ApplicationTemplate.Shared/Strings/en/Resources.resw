@@ -328,7 +328,7 @@ I think we all know why we are here."</value>
   <data name="CreateAccount_PhoneNumber.PlaceholderText" xml:space="preserve">
     <value>Phone Number (000) 000-0000</value>
   </data>
-  <data name="CreateAccount_DateOfBirth.PlaceholderText" xml:space="preserve">
+  <data name="CreateAccount_DateOfBirth.Text" xml:space="preserve">
     <value>Date of Birth</value>
   </data>
   <data name="CreateAccount_PostalCode.PlaceholderText" xml:space="preserve">
@@ -336,6 +336,9 @@ I think we all know why we are here."</value>
   </data>
   <data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
     <value>Choose a password</value>
+  </data>
+  <data name="CreateAccount_FavoriteDadNames.Text" xml:space="preserve">
+    <value>Favorite dad nickname (pick at least 1)</value>
   </data>
   <data name="CreateAccount_TermsOfServices.Content" xml:space="preserve">
     <value>I agree to the terms of service</value>

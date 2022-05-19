@@ -5,6 +5,7 @@ using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
+using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation
 {
@@ -40,12 +41,15 @@ namespace ApplicationTemplate.Presentation
 			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
 		}
 
-		public OnboardingItemViewModel[] OnboardingItems { get; } = new[]
+		public OnboardingItemViewModel[] OnboardingItems
 		{
-			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
-			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
-			new OnboardingItemViewModel("Get your shot of good humor everyday. Read the latest and greatest dad jokes!", "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png"),
-		};
+			get => new[]
+			{
+				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
+				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
+				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png")
+			};
+		}
 
 		public static implicit operator OnboardingPageViewModel(OnboardingItemViewModel v)
 		{

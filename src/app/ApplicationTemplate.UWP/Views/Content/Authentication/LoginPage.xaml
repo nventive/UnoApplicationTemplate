@@ -13,6 +13,25 @@
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup>
+
+				<VisualState x:Name="BiggerFont">
+
+					<!-- This represents bigger phones than iPhone 5, SE -->
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowHeight="630" />
+					</VisualState.StateTriggers>
+
+					<!-- We change the font size to adapt the design for small and big phones -->
+					<VisualState.Setters>
+						<Setter Target="Login_Title.FontSize"
+								Value="60" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+
 		<!-- Background -->
 		<Image Source="ms-appx:///Assets/Background_Mustaches_Light.png"
 			   Stretch="UniformToFill"
@@ -20,14 +39,15 @@
 			   VerticalAlignment="Stretch" />
 
 		<ScrollViewer>
-			<StackPanel VerticalAlignment="Center">
+			<StackPanel toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
+						VerticalAlignment="Center">
 				<TextBlock Text="{Binding Title}"
 						   x:Uid="Login_Title"
 						   Margin="22,32,22,0"
 						   Style="{StaticResource Headline2}"
-						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
 						   HorizontalTextAlignment="Center"
-						   HorizontalAlignment="Center" />
+						   HorizontalAlignment="Center"
+						   FontSize="54" />
 
 				<TextBlock Text="{Binding Quote}"
 						   x:Uid="Login_Subtitle"
@@ -70,7 +90,7 @@
 				<HyperlinkButton Content="Forgot password ?"
 								 x:Uid="Login_ForgotPassword"
 								 Command="{Binding NavigateToForgotPasswordPage}"
-								 Style="{StaticResource MaterialTextButtonStyle}"
+								 Foreground="{StaticResource MaterialOnBackgroundMediumBrush}"                                                                                                                                                                                                                                                                      
 								 Margin="42,0" />
 
 				<Button x:Name="LoginButton"
