@@ -156,37 +156,32 @@
 												Value="0.7" />
 									</VisualState.Setters>
 								</VisualState>
-								<VisualState x:Name="Selected">
-									<VisualState.Setters>
-										<Setter Target="CheckIcon.Opacity"
-												Value="1" />
-									</VisualState.Setters>
-								</VisualState>
+								<VisualState x:Name="Selected" />
 							</VisualStateGroup>
 
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid.RowDefinitions>
-							<RowDefinition Height="*" />
-							<RowDefinition Height="Auto" />
-						</Grid.RowDefinitions>
-<!--
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+
+						<!-- CheckBox -->
+						<CheckBox x:Name="CheckBox"
+								  Content="{TemplateBinding Content}"
+								  Foreground="{TemplateBinding Foreground}"
+								  HorizontalAlignment="Left" />
+
 						<ContentPresenter x:Name="Content"
 										  Margin="16,0,0,0"
+										  Grid.Column="1"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  Content="{TemplateBinding Content}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw"
-										  TextWrapping="Wrap" />-->
-
-						<!-- CheckBox -->
-						<CheckBox x:Name="CheckBox"
-								  Content="{TemplateBinding Content}"
-								  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								  Foreground="{TemplateBinding Foreground}"
-								  HorizontalAlignment="Left" />
+										  TextWrapping="Wrap" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

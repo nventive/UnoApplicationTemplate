@@ -130,4 +130,19 @@
 				Value="0.4" />
 	</Style>
 
+	<Style x:Key="Caption"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource MaterialCaption}">
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily02}" />
+		<Setter Property="FontSize"
+				Value="12" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="17" />
+		<Setter Property="CharacterSpacing"
+				Value="0.4" />
+	</Style>
+
 </ResourceDictionary>

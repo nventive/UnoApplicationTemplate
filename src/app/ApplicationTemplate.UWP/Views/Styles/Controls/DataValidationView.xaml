@@ -69,7 +69,7 @@
 								<ItemsControl.ItemTemplate>
 									<DataTemplate>
 										<TextBlock Text="{Binding ErrorMessage}"
-												   Style="{StaticResource Subtitle2}"
+												   Style="{StaticResource Caption}"
 												   Foreground="{StaticResource MaterialErrorBrush}" />
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
