@@ -44,7 +44,7 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialHeadline6}">
 		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
+				Value="{StaticResource FontFamily01SemiBold}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnSurfaceBrush}" />
 		<Setter Property="LineHeight"
