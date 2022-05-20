@@ -3,6 +3,7 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
@@ -70,11 +71,16 @@
 				<StackPanel Margin="24,16">
 
 					<!-- Version -->
-					<TextBlock Style="{StaticResource Subtitle2}">
+					<Grid Background="Transparent"
+						  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
+						  ue:MultipleTapExtension.TapCount="3">
+						<TextBlock Style="{StaticResource Subtitle2}">
 						<Run Text="DAD Jokes - Version"
-							 x:Uid="Settings_Version" />
-						<Run Text="{Binding VersionNumber}" />
-					</TextBlock>
+							 x:Uid="Settings_Version" /><Run
+							 Text=" " /><Run
+							 Text="{Binding VersionNumber}" />
+						</TextBlock>
+					</Grid>
 
 					<TextBlock Text="This application makes use of the dadjokes API from Dadjokes.io, which contains thousands of jokes."
 							   x:Uid="Settings_Version_Details"
