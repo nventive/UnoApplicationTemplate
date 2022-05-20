@@ -67,7 +67,7 @@
 				<utu:TabBarItem Command="{Binding ShowSettingsSection}">
 					<c:BottomTabBarButton IconStyle="{StaticResource SettingsPathControlStyle}"
 										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
-										  Content="Settings"
+										  Content="Profile"
 										  x:Uid="Menu_Settings" />
 				</utu:TabBarItem>
 			</utu:TabBar.Items>
