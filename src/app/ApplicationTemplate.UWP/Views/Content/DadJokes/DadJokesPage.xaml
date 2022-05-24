@@ -57,11 +57,12 @@
 								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
 								IndicatorColor="{StaticResource MaterialPrimaryColor}">
 					<ListView android:ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}"
-							  not_android:ItemsSource="{Binding Data}">
+							  not_android:ItemsSource="{Binding Data}"
+							  Padding="0,20,0,4">
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								<Grid Background="{StaticResource MaterialSurfaceBrush}"
-									  Margin="8,12">
+									  Margin="0,4">
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="*" />
 										<ColumnDefinition Width="Auto" />
@@ -70,7 +71,6 @@
 									<StackPanel Padding="16">
 										<TextBlock Text="{Binding Quote.Title}"
 												   Grid.Row="0"
-												   Margin="0,5"
 												   Style="{StaticResource Subtitle2}" />
 
 										<TextBlock Text="{Binding Quote.Selftext}"
@@ -82,7 +82,9 @@
 												  Command="{Binding Parent.ToggleIsFavorite}"
 												  CommandParameter="{Binding}"
 												  Grid.Column="2"
+												  Margin="10"
 												  Style="{StaticResource MaterialToggleButtonIconStyle}"
+												  VerticalAlignment="Top"
 												  HorizontalAlignment="Right">
 										<ToggleButton.Content>
 											<u:PathControl Style="{StaticResource OutlinedHeartPathControlStyle}"

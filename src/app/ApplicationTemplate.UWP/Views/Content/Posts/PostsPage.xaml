@@ -65,9 +65,10 @@
 			</dl:DataLoaderView>
 
 			<Button Background="Transparent"
-					Style="{StaticResource MaterialFabStyle}"
+					Style="{StaticResource MaterialButtonIconStyle}"
 					Command="{Binding NavigateToNewPost}"
 					CommandParameter="{Binding}"
+					Margin="24"
 					VerticalAlignment="Bottom"
 					HorizontalAlignment="Right">
 				<Border Width="56"
