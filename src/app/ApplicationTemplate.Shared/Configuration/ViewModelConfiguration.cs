@@ -40,6 +40,7 @@ namespace ApplicationTemplate
 					new DynamicCommandBuilderFactory(c => c
 						.CatchErrors(s.GetRequiredService<IDynamicCommandErrorHandler>())
 						.WithLogs(s.GetRequiredService<ILogger<IDynamicCommand>>())
+						.WithStrategy(new RaiseCanExecuteOnDispatcherCommandStrategy(c.ViewModel))
 						.DisableWhileExecuting()
 						.OnBackgroundThread()
 						.CancelPrevious()
