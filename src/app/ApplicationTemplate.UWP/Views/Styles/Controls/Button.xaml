@@ -145,7 +145,7 @@
 
 						<Border x:Name="Overlay"
 								Grid.ColumnSpan="2"
-								Background="{StaticResource TransparentBrush}"
+								Background="Transparent"
 								BorderThickness="0" />
 
 						<ContentPresenter x:Name="ContentPresenter"
