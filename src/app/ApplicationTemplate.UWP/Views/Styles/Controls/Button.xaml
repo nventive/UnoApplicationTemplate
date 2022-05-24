@@ -125,13 +125,13 @@
 								<VisualState x:Name="Normal" />
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Background"
+										<Setter Target="Overlay.Background"
 												Value="{StaticResource MaterialOnPrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
-										<Setter Target="RootGrid.Background"
+										<Setter Target="Overlay.Background"
 												Value="{StaticResource MaterialOnPrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
@@ -142,6 +142,11 @@
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
 						</Grid.ColumnDefinitions>
+
+						<Border x:Name="Overlay"
+								Grid.ColumnSpan="2"
+								Background="Transparent"
+								BorderThickness="0" />
 
 						<ContentPresenter x:Name="ContentPresenter"
 										  BorderBrush="{TemplateBinding BorderBrush}"
@@ -180,7 +185,7 @@
 		<Setter Property="Padding"
 				Value="10,8,10,8" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSecondaryBrush}" />
+				Value="{StaticResource MaterialOnSurfaceBrush}" />
 		<Setter Property="BorderBrush"
 				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="BorderThickness"

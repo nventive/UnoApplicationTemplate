@@ -1,5 +1,6 @@
 ﻿{
 	"id": 1,
-	"firstname": "Mock",
-	"lastname": "User"
+	"firstname": "Name",
+	"lastname": "Lastname",
+	"email": "name@nventive.com"
 }

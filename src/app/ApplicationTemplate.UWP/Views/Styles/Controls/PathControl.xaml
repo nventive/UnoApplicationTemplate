@@ -187,7 +187,7 @@
 	<Style x:Key="FilledHeartPathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialPrimaryAccentBrush}" />
+				Value="{StaticResource MaterialErrorBrush}" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"

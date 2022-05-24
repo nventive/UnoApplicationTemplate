@@ -21,6 +21,8 @@
 				Value="{StaticResource FontFamily01Bold}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="FontWeight"
+				Value="Bold" />
 		<Setter Property="LineHeight"
 				Value="62" />
 		<Setter Property="CharacterSpacing"
@@ -31,9 +33,11 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource MaterialHeadline5}">
 		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
+				Value="{StaticResource FontFamily01SemiBold}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="FontWeight"
+				Value="Medium" />
 		<Setter Property="LineHeight"
 				Value="32" />
 		<Setter Property="CharacterSpacing"

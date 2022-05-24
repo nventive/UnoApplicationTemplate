@@ -111,6 +111,8 @@
 	<Style x:Key="DefaultCommandBarStyle"
 		   TargetType="CommandBar"
 		   BasedOn="{StaticResource MaterialCommandBarStyle}">
+		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
+				Value="{StaticResource MaterialSurfaceBrush}" />
 		<Setter Property="Background"
 				Value="{ThemeResource MaterialOnBackgroundBrush}" />
 		<Setter Property="Foreground"
