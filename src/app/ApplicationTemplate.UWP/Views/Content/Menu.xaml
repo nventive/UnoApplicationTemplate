@@ -28,12 +28,24 @@
 									<CubicEase EasingMode="EaseInOut" />
 								</DoubleAnimation.EasingFunction>
 							</DoubleAnimation>
+
+							<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MenuRoot"
+														   Storyboard.TargetProperty="Visibility">
+								<DiscreteObjectKeyFrame KeyTime="0:0:0.3"
+														Value="Collapsed" />
+							</ObjectAnimationUsingKeyFrames>
 						</Storyboard>
 					</VisualTransition>
 				</VisualStateGroup.Transitions>
 
 				<VisualState x:Name="Open">
 					<Storyboard>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MenuRoot"
+													   Storyboard.TargetProperty="Visibility">
+							<DiscreteObjectKeyFrame KeyTime="0"
+													Value="Visible" />
+						</ObjectAnimationUsingKeyFrames>
+						
 						<DoubleAnimation Storyboard.TargetName="MenuRoot"
 										 Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
 										 To="0"
@@ -44,7 +56,15 @@
 						</DoubleAnimation>
 					</Storyboard>
 				</VisualState>
-				<VisualState x:Name="Closed" />
+				<VisualState x:Name="Closed">
+					<Storyboard>
+						<ObjectAnimationUsingKeyFrames Storyboard.TargetName="MenuRoot"
+													   Storyboard.TargetProperty="Visibility">
+							<DiscreteObjectKeyFrame KeyTime="0"
+													Value="Collapsed" />
+						</ObjectAnimationUsingKeyFrames>
+					</Storyboard>
+				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
 		<Grid.RenderTransform>
