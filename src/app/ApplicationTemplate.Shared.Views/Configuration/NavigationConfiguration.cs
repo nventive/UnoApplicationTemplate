@@ -43,6 +43,8 @@ namespace ApplicationTemplate.Views
 			{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
 			{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
 			{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
+			{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
+			{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
 		};
 
 		private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)

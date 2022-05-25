@@ -81,25 +81,22 @@ namespace ApplicationTemplate.Presentation
 			set => this.Set(value);
 		}
 
-		public bool? PasswordHasEightCharacters
+		public bool? PasswordHasMinimumLength
 		{
-			get => this.GetFromObservable(ObservePasswordHasEightCharacters(), initialValue: null);
-			set => this.Set(value);
+			get => this.GetFromObservable(ObservePasswordHasMinimumLength(), initialValue: null);
 		}
 
 		public bool? PasswordHasNumber
 		{
 			get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
-			set => this.Set(value);
 		}
 
 		public bool? PasswordHasUppercase
 		{
 			get => this.GetFromObservable(ObservePasswordHasUppercase(), initialValue: null);
-			set => this.Set(value);
 		}
 
-		private IObservable<bool?> ObservePasswordHasEightCharacters()
+		private IObservable<bool?> ObservePasswordHasMinimumLength()
 		{
 			return this.GetProperty(x => x.Password)
 				.Observe()
@@ -110,7 +107,7 @@ namespace ApplicationTemplate.Presentation
 						return null;
 					}
 
-					return password.Length >= 8;
+					return password.Length >= PresentationConstants.PasswordMinLength;
 				});
 		}
 

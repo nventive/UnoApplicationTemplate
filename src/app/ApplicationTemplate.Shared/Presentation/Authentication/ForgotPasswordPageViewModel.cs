@@ -12,6 +12,19 @@ namespace ApplicationTemplate.Presentation
 	{
 		public ForgotPasswordFormViewModel Form => this.GetChild(() => new ForgotPasswordFormViewModel());
 
+		public IDynamicCommand SendLink => this.GetCommandFromTask(async ct =>
+		{
+			var validationResult = await Form.Validate(ct);
+
+			// Send link here - TODO : Add PBI link
+
+			if (validationResult.IsValid)
+			{
+				await this.GetService<ISectionsNavigator>().Navigate(ct, () => new SentEmailConfirmationPageViewModel());
+				await this.GetService<ISectionsNavigator>().RemovePrevious(ct);
+			}
+		});
+
 		public IDynamicCommand ResetPassword => this.GetCommandFromTask(async ct =>
 		{
 			var validationResult = await Form.Validate(ct);

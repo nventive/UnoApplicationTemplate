@@ -16,7 +16,7 @@
 	<Page.Resources>
 		<ResourceDictionary>
 			<converters:FromNullableBoolToCustomValueConverter x:Key="NullableBoolToIconStyle"
-															   DefaultValue="{StaticResource CirclePathControlStyle}"
+															   DefaultValue="{StaticResource LightCirclePathControlStyle}"
 															   ValidValue="{StaticResource SuccessCheckPathControlStyle}"
 															   InvalidValue="{StaticResource ErrorXPathControlStyle}" />
 		</ResourceDictionary>
@@ -60,7 +60,7 @@
 					<!-- First Name -->
 					<local:DataValidationView Model="{Binding Form}"
 											  PropertyName="FirstName"
-											 Margin="42,0">
+											  Margin="42,0">
 						<TextBox PlaceholderText="First Name"
 								 x:Uid="CreateAccount_FirstName"
 								 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -171,7 +171,7 @@
 				</local:DataValidationView>
 
 					<!-- Password Validation Hints -->
-					<Grid Margin="42,12">
+					<Grid Margin="42,0,42,12">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
@@ -183,9 +183,9 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<u:PathControl x:Name="XHasEightCharactersPathControl"
+						<u:PathControl x:Name="XHasMinLengthPathControl"
 										   VerticalAlignment="Center"
-										   Style="{Binding Form.PasswordHasEightCharacters, Converter={StaticResource NullableBoolToIconStyle}}"
+										   Style="{Binding Form.PasswordHasMinimumLength, Converter={StaticResource NullableBoolToIconStyle}}"
 										   Margin="9,4,9,4" />
 
 						<u:PathControl x:Name="XHasNumberPathControl"
@@ -200,7 +200,7 @@
 										   Grid.Row="2"
 										   Margin="9,4,9,4" />
 
-						<TextBlock x:Name="HasEightCharactersText"
+						<TextBlock x:Name="HasMinimumLengthText"
 									   Text="8 characters minimum"
 									   x:Uid="Password_Validation1"
 									   Grid.Column="1"

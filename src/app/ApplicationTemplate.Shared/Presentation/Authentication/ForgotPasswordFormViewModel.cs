@@ -4,6 +4,7 @@ using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 using FluentValidation.Validators;
+using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation
 {
@@ -23,11 +24,13 @@ namespace ApplicationTemplate.Presentation
 
 	public class ForgotPasswordFormValidator : AbstractValidator<ForgotPasswordFormViewModel>
 	{
-		public ForgotPasswordFormValidator()
+		public ForgotPasswordFormValidator(IStringLocalizer localizer)
 		{
 			RuleFor(x => x.Email)
 				.NotEmpty()
-				.EmailAddress();
+				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
+				.EmailAddress()
+				.WithMessage(_ => localizer["ValidationError_Email"]);
 		}
 	}
 }

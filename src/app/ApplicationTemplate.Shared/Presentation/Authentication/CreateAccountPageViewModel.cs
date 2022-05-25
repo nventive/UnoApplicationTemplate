@@ -29,7 +29,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var validationResult = await Form.Validate(ct);
 
-			if (validationResult.IsValid && Form.PasswordHasEightCharacters == true && Form.PasswordHasNumber == true && Form.PasswordHasUppercase == true)
+			if (validationResult.IsValid && Form.PasswordHasMinimumLength == true && Form.PasswordHasNumber == true && Form.PasswordHasUppercase == true)
 			{
 				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), Form.Password);
 
