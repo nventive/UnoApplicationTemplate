@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -56,7 +57,7 @@ namespace ApplicationTemplate.Views
 				HandleSystemBackVisibility(services);
 
 				// Set StatusBar color depending on current ViewModel
-				await SetStatusBarColor(CancellationToken.None, services);
+				SetStatusBarColor(services);
 			}
 		}
 
@@ -125,12 +126,12 @@ namespace ApplicationTemplate.Views
 			return serviceProvider.GetRequiredService<ILogger<Startup>>();
 		}
 
-		private async Task SetStatusBarColor(CancellationToken ct, IServiceProvider services)
+		private void SetStatusBarColor(IServiceProvider services)
 		{
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 //+:cnd:noEmit
-			var dispatcher = services.GetRequiredService<CoreDispatcher>();
+			var dispatcher = services.GetRequiredService<IDispatcherScheduler>();
 
 			// These are pages with a different background color, needing a different status bar color
 			Type[] vmsAlternateColor =
@@ -142,7 +143,8 @@ namespace ApplicationTemplate.Views
 			services
 				.GetRequiredService<ISectionsNavigator>()
 				.ObserveProcessedState()
-				.Select(async (state) =>
+				.ObserveOn(dispatcher)
+				.Subscribe(onNext: state =>
 				{
 					var currentVmType = state.CurrentState.GetViewModelType();
 
@@ -166,14 +168,8 @@ namespace ApplicationTemplate.Views
 						}
 					}
 
-					await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-					{
-						Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = statusBarColor;
-					});
-
-					return currentVmType;
-				})
-				.Subscribe(_ => { }, e => Logger.LogError(e, "Failed to set status bar color."));
+					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = statusBarColor;
+				}, e => Logger.LogError(e, "Failed to set status bar color."));
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
