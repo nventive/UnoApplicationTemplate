@@ -13,44 +13,12 @@
 	
 	<!-- ResourceDictionary containing only 1 item doesn't work if that item refers Material resources. -->
 	<x:Int32 x:Key="ToggleSwitchWorkaround">0</x:Int32>
-	
-	<!-- Default native ToggleSwitch styles -->
-
-	<ios:Style x:Key="MaterialToggleSwitchStyle"
-			   BasedOn="{StaticResource MaterialToggleSwitchStyle}"
-			   TargetType="ToggleSwitch">
-		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
-		<Setter Property="Background"
-				Value="{ThemeResource MaterialOnSecondaryDisabledBrush}" />
-		<Setter Property="Padding"
-				Value="0" />
-		<Setter Property="HorizontalAlignment"
-				Value="Right" />
-		<Setter Property="MinWidth"
-				Value="34" />
-	</ios:Style>
-
-	<android:Style x:Key="MaterialToggleSwitchStyle"
-				   TargetType="ToggleSwitch"
-				   BasedOn="{StaticResource MaterialToggleSwitchStyle}">
-		<Setter Property="MinHeight"
-				Value="14" />
-		<Setter Property="Padding"
-				Value="0" />
-		<Setter Property="MinWidth"
-				Value="34" />
-	</android:Style>
 
 	<win:Style x:Key="MaterialToggleSwitchStyle"
 			   BasedOn="{StaticResource MaterialToggleSwitchStyle}"
 			   TargetType="ToggleSwitch">
-		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource MaterialOnSecondaryDisabledBrush}" />
-		<Setter Property="BorderBrush"
-				Value="{ThemeResource MaterialOnPrimaryBrush}" />
+				Value="{ThemeResource MaterialOnSecondaryLowBrush}" />
 	</win:Style>
 
 

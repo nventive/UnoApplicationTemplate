@@ -11,16 +11,16 @@ namespace ApplicationTemplate.Presentation
 {
 	public partial class OnboardingPageViewModel : ViewModel
 	{
+		private bool _isFromSettingsPage = false;
+
 		public OnboardingPageViewModel(bool isFromSettingsPage = false)
 		{
-			IsFromSettingsPage = isFromSettingsPage;
+			_isFromSettingsPage = isFromSettingsPage;
 		}
-
-		private bool IsFromSettingsPage { get; set; }
 
 		public IDynamicCommand NavigateToNextPage => this.GetCommandFromTask(async ct =>
 		{
-			if (IsFromSettingsPage)
+			if (_isFromSettingsPage)
 			{
 				// Forward navigation to navigate back to LoginPage
 				// Remove LoginPage for navigation stack

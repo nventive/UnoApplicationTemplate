@@ -90,7 +90,7 @@
 				<HyperlinkButton Content="Forgot password ?"
 								 x:Uid="Login_ForgotPassword"
 								 Command="{Binding NavigateToForgotPasswordPage}"
-								 Foreground="{StaticResource MaterialOnBackgroundMediumBrush}"                                                                                                                                                                                                                                                                      
+								 Foreground="{StaticResource MaterialOnSurfaceMediumBrush}"                                                                                                                                                                                                                                                                      
 								 Margin="42,0" />
 
 				<Button x:Name="LoginButton"

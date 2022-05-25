@@ -3,6 +3,7 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
@@ -22,35 +23,35 @@
 
 			<StackPanel>
 				<dl:DataLoaderView Source="{Binding UserProfile}"
-								   Margin="24">
+								   MinHeight="270">
 					<DataTemplate>
-						<StackPanel>
+						<StackPanel Padding="24">
 							<!-- Name and Lastname -->
 							<TextBlock Style="{StaticResource Headline5}">
 									<Run Text="{Binding Data.FirstName}" /><Run
-										 Text=" " /><Run
-										 Text="{Binding Data.LastName}" />
+											Text=" " /><Run
+											Text="{Binding Data.LastName}" />
 							</TextBlock>
 
 							<!-- Email -->
 							<TextBlock Text="Email"
-									   x:Uid="Settings_Email"
-									   Margin="0,16,0,0"
-									   Style="{StaticResource Subtitle2}" />
+										x:Uid="Settings_Email"
+										Margin="0,15,0,0"
+										Style="{StaticResource Subtitle2}" />
 							<TextBlock Text="{Binding Data.Email}"
-									   Style="{StaticResource Body2}" />
+										Style="{StaticResource Body2}" />
 
-							<Rectangle Margin="0,16"
-									   Height="1"
-									   HorizontalAlignment="Stretch"
-									   Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+							<Rectangle Margin="0,15"
+										Height="1"
+										HorizontalAlignment="Stretch"
+										Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
 							<!-- Password -->
 							<TextBlock Text="Password"
-									   x:Uid="Settings_Password"
-									   Style="{StaticResource Subtitle2}" />
+										x:Uid="Settings_Password"
+										Style="{StaticResource Subtitle2}" />
 							<TextBlock Text="xxxxxxxx"
-									   Style="{StaticResource Body2}" />
+										Style="{StaticResource Body2}" />
 
 							<!-- Change password -->
 							<Button Content="CHANGE PASSWORD"
@@ -58,7 +59,6 @@
 									Margin="0,15,0,0"
 									HorizontalAlignment="Left"
 									Command="{Binding Parent.NavigateToResetPasswordPage}" />
-
 						</StackPanel>
 					</DataTemplate>
 				</dl:DataLoaderView>
@@ -70,11 +70,16 @@
 				<StackPanel Margin="24,16">
 
 					<!-- Version -->
-					<TextBlock Style="{StaticResource Subtitle2}">
+					<Grid Background="Transparent"
+						  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
+						  ue:MultipleTapExtension.TapCount="3">
+						<TextBlock Style="{StaticResource Subtitle2}">
 						<Run Text="DAD Jokes - Version"
-							 x:Uid="Settings_Version" />
-						<Run Text="{Binding VersionNumber}" />
-					</TextBlock>
+							 x:Uid="Settings_Version" /><Run
+							 Text=" " /><Run
+							 Text="{Binding VersionNumber}" />
+						</TextBlock>
+					</Grid>
 
 					<TextBlock Text="This application makes use of the dadjokes API from Dadjokes.io, which contains thousands of jokes."
 							   x:Uid="Settings_Version_Details"
@@ -89,7 +94,7 @@
 							Command="{Binding NavigateToOnboardingPage}"
 							Style="{StaticResource MaterialContainedSecondaryButtonStyle}" />
 				</StackPanel>
-				
+
 				<Rectangle Height="1"
 						   HorizontalAlignment="Stretch"
 						   Fill="{StaticResource MaterialOnSurfacePressedBrush}" />

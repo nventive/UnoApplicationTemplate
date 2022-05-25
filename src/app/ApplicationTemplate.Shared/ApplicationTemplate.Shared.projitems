@@ -42,13 +42,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_Configuration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Configuration\IConfigurationExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\OnDataLostDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\AnalyticsDataLoaderStrategy.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\BaseMock.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DependencyInjection\RegistrationServiceCollectionExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicData\IChangeSet.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\NetworkReconnectionDataLoaderTrigger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicMvvm\IViewModel.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\ObjectSerializerToContentSerializerAdapter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\ObjectSerializerToResponseContentDeserializer.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Client\Data\PostErrorResponse.cs" />

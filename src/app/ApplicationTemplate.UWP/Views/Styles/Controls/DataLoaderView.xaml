@@ -58,7 +58,7 @@
 							   Canvas.Left="22"
 							   Width="67"
 							   Height="5"
-							   Fill="{StaticResource MaterialPrimaryAccentBrush}">
+							   Fill="{StaticResource MaterialErrorBrush}">
 						<Rectangle.RenderTransform>
 							<RotateTransform CenterX="34.6439"
 											 CenterY="65.7733"
@@ -66,7 +66,7 @@
 						</Rectangle.RenderTransform>
 					</Rectangle>
 					<Path Data="M104.911 7.73653C107.201 3.59431 112.566 2.33468 116.46 5.02525L159.726 34.9211C163.62 37.6116 164.339 43.076 161.274 46.6828L114.438 101.804L69.9172 71.0406L104.911 7.73653Z"
-						  Stroke="{StaticResource MaterialPrimaryAccentBrush}"
+						  Stroke="{StaticResource MaterialErrorBrush}"
 						  StrokeThickness="5" />
 				</Canvas>
 
@@ -79,7 +79,7 @@
 
 				<!-- Message -->
 				<TextBlock Text="Please try again."
-						   Foreground="{StaticResource MaterialOnBackgroundMediumBrush}"
+						   Foreground="{StaticResource MaterialOnSurfaceMediumBrush}"
 						   Style="{StaticResource Body1}"
 						   TextAlignment="Center" />
 

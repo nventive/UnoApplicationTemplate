@@ -128,7 +128,7 @@
 		<Setter Property="Height"
 				Value="56" />
 		<Setter Property="Background"
-				Value="{StaticResource TransparentBrush}" />
+				Value="Transparent" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialSurfaceBrush}" />
 	</Style>

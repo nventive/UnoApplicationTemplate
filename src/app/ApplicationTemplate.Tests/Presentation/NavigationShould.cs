@@ -42,5 +42,16 @@ namespace ApplicationTemplate.Tests
 			// Assert
 			Assert.NotEqual(sourceSection, currentSection);
 		}
+
+		[Fact]
+		public async Task NavigateToDiagnosticsPageAndBack()
+		{
+			var diagnosticsViewModel = await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(
+				() => new SettingsPageViewModel(),
+				p => p.NavigateToDiagnosticsPage
+			);
+
+			await AssertNavigateTo<SettingsPageViewModel>(() => diagnosticsViewModel.NavigateBack);
+		}
 	}
 }

@@ -49,6 +49,8 @@
 				Value="{StaticResource FontFamily01SemiBold}" />
 		<Setter Property="Foreground"
 				Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="FontWeight"
+				Value="Medium" />
 		<Setter Property="LineHeight"
 				Value="32" />
 		<Setter Property="CharacterSpacing"
