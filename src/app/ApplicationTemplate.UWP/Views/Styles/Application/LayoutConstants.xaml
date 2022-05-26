@@ -66,6 +66,4 @@
 	<CornerRadius x:Key="CardCornerRadius">2</CornerRadius>
 	<CornerRadius x:Key="TextBoxCornerRadius">2</CornerRadius>
 
-	<Thickness x:Key="BottomBarNavNeededMargin">0,0,0,90</Thickness>
-
 </ResourceDictionary>

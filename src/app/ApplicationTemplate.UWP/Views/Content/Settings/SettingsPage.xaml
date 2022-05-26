@@ -8,8 +8,7 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  mc:Ignorable="d">
 
-	<Grid Background="{StaticResource MaterialSurfaceBrush}"
-		  Margin="{StaticResource BottomBarNavNeededMargin}">
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
