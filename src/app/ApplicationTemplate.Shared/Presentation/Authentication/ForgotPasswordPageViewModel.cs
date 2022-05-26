@@ -16,7 +16,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var validationResult = await Form.Validate(ct);
 
-			// Send link here - TODO : Add PBI link
+			// Send link here - https://dev.azure.com/nventive/Practice%20committees/_backlogs/backlog/Mobile%20(.Net)/Features/?workitem=245437
 
 			if (validationResult.IsValid)
 			{
