@@ -20,9 +20,25 @@ namespace ApplicationTemplate.Views.Content
 					case ElementTheme.Default:
 					case ElementTheme.Light:
 						root.RequestedTheme = ElementTheme.Dark;
+						//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
+						//+:cnd:noEmit
+						// No need for the dispatcher here
+						Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+						//-:cnd:noEmit
+#endif
+						//+:cnd:noEmit
 						break;
 					case ElementTheme.Dark:
 						root.RequestedTheme = ElementTheme.Light;
+						//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
+						//+:cnd:noEmit
+						// No need for the dispatcher here
+						Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
+						//-:cnd:noEmit
+#endif
+						//+:cnd:noEmit
 						break;
 				}
 			}

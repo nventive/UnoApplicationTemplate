@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Text;
@@ -28,6 +29,14 @@ namespace Chinook.SectionsNavigation
 					return state.ActiveSection?.State.Stack.LastOrDefault()?.ViewModel.GetType();
 				})
 				.StartWith(sectionsNavigator.State.ActiveSection?.State.Stack.LastOrDefault()?.ViewModel.GetType());
+		}
+
+		public static IObservable<SectionsNavigatorEventArgs> ObserveProcessedState(this ISectionsNavigator sectionsNavigator)
+		{
+			return sectionsNavigator
+				.ObserveStateChanged()
+				.Where(args => args.EventArgs.CurrentState.LastRequestState == NavigatorRequestState.Processed)
+				.Select(args => args.EventArgs);
 		}
 	}
 }

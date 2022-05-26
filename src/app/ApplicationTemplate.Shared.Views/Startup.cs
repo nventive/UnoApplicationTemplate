@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Uno.UI;
 using Windows.UI.Core;
+using Windows.UI.Xaml;
 
 namespace ApplicationTemplate.Views
 {
@@ -52,6 +55,9 @@ namespace ApplicationTemplate.Views
 				await AddSystemBackButtonSource(services);
 
 				HandleSystemBackVisibility(services);
+
+				// Set StatusBar color depending on current ViewModel
+				SetStatusBarColor(services);
 			}
 		}
 
@@ -118,6 +124,55 @@ namespace ApplicationTemplate.Views
 		protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
 		{
 			return serviceProvider.GetRequiredService<ILogger<Startup>>();
+		}
+
+		private void SetStatusBarColor(IServiceProvider services)
+		{
+//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
+//+:cnd:noEmit
+			var dispatcher = services.GetRequiredService<IDispatcherScheduler>();
+
+			// These are pages with a different background color, needing a different status bar color
+			Type[] vmsAlternateColor =
+			{
+				typeof(OnboardingPageViewModel),
+				typeof(LoginPageViewModel)
+			};
+
+			services
+				.GetRequiredService<ISectionsNavigator>()
+				.ObserveProcessedState()
+				.ObserveOn(dispatcher)
+				.Subscribe(onNext: state =>
+				{
+					var currentVmType = state.CurrentState.GetViewModelType();
+
+					// We set the default status bar color to white
+					var statusBarColor = Windows.UI.Colors.White;
+
+					if (Window.Current.Content is FrameworkElement root && root.ActualTheme == ElementTheme.Dark)
+					{
+						// For dark theme, the status bar is black except for the pages in vmsAlternateColor
+						if (!vmsAlternateColor.Contains(currentVmType))
+						{
+							statusBarColor = Windows.UI.Colors.Black;
+						}
+					}
+					else
+					{
+						// For light theme, the status bar is white except for the pages in vmsAlternateColor
+						if (vmsAlternateColor.Contains(currentVmType))
+						{
+							statusBarColor = Windows.UI.Colors.Black;
+						}
+					}
+
+					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = statusBarColor;
+				}, e => Logger.LogError(e, "Failed to set status bar color."));
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
 		}
 	}
 }
