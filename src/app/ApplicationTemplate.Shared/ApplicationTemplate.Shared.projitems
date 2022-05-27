@@ -75,6 +75,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\CreateAccountFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\LoginFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\ForgotPasswordFormViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\PasswordFormViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\ResetPasswordPageViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\Authentication\SentEmailConfirmationPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesFiltersPageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesItemViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\DadJokes\DadJokesPageViewModel.cs" />
@@ -86,6 +89,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Extensions\SectionNavigatorExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\IViewModel.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\MenuViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Presentation\PresentationConstants.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Settings\EditProfileFormViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Settings\EditProfilePageViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Presentation\Settings\LicensesPageViewModel.cs" />

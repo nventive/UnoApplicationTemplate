@@ -12,6 +12,8 @@ namespace ApplicationTemplate.Presentation
 	{
 		public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
 
+		public PasswordFormViewModel PasswordForm => this.GetChild(() => new PasswordFormViewModel());
+
 		public string[] DadNames =>
 		new[]
 		{
@@ -29,9 +31,9 @@ namespace ApplicationTemplate.Presentation
 		{
 			var validationResult = await Form.Validate(ct);
 
-			if (validationResult.IsValid && Form.PasswordHasEightCharacters == true && Form.PasswordHasNumber == true && Form.PasswordHasUppercase == true)
+			if (validationResult.IsValid && PasswordForm.PasswordHasMinimumLength == true && PasswordForm.PasswordHasNumber == true && PasswordForm.PasswordHasUppercase == true)
 			{
-				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), Form.Password);
+				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), PasswordForm.Password);
 
 				await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 			}

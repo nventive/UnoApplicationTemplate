@@ -39,6 +39,11 @@ namespace ApplicationTemplate.Presentation
 			}
 		});
 
+		public IDynamicCommand NavigateToResetPasswordPage => this.GetCommandFromTask(async ct =>
+		{
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ResetPasswordPageViewModel());
+		});
+
 		public IDynamicCommand NavigateToDiagnosticsPage => this.GetCommandFromTask(async ct =>
 		{
 			await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new DiagnosticsPageViewModel());

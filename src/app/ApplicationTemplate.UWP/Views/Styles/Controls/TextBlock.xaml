@@ -28,6 +28,19 @@
 		<Setter Property="CharacterSpacing"
 				Value="-0.5" />
 	</Style>
+	
+	<Style x:Key="Headline3"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource MaterialHeadline3}">
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily01Bold}" />
+		<Setter Property="FontWeight"
+				Value="Bold" />
+		<Setter Property="Foreground"
+				Value="{StaticResource MaterialOnSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="56" />
+	</Style>
 
 	<Style x:Key="Headline5"
 		   TargetType="TextBlock"

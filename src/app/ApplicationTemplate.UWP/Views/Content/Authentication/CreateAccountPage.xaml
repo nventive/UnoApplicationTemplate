@@ -16,7 +16,7 @@
 	<Page.Resources>
 		<ResourceDictionary>
 			<converters:FromNullableBoolToCustomValueConverter x:Key="NullableBoolToIconStyle"
-															   DefaultValue="{StaticResource CirclePathControlStyle}"
+															   DefaultValue="{StaticResource LightCirclePathControlStyle}"
 															   ValidValue="{StaticResource SuccessCheckPathControlStyle}"
 															   InvalidValue="{StaticResource ErrorXPathControlStyle}" />
 		</ResourceDictionary>
@@ -60,7 +60,7 @@
 					<!-- First Name -->
 					<local:DataValidationView Model="{Binding Form}"
 											  PropertyName="FirstName"
-											 Margin="42,0">
+											  Margin="42,0">
 						<TextBox PlaceholderText="First Name"
 								 x:Uid="CreateAccount_FirstName"
 								 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -157,21 +157,21 @@
 					</local:DataValidationView>
 
 				<!-- Password -->
-				<local:DataValidationView Model="{Binding Form}"
+					<local:DataValidationView Model="{Binding PasswordForm}"
 										  PropertyName="Password"
 										  Margin="42,0"
 										  Background="{StaticResource MaterialSurfaceBrush}">
 					<PasswordBox x:Name="PasswordField"
 								 x:Uid="CreateAccount_Password"
 								 PlaceholderText="Choose a password"
-								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 Password="{Binding PasswordForm.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 								 ios:ReturnKeyType="Done"
 								 android:ImeOptions="Done"
 								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
 				</local:DataValidationView>
 
 					<!-- Password Validation Hints -->
-					<Grid Margin="42,12">
+					<Grid Margin="42,0,42,12">
 						<Grid.RowDefinitions>
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
@@ -183,24 +183,24 @@
 							<ColumnDefinition Width="*" />
 						</Grid.ColumnDefinitions>
 
-						<u:PathControl x:Name="XHasEightCharactersPathControl"
+						<u:PathControl x:Name="HasMinLengthPathControl"
 										   VerticalAlignment="Center"
-										   Style="{Binding Form.PasswordHasEightCharacters, Converter={StaticResource NullableBoolToIconStyle}}"
+										   Style="{Binding PasswordForm.PasswordHasMinimumLength, Converter={StaticResource NullableBoolToIconStyle}}"
 										   Margin="9,4,9,4" />
 
-						<u:PathControl x:Name="XHasNumberPathControl"
-										   Style="{Binding Form.PasswordHasNumber, Converter={StaticResource NullableBoolToIconStyle}}"
+						<u:PathControl x:Name="HasNumberPathControl"
+										   Style="{Binding PasswordForm.PasswordHasNumber, Converter={StaticResource NullableBoolToIconStyle}}"
 										   VerticalAlignment="Center"
 										   Grid.Row="1"
 										   Margin="9,4,9,4" />
 
-						<u:PathControl x:Name="XHasUppercasePathControl"
-										   Style="{Binding Form.PasswordHasUppercase, Converter={StaticResource NullableBoolToIconStyle}}"
+						<u:PathControl x:Name="HasUppercasePathControl"
+										   Style="{Binding PasswordForm.PasswordHasUppercase, Converter={StaticResource NullableBoolToIconStyle}}"
 										   VerticalAlignment="Center"
 										   Grid.Row="2"
 										   Margin="9,4,9,4" />
 
-						<TextBlock x:Name="HasEightCharactersText"
+						<TextBlock x:Name="HasMinimumLengthText"
 									   Text="8 characters minimum"
 									   x:Uid="Password_Validation1"
 									   Grid.Column="1"
