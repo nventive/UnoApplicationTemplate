@@ -78,7 +78,7 @@
 					<Path Fill="{StaticResource MaterialOnSecondaryColor}"
 						  Width="24"
 						  Height="24"
-						  Data="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z" />
+						  Data="{StaticResource PlusIcon}" />
 				</Border>
 			</Button>
 		</Grid>

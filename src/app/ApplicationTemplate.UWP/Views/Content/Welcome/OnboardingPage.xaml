@@ -71,7 +71,7 @@
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
-		<Image Source="ms-appx:///Assets/Background_Mustaches_Light.png"
+		<Image Source="{StaticResource BackgroundMustachesLightImage}"
 			   Stretch="UniformToFill" />
 
 		<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">

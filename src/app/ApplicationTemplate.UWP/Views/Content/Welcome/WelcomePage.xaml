@@ -15,14 +15,14 @@
 			<RowDefinition Height="0.1*" />
 		</Grid.RowDefinitions>
 
-		<Image Source="ms-appx:///Assets/Background_Mustaches.png"
+		<Image Source="{StaticResource BackgroundMustachesImage}"
 			   Stretch="UniformToFill"
 			   Grid.RowSpan="2" />
 
 		<StackPanel HorizontalAlignment="Center"
 					VerticalAlignment="Center"
 					Grid.Row="0">
-			<Image Source="ms-appx:///Assets/Logo.png"
+			<Image Source="{StaticResource LogoImage}"
 				   Width="280"
 				   HorizontalAlignment="Center" />
 			<TextBlock Text="&quot;Welcome to the Assumption Club.&#x0A;I think we all know why we are here.&quot;"
