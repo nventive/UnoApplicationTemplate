@@ -47,7 +47,7 @@
 								   HorizontalAlignment="Right"
 								   Grid.Column="1" />
 
-						<Path Data="F1M6.127,6L0.135,11.3C-0.031,11.447 -0.046,11.7 0.1,11.865 0.246,12.03 0.499,12.045 0.665,11.9L6.995,6.299C7.081,6.224 7.13,6.114 7.13,6 7.13,5.885 7.081,5.776 6.995,5.7L0.665,0.1C0.589,0.033 0.494,0 0.399,0 0.289,0 0.179,0.045 0.1,0.135 -0.046,0.3 -0.031,0.553 0.135,0.699z"
+						<Path Data="{StaticResource ChevronIcon}"
 							  VerticalAlignment="Center"
 							  HorizontalAlignment="Right"
 							  Margin="16,0,4,0"

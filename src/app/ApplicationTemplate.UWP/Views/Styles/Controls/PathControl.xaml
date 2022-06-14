@@ -18,7 +18,7 @@
 						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 						  MaxHeight="{TemplateBinding MaxHeight}"
 						  MaxWidth="{TemplateBinding MaxWidth}"
-						  Data="M21.99 4.5C21.99 3.4 21.1 2.5 20 2.5H4C2.9 2.5 2 3.4 2 4.5V16.5C2 17.6 2.9 18.5 4 18.5H18L22 22.5L21.99 4.5ZM18 14.5H6V12.5H18V14.5ZM18 11.5H6V9.5H18V11.5ZM18 8.5H6V6.5H18V8.5Z" />
+						  Data="{StaticResource HomePathControlIcon}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -35,7 +35,7 @@
 						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 						  MaxHeight="{TemplateBinding MaxHeight}"
 						  MaxWidth="{TemplateBinding MaxWidth}"
-						  Data="M0 14.7501V18.5001H3.75L14.81 7.44006L11.06 3.69006L0 14.7501ZM17.71 4.54006C18.1 4.15006 18.1 3.52006 17.71 3.13006L15.37 0.790059C14.98 0.400059 14.35 0.400059 13.96 0.790059L12.13 2.62006L15.88 6.37006L17.71 4.54006Z" />
+						  Data="{StaticResource PostsPathControlIcon}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -52,7 +52,7 @@
 						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 						  MaxHeight="{TemplateBinding MaxHeight}"
 						  MaxWidth="{TemplateBinding MaxWidth}"
-						  Data="M8 8.5C10.21 8.5 12 6.71 12 4.5C12 2.29 10.21 0.5 8 0.5C5.79 0.5 4 2.29 4 4.5C4 6.71 5.79 8.5 8 8.5ZM8 10.5C5.33 10.5 0 11.84 0 14.5V16.5H16V14.5C16 11.84 10.67 10.5 8 10.5Z" />
+						  Data="{StaticResource SettingsPathControlIcon}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -72,7 +72,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="u:PathControl">
-					<Path Data="M6.99998 0.833336C3.31998 0.833336 0.333313 3.82 0.333313 7.5C0.333313 11.18 3.31998 14.1667 6.99998 14.1667C10.68 14.1667 13.6666 11.18 13.6666 7.5C13.6666 3.82 10.68 0.833336 6.99998 0.833336ZM5.66665 10.8333L2.33331 7.5L3.27331 6.56L5.66665 8.94667L10.7266 3.88667L11.6666 4.83334L5.66665 10.8333Z"
+					<Path Data="{StaticResource SuccessCheckPathControlIcon}"
 						  Stretch="{TemplateBinding Stretch}"
 						  Width="{TemplateBinding Width}"
 						  Height="{TemplateBinding Height}"
@@ -97,7 +97,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="u:PathControl">
-					<Path Data="M6.99998 0.833334C3.31331 0.833334 0.333313 3.81333 0.333313 7.5C0.333313 11.1867 3.31331 14.1667 6.99998 14.1667C10.6866 14.1667 13.6666 11.1867 13.6666 7.5C13.6666 3.81333 10.6866 0.833334 6.99998 0.833334ZM10.3333 9.89333L9.39331 10.8333L6.99998 8.44L4.60665 10.8333L3.66665 9.89333L6.05998 7.5L3.66665 5.10667L4.60665 4.16667L6.99998 6.56L9.39331 4.16667L10.3333 5.10667L7.93998 7.5L10.3333 9.89333Z"
+					<Path Data="{StaticResource ErrorXPathControlIcon}"
 						  Stretch="{TemplateBinding Stretch}"
 						  Width="{TemplateBinding Width}"
 						  Height="{TemplateBinding Height}"
@@ -122,7 +122,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="u:PathControl">
-					<Path Data="M-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0"
+					<Path Data="{StaticResource CirclePathControlIcon}"
 						  Stretch="{TemplateBinding Stretch}"
 						  Width="{TemplateBinding Width}"
 						  Height="{TemplateBinding Height}"
@@ -172,7 +172,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="u:PathControl">
-					<Path Data="M2.00003 0L0.590027 1.41L5.17003 6L0.590027 10.59L2.00003 12L8.00003 6L2.00003 0Z"
+					<Path Data="{StaticResource RightArrowPathControlIcon}"
 						  Stretch="{TemplateBinding Stretch}"
 						  Width="{TemplateBinding Width}"
 						  Height="{TemplateBinding Height}"
@@ -198,7 +198,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="u:PathControl">
 					<Path x:Name="Heart"
-						  Data="M14.5 0C12.76 0 11.09 0.81 10 2.09C8.91 0.81 7.24 0 5.5 0C2.42 0 0 2.42 0 5.5C0 9.28 3.4 12.36 8.55 17.04L10 18.35L11.45 17.03C16.6 12.36 20 9.28 20 5.5C20 2.42 17.58 0 14.5 0ZM10.1 15.55L10 15.65L9.9 15.55C5.14 11.24 2 8.39 2 5.5C2 3.5 3.5 2 5.5 2C7.04 2 8.54 2.99 9.07 4.36H10.94C11.46 2.99 12.96 2 14.5 2C16.5 2 18 3.5 18 5.5C18 8.39 14.86 11.24 10.1 15.55Z"
+						  Data="{StaticResource OutlinedHeartPathControlIcon}"
 						  Fill="{TemplateBinding Foreground}"
 						  VerticalAlignment="Center"
 						  HorizontalAlignment="Center"
@@ -224,7 +224,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="u:PathControl">
 					<Path x:Name="Heart"
-						  Data="M10 18.35L8.55 17.03C3.4 12.36 0 9.28 0 5.5C0 2.42 2.42 0 5.5 0C7.24 0 8.91 0.81 10 2.09C11.09 0.81 12.76 0 14.5 0C17.58 0 20 2.42 20 5.5C20 9.28 16.6 12.36 11.45 17.04L10 18.35Z"
+						  Data="{StaticResource FilledHeartPathControlIcon}"
 						  Fill="{TemplateBinding Foreground}"
 						  VerticalAlignment="Center"
 						  HorizontalAlignment="Center"

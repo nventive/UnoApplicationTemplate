@@ -25,7 +25,7 @@
 	<Grid Background="{StaticResource MaterialOnBackgroundBrush}">
 
 		<!-- Background -->
-		<Image Source="ms-appx:///Assets/Background-Mustaches.png"
+		<Image Source="{StaticResource BackgroundMustachesImage}"
 			   Stretch="UniformToFill"
 			   HorizontalAlignment="Stretch"
 			   VerticalAlignment="Stretch" />

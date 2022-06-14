@@ -395,6 +395,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Styles\Application\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Styles\Application\LayoutConstants.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -40,7 +40,7 @@
 			<!--<CommandBar.PrimaryCommands>
 				<AppBarButton Command="{Binding NavigateToFilters}">
 					<AppBarButton.Icon>
-						<BitmapIcon UriSource="ms-appx:///Assets/CommandBarCommands/filter.png"
+						<BitmapIcon UriSource="{StaticResource FilterImage}"
 									Foreground="{StaticResource MaterialOnPrimaryBrush}" />
 					</AppBarButton.Icon>
 				</AppBarButton>

@@ -232,7 +232,7 @@
 
 						<StackPanel Orientation="Horizontal"
 									HorizontalAlignment="Center">
-							<Image Source="ms-appx:///Assets/Google_Icon.png"
+							<Image Source="{StaticResource GoogleIconImage}"
 								   Height="20"
 								   Width="20" />
 
