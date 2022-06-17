@@ -8,6 +8,10 @@
 							 xmlns:toolkit="using:Uno.UI.Toolkit"
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
+	<local:AttachableUserControl.Resources>
+		<ToolkitResources xmlns="using:Uno.Toolkit.UI" />
+	</local:AttachableUserControl.Resources>
+	
 	<Grid x:Name="MenuRoot"
 		  Background="{StaticResource MaterialOnBackgroundBrush}"
 		  toolkit:VisibleBoundsPadding.PaddingMask="Bottom">
