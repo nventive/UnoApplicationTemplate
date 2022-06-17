@@ -8,9 +8,6 @@
 			<ResourceDictionary.MergedDictionaries>
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
-				<!-- Load Toolkit resources -->
-				<ToolkitResources xmlns="using:Uno.Toolkit.UI" />
-				
 				<!-- Uno material -->
 				<MaterialColors xmlns="using:Uno.Material"
 								OverrideSource="ms-appx:///Views/Styles/Application/MaterialOverride.xaml" />
@@ -34,6 +31,7 @@
 				<ResourceDictionary Source="Views/Styles/Controls/DataValidationView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/ExtendedSplashScreen.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/FlipViewItem.xaml" />
+				<ResourceDictionary Source="Views/Styles/Controls/Frame.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/GridViewHeaderItem.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/GridViewItem.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/HyperlinkButton.xaml" />

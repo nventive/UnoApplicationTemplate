@@ -82,7 +82,8 @@
 			<Setter.Value>
 				<DataTemplate>
 					<TextBlock Text="{Binding}"
-							   Style="{StaticResource Headline6}" />
+							   Style="{StaticResource Headline6}"
+							   Foreground="{ThemeResource MaterialSurfaceBrush}"/>
 				</DataTemplate>
 			</Setter.Value>
 		</Setter>
@@ -117,8 +118,10 @@
 				Value="{ThemeResource MaterialOnBackgroundBrush}" />
 		<Setter Property="Foreground"
 				Value="{ThemeResource MaterialSurfaceBrush}" />
-		<Setter Property="Height"
-				Value="56" />
+		<android:Setter Property="Height"
+				Value="100" />
+		<Setter Property="Padding"
+				Value="{StaticResource StatusBarThickness}" />
 	</Style>
 
 	<Style x:Key="TransparentCommandBarStyle"
