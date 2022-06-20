@@ -34,6 +34,7 @@
 				<ResourceDictionary Source="Views/Styles/Controls/DataValidationView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/ExtendedSplashScreen.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/FlipViewItem.xaml" />
+				<ResourceDictionary Source="Views/Styles/Controls/Frame.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/GridViewHeaderItem.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/GridViewItem.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/HyperlinkButton.xaml" />
