@@ -20,8 +20,7 @@
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
-			<CommandBar Style="{StaticResource TransparentCommandBarStyle}"
-						toolkit:CommandBarExtensions.BackButtonForeground="{StaticResource MaterialOnSurfaceBrush}" />
+			<CommandBar Style="{StaticResource TransparentCommandBarStyle}" />
 
 			<StackPanel Grid.Row="1"
 						VerticalAlignment="Center">

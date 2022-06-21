@@ -124,13 +124,13 @@
 	<Style x:Key="TransparentCommandBarStyle"
 		   TargetType="CommandBar">
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource MaterialOnBackgroundBrush}" />
 		<Setter Property="Height"
 				Value="56" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource MaterialOnBackgroundBrush}" />
 	</Style>
 	
 	<!-- Default Style -->
