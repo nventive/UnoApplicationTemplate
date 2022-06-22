@@ -24,7 +24,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
 			// Dispose the previous ItemViewModels when Quotes produces new values
-			.DisposePreviousData()
+			//.DisposePreviousData()
 			.TriggerOnNetworkReconnection()
 			.TriggerFromObservable(this.GetService<IDadJokesService>().GetAndObservePostTypeFilter().Skip(1))
 		);

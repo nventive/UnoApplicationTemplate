@@ -2,9 +2,6 @@
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <LangVersion>9.0</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{C76E144C-92AD-4B8F-93F4-232D1CCDDAF0}</ProjectGuid>
@@ -14,8 +11,8 @@
     <AssemblyName>ApplicationTemplate</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.19041.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <AppxBundlePlatforms>x64</AppxBundlePlatforms>
@@ -112,23 +109,11 @@
     <Compile Include="Views\Content\Authentication\LoginPage.xaml.cs">
       <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\Authentication\ResetPasswordPage.xaml.cs">
-      <DependentUpon>ResetPasswordPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\ChuckNorris\ChuckNorrisFavoritesPage.xaml.cs">
+      <DependentUpon>ChuckNorrisFavoritesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\Authentication\SentEmailConfirmationPage.xaml.cs">
-      <DependentUpon>SentEmailConfirmationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\DadJokes\DadJokesFavoritesPage.xaml.cs">
-      <DependentUpon>DadJokesFavoritesPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\DadJokes\DadJokesSearchPage.xaml.cs">
-      <DependentUpon>DadJokesSearchPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\DadJokes\DadJokesFiltersPage.xaml.cs">
-      <DependentUpon>DadJokesFiltersPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Content\DadJokes\DadJokesPage.xaml.cs">
-      <DependentUpon>DadJokesPage.xaml</DependentUpon>
+    <Compile Include="Views\Content\ChuckNorris\ChuckNorrisSearchPage.xaml.cs">
+      <DependentUpon>ChuckNorrisSearchPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\Diagnostics\DiagnosticsOverlay.xaml.cs">
       <DependentUpon>DiagnosticsOverlay.xaml</DependentUpon>
@@ -160,32 +145,33 @@
     <Compile Include="Views\Content\Settings\WebViewPage.xaml.cs">
       <DependentUpon>WebViewPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Content\Welcome\WelcomePage.xaml.cs">
-      <DependentUpon>WelcomePage.xaml</DependentUpon>
+    <Compile Include="Views\Content\Welcome\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Content\Welcome\OnboardingPage.xaml.cs">
       <DependentUpon>OnboardingPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Content\Welcome\WelcomePage.xaml.cs">
+      <DependentUpon>WelcomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.Reactive" Version="5.0.0" />
     <PackageReference Include="System.Reflection.TypeExtensions" Version="4.3.0" />
     <PackageReference Include="System.Collections" Version="4.3.0" />
     <PackageReference Include="System.Runtime.Handles" Version="4.3.0" />
     <PackageReference Include="System.IO.FileSystem.Primitives" Version="4.3.0" />
     <PackageReference Include="System.Runtime.InteropServices" Version="4.3.0" />
-    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="6.0.0" />
-    <PackageReference Include="MessageDialogService.Uno" Version="0.5.0-dev.13" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.1" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
+    <PackageReference Include="System.Diagnostics.DiagnosticSource" Version="4.7.0" />
+    <PackageReference Include="MessageDialogService.Uno" Version="0.3.0-dev.5" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
-    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.13" />
-    <PackageReference Include="Uno.Toolkit.UI" Version="1.4.0-dev.16" />
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform" Version="6.2.9" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
@@ -193,13 +179,13 @@
     <PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.21" />
     <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="8.6.2" />
     <PackageReference Include="Refit" Version="4.7.51" />
-    <PackageReference Include="GeneratedSerializers.Json" Version="1.0.0-dev.30" />
-    <PackageReference Include="Reactive.Annex.Uno" Version="0.5.0-dev.29" />
-    <PackageReference Include="Uno.Material" Version="1.3.3" />
-    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls" Version="7.1.2" />
-    <PackageReference Include="Uno.UI" Version="4.2.6" />
-    <PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
-    <PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
+    <PackageReference Include="GeneratedSerializers.Json" Version="0.2.0-dev.10" />
+    <PackageReference Include="Reactive.Annex.Uno" Version="0.3.0-dev.18" />
+    <PackageReference Include="Uno.Material" Version="1.0.0-dev.812" />
+    <PackageReference Include="Uno.Microsoft.Toolkit.Uwp.DeveloperTools" Version="6.1.0-build.205.g2e0e348372" />
+    <PackageReference Include="Uno.UI" Version="3.10.0-dev.655" />
+    <PackageReference Include="Uno.Injectable" Version="1.34.0-dev.175" />
+    <PackageReference Include="Uno.CodeGen" Version="1.34.0-dev.175" />
     <PackageReference Include="Chinook.DynamicMvvm" Version="0.4.0-dev.41" />
     <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.4.0-dev.41" />
     <PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="0.4.0-dev.41" />
@@ -211,23 +197,23 @@
     <PackageReference Include="Chinook.DataLoader.Uno" Version="0.3.0-dev.42" />
     <PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="0.3.0-dev.42" />
     <PackageReference Include="DynamicData" Version="7.1.1" />
-    <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.4.0-dev.20" />
-    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.3.0-dev.33" />
-    <PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.17" />
-    <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
-    <PackageReference Include="Nventive.View.Uno" Version="0.4.0-dev.33" />
+    <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.2.0-dev.11" />
+    <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.2.0-dev.24" />
+    <PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.14" />
+    <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.14" />
+    <PackageReference Include="Nventive.View.Uno" Version="0.2.0-dev.9" />
     <PackageReference Include="nventive.Nimue.Application.Building.Light">
-      <Version>0.1.0-alpha.89</Version>
+      <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="nventive.Nimue.Application.Packaging">
-      <Version>0.1.0-alpha.89</Version>
+      <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     <PackageReference Include="nventive.Nimue.Application.Versioning">
-      <Version>0.1.0-alpha.89</Version>
+      <Version>0.1.0-alpha.73</Version>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
@@ -243,42 +229,41 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\AppIcon.scale-100.png" />
-    <Content Include="Assets\AppIcon.scale-125.png" />
-    <Content Include="Assets\AppIcon.scale-150.png" />
-    <Content Include="Assets\AppIcon.scale-200.png" />
-    <Content Include="Assets\AppIcon.scale-400.png" />
-    <Content Include="Assets\AppIcon.targetsize-16.png" />
-    <Content Include="Assets\AppIcon.targetsize-16_altform-unplated.png" />
-    <Content Include="Assets\AppIcon.targetsize-24.png" />
-    <Content Include="Assets\AppIcon.targetsize-24_altform-unplated.png" />
-    <Content Include="Assets\AppIcon.targetsize-256.png" />
-    <Content Include="Assets\AppIcon.targetsize-256_altform-unplated.png" />
-    <Content Include="Assets\AppIcon.targetsize-32.png" />
-    <Content Include="Assets\AppIcon.targetsize-32_altform-unplated.png" />
-    <Content Include="Assets\AppIcon.targetsize-48.png" />
-    <Content Include="Assets\AppIcon.targetsize-48_altform-unplated.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-125.png" />
     <Content Include="Assets\LargeTile.scale-150.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />
-    <Content Include="Assets\Placeholder.png" />
     <Content Include="Assets\SmallTile.scale-100.png" />
     <Content Include="Assets\SmallTile.scale-125.png" />
     <Content Include="Assets\SmallTile.scale-150.png" />
     <Content Include="Assets\SmallTile.scale-200.png" />
     <Content Include="Assets\SmallTile.scale-400.png" />
-    <Content Include="Assets\MediumTile.scale-100.png" />
-    <Content Include="Assets\MediumTile.scale-125.png" />
-    <Content Include="Assets\MediumTile.scale-150.png" />
-    <Content Include="Assets\MediumTile.scale-200.png" />
-    <Content Include="Assets\MediumTile.scale-400.png" />
     <Content Include="Assets\SplashScreen.scale-100.png" />
     <Content Include="Assets\SplashScreen.scale-125.png" />
     <Content Include="Assets\SplashScreen.scale-150.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
     <Content Include="Assets\StoreLogo.scale-100.png" />
     <Content Include="Assets\StoreLogo.scale-125.png" />
     <Content Include="Assets\StoreLogo.scale-150.png" />
@@ -308,27 +293,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\Authentication\ResetPasswordPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Content\Authentication\SentEmailConfirmationPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Content\DadJokes\DadJokesFavoritesPage.xaml">
+    <Page Include="Views\Content\ChuckNorris\ChuckNorrisFavoritesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Content\DadJokes\DadJokesSearchPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\DadJokes\DadJokesFiltersPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Content\DadJokes\DadJokesPage.xaml">
+    <Page Include="Views\Content\ChuckNorris\ChuckNorrisSearchPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -372,11 +341,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Content\Welcome\WelcomePage.xaml">
+    <Page Include="Views\Content\Welcome\HomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Content\Welcome\OnboardingPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Content\Welcome\WelcomePage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -400,10 +373,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\Styles\Application\Icons.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\Styles\Application\LayoutConstants.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -417,10 +386,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\Controls\Button.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Styles\Controls\CalendarView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -464,6 +429,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\Styles\Controls\ImagePresenter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\Styles\Controls\ListView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -475,10 +444,6 @@
     <Page Include="Views\Styles\Controls\ListViewItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Views\Styles\Controls\BottomTabBarButton.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Styles\Controls\PasswordBox.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -508,32 +473,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-  </ItemGroup>
-  <ItemGroup>
-    <SDKReference Include="WindowsMobile, Version=10.0.19041.0">
-      <Name>Windows Mobile Extensions for the UWP</Name>
-    </SDKReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Fonts\Guillon-Regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Fonts\Guillon-Bold.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Fonts\Guillon-SemiBold.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Fonts\Guillon-Black.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Fonts\Roboto-Regular.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Fonts\Roboto-Medium.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Assets\Fonts\Guillon-Light.ttf" />
   </ItemGroup>
   <Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" Condition="Exists('..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems')" />
   <Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
