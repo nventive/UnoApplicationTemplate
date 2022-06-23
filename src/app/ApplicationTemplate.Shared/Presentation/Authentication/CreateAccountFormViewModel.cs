@@ -86,7 +86,7 @@ namespace ApplicationTemplate.Presentation
 			RuleFor(x => x.Email)
 				.NotEmpty()
 				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
-				.EmailAddress()
+				.IsValidEmail()
 				.WithMessage(_ => localizer["ValidationError_Email"]);
 
 			RuleFor(x => x.PhoneNumber)

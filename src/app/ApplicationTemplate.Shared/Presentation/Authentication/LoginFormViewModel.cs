@@ -5,6 +5,7 @@ using Chinook.DynamicMvvm;
 using FluentValidation;
 using FluentValidation.Validators;
 using Microsoft.Extensions.Localization;
+using Presentation;
 
 namespace ApplicationTemplate.Presentation
 {
@@ -36,7 +37,7 @@ namespace ApplicationTemplate.Presentation
 			RuleFor(x => x.Email)
 				.NotEmpty()
 				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
-				.EmailAddress()
+				.IsValidEmail()
 				.WithMessage(_ => localizer["ValidationError_Email"]);
 			RuleFor(x => x.Password)
 				.NotEmpty()

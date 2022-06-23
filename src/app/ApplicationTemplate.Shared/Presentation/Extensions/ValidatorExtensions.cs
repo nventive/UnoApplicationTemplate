@@ -2,6 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using FluentValidation;
 using Uno.Extensions;
 
@@ -69,6 +70,61 @@ namespace Presentation
 					.All(pn => pn.ToString(CultureInfo.InvariantCulture).IsNumber() ||
 						pn == '(' || pn == ')' || pn == '-' || pn == ' ');
 				return result;
+			});
+		}
+
+		/// <summary>
+		/// Returns true if the string is a valid email address.
+		/// </summary>
+		/// <typeparam name="T">email</typeparam>
+		/// <param name="ruleBuilder"> Rule builder</param>
+		/// <returns>Validation result.</returns>
+		public static IRuleBuilderOptions<T, string> IsValidEmail<T>(this IRuleBuilder<T, string> ruleBuilder)
+		{
+			return ruleBuilder.Must(email =>
+			{
+				if (string.IsNullOrWhiteSpace(email))
+				{
+					return false;
+				}
+
+				try
+				{
+					// Normalize the domain
+					email = Regex.Replace(email, @"(@)(.+)$", DomainMapper,
+										  RegexOptions.None, TimeSpan.FromMilliseconds(200));
+
+					// Examines the domain part of the email and normalizes it.
+					string DomainMapper(Match match)
+					{
+						// Use IdnMapping class to convert Unicode domain names.
+						var idn = new IdnMapping();
+
+						// Pull out and process domain name (throws ArgumentException on invalid)
+						string domainName = idn.GetAscii(match.Groups[2].Value);
+
+						return match.Groups[1].Value + domainName;
+					}
+				}
+				catch (RegexMatchTimeoutException e)
+				{
+					return false;
+				}
+				catch (ArgumentException e)
+				{
+					return false;
+				}
+
+				try
+				{
+					return Regex.IsMatch(email,
+						@"^[^@\s]+@[^@\s]+\.[^@\s]+$",
+						RegexOptions.IgnoreCase, TimeSpan.FromMilliseconds(250));
+				}
+				catch (RegexMatchTimeoutException)
+				{
+					return false;
+				}
 			});
 		}
 	}
