@@ -129,7 +129,7 @@
 		<Setter Property="FontSize"
 				Value="16" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource MaterialOnPrimaryBrush}" />
 		<Setter Property="MinWidth"
 				Value="120" />
 		<Setter Property="MinHeight"

@@ -27,15 +27,19 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="FlipViewItem">
+
+					<!-- Border -->
 					<Border Background="{TemplateBinding Background}"
 							BorderBrush="{TemplateBinding BorderBrush}"
 							BorderThickness="{TemplateBinding BorderThickness}">
+
+						<!-- ContentPresenter -->
 						<ContentPresenter Content="{TemplateBinding Content}"
 										  ContentTransitions="{TemplateBinding ContentTransitions}"
 										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  Margin="{TemplateBinding Padding}"
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Margin="{TemplateBinding Padding}" />
 					</Border>
 				</ControlTemplate>
 			</Setter.Value>

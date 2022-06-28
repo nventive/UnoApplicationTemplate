@@ -83,7 +83,7 @@
 				<DataTemplate>
 					<TextBlock Text="{Binding}"
 							   Style="{StaticResource Headline6}"
-							   Foreground="{ThemeResource MaterialOnPrimaryColor}" />
+							   Foreground="{ThemeResource MaterialOnPrimaryBrush}" />
 				</DataTemplate>
 			</Setter.Value>
 		</Setter>
