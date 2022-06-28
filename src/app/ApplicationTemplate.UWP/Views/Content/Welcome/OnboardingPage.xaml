@@ -85,8 +85,7 @@
 							  ItemsSource="{Binding OnboardingItems}"
 							  ItemTemplate="{StaticResource OnboardingItemTemplate}"
 							  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
-							  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}"
-							  Grid.Row="1" />
+							  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
 
 			<!-- Skip/Complete Button -->
 			<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"

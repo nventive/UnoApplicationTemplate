@@ -17,6 +17,10 @@
 
 	<SolidColorBrush x:Key="MaterialPrimaryAccentBrush"
 					 Color="{ThemeResource MaterialPrimaryAccentColor}" />
+
+	<SolidColorBrush x:Key="MaterialPrimaryDarkBrush"
+					 Color="{ThemeResource MaterialPrimaryDarkColor}" />
+
 	
 	<SolidColorBrush x:Key="SeparatorBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
