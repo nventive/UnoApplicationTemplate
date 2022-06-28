@@ -3,10 +3,9 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:uc="using:Nventive.View.Converters"
-	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  mc:Ignorable="d">
+	  mc:Ignorable="">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
@@ -15,10 +14,14 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
+		<!-- CommandBar -->
 		<CommandBar Content="{Binding Title}">
 			<toolkit:CommandBarExtensions.NavigationCommand>
-				<AppBarButton Command="{Binding Cancel}">
+				<AppBarButton Command="{Binding Cancel}"
+							  Foreground="{StaticResource MaterialBackgroundBrush}">
 					<AppBarButton.Icon>
+
+						<!-- Icon -->
 						<BitmapIcon UriSource="ms-appx:///Assets/CommandBarCommands/closeIcon.png" />
 					</AppBarButton.Icon>
 				</AppBarButton>
@@ -31,34 +34,38 @@
 			<StackPanel DataContext="{Binding Form}">
 
 				<!-- Title -->
-				<local:DataValidationView Model="{Binding}"
-										  PropertyName="Title"
+				<local:DataValidationView PropertyName="Title"
+										  Model="{Binding}"
 										  Margin="0,4">
 					<TextBox Text="{Binding Title, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 CornerRadius="4"
-							 x:Uid="EditPost_JokeTitle"
 							 PlaceholderText="Joke's title"
+							 x:Uid="EditPost_JokeTitle"
+							 CornerRadius="4"
 							 FontSize="16" />
 				</local:DataValidationView>
 
 				<!-- Body -->
-				<local:DataValidationView Model="{Binding}"
-										  PropertyName="Body"
+				<local:DataValidationView PropertyName="Body"
+										  Model="{Binding}"
 										  Margin="0,4">
 					<TextBox Text="{Binding Body, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 x:Uid="EditPost_JokeContent"
-							 PlaceholderText="Write the joke" />
+							 PlaceholderText="Write the joke" 
+							 x:Uid="EditPost_JokeContent"/>
 				</local:DataValidationView>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal"
 						HorizontalAlignment="Right">
+
+				<!-- Cancel Button -->
 				<Button Content="Cancel"
 						x:Uid="EditPost_Cancel"
 						Command="{Binding Cancel}"
 						Style="{StaticResource MaterialOutlinedButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="5" />
+
+				<!-- Save Button -->
 				<Button Content="Save"
 						x:Uid="EditPost_Save"
 						Command="{Binding Save}"
