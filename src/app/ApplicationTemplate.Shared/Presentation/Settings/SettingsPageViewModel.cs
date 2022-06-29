@@ -58,14 +58,14 @@ namespace ApplicationTemplate.Presentation
 		{
 			var url = this.GetService<IStringLocalizer>()["PrivacyPolicyUrl"];
 
-			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.SystemPreferred);
+			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
 		});
 
 		public IDynamicCommand NavigateToTermsAndConditionsPage => this.GetCommandFromTask(async ct =>
 		{
 			var url = this.GetService<IStringLocalizer>()["TermsAndConditionsUrl"];
 
-			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.SystemPreferred);
+			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
 		});
 
 		private async Task<UserProfileData> GetUserProfile(CancellationToken ct)
