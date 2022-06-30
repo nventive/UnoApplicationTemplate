@@ -19,19 +19,19 @@ namespace ApplicationTemplate.Presentation
 		public bool? PasswordHasMinimumLength
 		{
 			get => this.GetFromObservable(ObservePasswordHasMinimumLength(), initialValue: null);
-			set => this.Set(value);
+			private set => this.Set(value);
 		}
 
 		public bool? PasswordHasNumber
 		{
 			get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
-			set => this.Set(value);
+			private set => this.Set(value);
 		}
 
 		public bool? PasswordHasUppercase
 		{
 			get => this.GetFromObservable(ObservePasswordHasUppercase(), initialValue: null);
-			set => this.Set(value);
+			private set => this.Set(value);
 		}
 
 		private IObservable<bool?> ObservePasswordHasMinimumLength()
