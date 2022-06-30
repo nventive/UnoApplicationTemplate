@@ -143,50 +143,20 @@
 						   Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
 				<!-- Privacy policy  -->
-				<Grid Margin="24,10,24,10">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
-					</Grid.ColumnDefinitions>
-
-					<TextBlock Text="Privacy policy"
-							   x:Uid="Settings_PrivacyPolicy"
-							   VerticalAlignment="Center"
-							   Style="{StaticResource Subtitle2}"/>
-
-					<Button Grid.Column="1"
-							Command="{Binding NavigateToPrivacyPolicyPage}"
-							Style="{StaticResource MaterialButtonIconStyle}">
-						<Button.Content>
-							<u:PathControl Style="{StaticResource RightArrowPathControlStyle}" />
-						</Button.Content>
-					</Button>
-				</Grid>
+				<Button Content="Privacy policy"
+						x:Uid="Settings_PrivacyPolicy"
+						Command="{Binding NavigateToPrivacyPolicyPage}"
+						Style="{StaticResource MaterialTextWithRightArrowAlternativeButtonStyle}" />
 
 				<Rectangle Height="1"
 						   HorizontalAlignment="Stretch"
 						   Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
 
 				<!-- Terms & conditions  -->
-				<Grid Margin="24,10,24,10">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="*" />
-						<ColumnDefinition Width="Auto" />
-					</Grid.ColumnDefinitions>
-
-					<TextBlock Text="Terms &amp; conditions"
-							   x:Uid="Settings_TermsAndConditions"
-							   VerticalAlignment="Center"
-							   Style="{StaticResource Subtitle2}"/>
-
-					<Button Grid.Column="1"
-							Command="{Binding NavigateToTermsAndConditionsPage}"
-							Style="{StaticResource MaterialButtonIconStyle}">
-						<Button.Content>
-							<u:PathControl Style="{StaticResource RightArrowPathControlStyle}" />
-						</Button.Content>
-					</Button>
-				</Grid>
+				<Button Content="Terms &amp; conditions"
+						x:Uid="Settings_TermsAndConditions"
+						Command="{Binding NavigateToTermsAndConditionsPage}"
+						Style="{StaticResource MaterialTextWithRightArrowAlternativeButtonStyle}" />
 
 				<Rectangle Height="1"
 						   HorizontalAlignment="Stretch"

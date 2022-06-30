@@ -183,10 +183,10 @@
   <data name="Settings_Email.Text" xml:space="preserve">
     <value>Email</value>
   </data>
-  <data name="Settings_PrivacyPolicy.Text" xml:space="preserve">
+  <data name="Settings_PrivacyPolicy.Content" xml:space="preserve">
     <value>Privacy Policy</value>
   </data>
-  <data name="Settings_TermsAndConditions.Text" xml:space="preserve">
+  <data name="Settings_TermsAndConditions.Content" xml:space="preserve">
     <value>Terms &amp; conditions</value>
   </data>
   <data name="Settings_ChangePassword.Content" xml:space="preserve">
