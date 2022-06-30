@@ -71,7 +71,7 @@ variables:
   InfoPlistPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.iOS/Info.plist
 
   # Pool names
-  windowsPoolName: 'windows 1809'
+  windowsPoolName: 'windows 2022'
   macOSPoolName: 'macOS'
 
   # Versions to use
