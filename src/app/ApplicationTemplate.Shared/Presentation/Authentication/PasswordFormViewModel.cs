@@ -19,16 +19,19 @@ namespace ApplicationTemplate.Presentation
 		public bool? PasswordHasMinimumLength
 		{
 			get => this.GetFromObservable(ObservePasswordHasMinimumLength(), initialValue: null);
+			set => this.Set(value);
 		}
 
 		public bool? PasswordHasNumber
 		{
 			get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
+			set => this.Set(value);
 		}
 
 		public bool? PasswordHasUppercase
 		{
 			get => this.GetFromObservable(ObservePasswordHasUppercase(), initialValue: null);
+			set => this.Set(value);
 		}
 
 		private IObservable<bool?> ObservePasswordHasMinimumLength()
@@ -74,6 +77,17 @@ namespace ApplicationTemplate.Presentation
 
 					return password.Any(char.IsUpper);
 				});
+		}
+
+		public void ValidatePasswordHints()
+		{
+			if (Password.IsNullOrEmpty())
+			{
+				// A password was not entered, we need to trigger validation hints
+				PasswordHasMinimumLength = false;
+				PasswordHasNumber = false;
+				PasswordHasUppercase = false;
+			}
 		}
 	}
 }

@@ -37,6 +37,10 @@ namespace ApplicationTemplate.Presentation
 
 				await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 			}
+			else
+			{
+				PasswordForm.ValidatePasswordHints();
+			}
 		});
 	}
 }
