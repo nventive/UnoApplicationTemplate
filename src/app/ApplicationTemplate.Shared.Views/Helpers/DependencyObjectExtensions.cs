@@ -24,7 +24,7 @@ namespace ApplicationTemplate.Views.Helpers
 		public static T FindFirstChild<T>(this DependencyObject element, int? childLevelLimit = null, bool includeCurrent = true)
 			where T :
 //-:cnd:noEmit
-#if HAS_UNO
+#if __IOS__ || __ANDROID__
 //+:cnd:noEmit
 			class,
 //-:cnd:noEmit
@@ -38,7 +38,7 @@ namespace ApplicationTemplate.Views.Helpers
 		public static T FindFirstChild<T>(this DependencyObject element, Func<T, bool> selector, int? childLevelLimit = null, bool includeCurrent = true)
 			where T :
 //-:cnd:noEmit
-#if HAS_UNO
+#if __IOS__ || __ANDROID__
 //+:cnd:noEmit
 			class,
 //-:cnd:noEmit
@@ -52,7 +52,7 @@ namespace ApplicationTemplate.Views.Helpers
 		private static T InnerFindFirstChild<T>(IEnumerable<DependencyObject> elements, Func<T, bool> selector, int? childLevelLimit, bool includeCurrentLevel)
 			where T :
 //-:cnd:noEmit
-#if HAS_UNO
+#if __IOS__ || __ANDROID__
 //+:cnd:noEmit
 			class,
 //-:cnd:noEmit
@@ -78,7 +78,7 @@ namespace ApplicationTemplate.Views.Helpers
 		public static T FindFirstParent<T>(this DependencyObject element, bool includeCurrent = true)
 			where T :
 //-:cnd:noEmit
-#if HAS_UNO
+#if __IOS__ || __ANDROID__
 //+:cnd:noEmit
 			class,
 //-:cnd:noEmit
@@ -92,7 +92,7 @@ namespace ApplicationTemplate.Views.Helpers
 		public static T FindFirstParent<T>(this DependencyObject element, Func<T, bool> selector, bool includeCurrent = true)
 			where T :
 //-:cnd:noEmit
-#if HAS_UNO
+#if __IOS__ || __ANDROID__
 //+:cnd:noEmit
 			class,
 //-:cnd:noEmit

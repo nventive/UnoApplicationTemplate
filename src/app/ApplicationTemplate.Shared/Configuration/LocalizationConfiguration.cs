@@ -55,7 +55,7 @@ namespace ApplicationTemplate
 			_cultureOverrideService.TryApply();
 
 //-:cnd:noEmit
-#if NET472
+#if NETFRAMEWORK
 //+:cnd:noEmit
 			// This is required for test projects otherwise the ResourceLoader will throw an exception.
 			Windows.ApplicationModel.Resources.ResourceLoader.DefaultLanguage = SupportedCultures.First().Name;

@@ -1,7 +1,4 @@
-﻿//-:cnd:noEmit
-#if NETFX_CORE || __ANDROID__ || __IOS__
-//+:cnd:noEmit
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Concurrency;
@@ -466,6 +463,3 @@ namespace ApplicationTemplate.Views.Behaviors
 		}
 	}
 }
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
