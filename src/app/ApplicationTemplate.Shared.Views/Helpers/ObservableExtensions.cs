@@ -122,7 +122,7 @@ namespace ApplicationTemplate.Views.Helpers
 //-:cnd:noEmit
 #if __ANDROID__
 //+:cnd:noEmit
-            var parent = (element as Android.Views.View).Parent;
+			var parent = (element as Android.Views.View).Parent;
 
 			return element.ObserveIsLoaded(detectIsLoaded ? parent != null : mustStartLoaded);
 //-:cnd:noEmit
