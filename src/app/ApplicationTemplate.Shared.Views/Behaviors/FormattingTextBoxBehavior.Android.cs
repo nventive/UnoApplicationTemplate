@@ -68,17 +68,18 @@ namespace ApplicationTemplate.Views.Behaviors
 				return new Android.Text.IInputFilter[0];
 			}
 
-			return new IInputFilter[] {
+			return new IInputFilter[]
+			{
 				new FormattingTextInputFilter(textFormat, targetTextBox),
-				// Special characters filtered out from input seem to still hang around in the software keyboard's text buffer. We add the 
-				// length filter last, otherwise these filtered characters would count toward the length limit. 
+				// Special characters filtered out from input seem to still hang around in the software keyboard's text buffer. We add the
+				// length filter last, otherwise these filtered characters would count toward the length limit.
 				new Android.Text.InputFilterLengthFilter(textFormat.Length)
 			};
 		}
 
 		/// <summary>
-		/// Force all child Controls of this view (including itself) to materialize their templates. This is a useful workaround on 
-		/// Android where there is a timing bug such that a child's template is frequently not materialized when the parent's Loaded 
+		/// Force all child Controls of this view (including itself) to materialize their templates. This is a useful workaround on
+		/// Android where there is a timing bug such that a child's template is frequently not materialized when the parent's Loaded
 		/// event is called.
 		/// </summary>
 		private static void MaterializeAllTemplates(DependencyObject view)

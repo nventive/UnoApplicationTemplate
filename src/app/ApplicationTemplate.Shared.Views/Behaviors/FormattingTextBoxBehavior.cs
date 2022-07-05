@@ -1,7 +1,4 @@
-﻿//-:cnd:noEmit
-#if NETFX_CORE || __ANDROID__ || __IOS__
-//+:cnd:noEmit
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Concurrency;
@@ -15,7 +12,7 @@ using Windows.UI.Xaml.Controls;
 namespace ApplicationTemplate.Views.Behaviors
 {
 	/// <summary>
-	/// This text box behavior allows you to format the input text based on specified format. 
+	/// This text box behavior allows you to format the input text based on specified format.
 	/// The specified format follows the following convention:
 	/// '#' allows anycharacters
 	/// 'A' : capital letter
@@ -23,7 +20,7 @@ namespace ApplicationTemplate.Views.Behaviors
 	/// '0' : digit
 	/// 'N' : Capital alphanumeric
 	/// 'n' : lower case alphanumeric
-	/// Example of formats: 
+	/// Example of formats:
 	/// - (000) 000-000 = Phone number
 	/// - 0000 0000 0000 0000  = credit card
 	/// - A0A 0A0 = code postal
@@ -196,7 +193,7 @@ namespace ApplicationTemplate.Views.Behaviors
 			var formattedText = FormatInput(textbox.Text, textFormat, 0, 0, ref selectionStart);
 			if (textbox.Text == formattedText)
 			{
-				// Note: On Android, most of the time we will cut out here because the input filter will have already formatted the text. However 
+				// Note: On Android, most of the time we will cut out here because the input filter will have already formatted the text. However
 				// the formatted text will occasionally be different if, eg, the user has inserted/deleted characters in the middle of the text.
 				return;
 			}
@@ -240,11 +237,11 @@ namespace ApplicationTemplate.Views.Behaviors
 						textIndex = nextAlphaNumericIndex;
 						var character = text[textIndex];
 
-						if (Char.IsDigit(character))
+						if (char.IsDigit(character))
 						{
 							sb.Append(text[textIndex]);
 						}
-						else if (Char.IsLetter(character))
+						else if (char.IsLetter(character))
 						{
 							var letter = string.Empty;
 
@@ -409,7 +406,7 @@ namespace ApplicationTemplate.Views.Behaviors
 		{
 			while (currentIndex < text.Length)
 			{
-				if (Char.IsDigit(text[currentIndex]))
+				if (char.IsDigit(text[currentIndex]))
 				{
 					return currentIndex;
 				}
@@ -429,7 +426,7 @@ namespace ApplicationTemplate.Views.Behaviors
 		{
 			while (currentIndex < text.Length)
 			{
-				if (Char.IsLetter(text[currentIndex]))
+				if (char.IsLetter(text[currentIndex]))
 				{
 					return currentIndex;
 				}
@@ -449,7 +446,7 @@ namespace ApplicationTemplate.Views.Behaviors
 		{
 			while (currentIndex < text.Length)
 			{
-				if (Char.IsLetter(text[currentIndex]) || Char.IsDigit(text[currentIndex]))
+				if (char.IsLetter(text[currentIndex]) || char.IsDigit(text[currentIndex]))
 				{
 					return currentIndex;
 				}
@@ -466,6 +463,3 @@ namespace ApplicationTemplate.Views.Behaviors
 		}
 	}
 }
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit

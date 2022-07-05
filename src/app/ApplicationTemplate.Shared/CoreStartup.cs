@@ -89,7 +89,7 @@ namespace ApplicationTemplate
 				await sectionsNavigator.Navigate(ct, () => new OnboardingPageViewModel());
 			}
 //-:cnd:noEmit
-#if __MOBILE__ || WINDOWS_UWP
+#if __ANDROID__ || __IOS__ || WINDOWS_UWP
 //+:cnd:noEmit
 			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 

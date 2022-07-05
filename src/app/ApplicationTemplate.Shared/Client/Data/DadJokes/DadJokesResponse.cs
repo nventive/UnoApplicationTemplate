@@ -1,6 +1,9 @@
-﻿namespace ApplicationTemplate.Client
+﻿using Uno;
+
+namespace ApplicationTemplate.Client
 {
-	public record DadJokesResponse
+	[GeneratedImmutable]
+	public partial class DadJokesResponse
 	{
 		public DadJokesResponse(DadJokesData data)
 		{

@@ -21,6 +21,7 @@ using Nventive.Persistence;
 [assembly: JsonSerializableType(typeof(Refit.ProblemDetails))]
 [assembly: JsonSerializableType(typeof(PostData))]
 [assembly: JsonSerializableType(typeof(PostData[]))]
+[assembly: JsonSerializableType(typeof(DadJokesResponse))]
 [assembly: JsonSerializableType(typeof(DadJokesErrorResponse))]
 [assembly: JsonSerializableType(typeof(UserProfileData))]
 [assembly: JsonSerializableType(typeof(DadJokesData))]
