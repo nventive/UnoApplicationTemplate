@@ -14,6 +14,13 @@
 					 Color="{ThemeResource MaterialSuccessColor}" />
 	<SolidColorBrush x:Key="MaterialOnSuccessBrush"
 					 Color="{ThemeResource MaterialOnSuccessColor}" />
+
+	<SolidColorBrush x:Key="MaterialPrimaryAccentBrush"
+					 Color="{ThemeResource MaterialPrimaryAccentColor}" />
+	
+	<SolidColorBrush x:Key="SeparatorBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Opacity="0.12"/>
 	
 	<!-- ToggleSwitch Brushes -->
 
@@ -30,5 +37,4 @@
 					ResourceKey="MaterialOnSurfaceMediumBrush" />
 	<StaticResource x:Key="MaterialToggleSwitchOnLowBackgroundBrush"
 					ResourceKey="MaterialOnSurfaceSelectedBrush" />
-
 </ResourceDictionary>
