@@ -124,12 +124,8 @@
 				Value="Left" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
-		<Setter Property="FontWeight"
-				Value="Normal" />
-		<Setter Property="FontSize"
-				Value="16" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource MaterialOnSurfaceMediumBrush}" />
 		<Setter Property="MinWidth"
 				Value="120" />
 		<Setter Property="MinHeight"
@@ -171,17 +167,6 @@
 								  Content="{TemplateBinding Content}"
 								  Foreground="{TemplateBinding Foreground}"
 								  HorizontalAlignment="Left" />
-
-						<ContentPresenter x:Name="Content"
-										  Margin="16,0,0,0"
-										  Grid.Column="1"
-										  ContentTemplate="{TemplateBinding ContentTemplate}"
-										  ContentTransitions="{TemplateBinding ContentTransitions}"
-										  Content="{TemplateBinding Content}"
-										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-										  AutomationProperties.AccessibilityView="Raw"
-										  TextWrapping="Wrap" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

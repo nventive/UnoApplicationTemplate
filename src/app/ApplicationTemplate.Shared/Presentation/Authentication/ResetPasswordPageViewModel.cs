@@ -20,6 +20,10 @@ namespace ApplicationTemplate.Presentation
 			{
 				await this.GetService<ISectionsNavigator>().NavigateBack(ct);
 			}
+			else
+			{
+				PasswordForm.ValidatePasswordHints();
+			}
 		});
 	}
 }

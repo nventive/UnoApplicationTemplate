@@ -137,7 +137,10 @@ namespace ApplicationTemplate.Views
 			Type[] vmsAlternateColor =
 			{
 				typeof(OnboardingPageViewModel),
-				typeof(LoginPageViewModel)
+				typeof(LoginPageViewModel),
+				typeof(ForgotPasswordFormViewModel),
+				typeof(ResetPasswordPageViewModel),
+				typeof(SentEmailConfirmationPageViewModel)
 			};
 
 			services
