@@ -25,6 +25,19 @@
 	<SolidColorBrush x:Key="SeparatorBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
 					 Opacity="0.12"/>
+
+	<!--
+		Some of the pages design flip the dichotomy of Background colors with their OnBackground complement.
+		So we have those brushes to avoid the 
+	-->
+	<SolidColorBrush x:Key="AlternateBackgroundBrush"
+					 Color="{ThemeResource MaterialOnBackgroundColor}" />
+	<SolidColorBrush x:Key="AlternateOnBackgroundBrush"
+					 Color="{ThemeResource MaterialBackgroundColor}" />
+	<SolidColorBrush x:Key="AlternateSurfacedBrush"
+					 Color="{ThemeResource MaterialOnSurfaceColor}" />
+	<SolidColorBrush x:Key="AlternateOnSurfaceBrush"
+					 Color="{ThemeResource MaterialSurfaceColor}" />
 	
 	<!-- ToggleSwitch Brushes -->
 

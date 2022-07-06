@@ -24,7 +24,7 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialOnBackgroundBrush}">
+	<Grid Background="{StaticResource AlternateBackgroundBrush}">
 
 		<!-- Background Image -->
 		<Image Source="{StaticResource BackgroundMustachesImage}"
@@ -131,8 +131,8 @@
 						
 						<CalendarDatePicker x:Name="BirthDayField"
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-											Background="{StaticResource MaterialOnPrimaryBrush}"
-											Foreground="{StaticResource MaterialPrimaryBrush}"
+											Background="{StaticResource MaterialSurfaceBrush}"
+											Foreground="{StaticResource MaterialOnSurfaceBrush}"
 											HorizontalAlignment="Stretch"
 											MinHeight="56"/>
 					</local:DataValidationView>
@@ -252,7 +252,7 @@
 											  Model="{Binding Form}"
 											  Margin="0,4,0,0">
 						<!-- List -->
-						<Grid Background="{StaticResource MaterialOnPrimaryBrush}"
+						<Grid Background="{StaticResource MaterialSurfaceBrush}"
 							  CornerRadius="4">
 							<ListView ItemsSource="{Binding DadNames}"
 									  ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
@@ -261,25 +261,20 @@
 									  IsItemClickEnabled="True" />
 						</Grid>
 					</local:DataValidationView>
-
-					<!-- Adding white background because foreground on checkbox doesn't work -->
-					<Grid Background="{StaticResource MaterialOnPrimaryBrush}"
-						  CornerRadius="4">
-						
+					
 					<!-- Terms of Service Agreement -->
 					<local:DataValidationView PropertyName="AgreeToTermsOfServices"
 											  Model="{Binding Form}"
 											  Margin="0,12,0,0">
 
-							<!-- Checkbox -->
-							<CheckBox x:Name="TermsOfServiceCheckBox"
-									  Content="I agree to the terms of services"
-									  x:Uid="CreateAccount_TermsOfServices"
-									  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-									  Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									  HorizontalAlignment="Left"/>
-						</local:DataValidationView>
-					</Grid>
+						<!-- Checkbox -->
+						<CheckBox x:Name="TermsOfServiceCheckBox"
+									Content="I agree to the terms of services"
+									x:Uid="CreateAccount_TermsOfServices"
+									IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									Foreground="{StaticResource MaterialOnPrimaryBrush}"
+									HorizontalAlignment="Left"/>
+					</local:DataValidationView>
 
 					<!-- Confirm Button -->
 					<Button x:Name="ConfirmButton"
