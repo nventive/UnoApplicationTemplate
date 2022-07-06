@@ -113,11 +113,11 @@
 		   TargetType="CommandBar"
 		   BasedOn="{StaticResource MaterialCommandBarStyle}">
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource MaterialBackgroundBrush}" />
 		<Setter Property="Background"
 				Value="{ThemeResource MaterialOnBackgroundBrush}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialSurfaceBrush}" />
+				Value="{ThemeResource MaterialBackgroundBrush}" />
 		<android:Setter Property="Height"
 						Value="100" />
 	</Style>
