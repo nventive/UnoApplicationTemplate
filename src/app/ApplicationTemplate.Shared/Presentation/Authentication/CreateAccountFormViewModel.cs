@@ -1,9 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -16,11 +11,6 @@ namespace ApplicationTemplate.Presentation
 	{
 		public CreateAccountFormViewModel()
 		{
-			this.AddValidation(this.GetProperty(x => x.FirstName));
-			this.AddValidation(this.GetProperty(x => x.LastName));
-			this.AddValidation(this.GetProperty(x => x.Email));
-			this.AddValidation(this.GetProperty(x => x.PhoneNumber));
-			this.AddValidation(this.GetProperty(x => x.PostalCode));
 			this.AddValidation(this.GetProperty(x => x.DateOfBirth));
 			// TODO : https://dev.azure.com/nventive/Practice%20committees/_workitems/edit/251910
 			//this.AddValidation(this.GetProperty(x => x.FavoriteDadNames));
@@ -74,6 +64,11 @@ namespace ApplicationTemplate.Presentation
 			get => this.Get<bool>();
 			set => this.Set(value);
 		}
+
+		public IDynamicCommand ValidateProperty => this.GetCommandFromTask<string>(async (ct, propertyName) =>
+		{
+			await this.ValidateProperty(ct, this.GetProperty(propertyName));
+		});
 	}
 
 	public class CreateAccountFormValidator : AbstractValidator<CreateAccountFormViewModel>

@@ -10,12 +10,6 @@ namespace ApplicationTemplate.Presentation
 {
 	public class LoginFormViewModel : ViewModel
 	{
-		public LoginFormViewModel()
-		{
-			this.AddValidation(this.GetProperty(x => x.Email));
-			this.AddValidation(this.GetProperty(x => x.Password));
-		}
-
 		public string Email
 		{
 			get => this.Get<string>();
@@ -27,6 +21,11 @@ namespace ApplicationTemplate.Presentation
 			get => this.Get<string>();
 			set => this.Set(value);
 		}
+
+		public IDynamicCommand ValidateProperty => this.GetCommandFromTask<string>(async (ct, propertyName) =>
+		{
+			await this.ValidateProperty(ct, this.GetProperty(propertyName));
+		});
 	}
 
 	public class LoginFormValidator : AbstractValidator<LoginFormViewModel>
