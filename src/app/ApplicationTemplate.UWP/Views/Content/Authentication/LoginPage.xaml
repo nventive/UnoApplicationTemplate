@@ -34,96 +34,102 @@
 
 		<!-- Background -->
 		<Image Source="{StaticResource BackgroundMustachesLightImage}"
-			   Stretch="UniformToFill"
-			   HorizontalAlignment="Stretch"
-			   VerticalAlignment="Stretch" />
+			   Stretch="UniformToFill" />
 
 		<ScrollViewer>
 			<StackPanel toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
-						VerticalAlignment="Center">
+						VerticalAlignment="Center"
+						Margin="0,32">
+
+				<!-- Title -->
 				<TextBlock Text="{Binding Title}"
 						   x:Uid="Login_Title"
-						   Margin="22,32,22,0"
 						   Style="{StaticResource Headline2}"
-						   HorizontalTextAlignment="Center"
-						   HorizontalAlignment="Center"
-						   FontSize="54" />
+						   TextAlignment="Center"
+						   Margin="20,0"/>
 
-				<TextBlock Text="{Binding Quote}"
-						   x:Uid="Login_Subtitle"
-						   Style="{StaticResource Body1}"
-						   Foreground="{StaticResource MaterialOnSurfaceBrush}"
-						   FontStyle="Italic"
-						   Margin="42,16,42,24"
-						   HorizontalTextAlignment="Center"
-						   HorizontalAlignment="Center" />
+				<StackPanel Margin="40,0">
+					
+					<!-- Quote -->
+					<TextBlock Text="{Binding Quote}"
+							   x:Uid="Login_Subtitle"
+							   Style="{StaticResource Body1}"
+							   Foreground="{StaticResource MaterialOnBackgroundBrush}"
+							   FontStyle="Italic"
+							   TextAlignment="Center"
+							   Margin="0,16,0,0" />
 
-				<!-- Email -->
-				<local:DataValidationView Model="{Binding Form}"
-										  PropertyName="Email"
-										  Margin="42,4">
-					<TextBox x:Name="EmailField"
-							 PlaceholderText="Email"
-							 x:Uid="Login_Email"
-							 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-							 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
-							 ue:ControlExtensions.LostFocusCommandParameter="Email"
-							 InputScope="EmailSmtpAddress"
-							 IsSpellCheckEnabled="False"
-							 ios:ReturnKeyType="Next"
-							 android:ImeOptions="Next"
-							 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
-				</local:DataValidationView>
-
-				<!-- Password -->
-				<local:DataValidationView Model="{Binding Form}"
-										  PropertyName="Password"
-										  Margin="42,4,42,0"
-										  Background="{StaticResource MaterialSurfaceBrush}">
-					<PasswordBox x:Name="PasswordField"
-								 x:Uid="Login_Password"
-								 PlaceholderText="Password"
-								 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
-								 ue:ControlExtensions.LostFocusCommandParameter="Password"
+					<!-- Email -->
+					<local:DataValidationView Model="{Binding Form}"
+											  PropertyName="Email"
+											  Margin="0,28,0,0">
+						<TextBox x:Name="EmailField"
+								 PlaceholderText="Email"
+								 x:Uid="Login_Email"
+								 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+								 ue:ControlExtensions.LostFocusCommandParameter="Email"
+								 InputScope="EmailSmtpAddress"
+								 ios:IsSpellCheckEnabled="False"
 								 ios:ReturnKeyType="Next"
 								 android:ImeOptions="Next"
-								 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
-				</local:DataValidationView>
+								 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
+					</local:DataValidationView>
 
-				<HyperlinkButton Content="Forgot password ?"
-								 x:Uid="Login_ForgotPassword"
-								 Command="{Binding NavigateToForgotPasswordPage}"
-								 Foreground="{StaticResource MaterialOnSurfaceMediumBrush}"                                                                                                                                                                                                                                                                      
-								 Margin="42,0" />
+					<!-- Password -->
+					<local:DataValidationView Model="{Binding Form}"
+											  PropertyName="Password"
+											  Margin="0,8,0,0">
+						<PasswordBox x:Name="PasswordField"
+									 x:Uid="Login_Password"
+									 PlaceholderText="Password"
+									 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+                                     ue:ControlExtensions.LostFocusCommandParameter="Password"
+									 ios:ReturnKeyType="Next"
+									 android:ImeOptions="Next"
+									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
+					</local:DataValidationView>
 
-				<Button x:Name="LoginButton"
-						x:Uid="Login_Login"
-						Content="LOG IN"
-						Command="{Binding Login}"
-						Style="{StaticResource MaterialContainedButtonStyle}"
-						HorizontalAlignment="Stretch"
-						Margin="42,24,42,16" />
+					<!-- Forgot Password Button -->
+					<HyperlinkButton Content="Forgot password ?"
+									 x:Uid="Login_ForgotPassword"
+									 Command="{Binding NavigateToForgotPasswordPage}"
+									 Foreground="{StaticResource MaterialOnBackgroundBrush}"                                                                                                                                                                                                                                                              
+									 Margin="0,4,0,0" />
 
-				<Button x:Name="CreateAccountButton"
-						x:Uid="Login_CreateAccount"
-						Content="CREATE ACCOUNT"
-						Command="{Binding NavigateToCreateAccountPage}"
-						Style="{StaticResource MaterialOutlinedButtonStyle}"
-						HorizontalAlignment="Stretch"
-						Margin="42,0" />
+					<!-- Login Button -->
+					<Button x:Name="LoginButton"
+							Content="LOG IN"
+							x:Uid="Login_Login"
+							Command="{Binding Login}"
+							Style="{StaticResource MaterialContainedButtonStyle}"
+							HorizontalAlignment="Stretch"
+							Margin="0,24,0,0" />
 
-				<Rectangle Margin="42,32"
-						   Height="1"
-						   HorizontalAlignment="Stretch"
-						   Fill="{StaticResource MaterialOnSurfacePressedBrush}" />
+					<!-- Create Account Button -->
+					<Button x:Name="CreateAccountButton"
+							x:Uid="Login_CreateAccount"
+							Content="CREATE ACCOUNT"
+							Command="{Binding NavigateToCreateAccountPage}"
+							Style="{StaticResource MaterialOutlinedButtonStyle}"
+							HorizontalAlignment="Stretch"
+							Margin="0,16,0,0" />
 
-				<Button x:Name="GoogleLoginButton"
-						x:Uid="Login_Google"
-						Content="CONTINUE WITH GOOGLE"
-						Style="{StaticResource GoogleButtonStyle}"
-						HorizontalAlignment="Stretch"
-						Margin="42,0,42,32" />
+					<!-- Separator -->
+					<Rectangle Fill="{StaticResource SeparatorBrush}"
+							   Height="1"
+							   HorizontalAlignment="Stretch"
+							   Margin="0,32,0,0"/>
+
+					<!-- Google Login Button -->
+					<Button x:Name="GoogleLoginButton"
+							x:Uid="Login_Google"
+							Content="CONTINUE WITH GOOGLE"
+							Style="{StaticResource GoogleButtonStyle}"
+							HorizontalAlignment="Stretch"
+							Margin="0,32,0,0" />
+				</StackPanel>
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>
