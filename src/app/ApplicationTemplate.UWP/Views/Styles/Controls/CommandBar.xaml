@@ -113,11 +113,11 @@
 		   TargetType="CommandBar"
 		   BasedOn="{StaticResource MaterialCommandBarStyle}">
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
-				Value="{StaticResource MaterialBackgroundBrush}" />
+				Value="{StaticResource AlternateOnBackgroundBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource MaterialOnBackgroundBrush}" />
+				Value="{ThemeResource AlternateBackgroundBrush}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialBackgroundBrush}" />
+				Value="{ThemeResource AlternateOnBackgroundBrush}" />
 		<android:Setter Property="Height"
 						Value="100" />
 	</Style>
@@ -125,13 +125,13 @@
 	<Style x:Key="TransparentCommandBarStyle"
 		   TargetType="CommandBar">
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource AlternateOnBackgroundBrush}" />
 		<Setter Property="Height"
 				Value="56" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource AlternateOnBackgroundBrush}" />
 	</Style>
 	
 	<!-- Default Style -->

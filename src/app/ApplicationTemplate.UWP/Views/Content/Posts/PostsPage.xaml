@@ -2,12 +2,11 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:ApplicationTemplate"
-	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:dl="using:Chinook.DataLoader"
-	  mc:Ignorable="d">
+	  mc:Ignorable="">
 
 	<Grid x:Name="PostPage"
 		  Background="{StaticResource MaterialBackgroundBrush}">
@@ -17,43 +16,59 @@
 			<RowDefinition Height="*" />
 		</Grid.RowDefinitions>
 
+		<!-- CommandBar -->
 		<CommandBar Content="Posts"
-					Grid.Row="0"
 					x:Uid="Posts_CommandBar" />
 
 		<Grid Grid.Row="1">
+
+			<!-- DataLoader View -->
 			<dl:DataLoaderView Source="{Binding Posts}"
 							   RefreshCommand="{Binding RefreshPosts}">
 				<DataTemplate>
+
+					<!-- Swipe to Refresh -->
 					<u:SwipeRefresh x:Name="RefreshContent"
 									RefreshCommand="{Binding Parent.RefreshPosts}"
 									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
-									IndicatorColor="{StaticResource MaterialPrimaryColor}">
+									IndicatorColor="{StaticResource MaterialPrimaryBrush}">
+
+						<!-- ListView -->
 						<ListView ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
-									<StackPanel Padding="0,15"
-												Background="{StaticResource MaterialSurfaceBrush}">
+
+									<StackPanel Background="{StaticResource MaterialSurfaceBrush}"
+												Margin="0,16,0,0"
+												Padding="16">
+
+										<!-- Title -->
 										<TextBlock Text="{Binding Title}"
-												   Margin="0,0,5,0"
 												   Style="{StaticResource Subtitle1}" />
+
+										<!-- Body -->
 										<TextBlock Text="{Binding Body}"
-												   Opacity="0.6"
 												   Foreground="{StaticResource MaterialOnSurfaceBrush}"
-												   Style="{StaticResource Body2}" />
+												   Style="{StaticResource Body2}"
+												   Opacity="{StaticResource MaterialMediumOpacity}"
+												   Margin="0,8,0,0"/>
+
 										<StackPanel Orientation="Horizontal"
-													HorizontalAlignment="Right">
-											<Button Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
+													HorizontalAlignment="Right"
+													Margin="0,16,0,0">
+
+											<!-- Delete Button -->
+											<Button Content="Delete"
+													Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
 													CommandParameter="{Binding}"
-													Content="Delete"
-													Margin="0,0,5,0"
-													Style="{StaticResource MaterialOutlinedButtonStyle}"
-													Grid.Row="0" />
-											<Button Command="{Binding ElementName=PostPage, Path=DataContext.NavigateToPost}"
+													Style="{StaticResource MaterialOutlinedButtonStyle}" />
+
+											<!-- Edit Button -->
+											<Button Content="Edit"
+													Command="{Binding ElementName=PostPage, Path=DataContext.NavigateToPost}"
 													CommandParameter="{Binding}"
-													Content="Edit"
 													Style="{StaticResource MaterialContainedButtonStyle}"
-													Grid.Row="1" />
+													Margin="4,0,0,0" />
 										</StackPanel>
 									</StackPanel>
 								</DataTemplate>
@@ -63,22 +78,26 @@
 				</DataTemplate>
 			</dl:DataLoaderView>
 
-			<Button Background="Transparent"
-					Style="{StaticResource MaterialButtonIconStyle}"
-					Command="{Binding NavigateToNewPost}"
+			<!-- Create New Post Button -->
+			<Button Command="{Binding NavigateToNewPost}"
 					CommandParameter="{Binding}"
-					Margin="24"
+					Style="{StaticResource MaterialButtonIconStyle}"
+					Background="Transparent"
+					HorizontalAlignment="Right"
 					VerticalAlignment="Bottom"
-					HorizontalAlignment="Right">
-				<Border Width="56"
-						Height="56"
-						CornerRadius="50"
-						Background="{StaticResource MaterialSecondaryColor}">
+					Margin="24">
 
-					<Path Fill="{StaticResource MaterialOnSecondaryColor}"
+				<!-- Border -->
+				<Border Background="{StaticResource MaterialSecondaryBrush}"
+						CornerRadius="50"
+						Width="56"
+						Height="56">
+
+					<!-- Icon -->
+					<Path Data="{StaticResource PlusIcon}"
+						  Fill="{StaticResource MaterialOnSecondaryBrush}"
 						  Width="24"
-						  Height="24"
-						  Data="{StaticResource PlusIcon}" />
+						  Height="24" />
 				</Border>
 			</Button>
 		</Grid>
