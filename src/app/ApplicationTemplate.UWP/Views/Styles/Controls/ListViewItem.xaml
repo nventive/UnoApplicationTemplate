@@ -157,15 +157,9 @@
 
 						</VisualStateManager.VisualStateGroups>
 
-						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="Auto" />
-							<ColumnDefinition Width="*" />
-						</Grid.ColumnDefinitions>
-
 						<!-- CheckBox -->
 						<CheckBox x:Name="CheckBox"
 								  Content="{TemplateBinding Content}"
-								  Foreground="{TemplateBinding Foreground}"
 								  HorizontalAlignment="Left" />
 					</Grid>
 				</ControlTemplate>

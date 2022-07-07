@@ -9,6 +9,15 @@
 					xmlns:ios="http://nventive.com/ios"
 					mc:Ignorable="xamarin android ios not_ios wasm">
 
+	<Style x:Key="MaterialCheckBoxStyle"
+		   TargetType="CheckBox"
+		   BasedOn="{StaticResource MaterialCheckBoxStyle}">
+		<Setter Property="FontFamily"
+				Value="{StaticResource FontFamily01Light}" />
+		<Setter Property="FontSize"
+				Value="12" />
+	</Style>
+
 	<!-- TODO: Remove once this issue has been resolved : https://github.com/unoplatform/Uno.Themes/issues/823 -->
 	<!-- We redefine MaterialCheckBoxStyle since it's content foreground is originally fixed and unchangeable -->
 	<Style x:Key="CustomMaterialCheckBoxStyle"
@@ -505,5 +514,5 @@
 
 	<!-- Default Style -->
 	<Style TargetType="CheckBox"
-		   BasedOn="{StaticResource CustomMaterialCheckBoxStyle}" />
+		   BasedOn="{StaticResource MaterialCheckBoxStyle}" />
 </ResourceDictionary>

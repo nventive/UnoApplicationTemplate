@@ -67,6 +67,8 @@
 								 PlaceholderText="Email"
 								 x:Uid="Login_Email"
 								 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+								 ue:ControlExtensions.LostFocusCommandParameter="Email"
 								 InputScope="EmailSmtpAddress"
 								 ios:IsSpellCheckEnabled="False"
 								 ios:ReturnKeyType="Next"
@@ -82,6 +84,8 @@
 									 x:Uid="Login_Password"
 									 PlaceholderText="Password"
 									 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+                                     ue:ControlExtensions.LostFocusCommandParameter="Password"
 									 ios:ReturnKeyType="Next"
 									 android:ImeOptions="Next"
 									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />

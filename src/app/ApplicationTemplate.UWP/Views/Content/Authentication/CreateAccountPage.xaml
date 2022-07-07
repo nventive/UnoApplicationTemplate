@@ -63,6 +63,8 @@
 						<TextBox PlaceholderText="First Name"
 								 x:Uid="CreateAccount_FirstName"
 								 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+								 ue:ControlExtensions.LostFocusCommandParameter="FirstName"
 								 IsSpellCheckEnabled="False"
 								 ios:ReturnKeyType="Next"
 								 android:ImeOptions="Next"
@@ -78,6 +80,8 @@
 								 PlaceholderText="Last Name"
 								 x:Uid="CreateAccount_LastName"
 								 Text="{Binding Form.LastName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+								 ue:ControlExtensions.LostFocusCommandParameter="LastName"
 								 IsSpellCheckEnabled="False"
 								 ios:ReturnKeyType="Next"
 								 android:ImeOptions="Next"
@@ -93,6 +97,8 @@
 									 PlaceholderText="Enter an email"
 									 x:Uid="CreateAccount_Email"
 									 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+									 ue:ControlExtensions.LostFocusCommandParameter="Email"
 									 InputScope="EmailSmtpAddress"
 									 IsSpellCheckEnabled="False"
 									 ios:ReturnKeyType="Next"
@@ -109,6 +115,8 @@
 								 PlaceholderText="Phone Number (000) 000-0000"
 								 x:Uid="CreateAccount_PhoneNumber"
 								 Text="{Binding Form.PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+								 ue:ControlExtensions.LostFocusCommandParameter="PhoneNumber"
 								 MaxLength="14"
 								 behaviors:FormattingTextBoxBehavior.TextFormat="(000) 000-0000"
 								 behaviors:FormattingTextBoxBehavior.IsEnabled="True"
@@ -146,6 +154,8 @@
 								 PlaceholderText="Postal Code A0A 0A0"
 								 x:Uid="CreateAccount_PostalCode"
 								 Text="{Binding Form.PostalCode, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+								 ue:ControlExtensions.LostFocusCommandParameter="PostalCode"
 								 InputScope="EmailSmtpAddress"
 								 IsSpellCheckEnabled="False"
 								 MaxLength="7"
@@ -261,22 +271,24 @@
 									  IsItemClickEnabled="True" />
 						</Grid>
 					</local:DataValidationView>
-					
+
 					<!-- Terms of Service Agreement -->
 					<local:DataValidationView PropertyName="AgreeToTermsOfServices"
-											  Model="{Binding Form}"
-											  Margin="0,12,0,0">
+											Model="{Binding Form}"
+											Margin="0,12,0,0">
 
 						<!-- Checkbox -->
+						<!-- TODO: Remove custom style once this issue has been resolved : https://github.com/unoplatform/Uno.Themes/issues/823 -->
 						<CheckBox x:Name="TermsOfServiceCheckBox"
-									Content="I agree to the terms of services"
-									x:Uid="CreateAccount_TermsOfServices"
-									IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-									Foreground="{StaticResource MaterialOnPrimaryBrush}"
-									HorizontalAlignment="Left"/>
+								  Content="I agree to the terms of services"
+								  x:Uid="CreateAccount_TermsOfServices"
+								  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								  Foreground="{StaticResource MaterialSurfaceBrush}"
+								  Style="{StaticResource CustomMaterialCheckBoxStyle}"
+								  HorizontalAlignment="Left"/>
 					</local:DataValidationView>
 
-					<!-- Confirm Button -->
+						<!-- Confirm Button -->
 					<Button x:Name="ConfirmButton"
 							Content="CREATE AN ACCOUNT"
 							x:Uid="CreateAccount_Confirm"
