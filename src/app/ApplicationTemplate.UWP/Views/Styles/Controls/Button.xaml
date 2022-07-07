@@ -165,11 +165,11 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw" />
-						<Grid Grid.Column="1"
-							  Margin="0,0,16,0">
-							<u:PathControl Style="{StaticResource RightArrowPathControlStyle}"
-										   Foreground="{StaticResource MaterialSurfaceBrush}" />
-						</Grid>
+						
+						<u:PathControl Style="{StaticResource RightArrowPathControlStyle}"
+									   Foreground="{StaticResource AlternateOnSurfaceBrush}"
+									   Margin="0,0,16,0"
+									   Grid.Column="1" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

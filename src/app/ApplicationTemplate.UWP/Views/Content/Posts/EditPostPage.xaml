@@ -18,7 +18,7 @@
 		<CommandBar Content="{Binding Title}">
 			<toolkit:CommandBarExtensions.NavigationCommand>
 				<AppBarButton Command="{Binding Cancel}"
-							  Foreground="{StaticResource MaterialBackgroundBrush}">
+							  Foreground="{StaticResource AlternateOnBackgroundBrush}">
 					<AppBarButton.Icon>
 
 						<!-- Icon -->

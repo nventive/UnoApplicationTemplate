@@ -9,7 +9,7 @@
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource MaterialOnBackgroundBrush}"
+		  Background="{StaticResource AlternateBackgroundBrush}"
 		  toolkit:VisibleBoundsPadding.PaddingMask="Bottom">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">

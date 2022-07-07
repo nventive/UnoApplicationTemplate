@@ -24,7 +24,7 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialOnBackgroundBrush}">
+	<Grid Background="{StaticResource AlternateBackgroundBrush}">
 
 		<!-- Background Image -->
 		<Image Source="{StaticResource BackgroundMustachesImage}"
@@ -139,8 +139,8 @@
 						
 						<CalendarDatePicker x:Name="BirthDayField"
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-											Background="{StaticResource MaterialOnPrimaryBrush}"
-											Foreground="{StaticResource MaterialPrimaryBrush}"
+											Background="{StaticResource MaterialSurfaceBrush}"
+											Foreground="{StaticResource MaterialOnSurfaceBrush}"
 											HorizontalAlignment="Stretch"
 											MinHeight="56"/>
 					</local:DataValidationView>
@@ -262,7 +262,7 @@
 											  Model="{Binding Form}"
 											  Margin="0,4,0,0">
 						<!-- List -->
-						<Grid Background="{StaticResource MaterialOnPrimaryBrush}"
+						<Grid Background="{StaticResource MaterialSurfaceBrush}"
 							  CornerRadius="4">
 							<ListView ItemsSource="{Binding DadNames}"
 									  ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
