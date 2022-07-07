@@ -34,6 +34,12 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
     `dotnet new -u ./`
 
+## Requirements
+
+This template largely relies on Uno Platform, if you want to make sure you got everything installed correctly on your machine, we encourage you to use `uno-check`, the documentation is available [here](https://platform.uno/docs/articles/uno-check.html)
+
+In addition to that, we use c# 10 so **Visual Studio 2022 is required**.
+
 ## Documentation
 
 This repository provides documentation on different topics under the [doc](doc/) folder.
