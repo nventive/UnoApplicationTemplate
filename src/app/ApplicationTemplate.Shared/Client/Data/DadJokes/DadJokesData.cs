@@ -4,18 +4,17 @@ using System.Text;
 using GeneratedSerializers;
 using Uno;
 
-namespace ApplicationTemplate.Client
-{
-	[GeneratedImmutable]
-	public partial class DadJokesData
-	{
-		public DadJokesData(DadJokeChildData[] children)
-		{
-			Children = children;
-		}
+namespace ApplicationTemplate.Client;
 
-		[EqualityHash]
-		[SerializationProperty("children")]
-		public DadJokeChildData[] Children { get; }
+[GeneratedImmutable]
+public partial class DadJokesData
+{
+	public DadJokesData(DadJokeChildData[] children)
+	{
+		Children = children;
 	}
+
+	[EqualityHash]
+	[SerializationProperty("children")]
+	public DadJokeChildData[] Children { get; }
 }

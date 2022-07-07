@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+public class DadJokesEndpointOptions : EndpointOptions
 {
-	public class DadJokesEndpointOptions : EndpointOptions
-	{
-	}
 }

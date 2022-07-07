@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public static class PresentationConstants
 {
-	public static class PresentationConstants
-	{
-		public const int PasswordMinLength = 8;
-	}
+	public const int PasswordMinLength = 8;
 }

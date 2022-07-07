@@ -1,12 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate.Views.Content
+namespace ApplicationTemplate.Views.Content;
+
+public sealed partial class EnvironmentPickerPage : Page
 {
-	public sealed partial class EnvironmentPickerPage : Page
+	public EnvironmentPickerPage()
 	{
-		public EnvironmentPickerPage()
-		{
-			this.InitializeComponent();
-		}
+		this.InitializeComponent();
 	}
 }

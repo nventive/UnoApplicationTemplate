@@ -3,17 +3,16 @@ using System.Collections.Generic;
 using System.Text;
 using Uno;
 
-namespace ApplicationTemplate.Client
-{
-	[GeneratedImmutable]
-	public partial class DadJokeChildData
-	{
-		public DadJokeChildData(DadJokeContentData data)
-		{
-			Data = data;
-		}
+namespace ApplicationTemplate.Client;
 
-		[EqualityHash]
-		public DadJokeContentData Data { get; }
+[GeneratedImmutable]
+public partial class DadJokeChildData
+{
+	public DadJokeChildData(DadJokeContentData data)
+	{
+		Data = data;
 	}
+
+	[EqualityHash]
+	public DadJokeContentData Data { get; }
 }

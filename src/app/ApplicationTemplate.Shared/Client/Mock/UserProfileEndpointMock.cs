@@ -7,37 +7,36 @@ using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using GeneratedSerializers;
 
-namespace ApplicationTemplate.Client
+namespace ApplicationTemplate.Client;
+
+public class UserProfileEndpointMock : BaseMock, IUserProfileEndpoint
 {
-	public class UserProfileEndpointMock : BaseMock, IUserProfileEndpoint
+	private readonly IApplicationSettingsService _applicationSettingsService;
+
+	public UserProfileEndpointMock(
+		IObjectSerializer serializer,
+		IApplicationSettingsService applicationSettingsService
+	) : base(serializer)
 	{
-		private readonly IApplicationSettingsService _applicationSettingsService;
+		_applicationSettingsService = applicationSettingsService ?? throw new ArgumentNullException(nameof(applicationSettingsService));
+	}
 
-		public UserProfileEndpointMock(
-			IObjectSerializer serializer,
-			IApplicationSettingsService applicationSettingsService
-		) : base(serializer)
+	public async Task<UserProfileData> Get(CancellationToken ct)
+	{
+		var settings = await _applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
+
+		if (settings.AuthenticationData == default(AuthenticationData))
 		{
-			_applicationSettingsService = applicationSettingsService ?? throw new ArgumentNullException(nameof(applicationSettingsService));
+			return default(UserProfileData);
 		}
 
-		public async Task<UserProfileData> Get(CancellationToken ct)
-		{
-			var settings = await _applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
+		await Task.Delay(TimeSpan.FromSeconds(2));
 
-			if (settings.AuthenticationData == default(AuthenticationData))
-			{
-				return default(UserProfileData);
-			}
+		return await GetTaskFromEmbeddedResource<UserProfileData>();
+	}
 
-			await Task.Delay(TimeSpan.FromSeconds(2));
-
-			return await GetTaskFromEmbeddedResource<UserProfileData>();
-		}
-
-		public async Task Update(CancellationToken ct, UserProfileData userProfile)
-		{
-			await Task.Delay(TimeSpan.FromSeconds(2));
-		}
+	public async Task Update(CancellationToken ct, UserProfileData userProfile)
+	{
+		await Task.Delay(TimeSpan.FromSeconds(2));
 	}
 }

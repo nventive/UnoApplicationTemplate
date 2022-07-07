@@ -6,31 +6,30 @@ using FluentValidation;
 using FluentValidation.Validators;
 using Microsoft.Extensions.Localization;
 
-namespace ApplicationTemplate.Presentation
-{
-	public class ForgotPasswordFormViewModel : ViewModel
-	{
-		public ForgotPasswordFormViewModel()
-		{
-			this.AddValidation(this.GetProperty(x => x.Email));
-		}
+namespace ApplicationTemplate.Presentation;
 
-		public string Email
-		{
-			get => this.Get<string>();
-			set => this.Set(value);
-		}
+public class ForgotPasswordFormViewModel : ViewModel
+{
+	public ForgotPasswordFormViewModel()
+	{
+		this.AddValidation(this.GetProperty(x => x.Email));
 	}
 
-	public class ForgotPasswordFormValidator : AbstractValidator<ForgotPasswordFormViewModel>
+	public string Email
 	{
-		public ForgotPasswordFormValidator(IStringLocalizer localizer)
-		{
-			RuleFor(x => x.Email)
-				.NotEmpty()
-				.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
-				.EmailAddress()
-				.WithMessage(_ => localizer["ValidationError_Email"]);
-		}
+		get => this.Get<string>();
+		set => this.Set(value);
+	}
+}
+
+public class ForgotPasswordFormValidator : AbstractValidator<ForgotPasswordFormViewModel>
+{
+	public ForgotPasswordFormValidator(IStringLocalizer localizer)
+	{
+		RuleFor(x => x.Email)
+			.NotEmpty()
+			.WithMessage(_ => localizer["ValidationNotEmpty_Email"])
+			.EmailAddress()
+			.WithMessage(_ => localizer["ValidationError_Email"]);
 	}
 }

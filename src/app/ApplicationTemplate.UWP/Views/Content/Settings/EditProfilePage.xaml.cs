@@ -1,12 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate.Views.Content
+namespace ApplicationTemplate.Views.Content;
+
+public sealed partial class EditProfilePage : Page
 {
-	public sealed partial class EditProfilePage : Page
+	public EditProfilePage()
 	{
-		public EditProfilePage()
-		{
-			this.InitializeComponent();
-		}
+		this.InitializeComponent();
 	}
 }

@@ -2,23 +2,22 @@
 using Microsoft.Extensions.DependencyInjection;
 using Windows.UI.Core;
 
-namespace ApplicationTemplate.Views
+namespace ApplicationTemplate.Views;
+
+/// <summary>
+/// This class is used for view services.
+/// - Configures view services.
+/// </summary>
+public static class ViewServicesConfiguration
 {
-	/// <summary>
-	/// This class is used for view services.
-	/// - Configures view services.
-	/// </summary>
-	public static class ViewServicesConfiguration
+	public static IServiceCollection AddViewServices(this IServiceCollection services)
 	{
-		public static IServiceCollection AddViewServices(this IServiceCollection services)
-		{
-			return services
-				.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
-				.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
-				.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
-					s.GetRequiredService<CoreDispatcher>(),
-					CoreDispatcherPriority.Normal
-				));
-		}
+		return services
+			.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
+			.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
+			.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
+				s.GetRequiredService<CoreDispatcher>(),
+				CoreDispatcherPriority.Normal
+			));
 	}
 }

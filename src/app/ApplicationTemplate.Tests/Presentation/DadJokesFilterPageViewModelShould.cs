@@ -7,44 +7,43 @@ using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
 
-namespace ApplicationTemplate.Tests
+namespace ApplicationTemplate.Tests;
+
+public class DadJokesFilterPageViewModelShould : NavigationTestsBase
 {
-	public class DadJokesFilterPageViewModelShould : NavigationTestsBase
+	private void MockingGetFavorites(Mock<IDadJokesService> mock)
 	{
-		private void MockingGetFavorites(Mock<IDadJokesService> mock)
-		{
-			mock
-				.Setup(m => m.GetFavorites(It.IsAny<CancellationToken>()))
-				.ReturnsAsync(new SourceList<DadJokesQuote>().AsObservableList());
-		}
+		mock
+			.Setup(m => m.GetFavorites(It.IsAny<CancellationToken>()))
+			.ReturnsAsync(new SourceList<DadJokesQuote>().AsObservableList());
+	}
 
-		// Basic class configuration
-		private void DadJokesFilterPageViewModelShould_Configuration(IHostBuilder host)
+	// Basic class configuration
+	private void DadJokesFilterPageViewModelShould_Configuration(IHostBuilder host)
+	{
+		host.ConfigureServices(services =>
 		{
-			host.ConfigureServices(services =>
+			// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
+			ReplaceWithMock<IDadJokesService>(services, mock =>
 			{
-				// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-				ReplaceWithMock<IDadJokesService>(services, mock =>
-				{
-					MockingGetFavorites(mock);
-				});
+				MockingGetFavorites(mock);
 			});
-		}
+		});
+	}
 
-		[Theory]
-		[InlineData(PostTypes.Hot)]
-		[InlineData(PostTypes.New)]
-		[InlineData(PostTypes.Rising)]
-		public async Task ReturnPosts_WhenProvidedPostType(PostTypes postType)
-		{
-			// Arrange
-			var dadJokesVM = (DadJokesPageViewModel) await Navigate(DefaultCancellationToken, () => new DadJokesPageViewModel());
+	[Theory]
+	[InlineData(PostTypes.Hot)]
+	[InlineData(PostTypes.New)]
+	[InlineData(PostTypes.Rising)]
+	public async Task ReturnPosts_WhenProvidedPostType(PostTypes postType)
+	{
+		// Arrange
+		var dadJokesVM = (DadJokesPageViewModel) await Navigate(DefaultCancellationToken, () => new DadJokesPageViewModel());
 
-			var filtersVM = await AssertNavigateTo<DadJokesFiltersPageViewModel>(() => dadJokesVM.NavigateToFilters);
+		var filtersVM = await AssertNavigateTo<DadJokesFiltersPageViewModel>(() => dadJokesVM.NavigateToFilters);
 
-			filtersVM.PostTypeFilter = postType;
+		filtersVM.PostTypeFilter = postType;
 
-			await AssertNavigateTo<DadJokesPageViewModel>(() => filtersVM.FiltersAndNavigate);
-		}
+		await AssertNavigateTo<DadJokesPageViewModel>(() => filtersVM.FiltersAndNavigate);
 	}
 }

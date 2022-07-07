@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Text;
 using Uno;
 
-namespace ApplicationTemplate.Client
+namespace ApplicationTemplate.Client;
+
+[GeneratedImmutable]
+public partial class DadJokesErrorResponse
 {
-	[GeneratedImmutable]
-	public partial class DadJokesErrorResponse
-	{
-		[EqualityHash]
-		public string Message { get; }
-	}
+	[EqualityHash]
+	public string Message { get; }
 }

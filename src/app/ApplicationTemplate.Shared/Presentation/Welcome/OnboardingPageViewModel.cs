@@ -7,53 +7,52 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Microsoft.Extensions.Localization;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public partial class OnboardingPageViewModel : ViewModel
 {
-	public partial class OnboardingPageViewModel : ViewModel
+	private bool _isFromSettingsPage = false;
+
+	public OnboardingPageViewModel(bool isFromSettingsPage = false)
 	{
-		private bool _isFromSettingsPage = false;
+		_isFromSettingsPage = isFromSettingsPage;
+	}
 
-		public OnboardingPageViewModel(bool isFromSettingsPage = false)
+	public IDynamicCommand NavigateToNextPage => this.GetCommandFromTask(async ct =>
+	{
+		if (_isFromSettingsPage)
 		{
-			_isFromSettingsPage = isFromSettingsPage;
+			// Forward navigation to navigate back to LoginPage
+			// Remove LoginPage for navigation stack
+			await this.GetService<ISectionsNavigator>().RemovePrevious(ct);
+			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new SettingsPageViewModel());
+			// Remove OnboardingPage for navigation stack
+			await this.GetService<ISectionsNavigator>().RemovePrevious(ct);
 		}
-
-		public IDynamicCommand NavigateToNextPage => this.GetCommandFromTask(async ct =>
+		else
 		{
-			if (_isFromSettingsPage)
-			{
-				// Forward navigation to navigate back to LoginPage
-				// Remove LoginPage for navigation stack
-				await this.GetService<ISectionsNavigator>().RemovePrevious(ct);
-				await this.GetService<ISectionsNavigator>().Navigate(ct, () => new SettingsPageViewModel());
-				// Remove OnboardingPage for navigation stack
-				await this.GetService<ISectionsNavigator>().RemovePrevious(ct);
-			}
-			else
-			{
-				await NavigateToLogin(ct);
-			}
-		});
-
-		public async Task NavigateToLogin(CancellationToken ct)
-		{
-			await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(isFirstLogin: true));
-			await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
+			await NavigateToLogin(ct);
 		}
+	});
 
-		public OnboardingItemViewModel[] OnboardingItems
-		{
-			get => new[]
-			{
-				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
-				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
-				new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png")
-			};
-		}
+	public async Task NavigateToLogin(CancellationToken ct)
+	{
+		await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(isFirstLogin: true));
+		await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
+	}
 
-		public static implicit operator OnboardingPageViewModel(OnboardingItemViewModel v)
+	public OnboardingItemViewModel[] OnboardingItems
+	{
+		get => new[]
 		{
-			throw new NotImplementedException();
-		}
+			new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_FirstScreen_Icon.png"),
+			new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_SecondScreen_Icon.png"),
+			new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png")
+		};
+	}
+
+	public static implicit operator OnboardingPageViewModel(OnboardingItemViewModel v)
+	{
+		throw new NotImplementedException();
 	}
 }

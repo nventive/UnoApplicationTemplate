@@ -1,11 +1,10 @@
 ﻿using System;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class NetworkDiagnosticsViewModel : ViewModel
 {
-	public class NetworkDiagnosticsViewModel : ViewModel
+	public NetworkDiagnosticsViewModel()
 	{
-		public NetworkDiagnosticsViewModel()
-		{
-		}
 	}
 }

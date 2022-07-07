@@ -5,17 +5,16 @@ using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 
-namespace ApplicationTemplate.Client
+namespace ApplicationTemplate.Client;
+
+public interface IDadJokesEndpoint
 {
-	public interface IDadJokesEndpoint
-	{
-		/// <summary>
-		/// Returns a list of dad jokes based on /r/dadjokes.
-		/// </summary>
-		/// <param name="ct"><see cref="CancellationToken"/></param>
-		/// <param name="typePost"><see cref="string"/></param>
-		/// <returns>List of quotes</returns>
-		[Get("/{typePost}.json")]
-		Task<DadJokesResponse> FetchData(CancellationToken ct, string typePost);
-	}
+	/// <summary>
+	/// Returns a list of dad jokes based on /r/dadjokes.
+	/// </summary>
+	/// <param name="ct"><see cref="CancellationToken"/></param>
+	/// <param name="typePost"><see cref="string"/></param>
+	/// <returns>List of quotes</returns>
+	[Get("/{typePost}.json")]
+	Task<DadJokesResponse> FetchData(CancellationToken ct, string typePost);
 }
