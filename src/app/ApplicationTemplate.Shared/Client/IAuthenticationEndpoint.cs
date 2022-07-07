@@ -31,8 +31,8 @@ namespace ApplicationTemplate.Client
 		/// <param name="ct"><see cref="CancellationToken"/></param>
 		/// <param name="email">Email</param>
 		/// <param name="password">Password</param>
-		/// <returns><see cref="Task"/></returns>
-		Task CreateAccount(CancellationToken ct, string email, string password);
+		/// <returns><see cref="AuthenticationData"/></returns>
+		Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password);
 
 		/// <summary>
 		/// Resets the password.
