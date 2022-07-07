@@ -6,7 +6,7 @@ trigger: # Start a new run as soon as a "canaries/build/(...)" branch is created
 resources:
   containers:
     - container: windows
-      image: nventive/vs_build-tools:16.11.9
+      image: nventive/vs_build-tools:17.1.1
       
 variables:
 - template: build/variables.yml
