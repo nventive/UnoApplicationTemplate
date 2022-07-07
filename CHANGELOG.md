@@ -7,6 +7,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 ### Added
 * c# 10 Language version and requirement to use Visual Studio 2022
+* Support for Android 12 (Avril, 2022)
 * Support for Android 11 (March, 2021)
 
 ### Changed
