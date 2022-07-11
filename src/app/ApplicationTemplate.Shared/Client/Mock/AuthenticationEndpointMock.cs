@@ -18,18 +18,24 @@ namespace ApplicationTemplate.Client
 			_serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
 		}
 
-		public async Task CreateAccount(CancellationToken ct, string email, string password)
+		public async Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password)
 		{
+			// We add a delay to simulate a long API call
 			await Task.Delay(TimeSpan.FromSeconds(2));
+
+			// We authenticate the user on account creation, since we don't have a backend to register and validate the user
+			return CreateAuthenticationData();
 		}
 
 		public async Task ResetPassword(CancellationToken ct, string email)
 		{
+			// We add a delay to simulate a long API call
 			await Task.Delay(TimeSpan.FromSeconds(2));
 		}
 
 		public async Task<AuthenticationData> Login(CancellationToken ct, string email, string password)
 		{
+			// We add a delay to simulate a long API call
 			await Task.Delay(TimeSpan.FromSeconds(2));
 
 			return CreateAuthenticationData();
@@ -42,6 +48,7 @@ namespace ApplicationTemplate.Client
 				throw new ArgumentNullException(nameof(unauthorizedToken));
 			}
 
+			// We add a delay to simulate a long API call
 			await Task.Delay(TimeSpan.FromSeconds(2));
 
 			return CreateAuthenticationData(unauthorizedToken.AccessToken.Payload);
