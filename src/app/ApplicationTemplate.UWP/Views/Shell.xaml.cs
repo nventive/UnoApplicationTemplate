@@ -24,7 +24,13 @@ namespace ApplicationTemplate
 
 		public static Shell Instance { get; private set; }
 
+//-:cnd:noEmit
+#if __IOS__ || WINDOWS_UWP
+//+:cnd:noEmit
 		public IExtendedSplashScreen ExtendedSplashScreen => this.AppExtendedSplashScreen;
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
 
 		public MultiFrame NavigationMultiFrame => this.RootNavigationMultiFrame;
 	}

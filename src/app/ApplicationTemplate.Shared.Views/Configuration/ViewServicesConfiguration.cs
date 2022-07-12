@@ -14,7 +14,13 @@ namespace ApplicationTemplate.Views
 		{
 			return services
 				.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
+//-:cnd:noEmit
+#if __IOS__ || WINDOWS_UWP
+//+:cnd:noEmit
 				.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
 				.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
 					s.GetRequiredService<CoreDispatcher>(),
 					CoreDispatcherPriority.Normal

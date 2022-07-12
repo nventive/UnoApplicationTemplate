@@ -10,7 +10,7 @@ namespace ApplicationTemplate
 		Label = "@string/ApplicationName",
 		LargeHeap = true,
 		HardwareAccelerated = true,
-		Theme = "@style/AppTheme",
+		Theme = "@style/AppTheme.Starting",
 		AllowBackup = false,
 		ResizeableActivity = false
 	)]

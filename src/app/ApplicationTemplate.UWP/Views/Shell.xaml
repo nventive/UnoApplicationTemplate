@@ -7,7 +7,8 @@
 			 xmlns:ue="using:Nventive.View.Extensions"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-			 mc:Ignorable="d">
+			 xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 mc:Ignorable="d not_android">
 
 	<Grid>
 		<!-- We add grid rows to prevent overlapping of the MultiFrame and the Menu bar -->
@@ -28,10 +29,11 @@
 								  Visibility="{Binding IsDiagnosticsOverlayEnabled, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
 								  Grid.RowSpan="2" />
 
-		<splash:ExtendedSplashScreen x:Name="AppExtendedSplashScreen"
+		<not_android:Grid Grid.RowSpan="2">
+			<splash:ExtendedSplashScreen x:Name="AppExtendedSplashScreen"
 									 ue:MultipleTapExtension.Command="{Binding DiagnosticsOverlay.NavigateToDiagnosticsPage}"
-									 ue:MultipleTapExtension.TapCount="3"
-									 Grid.RowSpan="2" />
+									 ue:MultipleTapExtension.TapCount="3" />
+		</not_android:Grid>
 	</Grid>
 
 </UserControl>

@@ -23,6 +23,8 @@ namespace ApplicationTemplate
 	{
 		protected override void OnCreate(Bundle bundle)
 		{
+			// Handle the splash screen transition.
+			AndroidX.Core.SplashScreen.SplashScreen.InstallSplashScreen(this);
 			base.OnCreate(bundle);
 		}
 	}
