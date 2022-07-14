@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using GeneratedSerializers;
-using Uno.Extensions;
 
 namespace ApplicationTemplate.Client
 {
@@ -62,7 +62,7 @@ namespace ApplicationTemplate.Client
 			return new AuthenticationData.Builder
 			{
 				AccessToken = jwt,
-				RefreshToken = Guid.NewGuid().ToStringInvariant(),
+				RefreshToken = Guid.NewGuid().ToString(format: null, CultureInfo.InvariantCulture),
 				Expiration = jwt.Payload.Expiration,
 			};
 		}

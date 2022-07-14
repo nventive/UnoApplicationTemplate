@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Collections.Immutable;
-using ApplicationTemplate.Client;
 using Uno;
 
-namespace ApplicationTemplate.Business
+namespace ApplicationTemplate.Client
 {
 	[GeneratedImmutable]
 	public partial class ApplicationSettings
@@ -13,6 +12,6 @@ namespace ApplicationTemplate.Business
 
 		public bool IsOnboardingCompleted { get; }
 
-		public ImmutableDictionary<string, DadJokesQuote> FavoriteQuotes { get; } = ImmutableDictionary<string, DadJokesQuote>.Empty;
+		public ImmutableDictionary<string, FavoriteJokeData> FavoriteQuotes { get; } = ImmutableDictionary<string, FavoriteJokeData>.Empty;
 	}
 }

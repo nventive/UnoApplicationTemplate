@@ -3,10 +3,9 @@ using System.Collections.Immutable;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Client;
 using Nventive.Persistence;
 
-namespace ApplicationTemplate.Business
+namespace ApplicationTemplate.Client
 {
 	public partial class ApplicationSettingsService : IApplicationSettingsService
 	{
@@ -44,7 +43,7 @@ namespace ApplicationTemplate.Business
 		}
 
 		/// <inheritdoc />
-		public async Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, DadJokesQuote> quotes)
+		public async Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, FavoriteJokeData> quotes)
 		{
 			await Update(ct, s => s.WithFavoriteQuotes(quotes));
 		}
@@ -53,7 +52,7 @@ namespace ApplicationTemplate.Business
 		public async Task DiscardUserSettings(CancellationToken ct)
 		{
 			await Update(ct, s => s
-				.WithFavoriteQuotes(ImmutableDictionary<string, DadJokesQuote>.Empty)
+				.WithFavoriteQuotes(ImmutableDictionary<string, FavoriteJokeData>.Empty)
 				.WithAuthenticationData(default(AuthenticationData))
 			);
 		}

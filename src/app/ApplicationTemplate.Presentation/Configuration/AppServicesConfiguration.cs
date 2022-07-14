@@ -12,8 +12,6 @@ using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using Nventive.ExtendedSplashScreen;
-using Windows.ApplicationModel;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 

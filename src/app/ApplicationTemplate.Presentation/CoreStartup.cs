@@ -15,10 +15,8 @@ using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Nventive.ExtendedSplashScreen;
 using Uno.Disposables;
 using Uno.Extensions;
-using Windows.UI.Core;
 
 namespace ApplicationTemplate
 {

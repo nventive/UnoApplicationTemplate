@@ -2,12 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using ApplicationTemplate.Client;
-using Uno;
 
 namespace ApplicationTemplate.Business
 {
-	[GeneratedImmutable]
-	public partial class DadJokesQuote
+	public record DadJokesQuote
 	{
 		public DadJokesQuote(DadJokeContentData data, bool isFavorite)
 		{
@@ -29,8 +27,16 @@ namespace ApplicationTemplate.Business
 			IsFavorite = isFavorite;
 		}
 
-		[EqualityKey]
-		[EqualityHash]
+		public DadJokesQuote(FavoriteJokeData favoriteJokeData)
+		{
+			Id = favoriteJokeData.Id;
+			Selftext = favoriteJokeData.Selftext;
+			Title = favoriteJokeData.Title;
+			TotalAwardsReceived = favoriteJokeData.TotalAwardsReceived;
+			Distinguished = favoriteJokeData.Distinguished;
+			IsFavorite = true;
+		}
+
 		public string Id { get; }
 
 		public string Selftext { get; }
@@ -43,7 +49,11 @@ namespace ApplicationTemplate.Business
 
 		public int TotalAwardsReceived { get; }
 
-		[EqualityIgnore]
-		public bool IsFavorite { get; }
+		public bool IsFavorite { get; init; }
+
+		public FavoriteJokeData ToFavoriteJokeData()
+		{
+			return new FavoriteJokeData(Id, Title, Selftext, TotalAwardsReceived, Distinguished);
+		}
 	}
 }

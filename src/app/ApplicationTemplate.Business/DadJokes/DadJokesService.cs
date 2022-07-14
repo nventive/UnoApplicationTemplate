@@ -70,10 +70,10 @@ namespace ApplicationTemplate.Business
 
 			var settings = await _applicationSettingsService.GetCurrent(ct);
 
-			quote = quote.WithIsFavorite(isFavorite);
+			quote = quote with { IsFavorite = isFavorite };
 
 			var updatedFavorites = isFavorite && !settings.FavoriteQuotes.ContainsKey(quote.Id)
-				? settings.FavoriteQuotes.Add(quote.Id, quote)
+				? settings.FavoriteQuotes.Add(quote.Id, quote.ToFavoriteJokeData())
 				: settings.FavoriteQuotes.Remove(quote.Id);
 
 			await _applicationSettingsService.SetFavoriteQuotes(ct, updatedFavorites);
@@ -101,7 +101,7 @@ namespace ApplicationTemplate.Business
 				var settings = await _applicationSettingsService.GetCurrent(ct);
 
 				_favouriteQuotes = new SourceList<DadJokesQuote>();
-				_favouriteQuotes.AddRange(settings.FavoriteQuotes.Values);
+				_favouriteQuotes.AddRange(settings.FavoriteQuotes.Values.Select(favoriteData => new DadJokesQuote(favoriteData)));
 			}
 
 			return _favouriteQuotes;

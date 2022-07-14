@@ -2,9 +2,8 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Business
+namespace ApplicationTemplate.Client
 {
 	public interface IApplicationSettingsService
 	{
@@ -49,6 +48,6 @@ namespace ApplicationTemplate.Business
 		/// <param name="ct"><see cref="CancellationToken"/></param>
 		/// <param name="quotes">Favorite quotes</param>
 		/// <returns><see cref="Task"/></returns>
-		Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, DadJokesQuote> quotes);
+		Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, FavoriteJokeData> quotes);
 	}
 }
