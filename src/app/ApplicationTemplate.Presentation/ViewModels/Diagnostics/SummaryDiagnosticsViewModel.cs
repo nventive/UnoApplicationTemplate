@@ -109,7 +109,7 @@ namespace ApplicationTemplate.Presentation
 //-:cnd:noEmit
 #if !NETFRAMEWORK
 //+:cnd:noEmit
-			var startup = App.Startup;
+			var startup = this.GetService<StartupBase>();
 			var startupTime = startup.StartActivity.StartTimeUtc + startup.StartActivity.Duration - startup.PreInitializeActivity.StartTimeUtc;
 
 			stringBuilder.AppendLine($"Startup time: {Math.Round(startupTime.TotalMilliseconds)} ms");
@@ -118,8 +118,8 @@ namespace ApplicationTemplate.Presentation
 			stringBuilder.AppendLine(GetFormattedActivity(startup.InitializeActivity, startup.PreInitializeActivity));
 			stringBuilder.AppendLine(GetFormattedActivity(startup.CoreStartup.BuildCoreHostActivity, prefix: "  "));
 			stringBuilder.AppendLine(GetFormattedActivity(startup.CoreStartup.BuildHostActivity, prefix: "  "));
-			stringBuilder.AppendLine(GetFormattedActivity(App.Instance.ShellActivity, startup.InitializeActivity));
-			stringBuilder.AppendLine(GetFormattedActivity(startup.StartActivity, App.Instance.ShellActivity));
+			stringBuilder.AppendLine(GetFormattedActivity(startup.ShellActivity, startup.InitializeActivity));
+			stringBuilder.AppendLine(GetFormattedActivity(startup.StartActivity, startup.ShellActivity));
 
 			string GetFormattedActivity(Activity activity, Activity previousActivity = null, string prefix = null)
 			{

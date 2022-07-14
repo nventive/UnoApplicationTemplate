@@ -24,8 +24,6 @@ namespace ApplicationTemplate
 			ConfigureOrientation();
 		}
 
-		public Activity ShellActivity { get; } = new Activity(nameof(Shell));
-
 		public static App Instance { get; private set; }
 
 		public static Startup Startup { get; private set; }
@@ -64,11 +62,11 @@ namespace ApplicationTemplate
 				ConfigureFirebase();
 #endif
 
-				ShellActivity.Start();
+				Startup.ShellActivity.Start();
 
 				CurrentWindow.Content = Shell = new Shell(args);
 
-				ShellActivity.Stop();
+				Startup.ShellActivity.Stop();
 			}
 
 			CurrentWindow.Activate();

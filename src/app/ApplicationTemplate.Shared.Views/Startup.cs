@@ -26,6 +26,8 @@ namespace ApplicationTemplate.Views
 
 		protected override void PreInitializeServices()
 		{
+			LocalizationConfiguration.PreInitialize();
+
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 //+:cnd:noEmit
@@ -38,7 +40,7 @@ namespace ApplicationTemplate.Views
 
 		protected override void InitializeViewServices(IHostBuilder hostBuilder)
 		{
-			hostBuilder.AddViewServices();
+			hostBuilder.AddViewServices(this);
 		}
 
 		protected override void OnInitialized(IServiceProvider services)

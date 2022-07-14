@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
-using Windows.UI.Core;
 
 namespace ApplicationTemplate.Presentation
 {
@@ -26,9 +26,9 @@ namespace ApplicationTemplate.Presentation
 			GC.WaitForPendingFinalizers();
 		});
 
-		public IDynamicCommand TestErrorInCoreDispatcher => this.GetCommand(() =>
+		public IDynamicCommand TestErrorInCoreDispatcher => this.GetCommandFromTask(async ct =>
 		{
-			var _ = this.GetService<CoreDispatcher>().RunAsync(CoreDispatcherPriority.High, () => throw new Exception("This is a test of an exception in the CoreDispatcher. Please ignore."));
+			await this.GetService<IDispatcherScheduler>().Run(ct2 => throw new Exception("This is a test of an exception in the CoreDispatcher. Please ignore."), ct);
 		});
 
 		public IDynamicCommand TestErrorInThreadPool => this.GetCommandFromTask(async ct =>
@@ -51,10 +51,10 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand TestErrorInMainThread => this.GetCommandFromTask(async ct =>
 		{
-			//-:cnd:noEmit
+//-:cnd:noEmit
 			// This will not crash on Android as it can be safely handled.
 #if !__ANDROID__
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			var confirmation = await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
 				.Title("Diagnostics")
 				.Content("This should crash your application. Make sure your analytics provider receives a crash log.")
@@ -66,24 +66,24 @@ namespace ApplicationTemplate.Presentation
 			{
 				return;
 			}
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if __IOS__
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			/// This will be handled by <see cref="AppDomain.CurrentDomain.UnhandledException" />
 			UIKit.UIApplication.SharedApplication.InvokeOnMainThread(() => throw new Exception("This is a test of an exception in the MainThread. Please ignore."));
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #elif __ANDROID__
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			/// This will be handled by <see cref="Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser" />
 			var _ = new Android.OS.Handler(Android.OS.Looper.MainLooper).Post(() => throw new InvalidOperationException("This is a test of an exception in the MainLooper. Please ignore."));
 			await Task.CompletedTask;
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 		});
 	}
 }

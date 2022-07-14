@@ -78,7 +78,7 @@ namespace ApplicationTemplate
 
 		private static LoggerConfiguration AddFileLogging(LoggerConfiguration configuration, string logFilePath)
 		{
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 			return configuration
 				.WriteTo.File(logFilePath, outputTemplate: "{Timestamp:yyyy-MM-dd HH:mm:ss.fffzzz} [{Platform}] {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}", fileSizeLimitBytes: 10485760) // 10mb

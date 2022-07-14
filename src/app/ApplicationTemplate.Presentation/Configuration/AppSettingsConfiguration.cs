@@ -20,21 +20,21 @@ namespace ApplicationTemplate
 	{
 		public const string AppSettingsFileName = "appsettings";
 
-		//-:cnd:noEmit
+//-:cnd:noEmit
 #if PRODUCTION
 //+:cnd:noEmit
 		public const string DefaultEnvironment = "PRODUCTION";
 //-:cnd:noEmit
 #elif DEBUG
-		//+:cnd:noEmit
+//+:cnd:noEmit
 		public const string DefaultEnvironment = "DEVELOPMENT";
-		//-:cnd:noEmit
+//-:cnd:noEmit
 #else
 //+:cnd:noEmit
 		public const string DefaultEnvironment = "STAGING";
 //-:cnd:noEmit
 #endif
-		//+:cnd:noEmit
+//+:cnd:noEmit
 
 		public static IHostBuilder AddAppSettings(this IHostBuilder hostBuilder)
 		{

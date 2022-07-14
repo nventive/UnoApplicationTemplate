@@ -519,6 +519,12 @@
   <ItemGroup>
     <Content Include="Assets\Fonts\Guillon-Light.ttf" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj">
+      <Project>{ab67372c-6cf2-46a5-bc86-7cd257af3ff0}</Project>
+      <Name>ApplicationTemplate.Presentation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" Condition="Exists('..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems')" />
   <Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

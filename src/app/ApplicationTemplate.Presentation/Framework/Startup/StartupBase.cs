@@ -29,6 +29,8 @@ namespace ApplicationTemplate
 
 		public Activity StartActivity { get; } = new Activity(nameof(Start));
 
+		public Activity ShellActivity { get; } = new Activity("Shell");
+
 		public CoreStartupBase CoreStartup { get; }
 
 		protected ILogger Logger { get; private set; }

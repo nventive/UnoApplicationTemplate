@@ -9,8 +9,6 @@ using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Presentation
 {

@@ -4,6 +4,7 @@ using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
+using ApplicationTemplate.Client;
 using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
 using Chinook.DataLoader;
@@ -24,7 +25,6 @@ namespace ApplicationTemplate
 	{
 		protected override void PreInitializeServices()
 		{
-			LocalizationConfiguration.PreInitialize();
 		}
 
 		protected override IHostBuilder InitializeServices(IHostBuilder hostBuilder)

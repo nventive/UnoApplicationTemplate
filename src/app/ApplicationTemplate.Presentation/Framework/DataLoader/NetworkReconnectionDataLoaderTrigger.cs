@@ -43,7 +43,7 @@ namespace ApplicationTemplate
 			Xamarin.Essentials.Connectivity.ConnectivityChanged -= OnConnectivityChanged;
 		}
 	}
-	//-:cnd:noEmit
+//-:cnd:noEmit
 #else
 //+:cnd:noEmit
 	/// <summary>
@@ -63,7 +63,7 @@ namespace ApplicationTemplate
 	}
 //-:cnd:noEmit
 #endif
-	//+:cnd:noEmit
+//+:cnd:noEmit
 
 	public static class NetworkReconnectionDataLoaderExtensions
 	{

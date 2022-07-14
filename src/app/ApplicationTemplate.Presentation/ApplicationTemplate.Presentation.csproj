@@ -1,11 +1,33 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
+		<PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.5.3.2" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="3.1.0" />
+		<PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.4" />
+		<PackageReference Include="Chinook.DynamicMvvm" Version="0.9.0-dev.106" />
+		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="0.9.0-dev.106" />
+		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="0.9.0-dev.106" />
+		<PackageReference Include="Chinook.DataLoader" Version="0.7.0-dev.83" />
+		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="0.7.0-dev.83" />
+		<PackageReference Include="Chinook.BackButtonManager" Version="0.5.0-dev.33" />
+		<PackageReference Include="Chinook.SectionsNavigation" Version="0.7.0-dev.88" />
+		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.7.0-dev.88" />
+		<PackageReference Include="MessageDialogService" Version="0.5.0-dev.13" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
+	</ItemGroup>
 
 </Project>

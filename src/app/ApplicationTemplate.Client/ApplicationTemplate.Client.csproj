@@ -13,9 +13,11 @@
 	<ItemGroup>
 		<PackageReference Include="Refit" Version="4.7.51" />
 		<PackageReference Include="GeneratedSerializers.Json" Version="1.0.0-dev.30" />
+		<PackageReference Include="System.Text.Json" Version="6.0.5" />
 		<PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
 		<PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.21" />
 		<PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.17" />
+		<PackageReference Include="Nventive.Persistence" Version="0.2.0-dev.17" />
 		<PackageReference Include="System.Reactive" Version="5.0.0" />
 
 	</ItemGroup>

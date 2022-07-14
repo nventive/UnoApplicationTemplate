@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationTemplate;
 using ApplicationTemplate.Business;
+using ApplicationTemplate.Client;
 using ApplicationTemplate.Presentation;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;

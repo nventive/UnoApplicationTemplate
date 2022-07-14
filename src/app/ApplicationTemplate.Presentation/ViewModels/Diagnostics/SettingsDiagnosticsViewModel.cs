@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.Logging;
-using Windows.Storage;
-using Windows.System;
 
 namespace ApplicationTemplate.Presentation
 {
@@ -30,18 +28,20 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand OpenSettingsFolder => this.GetCommand(() =>
 		{
-			var localFolder = ApplicationData.Current.LocalFolder;
+			throw new NotImplementedException();
 
-			this.GetService<IDispatcherScheduler>().ScheduleTask(async (ct2, s) =>
-			{
-//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-				await Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-			});
+//			var localFolder = ApplicationData.Current.LocalFolder;
+
+//			this.GetService<IDispatcherScheduler>().ScheduleTask(async (ct2, s) =>
+//			{
+////-:cnd:noEmit
+//#if WINDOWS_UWP
+////+:cnd:noEmit
+//				await Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
+////-:cnd:noEmit
+//#endif
+////+:cnd:noEmit
+//			});
 		});
 
 		public bool CanOpenSettingsFolder { get; } =
@@ -53,9 +53,9 @@ namespace ApplicationTemplate.Presentation
 #else
 //+:cnd:noEmit
 			false;
-		//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-		//+:cnd:noEmit
+//+:cnd:noEmit
 
 		private async Task OnDiagnosticsOverlayChanged(CancellationToken ct, bool isEnabled)
 		{

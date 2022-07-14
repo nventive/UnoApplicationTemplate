@@ -11,20 +11,6 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Compatibility\BindableAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Configuration\IConfigurationExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\AnalyticsDataLoaderStrategy.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\DependencyInjection\RegistrationServiceCollectionExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\DynamicData\IChangeSet.Extensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\DataLoader\NetworkReconnectionDataLoaderTrigger.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\ObjectSerializerToContentSerializerAdapter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\ObjectSerializerToResponseContentDeserializer.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Startup\CoreStartupBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\ObjectSerializerToSettingsSerializerAdapter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Reactive\IObservable.Extensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\SystemTextJsonToObjectSerializerAdapter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Serialization\SystemTextJsonToContentSerializerAdapter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Startup\StartupBase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Startup\StartupState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Validation\DataValidationState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Validation\DataValidationStateType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Validation\DataValidationView.cs" />
@@ -40,10 +26,7 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.json" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Framework\DataLoader\" />
     <Folder Include="$(MSBuildThisFileDirectory)Framework\Compatibility\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Framework\Reactive\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Framework\Serialization\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.production.json" />

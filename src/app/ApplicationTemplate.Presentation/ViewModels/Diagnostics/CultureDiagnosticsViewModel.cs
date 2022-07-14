@@ -21,7 +21,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var newCulture = new CultureInfo(Culture);
 
-			this.GetService<ThreadCultureOverrideService>().SetCulture(newCulture);
+			this.GetService<IThreadCultureOverrideService>().SetCulture(newCulture);
 
 			if (CultureInfo.CurrentCulture.Name != newCulture.Name)
 			{

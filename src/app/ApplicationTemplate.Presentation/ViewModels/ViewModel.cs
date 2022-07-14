@@ -36,14 +36,14 @@ namespace ApplicationTemplate.Presentation
 
 		void INavigableViewModel.SetView(object view)
 		{
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if WINDOWS_UWP || __IOS__ || __ANDROID__
-			//+:cnd:noEmit
+//+:cnd:noEmit
 			var frameworkElement = view as Windows.UI.Xaml.FrameworkElement;
 			View = new ViewModelView(frameworkElement);
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 		}
 
 		/// <summary>
