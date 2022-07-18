@@ -128,23 +128,7 @@ namespace ApplicationTemplate
 
 		private static IServiceCollection AddMainHandler(this IServiceCollection services)
 		{
-			return services.AddTransient<HttpMessageHandler>(s =>
-//-:cnd:noEmit
-#if __IOS__
-//+:cnd:noEmit
-				new NSUrlSessionHandler()
-//-:cnd:noEmit
-#elif __ANDROID__
-//+:cnd:noEmit
-				new Xamarin.Android.Net.AndroidClientHandler()
-//-:cnd:noEmit
-#else
-//+:cnd:noEmit
-				new HttpClientHandler()
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-			);
+			return services.AddTransient<HttpMessageHandler, HttpClientHandler>();
 		}
 
 		private static IServiceCollection AddResponseContentDeserializer(this IServiceCollection services)
@@ -155,7 +139,7 @@ namespace ApplicationTemplate
 		private static IServiceCollection AddNetworkExceptionHandler(this IServiceCollection services)
 		{
 			return services
-				.AddSingleton<INetworkAvailabilityChecker>(new NetworkAvailabilityChecker(GetIsNetworkAvailable))
+				.AddSingleton<INetworkAvailabilityChecker>(new NetworkAvailabilityChecker(ct => Task.FromResult(true)))
 				.AddTransient<NetworkExceptionHandler>();
 		}
 
@@ -189,19 +173,6 @@ namespace ApplicationTemplate
 //+:cnd:noEmit
 		}
 #endif
-
-		private static Task<bool> GetIsNetworkAvailable(CancellationToken ct)
-		{
-//-:cnd:noEmit
-#if WINDOWS_UWP || __ANDROID__ || __IOS__
-			// TODO #172362: Not implemented in Uno.
-			// return NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
-			return Task.FromResult(Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet);
-#else
-			return Task.FromResult(true);
-#endif
-//+:cnd:noEmit
-		}
 
 		private static void AddDefaultHeaders(HttpClient client, IServiceProvider serviceProvider)
 		{

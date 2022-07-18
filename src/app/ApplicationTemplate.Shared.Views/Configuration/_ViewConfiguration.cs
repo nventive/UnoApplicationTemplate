@@ -28,6 +28,7 @@ namespace ApplicationTemplate.Views
 					.AddLocalization()
 					.AddNavigation()
 					.AddViewServices()
+					.AddApi()
 				);
 		}
 	}

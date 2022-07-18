@@ -6,12 +6,8 @@ namespace ApplicationTemplate.Client
 {
 	public record AuthenticationToken
 	{
-		public static AuthenticationToken Default { get; } = new AuthenticationToken();
+		public static AuthenticationToken Default { get; } = new AuthenticationToken(default, DateTimeOffset.MinValue, DateTimeOffset.MinValue);
 
-		public AuthenticationToken()
-		{
-		}
-		
 		public AuthenticationToken(string email, DateTimeOffset expiration, DateTimeOffset issuedAt)
 		{
 			Email = email;
