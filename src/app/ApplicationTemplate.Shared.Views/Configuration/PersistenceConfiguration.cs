@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Reactive.Concurrency;
 using System.Text;
-using ApplicationTemplate.Business;
+using System.Text.Json;
 using ApplicationTemplate.Client;
-using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
 
@@ -56,8 +55,8 @@ namespace ApplicationTemplate.Views
 			return UnoDataPersister.CreateFromFile<T>(
 				FolderType.WorkingData,
 				typeof(T).Name + ".json",
-				async (ct, s) => (T)services.GetRequiredService<IObjectSerializer>().FromStream(s, typeof(T)),
-				async (ct, s, b) => services.GetRequiredService<IObjectSerializer>().WriteToStream(s, typeof(T), b, canDisposeStream: true)
+				async (ct, s) => await JsonSerializer.DeserializeAsync<T>(s, options: services.GetService<JsonSerializerOptions>(), ct),
+				async (ct, v, s) => await JsonSerializer.SerializeAsync<T>(s, v, options: services.GetService<JsonSerializerOptions>(), ct)
 			)
 			.ToObservablePersister(services.GetRequiredService<IBackgroundScheduler>());
 		}

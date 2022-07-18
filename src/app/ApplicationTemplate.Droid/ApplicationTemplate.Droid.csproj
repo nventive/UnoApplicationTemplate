@@ -266,7 +266,20 @@
   <ItemGroup>
     <AndroidResource Include="Resources\values-night\Colors.xml" />
   </ItemGroup>
-  <Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" Condition="Exists('..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems')" />
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj">
+      <Project>{553af3b8-d5e7-4737-94a5-2ed0b65267e9}</Project>
+      <Name>ApplicationTemplate.Business</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj">
+      <Project>{edcd3803-cfdb-442b-8c2d-e779bcd1178d}</Project>
+      <Name>ApplicationTemplate.Client</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj">
+      <Project>{ab67372c-6cf2-46a5-bc86-7cd257af3ff0}</Project>
+      <Name>ApplicationTemplate.Presentation</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>
