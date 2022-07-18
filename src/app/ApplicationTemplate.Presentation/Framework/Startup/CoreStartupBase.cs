@@ -51,8 +51,9 @@ namespace ApplicationTemplate
 		/// <summary>
 		/// Initializes the application.
 		/// </summary>
+		/// <param name="contentRootPath">Specifies the content root directory to be used by the host.</param>
 		/// <param name="extraHostConfiguration">Extra host configuration</param>
-		public void Initialize(Action<IHostBuilder> extraHostConfiguration = null)
+		public void Initialize(string contentRootPath, Action<IHostBuilder> extraHostConfiguration = null)
 		{
 			if (State.IsInitialized)
 			{
@@ -66,11 +67,9 @@ namespace ApplicationTemplate
 
 			BuildCoreHostActivity.Start();
 
-			Logger = CreateHostLogger();
+			Logger = CreateHostLogger(contentRootPath);
 
 			BuildCoreHostActivity.Stop();
-
-			var contentRootPath = GetContentRootPath();
 
 			BuildHostActivity.Start();
 
@@ -154,10 +153,8 @@ namespace ApplicationTemplate
 		/// <returns>Task that completes when the services are started.</returns>
 		protected abstract Task StartServices(IServiceProvider services, bool isFirstStart);
 
-		private ILogger CreateHostLogger()
+		private ILogger CreateHostLogger(string contentRootPath)
 		{
-			var contentRootPath = GetContentRootPath();
-
 			var coreHost = new HostBuilder()
 				.UseContentRoot(contentRootPath)
 				.AddAppSettings()
@@ -165,17 +162,6 @@ namespace ApplicationTemplate
 				.Build();
 
 			return GetOrCreateLogger(coreHost.Services);
-		}
-
-		private string GetContentRootPath()
-		{
-//-:cnd:noEmit
-#if WINDOWS_UWP || __ANDROID__ || __IOS__
-			return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
-#else
-			return string.Empty;
-#endif
-//+:cnd:noEmit
 		}
 	}
 }
