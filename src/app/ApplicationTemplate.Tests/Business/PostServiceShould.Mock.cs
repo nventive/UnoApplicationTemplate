@@ -9,17 +9,8 @@ namespace ApplicationTemplate.Tests.Business
 		// Mocked database
 		private PostData[] _mockedPosts = new PostData[]
 		{
-			new PostData.Builder()
-				.WithId(1)
-				.WithBody("test body 1")
-				.WithTitle("test title 1")
-				.WithUserIdentifier(12),
-
-			new PostData.Builder()
-				.WithId(2)
-				.WithBody("test body 2")
-				.WithTitle("test title 2")
-				.WithUserIdentifier(5),
+			new PostData(1, title: "test title 1", body: "test body 1", userIdentifier: 12),
+			new PostData(2, title: "test title 2", body:"test body 2", userIdentifier: 5),
 		};
 
 		private IEnumerable<PostData> GetMockedPosts()

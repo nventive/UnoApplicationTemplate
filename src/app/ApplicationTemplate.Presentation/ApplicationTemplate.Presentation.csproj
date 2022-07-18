@@ -6,6 +6,14 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+		<EmbeddedResource Include="appsettings.development.json" />
+		<EmbeddedResource Include="appsettings.json" />
+		<EmbeddedResource Include="appsettings.production.json" />
+		<EmbeddedResource Include="appsettings.staging.json" />
+		<EmbeddedResource Include="ThirdPartySoftwareLicenses.txt" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
 		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.2" />
@@ -26,6 +34,7 @@
 		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.7.0-dev.88" />
 		<PackageReference Include="MessageDialogService" Version="0.5.0-dev.13" />
 		<PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
+		<PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
 	</ItemGroup>
 
 	<ItemGroup>

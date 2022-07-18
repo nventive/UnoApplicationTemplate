@@ -15,7 +15,7 @@ namespace ApplicationTemplate.Client
 			UserIdentifier = userIdentifier;
 		}
 
-		public long Id { get; }
+		public long Id { get; init; }
 
 		public string Title { get; init; }
 

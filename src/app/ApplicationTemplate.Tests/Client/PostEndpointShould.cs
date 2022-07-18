@@ -35,12 +35,7 @@ namespace ApplicationTemplate.Tests
 		public async Task CreateOne()
 		{
 			// Arrange
-			var post = new PostData.Builder()
-			{
-				Title = "My title",
-				Body = "My body",
-				UserIdentifier = 100,
-			};
+			var post = new PostData(default, title: "My title", body: "My body", userIdentifier: 100);
 
 			// Act
 			var result = await SUT.Create(DefaultCancellationToken, post);
@@ -57,13 +52,7 @@ namespace ApplicationTemplate.Tests
 		public async Task UpdateOne()
 		{
 			// Arrange
-			var post = new PostData.Builder()
-			{
-				Id = 1,
-				Title = "My updated title",
-				Body = "My updated body",
-				UserIdentifier = 100,
-			};
+			var post = new PostData(1, title: "My updated title", body: "My updated body", userIdentifier: 100);
 
 			// Act
 			var result = await SUT.Update(DefaultCancellationToken, post.Id, post);

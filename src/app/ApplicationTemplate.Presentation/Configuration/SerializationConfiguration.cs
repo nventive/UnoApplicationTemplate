@@ -45,6 +45,7 @@ namespace ApplicationTemplate
 			options.AddContext<JsonContext>();
 
 			services
+				.AddSingleton(options)
 				.AddSingleton<ISettingsSerializer>(c => new JsonSerializerToSettingsSerializerAdapter(options));
 
 			return services;

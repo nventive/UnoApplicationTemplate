@@ -10,24 +10,11 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Compatibility\BindableAttribute.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Validation\DataValidationState.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Validation\DataValidationStateType.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Validation\DataValidationView.cs" />
     <!--#if (IncludeFirebaseAnalytics)
     <Compile Include="$(MSBuildThisFileDirectory)Framework\FirebasePerformanceHandler.cs" />
     #endif -->
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)ThirdPartySoftwareLicenses.txt" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.staging.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.development.json" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.json" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Framework\Compatibility\" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.production.json" />
   </ItemGroup>
 </Project>

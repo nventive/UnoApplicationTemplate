@@ -22,15 +22,8 @@ namespace ApplicationTemplate
 		/// <returns><see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddNavigationCore(this IServiceCollection services)
 		{
-//-:cnd:noEmit
-#if NETFRAMEWORK
-//+:cnd:noEmit
-			services.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Login", "Home", "Posts", "Settings"));
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-
 			return services
+				.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Login", "Home", "Posts", "Settings"))
 				.AddSingleton<IStackNavigator>(s => new SectionsNavigatorToStackNavigatorAdapter(s.GetService<ISectionsNavigator>()))
 				.AddSingleton<IBackButtonManager>(s =>
 				{
