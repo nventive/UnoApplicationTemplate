@@ -76,13 +76,13 @@ namespace ApplicationTemplate
 
 		private static string GetContentRootPath()
 		{
-			//-:cnd:noEmit
+//-:cnd:noEmit
 #if WINDOWS_UWP || __ANDROID__ || __IOS__
 			return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
 			return string.Empty;
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 		}
 
 		private void ConfigureOrientation()

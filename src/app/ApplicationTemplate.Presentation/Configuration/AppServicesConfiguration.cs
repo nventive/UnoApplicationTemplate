@@ -34,7 +34,7 @@ namespace ApplicationTemplate
 		{
 			return services
 				.AddXamarinEssentials()
-				.AddMessageDialog()
+				.AddSingleton<IMessageDialogService, AcceptOrDefaultMessageDialogService>()
 				.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 				.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
 				.AddSingleton<IPostService, PostService>()
@@ -49,36 +49,7 @@ namespace ApplicationTemplate
 			return services
 				.AddSingleton<IDeviceInfo, DeviceInfoImplementation>()
 				.AddSingleton<IAppInfo, AppInfoImplementation>()
-//-:cnd:noEmit
-#if WINDOWS_UWP || __IOS__ || __ANDROID__
-//+:cnd:noEmit
-				.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
 				.AddSingleton<IEmail, EmailImplementation>();
-		}
-
-		private static IServiceCollection AddMessageDialog(this IServiceCollection services)
-		{
-			return services.AddSingleton<IMessageDialogService>(s =>
-//-:cnd:noEmit
-#if WINDOWS_UWP || __IOS__ || __ANDROID__
-//+:cnd:noEmit
-				new MessageDialogService.MessageDialogService(
-					() => s.GetRequiredService<Windows.UI.Core.CoreDispatcher>(),
-					new MessageDialogBuilderDelegate(
-						key => s.GetRequiredService<IStringLocalizer>()[key]
-					)
-				)
-//-:cnd:noEmit
-#else
-//+:cnd:noEmit
-				new AcceptOrDefaultMessageDialogService()
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-			);
 		}
 	}
 }
