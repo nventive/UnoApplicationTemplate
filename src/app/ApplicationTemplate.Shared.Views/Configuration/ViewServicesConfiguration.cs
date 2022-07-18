@@ -19,6 +19,7 @@ namespace ApplicationTemplate.Views
 					s.GetRequiredService<CoreDispatcher>(),
 					CoreDispatcherPriority.Normal
 				))
+				.AddSingleton<IViewModelViewFactory, FrameworkElementViewModelViewFactory>()
 				.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>();
 		}
 	}
