@@ -26,6 +26,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FrameworkElementExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableExtensions.cs" />

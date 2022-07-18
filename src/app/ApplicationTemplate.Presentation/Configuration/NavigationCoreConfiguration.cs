@@ -23,6 +23,7 @@ namespace ApplicationTemplate
 		public static IServiceCollection AddNavigationCore(this IServiceCollection services)
 		{
 			return services
+				.AddSingleton<IExtendedSplashscreenController, MockExtendedSplashscreenController>()
 				.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Login", "Home", "Posts", "Settings"))
 				.AddSingleton<IStackNavigator>(s => new SectionsNavigatorToStackNavigatorAdapter(s.GetService<ISectionsNavigator>()))
 				.AddSingleton<IBackButtonManager>(s =>

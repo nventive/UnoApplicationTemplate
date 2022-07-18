@@ -86,20 +86,8 @@ namespace ApplicationTemplate
 			{
 				await sectionsNavigator.Navigate(ct, () => new OnboardingPageViewModel());
 			}
-//-:cnd:noEmit
-#if __ANDROID__ || __IOS__ || WINDOWS_UWP
-//+:cnd:noEmit
-			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 
-			_ = dispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplashScreen);
-
-			void DismissSplashScreen() // Runs on UI thread
-			{
-				Shell.Instance.ExtendedSplashScreen.Dismiss();
-			}
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
+			services.GetRequiredService<IExtendedSplashscreenController>().Dismiss();
 		}
 
 		private void NotifyUserOnSessionExpired(IServiceProvider services)

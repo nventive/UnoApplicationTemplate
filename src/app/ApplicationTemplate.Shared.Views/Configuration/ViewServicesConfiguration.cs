@@ -18,7 +18,8 @@ namespace ApplicationTemplate.Views
 				.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
 					s.GetRequiredService<CoreDispatcher>(),
 					CoreDispatcherPriority.Normal
-				));
+				))
+				.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>();
 		}
 	}
 }
