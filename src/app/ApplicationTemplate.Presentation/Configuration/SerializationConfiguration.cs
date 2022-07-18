@@ -1,35 +1,33 @@
 ﻿using System;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using ApplicationTemplate;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
-using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
 
-// In case that you need to have ImmutableList<T> at the root for endpoint (to not have arrays in endpoint)
-// You need to add <IsImmutablesAtRootDisabled>0</IsImmutablesAtRootDisabled> in SerializationConfig.xml
-// This will enable the Immutables serializer and you will be able to register them here without compilation errors
-
-[assembly: JsonSerializationConfiguration(GenerateOnlyRegisteredTypes = true)]
-
-[assembly: JsonSerializableType(typeof(bool))]
-[assembly: JsonSerializableType(typeof(string))]
-[assembly: JsonSerializableType(typeof(string[]))]
-[assembly: JsonSerializableType(typeof(AuthenticationToken))]
-[assembly: JsonSerializableType(typeof(AuthenticationData))]
-[assembly: JsonSerializableType(typeof(ApplicationSettings))]
-[assembly: JsonSerializableType(typeof(Refit.ProblemDetails))]
-[assembly: JsonSerializableType(typeof(PostData))]
-[assembly: JsonSerializableType(typeof(PostData[]))]
-[assembly: JsonSerializableType(typeof(DadJokesResponse))]
-[assembly: JsonSerializableType(typeof(DadJokesErrorResponse))]
-[assembly: JsonSerializableType(typeof(UserProfileData))]
-[assembly: JsonSerializableType(typeof(DadJokesData))]
-[assembly: JsonSerializableType(typeof(DadJokeChildData))]
-[assembly: JsonSerializableType(typeof(DadJokeContentData))]
-
 namespace ApplicationTemplate
 {
+	//[JsonSerializable(typeof(bool))]
+	//[JsonSerializable(typeof(string))]
+	//[JsonSerializable(typeof(string[]))]
+	[JsonSerializable(typeof(AuthenticationToken))]
+	//[JsonSerializable(typeof(AuthenticationData))]
+	//[JsonSerializable(typeof(ApplicationSettings))]
+	[JsonSerializable(typeof(Refit.ProblemDetails))]
+	[JsonSerializable(typeof(PostData))]
+	[JsonSerializable(typeof(PostData[]))]
+	[JsonSerializable(typeof(DadJokesResponse))]
+	[JsonSerializable(typeof(DadJokesErrorResponse))]
+	[JsonSerializable(typeof(UserProfileData))]
+	[JsonSerializable(typeof(DadJokesData))]
+	[JsonSerializable(typeof(DadJokeChildData))]
+	[JsonSerializable(typeof(DadJokeContentData))]
+	public partial class JsonContext : JsonSerializerContext
+	{
+	}
+
 	/// <summary>
 	/// This class is used for serialization configuration.
 	/// - Configures the serializers.
@@ -43,35 +41,13 @@ namespace ApplicationTemplate
 		/// <returns><see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddSerialization(this IServiceCollection services)
 		{
-			SerializationGeneratorConfiguration.Initialize(serializerRegistry =>
-			{
-				// If you want to use a custom implementation of ISerializer,
-				// replace this with your implementation.
-				var customSerializer = default(ISerializer);
+			var options = new JsonSerializerOptions();
+			options.AddContext<JsonContext>();
 
-				var serializer = serializerRegistry(customSerializer);
-
-				services
-					.AddSingleton<ISerializer>(c => serializer)
-					.AddSingleton<IObjectSerializer>(c => serializer)
-					.AddSingleton<ISettingsSerializer>(c => new ObjectSerializerToSettingsSerializerAdapter(serializer));
-			});
+			services
+				.AddSingleton<ISettingsSerializer>(c => new JsonSerializerToSettingsSerializerAdapter(options));
 
 			return services;
 		}
-	}
-
-	/// <summary>
-	/// This class is used by the generated code from the static serializers.
-	/// Do not move or update without reasons.
-	/// </summary>
-	public partial class SerializationGeneratorConfiguration
-	{
-		public static void Initialize(Action<Func<ISerializer, ISerializer>> serializerRegistry)
-		{
-			InitSerializer(serializerRegistry);
-		}
-
-		static partial void InitSerializer(Action<Func<ISerializer, ISerializer>> serializerRegister);
 	}
 }

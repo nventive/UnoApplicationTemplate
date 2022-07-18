@@ -31,9 +31,11 @@ namespace ApplicationTemplate.Presentation
 
 		public PostData GetPost()
 		{
-			return _post
-				.WithTitle(Title)
-				.WithBody(Body);
+			return _post with
+			{
+				Title = Title,
+				Body = Body
+			};
 		}
 	}
 

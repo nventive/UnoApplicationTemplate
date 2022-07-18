@@ -4,7 +4,6 @@ using System.Reactive.Concurrency;
 using System.Text;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
-using GeneratedSerializers;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
 

@@ -8,7 +8,6 @@ using System.Threading.Tasks;
 using ApplicationTemplate;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
-using GeneratedSerializers;
 using MallardMessageHandlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -150,7 +149,7 @@ namespace ApplicationTemplate
 
 		private static IServiceCollection AddResponseContentDeserializer(this IServiceCollection services)
 		{
-			return services.AddSingleton<IResponseContentDeserializer, ObjectSerializerToResponseContentDeserializer>();
+			return services.AddSingleton<IResponseContentDeserializer, JsonSerializerToResponseContentSererializerAdapter>();
 		}
 
 		private static IServiceCollection AddNetworkExceptionHandler(this IServiceCollection services)

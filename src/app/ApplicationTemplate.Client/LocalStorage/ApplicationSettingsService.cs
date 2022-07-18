@@ -33,28 +33,29 @@ namespace ApplicationTemplate.Client
 		/// <inheritdoc />
 		public async Task CompleteOnboarding(CancellationToken ct)
 		{
-			await Update(ct, s => s.WithIsOnboardingCompleted(true));
+			await Update(ct, s => s with { IsOnboardingCompleted = true });
 		}
 
 		/// <inheritdoc />
 		public async Task SetAuthenticationData(CancellationToken ct, AuthenticationData authenticationData)
 		{
-			await Update(ct, s => s.WithAuthenticationData(authenticationData));
+			await Update(ct, s => s with { AuthenticationData = authenticationData });
 		}
 
 		/// <inheritdoc />
 		public async Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, FavoriteJokeData> quotes)
 		{
-			await Update(ct, s => s.WithFavoriteQuotes(quotes));
+			await Update(ct, s => s with { FavoriteQuotes = quotes });
 		}
 
 		/// <inheritdoc />
 		public async Task DiscardUserSettings(CancellationToken ct)
 		{
-			await Update(ct, s => s
-				.WithFavoriteQuotes(ImmutableDictionary<string, FavoriteJokeData>.Empty)
-				.WithAuthenticationData(default(AuthenticationData))
-			);
+			await Update(ct, s => s with
+			{
+				FavoriteQuotes = ImmutableDictionary<string, FavoriteJokeData>.Empty,
+				AuthenticationData = default(AuthenticationData)
+			});
 		}
 
 		private async Task Update(CancellationToken ct, Func<ApplicationSettings, ApplicationSettings> updateFunction)

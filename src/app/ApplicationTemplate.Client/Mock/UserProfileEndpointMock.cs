@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GeneratedSerializers;
 using MallardMessageHandlers;
 
 namespace ApplicationTemplate.Client
@@ -13,9 +13,9 @@ namespace ApplicationTemplate.Client
 		private readonly IAuthenticationTokenProvider<AuthenticationData> _tokenProvider;
 
 		public UserProfileEndpointMock(
-			IObjectSerializer serializer,
-			IAuthenticationTokenProvider<AuthenticationData> tokenProvider
-		) : base(serializer)
+			IAuthenticationTokenProvider<AuthenticationData> tokenProvider,
+			JsonSerializerOptions serializerOptions)
+			: base(serializerOptions)
 		{
 			_tokenProvider = tokenProvider ?? throw new ArgumentNullException(nameof(tokenProvider));
 		}

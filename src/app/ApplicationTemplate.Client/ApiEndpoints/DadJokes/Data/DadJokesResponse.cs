@@ -1,8 +1,5 @@
-﻿using Uno;
-
-namespace ApplicationTemplate.Client
+﻿namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
 	public partial class DadJokesResponse
 	{
 		public DadJokesResponse(DadJokesData data)

@@ -5,20 +5,18 @@ using Uno;
 
 namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
-	public partial class DadJokeContentData
+	public class DadJokeContentData
 	{
-		public DadJokeContentData(string id, string title, string selftext, int total_awards_received, string distinguished, bool isFavorite)
+		public DadJokeContentData(string id, string title, string selftext, int totalAwardsReceived, string distinguished, bool isFavorite)
 		{
 			Id = id;
 			Title = title;
 			Selftext = selftext;
-			TotalAwardsReceived = total_awards_received;
+			TotalAwardsReceived = totalAwardsReceived;
 			Distinguished = distinguished;
 			IsFavorite = isFavorite;
 		}
 
-		[EqualityKey]
 		public string Id { get; }
 
 		public string Title { get; }

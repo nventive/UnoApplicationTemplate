@@ -1,23 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GeneratedSerializers;
-using Uno;
+using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
-	public partial class PostData
+	public record PostData
 	{
-		[EqualityKey]
+		public PostData(long id, string title, string body, long userIdentifier)
+		{
+			Id = id;
+			Title = title;
+			Body = body;
+			UserIdentifier = userIdentifier;
+		}
+
 		public long Id { get; }
 
-		public string Title { get; }
+		public string Title { get; init; }
 
-		public string Body { get; }
+		public string Body { get; init; }
 
-		[SerializationProperty("UserId")]
-		public long UserIdentifier { get; }
+		[JsonPropertyName("UserId")]
+		public long UserIdentifier { get; init; }
 
 		public bool Exists => Id != 0;
 

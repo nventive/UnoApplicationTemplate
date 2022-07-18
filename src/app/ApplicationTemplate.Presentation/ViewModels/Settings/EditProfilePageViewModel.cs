@@ -25,9 +25,11 @@ namespace ApplicationTemplate.Presentation
 
 			if (validationResult.IsValid)
 			{
-				var updatedUserProfile = _userProfile
-					.WithFirstName(Form.FirstName)
-					.WithLastName(Form.LastName);
+				var updatedUserProfile = _userProfile with
+				{
+					FirstName = Form.FirstName,
+					LastName = Form.LastName
+				};
 
 				await this.GetService<IUserProfileService>().Update(ct, updatedUserProfile);
 

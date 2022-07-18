@@ -2,6 +2,7 @@
 
 	<PropertyGroup>
 		<TargetFramework>netstandard2.0</TargetFramework>
+		<LangVersion>9.0</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -24,6 +25,7 @@
 		<PackageReference Include="Chinook.SectionsNavigation" Version="0.7.0-dev.88" />
 		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.7.0-dev.88" />
 		<PackageReference Include="MessageDialogService" Version="0.5.0-dev.13" />
+		<PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
 	</ItemGroup>
 
 	<ItemGroup>

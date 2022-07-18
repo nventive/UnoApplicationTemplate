@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GeneratedSerializers;
 using Refit;
 
 namespace ApplicationTemplate.Client
 {
 	public class PostEndpointMock : BaseMock, IPostEndpoint
 	{
-		public PostEndpointMock(IObjectSerializer serializer)
-			: base(serializer)
+		public PostEndpointMock(JsonSerializerOptions serializerOptions)
+			: base(serializerOptions)
 		{
 		}
 

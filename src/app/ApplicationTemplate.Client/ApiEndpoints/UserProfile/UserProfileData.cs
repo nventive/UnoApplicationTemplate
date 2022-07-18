@@ -1,20 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Uno;
 
 namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
-	public partial class UserProfileData
+	public record UserProfileData
 	{
-		[EqualityKey]
+		public UserProfileData(string id, string firstName, string lastName, string email)
+		{
+			Id = id;
+			FirstName = firstName;
+			LastName = lastName;
+			Email = email;
+		}
+
 		public string Id { get; }
+				
+		public string FirstName { get; init; }
 
-		public string FirstName { get; }
+		public string LastName { get; init; }
 
-		public string LastName { get; }
-
-		public string Email { get; }
+		public string Email { get; init; }
 	}
 }

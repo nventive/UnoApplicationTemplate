@@ -2,20 +2,20 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GeneratedSerializers;
 using MallardMessageHandlers;
 
 namespace ApplicationTemplate
 {
-	public class ObjectSerializerToResponseContentDeserializer : IResponseContentDeserializer
+	public class JsonSerializerToResponseContentSererializerAdapter : IResponseContentDeserializer
 	{
-		private readonly IObjectSerializer _objectSerializer;
+		private readonly JsonSerializerOptions _serializerOptions;
 
-		public ObjectSerializerToResponseContentDeserializer(IObjectSerializer objectSerializer)
+		public JsonSerializerToResponseContentSererializerAdapter(JsonSerializerOptions serializerOptions)
 		{
-			_objectSerializer = objectSerializer ?? throw new ArgumentNullException(nameof(objectSerializer));
+			_serializerOptions = serializerOptions;
 		}
 
 		public async Task<TResponse> Deserialize<TResponse>(CancellationToken ct, HttpContent content)
@@ -27,7 +27,7 @@ namespace ApplicationTemplate
 
 			using (var stream = await content.ReadAsStreamAsync())
 			{
-				return (TResponse)_objectSerializer.FromStream(stream, typeof(TResponse));
+				return await JsonSerializer.DeserializeAsync<TResponse>(stream, _serializerOptions);
 			}
 		}
 	}

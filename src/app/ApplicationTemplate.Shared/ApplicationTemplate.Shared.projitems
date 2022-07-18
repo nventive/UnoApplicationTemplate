@@ -22,7 +22,6 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)ThirdPartySoftwareLicenses.txt" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.staging.json" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.development.json" />
-    <None Include="$(MSBuildThisFileDirectory)SerializationConfig.xml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)appsettings.json" />
   </ItemGroup>
   <ItemGroup>

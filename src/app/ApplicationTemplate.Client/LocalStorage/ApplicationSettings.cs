@@ -1,17 +1,27 @@
 ﻿using System;
 using System.Collections.Immutable;
-using Uno;
 
 namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
-	public partial class ApplicationSettings
+	public record ApplicationSettings
 	{
-		[EqualityHash]
-		public AuthenticationData AuthenticationData { get; }
+		public static ApplicationSettings Default { get; } = new ApplicationSettings();
 
-		public bool IsOnboardingCompleted { get; }
+		public ApplicationSettings()
+		{
+		}
 
-		public ImmutableDictionary<string, FavoriteJokeData> FavoriteQuotes { get; } = ImmutableDictionary<string, FavoriteJokeData>.Empty;
+		public ApplicationSettings(AuthenticationData authenticationData, bool isOnboardingCompleted, ImmutableDictionary<string, FavoriteJokeData> favoriteQuotes)
+		{
+			AuthenticationData = authenticationData;
+			IsOnboardingCompleted = isOnboardingCompleted;
+			FavoriteQuotes = favoriteQuotes;
+		}
+
+		public AuthenticationData AuthenticationData { get; init; }
+
+		public bool IsOnboardingCompleted { get; init; }
+
+		public ImmutableDictionary<string, FavoriteJokeData> FavoriteQuotes { get; init; } = ImmutableDictionary<string, FavoriteJokeData>.Empty;
 	}
 }

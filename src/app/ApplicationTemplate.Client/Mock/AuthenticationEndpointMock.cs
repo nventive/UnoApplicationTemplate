@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
-using GeneratedSerializers;
 
 namespace ApplicationTemplate.Client
 {
 	public class AuthenticationEndpointMock : IAuthenticationEndpoint
 	{
-		private readonly IObjectSerializer _serializer;
+		private readonly JsonSerializerOptions _serializerOptions;
 
-		public AuthenticationEndpointMock(IObjectSerializer serializer)
+		public AuthenticationEndpointMock(JsonSerializerOptions serializerOptions)
 		{
-			_serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
+			_serializerOptions = serializerOptions;
 		}
 
 		public async Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password)
@@ -57,9 +57,9 @@ namespace ApplicationTemplate.Client
 		private AuthenticationData CreateAuthenticationData(AuthenticationToken token = null, TimeSpan? timeToLive = null)
 		{
 			var encodedJwt = CreateJsonWebToken(token, timeToLive);
-			var jwt = new JwtData<AuthenticationToken>(encodedJwt, _serializer);
+			var jwt = new JwtData<AuthenticationToken>(encodedJwt, _serializerOptions);
 
-			return new AuthenticationData.Builder
+			return new AuthenticationData()
 			{
 				AccessToken = jwt,
 				RefreshToken = Guid.NewGuid().ToString(format: null, CultureInfo.InvariantCulture),
@@ -74,14 +74,16 @@ namespace ApplicationTemplate.Client
 
 			var now = DateTimeOffset.Now;
 
-			token = (token ?? AuthenticationToken.Default)
-				.WithExpiration(now + (timeToLive ?? TimeSpan.FromMinutes(10)))
-				.WithIssuedAt(now);
+			token = (token ?? AuthenticationToken.Default) with
+			{
+				Expiration = now + (timeToLive ?? TimeSpan.FromMinutes(10)),
+				IssuedAt = now
+			};
 
 			string payload;
 			using (var stream = new MemoryStream())
 			{
-				_serializer.WriteToStream(token, typeof(AuthenticationToken), stream, canDisposeStream: false);
+				JsonSerializer.Serialize(stream, token, _serializerOptions);
 				payload = Convert.ToBase64String(stream.ToArray());
 			}
 

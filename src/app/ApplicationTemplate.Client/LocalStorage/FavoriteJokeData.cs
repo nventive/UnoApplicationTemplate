@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using Uno;
 
 namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
-	public partial class FavoriteJokeData
+	public class FavoriteJokeData
 	{
 		public FavoriteJokeData(string id, string title, string selftext, int totalAwardsReceived, string distinguished)
 		{
@@ -17,7 +15,6 @@ namespace ApplicationTemplate.Client
 			Distinguished = distinguished;
 		}
 
-		[EqualityKey]
 		public string Id { get; }
 
 		public string Title { get; }

@@ -1,29 +1,26 @@
 ﻿using System;
-using GeneratedSerializers;
+using System.Text.Json.Serialization;
 using MallardMessageHandlers;
-using Uno;
 
 namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
-	public partial class AuthenticationData : IAuthenticationToken
+	public class AuthenticationData : IAuthenticationToken
 	{
-		[EqualityHash]
-		[SerializationProperty("access_token")]
-		public JwtData<AuthenticationToken> AccessToken { get; }
+		[JsonPropertyName("access_token")]
+		[JsonConverter(typeof(JwtDataJsonConverter<AuthenticationToken>))]
+		public JwtData<AuthenticationToken> AccessToken { get; init; }
 
-		[SerializationProperty("refresh_token")]
-		public string RefreshToken { get; }
+		[JsonPropertyName("refresh_token")]
+		public string RefreshToken { get; init; }
 
-		public DateTimeOffset? Expiration { get; }
+		public DateTimeOffset? Expiration { get; init; }
 
-		[EqualityKey]
 		public string Email => AccessToken?.Payload?.Email;
 
-		[SerializationIgnore]
+		[JsonIgnore]
 		public bool CanBeRefreshed => !string.IsNullOrEmpty(RefreshToken);
 
-		[SerializationIgnore]
+		[JsonIgnore]
 		string IAuthenticationToken.AccessToken => AccessToken?.Token;
 	}
 }

@@ -5,18 +5,18 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
-using GeneratedSerializers;
 
 namespace ApplicationTemplate
 {
 	public class BaseMock
 	{
-		private readonly IObjectSerializer _serializer;
+		private readonly JsonSerializerOptions _serializerOptions;
 
-		public BaseMock(IObjectSerializer serializer)
+		public BaseMock(JsonSerializerOptions serializerOptions)
 		{
-			_serializer = serializer ?? throw new ArgumentNullException(nameof(serializer));
+			_serializerOptions = serializerOptions;
 		}
 
 		/// <summary>
@@ -24,7 +24,6 @@ namespace ApplicationTemplate
 		/// </summary>
 		/// <typeparam name="T">Type of value</typeparam>
 		/// <param name="resourceName">Name of the resource</param>
-		/// <param name="serializer">Object serializer</param>
 		/// <param name="callerMemberName">Caller member name</param>
 		/// <returns>Deserialized value</returns>
 		/// <remarks>
@@ -35,7 +34,6 @@ namespace ApplicationTemplate
 		[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "Not available for Desktop")]
 		protected T GetFromEmbeddedResource<T>(
 			string resourceName = null,
-			IObjectSerializer serializer = null,
 			[CallerMemberName] string callerMemberName = null)
 		{
 			var assembly = GetType().GetTypeInfo().Assembly;
@@ -55,7 +53,7 @@ namespace ApplicationTemplate
 
 			using (var stream = assembly.GetManifestResourceStream(actualResourceName))
 			{
-				return (T)(serializer ?? _serializer).FromStream(stream, typeof(T));
+				return JsonSerializer.Deserialize<T>(stream, _serializerOptions);
 			}
 		}
 
@@ -69,13 +67,11 @@ namespace ApplicationTemplate
 		/// </remarks>
 		/// <typeparam name="T">Type of object</typeparam>
 		/// <param name="resourceName">Name of the resource</param>
-		/// <param name="serializer">Deserializer</param>
 		/// <param name="callerMemberName">Name of the caller (used if no resource name provided)</param>
 		/// <returns>Deserialized object</returns>
 		protected Task<T> GetTaskFromEmbeddedResource<T>(
 			string resourceName = null,
-			IObjectSerializer serializer = null,
 			[CallerMemberName] string callerMemberName = null
-		) => Task.FromResult(GetFromEmbeddedResource<T>(resourceName, serializer, callerMemberName));
+		) => Task.FromResult(GetFromEmbeddedResource<T>(resourceName, callerMemberName));
 	}
 }

@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using GeneratedSerializers;
-using Uno;
+using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.Client
 {
-	[GeneratedImmutable]
 	public partial class DadJokesData
 	{
 		public DadJokesData(DadJokeChildData[] children)
@@ -14,8 +12,7 @@ namespace ApplicationTemplate.Client
 			Children = children;
 		}
 
-		[EqualityHash]
-		[SerializationProperty("children")]
+		[JsonPropertyName("children")]
 		public DadJokeChildData[] Children { get; }
 	}
 }
