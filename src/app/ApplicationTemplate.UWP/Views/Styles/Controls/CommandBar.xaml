@@ -118,8 +118,10 @@
 				Value="{ThemeResource AlternateBackgroundBrush}" />
 		<Setter Property="Foreground"
 				Value="{ThemeResource AlternateOnBackgroundBrush}" />
-		<android:Setter Property="Height"
-						Value="100" />
+		<Setter Property="Height"
+				Value="NaN" />
+		<Setter Property="toolkit:VisibleBoundsPadding.PaddingMask"
+				Value="Top" />
 	</Style>
 
 	<Style x:Key="TransparentCommandBarStyle"
