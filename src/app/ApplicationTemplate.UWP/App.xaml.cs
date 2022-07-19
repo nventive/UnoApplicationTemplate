@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using ApplicationTemplate.Views;
 using Chinook.SectionsNavigation;
@@ -56,7 +57,7 @@ namespace ApplicationTemplate
 				ConfigureViewSize();
 				ConfigureStatusBar();
 
-				Startup.Initialize(GetContentRootPath());
+				Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath());
 
 #if (IncludeFirebaseAnalytics)
 				ConfigureFirebase();
@@ -83,6 +84,27 @@ namespace ApplicationTemplate
 			return string.Empty;
 #endif
 //+:cnd:noEmit
+		}
+
+		private static string GetSettingsFolderPath()
+		{
+//-:cnd:noEmit
+#if WINDOWS_UWP
+//+:cnd:noEmit
+			var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
+//-:cnd:noEmit
+#elif __ANDROID__ || __IOS__
+//+:cnd:noEmit
+			var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+//-:cnd:noEmit
+#else
+//+:cnd:noEmit
+			var folderPath = string.Empty;
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
+
+			return folderPath;
 		}
 
 		private void ConfigureOrientation()

@@ -36,7 +36,7 @@ namespace ApplicationTemplate
 #endif
 //+:cnd:noEmit
 
-		public static IHostBuilder AddAppSettings(this IHostBuilder hostBuilder)
+		public static IHostBuilder AddAppSettings(this IHostBuilder hostBuilder, string folderPath)
 		{
 			if (hostBuilder is null)
 			{
@@ -47,7 +47,7 @@ namespace ApplicationTemplate
 				.AddConfiguration()
 				.ConfigureHostConfiguration(b => b
 					.AddGeneralAppSettings()
-					.AddEnvironmentAppSettings()
+					.AddEnvironmentAppSettings(folderPath)
 				);
 		}
 
@@ -64,9 +64,9 @@ namespace ApplicationTemplate
 			return configurationBuilder;
 		}
 
-		private static IConfigurationBuilder AddEnvironmentAppSettings(this IConfigurationBuilder configurationBuilder)
+		private static IConfigurationBuilder AddEnvironmentAppSettings(this IConfigurationBuilder configurationBuilder, string folderPath)
 		{
-			var currentEnvironment = AppEnvironment.GetCurrent();
+			var currentEnvironment = AppEnvironment.GetCurrent(folderPath);
 			var environmentAppSettingsFileName = $"{AppSettingsFileName}.{currentEnvironment}.json";
 			var environmentAppSettings = AppSettings.GetAll().SingleOrDefault(s => s.FileName.EndsWith(environmentAppSettingsFileName, StringComparison.OrdinalIgnoreCase));
 
@@ -98,11 +98,11 @@ namespace ApplicationTemplate
 			/// Gets the current environment.
 			/// </summary>
 			/// <returns>Current environment</returns>
-			public static string GetCurrent()
+			public static string GetCurrent(string folderPath)
 			{
 				if (_currentEnvironment == null)
 				{
-					var filePath = GetSettingFilePath();
+					var filePath = GetSettingFilePath(folderPath);
 
 					_currentEnvironment = File.Exists(filePath)
 						? File.ReadAllText(filePath)
@@ -116,7 +116,7 @@ namespace ApplicationTemplate
 			/// Sets the current environment to <paramref name="environment"/>.
 			/// </summary>
 			/// <param name="environment">Environment</param>
-			public static void SetCurrent(string environment)
+			public static void SetCurrent(string folderPath, string environment)
 			{
 				if (environment == null)
 				{
@@ -132,7 +132,7 @@ namespace ApplicationTemplate
 					throw new InvalidOperationException($"Environment '{environment}' is unknown and cannot be set.");
 				}
 
-				using (var writer = File.CreateText(GetSettingFilePath()))
+				using (var writer = File.CreateText(GetSettingFilePath(folderPath)))
 				{
 					writer.Write(environment);
 				}
@@ -159,24 +159,8 @@ namespace ApplicationTemplate
 				return environmentsFromAppSettings;
 			}
 
-			private static string GetSettingFilePath()
+			private static string GetSettingFilePath(string folderPath)
 			{
-//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-				var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
-//-:cnd:noEmit
-#elif __ANDROID__ || __IOS__
-//+:cnd:noEmit
-				var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-//-:cnd:noEmit
-#else
-//+:cnd:noEmit
-				var folderPath = string.Empty;
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-
 				return Path.Combine(folderPath, "environment");
 			}
 		}

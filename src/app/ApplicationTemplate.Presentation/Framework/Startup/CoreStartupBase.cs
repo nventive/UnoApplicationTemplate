@@ -53,7 +53,7 @@ namespace ApplicationTemplate
 		/// </summary>
 		/// <param name="contentRootPath">Specifies the content root directory to be used by the host.</param>
 		/// <param name="extraHostConfiguration">Extra host configuration</param>
-		public void Initialize(string contentRootPath, Action<IHostBuilder> extraHostConfiguration = null)
+		public void Initialize(string contentRootPath, string settingsFolderPath, Action<IHostBuilder> extraHostConfiguration = null)
 		{
 			if (State.IsInitialized)
 			{
@@ -67,14 +67,15 @@ namespace ApplicationTemplate
 
 			BuildCoreHostActivity.Start();
 
-			Logger = CreateHostLogger(contentRootPath);
+			Logger = CreateHostLogger(contentRootPath, settingsFolderPath);
 
 			BuildCoreHostActivity.Stop();
 
 			BuildHostActivity.Start();
 
 			var hostBuilder = InitializeServices(new HostBuilder()
-				.UseContentRoot(contentRootPath)
+				.UseContentRoot(contentRootPath),
+				settingsFolderPath
 			);
 
 			extraHostConfiguration?.Invoke(hostBuilder);
@@ -104,7 +105,7 @@ namespace ApplicationTemplate
 		/// </summary>
 		/// <param name="hostBuilder">The hostbuilder in which services must be added.</param>
 		/// <returns>The original host builder with the new services added.</returns>
-		protected abstract IHostBuilder InitializeServices(IHostBuilder hostBuilder);
+		protected abstract IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath);
 
 		/// <summary>
 		/// This method will be called once the app is initialized.
@@ -153,11 +154,11 @@ namespace ApplicationTemplate
 		/// <returns>Task that completes when the services are started.</returns>
 		protected abstract Task StartServices(IServiceProvider services, bool isFirstStart);
 
-		private ILogger CreateHostLogger(string contentRootPath)
+		private ILogger CreateHostLogger(string contentRootPath, string settingsFolderPath)
 		{
 			var coreHost = new HostBuilder()
 				.UseContentRoot(contentRootPath)
-				.AddAppSettings()
+				.AddAppSettings(settingsFolderPath)
 				.AddHostLogging()
 				.Build();
 

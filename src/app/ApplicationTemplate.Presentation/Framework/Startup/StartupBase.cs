@@ -61,7 +61,7 @@ namespace ApplicationTemplate
 		/// Initializes the application.
 		/// </summary>
 		/// <param name="contentRootPath">Specifies the content root directory to be used by the host.</param>
-		public void Initialize(string contentRootPath)
+		public void Initialize(string contentRootPath, string settingsFolderPath)
 		{
 			if (State.IsInitialized)
 			{
@@ -75,7 +75,7 @@ namespace ApplicationTemplate
 
 			InitializeActivity.Start();
 
-			CoreStartup.Initialize(contentRootPath, InitializeViewServices);
+			CoreStartup.Initialize(contentRootPath, settingsFolderPath, InitializeViewServices);
 
 			Logger = GetOrCreateLogger(ServiceProvider);
 

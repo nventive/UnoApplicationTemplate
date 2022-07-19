@@ -27,11 +27,11 @@ namespace ApplicationTemplate
 		{
 		}
 
-		protected override IHostBuilder InitializeServices(IHostBuilder hostBuilder)
+		protected override IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath)
 		{
 			return hostBuilder
 				.AddAppLogging()
-				.AddAppSettings()
+				.AddAppSettings(settingsFolderPath)
 				.AddServices();
 		}
 
