@@ -29,6 +29,7 @@ namespace ApplicationTemplate.Views
 					.AddNavigation()
 					.AddViewServices()
 					.AddApi()
+					.AddPersistence()
 				);
 		}
 	}

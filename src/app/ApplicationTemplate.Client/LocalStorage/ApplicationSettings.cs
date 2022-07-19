@@ -7,15 +7,14 @@ namespace ApplicationTemplate.Client
 	{
 		public static ApplicationSettings Default { get; } = new ApplicationSettings();
 
-		public ApplicationSettings()
-		{
-		}
-
-		public ApplicationSettings(AuthenticationData authenticationData, bool isOnboardingCompleted, ImmutableDictionary<string, FavoriteJokeData> favoriteQuotes)
+		public ApplicationSettings(
+			AuthenticationData authenticationData = null,
+			bool isOnboardingCompleted = false,
+			ImmutableDictionary<string, FavoriteJokeData> favoriteQuotes = null)
 		{
 			AuthenticationData = authenticationData;
 			IsOnboardingCompleted = isOnboardingCompleted;
-			FavoriteQuotes = favoriteQuotes;
+			FavoriteQuotes = favoriteQuotes ?? ImmutableDictionary<string, FavoriteJokeData>.Empty;
 		}
 
 		public AuthenticationData AuthenticationData { get; init; }

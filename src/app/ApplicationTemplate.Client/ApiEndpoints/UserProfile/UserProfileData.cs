@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.Client
 {
@@ -14,8 +15,9 @@ namespace ApplicationTemplate.Client
 			Email = email;
 		}
 
+		[JsonConverter(typeof(StringJsonConverter))]
 		public string Id { get; }
-				
+
 		public string FirstName { get; init; }
 
 		public string LastName { get; init; }

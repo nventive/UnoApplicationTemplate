@@ -51,7 +51,7 @@ namespace ApplicationTemplate.Client
 			// We add a delay to simulate a long API call
 			await Task.Delay(TimeSpan.FromSeconds(2));
 
-			return CreateAuthenticationData(unauthorizedToken.AccessToken.Payload);
+			return CreateAuthenticationData(unauthorizedToken.AccessTokenPayload);
 		}
 
 		private AuthenticationData CreateAuthenticationData(AuthenticationToken token = null, TimeSpan? timeToLive = null)
@@ -61,7 +61,7 @@ namespace ApplicationTemplate.Client
 
 			return new AuthenticationData()
 			{
-				AccessToken = jwt,
+				AccessToken = jwt.Token,
 				RefreshToken = Guid.NewGuid().ToString(format: null, CultureInfo.InvariantCulture),
 				Expiration = jwt.Payload.Expiration,
 			};

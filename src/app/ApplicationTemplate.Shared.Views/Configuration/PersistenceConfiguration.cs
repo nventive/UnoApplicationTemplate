@@ -31,23 +31,31 @@ namespace ApplicationTemplate.Views
 //-:cnd:noEmit
 #if __ANDROID__
 //+:cnd:noEmit
-			return new KeyStoreSettingsStorage(
-				services.GetRequiredService<ISettingsSerializer>(),
-				Uno.UI.ContextHelper.Current.GetFileStreamPath(typeof(T).Name).AbsolutePath
-			).ToDataPersister<T>(typeof(T).Name);
-			//-:cnd:noEmit
+			return new SettingsStorageObservableDataPersisterAdapter<T>(
+				storage: new KeyStoreSettingsStorage(
+					services.GetRequiredService<ISettingsSerializer>(),
+					Uno.UI.ContextHelper.Current.GetFileStreamPath(typeof(T).Name).AbsolutePath
+				),
+				key: typeof(T).Name,
+				comparer: null,
+				concurrencyProtection: false
+			);
+//-:cnd:noEmit
 #elif __IOS__
 //+:cnd:noEmit
-			return new KeychainSettingsStorage(
-				services.GetRequiredService<ISettingsSerializer>()
-			).ToDataPersister<T>(typeof(T).Name);
+			return new SettingsStorageObservableDataPersisterAdapter<T>(
+				storage: new KeychainSettingsStorage(services.GetRequiredService<ISettingsSerializer>()),
+				key: typeof(T).Name,
+				comparer: null,
+				concurrencyProtection: false
+			);
 //-:cnd:noEmit
 #else
 //+:cnd:noEmit
 			return CreateDataPersister(services, defaultValue);
 //-:cnd:noEmit
 #endif
-			//+:cnd:noEmit
+//+:cnd:noEmit
 		}
 
 		private static IObservableDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))

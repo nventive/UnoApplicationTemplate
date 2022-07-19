@@ -9,12 +9,9 @@ using Nventive.Persistence;
 
 namespace ApplicationTemplate
 {
-	//[JsonSerializable(typeof(bool))]
-	//[JsonSerializable(typeof(string))]
-	//[JsonSerializable(typeof(string[]))]
 	[JsonSerializable(typeof(AuthenticationToken))]
-	//[JsonSerializable(typeof(AuthenticationData))]
-	//[JsonSerializable(typeof(ApplicationSettings))]
+	[JsonSerializable(typeof(AuthenticationData))]
+	[JsonSerializable(typeof(ApplicationSettings))]
 	[JsonSerializable(typeof(Refit.ProblemDetails))]
 	[JsonSerializable(typeof(PostData))]
 	[JsonSerializable(typeof(PostData[]))]
@@ -41,7 +38,13 @@ namespace ApplicationTemplate
 		/// <returns><see cref="IServiceCollection"/>.</returns>
 		public static IServiceCollection AddSerialization(this IServiceCollection services)
 		{
-			var options = new JsonSerializerOptions();
+			// These options allow some more cases than just the default.
+			var options = new JsonSerializerOptions
+			{
+				AllowTrailingCommas = true,
+				NumberHandling = JsonNumberHandling.AllowReadingFromString,
+				PropertyNameCaseInsensitive = true,
+			};
 			options.AddContext<JsonContext>();
 
 			services
