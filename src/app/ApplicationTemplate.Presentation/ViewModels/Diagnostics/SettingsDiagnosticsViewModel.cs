@@ -5,6 +5,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Presentation
@@ -22,7 +23,7 @@ namespace ApplicationTemplate.Presentation
 
 		public bool IsDiagnosticsOverlayEnabled
 		{
-			get => this.Get(initialValue: DiagnosticsConfiguration.DiagnosticsOverlay.GetIsEnabled());
+			get => this.Get(initialValue: this.GetOptionsValue<DiagnosticsOptions>().IsDiagnosticsOverlayEnabled);
 			set => this.Set(value);
 		}
 
@@ -30,40 +31,40 @@ namespace ApplicationTemplate.Presentation
 		{
 			throw new NotImplementedException();
 
-//			var localFolder = ApplicationData.Current.LocalFolder;
+			//			var localFolder = ApplicationData.Current.LocalFolder;
 
-//			this.GetService<IDispatcherScheduler>().ScheduleTask(async (ct2, s) =>
-//			{
-////-:cnd:noEmit
-//#if WINDOWS_UWP
-////+:cnd:noEmit
-//				await Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
-////-:cnd:noEmit
-//#endif
-////+:cnd:noEmit
-//			});
+			//			this.GetService<IDispatcherScheduler>().ScheduleTask(async (ct2, s) =>
+			//			{
+			////-:cnd:noEmit
+			//#if WINDOWS_UWP
+			////+:cnd:noEmit
+			//				await Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
+			////-:cnd:noEmit
+			//#endif
+			////+:cnd:noEmit
+			//			});
 		});
 
 		public bool CanOpenSettingsFolder { get; } =
-//-:cnd:noEmit
+			//-:cnd:noEmit
 #if WINDOWS_UWP
 //+:cnd:noEmit
 			true;
 //-:cnd:noEmit
 #else
-//+:cnd:noEmit
+			//+:cnd:noEmit
 			false;
-//-:cnd:noEmit
+		//-:cnd:noEmit
 #endif
-//+:cnd:noEmit
+		//+:cnd:noEmit
 
 		private async Task OnDiagnosticsOverlayChanged(CancellationToken ct, bool isEnabled)
 		{
-			var isCurrentlyEnabled = DiagnosticsConfiguration.DiagnosticsOverlay.GetIsEnabled();
+			var isCurrentlyEnabled = this.GetOptionsValue<DiagnosticsOptions>().IsDiagnosticsOverlayEnabled;
 
 			this.GetService<ILogger<SettingsDiagnosticsViewModel>>().LogInformation("{isEnabled} diagnostics overlay.", isEnabled ? "Enabling" : "Disabling");
 
-			DiagnosticsConfiguration.DiagnosticsOverlay.SetIsEnabled(isEnabled);
+			this.GetService<IConfiguration>()["Diagnostics:IsDiagnosticsOverlayEnabled"] = isEnabled.ToString();
 
 			if (isCurrentlyEnabled != isEnabled)
 			{

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using ApplicationTemplate;
@@ -21,6 +22,7 @@ namespace ApplicationTemplate
 	[JsonSerializable(typeof(DadJokesData))]
 	[JsonSerializable(typeof(DadJokeChildData))]
 	[JsonSerializable(typeof(DadJokeContentData))]
+	[JsonSerializable(typeof(Dictionary<string, string>))]
 	public partial class JsonContext : JsonSerializerContext
 	{
 	}
@@ -31,12 +33,9 @@ namespace ApplicationTemplate
 	/// </summary>
 	public static class SerializationConfiguration
 	{
-		/// <summary>
-		/// Adds the serialization services to the <see cref="IServiceCollection"/>.
-		/// </summary>
-		/// <param name="services">Service collection.</param>
-		/// <returns><see cref="IServiceCollection"/>.</returns>
-		public static IServiceCollection AddSerialization(this IServiceCollection services)
+		public static JsonSerializerOptions DefaultJsonSerializerOptions { get; } = GetDefaultOptions();
+
+		private static JsonSerializerOptions GetDefaultOptions()
 		{
 			// These options allow some more cases than just the default.
 			var options = new JsonSerializerOptions
@@ -47,9 +46,19 @@ namespace ApplicationTemplate
 			};
 			options.AddContext<JsonContext>();
 
+			return options;
+		}
+
+		/// <summary>
+		/// Adds the serialization services to the <see cref="IServiceCollection"/>.
+		/// </summary>
+		/// <param name="services">Service collection.</param>
+		/// <returns><see cref="IServiceCollection"/>.</returns>
+		public static IServiceCollection AddSerialization(this IServiceCollection services)
+		{
 			services
-				.AddSingleton(options)
-				.AddSingleton<ISettingsSerializer>(c => new JsonSerializerToSettingsSerializerAdapter(options));
+				.AddSingleton(DefaultJsonSerializerOptions)
+				.AddSingleton<ISettingsSerializer>(c => new JsonSerializerToSettingsSerializerAdapter(DefaultJsonSerializerOptions));
 
 			return services;
 		}

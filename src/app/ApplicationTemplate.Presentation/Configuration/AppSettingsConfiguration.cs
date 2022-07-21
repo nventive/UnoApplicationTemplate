@@ -1,16 +1,111 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging.Abstractions;
+using Uno.Extensions;
 
 namespace ApplicationTemplate
 {
+	/// <summary>
+	/// This implementation of <see cref="JsonConfigurationProvider"/> overrides its file when <see cref="Set(string, string)"/> is called.
+	/// </summary>
+	public class WritableJsonConfigurationProvider : JsonConfigurationProvider
+	{
+		private ILogger _logger;
+
+		public WritableJsonConfigurationProvider(JsonConfigurationSource source, ILogger logger) : base(source)
+		{
+			_logger = logger;
+		}
+
+		public override void Set(string key, string value)
+		{
+			base.Set(key, value);
+
+			var filePath = Source.FileProvider.GetFileInfo(Source.Path).PhysicalPath;
+			var stopwatch = new Stopwatch();
+
+			using (var writer = File.CreateText(filePath))
+			{
+				try
+				{
+					stopwatch.Start();
+					var json = JsonSerializer.Serialize(Data, options: SerializationConfiguration.DefaultJsonSerializerOptions);
+					stopwatch.Stop();
+					writer.Write(json);
+				}
+				catch
+				{
+					stopwatch.Stop();
+					if (writer.BaseStream.Position == 0)
+					{
+						writer.Dispose();
+						// Don't keep the file if it's empty because it won't load properly on next launch.
+						File.Delete(filePath);
+					}
+					throw;
+				}
+			}
+
+			_logger.LogDebug("Serialized ­­­­{PairCount} key-value-pairs in {ElapsedMilliseconds}ms.", Data.Count, stopwatch.ElapsedMilliseconds);
+
+			OnReload();
+		}
+	}
+
+	public class WritableJsonConfigurationSource : IConfigurationSource
+	{
+		public WritableJsonConfigurationSource(string filePath)
+		{
+			FilePath = filePath;
+		}
+
+		public string FilePath { get; }
+
+		public IConfigurationProvider Build(IConfigurationBuilder builder)
+		{
+			builder.Properties.TryGetValue("HostLoggerFactory", out var value);
+			var factory = value as ILoggerFactory;
+			var logger = NullLogger.Instance as ILogger;
+			if (factory != null)
+			{
+				logger = factory.CreateLogger<WritableJsonConfigurationProvider>();
+			}
+
+			return new WritableJsonConfigurationProvider(GetSource(FilePath, builder), logger);
+		}
+
+		private static JsonConfigurationSource GetSource(string filePath, IConfigurationBuilder builder)
+		{
+			var source = new JsonConfigurationSource()
+			{
+				Path = filePath,
+
+				// We disable ReloadOnChange because we reload manually after saving the file.
+				ReloadOnChange = false,
+
+				// It's optional because it doesn't exists for as long as we don't override a value.
+				Optional = true,
+			};
+
+			source.ResolveFileProvider();
+			source.EnsureDefaults(builder);
+
+			return source;
+		}
+	}
+
 	/// <summary>
 	/// This class is used for app settings configuration.
 	/// - Loads the environment specific app settings.
@@ -48,6 +143,7 @@ namespace ApplicationTemplate
 				.ConfigureHostConfiguration(b => b
 					.AddGeneralAppSettings()
 					.AddEnvironmentAppSettings(folderPath)
+					.Add(new WritableJsonConfigurationSource(Path.Combine(folderPath, AppSettingsFileName + ".override.json")))
 				);
 		}
 

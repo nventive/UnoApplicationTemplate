@@ -46,9 +46,9 @@ namespace ApplicationTemplate
 				throw new InvalidOperationException($"You shouldn't call {nameof(PreInitialize)} more than once.");
 			}
 
-			PreInitializeServices();
-
 			PreInitializeActivity.Start();
+
+			PreInitializeServices();
 
 			CoreStartup.PreInitialize();
 

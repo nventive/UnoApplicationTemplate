@@ -67,14 +67,20 @@ namespace ApplicationTemplate
 
 			BuildCoreHostActivity.Start();
 
-			Logger = CreateHostLogger(contentRootPath, settingsFolderPath);
+			// We use 2 hosts. The first one is used during the setup of the second.
+			// The first one is mainly used to setup loggers to debug the initialization code.
+
+			var hostServices = CreateHostServices(contentRootPath, settingsFolderPath);
+			Logger = GetOrCreateLogger(hostServices);
 
 			BuildCoreHostActivity.Stop();
 
 			BuildHostActivity.Start();
 
 			var hostBuilder = InitializeServices(new HostBuilder()
-				.UseContentRoot(contentRootPath),
+				.UseContentRoot(contentRootPath)
+				// We add the LoggerFactory so that the configuration providers can use loggers.
+				.ConfigureHostConfiguration(b => b.Properties["HostLoggerFactory"] = hostServices.GetService<ILoggerFactory>()),
 				settingsFolderPath
 			);
 
@@ -154,7 +160,7 @@ namespace ApplicationTemplate
 		/// <returns>Task that completes when the services are started.</returns>
 		protected abstract Task StartServices(IServiceProvider services, bool isFirstStart);
 
-		private ILogger CreateHostLogger(string contentRootPath, string settingsFolderPath)
+		private IServiceProvider CreateHostServices(string contentRootPath, string settingsFolderPath)
 		{
 			var coreHost = new HostBuilder()
 				.UseContentRoot(contentRootPath)
@@ -162,7 +168,7 @@ namespace ApplicationTemplate
 				.AddHostLogging()
 				.Build();
 
-			return GetOrCreateLogger(coreHost.Services);
+			return coreHost.Services;
 		}
 	}
 }

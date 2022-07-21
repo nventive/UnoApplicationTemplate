@@ -23,6 +23,7 @@ namespace ApplicationTemplate
 
 			return hostBuilder.ConfigureServices((context, s) => s
 					.AddApi(context.Configuration)
+					.AddDiagnostics(context.Configuration)
 					.AddMvvm()
 					.AddPersistence()
 					.AddNavigationCore()

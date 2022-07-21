@@ -18,4 +18,6 @@
 	<assembly fullname="ApplicationTemplate.Client" />
 	<assembly fullname="ApplicationTemplate.Business" />
 	<assembly fullname="ApplicationTemplate.Presentation" />
+
+	<assembly fullname="System.Text.Json" />
 </linker>
