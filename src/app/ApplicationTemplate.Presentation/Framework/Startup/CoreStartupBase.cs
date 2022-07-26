@@ -53,7 +53,11 @@ namespace ApplicationTemplate
 		/// </summary>
 		/// <param name="contentRootPath">Specifies the content root directory to be used by the host.</param>
 		/// <param name="extraHostConfiguration">Extra host configuration</param>
-		public void Initialize(string contentRootPath, string settingsFolderPath, Action<IHostBuilder> extraHostConfiguration = null)
+		public void Initialize(
+			string contentRootPath,
+			string settingsFolderPath,
+			LoggingConfigurator loggingConfiguration = null,
+			Action<IHostBuilder> extraHostConfiguration = null)
 		{
 			if (State.IsInitialized)
 			{
@@ -70,7 +74,7 @@ namespace ApplicationTemplate
 			// We use 2 hosts. The first one is used during the setup of the second.
 			// The first one is mainly used to setup loggers to debug the initialization code.
 
-			var hostServices = CreateHostServices(contentRootPath, settingsFolderPath);
+			var hostServices = CreateHostServices(contentRootPath, settingsFolderPath, loggingConfiguration);
 			Logger = GetOrCreateLogger(hostServices);
 
 			BuildCoreHostActivity.Stop();
@@ -79,6 +83,11 @@ namespace ApplicationTemplate
 
 			var hostBuilder = InitializeServices(new HostBuilder()
 				.UseContentRoot(contentRootPath)
+				.ConfigureLogging((hostBuilderContext, loggingBuilder) =>
+				{
+					loggingConfiguration(hostBuilderContext, loggingBuilder, isAppLogging: true);
+					loggingBuilder.Services.BindOptionsToConfiguration<LoggingOutputOptions>(hostBuilderContext.Configuration);
+				})
 				// We add the LoggerFactory so that the configuration providers can use loggers.
 				.ConfigureHostConfiguration(b => b.Properties["HostLoggerFactory"] = hostServices.GetService<ILoggerFactory>()),
 				settingsFolderPath
@@ -160,15 +169,20 @@ namespace ApplicationTemplate
 		/// <returns>Task that completes when the services are started.</returns>
 		protected abstract Task StartServices(IServiceProvider services, bool isFirstStart);
 
-		private IServiceProvider CreateHostServices(string contentRootPath, string settingsFolderPath)
+		private IServiceProvider CreateHostServices(string contentRootPath, string settingsFolderPath, LoggingConfigurator loggingConfiguration)
 		{
 			var coreHost = new HostBuilder()
 				.UseContentRoot(contentRootPath)
 				.AddAppSettings(settingsFolderPath)
-				.AddHostLogging()
+				.ConfigureLogging((hostBuilderContext, loggingBuilder) =>
+				{
+					loggingConfiguration(hostBuilderContext, loggingBuilder, isAppLogging: false);
+				})
 				.Build();
 
 			return coreHost.Services;
 		}
 	}
+
+	public delegate void LoggingConfigurator(HostBuilderContext hostBuilderContext, ILoggingBuilder loggingBuilder, bool isAppLogging);
 }

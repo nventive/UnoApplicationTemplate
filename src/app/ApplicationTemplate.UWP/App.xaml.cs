@@ -57,7 +57,7 @@ namespace ApplicationTemplate
 				ConfigureViewSize();
 				ConfigureStatusBar();
 
-				Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath());
+				Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
 
 #if (IncludeFirebaseAnalytics)
 				ConfigureFirebase();

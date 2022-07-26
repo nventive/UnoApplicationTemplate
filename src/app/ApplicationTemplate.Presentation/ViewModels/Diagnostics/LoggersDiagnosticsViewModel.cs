@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Presentation
@@ -27,13 +28,13 @@ namespace ApplicationTemplate.Presentation
 
 		public bool IsFileLoggingEnabled
 		{
-			get => this.Get(initialValue: LoggingConfiguration.FileLogging.GetIsEnabled());
+			get => this.Get(initialValue: this.GetOptionsValue<LoggingOutputOptions>().IsFileLoggingEnabled);
 			set => this.Set(value);
 		}
 
 		public bool IsConsoleLoggingEnabled
 		{
-			get => this.Get(initialValue: LoggingConfiguration.ConsoleLogging.GetIsEnabled());
+			get => this.Get(initialValue: this.GetOptionsValue<LoggingOutputOptions>().IsConsoleLoggingEnabled);
 			set => this.Set(value);
 		}
 
@@ -51,7 +52,7 @@ namespace ApplicationTemplate.Presentation
 				return;
 			}
 
-			LoggingConfiguration.FileLogging.DeleteLogFiles();
+			this.GetService<ILogFilesProvider>().DeleteLogFiles();
 
 			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("Log files deleted.");
 
@@ -82,11 +83,11 @@ namespace ApplicationTemplate.Presentation
 
 		private async Task OnConsoleLoggingChanged(CancellationToken ct, bool isEnabled)
 		{
-			var isCurrentlyEnabled = LoggingConfiguration.ConsoleLogging.GetIsEnabled();
+			var isCurrentlyEnabled = this.GetOptionsValue<LoggingOutputOptions>().IsConsoleLoggingEnabled;
 
 			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{isEnabled} console logging.", isEnabled ? "Enabling" : "Disabling");
 
-			LoggingConfiguration.ConsoleLogging.SetIsEnabled(isEnabled);
+			this.GetService<IConfiguration>()["LoggingOutput:IsConsoleLoggingEnabled"] = isEnabled.ToString();
 
 			if (isCurrentlyEnabled != isEnabled)
 			{
@@ -100,11 +101,11 @@ namespace ApplicationTemplate.Presentation
 
 		private async Task OnFileLoggingChanged(CancellationToken ct, bool isEnabled)
 		{
-			var isCurrentlyEnabled = LoggingConfiguration.FileLogging.GetIsEnabled();
+			var isCurrentlyEnabled = this.GetOptionsValue<LoggingOutputOptions>().IsFileLoggingEnabled;
 
 			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{isEnabled} file logging.", isEnabled ? "Enabling" : "Disabling");
 
-			LoggingConfiguration.FileLogging.SetIsEnabled(isEnabled);
+			this.GetService<IConfiguration>()["LoggingOutput:IsFileLoggingEnabled"] = isEnabled.ToString();
 
 			if (isCurrentlyEnabled != isEnabled)
 			{

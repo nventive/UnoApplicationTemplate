@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Chinook.DynamicMvvm;
 using Microsoft.Extensions.Logging;
@@ -28,7 +29,7 @@ namespace ApplicationTemplate.Presentation
 				Body = summary,
 			};
 
-			foreach (var logFilePath in LoggingConfiguration.FileLogging.GetLogFilePaths())
+			foreach (var logFilePath in this.GetService<ILogFilesProvider>().GetLogFilesPaths())
 			{
 				if (File.Exists(logFilePath))
 				{
@@ -45,6 +46,8 @@ namespace ApplicationTemplate.Presentation
 		{
 			var appInfo = this.GetService<IAppInfo>();
 			var deviceInfo = this.GetService<IDeviceInfo>();
+			var logFilesProvider = this.GetService<ILogFilesProvider>();
+			var loggingOptions = this.GetOptionsValue<LoggingOutputOptions>();
 
 			var stringBuilder = new StringBuilder();
 
@@ -90,11 +93,11 @@ namespace ApplicationTemplate.Presentation
 //+:cnd:noEmit
 			stringBuilder.AppendLine($"Debug build: {isDebug}");
 
-			stringBuilder.AppendLine($"Console logging enabled: {LoggingConfiguration.ConsoleLogging.GetIsEnabled()}");
+			stringBuilder.AppendLine($"Console logging enabled: {loggingOptions.IsConsoleLoggingEnabled}");
 
-			stringBuilder.AppendLine($"File logging enabled: {LoggingConfiguration.FileLogging.GetIsEnabled()}");
+			stringBuilder.AppendLine($"File logging enabled: {loggingOptions.IsFileLoggingEnabled}");
 
-			var hasLogFile = File.Exists(LoggingConfiguration.FileLogging.GetLogFilePath());
+			var hasLogFile = File.Exists(logFilesProvider.GetLogFilesPaths().First());
 			stringBuilder.AppendLine($"Has log file: {hasLogFile}");
 
 			stringBuilder.Append(GetStartupDetails());

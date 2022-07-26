@@ -14,6 +14,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ApiConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LocalizationConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\LoggingConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\PersistenceConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ViewServicesConfiguration.cs" />

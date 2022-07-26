@@ -30,7 +30,6 @@ namespace ApplicationTemplate
 		protected override IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath)
 		{
 			return hostBuilder
-				.AddAppLogging()
 				.AddAppSettings(settingsFolderPath)
 				.AddServices();
 		}

@@ -40,7 +40,7 @@ namespace ApplicationTemplate.Tests
 		{
 			var coreStartup = new CoreStartup();
 			coreStartup.PreInitialize();
-			coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, extraHostConfiguration);
+			coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, (_, _, _) => { }, extraHostConfiguration);
 
 			_coreStartup = coreStartup;
 
