@@ -49,6 +49,7 @@ namespace ApplicationTemplate
 			return services
 				.AddSingleton<IDeviceInfo, DeviceInfoImplementation>()
 				.AddSingleton<IAppInfo, AppInfoImplementation>()
+				.AddSingleton<IConnectivity, ConnectivityImplementation>()
 				.AddSingleton<IEmail, EmailImplementation>();
 		}
 	}
