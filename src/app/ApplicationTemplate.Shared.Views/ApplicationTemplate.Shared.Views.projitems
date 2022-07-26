@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ApiConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\LinkerConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LocalizationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LoggingConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationConfiguration.cs" />
@@ -28,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\DiagnosticsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\FrameworkElementViewModelViewFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />

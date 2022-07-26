@@ -109,9 +109,6 @@ namespace ApplicationTemplate.Presentation
 		{
 			var stringBuilder = new StringBuilder();
 
-//-:cnd:noEmit
-#if !NETFRAMEWORK
-//+:cnd:noEmit
 			var startup = this.GetService<StartupBase>();
 			var startupTime = startup.StartActivity.StartTimeUtc + startup.StartActivity.Duration - startup.PreInitializeActivity.StartTimeUtc;
 
@@ -151,9 +148,6 @@ namespace ApplicationTemplate.Presentation
 
 				return sb.ToString();
 			}
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
 
 			return stringBuilder.ToString();
 		}

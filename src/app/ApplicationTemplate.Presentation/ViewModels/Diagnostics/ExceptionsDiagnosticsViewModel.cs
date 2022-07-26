@@ -51,39 +51,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand TestErrorInMainThread => this.GetCommandFromTask(async ct =>
 		{
-//-:cnd:noEmit
-			// This will not crash on Android as it can be safely handled.
-#if !__ANDROID__
-//+:cnd:noEmit
-			var confirmation = await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
-				.Title("Diagnostics")
-				.Content("This should crash your application. Make sure your analytics provider receives a crash log.")
-				.CancelCommand()
-				.Command(MessageDialogResult.Accept, label: "Crash")
-			);
-
-			if (confirmation != MessageDialogResult.Accept)
-			{
-				return;
-			}
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-
-//-:cnd:noEmit
-#if __IOS__
-//+:cnd:noEmit
-			/// This will be handled by <see cref="AppDomain.CurrentDomain.UnhandledException" />
-			UIKit.UIApplication.SharedApplication.InvokeOnMainThread(() => throw new Exception("This is a test of an exception in the MainThread. Please ignore."));
-//-:cnd:noEmit
-#elif __ANDROID__
-//+:cnd:noEmit
-			/// This will be handled by <see cref="Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser" />
-			var _ = new Android.OS.Handler(Android.OS.Looper.MainLooper).Post(() => throw new InvalidOperationException("This is a test of an exception in the MainLooper. Please ignore."));
-			await Task.CompletedTask;
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
+			await this.GetService<IDiagnosticsService>().TestExceptionFromMainThread(ct);
 		});
 	}
 }

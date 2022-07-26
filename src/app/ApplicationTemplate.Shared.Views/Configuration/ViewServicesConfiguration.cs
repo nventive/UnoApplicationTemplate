@@ -24,6 +24,7 @@ namespace ApplicationTemplate.Views
 					CoreDispatcherPriority.Normal
 				))
 				.AddSingleton<IViewModelViewFactory, FrameworkElementViewModelViewFactory>()
+				.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 				.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 				.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>()
 				.AddMessageDialog();

@@ -14,6 +14,8 @@ namespace ApplicationTemplate.Presentation
 	{
 		public SettingsDiagnosticsViewModel()
 		{
+			CanOpenSettingsFolder = this.GetService<IDiagnosticsService>().CanOpenSettingsFolder;
+
 			AddDisposable(this.GetProperty(x => x.IsDiagnosticsOverlayEnabled)
 				.Observe()
 				.SelectManyDisposePrevious((e, ct) => OnDiagnosticsOverlayChanged(ct, e))
@@ -29,34 +31,10 @@ namespace ApplicationTemplate.Presentation
 
 		public IDynamicCommand OpenSettingsFolder => this.GetCommand(() =>
 		{
-			throw new NotImplementedException();
-
-			//			var localFolder = ApplicationData.Current.LocalFolder;
-
-			//			this.GetService<IDispatcherScheduler>().ScheduleTask(async (ct2, s) =>
-			//			{
-			////-:cnd:noEmit
-			//#if WINDOWS_UWP
-			////+:cnd:noEmit
-			//				await Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
-			////-:cnd:noEmit
-			//#endif
-			////+:cnd:noEmit
-			//			});
+			this.GetService<IDiagnosticsService>().OpenSettingsFolder();
 		});
 
-		public bool CanOpenSettingsFolder { get; } =
-			//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-			true;
-//-:cnd:noEmit
-#else
-			//+:cnd:noEmit
-			false;
-		//-:cnd:noEmit
-#endif
-		//+:cnd:noEmit
+		public bool CanOpenSettingsFolder { get; }
 
 		private async Task OnDiagnosticsOverlayChanged(CancellationToken ct, bool isEnabled)
 		{
