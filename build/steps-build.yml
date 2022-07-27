@@ -145,6 +145,7 @@ steps:
       /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid)
       /p:ApplicationIdentifier=$(ApplicationIdentifier)
       /p:IsLightBuild=$(IsLightBuild) 
+      /bl
     configuration: $(ApplicationConfiguration)
     platform: $(ApplicationPlatform)
     clean: false
@@ -165,6 +166,14 @@ steps:
 - script: dotnet test ${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }} /p:Configuration=$(ApplicationConfiguration) /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=${{ parameters.pathToSrc }}/coverage /p:ExcludeByFile="**/*.g.cs" /p:Exclude="[*]*.Tests.*" --logger trx --no-build
   displayName: 'Run tests'
   condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
+
+- task: CopyFiles@2
+  displayName: 'Copy binlog (if any) to artifact directory'
+  condition: always()
+  inputs:
+    Contents: '**/*.binlog'
+    flattenFolders : true
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishTestResults@2
   displayName: Publish test results
@@ -203,6 +212,7 @@ steps:
 
 - publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
+  condition: always()
   artifact: $(ArtifactName)
 
 #-if false
