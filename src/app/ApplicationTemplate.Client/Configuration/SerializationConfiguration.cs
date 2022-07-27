@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using ApplicationTemplate;
-using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
