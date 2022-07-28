@@ -9,7 +9,7 @@ namespace ApplicationTemplate.Client
 		public AuthenticationData(
 			string accessToken = default,
 			string refreshToken = default,
-			DateTimeOffset? expiration = default)
+			DateTimeOffset expiration = default)
 		{
 			AccessToken = accessToken;
 			RefreshToken = refreshToken;
@@ -25,7 +25,7 @@ namespace ApplicationTemplate.Client
 		[JsonPropertyName("refresh_token")]
 		public string RefreshToken { get; init; }
 
-		public DateTimeOffset? Expiration { get; init; }
+		public DateTimeOffset Expiration { get; init; }
 
 		public string Email => AccessTokenPayload?.Email;
 
