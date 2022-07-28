@@ -132,21 +132,6 @@
     <PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.View.Uno" Version="0.4.0-dev.33" />
-    <PackageReference Include="nventive.Nimue.Application.Building.Light">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="nventive.Nimue.Application.Packaging">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="nventive.Nimue.Application.Versioning">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <!--#if (IncludeFirebaseAnalytics)
     <PackageReference Include="Xamarin.Firebase.Core" Version="118.0.0" />
     <PackageReference Include="Xamarin.Firebase.Crashlytics" Version="117.3.0 " />
