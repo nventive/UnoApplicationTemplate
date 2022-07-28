@@ -14,7 +14,7 @@ namespace ApplicationTemplate
 	/// </summary>
 	public abstract class StartupBase
 	{
-		public StartupBase(CoreStartupBase coreStartup)
+		protected StartupBase(CoreStartupBase coreStartup)
 		{
 			CoreStartup = coreStartup;
 		}
@@ -151,7 +151,7 @@ namespace ApplicationTemplate
 
 			async Task StartViewServicesWithLogs(IServiceProvider services, bool isFirstStart)
 			{
-				Logger.LogDebug($"Starting view services (isFirstStart: {isFirstStart}).");
+				Logger.LogDebug("Starting view services (isFirstStart: {IsFirstStart}).", isFirstStart);
 
 				await StartViewServices(services, isFirstStart);
 

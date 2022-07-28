@@ -40,7 +40,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var isCurrentlyEnabled = this.GetOptionsValue<DiagnosticsOptions>().IsDiagnosticsOverlayEnabled;
 
-			this.GetService<ILogger<SettingsDiagnosticsViewModel>>().LogInformation("{isEnabled} diagnostics overlay.", isEnabled ? "Enabling" : "Disabling");
+			this.GetService<ILogger<SettingsDiagnosticsViewModel>>().LogInformation("{IsEnabled} diagnostics overlay.", isEnabled ? "Enabling" : "Disabling");
 
 			this.GetService<IConfiguration>()["Diagnostics:IsDiagnosticsOverlayEnabled"] = isEnabled.ToString();
 

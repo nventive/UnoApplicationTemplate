@@ -25,7 +25,7 @@ namespace ApplicationTemplate.Views.Behaviors
 			UpdateDelegate(d, (bool)e.NewValue, textFormat);
 		}
 
-		static void UpdateDelegate(DependencyObject d, bool? enabled, string format)
+		private static void UpdateDelegate(DependencyObject d, bool? enabled, string format)
 		{
 			var textbox = (TextBox)d;
 			if (textbox.GetTemplateChild(TextBoxConstants.ContentElementPartName) != null)
@@ -42,7 +42,7 @@ namespace ApplicationTemplate.Views.Behaviors
 			}
 		}
 
-		static void UpdateDelegateImpl(TextBox textbox, bool? enabled = null, string format = null)
+		private static void UpdateDelegateImpl(TextBox textbox, bool? enabled = null, string format = null)
 		{
 			var nativeView = (textbox as DependencyObject).FindFirstChild<SinglelineTextBoxView>();
 			if (nativeView == null)

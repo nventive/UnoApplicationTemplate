@@ -14,6 +14,7 @@ namespace ApplicationTemplate.Views
 		/// Adds the services to the <see cref="IHostBuilder"/>.
 		/// </summary>
 		/// <param name="hostBuilder">Host builder.</param>
+		/// <param name="startupBase">The <see cref="StartupBase"/>.</param>
 		/// <returns><see cref="IHostBuilder"/>.</returns>
 		public static IHostBuilder AddViewServices(this IHostBuilder hostBuilder, StartupBase startupBase)
 		{

@@ -145,7 +145,7 @@ namespace ApplicationTemplate
 
 			var isFirstStart = !State.IsStarted;
 
-			Logger.LogDebug($"Starting services (isFirstStart: {isFirstStart}).");
+			Logger.LogDebug("Starting services (isFirstStart: {IsFirstStart}).", isFirstStart);
 
 			await StartServices(ServiceProvider, isFirstStart);
 

@@ -24,6 +24,9 @@ namespace ApplicationTemplate.Views.Helpers
 	[Flags]
 	internal enum SubscribeToElementOptions : byte
 	{
+		/// <summary>
+		/// No options.
+		/// </summary>
 		None = 0,
 
 		/// <summary>
@@ -80,6 +83,14 @@ namespace ApplicationTemplate.Views.Helpers
 		/// <summary>
 		/// Subscribe to the observable sequence when the <paramref name="element"/> is loaded, and automatically unsubscribe when it's unloaded.
 		/// </summary>
+		/// <typeparam name="T">The type of data from source.</typeparam>
+		/// <param name="source">The observable source.</param>
+		/// <param name="element">The framework element to subscribe to.</param>
+		/// <param name="onNext">The action invoked when the observable pushes a new value.</param>
+		/// <param name="onError">The action invoked when the observable pushes an error.</param>
+		/// <param name="onCompleted">The action invoked on when the </param>
+		/// <param name="options">The subscription options.</param>
+		/// <returns>A disposable that unsubscribes.</returns>
 		public static IDisposable SubscribeToElement<T>(
 			this IObservable<T> source,
 			FrameworkElement element,
@@ -94,6 +105,12 @@ namespace ApplicationTemplate.Views.Helpers
 		/// <summary>
 		/// Subscribe to the observable sequence when the <paramref name="element"/> is loaded, and automatically unsubscribe when it's unloaded.
 		/// </summary>
+		/// <typeparam name="T">The type of data from source.</typeparam>
+		/// <param name="source">The observable source.</param>
+		/// <param name="element">The framework element to subscribe to.</param>
+		/// <param name="observer">The observer to handle the observable notifications.</param>
+		/// <param name="options">The subscription options.</param>
+		/// <returns>A disposable that unsubscribes.</returns>
 		public static IDisposable SubscribeToElement<T>(this IObservable<T> source, FrameworkElement element, IObserver<T> observer, SubscribeToElementOptions options = SubscribeToElementOptions.Default)
 		{
 			var mustStartLoaded = (options & SubscribeToElementOptions.StartLoaded) == SubscribeToElementOptions.StartLoaded;
@@ -158,6 +175,13 @@ namespace ApplicationTemplate.Views.Helpers
 		/// <summary>
 		/// Helper to create an observable sequence "FromEventPattern" on a DependencyObject using right scheduler.
 		/// </summary>
+		/// <typeparam name="THandler">The type of handler.</typeparam>
+		/// <typeparam name="TArgs">The type of event args.</typeparam>
+		/// <param name="addHandler">The subscribe action.</param>
+		/// <param name="removeHandler">The unsubscribe action.</param>
+		/// <param name="element">The framework element.</param>
+		/// <param name="options">The subscription options.</param>
+		/// <returns>An observable sequence.</returns>
 		public static IObservable<EventPattern<TArgs>> FromEventPattern<THandler, TArgs>(
 			Action<THandler> addHandler,
 			Action<THandler> removeHandler,

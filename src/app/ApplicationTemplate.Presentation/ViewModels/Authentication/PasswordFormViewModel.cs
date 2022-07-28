@@ -8,7 +8,7 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation
 {
-    public class PasswordFormViewModel : ViewModel
+	public class PasswordFormViewModel : ViewModel
 	{
 		public string Password
 		{

@@ -7,6 +7,7 @@ using MessageDialogService;
 
 namespace ApplicationTemplate.Presentation
 {
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2201:Do not raise reserved exception types", Justification = "Those are diagnostics exception to test how the app reacts to exceptions.")]
 	public class ExceptionsDiagnosticsViewModel : ViewModel
 	{
 		public IDynamicCommand TestErrorInCommand => this.GetCommand(() =>

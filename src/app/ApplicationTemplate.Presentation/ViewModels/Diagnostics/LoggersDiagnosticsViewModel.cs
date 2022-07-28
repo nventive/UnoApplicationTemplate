@@ -85,7 +85,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var isCurrentlyEnabled = this.GetOptionsValue<LoggingOutputOptions>().IsConsoleLoggingEnabled;
 
-			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{isEnabled} console logging.", isEnabled ? "Enabling" : "Disabling");
+			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{IsEnabled} console logging.", isEnabled ? "Enabling" : "Disabling");
 
 			this.GetService<IConfiguration>()["LoggingOutput:IsConsoleLoggingEnabled"] = isEnabled.ToString();
 
@@ -103,7 +103,7 @@ namespace ApplicationTemplate.Presentation
 		{
 			var isCurrentlyEnabled = this.GetOptionsValue<LoggingOutputOptions>().IsFileLoggingEnabled;
 
-			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{isEnabled} file logging.", isEnabled ? "Enabling" : "Disabling");
+			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{IsEnabled} file logging.", isEnabled ? "Enabling" : "Disabling");
 
 			this.GetService<IConfiguration>()["LoggingOutput:IsFileLoggingEnabled"] = isEnabled.ToString();
 

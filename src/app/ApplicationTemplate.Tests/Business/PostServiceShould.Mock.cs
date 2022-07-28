@@ -10,7 +10,7 @@ namespace ApplicationTemplate.Tests.Business
 		private PostData[] _mockedPosts = new PostData[]
 		{
 			new PostData(1, title: "test title 1", body: "test body 1", userIdentifier: 12),
-			new PostData(2, title: "test title 2", body:"test body 2", userIdentifier: 5),
+			new PostData(2, title: "test title 2", body: "test body 2", userIdentifier: 5),
 		};
 
 		private IEnumerable<PostData> GetMockedPosts()

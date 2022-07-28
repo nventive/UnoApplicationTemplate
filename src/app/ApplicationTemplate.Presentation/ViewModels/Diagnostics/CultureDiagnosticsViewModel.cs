@@ -31,7 +31,8 @@ namespace ApplicationTemplate.Presentation
 					.OkCommand()
 				);
 			}
-		}, c => c.CatchErrors(OnSaveCultureError));
+		},
+		c => c.CatchErrors(OnSaveCultureError));
 
 		private async Task OnSaveCultureError(CancellationToken ct, IDynamicCommand c, Exception e)
 		{

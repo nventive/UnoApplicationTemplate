@@ -110,6 +110,7 @@ namespace ApplicationTemplate.Business
 		public void Dispose()
 		{
 			_favouriteQuotes?.Dispose();
+			_postType.Dispose();
 		}
 	}
 }

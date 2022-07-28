@@ -21,10 +21,10 @@ namespace ApplicationTemplate
 
 		// https://github.com/dotnet/coreclr/blob/50ef79d48df81635e58ca59386620f0151df6022/src/mscorlib/src/System/DateTime.cs#L71
 		private const int DaysPerYear = 365;
-		private const int DaysPer4Years = DaysPerYear * 4 + 1;
-		private const int DaysPer100Years = DaysPer4Years * 25 - 1;
-		private const int DaysPer400Years = DaysPer100Years * 4 + 1;
-		private const int DaysTo1970 = DaysPer400Years * 4 + DaysPer100Years * 3 + DaysPer4Years * 17 + DaysPerYear;
+		private const int DaysPer4Years = (DaysPerYear * 4) + 1;
+		private const int DaysPer100Years = (DaysPer4Years * 25) - 1;
+		private const int DaysPer400Years = (DaysPer100Years * 4) + 1;
+		private const int DaysTo1970 = (DaysPer400Years * 4) + (DaysPer100Years * 3) + (DaysPer4Years * 17) + DaysPerYear;
 
 		// https://github.com/dotnet/coreclr/blob/50ef79d48df81635e58ca59386620f0151df6022/src/mscorlib/src/System/DateTimeOffset.cs#L43
 		private const long UnixEpochTicks = TimeSpan.TicksPerDay * DaysTo1970;

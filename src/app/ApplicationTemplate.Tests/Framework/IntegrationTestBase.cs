@@ -43,8 +43,6 @@ namespace ApplicationTemplate.Tests
 			coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, (_, _, _) => { }, extraHostConfiguration);
 
 			_coreStartup = coreStartup;
-
-			ConfigureSecurityProtocol();
 		}
 
 		public virtual async Task InitializeAsync()
@@ -102,15 +100,6 @@ namespace ApplicationTemplate.Tests
 			mockSetup(mockedService);
 
 			return services.Replace(ServiceDescriptor.Singleton(mockedService.Object));
-		}
-
-		/// <summary>
-		/// This will fix an exception in test projects.
-		/// The error is the following: Unable to read data from the transport connection : An existing connection was forcibly closed by the remote host.
-		/// </summary>
-		private static void ConfigureSecurityProtocol()
-		{
-			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 		}
 
 		public virtual async Task DisposeAsync()

@@ -77,7 +77,8 @@ namespace ApplicationTemplate
 		{
 			var output = input?.Replace('-', '+').Replace('_', '/') ?? string.Empty;
 
-			switch (output.Length % 4) // Pad with trailing '='s
+			// Pad with trailing '='s
+			switch (output.Length % 4)
 			{
 				case 0: break; // No pad chars in this case
 				case 2:

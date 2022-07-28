@@ -12,7 +12,7 @@ namespace ApplicationTemplate.Client
 		{
 		}
 
-		public Task<DadJokesResponse> FetchData(CancellationToken ct, string post)
+		public Task<DadJokesResponse> FetchData(CancellationToken ct, string typePost)
 			=> Task.FromResult(new DadJokesResponse(new DadJokesData(Array.Empty<DadJokeChildData>())));
 	}
 }
