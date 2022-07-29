@@ -69,14 +69,15 @@ variables:
 
   # Paths to file
   InfoPlistPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.iOS/Info.plist
+  AndroidManifestPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.Droid/Properties/AndroidManifest.xml
 
   # Pool names
-  windowsPoolName: 'windows 1809'
+  windowsPoolName: 'windows 2022'
   macOSPoolName: 'macOS'
 
   # Versions to use
   NUGET_VERSION: 6.1.0
-  XAMARIN_IOS_VERSION: 15.0
+  XAMARIN_IOS_VERSION: 15.10
 
   # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
   # We make seperate folders so that releases can each download only the folder they need.

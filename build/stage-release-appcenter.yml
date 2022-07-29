@@ -148,7 +148,7 @@ jobs:
               serverEndpoint: ${{ parameters.appCenterServiceConnectionName }}
               distributionGroupId: ${{ parameters.appCenterDistributionGroup }}
               appSlug: ${{ parameters.appCenterAndroidSlug }}
-              appFile: '$(Pipeline.Workspace)/$(artifactName)/*.aab'
+              appFile: '$(Pipeline.Workspace)/$(artifactName)/*Signed.aab'
               releaseNotesOption: file
               releaseNotesFile: "$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md"
               isSilent: true

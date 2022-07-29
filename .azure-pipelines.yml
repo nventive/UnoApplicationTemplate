@@ -25,11 +25,7 @@ trigger:
 resources:
   containers:
     - container: windows
-      image: nventive/vs_build-tools:16.11.9
-#-if false
-    - container: windowsNet6 # .Net 6 is required for the dotnet new to work properly because of this bug: https://github.com/dotnet/templating/pull/2939
-      image: nventive/vs_build-tools:17.1.1
-#-endif
+      image: nventive/vs_build-tools:17.2.5
 
 variables:
 - template: build/variables.yml
@@ -49,6 +45,7 @@ stages:
       pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
       solutionFileName: 'GeneratedApp.sln'
       pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.iOS/Info.plist'
+      pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Droid/Properties/AndroidManifest.xml'
       applicationEnvironment: Generated_Staging
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
