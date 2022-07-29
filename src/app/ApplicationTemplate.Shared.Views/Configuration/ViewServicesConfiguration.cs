@@ -1,6 +1,10 @@
 ﻿using System.Reactive.Concurrency;
+using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Windows.UI.Core;
+using Xamarin.Essentials.Implementation;
+using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate.Views
 {
@@ -18,7 +22,34 @@ namespace ApplicationTemplate.Views
 				.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
 					s.GetRequiredService<CoreDispatcher>(),
 					CoreDispatcherPriority.Normal
-				));
+				))
+				.AddSingleton<IViewModelViewFactory, FrameworkElementViewModelViewFactory>()
+				.AddSingleton<IDiagnosticsService, DiagnosticsService>()
+				.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
+				.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>()
+				.AddMessageDialog();
+		}
+
+		private static IServiceCollection AddMessageDialog(this IServiceCollection services)
+		{
+			return services.AddSingleton<IMessageDialogService>(s =>
+//-:cnd:noEmit
+#if WINDOWS_UWP || __IOS__ || __ANDROID__
+//+:cnd:noEmit
+				new MessageDialogService.MessageDialogService(
+					() => s.GetRequiredService<CoreDispatcher>(),
+					new MessageDialogBuilderDelegate(
+						key => s.GetRequiredService<IStringLocalizer>()[key]
+					)
+				)
+//-:cnd:noEmit
+#else
+//+:cnd:noEmit
+				new AcceptOrDefaultMessageDialogService()
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
+			);
 		}
 	}
 }

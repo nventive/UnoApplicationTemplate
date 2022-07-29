@@ -198,7 +198,7 @@ namespace ApplicationTemplate.Views.Behaviors
 				return;
 			}
 
-			textbox.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+			_ = textbox.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
 			{
 				textbox.Text = formattedText;
 				textbox.SelectionStart = selectionStart;

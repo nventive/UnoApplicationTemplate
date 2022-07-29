@@ -37,7 +37,7 @@ namespace ApplicationTemplate.Tests
 		/// <returns>The current ViewModel.</returns>
 		protected IViewModel GetCurrentViewModel()
 		{
-			return (IViewModel) GetService<ISectionsNavigator>().GetActiveStackNavigator().GetActiveViewModel();
+			return (IViewModel)GetService<ISectionsNavigator>().GetActiveStackNavigator().GetActiveViewModel();
 		}
 
 		/// <summary>
@@ -120,7 +120,7 @@ namespace ApplicationTemplate.Tests
 			where TSourceViewModel : ViewModel
 		{
 			// Arrange
-			TSourceViewModel viewModel = (TSourceViewModel) await NavigateAndClear(DefaultCancellationToken, sourceVMBuilder);
+			TSourceViewModel viewModel = (TSourceViewModel)await NavigateAndClear(DefaultCancellationToken, sourceVMBuilder);
 
 			// Act
 			await navigationCommand(viewModel).Execute();
@@ -136,12 +136,13 @@ namespace ApplicationTemplate.Tests
 		/// <typeparam name="TDestinationViewModel">The destination ViewModel type.</typeparam>
 		/// <param name="sourceVMBuilder">The source ViewModel builder.</param>
 		/// <param name="navigationCommand">A function that returns a command to execute before asserting the destination is TDestinationViewModel</param>
+		/// <param name="sourceSection">The section name.</param>
 		/// <returns>A task that when completed will contain the new section name.</returns>
 		protected async Task<string> AssertSetActiceSection<TSourceViewModel, TDestinationViewModel>(Func<TSourceViewModel> sourceVMBuilder, Func<TSourceViewModel, IDynamicCommand> navigationCommand, string sourceSection)
 			where TSourceViewModel : ViewModel
 		{
 			await SetActiveSection(DefaultCancellationToken, sourceSection, sourceVMBuilder);
-			TSourceViewModel viewModel = (TSourceViewModel) await NavigateAndClear(DefaultCancellationToken, sourceVMBuilder);
+			TSourceViewModel viewModel = (TSourceViewModel)await NavigateAndClear(DefaultCancellationToken, sourceVMBuilder);
 
 			await navigationCommand(viewModel).Execute();
 

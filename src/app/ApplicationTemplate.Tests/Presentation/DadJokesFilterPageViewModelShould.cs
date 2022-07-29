@@ -38,7 +38,7 @@ namespace ApplicationTemplate.Tests
 		public async Task ReturnPosts_WhenProvidedPostType(PostTypes postType)
 		{
 			// Arrange
-			var dadJokesVM = (DadJokesPageViewModel) await Navigate(DefaultCancellationToken, () => new DadJokesPageViewModel());
+			var dadJokesVM = (DadJokesPageViewModel)await Navigate(DefaultCancellationToken, () => new DadJokesPageViewModel());
 
 			var filtersVM = await AssertNavigateTo<DadJokesFiltersPageViewModel>(() => dadJokesVM.NavigateToFilters);
 

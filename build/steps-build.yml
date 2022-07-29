@@ -125,6 +125,7 @@ steps:
 
 - task: MSBuild@1
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
+  condition: and(succeeded(), eq('${{ parameters.iosProvisioningProfileFile }}', ''))
   inputs:
     solution: '${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}'
     msbuildLocationMethod: version
@@ -144,6 +145,7 @@ steps:
       /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid)
       /p:ApplicationIdentifier=$(ApplicationIdentifier)
       /p:IsLightBuild=$(IsLightBuild) 
+      /bl
     configuration: $(ApplicationConfiguration)
     platform: $(ApplicationPlatform)
     clean: false
@@ -152,9 +154,26 @@ steps:
     logProjectEvents: false
     createLogFile: false
 
+# Build Xamarin.iOS as for now MSBUILD Task keeps using Msbuild from mono
+# This task execute a sh script that points directly to VS Msbuild in order to support C#10
+- task: Bash@3
+  displayName: 'Build Xamarin iOS project'
+  condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
+  inputs:
+    filePath: '$(System.DefaultWorkingDirectory)/build/build-ios.sh'
+    arguments: '"${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}" "$(ApplicationConfiguration)" "$(ApplicationPlatform)" "$(provisioningProfile.provisioningProfileUuid)" "$(ApplicationIdentifier)" "$(PreReleaseNumber)"'
+
 - script: dotnet test ${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }} /p:Configuration=$(ApplicationConfiguration) /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=${{ parameters.pathToSrc }}/coverage /p:ExcludeByFile="**/*.g.cs" /p:Exclude="[*]*.Tests.*" --logger trx --no-build
   displayName: 'Run tests'
   condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
+
+- task: CopyFiles@2
+  displayName: 'Copy binlog (if any) to artifact directory'
+  condition: always()
+  inputs:
+    Contents: '**/*.binlog'
+    flattenFolders : true
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: PublishTestResults@2
   displayName: Publish test results
@@ -193,6 +212,7 @@ steps:
 
 - publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
+  condition: always()
   artifact: $(ArtifactName)
 
 #-if false

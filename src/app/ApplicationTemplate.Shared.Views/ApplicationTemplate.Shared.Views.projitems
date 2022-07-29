@@ -12,14 +12,26 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.Android.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.iOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\ApiConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\LinkerConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\LocalizationConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\LoggingConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\PersistenceConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ViewServicesConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\_ViewConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\BottomTabBarButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationStateType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FiltersConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DebugConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\DiagnosticsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\FrameworkElementViewModelViewFactory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FrameworkElementExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableExtensions.cs" />
@@ -86,5 +98,9 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_ThirdScreen_Icon.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_ThirdScreen_Icon.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Tutorial_ThirdScreen_Icon.scale-400.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\en\Resources.resw" />
+    <PRIResource Include="$(MSBuildThisFileDirectory)Strings\fr\Resources.resw" />
   </ItemGroup>
 </Project>

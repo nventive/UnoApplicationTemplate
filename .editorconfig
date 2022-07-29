@@ -316,3 +316,15 @@ dotnet_diagnostic.SA1413.severity = suggestion
 dotnet_diagnostic.CA1062.severity = suggestion
 # CA2227: Collection properties should be read only
 dotnet_diagnostic.CA2227.severity = silent
+# CA1805: Do not initialize unnecessarily
+dotnet_diagnostic.CA1805.severity = none
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = none
+# CA2225: Operator overloads have named alternates
+dotnet_diagnostic.CA2225.severity = suggestion
+# CA1024: Use properties where appropriate
+dotnet_diagnostic.CA1024.severity = none
+# SA1615: Element return value should be documented
+dotnet_diagnostic.SA1615.severity = suggestion
+# CA5394: Do not use insecure randomness
+dotnet_diagnostic.CA5394.severity = suggestion

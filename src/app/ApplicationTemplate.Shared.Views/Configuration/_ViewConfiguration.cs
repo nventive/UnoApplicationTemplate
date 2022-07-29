@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
 namespace ApplicationTemplate.Views
@@ -13,8 +14,9 @@ namespace ApplicationTemplate.Views
 		/// Adds the services to the <see cref="IHostBuilder"/>.
 		/// </summary>
 		/// <param name="hostBuilder">Host builder.</param>
+		/// <param name="startupBase">The <see cref="StartupBase"/>.</param>
 		/// <returns><see cref="IHostBuilder"/>.</returns>
-		public static IHostBuilder AddViewServices(this IHostBuilder hostBuilder)
+		public static IHostBuilder AddViewServices(this IHostBuilder hostBuilder, StartupBase startupBase)
 		{
 			if (hostBuilder is null)
 			{
@@ -23,8 +25,12 @@ namespace ApplicationTemplate.Views
 
 			return hostBuilder
 				.ConfigureServices(s => s
+					.AddSingleton(startupBase)
+					.AddLocalization()
 					.AddNavigation()
 					.AddViewServices()
+					.AddApi()
+					.AddPersistence()
 				);
 		}
 	}

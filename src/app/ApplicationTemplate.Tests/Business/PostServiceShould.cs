@@ -90,19 +90,14 @@ namespace ApplicationTemplate.Tests.Business
 		public async Task CreatePost()
 		{
 			// Arrange
-			var post = new PostData.Builder()
-			{
-				Title = "My title",
-				Body = "My body",
-				UserIdentifier = 100,
-			};
+			var post = new PostData(default, title: "My title", body: "My body", userIdentifier: 100);
 
 			var randomId = new Random().Next(1, int.MaxValue);
 
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
 			mockedPostEndpoint
 				.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), It.IsAny<PostData>()))
-				.ReturnsAsync(post.WithId(randomId));
+				.ReturnsAsync(post with { Id = randomId });
 
 			var sut = new PostService(mockedPostEndpoint.Object);
 
@@ -129,12 +124,7 @@ namespace ApplicationTemplate.Tests.Business
 		public async Task ReturnNull_WhenCreatePostFailed()
 		{
 			// Arrange
-			var post = new PostData.Builder()
-			{
-				Title = "My title",
-				Body = "My body",
-				UserIdentifier = 100,
-			};
+			var post = new PostData(default, title: "My title", body: "My body", userIdentifier: 100);
 
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
 			mockedPostEndpoint
@@ -180,13 +170,7 @@ namespace ApplicationTemplate.Tests.Business
 		public async Task Update_WhenGivenPostAlreadyExists()
 		{
 			// Arrange
-			var post = new PostData.Builder()
-			{
-				Id = 1,
-				Title = "My updated title",
-				Body = "My updated body",
-				UserIdentifier = 100,
-			};
+			var post = new PostData(id: 1, title: "My updated title", body: "My updated body", userIdentifier: 100);
 
 			// This part is the part that must be defined by the API contract.
 			// Since there is none here, we are assuming it's giving us a null object when the body is null

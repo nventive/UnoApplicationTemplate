@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using ApplicationTemplate.Views;
 using Chinook.SectionsNavigation;
@@ -23,8 +24,6 @@ namespace ApplicationTemplate
 
 			ConfigureOrientation();
 		}
-
-		public Activity ShellActivity { get; } = new Activity(nameof(Shell));
 
 		public static App Instance { get; private set; }
 
@@ -58,22 +57,54 @@ namespace ApplicationTemplate
 				ConfigureViewSize();
 				ConfigureStatusBar();
 
-				Startup.Initialize();
+				Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
 
 #if (IncludeFirebaseAnalytics)
 				ConfigureFirebase();
 #endif
 
-				ShellActivity.Start();
+				Startup.ShellActivity.Start();
 
 				CurrentWindow.Content = Shell = new Shell(args);
 
-				ShellActivity.Stop();
+				Startup.ShellActivity.Stop();
 			}
 
 			CurrentWindow.Activate();
 
 			_ = Task.Run(() => Startup.Start());
+		}
+
+		private static string GetContentRootPath()
+		{
+//-:cnd:noEmit
+#if WINDOWS_UWP || __ANDROID__ || __IOS__
+			return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+#else
+			return string.Empty;
+#endif
+//+:cnd:noEmit
+		}
+
+		private static string GetSettingsFolderPath()
+		{
+//-:cnd:noEmit
+#if WINDOWS_UWP
+//+:cnd:noEmit
+			var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
+//-:cnd:noEmit
+#elif __ANDROID__ || __IOS__
+//+:cnd:noEmit
+			var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+//-:cnd:noEmit
+#else
+//+:cnd:noEmit
+			var folderPath = string.Empty;
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
+
+			return folderPath;
 		}
 
 		private void ConfigureOrientation()
