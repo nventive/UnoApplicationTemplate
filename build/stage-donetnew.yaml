@@ -1,8 +1,8 @@
 jobs:
   - job: On_Windows_Dotnet_New
     pool:
-      name: 'Windows 2022' # .Net 6 is required for the dotnet new to work properly because of this bug: https://github.com/dotnet/templating/pull/2939
-    container: windowsNet6
+      name: $(windowsPoolName)
+    container: windows
     
     steps:    
     - script: dotnet new -i $(Build.SourcesDirectory)

@@ -62,18 +62,44 @@
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <OutputPath>bin\iPhone\Release</OutputPath>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
-    <Optimize>True</Optimize>
     <MtouchDebug>False</MtouchDebug>
     <MtouchArch>ARM64</MtouchArch>
     <MtouchUseSGen>True</MtouchUseSGen>
-    <OptimizePNGs>True</OptimizePNGs>
-    <MtouchUseLlvm>True</MtouchUseLlvm>
-    <MtouchUseThumb>True</MtouchUseThumb>
     <MtouchEnableSGenConc>True</MtouchEnableSGenConc>
-    <MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
     <BuildIpa>True</BuildIpa>
     <CodesignKey>iPhone Distribution</CodesignKey>
   </PropertyGroup>
+
+  <!-- This is to optimize build time since we don't use nimue anymore -->
+  <Choose>
+    <When Condition="'$(IsLightBuild)' == 'True'">
+      <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+        <!-- Build optimization for lightbuild -->
+        <!-- Prevents PNG optimization -->
+        <OptimizePNGs>False</OptimizePNGs>
+        <!-- Disables LLVM -->
+        <MtouchUseLlvm>False</MtouchUseLlvm>
+        <MtouchUseThumb>False</MtouchUseThumb>
+        <!-- Disables symbol stripping -->
+        <MtouchNoSymbolStrip>True</MtouchNoSymbolStrip>
+        <MtouchNoStrip>True</MtouchNoStrip>
+        <!-- Disables dSYM creation -->
+        <MtouchExtraArgs>$(MtouchExtraArgs) --dsym=false</MtouchExtraArgs>
+        <Optimize>false</Optimize>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+        <OptimizePNGs>True</OptimizePNGs>
+        <MtouchUseLlvm>True</MtouchUseLlvm>
+        <MtouchUseThumb>True</MtouchUseThumb>
+        <MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
+        <MtouchExtraArgs>--xml=./LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+        <Optimize>true</Optimize>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
   <ItemGroup>
     <Compile Include="Application.cs" />
     <BundleResource Include="Resources\Assets\splashscreen_icon.png" />
@@ -144,21 +170,6 @@
     <PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.View.Uno" Version="0.4.0-dev.33" />
-    <PackageReference Include="nventive.Nimue.Application.Building.Light">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="nventive.Nimue.Application.Packaging">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="nventive.Nimue.Application.Versioning">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <!--#if (IncludeFirebaseAnalytics)
 		<PackageReference Include="Xamarin.Firebase.iOS.Analytics" Version="6.9.0" />
 		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="6.10.4" />

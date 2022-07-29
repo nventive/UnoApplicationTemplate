@@ -1,4 +1,4 @@
-parameters:
+﻿parameters:
 - name: applicationEnvironment
   type: string
   default: ''
@@ -32,6 +32,9 @@ parameters:
 - name: pathToInfoPlist
   type: string
   default: '$(InfoPlistPath)'
+- name: pathToAndroidManifest
+  type: string
+  default: '$(AndroidManifestPath)'
 
 jobs:
   - job: On_Windows_ReleaseNotes
@@ -83,6 +86,7 @@ jobs:
           pathToSrc: ${{ parameters.pathToSrc }}
           solutionFileName: ${{ parameters.solutionFileName }}
           androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
+          pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
 
   - job: On_Mac # Build iOS on a mac
     strategy:

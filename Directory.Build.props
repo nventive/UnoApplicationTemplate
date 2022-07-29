@@ -41,4 +41,9 @@
 		<DefineConstants>$(DefineConstants);PRODUCTION</DefineConstants>
 	</PropertyGroup>
 
+  <!-- Define the IsLightBuild property. It's set to true by the CI pipeline when a pull request is built. -->
+  <PropertyGroup>
+		<IsLightBuild>False</IsLightBuild>
+	</PropertyGroup>
+
 </Project>

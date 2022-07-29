@@ -60,24 +60,40 @@
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidDexTool>d8</AndroidDexTool>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DefineConstants>TRACE</DefineConstants>
-    <!-- Set this to False to attach your debugger in Release. -->
-    <Optimize>True</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
     <AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-    <AotAssemblies>True</AotAssemblies>
     <AndroidManagedSymbols>True</AndroidManagedSymbols>
     <AndroidEnableSGenConcurrent>True</AndroidEnableSGenConcurrent>
     <AndroidAotAdditionalArguments>nodebug,no-write-symbols</AndroidAotAdditionalArguments>
-    <EnableLLVM>True</EnableLLVM>
-    <AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
     <AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
     <BundleAssemblies>false</BundleAssemblies>
     <AndroidPackageFormat>aab</AndroidPackageFormat>
     <AndroidUseAapt2>true</AndroidUseAapt2>
   </PropertyGroup>
+  <Choose>
+    <When Condition="'$(IsLightBuild)' == 'True'">
+      <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <!-- Build optimization for lightbuild (faster builds in pull requests)-->
+        <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+        <AotAssemblies>false</AotAssemblies>
+        <EnableLLVM>false</EnableLLVM>
+        <Optimize>false</Optimize>
+      </PropertyGroup>
+    </When>
+    <Otherwise>
+      <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+        <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
+        <AotAssemblies>true</AotAssemblies>
+        <EnableLLVM>true</EnableLLVM>
+        <Optimize>true</Optimize>
+      </PropertyGroup>
+    </Otherwise>
+  </Choose>
+
   <ItemGroup>
     <Reference Include="Mono.Android" />
     <Reference Include="Mono.Android.Export" />
@@ -132,21 +148,6 @@
     <PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.View.Uno" Version="0.4.0-dev.33" />
-    <PackageReference Include="nventive.Nimue.Application.Building.Light">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="nventive.Nimue.Application.Packaging">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
-    <PackageReference Include="nventive.Nimue.Application.Versioning">
-      <Version>0.1.0-alpha.89</Version>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-      <PrivateAssets>all</PrivateAssets>
-    </PackageReference>
     <!--#if (IncludeFirebaseAnalytics)
     <PackageReference Include="Xamarin.Firebase.Core" Version="118.0.0" />
     <PackageReference Include="Xamarin.Firebase.Crashlytics" Version="117.3.0 " />
