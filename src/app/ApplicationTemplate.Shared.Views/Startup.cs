@@ -40,7 +40,14 @@ namespace ApplicationTemplate.Views
 
 		protected override void InitializeViewServices(IHostBuilder hostBuilder)
 		{
-			hostBuilder.AddViewServices(this);
+			hostBuilder.ConfigureServices(s => s
+				.AddSingleton(this)
+				.AddLocalization()
+				.AddNavigation()
+				.AddViewServices()
+				.AddApi()
+				.AddPersistence()
+			);
 		}
 
 		protected override void OnInitialized(IServiceProvider services)

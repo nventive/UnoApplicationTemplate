@@ -7,7 +7,13 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
-	public static class RegistrationServiceCollectionExtensions
+	/// <summary>
+	/// This class exposes extension methods on <see cref="IServiceCollection"/>.
+	/// </summary>
+	/// <remarks>
+	/// Note that the class name starts with "ApplicationTemplate" to avoid potential collisions since we use the original namespace of <see cref="IServiceCollection"/>.
+	/// </remarks>
+	public static class ApplicationTemplateServiceCollectionExtensions
 	{
 		/// <summary>
 		/// Registers <typeparamref name="T"/> as an option bound to the <paramref name="configuration"/>
