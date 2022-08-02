@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Reactive.Concurrency;
 using System.Text;
-using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;

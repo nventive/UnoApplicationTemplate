@@ -31,7 +31,17 @@ namespace ApplicationTemplate
 		{
 			return hostBuilder
 				.AddAppSettings(settingsFolderPath)
-				.AddServices();
+				.ConfigureServices((context, s) => s
+					.AddApi(context.Configuration)
+					.AddDiagnostics(context.Configuration)
+					.AddMvvm()
+					.AddPersistence()
+					.AddNavigationCore()
+					.AddErrorHandling()
+					.AddSerialization()
+					.AddLocalization()
+					.AddAppServices()
+				);
 		}
 
 		protected override void OnInitialized(IServiceProvider services)

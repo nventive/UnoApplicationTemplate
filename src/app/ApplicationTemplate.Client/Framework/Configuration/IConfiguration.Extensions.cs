@@ -5,9 +5,12 @@ using Microsoft.Extensions.Configuration;
 namespace Microsoft.Extensions.Configuration
 {
 	/// <summary>
-	/// <see cref="IConfiguration"/> extension methods.
+	/// This class exposes extension methods on <see cref="IConfiguration"/>.
 	/// </summary>
-	public static class IConfigurationExtensions
+	/// <remarks>
+	/// Note that the class name starts with "ApplicationTemplate" to avoid potential collisions since we use the original namespace of <see cref="IConfigurationSection"/>.
+	/// </remarks>
+	public static class ApplicationTemplateConfigurationExtensions
 	{
 		/// <summary>
 		/// Returns the <see cref="IConfigurationSection"/> for the options represented by <typeparamref name="T"/>.
