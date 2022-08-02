@@ -41,7 +41,7 @@ namespace ApplicationTemplate.Views
 		protected override void InitializeViewServices(IHostBuilder hostBuilder)
 		{
 			hostBuilder.ConfigureServices(s => s
-				.AddSingleton(this)
+				.AddSingleton<StartupBase>(this)
 				.AddLocalization()
 				.AddNavigation()
 				.AddViewServices()

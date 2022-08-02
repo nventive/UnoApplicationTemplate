@@ -76,6 +76,11 @@ namespace ApplicationTemplate
 #elif __IOS__
 				.Enrich.WithProperty("Platform", "iOS");
 #endif
+#elif WINDOWS_UWP
+			return configuration
+				.WriteTo.File(logFilePath, outputTemplate: "{Timestamp:MM-dd HH:mm:ss.fffzzz} [{Platform}] Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}")
+				.Enrich.WithProperty("Platform", "UWP");
+
 #else
 			return configuration;
 #endif
@@ -94,11 +99,20 @@ namespace ApplicationTemplate
 
 			public string GetLogFilePath(bool isAppLogging = true)
 			{
-				var logDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+				var logDirectory = GetLogFilesDirectory();
 
 				return isAppLogging
 					? Path.Combine(logDirectory, "ApplicationTemplate.log")
 					: Path.Combine(logDirectory, "ApplicationTemplate.host.log");
+			}
+
+			public static string GetLogFilesDirectory()
+			{
+#if WINDOWS_UWP
+				return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+#else
+				return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+#endif
 			}
 
 			public string[] GetLogFilesPaths()

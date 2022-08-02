@@ -33,7 +33,7 @@ namespace ApplicationTemplate.Presentation
 			{
 				if (File.Exists(logFilePath))
 				{
-					message.Attachments.Add(new EmailAttachment(logFilePath));
+					message.Attachments.Add(new EmailAttachment(logFilePath, contentType: "text/plain"));
 				}
 			}
 
