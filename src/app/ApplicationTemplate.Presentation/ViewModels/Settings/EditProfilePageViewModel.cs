@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 
@@ -10,9 +9,9 @@ namespace ApplicationTemplate.Presentation
 {
 	public class EditProfilePageViewModel : ViewModel
 	{
-		private readonly UserProfileData _userProfile;
+		private readonly UserProfile _userProfile;
 
-		public EditProfilePageViewModel(UserProfileData userProfile)
+		public EditProfilePageViewModel(UserProfile userProfile)
 		{
 			_userProfile = userProfile ?? throw new ArgumentNullException(nameof(userProfile));
 		}

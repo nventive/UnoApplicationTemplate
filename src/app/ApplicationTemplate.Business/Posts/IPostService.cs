@@ -2,7 +2,6 @@
 using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Client;
 
 namespace ApplicationTemplate.Business
 {
@@ -13,23 +12,23 @@ namespace ApplicationTemplate.Business
 		/// </summary>
 		/// <param name="ct"><see cref="CancellationToken"/></param>
 		/// <param name="postId">Post id</param>
-		/// <returns><see cref="PostData"/></returns>
-		Task<PostData> GetPost(CancellationToken ct, long postId);
+		/// <returns><see cref="Post"/></returns>
+		Task<Post> GetPost(CancellationToken ct, long postId);
 
 		/// <summary>
 		/// Gets the list of all posts.
 		/// </summary>
 		/// <param name="ct"><see cref="CancellationToken"/></param>
 		/// <returns>List of all posts</returns>
-		Task<ImmutableList<PostData>> GetPosts(CancellationToken ct);
+		Task<ImmutableList<Post>> GetPosts(CancellationToken ct);
 
 		/// <summary>
 		/// Creates a post.
 		/// </summary>
 		/// <param name="ct"><see cref="CancellationToken"/></param>
-		/// <param name="post"><see cref="PostData"/></param>
-		/// <returns>New <see cref="PostData"/></returns>
-		Task<PostData> Create(CancellationToken ct, PostData post);
+		/// <param name="post"><see cref="Post"/></param>
+		/// <returns>New <see cref="Post"/></returns>
+		Task<Post> Create(CancellationToken ct, Post post);
 
 		/// <summary>
 		/// Updates a post.
@@ -38,7 +37,7 @@ namespace ApplicationTemplate.Business
 		/// <param name="postId">Post id</param>
 		/// <param name="post"><see cref="PostData"/></param>
 		/// <returns>Updated <see cref="PostData"/></returns>
-		Task<PostData> Update(CancellationToken ct, long postId, PostData post);
+		Task<Post> Update(CancellationToken ct, long postId, Post post);
 
 		/// <summary>
 		/// Deletes a post.

@@ -2,7 +2,6 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -13,7 +12,7 @@ namespace ApplicationTemplate.Presentation
 {
 	public class EditPostPageViewModel : ViewModel
 	{
-		public EditPostPageViewModel(PostData post = null)
+		public EditPostPageViewModel(Post post = null)
 		{
 			IsNewPost = post == null;
 			Title = post == null ? this.GetService<IStringLocalizer>()["EditPost_NewPost"] : post.Title;

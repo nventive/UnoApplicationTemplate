@@ -54,7 +54,7 @@ namespace ApplicationTemplate.Tests.Business
 				result
 					.Should().NotBeNull();
 				result
-					.Should().BeOfType<PostData>();
+					.Should().BeOfType<Post>();
 				result.Id
 					.Should().Be(givenId);
 			}
@@ -83,21 +83,26 @@ namespace ApplicationTemplate.Tests.Business
 			// Assert with invalid id
 			result
 				.Should()
-				.Be(default(PostData));
+				.Be(default(Post));
 		}
 
 		[Fact]
 		public async Task CreatePost()
 		{
 			// Arrange
-			var post = new PostData(default, title: "My title", body: "My body", userIdentifier: 100);
+			var post = new Post()
+			{
+				Title = "My title",
+				Body = "My body",
+				UserIdentifier = 100
+			};
 
 			var randomId = new Random().Next(1, int.MaxValue);
 
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
 			mockedPostEndpoint
 				.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), It.IsAny<PostData>()))
-				.ReturnsAsync(post with { Id = randomId });
+				.ReturnsAsync((post with { Id = randomId }).ToData());
 
 			var sut = new PostService(mockedPostEndpoint.Object);
 
@@ -124,11 +129,11 @@ namespace ApplicationTemplate.Tests.Business
 		public async Task ReturnNull_WhenCreatePostFailed()
 		{
 			// Arrange
-			var post = new PostData(default, title: "My title", body: "My body", userIdentifier: 100);
+			var post = new Post { Title = "My title", Body = "My body", UserIdentifier = 100 };
 
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
 			mockedPostEndpoint
-				.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), post))
+				.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), post.ToData()))
 				.ReturnsAsync(default(PostData));
 
 			var sut = new PostService(mockedPostEndpoint.Object);
@@ -145,7 +150,7 @@ namespace ApplicationTemplate.Tests.Business
 		public async Task ReturnNull_WhenCreatePostBodyIsNull()
 		{
 			// Arrange
-			var post = default(PostData);
+			var post = default(Post);
 
 			var randomId = new Random().Next(1, int.MaxValue);
 
@@ -153,7 +158,7 @@ namespace ApplicationTemplate.Tests.Business
 			// Since there is none here, we are assuming it's giving us a null object when the body is null
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
 			mockedPostEndpoint
-				.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), post))
+				.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), post.ToData()))
 				.ReturnsAsync(default(PostData));
 
 			var sut = new PostService(mockedPostEndpoint.Object);
@@ -170,14 +175,14 @@ namespace ApplicationTemplate.Tests.Business
 		public async Task Update_WhenGivenPostAlreadyExists()
 		{
 			// Arrange
-			var post = new PostData(id: 1, title: "My updated title", body: "My updated body", userIdentifier: 100);
+			var post = new Post { Id = 1, Title = "My updated title", Body = "My updated body", UserIdentifier = 100 };
 
 			// This part is the part that must be defined by the API contract.
 			// Since there is none here, we are assuming it's giving us a null object when the body is null
 			var mockedPostEndpoint = new Mock<IPostEndpoint>();
 			mockedPostEndpoint
-				.Setup(endpoint => endpoint.Update(It.IsAny<CancellationToken>(), post.Id, post))
-				.ReturnsAsync(post);
+				.Setup(endpoint => endpoint.Update(It.IsAny<CancellationToken>(), post.Id, post.ToData()))
+				.ReturnsAsync(post.ToData());
 
 			var sut = new PostService(mockedPostEndpoint.Object);
 

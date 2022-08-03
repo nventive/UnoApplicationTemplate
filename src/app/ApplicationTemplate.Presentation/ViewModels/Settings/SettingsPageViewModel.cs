@@ -3,7 +3,6 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -19,7 +18,7 @@ namespace ApplicationTemplate.Presentation
 	{
 		public string VersionNumber => this.Get(GetVersionNumber);
 
-		public IDataLoader<UserProfileData> UserProfile => this.GetDataLoader(GetUserProfile, db => db
+		public IDataLoader<UserProfile> UserProfile => this.GetDataLoader(GetUserProfile, db => db
 			.TriggerFromObservable(this.GetService<IAuthenticationService>().GetAndObserveIsAuthenticated().Skip(1))
 		);
 
@@ -68,7 +67,7 @@ namespace ApplicationTemplate.Presentation
 			await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
 		});
 
-		private async Task<UserProfileData> GetUserProfile(CancellationToken ct)
+		private async Task<UserProfile> GetUserProfile(CancellationToken ct)
 		{
 			return await this.GetService<IUserProfileService>().GetCurrent(ct);
 		}

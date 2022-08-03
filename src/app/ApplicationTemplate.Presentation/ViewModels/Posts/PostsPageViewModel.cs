@@ -3,7 +3,6 @@ using System.Collections.Immutable;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
@@ -21,7 +20,7 @@ namespace ApplicationTemplate.Presentation
 			_onGetPostsCalled = onGetPostsCalled;
 		}
 
-		public IDynamicCommand DeletePost => this.GetCommandFromTask<PostData>(async (ct, post) =>
+		public IDynamicCommand DeletePost => this.GetCommandFromTask<Post>(async (ct, post) =>
 		{
 			await this.GetService<IPostService>().Delete(ct, post.Id);
 		});
@@ -31,7 +30,7 @@ namespace ApplicationTemplate.Presentation
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new EditPostPageViewModel());
 		});
 
-		public IDynamicCommand NavigateToPost => this.GetCommandFromTask<PostData>(async (ct, post) =>
+		public IDynamicCommand NavigateToPost => this.GetCommandFromTask<Post>(async (ct, post) =>
 		{
 			await this.GetService<IStackNavigator>().Navigate(ct, () => new EditPostPageViewModel(post));
 		});
@@ -40,7 +39,7 @@ namespace ApplicationTemplate.Presentation
 
 		public IDataLoader Posts => this.GetDataLoader(GetPosts, d => d.WithTrigger(_deletePostTrigger));
 
-		private async Task<ImmutableList<PostData>> GetPosts(CancellationToken ct)
+		private async Task<ImmutableList<Post>> GetPosts(CancellationToken ct)
 		{
 			if (_onGetPostsCalled != null)
 			{
