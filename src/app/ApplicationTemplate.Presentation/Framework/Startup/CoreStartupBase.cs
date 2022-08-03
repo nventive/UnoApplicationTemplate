@@ -13,12 +13,11 @@ namespace ApplicationTemplate
 	/// This abstract class is responsible for building the host of the application as well as startup diagnostics.
 	/// The implementator class is responsible for the application-specific code that initializes the application's services.
 	/// </summary>
-	public abstract class CoreStartupBase
+	public abstract class CoreStartupBase : IDisposable
 	{
-		/// <summary>
-		/// All subscriptions which will never be disposed.
-		/// </summary>
-		protected static readonly CompositeDisposable _neverDisposed = new CompositeDisposable();
+		private IHost _host;
+
+		protected CompositeDisposable Disposables { get; } = new CompositeDisposable();
 
 		public StartupState State { get; } = new StartupState();
 
@@ -95,11 +94,11 @@ namespace ApplicationTemplate
 
 			extraHostConfiguration?.Invoke(hostBuilder);
 
-			var host = hostBuilder.Build();
+			_host = hostBuilder.Build();
 
 			BuildHostActivity.Stop();
 
-			ServiceProvider = host.Services;
+			ServiceProvider = _host.Services;
 
 			OnInitialized(ServiceProvider);
 
@@ -181,6 +180,12 @@ namespace ApplicationTemplate
 				.Build();
 
 			return coreHost.Services;
+		}
+
+		public void Dispose()
+		{
+			Disposables.Dispose();
+			_host.Dispose();
 		}
 	}
 
