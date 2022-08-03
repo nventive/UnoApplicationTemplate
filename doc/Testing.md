@@ -109,6 +109,10 @@ You can also mock services that are normally registered with their implementatio
   }
   ```
 
+## Logging
+
+When doing integration tests, you can pass an `ITestOutputHelper` to the base constructors of `IntegrationTestBase` or `NavigationTestsBase` to automatically setup the Serilog logging for your tests using the same configuration as the app.
+
 ## Naming
 
 It is important to follow certain rules about the names of your class and your methods. The idea here is to make a sentence when combining your class name with one of your test.

@@ -10,6 +10,8 @@ For more documentation on localization, read the references listed at the bottom
 
 - An Uno implementation of `IStringLocalizer` (`ResourceLoaderStringLocalizer`) is registered as service in the [LocalizationConfiguration.cs](../src/app/ApplicationTemplate.Shared/Configuration/LocalizationConfiguration.cs) file.
 
+- For tests projects, a mock implementation of `IStringLocalizer` is used to avoid relying on a file. This improves performance and eases test parallelization.
+
 - We use `IStringLocalizer` to resolve those localized texts
   ```csharp
   var stringLocalizer = serviceProvider.GetService<IStringLocalizer>();
