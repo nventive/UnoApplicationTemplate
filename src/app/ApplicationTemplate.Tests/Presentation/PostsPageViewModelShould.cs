@@ -8,11 +8,16 @@ using Chinook.DynamicMvvm;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ApplicationTemplate.Tests
 {
 	public partial class PostsPageViewModelShould : NavigationTestsBase
 	{
+		public PostsPageViewModelShould(ITestOutputHelper output) : base(output)
+		{
+		}
+
 		[Fact]
 		public async Task GetAll()
 		{

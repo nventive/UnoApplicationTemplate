@@ -5,12 +5,17 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
+using Chinook.DynamicMvvm;
+using FluentAssertions;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Nventive.Persistence;
+using Serilog;
 using Xunit;
+using Xunit.Abstractions;
 
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true)]
 
@@ -23,12 +28,19 @@ namespace ApplicationTemplate.Tests
 	{
 		protected static readonly CancellationToken DefaultCancellationToken = CancellationToken.None;
 		protected static readonly CancellationToken AnyCancellationToken = It.IsAny<CancellationToken>();
-
+		private readonly ITestOutputHelper _output;
 		private CoreStartup _coreStartup;
 
-		// This is called before every test
-		public IntegrationTestBase()
+		/// <summary>
+		/// Initializes a new instance of the <see cref="IntegrationTestBase"/> class.
+		/// </summary>
+		/// <remarks>
+		/// This is called before every test.
+		/// </remarks>
+		/// <param name="output">Optional output parameter. Provide it when you want to consult the logs of this test.</param>
+		public IntegrationTestBase(ITestOutputHelper output = null)
 		{
+			_output = output;
 			InitializeServices(ConfigureHost);
 		}
 
@@ -40,14 +52,33 @@ namespace ApplicationTemplate.Tests
 		{
 			var coreStartup = new CoreStartup();
 			coreStartup.PreInitialize();
-			coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, (_, _, _) => { }, extraHostConfiguration);
+			coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, ConfigureLogging, extraHostConfiguration);
 
 			_coreStartup = coreStartup;
+		}
+
+		private void ConfigureLogging(HostBuilderContext hostBuilderContext, ILoggingBuilder loggingBuilder, bool isAppLogging)
+		{
+			if (_output is null)
+			{
+				return;
+			}
+
+			var serilogConfiguration = new LoggerConfiguration()
+				.ReadFrom.Configuration(hostBuilderContext.Configuration)
+				.Enrich.With(new ThreadIdEnricher())
+				.WriteTo.TestOutput(_output, outputTemplate: "{Timestamp:HH:mm:ss.fff} Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}");
+
+			var logger = serilogConfiguration.CreateLogger();
+			loggingBuilder.AddSerilog(logger);
 		}
 
 		public virtual async Task InitializeAsync()
 		{
 			await _coreStartup.Start();
+
+			// This sometimes fails when parallelization is enabled. (That's one of the reasons why parallelization is disabled.)
+			ViewModelBase.DefaultServiceProvider.Should().BeSameAs(_coreStartup.ServiceProvider, because: "We want the ViewModels of this test to use the services that we just initialized.");
 		}
 
 		/// <summary>
@@ -104,14 +135,7 @@ namespace ApplicationTemplate.Tests
 
 		public virtual async Task DisposeAsync()
 		{
-			await ClearStorage();
-		}
-
-		protected virtual async Task ClearStorage()
-		{
-			var dataPersister = GetService<IObservableDataPersister<ApplicationSettings>>();
-
-			await dataPersister.Update(DefaultCancellationToken, d => d.RemoveAndCommit());
+			_coreStartup.Dispose();
 		}
 	}
 
@@ -121,6 +145,14 @@ namespace ApplicationTemplate.Tests
 	/// <typeparam name="TSUT">The type of the service under test.</typeparam>
 	public class IntegrationTestBase<TSUT> : IntegrationTestBase
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="IntegrationTestBase{TSUT}"/> class.
+		/// </summary>
+		/// <param name="output">Optional output parameter. Provide it when you want to consult the logs of this test.</param>
+		public IntegrationTestBase(ITestOutputHelper output = null) : base(output)
+		{
+		}
+
 		protected virtual TSUT SUT => GetService<TSUT>();
 	}
 }

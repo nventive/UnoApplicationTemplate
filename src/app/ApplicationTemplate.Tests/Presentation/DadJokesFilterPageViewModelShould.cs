@@ -6,11 +6,16 @@ using DynamicData;
 using Microsoft.Extensions.Hosting;
 using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ApplicationTemplate.Tests
 {
 	public class DadJokesFilterPageViewModelShould : NavigationTestsBase
 	{
+		public DadJokesFilterPageViewModelShould(ITestOutputHelper output) : base(output)
+		{
+		}
+
 		private void MockingGetFavorites(Mock<IDadJokesService> mock)
 		{
 			mock

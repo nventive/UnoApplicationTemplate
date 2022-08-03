@@ -129,7 +129,7 @@ namespace ApplicationTemplate
 					await services.GetRequiredService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: true);
 				})
 				.Subscribe(_ => { }, e => Logger.LogError(e, "Failed to notify user of session expiration."))
-				.DisposeWith(_neverDisposed);
+				.DisposeWith(Disposables);
 		}
 
 		private static async Task ClearNavigationStack(CancellationToken ct, ISectionStackNavigator stack)

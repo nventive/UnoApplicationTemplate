@@ -24,6 +24,11 @@ namespace ApplicationTemplate
 			var serilogConfiguration = new LoggerConfiguration();
 
 			serilogConfiguration.ReadFrom.Configuration(hostBuilderContext.Configuration);
+//-:cnd:noEmit
+#if WINDOWS_UWP
+			serilogConfiguration.Enrich.With(new ThreadIdEnricher());
+#endif
+//+:cnd:noEmit
 
 			var options = hostBuilderContext.Configuration
 				.GetSection("LoggingOutput")
@@ -60,7 +65,7 @@ namespace ApplicationTemplate
 #elif __IOS__
 				.WriteTo.NSLog(outputTemplate: "{Level:u1}/{SourceContext}: {Message:lj} {Exception}");
 #else
-				.WriteTo.Debug(outputTemplate: "{Timestamp:MM-dd HH:mm:ss.fffzzz} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}");
+				.WriteTo.Debug(outputTemplate: "{Timestamp:HH:mm:ss.fff} Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}");
 #endif
 //+:cnd:noEmit
 		}

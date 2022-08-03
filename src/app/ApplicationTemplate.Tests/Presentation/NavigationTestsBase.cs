@@ -11,6 +11,7 @@ using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ApplicationTemplate.Tests
 {
@@ -19,6 +20,14 @@ namespace ApplicationTemplate.Tests
 	/// </summary>
 	public class NavigationTestsBase : IntegrationTestBase
 	{
+		/// <summary>
+		/// Initializes a new instance of the <see cref="NavigationTestsBase"/> class.
+		/// </summary>
+		/// <param name="output">Optional output parameter. Provide it when you want to consult the logs of this test.</param>
+		public NavigationTestsBase(ITestOutputHelper output = null) : base(output)
+		{
+		}
+
 		/// <summary>
 		/// This method can be used to assert that the current ViewModel is a TViewModel.
 		/// </summary>
