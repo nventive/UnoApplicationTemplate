@@ -20,6 +20,7 @@ We use the following convention for log levels:
 We use [Serilog](https://www.nuget.org/packages/Serilog/) to implement log providers (called sinks).
   - We use [Serilog.Sinks.Xamarin](https://www.nuget.org/packages/Serilog.Sinks.Xamarin/) for native console logging (not supported by [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/)).
   - We use [Serilog.Sinks.File](https://www.nuget.org/packages/Serilog.Sinks.File) for file logging.
+  - We use [Serilog.Sinks.XUnit](https://www.nuget.org/packages/Serilog.Sinks.XUnit) for xUnit test logging.
   - We use [Serilog.Settings.Configuration](https://www.nuget.org/packages/Serilog.Settings.Configuration) to load the log filters from [appsettings.json](../src/app/ApplicationTemplate.Shared/appsettings.json); _filters are different between environments_.
   - We use [Serilog.Extensions.Hosting](https://www.nuget.org/packages/Serilog.Extensions.Hosting/) to configure the loggers with `GenericHost`.
 
@@ -37,7 +38,7 @@ myLogger.LogInformation("This is an information log.");
 
 ## Diagnostics
 
-Multiple logging features can be tested from the diagnostics screen. This is configured in [LoggersDiagnosticsViewModel](../src/app/ApplicationTemplate.Shared/Presentation/Diagnostics/LoggersDiagnosticsViewModel.cs) and [SummaryDiagnosticsViewModel](../src/app/ApplicationTemplate.Shared/Presentation/Diagnostics/SummaryDiagnosticsViewModel.cs)..
+Multiple logging features can be tested from the diagnostics screen. This is configured in [LoggersDiagnosticsViewModel](../src/app/ApplicationTemplate.Shared/Presentation/Diagnostics/LoggersDiagnosticsViewModel.cs) and [SummaryDiagnosticsViewModel](../src/app/ApplicationTemplate.Shared/Presentation/Diagnostics/SummaryDiagnosticsViewModel.cs).
 
 - You can test the different log levels / providers. 
 - You can enable / disable console logging.

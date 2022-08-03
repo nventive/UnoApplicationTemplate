@@ -28,6 +28,19 @@ _[Create this diagram from the [architecture file](diagrams/architecture.drawio)
 
 ---
 
+## Solution Structure
+
+The application solution is divided in 2 main areas.
+- `app-heads` contains the _runnable_ heads.
+- `app-shared` contains the shared code used by the heads.
+  - It's divided per application layer.
+  - You can only put platform-specific code (things like `#if __IOS__`) in the Views layer.
+  The other layers are `.Net Standard 2.0` libraries that are platform agnostic.
+
+![Solution diagram](diagrams/solution-structure.png)
+
+---
+
 ## Topics
 
 ### T01 - Material Theme
