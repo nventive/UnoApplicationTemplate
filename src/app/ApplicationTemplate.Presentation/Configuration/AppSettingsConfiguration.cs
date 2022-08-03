@@ -189,15 +189,18 @@ namespace ApplicationTemplate
 		public class AppEnvironment
 		{
 			private static string _currentEnvironment;
+			private static string _currentFolderPath;
 
 			/// <summary>
 			/// Gets the current environment.
 			/// </summary>
-			/// <returns>Current environment</returns>
+			/// <param name="folderPath">The path to the directory containing the environment override file.</param>
+			/// <returns>The current environment.</returns>
 			public static string GetCurrent(string folderPath)
 			{
 				if (_currentEnvironment == null)
 				{
+					_currentFolderPath = folderPath;
 					var filePath = GetSettingFilePath(folderPath);
 
 					_currentEnvironment = File.Exists(filePath)
@@ -211,8 +214,8 @@ namespace ApplicationTemplate
 			/// <summary>
 			/// Sets the current environment to <paramref name="environment"/>.
 			/// </summary>
-			/// <param name="environment">Environment</param>
-			public static void SetCurrent(string folderPath, string environment)
+			/// <param name="environment">The environment override.</param>
+			public static void SetCurrent(string environment)
 			{
 				if (environment == null)
 				{
@@ -228,7 +231,7 @@ namespace ApplicationTemplate
 					throw new InvalidOperationException($"Environment '{environment}' is unknown and cannot be set.");
 				}
 
-				using (var writer = File.CreateText(GetSettingFilePath(folderPath)))
+				using (var writer = File.CreateText(GetSettingFilePath(_currentFolderPath)))
 				{
 					writer.Write(environment);
 				}

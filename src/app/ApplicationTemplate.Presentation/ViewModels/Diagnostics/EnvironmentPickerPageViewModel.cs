@@ -40,7 +40,7 @@ namespace ApplicationTemplate.Presentation
 				return;
 			}
 
-			//AppSettingsConfiguration.AppEnvironment.SetCurrent(environment);
+			AppSettingsConfiguration.AppEnvironment.SetCurrent(environment);
 
 			// TODO #173219 : Disable back button
 
