@@ -17,6 +17,11 @@ namespace ApplicationTemplate.Business
 
 		public static UserProfile FromData(UserProfileData data)
 		{
+			if (data is null)
+			{
+				return null;
+			}
+
 			return new UserProfile
 			{
 				Id = data.Id,

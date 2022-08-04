@@ -1,4 +1,5 @@
 ﻿using System.Reactive.Concurrency;
+using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
@@ -23,7 +24,7 @@ namespace ApplicationTemplate.Views
 					s.GetRequiredService<CoreDispatcher>(),
 					CoreDispatcherPriority.Normal
 				))
-				.AddSingleton<IViewModelViewFactory, FrameworkElementViewModelViewFactory>()
+				.AddSingleton<IViewModelViewFactory, ViewModelViewFactory>()
 				.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 				.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 				.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>()
