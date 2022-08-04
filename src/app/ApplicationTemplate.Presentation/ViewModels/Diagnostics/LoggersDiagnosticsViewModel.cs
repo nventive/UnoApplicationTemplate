@@ -28,13 +28,13 @@ namespace ApplicationTemplate.Presentation
 
 		public bool IsFileLoggingEnabled
 		{
-			get => this.Get(initialValue: this.GetOptionsValue<LoggingOutputOptions>().IsFileLoggingEnabled);
+			get => this.GetFromOptionsMonitor<LoggingOutputOptions, bool>(o => o.IsFileLoggingEnabled);
 			set => this.Set(value);
 		}
 
 		public bool IsConsoleLoggingEnabled
 		{
-			get => this.Get(initialValue: this.GetOptionsValue<LoggingOutputOptions>().IsConsoleLoggingEnabled);
+			get => this.GetFromOptionsMonitor<LoggingOutputOptions, bool>(o => o.IsConsoleLoggingEnabled);
 			set => this.Set(value);
 		}
 
@@ -83,38 +83,24 @@ namespace ApplicationTemplate.Presentation
 
 		private async Task OnConsoleLoggingChanged(CancellationToken ct, bool isEnabled)
 		{
-			var isCurrentlyEnabled = this.GetOptionsValue<LoggingOutputOptions>().IsConsoleLoggingEnabled;
-
 			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{IsEnabled} console logging.", isEnabled ? "Enabling" : "Disabling");
 
-			this.GetService<IConfiguration>()["LoggingOutput:IsConsoleLoggingEnabled"] = isEnabled.ToString();
-
-			if (isCurrentlyEnabled != isEnabled)
-			{
-				await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
-					.Title("Diagnostics")
-					.Content("Restart the application to apply your changes.")
-					.OkCommand()
-				);
-			}
+			await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
+				.Title("Diagnostics")
+				.Content("Restart the application to apply your changes.")
+				.OkCommand()
+			);
 		}
 
 		private async Task OnFileLoggingChanged(CancellationToken ct, bool isEnabled)
 		{
-			var isCurrentlyEnabled = this.GetOptionsValue<LoggingOutputOptions>().IsFileLoggingEnabled;
-
 			this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{IsEnabled} file logging.", isEnabled ? "Enabling" : "Disabling");
 
-			this.GetService<IConfiguration>()["LoggingOutput:IsFileLoggingEnabled"] = isEnabled.ToString();
-
-			if (isCurrentlyEnabled != isEnabled)
-			{
-				await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
-				   .Title("Diagnostics")
-				   .Content("Restart the application to apply your changes.")
-				   .OkCommand()
-			   );
-			}
+			await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
+				.Title("Diagnostics")
+				.Content("Restart the application to apply your changes.")
+				.OkCommand()
+			);
 		}
 	}
 }
