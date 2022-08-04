@@ -9,6 +9,7 @@ using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
+using Chinook.DynamicMvvm.Deactivation;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using FluentValidation;
@@ -202,6 +203,40 @@ namespace ApplicationTemplate
 //+:cnd:noEmit
 #endif
 			};
+		}
+
+		/// <summary>
+		/// Starts deactivating and reactivating ViewModels based on navigation.
+		/// </summary>
+		/// <remarks>
+		/// To benefit from the deactivation optimizations, you need to do the following:<br/>
+		/// 1. Call this method from <see cref="StartServices(IServiceProvider, bool)"/>.<br/>
+		/// 2. Change <see cref="ViewModel"/> so that it inherits from <see cref="DeactivatableViewModelBase"/> rather than just <see cref="ViewModelBase"/>.<br/>
+		/// 3. Consider using extensions such as GetFromDeactivatableObservable instead of the classic GetFromObservable for your dynamic properties from observables.<br/>
+		/// ViewModel deactivation shows benefits when your pages have a lot of live updates.<br/>
+		/// Deactivation means that a page ViewModel unsubscribes from its observable or event dependencies while it's not active (i.e. "visible" to the user).<br/>
+		/// Reactivation occurs when a page ViewModel becomes active again and causes re-subscriptions.
+		/// </remarks>
+		/// <param name="services">The <see cref="IServiceProvider"/>.</param>
+		private void StartViewModelDeactivation(IServiceProvider services)
+		{
+			var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
+
+			IDeactivatable previousVM = null;
+			sectionsNavigator.StateChanged += OnSectionsNavigatorStateChanged;
+
+			void OnSectionsNavigatorStateChanged(object sender, SectionsNavigatorEventArgs args)
+			{
+				var currentVM = sectionsNavigator.GetActiveStackNavigator()?.GetActiveViewModel() as IDeactivatable;
+
+				if (previousVM != currentVM)
+				{
+					previousVM?.Deactivate();
+					currentVM?.Reactivate();
+				}
+
+				previousVM = currentVM;
+			}
 		}
 
 		protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
