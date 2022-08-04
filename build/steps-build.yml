@@ -163,7 +163,15 @@ steps:
     filePath: '$(System.DefaultWorkingDirectory)/build/build-ios.sh'
     arguments: '"${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}" "$(ApplicationConfiguration)" "$(ApplicationPlatform)" "$(provisioningProfile.provisioningProfileUuid)" "$(ApplicationIdentifier)" "$(PreReleaseNumber)"'
 
-- script: dotnet test ${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }} /p:Configuration=$(ApplicationConfiguration) /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=cobertura /p:CoverletOutput=${{ parameters.pathToSrc }}/coverage /p:ExcludeByFile="**/*.g.cs" /p:Exclude="[*]*.Tests.*" --logger trx --no-build
+- script: >
+    dotnet test ${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}
+    /p:Configuration=$(ApplicationConfiguration)
+    /p:CollectCoverage=true 
+    /p:CoverletOutputFormat=cobertura
+    /p:CoverletOutput=${{ parameters.pathToSrc }}/coverage
+    /p:ExcludeByFile="**/*.g.cs"
+    --logger trx
+    --no-build
   displayName: 'Run tests'
   condition: and(succeeded(), eq(variables['ApplicationConfiguration'], 'Release_Tests'))
 
