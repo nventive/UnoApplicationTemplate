@@ -53,7 +53,7 @@
 		<PackageReference Include="Chinook.BackButtonManager" Version="0.5.0-dev.33" />
 		<PackageReference Include="Chinook.SectionsNavigation" Version="0.7.0-dev.91" />
 		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="0.7.0-dev.91" />
-		<PackageReference Include="xunit" Version="2.4.1" />
+		<PackageReference Include="xunit" Version="2.4.2" />
 		<PackageReference Include="xunit.runner.visualstudio" Version="2.4.5">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
