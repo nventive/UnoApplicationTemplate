@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 
@@ -9,11 +9,11 @@ namespace ApplicationTemplate.Presentation
 {
 	public class EditProfileFormViewModel : ViewModel
 	{
-		private readonly UserProfileData _userProfileData;
+		private readonly UserProfile _userProfileData;
 
-		public EditProfileFormViewModel(UserProfileData userProfileData)
+		public EditProfileFormViewModel(UserProfile userProfile)
 		{
-			_userProfileData = userProfileData ?? throw new ArgumentNullException(nameof(userProfileData));
+			_userProfileData = userProfile ?? throw new ArgumentNullException(nameof(userProfile));
 
 			this.AddValidation(this.GetProperty(x => x.FirstName));
 			this.AddValidation(this.GetProperty(x => x.LastName));

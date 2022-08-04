@@ -1,5 +1,5 @@
 ﻿using System;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 
@@ -7,11 +7,11 @@ namespace ApplicationTemplate.Presentation
 {
 	public class PostFormViewModel : ViewModel
 	{
-		private readonly PostData _post;
+		private readonly Post _post;
 
-		public PostFormViewModel(PostData post)
+		public PostFormViewModel(Post post)
 		{
-			_post = post;
+			_post = post ?? new Post();
 
 			this.AddValidation(this.GetProperty(x => x.Title));
 			this.AddValidation(this.GetProperty(x => x.Body));
@@ -29,7 +29,7 @@ namespace ApplicationTemplate.Presentation
 			set => this.Set(value);
 		}
 
-		public PostData GetPost()
+		public Post GetPost()
 		{
 			return _post with
 			{

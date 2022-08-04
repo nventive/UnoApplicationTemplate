@@ -2,7 +2,7 @@
 using System.Collections.Immutable;
 using System.Linq;
 using System.Threading.Tasks;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.Business;
 using ApplicationTemplate.Presentation;
 using Chinook.DynamicMvvm;
 using FluentAssertions;
@@ -26,7 +26,7 @@ namespace ApplicationTemplate.Tests
 			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
 
 			// Act
-			var posts = await viewModel.Posts.Load(DefaultCancellationToken) as ImmutableList<PostData>;
+			var posts = await viewModel.Posts.Load(DefaultCancellationToken) as ImmutableList<Post>;
 
 			// Assert
 			posts.Should().NotBeNull();
@@ -39,7 +39,7 @@ namespace ApplicationTemplate.Tests
 			// Arrange
 			await NavigateAndClear(DefaultCancellationToken, () => new PostsPageViewModel());
 			var viewModel = (PostsPageViewModel)GetCurrentViewModel();
-			var posts = await viewModel.Posts.Load(DefaultCancellationToken) as ImmutableList<PostData>;
+			var posts = await viewModel.Posts.Load(DefaultCancellationToken) as ImmutableList<Post>;
 
 			// Act
 			var editedPost = posts.First();

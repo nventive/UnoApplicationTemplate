@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Immutable;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Client;
@@ -15,26 +16,26 @@ namespace ApplicationTemplate.Business
 			_postEndpoint = postEndpoint;
 		}
 
-		public async Task<PostData> GetPost(CancellationToken ct, long postId)
+		public async Task<Post> GetPost(CancellationToken ct, long postId)
 		{
-			return await _postEndpoint.Get(ct, postId);
+			return Post.FromData(await _postEndpoint.Get(ct, postId));
 		}
 
-		public async Task<ImmutableList<PostData>> GetPosts(CancellationToken ct)
+		public async Task<ImmutableList<Post>> GetPosts(CancellationToken ct)
 		{
 			var posts = await _postEndpoint.GetAll(ct);
 
-			return posts.ToImmutableList();
+			return posts.Select(data => Post.FromData(data)).ToImmutableList();
 		}
 
-		public async Task<PostData> Create(CancellationToken ct, PostData post)
+		public async Task<Post> Create(CancellationToken ct, Post post)
 		{
-			return await _postEndpoint.Create(ct, post);
+			return Post.FromData(await _postEndpoint.Create(ct, post.ToData()));
 		}
 
-		public async Task<PostData> Update(CancellationToken ct, long postId, PostData post)
+		public async Task<Post> Update(CancellationToken ct, long postId, Post post)
 		{
-			return await _postEndpoint.Update(ct, postId, post);
+			return Post.FromData(await _postEndpoint.Update(ct, postId, post.ToData()));
 		}
 
 		public async Task Delete(CancellationToken ct, long postId)

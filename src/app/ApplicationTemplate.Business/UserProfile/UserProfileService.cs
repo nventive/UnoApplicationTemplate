@@ -19,15 +19,15 @@ namespace ApplicationTemplate.Business
 			_profileEndpoint = profileEndpoint ?? throw new ArgumentNullException(nameof(profileEndpoint));
 		}
 
-		public async Task<UserProfileData> GetCurrent(CancellationToken ct)
+		public async Task<UserProfile> GetCurrent(CancellationToken ct)
 		{
-			return await _profileEndpoint.Get(ct);
+			return UserProfile.FromData(await _profileEndpoint.Get(ct));
 		}
 
 		/// <inheritdoc/>
-		public async Task Update(CancellationToken ct, UserProfileData userProfile)
+		public async Task Update(CancellationToken ct, UserProfile userProfile)
 		{
-			await _profileEndpoint.Update(ct, userProfile);
+			await _profileEndpoint.Update(ct, userProfile.ToData());
 		}
 	}
 }
