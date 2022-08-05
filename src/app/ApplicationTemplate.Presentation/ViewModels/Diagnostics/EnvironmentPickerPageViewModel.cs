@@ -40,7 +40,7 @@ namespace ApplicationTemplate.Presentation
 				return;
 			}
 
-			AppSettingsConfiguration.AppEnvironment.SetCurrent(environment);
+			ConfigurationConfiguration.AppEnvironment.SetCurrent(environment);
 
 			// TODO #173219 : Disable back button
 
@@ -49,7 +49,7 @@ namespace ApplicationTemplate.Presentation
 
 		private Task<string[]> GetEnvironments(CancellationToken ct)
 		{
-			return Task.FromResult(AppSettingsConfiguration.AppEnvironment.GetAll());
+			return Task.FromResult(ConfigurationConfiguration.AppEnvironment.GetAll());
 		}
 	}
 }

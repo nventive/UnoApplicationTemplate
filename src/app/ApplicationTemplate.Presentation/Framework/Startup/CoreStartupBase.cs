@@ -51,6 +51,8 @@ namespace ApplicationTemplate
 		/// Initializes the application.
 		/// </summary>
 		/// <param name="contentRootPath">Specifies the content root directory to be used by the host.</param>
+		/// <param name="settingsFolderPath">The folder path indicating where the override files are.</param>
+		/// <param name="loggingConfiguration">The delegate to call to configure logging.</param>
 		/// <param name="extraHostConfiguration">Extra host configuration</param>
 		public void Initialize(
 			string contentRootPath,
@@ -118,6 +120,7 @@ namespace ApplicationTemplate
 		/// Initializes services into the provided <see cref="IHostBuilder"/>.
 		/// </summary>
 		/// <param name="hostBuilder">The hostbuilder in which services must be added.</param>
+		/// <param name="settingsFolderPath">The folder path indicating where the override files are.</param>
 		/// <returns>The original host builder with the new services added.</returns>
 		protected abstract IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath);
 
@@ -132,7 +135,6 @@ namespace ApplicationTemplate
 		/// Starts the application.
 		/// This method can be called multiple times.
 		/// </summary>
-		/// <returns><see cref="Task"/></returns>
 		public async Task Start()
 		{
 			if (!State.IsInitialized)
@@ -172,7 +174,7 @@ namespace ApplicationTemplate
 		{
 			var coreHost = new HostBuilder()
 				.UseContentRoot(contentRootPath)
-				.AddAppSettings(settingsFolderPath)
+				.AddConfiguration(settingsFolderPath)
 				.ConfigureLogging((hostBuilderContext, loggingBuilder) =>
 				{
 					loggingConfiguration(hostBuilderContext, loggingBuilder, isAppLogging: false);
@@ -184,8 +186,17 @@ namespace ApplicationTemplate
 
 		public void Dispose()
 		{
-			Disposables.Dispose();
-			_host.Dispose();
+			Dispose(true);
+			GC.SuppressFinalize(this);
+		}
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (disposing)
+			{
+				Disposables.Dispose();
+				_host.Dispose();
+			}
 		}
 	}
 

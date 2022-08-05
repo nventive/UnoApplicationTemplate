@@ -76,9 +76,9 @@ namespace ApplicationTemplate.Presentation
 			// iOS :UserAgent = $"{applicationName}/{AppVersion.ToString()}({DeviceType}; iOS {OSVersionNumber})";
 			stringBuilder.AppendLine($"Culture: {CultureInfo.CurrentCulture.Name}");
 
-			stringBuilder.AppendLine($"Environment: {AppSettingsConfiguration.AppEnvironment.GetCurrent(null)}");
+			stringBuilder.AppendLine($"Environment: {ConfigurationConfiguration.AppEnvironment.GetCurrent(null)}");
 
-			stringBuilder.AppendLine($"Build environment: {AppSettingsConfiguration.DefaultEnvironment}");
+			stringBuilder.AppendLine($"Build environment: {ConfigurationConfiguration.DefaultEnvironment}");
 
 //-:cnd:noEmit
 #if DEBUG

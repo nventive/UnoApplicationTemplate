@@ -31,7 +31,7 @@ namespace ApplicationTemplate
 		protected override IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath)
 		{
 			return hostBuilder
-				.AddAppSettings(settingsFolderPath)
+				.AddConfiguration(settingsFolderPath)
 				.ConfigureServices((context, s) => s
 					.AddApi(context.Configuration)
 					.AddDiagnostics(context.Configuration)
