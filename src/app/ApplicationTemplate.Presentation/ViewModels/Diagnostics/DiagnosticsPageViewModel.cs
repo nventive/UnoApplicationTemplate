@@ -33,7 +33,7 @@ namespace ApplicationTemplate.Presentation
 
 		private Task<string> GetCurrentEnvironment(CancellationToken ct)
 		{
-			return Task.FromResult(AppSettingsConfiguration.AppEnvironment.GetCurrent(null));
+			return Task.FromResult(ConfigurationConfiguration.AppEnvironment.GetCurrent(null));
 		}
 	}
 }

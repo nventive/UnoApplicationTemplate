@@ -1,117 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Abstractions;
-using Uno.Extensions;
 
 namespace ApplicationTemplate
 {
 	/// <summary>
-	/// This implementation of <see cref="JsonConfigurationProvider"/> overrides its file when <see cref="Set(string, string)"/> is called.
-	/// </summary>
-	public class WritableJsonConfigurationProvider : JsonConfigurationProvider
-	{
-		private ILogger _logger;
-
-		public WritableJsonConfigurationProvider(JsonConfigurationSource source, ILogger logger) : base(source)
-		{
-			_logger = logger;
-		}
-
-		public override void Set(string key, string value)
-		{
-			base.Set(key, value);
-
-			var filePath = Source.FileProvider.GetFileInfo(Source.Path).PhysicalPath;
-			var stopwatch = new Stopwatch();
-
-			using (var writer = File.CreateText(filePath))
-			{
-				try
-				{
-					stopwatch.Start();
-					var json = JsonSerializer.Serialize(Data, options: SerializationConfiguration.DefaultJsonSerializerOptions);
-					stopwatch.Stop();
-					writer.Write(json);
-				}
-				catch
-				{
-					stopwatch.Stop();
-					if (writer.BaseStream.Position == 0)
-					{
-						writer.Dispose();
-						// Don't keep the file if it's empty because it won't load properly on next launch.
-						File.Delete(filePath);
-					}
-					throw;
-				}
-			}
-
-			_logger.LogDebug("Serialized ­­­­{PairCount} key-value-pairs in {ElapsedMilliseconds}ms.", Data.Count, stopwatch.ElapsedMilliseconds);
-
-			OnReload();
-		}
-	}
-
-	public class WritableJsonConfigurationSource : IConfigurationSource
-	{
-		public WritableJsonConfigurationSource(string filePath)
-		{
-			FilePath = filePath;
-		}
-
-		public string FilePath { get; }
-
-		public IConfigurationProvider Build(IConfigurationBuilder builder)
-		{
-			builder.Properties.TryGetValue("HostLoggerFactory", out var value);
-			var factory = value as ILoggerFactory;
-			var logger = NullLogger.Instance as ILogger;
-			if (factory != null)
-			{
-				logger = factory.CreateLogger<WritableJsonConfigurationProvider>();
-			}
-
-			return new WritableJsonConfigurationProvider(GetSource(FilePath, builder), logger);
-		}
-
-		private static JsonConfigurationSource GetSource(string filePath, IConfigurationBuilder builder)
-		{
-			var source = new JsonConfigurationSource()
-			{
-				Path = filePath,
-
-				// We disable ReloadOnChange because we reload manually after saving the file.
-				ReloadOnChange = false,
-
-				// It's optional because it doesn't exists for as long as we don't override a value.
-				Optional = true,
-			};
-
-			source.ResolveFileProvider();
-			source.EnsureDefaults(builder);
-
-			return source;
-		}
-	}
-
-	/// <summary>
-	/// This class is used for app settings configuration.
-	/// - Loads the environment specific app settings.
+	/// This class is used to populate the <see cref="IConfiguration"/> of the host.
+	/// - Loads the options from the various appsettings.xxx.json files.
 	/// - Configures the host.
 	/// </summary>
-	public static class AppSettingsConfiguration
+	public static class ConfigurationConfiguration
 	{
 		public const string AppSettingsFileName = "appsettings";
 
@@ -131,7 +34,12 @@ namespace ApplicationTemplate
 #endif
 //+:cnd:noEmit
 
-		public static IHostBuilder AddAppSettings(this IHostBuilder hostBuilder, string folderPath)
+		/// <summary>
+		/// Populates the <see cref="IConfiguration"/> of the host using appsettings.json files.
+		/// </summary>
+		/// <param name="hostBuilder">The host builder.</param>
+		/// <param name="folderPath">The folder path pointing to override files.</param>
+		public static IHostBuilder AddConfiguration(this IHostBuilder hostBuilder, string folderPath)
 		{
 			if (hostBuilder is null)
 			{
@@ -141,13 +49,22 @@ namespace ApplicationTemplate
 			return hostBuilder
 				.AddConfiguration()
 				.ConfigureHostConfiguration(b => b
-					.AddGeneralAppSettings()
-					.AddEnvironmentAppSettings(folderPath)
-					.Add(new WritableJsonConfigurationSource(Path.Combine(folderPath, AppSettingsFileName + ".override.json")))
+					// appsettings.json
+					.AddBaseConfiguration()
+
+					// appsettings.{staging, production, etc.}.json
+					.AddEnvironmentConfiguration(folderPath)
+
+					// appsettings.override.json
+					.AddUserOverrideConfiguration(folderPath)
 				);
 		}
 
-		private static IConfigurationBuilder AddGeneralAppSettings(this IConfigurationBuilder configurationBuilder)
+		/// <summary>
+		/// Adds the base configuration source.
+		/// </summary>
+		/// <param name="configurationBuilder">The configuration builder.</param>
+		private static IConfigurationBuilder AddBaseConfiguration(this IConfigurationBuilder configurationBuilder)
 		{
 			var generalAppSettingsFileName = $"{AppSettingsFileName}.json";
 			var generalAppSettings = AppSettings.GetAll().SingleOrDefault(s => s.FileName.EndsWith(generalAppSettingsFileName, StringComparison.OrdinalIgnoreCase));
@@ -160,7 +77,13 @@ namespace ApplicationTemplate
 			return configurationBuilder;
 		}
 
-		private static IConfigurationBuilder AddEnvironmentAppSettings(this IConfigurationBuilder configurationBuilder, string folderPath)
+		/// <summary>
+		/// Adds the environment specific configuration source.
+		/// The environment can be overriden by the user.
+		/// </summary>
+		/// <param name="configurationBuilder">The configuration builder.</param>
+		/// <param name="folderPath">The folder path indicating where the override file should be when the user overrode the environment.</param>
+		private static IConfigurationBuilder AddEnvironmentConfiguration(this IConfigurationBuilder configurationBuilder, string folderPath)
 		{
 			var currentEnvironment = AppEnvironment.GetCurrent(folderPath);
 			var environmentAppSettingsFileName = $"{AppSettingsFileName}.{currentEnvironment}.json";
@@ -174,7 +97,21 @@ namespace ApplicationTemplate
 			return configurationBuilder;
 		}
 
-		public static IHostBuilder AddConfiguration(this IHostBuilder hostBuilder)
+		/// <summary>
+		/// Adds the optional <i>user-override</i> configuration source.
+		/// </summary>
+		/// <param name="configurationBuilder">The configuration builder.</param>
+		/// <param name="folderPath">The folder path indicating where the override file should be.</param>
+		private static IConfigurationBuilder AddUserOverrideConfiguration(this IConfigurationBuilder configurationBuilder, string folderPath)
+		{
+			return configurationBuilder.Add(new WritableJsonConfigurationSource(Path.Combine(folderPath, AppSettingsFileName + ".override.json")));
+		}
+
+		/// <summary>
+		/// Registers the <see cref="IConfiguration"/> as a singleton.
+		/// </summary>
+		/// <param name="hostBuilder">The host builder.</param>
+		private static IHostBuilder AddConfiguration(this IHostBuilder hostBuilder)
 		{
 			if (hostBuilder is null)
 			{
