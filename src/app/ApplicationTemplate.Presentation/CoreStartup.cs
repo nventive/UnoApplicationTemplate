@@ -33,8 +33,9 @@ namespace ApplicationTemplate
 			return hostBuilder
 				.AddConfiguration(settingsFolderPath)
 				.ConfigureServices((context, s) => s
-					.AddApi(context.Configuration)
 					.AddDiagnostics(context.Configuration)
+					.AddMock(context.Configuration)
+					.AddApi(context.Configuration)
 					.AddMvvm()
 					.AddPersistence()
 					.AddNavigationCore()

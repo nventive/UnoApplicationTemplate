@@ -29,5 +29,20 @@ namespace ApplicationTemplate.Presentation
 		});
 
 		public bool CanOpenSettingsFolder { get; }
+
+		public bool IsMockEnabled
+		{
+			get => this.GetFromOptionsMonitor<MockOptions, bool>(o => o.IsMockEnabled);
+			set => this.Set(value);
+		}
+
+		public IDynamicCommand NotifyNeedsRestart => this.GetCommandFromTask(async ct =>
+		{
+			await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
+				.Title("Diagnostics")
+				.Content("Restart the application to apply your changes.")
+				.OkCommand()
+			);
+		});
 	}
 }

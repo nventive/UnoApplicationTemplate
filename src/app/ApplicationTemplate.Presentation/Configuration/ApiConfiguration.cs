@@ -42,22 +42,24 @@ namespace ApplicationTemplate
 				.AddFirebaseHandler()
 #endif
 				.AddResponseContentDeserializer()
-				.AddAuthenticationEndpoint(configuration)
+				.AddAuthenticationEndpoint()
 				.AddPostEndpoint(configuration)
-				.AddUserProfileEndpoint(configuration)
+				.AddUserProfileEndpoint()
 				.AddDadJokesEndpoint(configuration);
 
 			return services;
 		}
 
-		private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services, IConfiguration configuration)
+		private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services)
 		{
-			return services.AddEndpoint<IUserProfileEndpoint, UserProfileEndpointMock>(configuration, "UserProfileEndpoint");
+			// This one doesn't have an actual remote endpoint yet. It's always a mock implementation.
+			return services.AddSingleton<IUserProfileEndpoint, UserProfileEndpointMock>();
 		}
 
-		private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services, IConfiguration configuration)
+		private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services)
 		{
-			return services.AddEndpoint<IAuthenticationEndpoint, AuthenticationEndpointMock>(configuration, "AuthenticationEndpoint");
+			// This one doesn't have an actual remote endpoint yet. It's always a mock implementation.
+			return services.AddSingleton<IAuthenticationEndpoint, AuthenticationEndpointMock>();
 		}
 
 		private static IServiceCollection AddPostEndpoint(this IServiceCollection services, IConfiguration configuration)
@@ -88,14 +90,14 @@ namespace ApplicationTemplate
 			where TInterface : class
 			where TMock : class, TInterface
 		{
-			var options = configuration.GetSection(name).Get<EndpointOptions>();
-
-			if (options.EnableMock)
+			var mockOptions = configuration.GetSection("Mock").Get<MockOptions>();
+			if (mockOptions.IsMockEnabled)
 			{
 				services.AddSingleton<TInterface, TMock>();
 			}
 			else
 			{
+				var options = configuration.GetSection(name).Get<EndpointOptions>();
 				var httpClientBuilder = services
 					.AddRefitHttpClient<TInterface>()
 					.ConfigurePrimaryHttpMessageHandler(serviceProvider => serviceProvider.GetRequiredService<HttpMessageHandler>())

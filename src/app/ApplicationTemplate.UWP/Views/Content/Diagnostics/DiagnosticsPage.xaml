@@ -3,6 +3,8 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+	  xmlns:core="using:Microsoft.Xaml.Interactions.Core"
 	  mc:Ignorable="">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
@@ -84,7 +86,7 @@
 
 				<!-- Localization -->
 				<StackPanel>
-					
+
 					<!-- Label -->
 					<TextBlock Text="LOCALIZATION"
 							   FontWeight="Bold"
@@ -136,6 +138,31 @@
 									  Grid.Column="1" />
 					</Grid>
 
+					<Grid Margin="0,4">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+
+						<!-- Label -->
+						<TextBlock Text="Mock data"
+								   VerticalAlignment="Center" />
+
+						<!-- ToggleSwitch -->
+						<ToggleSwitch IsOn="{Binding IsMockEnabled, Mode=TwoWay}"
+									  HorizontalAlignment="Right"
+									  VerticalAlignment="Center"
+									  Width="50"
+									  MinWidth="50"
+									  Grid.Column="1">
+							<interactivity:Interaction.Behaviors>
+								<core:EventTriggerBehavior EventName="Toggled">
+									<core:InvokeCommandAction Command="{Binding NotifyNeedsRestart}" />
+								</core:EventTriggerBehavior>
+							</interactivity:Interaction.Behaviors>
+						</ToggleSwitch>
+					</Grid>
+
 					<!-- Open Settings Folder Button -->
 					<Button Content="Open settings folder"
 							Command="{Binding OpenSettingsFolder}"
@@ -146,7 +173,7 @@
 
 				<!-- Loggers -->
 				<StackPanel DataContext="{Binding LoggersDiagnostics}">
-					
+
 					<!-- Label -->
 					<TextBlock Text="LOGGERS"
 							   FontWeight="Bold"
@@ -187,7 +214,7 @@
 									  Width="50"
 									  Grid.Column="1" />
 					</Grid>
-						
+
 					<!-- Delete Log Files Button -->
 					<Button Content="Delete log files"
 							Command="{Binding DeleteLogFiles}"
