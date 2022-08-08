@@ -13,14 +13,12 @@
 
 		<!-- Jokes Empty Template -->
 		<DataTemplate x:Key="JokesEmptyTemplate">
-			<Grid>
-				
-				<StackPanel Visibility="{Binding Jokes, Converter={StaticResource EmptyStringToCollapsed}, FallbackValue=Collapsed}"
-							HorizontalAlignment="Stretch"
+			<Grid>				
+				<StackPanel HorizontalAlignment="Stretch"
 							VerticalAlignment="Center">
 
 					<!-- No Result Text -->
-					<TextBlock Text="No results found for"
+					<TextBlock Text="There are no results."
 							   Style="{StaticResource Body1}"
 							   HorizontalAlignment="Center" />
 				</StackPanel>

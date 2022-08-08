@@ -6,9 +6,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="Mock\DadJokesEndpointMock.FetchData.json" />
-		<EmbeddedResource Include="Mock\PostEndpointMock.GetAll.json" />
-		<EmbeddedResource Include="Mock\UserProfileEndpointMock.Get.json" />
+		<EmbeddedResource Include="ApiEndpoints\DadJokes\DadJokesEndpointMock.FetchData.json" />
+		<EmbeddedResource Include="ApiEndpoints\Posts\PostEndpointMock.GetAll.json" />
+		<EmbeddedResource Include="ApiEndpoints\UserProfile\UserProfileEndpointMock.Get.json" />
 	</ItemGroup>
 
 	<ItemGroup>
