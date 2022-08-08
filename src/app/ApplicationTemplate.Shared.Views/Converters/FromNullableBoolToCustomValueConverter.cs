@@ -2,32 +2,31 @@
 using ApplicationTemplate.Presentation;
 using Nventive.View.Converters;
 
-namespace ApplicationTemplate.Views
+namespace ApplicationTemplate.Views;
+
+public class FromNullableBoolToCustomValueConverter : ConverterBase
 {
-	public class FromNullableBoolToCustomValueConverter : ConverterBase
+	public object DefaultValue { get; set; }
+
+	public object ValidValue { get; set; }
+
+	public object InvalidValue { get; set; }
+
+	protected override object Convert(object value, Type targetType, object parameter)
 	{
-		public object DefaultValue { get; set; }
-
-		public object ValidValue { get; set; }
-
-		public object InvalidValue { get; set; }
-
-		protected override object Convert(object value, Type targetType, object parameter)
+		if (value is bool?)
 		{
-			if (value is bool?)
+			switch (value)
 			{
-				switch (value)
-				{
-					case null:
-						return DefaultValue;
-					case false:
-						return InvalidValue;
-					case true:
-						return ValidValue;
-				}
+				case null:
+					return DefaultValue;
+				case false:
+					return InvalidValue;
+				case true:
+					return ValidValue;
 			}
-
-			return DefaultValue;
 		}
+
+		return DefaultValue;
 	}
 }

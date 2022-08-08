@@ -2,18 +2,17 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class WebViewPageViewModel : ViewModel
 {
-	public class WebViewPageViewModel : ViewModel
+	public WebViewPageViewModel(string title, Uri sourceUri)
 	{
-		public WebViewPageViewModel(string title, Uri sourceUri)
-		{
-			Title = title;
-			SourceUri = sourceUri;
-		}
-
-		public string Title { get; set; }
-
-		public Uri SourceUri { get; set; }
+		Title = title;
+		SourceUri = sourceUri;
 	}
+
+	public string Title { get; set; }
+
+	public Uri SourceUri { get; set; }
 }

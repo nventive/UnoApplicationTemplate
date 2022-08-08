@@ -6,37 +6,36 @@ using System.Threading;
 using System.Threading.Tasks;
 using MallardMessageHandlers;
 
-namespace ApplicationTemplate.Client
+namespace ApplicationTemplate.Client;
+
+public class UserProfileEndpointMock : BaseMock, IUserProfileEndpoint
 {
-	public class UserProfileEndpointMock : BaseMock, IUserProfileEndpoint
+	private readonly IAuthenticationTokenProvider<AuthenticationData> _tokenProvider;
+
+	public UserProfileEndpointMock(
+		IAuthenticationTokenProvider<AuthenticationData> tokenProvider,
+		JsonSerializerOptions serializerOptions)
+		: base(serializerOptions)
 	{
-		private readonly IAuthenticationTokenProvider<AuthenticationData> _tokenProvider;
+		_tokenProvider = tokenProvider ?? throw new ArgumentNullException(nameof(tokenProvider));
+	}
 
-		public UserProfileEndpointMock(
-			IAuthenticationTokenProvider<AuthenticationData> tokenProvider,
-			JsonSerializerOptions serializerOptions)
-			: base(serializerOptions)
+	public async Task<UserProfileData> Get(CancellationToken ct)
+	{
+		var authenticationData = await _tokenProvider.GetToken(ct, request: null);
+
+		if (authenticationData == default(AuthenticationData))
 		{
-			_tokenProvider = tokenProvider ?? throw new ArgumentNullException(nameof(tokenProvider));
+			return default(UserProfileData);
 		}
 
-		public async Task<UserProfileData> Get(CancellationToken ct)
-		{
-			var authenticationData = await _tokenProvider.GetToken(ct, request: null);
+		await Task.Delay(TimeSpan.FromSeconds(2), ct);
 
-			if (authenticationData == default(AuthenticationData))
-			{
-				return default(UserProfileData);
-			}
+		return await GetTaskFromEmbeddedResource<UserProfileData>();
+	}
 
-			await Task.Delay(TimeSpan.FromSeconds(2), ct);
-
-			return await GetTaskFromEmbeddedResource<UserProfileData>();
-		}
-
-		public async Task Update(CancellationToken ct, UserProfileData userProfile)
-		{
-			await Task.Delay(TimeSpan.FromSeconds(2), ct);
-		}
+	public async Task Update(CancellationToken ct, UserProfileData userProfile)
+	{
+		await Task.Delay(TimeSpan.FromSeconds(2), ct);
 	}
 }

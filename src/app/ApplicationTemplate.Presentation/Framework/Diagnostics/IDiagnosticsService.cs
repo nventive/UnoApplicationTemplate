@@ -4,14 +4,13 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+public interface IDiagnosticsService
 {
-	public interface IDiagnosticsService
-	{
-		Task TestExceptionFromMainThread(CancellationToken ct);
+	Task TestExceptionFromMainThread(CancellationToken ct);
 
-		void OpenSettingsFolder();
+	void OpenSettingsFolder();
 
-		bool CanOpenSettingsFolder { get; }
-	}
+	bool CanOpenSettingsFolder { get; }
 }

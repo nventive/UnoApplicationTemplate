@@ -6,13 +6,12 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MallardMessageHandlers;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public partial class WelcomePageViewModel : ViewModel
 {
-	public partial class WelcomePageViewModel : ViewModel
+	public IDynamicCommand NavigateToOnboarding => this.GetCommandFromTask(async ct =>
 	{
-		public IDynamicCommand NavigateToOnboarding => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new OnboardingPageViewModel());
-		});
-	}
+		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new OnboardingPageViewModel());
+	});
 }

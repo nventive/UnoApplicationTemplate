@@ -5,67 +5,66 @@ using System.Threading;
 using System.Threading.Tasks;
 using Nventive.Persistence;
 
-namespace ApplicationTemplate.Client
+namespace ApplicationTemplate.Client;
+
+public partial class ApplicationSettingsService : IApplicationSettingsService
 {
-	public partial class ApplicationSettingsService : IApplicationSettingsService
+	private readonly IObservableDataPersister<ApplicationSettings> _dataPersister;
+
+	public ApplicationSettingsService(IObservableDataPersister<ApplicationSettings> dataPersister)
 	{
-		private readonly IObservableDataPersister<ApplicationSettings> _dataPersister;
+		_dataPersister = dataPersister ?? throw new ArgumentNullException(nameof(dataPersister));
+	}
 
-		public ApplicationSettingsService(IObservableDataPersister<ApplicationSettings> dataPersister)
+	/// <inheritdoc />
+	public async Task<ApplicationSettings> GetCurrent(CancellationToken ct)
+	{
+		var result = await _dataPersister.Load(ct);
+
+		return result.Value ?? ApplicationSettings.Default;
+	}
+
+	/// <inheritdoc />
+	public IObservable<ApplicationSettings> GetAndObserveCurrent()
+	{
+		return _dataPersister.GetAndObserve().Select(r => r.Value ?? ApplicationSettings.Default);
+	}
+
+	/// <inheritdoc />
+	public async Task CompleteOnboarding(CancellationToken ct)
+	{
+		await Update(ct, s => s with { IsOnboardingCompleted = true });
+	}
+
+	/// <inheritdoc />
+	public async Task SetAuthenticationData(CancellationToken ct, AuthenticationData authenticationData)
+	{
+		await Update(ct, s => s with { AuthenticationData = authenticationData });
+	}
+
+	/// <inheritdoc />
+	public async Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, FavoriteJokeData> quotes)
+	{
+		await Update(ct, s => s with { FavoriteQuotes = quotes });
+	}
+
+	/// <inheritdoc />
+	public async Task DiscardUserSettings(CancellationToken ct)
+	{
+		await Update(ct, s => s with
 		{
-			_dataPersister = dataPersister ?? throw new ArgumentNullException(nameof(dataPersister));
-		}
+			FavoriteQuotes = ImmutableDictionary<string, FavoriteJokeData>.Empty,
+			AuthenticationData = default(AuthenticationData)
+		});
+	}
 
-		/// <inheritdoc />
-		public async Task<ApplicationSettings> GetCurrent(CancellationToken ct)
+	private async Task Update(CancellationToken ct, Func<ApplicationSettings, ApplicationSettings> updateFunction)
+	{
+		await _dataPersister.Update(ct, context =>
 		{
-			var result = await _dataPersister.Load(ct);
+			var settings = context.GetReadValueOrDefault(ApplicationSettings.Default);
 
-			return result.Value ?? ApplicationSettings.Default;
-		}
-
-		/// <inheritdoc />
-		public IObservable<ApplicationSettings> GetAndObserveCurrent()
-		{
-			return _dataPersister.GetAndObserve().Select(r => r.Value ?? ApplicationSettings.Default);
-		}
-
-		/// <inheritdoc />
-		public async Task CompleteOnboarding(CancellationToken ct)
-		{
-			await Update(ct, s => s with { IsOnboardingCompleted = true });
-		}
-
-		/// <inheritdoc />
-		public async Task SetAuthenticationData(CancellationToken ct, AuthenticationData authenticationData)
-		{
-			await Update(ct, s => s with { AuthenticationData = authenticationData });
-		}
-
-		/// <inheritdoc />
-		public async Task SetFavoriteQuotes(CancellationToken ct, ImmutableDictionary<string, FavoriteJokeData> quotes)
-		{
-			await Update(ct, s => s with { FavoriteQuotes = quotes });
-		}
-
-		/// <inheritdoc />
-		public async Task DiscardUserSettings(CancellationToken ct)
-		{
-			await Update(ct, s => s with
-			{
-				FavoriteQuotes = ImmutableDictionary<string, FavoriteJokeData>.Empty,
-				AuthenticationData = default(AuthenticationData)
-			});
-		}
-
-		private async Task Update(CancellationToken ct, Func<ApplicationSettings, ApplicationSettings> updateFunction)
-		{
-			await _dataPersister.Update(ct, context =>
-			{
-				var settings = context.GetReadValueOrDefault(ApplicationSettings.Default);
-
-				context.Commit(updateFunction(settings));
-			});
-		}
+			context.Commit(updateFunction(settings));
+		});
 	}
 }

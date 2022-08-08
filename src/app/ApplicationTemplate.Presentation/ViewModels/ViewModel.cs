@@ -10,45 +10,44 @@ using Chinook.StackNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Uno;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+/// <summary>
+/// ViewModel to use as a base for all other ViewModels.
+/// </summary>
+public class ViewModel : ViewModelBase, INavigableViewModel
 {
-	/// <summary>
-	/// ViewModel to use as a base for all other ViewModels.
-	/// </summary>
-	public class ViewModel : ViewModelBase, INavigableViewModel
+	// Add properties or commands you want to have on all your ViewModels
+
+	public ViewModel()
 	{
-		// Add properties or commands you want to have on all your ViewModels
+		(this as IInjectable)?.Inject((t, n) => this.GetService(t));
+	}
 
-		public ViewModel()
-		{
-			(this as IInjectable)?.Inject((t, n) => this.GetService(t));
-		}
+	public IDynamicCommand NavigateBack => this.GetCommandFromTask(async ct =>
+	{
+		await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
+	});
 
-		public IDynamicCommand NavigateBack => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
-		});
+	public IDynamicCommand CloseModal => this.GetCommandFromTask(async ct =>
+	{
+		await this.GetService<ISectionsNavigator>().CloseModal(ct);
+	});
 
-		public IDynamicCommand CloseModal => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<ISectionsNavigator>().CloseModal(ct);
-		});
+	void INavigableViewModel.SetView(object view)
+	{
+		var factory = this.GetService<IViewModelViewFactory>();
+		View = factory.Create(view);
+	}
 
-		void INavigableViewModel.SetView(object view)
-		{
-			var factory = this.GetService<IViewModelViewFactory>();
-			View = factory.Create(view);
-		}
-
-		/// <summary>
-		/// Executes the specified <paramref name="action"/> on the dispatcher.
-		/// </summary>
-		/// <param name="ct"><see cref="CancellationToken"/>.</param>
-		/// <param name="action">Action to execute.</param>
-		/// <returns><see cref="Task"/>.</returns>
-		public async Task RunOnDispatcher(CancellationToken ct, Func<CancellationToken, Task> action)
-		{
-			await this.GetService<IDispatcherScheduler>().Run(ct2 => action(ct2), ct);
-		}
+	/// <summary>
+	/// Executes the specified <paramref name="action"/> on the dispatcher.
+	/// </summary>
+	/// <param name="ct"><see cref="CancellationToken"/>.</param>
+	/// <param name="action">Action to execute.</param>
+	/// <returns><see cref="Task"/>.</returns>
+	public async Task RunOnDispatcher(CancellationToken ct, Func<CancellationToken, Task> action)
+	{
+		await this.GetService<IDispatcherScheduler>().Run(ct2 => action(ct2), ct);
 	}
 }

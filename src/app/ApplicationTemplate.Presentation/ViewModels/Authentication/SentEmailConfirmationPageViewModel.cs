@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class SentEmailConfirmationPageViewModel : ViewModel
 {
-	public class SentEmailConfirmationPageViewModel : ViewModel
-	{
-	}
 }

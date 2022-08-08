@@ -1,12 +1,11 @@
 ﻿using Windows.UI.Xaml.Controls;
 
-namespace ApplicationTemplate.Views.Content
+namespace ApplicationTemplate.Views.Content;
+
+public sealed partial class SentEmailConfirmationPage : Page
 {
-	public sealed partial class SentEmailConfirmationPage : Page
+	public SentEmailConfirmationPage()
 	{
-		public SentEmailConfirmationPage()
-		{
-			this.InitializeComponent();
-		}
+		this.InitializeComponent();
 	}
 }

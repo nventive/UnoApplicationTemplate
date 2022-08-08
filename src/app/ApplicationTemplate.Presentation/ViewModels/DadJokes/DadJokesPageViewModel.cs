@@ -12,74 +12,73 @@ using Chinook.StackNavigation;
 using DynamicData;
 using Xamarin.Essentials.Interfaces;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public partial class DadJokesPageViewModel : ViewModel
 {
-	public partial class DadJokesPageViewModel : ViewModel
+	public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 	{
-		public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
+		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
+	});
+
+	public IDynamicCommand RefreshJokes => this.GetCommandFromDataLoaderRefresh(Jokes);
+
+	public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
+		// Dispose the previous ItemViewModels when Quotes produces new values
+		.DisposePreviousData()
+		.TriggerOnNetworkReconnection(this.GetService<IConnectivity>())
+		.TriggerFromObservable(this.GetService<IDadJokesService>().GetAndObservePostTypeFilter().Skip(1))
+	);
+
+	public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<DadJokesItemViewModel>(async (ct, item) =>
+	{
+		await this.GetService<IDadJokesService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
+	});
+
+	private async Task<DadJokesItemViewModel[]> LoadJokes(CancellationToken ct, IDataLoaderRequest request)
+	{
+		await SetupFavoritesUpdate(ct);
+		var quotes = await this.GetService<IDadJokesService>().FetchData(ct);
+
+		return quotes
+			.Select(q => this.GetChild(() => new DadJokesItemViewModel(this, q), q.Id))
+			.ToArray();
+	}
+
+	private async Task SetupFavoritesUpdate(CancellationToken ct)
+	{
+		const string FavoritesKey = "FavoritesSubscription";
+
+		if (!TryGetDisposable(FavoritesKey, out var _))
 		{
-			await this.GetService<ISectionsNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
-		});
+			// Get the observable list of favorites.
+			var favorites = await this.GetService<IDadJokesService>().GetFavorites(ct);
 
-		public IDynamicCommand RefreshJokes => this.GetCommandFromDataLoaderRefresh(Jokes);
+			// Subscribe to the observable list to update the current items.
+			var subscription = favorites
+				.Connect()
+				.Subscribe(UpdateItemViewModels);
 
-		public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
-			// Dispose the previous ItemViewModels when Quotes produces new values
-			.DisposePreviousData()
-			.TriggerOnNetworkReconnection(this.GetService<IConnectivity>())
-			.TriggerFromObservable(this.GetService<IDadJokesService>().GetAndObservePostTypeFilter().Skip(1))
-		);
-
-		public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<DadJokesItemViewModel>(async (ct, item) =>
-		{
-			await this.GetService<IDadJokesService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
-		});
-
-		private async Task<DadJokesItemViewModel[]> LoadJokes(CancellationToken ct, IDataLoaderRequest request)
-		{
-			await SetupFavoritesUpdate(ct);
-			var quotes = await this.GetService<IDadJokesService>().FetchData(ct);
-
-			return quotes
-				.Select(q => this.GetChild(() => new DadJokesItemViewModel(this, q), q.Id))
-				.ToArray();
+			AddDisposable(FavoritesKey, subscription);
 		}
 
-		private async Task SetupFavoritesUpdate(CancellationToken ct)
+		void UpdateItemViewModels(IChangeSet<DadJokesQuote> changeSet)
 		{
-			const string FavoritesKey = "FavoritesSubscription";
-
-			if (!TryGetDisposable(FavoritesKey, out var _))
+			var quotesVMs = Jokes.State.Data;
+			if (quotesVMs != null && quotesVMs.Any())
 			{
-				// Get the observable list of favorites.
-				var favorites = await this.GetService<IDadJokesService>().GetFavorites(ct);
+				var addedItems = changeSet.GetAddedItems();
+				var removedItems = changeSet.GetRemovedItems();
 
-				// Subscribe to the observable list to update the current items.
-				var subscription = favorites
-					.Connect()
-					.Subscribe(UpdateItemViewModels);
-
-				AddDisposable(FavoritesKey, subscription);
-			}
-
-			void UpdateItemViewModels(IChangeSet<DadJokesQuote> changeSet)
-			{
-				var quotesVMs = Jokes.State.Data;
-				if (quotesVMs != null && quotesVMs.Any())
+				foreach (var quoteVM in quotesVMs)
 				{
-					var addedItems = changeSet.GetAddedItems();
-					var removedItems = changeSet.GetRemovedItems();
-
-					foreach (var quoteVM in quotesVMs)
+					if (addedItems.Any(a => a.Id == quoteVM.Quote.Id))
 					{
-						if (addedItems.Any(a => a.Id == quoteVM.Quote.Id))
-						{
-							quoteVM.IsFavorite = true;
-						}
-						if (removedItems.Any(r => r.Id == quoteVM.Quote.Id))
-						{
-							quoteVM.IsFavorite = false;
-						}
+						quoteVM.IsFavorite = true;
+					}
+					if (removedItems.Any(r => r.Id == quoteVM.Quote.Id))
+					{
+						quoteVM.IsFavorite = false;
 					}
 				}
 			}

@@ -3,52 +3,51 @@ using System.Collections.Generic;
 using System.Text;
 using ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Business
+namespace ApplicationTemplate.Business;
+
+public record Post
 {
-	public record Post
+	public long Id { get; init; }
+
+	public string Title { get; init; }
+
+	public string Body { get; init; }
+
+	public long UserIdentifier { get; init; }
+
+	public bool Exists => Id != 0;
+
+	public static Post FromData(PostData data)
 	{
-		public long Id { get; init; }
-
-		public string Title { get; init; }
-
-		public string Body { get; init; }
-
-		public long UserIdentifier { get; init; }
-
-		public bool Exists => Id != 0;
-
-		public static Post FromData(PostData data)
+		if (data is null)
 		{
-			if (data is null)
-			{
-				return default;
-			}
-
-			return new Post
-			{
-				Id = data.Id,
-				Title = data.Title,
-				Body = data.Body,
-				UserIdentifier = data.UserIdentifier
-			};
+			return default;
 		}
 
-		public override string ToString()
+		return new Post
 		{
-			return $"[Id={Id}, Title={Title}, Body={Body}, UserIdentifier={UserIdentifier}]";
-		}
+			Id = data.Id,
+			Title = data.Title,
+			Body = data.Body,
+			UserIdentifier = data.UserIdentifier
+		};
 	}
 
-	public static class PostExtensions
+	public override string ToString()
 	{
-		public static PostData­ ToData(this Post post)
-		{
-			if (post is null)
-			{
-				return default;
-			}
+		return $"[Id={Id}, Title={Title}, Body={Body}, UserIdentifier={UserIdentifier}]";
+	}
+}
 
-			return new PostData­(post.Id, post.Title, post.Body, post.UserIdentifier);
+public static class PostExtensions
+{
+	public static PostData­ ToData(this Post post)
+	{
+		if (post is null)
+		{
+			return default;
 		}
+
+		return new PostData­(post.Id, post.Title, post.Body, post.UserIdentifier);
 	}
 }

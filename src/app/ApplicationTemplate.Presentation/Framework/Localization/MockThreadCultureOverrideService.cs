@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+public class MockThreadCultureOverrideService : IThreadCultureOverrideService
 {
-	public class MockThreadCultureOverrideService : IThreadCultureOverrideService
+	public CultureInfo GetCulture()
 	{
-		public CultureInfo GetCulture()
-		{
-			return CultureInfo.CurrentCulture;
-		}
+		return CultureInfo.CurrentCulture;
+	}
 
-		public void SetCulture(CultureInfo culture)
-		{
-			return;
-		}
+	public void SetCulture(CultureInfo culture)
+	{
+		return;
+	}
 
-		public bool TryApply()
-		{
-			return false;
-		}
+	public bool TryApply()
+	{
+		return false;
 	}
 }

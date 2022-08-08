@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate.Client
-{
-	public partial class DadJokeChildData
-	{
-		public DadJokeChildData(DadJokeContentData data)
-		{
-			Data = data;
-		}
+namespace ApplicationTemplate.Client;
 
-		public DadJokeContentData Data { get; }
+public partial class DadJokeChildData
+{
+	public DadJokeChildData(DadJokeContentData data)
+	{
+		Data = data;
 	}
+
+	public DadJokeContentData Data { get; }
 }

@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate.Client
-{
-	public class PostErrorResponse
-	{
-		public PostData Data { get; }
+namespace ApplicationTemplate.Client;
 
-		public ErrorData Error { get; }
-	}
+public class PostErrorResponse
+{
+	public PostData Data { get; }
+
+	public ErrorData Error { get; }
 }

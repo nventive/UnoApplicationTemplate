@@ -4,28 +4,27 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+public class JwtDataJsonConverter<TPayload> : JsonConverter<JwtData<TPayload>>
+	where TPayload : class
 {
-	public class JwtDataJsonConverter<TPayload> : JsonConverter<JwtData<TPayload>>
-		where TPayload : class
+	public override JwtData<TPayload> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override JwtData<TPayload> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-		{
-			var token = reader.GetString();
+		var token = reader.GetString();
 
-			return new JwtData<TPayload>(token, options);
+		return new JwtData<TPayload>(token, options);
+	}
+
+	public override void Write(Utf8JsonWriter writer, JwtData<TPayload> value, JsonSerializerOptions options)
+	{
+		if (value?.Token is null)
+		{
+			writer.WriteNullValue();
 		}
-
-		public override void Write(Utf8JsonWriter writer, JwtData<TPayload> value, JsonSerializerOptions options)
+		else
 		{
-			if (value?.Token is null)
-			{
-				writer.WriteNullValue();
-			}
-			else
-			{
-				writer.WriteStringValue(value.Token);
-			}
+			writer.WriteStringValue(value.Token);
 		}
 	}
 }

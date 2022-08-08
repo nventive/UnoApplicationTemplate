@@ -2,23 +2,22 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ApplicationTemplate
-{
-	public interface IExtendedSplashscreenController
-	{
-		/// <summary>
-		/// Dismisses the extended splashscreen.
-		/// </summary>
-		void Dismiss();
-	}
+namespace ApplicationTemplate;
 
+public interface IExtendedSplashscreenController
+{
 	/// <summary>
-	/// This implementation of <see cref="IExtendedSplashscreenController"/> does nothing.
+	/// Dismisses the extended splashscreen.
 	/// </summary>
-	public class MockExtendedSplashscreenController : IExtendedSplashscreenController
+	void Dismiss();
+}
+
+/// <summary>
+/// This implementation of <see cref="IExtendedSplashscreenController"/> does nothing.
+/// </summary>
+public class MockExtendedSplashscreenController : IExtendedSplashscreenController
+{
+	public void Dismiss()
 	{
-		public void Dismiss()
-		{
-		}
 	}
 }
