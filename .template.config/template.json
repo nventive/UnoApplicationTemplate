@@ -20,10 +20,6 @@
     {
       "modifiers": [
         {
-          "condition": "(!IncludeFirebaseAnalytics)",
-          "exclude": [ "**/FirebasePerformanceHandler.cs" ]
-        },
-        {
           "exclude": [
             "**/[Bb]in/**",
             "**/[Oo]bj/**",
@@ -77,11 +73,5 @@
     }
   },
   "symbols": {
-    "IncludeFirebaseAnalytics": {
-        "type": "parameter",
-        "datatype": "bool",
-        "description": "If specified, adds Firebase Analytics (Analytics, Crashlytics, Performance).",
-        "defaultValue": "false"
-    }
   }
 }

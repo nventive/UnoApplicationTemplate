@@ -25,7 +25,6 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
     The following options are available when running the command.
 
     - To get help: `dotnet new nv-mobile -h`
-    - To add Firebase Analytics: `dotnet new nv-mobile -n MyProjectName --include-firebase-analytics` (or -fa)
 
 [Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
 

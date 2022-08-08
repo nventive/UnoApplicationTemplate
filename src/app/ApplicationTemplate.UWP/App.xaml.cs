@@ -59,10 +59,6 @@ namespace ApplicationTemplate
 
 				Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
 
-#if (IncludeFirebaseAnalytics)
-				ConfigureFirebase();
-#endif
-
 				Startup.ShellActivity.Start();
 
 				CurrentWindow.Content = Shell = new Shell(args);
@@ -148,19 +144,5 @@ namespace ApplicationTemplate
 			resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
 			resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
 		}
-
-#if (IncludeFirebaseAnalytics)
-		private void ConfigureFirebase()
-		{
-//-:cnd:noEmit
-#if __IOS__
-//+:cnd:noEmit
-			// This is used to initalize firebase and crashlytics.
-			Firebase.Core.App.Configure();
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-		}
-#endif
 	}
 }

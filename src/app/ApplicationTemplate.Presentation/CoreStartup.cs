@@ -169,40 +169,7 @@ namespace ApplicationTemplate
 					return;
 				}
 
-#if (IncludeFirebaseAnalytics)
-//-:cnd:noEmit
-#if __ANDROID__
-//+:cnd:noEmit
-				if (exception is Java.Lang.RuntimeException)
-				{
-					/// If the exception is a <see cref="Java.Lang.RuntimeException"/> it was already handled and labeled as "Crash" on the console.
-					return;
-				}
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-#endif
-
 				OnError(exception, e.IsTerminating);
-
-#if (IncludeFirebaseAnalytics)
-//-:cnd:noEmit
-#if __ANDROID__
-//+:cnd:noEmit
-				if (e.IsTerminating && Java.Lang.Thread.DefaultUncaughtExceptionHandler != null)
-				{
-					/// We need to call <see cref="Java.Lang.Thread.DefaultUncaughtExceptionHandler.UncaughtException"/>
-					/// in order for the crash to be reported by the crash analytics.
-					/// This will re-invoke <see cref="AppDomain.CurrentDomain.UnhandledException"/> with the new exception.
-					Java.Lang.Thread.DefaultUncaughtExceptionHandler.UncaughtException(
-						Java.Lang.Thread.CurrentThread(),
-						new Java.Lang.RuntimeException(Java.Lang.Throwable.FromException(exception))
-					);
-				}
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-#endif
 			};
 		}
 
