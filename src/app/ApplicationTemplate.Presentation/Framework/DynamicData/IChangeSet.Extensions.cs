@@ -2,67 +2,66 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace DynamicData
-{
-	public static class ChangeSetExtensions
-	{
-		public static IEnumerable<T> GetAddedItems<T>(this IChangeSet<T> changeSet)
-		{
-			if (changeSet is null)
-			{
-				throw new ArgumentNullException(nameof(changeSet));
-			}
+namespace DynamicData;
 
-			foreach (var change in changeSet)
-			{
-				switch (change.Type)
-				{
-					case ChangeType.Item:
-						if (change.Reason == ListChangeReason.Add)
-						{
-							yield return change.Item.Current;
-						}
-						break;
-					case ChangeType.Range:
-						if (change.Reason == ListChangeReason.AddRange)
-						{
-							foreach (var item in change.Range)
-							{
-								yield return item;
-							}
-						}
-						break;
-				}
-			}
+public static class ChangeSetExtensions
+{
+	public static IEnumerable<T> GetAddedItems<T>(this IChangeSet<T> changeSet)
+	{
+		if (changeSet is null)
+		{
+			throw new ArgumentNullException(nameof(changeSet));
 		}
 
-		public static IEnumerable<T> GetRemovedItems<T>(this IChangeSet<T> changeSet)
+		foreach (var change in changeSet)
 		{
-			if (changeSet is null)
+			switch (change.Type)
 			{
-				throw new ArgumentNullException(nameof(changeSet));
+				case ChangeType.Item:
+					if (change.Reason == ListChangeReason.Add)
+					{
+						yield return change.Item.Current;
+					}
+					break;
+				case ChangeType.Range:
+					if (change.Reason == ListChangeReason.AddRange)
+					{
+						foreach (var item in change.Range)
+						{
+							yield return item;
+						}
+					}
+					break;
 			}
+		}
+	}
 
-			foreach (var change in changeSet)
+	public static IEnumerable<T> GetRemovedItems<T>(this IChangeSet<T> changeSet)
+	{
+		if (changeSet is null)
+		{
+			throw new ArgumentNullException(nameof(changeSet));
+		}
+
+		foreach (var change in changeSet)
+		{
+			switch (change.Type)
 			{
-				switch (change.Type)
-				{
-					case ChangeType.Item:
-						if (change.Reason == ListChangeReason.Remove)
+				case ChangeType.Item:
+					if (change.Reason == ListChangeReason.Remove)
+					{
+						yield return change.Item.Current;
+					}
+					break;
+				case ChangeType.Range:
+					if (change.Reason == ListChangeReason.RemoveRange)
+					{
+						foreach (var item in change.Range)
 						{
-							yield return change.Item.Current;
+							yield return item;
 						}
-						break;
-					case ChangeType.Range:
-						if (change.Reason == ListChangeReason.RemoveRange)
-						{
-							foreach (var item in change.Range)
-							{
-								yield return item;
-							}
-						}
-						break;
-				}
+					}
+					break;
 			}
 		}
 	}

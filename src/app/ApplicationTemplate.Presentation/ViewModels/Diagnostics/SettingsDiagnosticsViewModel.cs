@@ -8,41 +8,40 @@ using MessageDialogService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class SettingsDiagnosticsViewModel : ViewModel
 {
-	public class SettingsDiagnosticsViewModel : ViewModel
+	public SettingsDiagnosticsViewModel()
 	{
-		public SettingsDiagnosticsViewModel()
-		{
-			CanOpenSettingsFolder = this.GetService<IDiagnosticsService>().CanOpenSettingsFolder;
-		}
-
-		public bool IsDiagnosticsOverlayEnabled
-		{
-			get => this.GetFromOptionsMonitor<DiagnosticsOptions, bool>(o => o.IsDiagnosticsOverlayEnabled);
-			set => this.Set(value);
-		}
-
-		public IDynamicCommand OpenSettingsFolder => this.GetCommand(() =>
-		{
-			this.GetService<IDiagnosticsService>().OpenSettingsFolder();
-		});
-
-		public bool CanOpenSettingsFolder { get; }
-
-		public bool IsMockEnabled
-		{
-			get => this.GetFromOptionsMonitor<MockOptions, bool>(o => o.IsMockEnabled);
-			set => this.Set(value);
-		}
-
-		public IDynamicCommand NotifyNeedsRestart => this.GetCommandFromTask(async ct =>
-		{
-			await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
-				.Title("Diagnostics")
-				.Content("Restart the application to apply your changes.")
-				.OkCommand()
-			);
-		});
+		CanOpenSettingsFolder = this.GetService<IDiagnosticsService>().CanOpenSettingsFolder;
 	}
+
+	public bool IsDiagnosticsOverlayEnabled
+	{
+		get => this.GetFromOptionsMonitor<DiagnosticsOptions, bool>(o => o.IsDiagnosticsOverlayEnabled);
+		set => this.Set(value);
+	}
+
+	public IDynamicCommand OpenSettingsFolder => this.GetCommand(() =>
+	{
+		this.GetService<IDiagnosticsService>().OpenSettingsFolder();
+	});
+
+	public bool CanOpenSettingsFolder { get; }
+
+	public bool IsMockEnabled
+	{
+		get => this.GetFromOptionsMonitor<MockOptions, bool>(o => o.IsMockEnabled);
+		set => this.Set(value);
+	}
+
+	public IDynamicCommand NotifyNeedsRestart => this.GetCommandFromTask(async ct =>
+	{
+		await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
+			.Title("Diagnostics")
+			.Content("Restart the application to apply your changes.")
+			.OkCommand()
+		);
+	});
 }

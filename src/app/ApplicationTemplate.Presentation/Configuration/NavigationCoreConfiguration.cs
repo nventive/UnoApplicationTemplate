@@ -7,38 +7,37 @@ using Chinook.StackNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+/// <summary>
+/// This class is used for navigation configuration.
+/// - Configures the navigator.
+/// </summary>
+public static class NavigationCoreConfiguration
 {
 	/// <summary>
-	/// This class is used for navigation configuration.
-	/// - Configures the navigator.
+	/// Adds the core navigation services to the <see cref="IServiceCollection"/>.
 	/// </summary>
-	public static class NavigationCoreConfiguration
+	/// <param name="services">Service collection.</param>
+	/// <returns><see cref="IServiceCollection"/>.</returns>
+	public static IServiceCollection AddNavigationCore(this IServiceCollection services)
 	{
-		/// <summary>
-		/// Adds the core navigation services to the <see cref="IServiceCollection"/>.
-		/// </summary>
-		/// <param name="services">Service collection.</param>
-		/// <returns><see cref="IServiceCollection"/>.</returns>
-		public static IServiceCollection AddNavigationCore(this IServiceCollection services)
-		{
-			return services
-				.AddSingleton<IExtendedSplashscreenController, MockExtendedSplashscreenController>()
-				.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Login", "Home", "Posts", "Settings"))
-				.AddSingleton<IStackNavigator>(s => new SectionsNavigatorToStackNavigatorAdapter(s.GetService<ISectionsNavigator>()))
-				.AddSingleton<IBackButtonManager>(s =>
-				{
-					var manager = new BackButtonManager();
+		return services
+			.AddSingleton<IExtendedSplashscreenController, MockExtendedSplashscreenController>()
+			.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Login", "Home", "Posts", "Settings"))
+			.AddSingleton<IStackNavigator>(s => new SectionsNavigatorToStackNavigatorAdapter(s.GetService<ISectionsNavigator>()))
+			.AddSingleton<IBackButtonManager>(s =>
+			{
+				var manager = new BackButtonManager();
 
-					var sectionsNavigator = s.GetRequiredService<ISectionsNavigator>();
-					manager.AddHandler(new BackButtonHandler(
-						name: "DefaultSectionsNavigatorHandler",
-						canHandle: () => sectionsNavigator.CanNavigateBackOrCloseModal(),
-						handle: async ct => await sectionsNavigator.NavigateBackOrCloseModal(ct)
-					));
+				var sectionsNavigator = s.GetRequiredService<ISectionsNavigator>();
+				manager.AddHandler(new BackButtonHandler(
+					name: "DefaultSectionsNavigatorHandler",
+					canHandle: () => sectionsNavigator.CanNavigateBackOrCloseModal(),
+					handle: async ct => await sectionsNavigator.NavigateBackOrCloseModal(ct)
+				));
 
-					return manager;
-				});
-		}
+				return manager;
+			});
 	}
 }

@@ -6,50 +6,49 @@ using Microsoft.Extensions.Configuration.Json;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+/// <summary>
+/// Represents the source of <see cref="WritableJsonConfigurationProvider"/>.
+/// </summary>
+public class WritableJsonConfigurationSource : IConfigurationSource
 {
-	/// <summary>
-	/// Represents the source of <see cref="WritableJsonConfigurationProvider"/>.
-	/// </summary>
-	public class WritableJsonConfigurationSource : IConfigurationSource
+	public WritableJsonConfigurationSource(string filePath)
 	{
-		public WritableJsonConfigurationSource(string filePath)
+		FilePath = filePath;
+	}
+
+	public string FilePath { get; }
+
+	public IConfigurationProvider Build(IConfigurationBuilder builder)
+	{
+		builder.Properties.TryGetValue("HostLoggerFactory", out var value);
+		var factory = value as ILoggerFactory;
+		var logger = NullLogger.Instance as ILogger;
+		if (factory != null)
 		{
-			FilePath = filePath;
+			logger = factory.CreateLogger<WritableJsonConfigurationProvider>();
 		}
 
-		public string FilePath { get; }
+		return new WritableJsonConfigurationProvider(GetSource(FilePath, builder), logger);
+	}
 
-		public IConfigurationProvider Build(IConfigurationBuilder builder)
+	private static JsonConfigurationSource GetSource(string filePath, IConfigurationBuilder builder)
+	{
+		var source = new JsonConfigurationSource()
 		{
-			builder.Properties.TryGetValue("HostLoggerFactory", out var value);
-			var factory = value as ILoggerFactory;
-			var logger = NullLogger.Instance as ILogger;
-			if (factory != null)
-			{
-				logger = factory.CreateLogger<WritableJsonConfigurationProvider>();
-			}
+			Path = filePath,
 
-			return new WritableJsonConfigurationProvider(GetSource(FilePath, builder), logger);
-		}
+			// We disable ReloadOnChange because we reload manually after saving the file.
+			ReloadOnChange = false,
 
-		private static JsonConfigurationSource GetSource(string filePath, IConfigurationBuilder builder)
-		{
-			var source = new JsonConfigurationSource()
-			{
-				Path = filePath,
+			// It's optional because it doesn't exists for as long as we don't override a value.
+			Optional = true,
+		};
 
-				// We disable ReloadOnChange because we reload manually after saving the file.
-				ReloadOnChange = false,
+		source.ResolveFileProvider();
+		source.EnsureDefaults(builder);
 
-				// It's optional because it doesn't exists for as long as we don't override a value.
-				Optional = true,
-			};
-
-			source.ResolveFileProvider();
-			source.EnsureDefaults(builder);
-
-			return source;
-		}
+		return source;
 	}
 }

@@ -6,41 +6,40 @@ using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class CreateAccountPageViewModel : ViewModel
 {
-	public class CreateAccountPageViewModel : ViewModel
+	public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
+
+	public PasswordFormViewModel PasswordForm => this.GetChild(() => new PasswordFormViewModel());
+
+	public string[] DadNames =>
+	new[]
 	{
-		public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());
+		"Dad",
+		"Papa",
+		"Pa",
+		"Pop",
+		"Father",
+		"Padre",
+		"Père",
+		"Papi",
+	};
 
-		public PasswordFormViewModel PasswordForm => this.GetChild(() => new PasswordFormViewModel());
+	public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
+	{
+		var validationResult = await Form.Validate(ct);
 
-		public string[] DadNames =>
-		new[]
+		if (validationResult.IsValid && PasswordForm.PasswordHasMinimumLength == true && PasswordForm.PasswordHasNumber == true && PasswordForm.PasswordHasUppercase == true)
 		{
-			"Dad",
-			"Papa",
-			"Pa",
-			"Pop",
-			"Father",
-			"Padre",
-			"Père",
-			"Papi",
-		};
+			await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), PasswordForm.Password);
 
-		public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
+			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
+		}
+		else
 		{
-			var validationResult = await Form.Validate(ct);
-
-			if (validationResult.IsValid && PasswordForm.PasswordHasMinimumLength == true && PasswordForm.PasswordHasNumber == true && PasswordForm.PasswordHasUppercase == true)
-			{
-				await this.GetService<IAuthenticationService>().CreateAccount(ct, Form.Email.Trim(), PasswordForm.Password);
-
-				await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
-			}
-			else
-			{
-				PasswordForm.ValidatePasswordHints();
-			}
-		});
-	}
+			PasswordForm.ValidatePasswordHints();
+		}
+	});
 }

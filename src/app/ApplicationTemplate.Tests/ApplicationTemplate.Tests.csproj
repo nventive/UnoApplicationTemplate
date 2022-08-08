@@ -4,7 +4,7 @@
 		<TargetFramework>net472</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<LangVersion>9.0</LangVersion>
+		<LangVersion>10.0</LangVersion>
 		<IsTestProject>True</IsTestProject>
 		<DefineConstants>NETFRAMEWORK</DefineConstants>
 	</PropertyGroup>

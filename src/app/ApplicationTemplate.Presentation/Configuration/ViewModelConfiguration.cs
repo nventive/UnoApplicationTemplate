@@ -9,68 +9,67 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+/// <summary>
+/// This class is used for view model configuration.
+/// - Configures the dynamic properties.
+/// - Configures the dynamic commands.
+/// - Configures the data loaders.
+/// </summary>
+public static class ViewModelConfiguration
 {
 	/// <summary>
-	/// This class is used for view model configuration.
-	/// - Configures the dynamic properties.
-	/// - Configures the dynamic commands.
-	/// - Configures the data loaders.
+	/// Adds the mvvm services to the <see cref="IServiceCollection"/>.
 	/// </summary>
-	public static class ViewModelConfiguration
+	/// <param name="services">Service collection.</param>
+	/// <returns><see cref="IServiceCollection"/>.</returns>
+	public static IServiceCollection AddMvvm(this IServiceCollection services)
 	{
-		/// <summary>
-		/// Adds the mvvm services to the <see cref="IServiceCollection"/>.
-		/// </summary>
-		/// <param name="services">Service collection.</param>
-		/// <returns><see cref="IServiceCollection"/>.</returns>
-		public static IServiceCollection AddMvvm(this IServiceCollection services)
-		{
-			return services
-				.AddDynamicProperties()
-				.AddDynamicCommands()
-				.AddDataLoaders()
-				.AddValidatorsFromAssemblyContaining(typeof(ViewModelConfiguration), ServiceLifetime.Singleton);
-		}
+		return services
+			.AddDynamicProperties()
+			.AddDynamicCommands()
+			.AddDataLoaders()
+			.AddValidatorsFromAssemblyContaining(typeof(ViewModelConfiguration), ServiceLifetime.Singleton);
+	}
 
-		private static IServiceCollection AddDynamicCommands(this IServiceCollection services)
-		{
-			return services
-				.AddSingleton<IDynamicCommandBuilderFactory>(s =>
-					new DynamicCommandBuilderFactory(c => c
-						.CatchErrors(s.GetRequiredService<IDynamicCommandErrorHandler>())
-						.WithLogs(s.GetRequiredService<ILogger<IDynamicCommand>>())
-						.WithStrategy(new RaiseCanExecuteOnDispatcherCommandStrategy(c.ViewModel))
-						.DisableWhileExecuting()
-						.OnBackgroundThread()
-						.CancelPrevious()
-					)
-				);
-		}
-
-		private static IServiceCollection AddDynamicProperties(this IServiceCollection services)
-		{
-			return services.AddSingleton<IDynamicPropertyFactory, DynamicPropertyFactory>();
-		}
-
-		private static IServiceCollection AddDataLoaders(this IServiceCollection services)
-		{
-			return services.AddSingleton<IDataLoaderBuilderFactory>(s =>
-			{
-				return new DataLoaderBuilderFactory(b => b
+	private static IServiceCollection AddDynamicCommands(this IServiceCollection services)
+	{
+		return services
+			.AddSingleton<IDynamicCommandBuilderFactory>(s =>
+				new DynamicCommandBuilderFactory(c => c
+					.CatchErrors(s.GetRequiredService<IDynamicCommandErrorHandler>())
+					.WithLogs(s.GetRequiredService<ILogger<IDynamicCommand>>())
+					.WithStrategy(new RaiseCanExecuteOnDispatcherCommandStrategy(c.ViewModel))
+					.DisableWhileExecuting()
 					.OnBackgroundThread()
-					.WithEmptySelector(GetIsEmpty)
-					.WithAnalytics(
-						onSuccess: async (ct, request, value) => { /* Some analytics */ },
-						onError: async (ct, request, error) => { /* Somme analytics */ }
-					)
-				);
+					.CancelPrevious()
+				)
+			);
+	}
 
-				bool GetIsEmpty(IDataLoaderState state)
-				{
-					return state.Data == null || (state.Data is IEnumerable enumerable && !enumerable.Cast<object>().Any());
-				}
-			});
-		}
+	private static IServiceCollection AddDynamicProperties(this IServiceCollection services)
+	{
+		return services.AddSingleton<IDynamicPropertyFactory, DynamicPropertyFactory>();
+	}
+
+	private static IServiceCollection AddDataLoaders(this IServiceCollection services)
+	{
+		return services.AddSingleton<IDataLoaderBuilderFactory>(s =>
+		{
+			return new DataLoaderBuilderFactory(b => b
+				.OnBackgroundThread()
+				.WithEmptySelector(GetIsEmpty)
+				.WithAnalytics(
+					onSuccess: async (ct, request, value) => { /* Some analytics */ },
+					onError: async (ct, request, error) => { /* Somme analytics */ }
+				)
+			);
+
+			bool GetIsEmpty(IDataLoaderState state)
+			{
+				return state.Data == null || (state.Data is IEnumerable enumerable && !enumerable.Cast<object>().Any());
+			}
+		});
 	}
 }

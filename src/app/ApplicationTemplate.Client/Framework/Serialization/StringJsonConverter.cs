@@ -5,32 +5,31 @@ using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace ApplicationTemplate
+namespace ApplicationTemplate;
+
+/// <summary>
+/// This converter reads non-string tokens as strings.
+/// </summary>
+public class StringJsonConverter : JsonConverter<string>
 {
-	/// <summary>
-	/// This converter reads non-string tokens as strings.
-	/// </summary>
-	public class StringJsonConverter : JsonConverter<string>
+	public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
 	{
-		public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+		switch (reader.TokenType)
 		{
-			switch (reader.TokenType)
-			{
-				case JsonTokenType.Number:
-					var stringValue = reader.GetInt32();
-					return stringValue.ToString(CultureInfo.InvariantCulture);
+			case JsonTokenType.Number:
+				var stringValue = reader.GetInt32();
+				return stringValue.ToString(CultureInfo.InvariantCulture);
 
-				case JsonTokenType.String:
-					return reader.GetString();
+			case JsonTokenType.String:
+				return reader.GetString();
 
-				default:
-					throw new JsonException($"The token type {reader.TokenType} is not supported by {nameof(StringJsonConverter)}.");
-			}
+			default:
+				throw new JsonException($"The token type {reader.TokenType} is not supported by {nameof(StringJsonConverter)}.");
 		}
+	}
 
-		public override void Write(Utf8JsonWriter writer, string value, JsonSerializerOptions options)
-		{
-			writer.WriteStringValue(value);
-		}
+	public override void Write(Utf8JsonWriter writer, string value, JsonSerializerOptions options)
+	{
+		writer.WriteStringValue(value);
 	}
 }

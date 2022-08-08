@@ -6,50 +6,49 @@ using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
-namespace ApplicationTemplate.Presentation
+namespace ApplicationTemplate.Presentation;
+
+public class EnvironmentPickerPageViewModel : ViewModel
 {
-	public class EnvironmentPickerPageViewModel : ViewModel
+	private readonly string _currentEnvironment;
+
+	public EnvironmentPickerPageViewModel(string currentEnvironment)
 	{
-		private readonly string _currentEnvironment;
+		_currentEnvironment = currentEnvironment;
+	}
 
-		public EnvironmentPickerPageViewModel(string currentEnvironment)
+	public string SelectedEnvironment
+	{
+		get => this.Get(_currentEnvironment);
+		set => this.Set(value);
+	}
+
+	public bool RequiresRestart
+	{
+		get => this.Get<bool>();
+		set => this.Set(value);
+	}
+
+	public IEnumerable<string> Environments => this.GetFromTask(GetEnvironments);
+
+	public IDynamicCommand SelectEnvironment => this.GetCommandFromTask<string>(async (ct, environment) =>
+	{
+		if (_currentEnvironment == environment)
 		{
-			_currentEnvironment = currentEnvironment;
+			await this.GetService<ISectionsNavigator>().NavigateBack(ct);
+
+			return;
 		}
 
-		public string SelectedEnvironment
-		{
-			get => this.Get(_currentEnvironment);
-			set => this.Set(value);
-		}
+		ConfigurationConfiguration.AppEnvironment.SetCurrent(environment);
 
-		public bool RequiresRestart
-		{
-			get => this.Get<bool>();
-			set => this.Set(value);
-		}
+		// TODO #173219 : Disable back button
 
-		public IEnumerable<string> Environments => this.GetFromTask(GetEnvironments);
+		RequiresRestart = true;
+	});
 
-		public IDynamicCommand SelectEnvironment => this.GetCommandFromTask<string>(async (ct, environment) =>
-		{
-			if (_currentEnvironment == environment)
-			{
-				await this.GetService<ISectionsNavigator>().NavigateBack(ct);
-
-				return;
-			}
-
-			ConfigurationConfiguration.AppEnvironment.SetCurrent(environment);
-
-			// TODO #173219 : Disable back button
-
-			RequiresRestart = true;
-		});
-
-		private Task<string[]> GetEnvironments(CancellationToken ct)
-		{
-			return Task.FromResult(ConfigurationConfiguration.AppEnvironment.GetAll());
-		}
+	private Task<string[]> GetEnvironments(CancellationToken ct)
+	{
+		return Task.FromResult(ConfigurationConfiguration.AppEnvironment.GetAll());
 	}
 }
