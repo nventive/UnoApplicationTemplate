@@ -36,9 +36,6 @@
     <MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
     <MtouchEnableBitcode>False</MtouchEnableBitcode>
     <MtouchUseRefCounting>False</MtouchUseRefCounting>
-    <!--#if (IncludeFirebaseAnalytics)
-		<FirebaseCrashlyticsUploadSymbolsEnabled>True</FirebaseCrashlyticsUploadSymbolsEnabled>
-		#endif -->
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
@@ -168,16 +165,6 @@
     <PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
     <PackageReference Include="Nventive.View.Uno" Version="0.4.0-dev.45" />
-    <!--#if (IncludeFirebaseAnalytics)
-		<PackageReference Include="Xamarin.Firebase.iOS.Analytics" Version="6.9.0" />
-		<PackageReference Include="Xamarin.Firebase.iOS.Core" Version="6.10.4" />
-		<PackageReference Include="Xamarin.Firebase.iOS.InstanceID" Version="4.8.0" />
-		<PackageReference Include="Xamarin.Firebase.iOS.Installations" Version="1.7.0" />
-		<PackageReference Include="Xamarin.Firebase.iOS.Crashlytics" Version="4.6.2" />
-		<PackageReference Include="Xamarin.Firebase.iOS.PerformanceMonitoring" Version="3.3.0" />
-		<PackageReference Include="Xamarin.Firebase.iOS.RemoteConfig" Version="4.9.1" />
-		<PackageReference Include="Xamarin.Firebase.iOS.ABTesting" Version="4.2.0" />
-		#endif -->
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">

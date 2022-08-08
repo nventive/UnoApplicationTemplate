@@ -38,9 +38,6 @@ namespace ApplicationTemplate
 				.AddNetworkExceptionHandler()
 				.AddExceptionHubHandler()
 				.AddAuthenticationTokenHandler()
-#if (IncludeFirebaseAnalytics)
-				.AddFirebaseHandler()
-#endif
 				.AddResponseContentDeserializer()
 				.AddAuthenticationEndpoint()
 				.AddPostEndpoint(configuration)
@@ -111,16 +108,6 @@ namespace ApplicationTemplate
 				configure?.Invoke(httpClientBuilder);
 
 				httpClientBuilder.AddHttpMessageHandler<NetworkExceptionHandler>();
-
-#if (IncludeFirebaseAnalytics)
-//-:cnd:noEmit
-#if __ANDROID__
-//+:cnd:noEmit
-				httpClientBuilder.AddHttpMessageHandler<FirebasePerformanceHandler>();
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-#endif
 			}
 
 			return services;
@@ -156,24 +143,6 @@ namespace ApplicationTemplate
 				.AddSingleton<IAuthenticationTokenProvider<AuthenticationData>>(s => s.GetRequiredService<IAuthenticationService>())
 				.AddTransient<AuthenticationTokenHandler<AuthenticationData>>();
 		}
-
-#if (IncludeFirebaseAnalytics)
-		private static IServiceCollection AddFirebaseHandler(this IServiceCollection services)
-		{
-//-:cnd:noEmit
-#if __ANDROID__
-//+:cnd:noEmit
-			return services.AddTransient<FirebasePerformanceHandler>();
-//-:cnd:noEmit
-#else
-//+:cnd:noEmit
-			return services;
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-		}
-#endif
-
 		private static void AddDefaultHeaders(HttpClient client, IServiceProvider serviceProvider)
 		{
 			client.DefaultRequestHeaders.Add("Accept-Language", CultureInfo.CurrentCulture.Name);
