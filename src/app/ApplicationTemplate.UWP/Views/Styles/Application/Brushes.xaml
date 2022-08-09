@@ -24,7 +24,7 @@
 	
 	<SolidColorBrush x:Key="SeparatorBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
-					 Opacity="0.12"/>
+					 Opacity="0.12" />
 
 	<!--
 		Some of the pages design flip the dichotomy of Background colors with their OnBackground complement.

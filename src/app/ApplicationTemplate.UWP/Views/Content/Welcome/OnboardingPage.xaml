@@ -37,7 +37,7 @@
 						   Width="223"
 						   VerticalAlignment="Bottom"
 						   HorizontalAlignment="Center"
-						   Margin="0,0,0,50"/>
+						   Margin="0,0,0,50" />
 
 					<!-- Message -->
 					<TextBlock Text="{Binding PrimaryText}"
@@ -46,7 +46,7 @@
 							   MaxWidth="300"
 							   VerticalAlignment="Bottom"
 							   HorizontalTextAlignment="Center"
-							   Margin="0,0,0,20"/>
+							   Margin="0,0,0,20" />
 				</Grid>
 			</DataTemplate>
 

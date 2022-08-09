@@ -46,7 +46,7 @@
 						   x:Uid="Login_Title"
 						   Style="{StaticResource Headline2}"
 						   TextAlignment="Center"
-						   Margin="20,0"/>
+						   Margin="20,0" />
 
 				<StackPanel Margin="40,0">
 					
@@ -120,7 +120,7 @@
 					<Rectangle Fill="{StaticResource SeparatorBrush}"
 							   Height="1"
 							   HorizontalAlignment="Stretch"
-							   Margin="0,32,0,0"/>
+							   Margin="0,32,0,0" />
 
 					<!-- Google Login Button -->
 					<Button x:Name="GoogleLoginButton"

@@ -50,7 +50,7 @@
 										  Margin="0,4">
 					<TextBox Text="{Binding Body, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 							 PlaceholderText="Write the joke" 
-							 x:Uid="EditPost_JokeContent"/>
+							 x:Uid="EditPost_JokeContent" />
 				</local:DataValidationView>
 			</StackPanel>
 

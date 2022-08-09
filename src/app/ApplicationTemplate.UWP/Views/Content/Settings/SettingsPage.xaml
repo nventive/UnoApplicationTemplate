@@ -106,7 +106,7 @@
 							   x:Uid="Settings_Version_Details"
 							   Style="{StaticResource Body2}"
 							   Foreground="{StaticResource MaterialOnBackgroundBrush}"
-							   Opacity="{StaticResource MaterialMediumOpacity}"/>
+							   Opacity="{StaticResource MaterialMediumOpacity}" />
 
 					<!-- Replay tutorial -->
 					<Button Content="REPLAY TUTORIAL"
@@ -199,7 +199,7 @@
 				<!-- Separator -->
 				<Rectangle Fill="{StaticResource SeparatorBrush}" 
 						   Height="1"
-						   HorizontalAlignment="Stretch"/>
+						   HorizontalAlignment="Stretch" />
 
 				<!-- Logout -->
 				<Button Content="LOGOUT"

@@ -142,7 +142,7 @@
 											Background="{StaticResource MaterialSurfaceBrush}"
 											Foreground="{StaticResource MaterialOnSurfaceBrush}"
 											HorizontalAlignment="Stretch"
-											MinHeight="56"/>
+											MinHeight="56" />
 					</local:DataValidationView>
 
 					<!-- Postal Code -->
@@ -203,7 +203,7 @@
 								   Foreground="{StaticResource MaterialOnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
-								   not_android:Margin="8,3,0,0"/>
+								   not_android:Margin="8,3,0,0" />
 					</StackPanel>
 
 					<!-- Has Number Hint -->
@@ -225,7 +225,7 @@
 								   Foreground="{StaticResource MaterialOnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
-								   not_android:Margin="8,3,0,0"/>
+								   not_android:Margin="8,3,0,0" />
 					</StackPanel>
 
 					<!-- Has Uppercase Hint -->
@@ -247,7 +247,7 @@
 								   Foreground="{StaticResource MaterialOnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
-								   not_android:Margin="8,3,0,0"/>
+								   not_android:Margin="8,3,0,0" />
 					</StackPanel>
 
 					<!-- Favorite Dad Nickname Label -->
@@ -285,7 +285,7 @@
 								  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 								  Foreground="{StaticResource MaterialSurfaceBrush}"
 								  Style="{StaticResource CustomMaterialCheckBoxStyle}"
-								  HorizontalAlignment="Left"/>
+								  HorizontalAlignment="Left" />
 					</local:DataValidationView>
 
 						<!-- Confirm Button -->

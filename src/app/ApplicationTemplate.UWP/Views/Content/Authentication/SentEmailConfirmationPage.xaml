@@ -30,7 +30,7 @@
 				<!-- Image -->
 				<Image Source="ms-appx:///Assets/Letters.png"
 					   MaxWidth="300"
-					   Stretch="UniformToFill"/>
+					   Stretch="UniformToFill" />
 
 				<!-- Title -->
 				<TextBlock Text="Email sent!"
