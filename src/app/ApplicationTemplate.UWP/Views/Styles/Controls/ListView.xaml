@@ -1,9 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:xamarin="http://nventive.com/xamarin"
+                    xmlns:xamarin="http://uno.ui/xamarin"
                     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                    xmlns:toolkit="using:Uno.UI.Toolkit"
 					mc:Ignorable="d xamarin">
 
 	<!-- 

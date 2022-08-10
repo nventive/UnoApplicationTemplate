@@ -5,10 +5,9 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
-	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  xmlns:android="http://nventive.com/android"
-	  xmlns:ios="http://nventive.com/ios"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="d ios android">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
@@ -46,7 +45,7 @@
 						   x:Uid="Login_Title"
 						   Style="{StaticResource Headline2}"
 						   TextAlignment="Center"
-						   Margin="20,0"/>
+						   Margin="20,0" />
 
 				<StackPanel Margin="40,0">
 					
@@ -120,7 +119,7 @@
 					<Rectangle Fill="{StaticResource SeparatorBrush}"
 							   Height="1"
 							   HorizontalAlignment="Stretch"
-							   Margin="0,32,0,0"/>
+							   Margin="0,32,0,0" />
 
 					<!-- Google Login Button -->
 					<Button x:Name="GoogleLoginButton"

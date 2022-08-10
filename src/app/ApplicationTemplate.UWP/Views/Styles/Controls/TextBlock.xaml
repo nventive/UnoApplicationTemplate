@@ -1,5 +1,4 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<!-- List of Material TextBlock styles: https://github.com/unoplatform/Uno.Themes/blob/master/src/library/Uno.Material/Styles/Controls/TextBlock.xaml -->

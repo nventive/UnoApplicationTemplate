@@ -1,11 +1,9 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.OnboardingPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:uc="using:Nventive.View.Converters"
 	  xmlns:u="using:Nventive.View.Controls"
-	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  mc:Ignorable="">
+	  xmlns:toolkit="using:Uno.UI.Toolkit">
 
 	<Page.Resources>
 		<ResourceDictionary>
@@ -37,7 +35,7 @@
 						   Width="223"
 						   VerticalAlignment="Bottom"
 						   HorizontalAlignment="Center"
-						   Margin="0,0,0,50"/>
+						   Margin="0,0,0,50" />
 
 					<!-- Message -->
 					<TextBlock Text="{Binding PrimaryText}"
@@ -46,7 +44,7 @@
 							   MaxWidth="300"
 							   VerticalAlignment="Bottom"
 							   HorizontalTextAlignment="Center"
-							   Margin="0,0,0,20"/>
+							   Margin="0,0,0,20" />
 				</Grid>
 			</DataTemplate>
 

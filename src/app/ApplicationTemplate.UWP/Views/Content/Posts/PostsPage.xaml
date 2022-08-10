@@ -1,12 +1,8 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.PostsPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:local="using:ApplicationTemplate"
-	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:u="using:Nventive.View.Controls"
-	  xmlns:dl="using:Chinook.DataLoader"
-	  mc:Ignorable="">
+	  xmlns:dl="using:Chinook.DataLoader">
 
 	<Grid x:Name="PostPage"
 		  Background="{StaticResource MaterialBackgroundBrush}">
@@ -51,7 +47,7 @@
 												   Foreground="{StaticResource MaterialOnSurfaceBrush}"
 												   Style="{StaticResource Body2}"
 												   Opacity="{StaticResource MaterialMediumOpacity}"
-												   Margin="0,8,0,0"/>
+												   Margin="0,8,0,0" />
 
 										<StackPanel Orientation="Horizontal"
 													HorizontalAlignment="Right"

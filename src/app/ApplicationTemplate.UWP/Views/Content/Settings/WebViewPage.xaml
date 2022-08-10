@@ -1,9 +1,7 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.WebViewPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:awv="using:AsyncWebView"
-	  mc:Ignorable="">
+	  xmlns:awv="using:AsyncWebView">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
