@@ -1,11 +1,6 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.WelcomePage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:local="using:ApplicationTemplate"
-	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:uc="using:Nventive.View.Converters"
-	  xmlns:u="using:Nventive.View.Controls"
-	  mc:Ignorable="">
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<Grid Background="{StaticResource AlternateBackgroundBrush}">
 

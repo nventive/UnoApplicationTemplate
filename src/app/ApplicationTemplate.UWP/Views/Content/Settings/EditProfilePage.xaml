@@ -4,8 +4,8 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
-	  xmlns:android="http://nventive.com/android"
-	  xmlns:ios="http://nventive.com/ios"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="android ios">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">

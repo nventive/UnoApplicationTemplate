@@ -5,10 +5,9 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:ue="using:Nventive.View.Extensions"
-	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  xmlns:android="http://nventive.com/android"
-	  xmlns:ios="http://nventive.com/ios"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="d ios android">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">

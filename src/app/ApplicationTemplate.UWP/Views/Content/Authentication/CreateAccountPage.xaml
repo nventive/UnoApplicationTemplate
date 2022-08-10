@@ -8,9 +8,9 @@
 	  xmlns:converters="using:ApplicationTemplate.Views"
 	  xmlns:behaviors="using:ApplicationTemplate.Views.Behaviors"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
-	  xmlns:android="http://nventive.com/android"
+	  xmlns:android="http://uno.ui/android"
 	  xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	  xmlns:ios="http://nventive.com/ios"
+	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="ios android">
 
 	<Page.Resources>

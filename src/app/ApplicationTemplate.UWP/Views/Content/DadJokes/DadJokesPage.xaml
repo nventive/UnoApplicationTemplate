@@ -5,7 +5,7 @@
 	  xmlns:dl="using:Chinook.DataLoader"
 	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:um="using:Uno.Material"
-	  xmlns:android="http://nventive.com/android"
+	  xmlns:android="http://uno.ui/android"
 	  xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  mc:Ignorable="android">
 
