@@ -36,8 +36,8 @@ public class ViewModel : ViewModelBase, INavigableViewModel
 
 	void INavigableViewModel.SetView(object view)
 	{
-		var factory = this.GetService<IViewModelViewFactory>();
-		View = factory.Create(view);
+		var factory = this.GetService<IDispatcherFactory>();
+		Dispatcher = factory.Create(view);
 	}
 
 	/// <summary>

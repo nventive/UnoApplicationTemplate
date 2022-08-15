@@ -24,7 +24,7 @@ public static class ViewServicesConfiguration
 				s.GetRequiredService<CoreDispatcher>(),
 				CoreDispatcherPriority.Normal
 			))
-			.AddSingleton<IViewModelViewFactory, ViewModelViewFactory>()
+			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>()
