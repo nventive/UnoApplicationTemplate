@@ -25,13 +25,6 @@
   default: ''
 
 steps:
-- task: UseDotNet@2
-  displayName: 'Install .Net Core runtime 2.1.x'
-  inputs:
-    version: 2.1.x
-    packageType: 'runtime'
-    installationPath: '$(Agent.ToolsDirectory)/dotnet'
-
 #-if false
 - download: current
   condition: eq('GeneratedApp.sln', '${{ parameters.solutionFileName }}')
@@ -40,13 +33,13 @@ steps:
 
 - task: gitversion/setup@0
   inputs:
-    versionSpec: '5.0.0'
+    versionSpec: '5.10.1'
   displayName: 'Install GitVersion'
 
 - task: gitversion/execute@0
   inputs:
     useConfigFile: true
-    configFilePath: 'gitversion.yml'
+    configFilePath: $(Build.SourcesDirectory)/gitversion.yml
   displayName: 'Calculate version'
 
 - task: MSBuild@1

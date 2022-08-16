@@ -32,7 +32,7 @@ variables:
   GooglePlayKeystore: com.nventive.applicationtemplate.jks # This is the official keystore used for Google Play.
   # iOS
   InternalProvisioningProfile: com.nventive.internal.applicationtemplate.mobileprovision # This is the internal provisioning profile for internal builds.
-  InternalCertificate: nventive.internal.p12 # This is the certificate from the entreprise account used to sign internal builds.
+  InternalCertificate: nventive_enterprise.p12 # This is the certificate from the entreprise account used to sign internal builds.
   AppStoreProvisioningProfile: com.nventive.applicationtemplate.mobileprovision # This is the official provisioning profile for the AppStore.
   AppStoreCertificate: nventive.p12 # This is the official certificate used to sign AppStore builds.
 
