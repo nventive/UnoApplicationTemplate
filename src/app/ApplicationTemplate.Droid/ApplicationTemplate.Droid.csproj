@@ -116,10 +116,10 @@
     <PackageReference Include="Uno.UI" Version="4.2.6" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.2.6" />
     <PackageReference Include="Uno.UniversalImageLoader" Version="1.9.35" />
-    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.10.0-dev.120" />
-    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="0.7.0-dev.91" />
-    <PackageReference Include="Chinook.DataLoader.Uno" Version="0.10.0-dev.91" />
-    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="0.5.0-dev.33" />
+    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="1.0.0" />
+    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="1.0.0" />
+    <PackageReference Include="Chinook.DataLoader.Uno" Version="1.0.0" />
+    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="1.0.0" />
     <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.4.0-dev.22" />
     <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.3.0-dev.33" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
