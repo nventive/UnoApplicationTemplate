@@ -185,10 +185,10 @@
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls" Version="7.1.2" />
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed" Version="2.0.1" />
     <PackageReference Include="Uno.UI" Version="4.2.6" />
-    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="0.10.0-dev.120" />
-    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="0.5.0-dev.33" />
-    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="0.7.0-dev.91" />
-    <PackageReference Include="Chinook.DataLoader.Uno" Version="0.10.0-dev.91" />
+    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="1.0.0" />
+    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="1.0.0" />
+    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="1.0.0" />
+    <PackageReference Include="Chinook.DataLoader.Uno" Version="1.0.0" />
     <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.4.0-dev.22" />
     <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.3.0-dev.33" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
