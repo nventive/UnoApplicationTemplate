@@ -53,6 +53,7 @@
 
 		<!-- DataLoaderView -->
 		<dl:DataLoaderView Source="{Binding Jokes}"
+						   RefreshCommand="{Binding RefreshJokes}"
 						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
 						   Grid.Row="1">
 			<DataTemplate>

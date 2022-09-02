@@ -169,8 +169,10 @@
 								</VisualState>
 								<VisualState x:Name="Initial_Error_Loading">
 									<VisualState.Setters>
-										<Setter Target="ErrorPresenter.Visibility"
+										<Setter Target="LoadingIndicator.Visibility"
 												Value="Visible" />
+										<Setter Target="LoadingIndicator.IsActive"
+												Value="True" />
 									</VisualState.Setters>
 								</VisualState>
 
