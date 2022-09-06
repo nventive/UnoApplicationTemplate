@@ -30,7 +30,7 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Uno.SourceGenerationTasks" Version="4.0.2" />
+		<PackageReference Include="Uno.SourceGenerationTasks" Version="4.1.0" />
 		<PackageReference Include="Uno.UITest" Version="1.0.0" />
 		<PackageReference Include="Uno.UITest.Helpers" Version="1.0.0" />
 		<PackageReference Include="Xamarin.UITest" Version="3.0.19" />
