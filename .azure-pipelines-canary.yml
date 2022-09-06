@@ -21,10 +21,10 @@ stages:
     parameters:
       applicationEnvironment: Staging
       androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Internal.Android'
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Internal.iOS'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
       removeHyperlinksFromReleaseNotes: true
 
 - stage: AppCenter_Canary
@@ -40,6 +40,6 @@ stages:
       appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
       androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Internal.Android'
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       appCenterServiceConnectionName: $(AppCenterCanaryServiceConnection)
       appCenterDistributionGroup: $(AppCenterCanaryDistributionGroup)
