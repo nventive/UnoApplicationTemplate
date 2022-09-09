@@ -12,6 +12,7 @@ using MallardMessageHandlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Refit;
+using Uno.Extensions;
 
 namespace ApplicationTemplate;
 
@@ -38,6 +39,7 @@ public static class ApiConfiguration
 			.AddNetworkExceptionHandler()
 			.AddExceptionHubHandler()
 			.AddAuthenticationTokenHandler()
+			.AddTransient<HttpDebuggerHandler>()
 			.AddResponseContentDeserializer()
 			.AddAuthenticationEndpoint()
 			.AddPostEndpoint(configuration)
@@ -95,6 +97,7 @@ public static class ApiConfiguration
 		else
 		{
 			var options = configuration.GetSection(name).Get<EndpointOptions>();
+			var diagnosticsOptions = configuration.ReadOptions<DiagnosticsOptions>();
 			var httpClientBuilder = services
 				.AddRefitHttpClient<TInterface>()
 				.ConfigurePrimaryHttpMessageHandler(serviceProvider => serviceProvider.GetRequiredService<HttpMessageHandler>())
@@ -103,6 +106,7 @@ public static class ApiConfiguration
 					client.BaseAddress = options.Url;
 					AddDefaultHeaders(client, serviceProvider);
 				})
+				.AddConditionalHttpMessageHandler<HttpDebuggerHandler>(diagnosticsOptions.IsHttpDebuggerEnabled)
 				.AddHttpMessageHandler<ExceptionHubHandler>();
 
 			configure?.Invoke(httpClientBuilder);
@@ -143,6 +147,7 @@ public static class ApiConfiguration
 			.AddSingleton<IAuthenticationTokenProvider<AuthenticationData>>(s => s.GetRequiredService<IAuthenticationService>())
 			.AddTransient<AuthenticationTokenHandler<AuthenticationData>>();
 	}
+	
 	private static void AddDefaultHeaders(HttpClient client, IServiceProvider serviceProvider)
 	{
 		client.DefaultRequestHeaders.Add("Accept-Language", CultureInfo.CurrentCulture.Name);

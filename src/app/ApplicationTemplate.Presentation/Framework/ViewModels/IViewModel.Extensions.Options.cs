@@ -96,6 +96,8 @@ public static class ChinookViewModelExtensionsForOptions
 
 		static string GetOptionPropertyName(Expression<Func<TOptions, TValue>> expression)
 		{
+			var sb = new StringBuilder();
+
 			if (!(expression.Body is MemberExpression member))
 			{
 				throw new ArgumentException($"Expression '{expression}' doesn't refer to member property.");
@@ -107,7 +109,17 @@ public static class ChinookViewModelExtensionsForOptions
 				throw new ArgumentException($"Expression '{expression}' doesn't refer to a property.");
 			}
 
-			return propInfo.Name;
+			var innerExpression = member.Expression as MemberExpression;
+			while (innerExpression != null)
+			{
+				sb.Append(innerExpression.Member.Name);
+				sb.Append(':');
+				innerExpression = innerExpression.Expression as MemberExpression;
+			}
+
+			sb.Append(propInfo.Name);
+
+			return sb.ToString();
 		}
 
 		string GetValueAsString(TValue value)

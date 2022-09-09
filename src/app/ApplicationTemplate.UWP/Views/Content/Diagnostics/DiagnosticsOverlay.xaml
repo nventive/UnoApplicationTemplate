@@ -3,6 +3,7 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:uc="using:Nventive.View.Converters"
+			 xmlns:diag="using:ApplicationTemplate.Views.Content.Diagnostics"
 			 xmlns:xamarin="http://uno.ui/xamarin"
 			 mc:Ignorable="xamarin">
 
@@ -230,12 +231,16 @@
 			</StackPanel>
 
 			<!-- Diagnostics expanded content -->
-			<StackPanel Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
-						Grid.Row="1">
+			<Grid Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
+						Grid.Row="0"
+						Grid.RowSpan="3"
+						Padding="0,0,50,0">
 
-				<!-- placeholder -->
-				
-			</StackPanel>
+				<!-- Custom Diagnostics content; currently the HttpDebuggerView. -->
+				<diag:HttpDebuggerView DataContext="{Binding HttpDebugger}"
+									   VerticalAlignment="Stretch"/>
+
+			</Grid>
 
 			<StackPanel HorizontalAlignment="Right"
 						Grid.Row="2">
@@ -245,10 +250,15 @@
 						Command="{Binding CollectMemory}"
 						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
+				<!-- Toggle Http Debugger Button -->
+				<Button Content="Http"
+						Command="{Binding ToggleHttpDebugger}"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
+
 				<!-- Toggle Alignment Grid Button -->
 				<Button Content="Grid"
 						Command="{Binding ToggleAlignmentGrid}"
-						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />				
 
 				<!-- Theme Button -->
 				<Button Content="Theme"

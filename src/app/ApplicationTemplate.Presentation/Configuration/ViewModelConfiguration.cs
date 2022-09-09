@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
+using Chinook.DynamicMvvm.Implementations;
 using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -50,7 +51,7 @@ public static class ViewModelConfiguration
 
 	private static IServiceCollection AddDynamicProperties(this IServiceCollection services)
 	{
-		return services.AddSingleton<IDynamicPropertyFactory, DynamicPropertyFactory>();
+		return services.AddSingleton<IDynamicPropertyFactory, ValueChangedOnBackgroundTaskDynamicPropertyFactory>();
 	}
 
 	private static IServiceCollection AddDataLoaders(this IServiceCollection services)

@@ -10,6 +10,8 @@ public partial class DiagnosticsOverlayViewModel : ViewModel
 {
 	private DiagnosticsCountersService DiagnosticsCountersService => this.GetService<DiagnosticsCountersService>();
 
+	public HttpDebuggerViewModel HttpDebugger => this.GetChild(() => new HttpDebuggerViewModel());
+
 	public IDynamicCommand CollectMemory => this.GetCommand(() =>
 	{
 		GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced);
@@ -33,6 +35,13 @@ public partial class DiagnosticsOverlayViewModel : ViewModel
 	public IDynamicCommand ToggleAlignmentGrid => this.GetCommand(() =>
 	{
 		IsAlignmentGridEnabled = !IsAlignmentGridEnabled;
+	});
+
+	public IDynamicCommand ToggleHttpDebugger => this.GetCommand(() =>
+	{
+		// The HttpDebugger is currently the only thing in the expanded view.
+		// This method will change when we add more things to the expanded view.
+		IsDiagnosticsExpanded = !IsDiagnosticsExpanded;
 	});
 
 	public bool IsDiagnosticsExpanded
