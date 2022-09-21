@@ -46,7 +46,13 @@ public static class ApplicationTemplateConfigurationExtensions
 	/// Gets the default name for options of type <paramref name="optionsType"/>.
 	/// Removes the -Options prefix if any.
 	/// </summary>
-	public static string DefaultOptionsName(Type optionsType) => Regex.Replace(optionsType.Name, @"Options$", string.Empty);
+	public static string DefaultOptionsName(Type optionsType) => DefaultOptionsName(optionsType.Name);
+
+	/// <summary>
+	/// Gets the default name for options of the specified <paramref name="optionsTypeName"/>.
+	/// Removes the -Options prefix if any.
+	/// </summary>
+	public static string DefaultOptionsName(string optionsTypeName) => Regex.Replace(optionsTypeName, @"Options$", string.Empty);
 
 	/// <summary>
 	/// Gets the default name for options of type <typeparamref name="T"/>.

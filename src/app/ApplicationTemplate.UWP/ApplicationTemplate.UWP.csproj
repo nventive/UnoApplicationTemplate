@@ -139,6 +139,9 @@
     <Compile Include="Views\Content\Diagnostics\EnvironmentPickerPage.xaml.cs">
       <DependentUpon>EnvironmentPickerPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Content\Diagnostics\HttpDebuggerView.xaml.cs">
+      <DependentUpon>HttpDebuggerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Content\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -300,6 +303,10 @@
     <Page Include="Views\Content\Diagnostics\EnvironmentPickerPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Content\Diagnostics\HttpDebuggerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Content\Menu.xaml">
       <Generator>MSBuild:Compile</Generator>
