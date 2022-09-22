@@ -30,7 +30,7 @@
 									IndicatorColor="{StaticResource MaterialPrimaryBrush}">
 
 						<!-- ListView -->
-						<ListView ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}">
+						<ListView ItemsSource="{Binding Data}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 
