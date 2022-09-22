@@ -46,8 +46,7 @@
 								IndicatorColor="{StaticResource MaterialPrimaryBrush}">
 
 					<!-- Quotes ListView -->
-					<ListView android:ItemsSource="{Binding Path=DataContext.Data, ElementName=RefreshContent}"
-							  not_android:ItemsSource="{Binding Data}">
+					<ListView ItemsSource="{Binding Data}">
 
 						<ListView.ItemTemplate>
 							<DataTemplate>

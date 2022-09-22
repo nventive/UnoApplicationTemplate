@@ -7,8 +7,10 @@
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:android="http://uno.ui/android"
+			 xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:xamarin="http://uno.ui/xamarin"
-			 mc:Ignorable="d xamarin"
+			 mc:Ignorable="d xamarin android"
 			 d:DesignHeight="300"
 			 d:DesignWidth="400">
 
@@ -35,8 +37,10 @@
 			   TargetType="TextBox">
 			<Setter Property="FontSize"
 					Value="12" />
-			<Setter Property="FontFamily"
-					Value="Courier New" />
+			<android:Setter Property="FontFamily"
+							Value="monospace" />
+			<not_android:Setter Property="FontFamily"
+								Value="Courier New" />
 			<Setter Property="TextWrapping"
 					Value="Wrap" />
 			<Setter Property="AcceptsReturn"
@@ -380,7 +384,8 @@
 
 						<TextBlock Text="{Binding MainLine}"
 								   Style="{StaticResource HttpDebuggerTextBlockStyle}"
-								   FontFamily="Courier New"
+								   not_android:FontFamily="Courier New"
+								   android:FontFamily="monospace"
 								   Foreground="{Binding Trace.Status, Converter={StaticResource StatusToForeground}}"
 								   VerticalAlignment="Center"
 								   Grid.Column="1" />
@@ -484,7 +489,7 @@
 										  IsChecked="{Binding FormatResponseContent, Mode=TwoWay}"
 										  Style="{StaticResource HttpDebuggerToggleButtonStyle}"
 										  HorizontalAlignment="Right" />
-							
+
 							<ToggleButton Content="{Binding HideResponseHeaders, Converter={StaticResource BoolToToggleHeaderContent}}"
 										  IsChecked="{Binding HideResponseHeaders, Mode=TwoWay}"
 										  Style="{StaticResource HttpDebuggerToggleButtonStyle}"

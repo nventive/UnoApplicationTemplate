@@ -141,7 +141,7 @@
     <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.4.0-dev.22" />
     <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.3.0-dev.33" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.17" />
-    <PackageReference Include="Nventive.View.Uno" Version="0.4.0-dev.45" />
+    <PackageReference Include="Nventive.View.Uno" Version="0.4.0-dev.49" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
