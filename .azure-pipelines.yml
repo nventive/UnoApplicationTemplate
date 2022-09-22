@@ -13,14 +13,14 @@
 pr:
  branches:
    include:
-   - master
+   - main
    - release/*
    - feature/*
 
 trigger:
   branches:
     include:
-      - master
+      - main
 
 resources:
   containers:

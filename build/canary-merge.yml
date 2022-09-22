@@ -35,7 +35,7 @@ steps:
     usePrivateFeed: false
     useNuGetOrg: true
     mergeBranch: true
-    branchToMerge: 'master'
+    branchToMerge: 'main'
     isBranchToMergeAway: true
     mergeRepositoryConnection: 'UnoApplicationTemplate'
     pushMergeBranch: true
