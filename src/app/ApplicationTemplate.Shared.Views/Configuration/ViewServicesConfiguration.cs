@@ -1,4 +1,5 @@
-﻿using System.Reactive.Concurrency;
+﻿using System;
+using System.Reactive.Concurrency;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
@@ -40,7 +41,8 @@ public static class ViewServicesConfiguration
 			new MessageDialogService.MessageDialogService(
 				() => s.GetRequiredService<CoreDispatcher>(),
 				new MessageDialogBuilderDelegate(
-					key => s.GetRequiredService<IStringLocalizer>()[key]
+					key => s.GetRequiredService<IStringLocalizer>()[key],
+					windowHandle: null
 				)
 			)
 //-:cnd:noEmit
