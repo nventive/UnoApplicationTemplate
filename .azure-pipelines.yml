@@ -5,7 +5,6 @@
 #   always: false # If nothing changed, don't start a new run.
 #   branches:
 #     include:
-#       - master
 #       - main
 #       - develop
 #       - release/*

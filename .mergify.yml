@@ -8,8 +8,8 @@ pull_request_rules:
 
   - name: automatic strict merge when CI passes, has 2 reviews, no requests for change and is labeled 'ready-to-merge' unless labelled 'do-not-merge/breaking-change' or 'do-not-merge/work-in-progress'
     conditions:
-      # Only pull-requests sent to the master branch
-      - base=master
+      # Only pull-requests sent to the main branch
+      - base=main
 
       # All Azure builds should be green:
       - status-success=nventive.UnoApplicationTemplate
