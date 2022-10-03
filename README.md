@@ -2,6 +2,13 @@
 
 This is a mobile app project template using [Uno Platform](https://github.com/unoplatform/uno) and the latest .NET practices.
 
+- It uses the MVVM pattern.
+- Code is organized by [application layer](doc/Architecture.md#Solution-Structure).
+- It comes with [dependency injection](doc/DependencyInjection.md).
+- There are built-in [logs](doc/Logging.md) and [diagnostics tools](doc/Diagnostics.md).
+- There is scaffolding code showing sample features.
+  When you run as-is, you get a _Dad Jokes_ application.
+
 ## Getting Started
 
 We use `dotnet` project templates to easily create new projects. It simplifies the **project renaming** and supports **conditional inclusions**.
@@ -48,6 +55,7 @@ This repository provides documentation on different topics under the [doc](doc/)
 - [Configuration](doc/Configuration.md)
 - [HTTP](doc/HTTP.md)
 - [Logging](doc/Logging.md)
+- [Diagnostics](doc/Diagnostics.md)
 - [Platform specifics](doc/PlatformSpecifics.md)
 - [Serialization](doc/Serialization.md)
 - [Startup](doc/Startup.md)
