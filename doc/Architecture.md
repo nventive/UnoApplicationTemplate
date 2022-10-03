@@ -39,6 +39,24 @@ The application solution is divided in 2 main areas.
 
 ![Solution diagram](diagrams/solution-structure.png)
 
+### Client (DAL)
+The _data access layer_ is where you would put external dependencies such as API endpoints and local storage.
+This is where you put serializable entities.
+
+### Business
+The business layer is where you put your business services and entities that manipulate data from the client layer.
+Entities from the business layer are usually immutable and they don't need to be serializable.
+
+### Presentation
+The presentation layer implements the user experience (UX).
+It contains all the ViewModels, navigation, dialogs, and most of the configuration.
+
+### View
+The view layer implements the user interface (UI).
+It contains all the XAML, converters, templates, styles, assets, and other UI resources.
+This layer also contains platform-specific implementations of services.
+For that reason, it also contains a good portion of the configuration.
+
 ---
 
 ## Topics
