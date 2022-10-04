@@ -11,6 +11,8 @@ This is a mobile app project template using [Uno Platform](https://github.com/un
 
 ## Getting Started
 
+Bonjour! :D
+
 We use `dotnet` project templates to easily create new projects. It simplifies the **project renaming** and supports **conditional inclusions**.
 
 ### Installing the template
