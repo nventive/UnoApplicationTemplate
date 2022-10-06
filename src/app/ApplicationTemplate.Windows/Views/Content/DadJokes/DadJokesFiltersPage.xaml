@@ -1,0 +1,76 @@
+﻿<Page x:Class="ApplicationTemplate.Views.Content.DadJokesFiltersPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:cv="using:ApplicationTemplate.Views">
+
+	<Page.Resources>
+
+		<!-- Filters Converter -->
+		<cv:FiltersConverter x:Key="FiltersConverter" />
+
+		<!-- Quotes EmptyTemplate -->
+		<DataTemplate x:Key="QuotesEmptyTemplate">
+
+			<!-- No Favorite Text -->
+			<TextBlock Text="You don't have any favorites"
+					   Style="{StaticResource Body1}"
+					   VerticalAlignment="Center"
+					   HorizontalAlignment="Center" />
+		</DataTemplate>
+	</Page.Resources>
+
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- CommandBar-->
+		<CommandBar Content="Filters"
+					x:Uid="DadJokesFiltersPage_CommandBar" />
+
+		<StackPanel Margin="20,25,20,0"
+					Grid.Row="1">
+
+			<!-- Favorites CheckBox -->
+			<CheckBox Content="Favorites" />
+
+			<!-- Most Awards CheckBox -->
+			<CheckBox Content="Most awards" />
+
+			<!-- Most Awards CheckBox -->
+			<TextBlock Text="Type of posts"
+					   Style="{StaticResource Subtitle1}"
+					   Margin="0,15" />
+
+			<!-- New Posts CheckBox -->
+			<RadioButton Content="New posts"
+						 IsChecked="{Binding PostTypeFilter, Converter={StaticResource FiltersConverter}, ConverterParameter=New}"
+						 Command="{Binding HandleCheck}"
+						 CommandParameter="New"
+						 GroupName="Posts type" />
+
+			<!-- Hot Posts CheckBox -->
+			<RadioButton Content="Hot Posts"
+						 IsChecked="{Binding PostTypeFilter, Converter={StaticResource FiltersConverter}, ConverterParameter=Hot}"
+						 Command="{Binding HandleCheck}"
+						 CommandParameter="Hot" 
+						 GroupName="Posts type" />
+
+			<!-- Rising Posts CheckBox -->
+			<RadioButton Content="Rising posts"
+						 IsChecked="{Binding PostTypeFilter, Converter={StaticResource FiltersConverter}, ConverterParameter=Rising}"
+						 Command="{Binding HandleCheck}"
+						 CommandParameter="Rising" 
+						 GroupName="Posts type" />
+
+			<!-- Filter Button -->
+			<Button Content="Filter"
+					Command="{Binding FiltersAndNavigate}"
+					Style="{StaticResource MaterialOutlinedButtonStyle}"
+					Margin="0,16,0,0" />
+		</StackPanel>
+	</Grid>
+</Page>

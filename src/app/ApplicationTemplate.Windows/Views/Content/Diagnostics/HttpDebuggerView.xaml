@@ -1,0 +1,505 @@
+﻿<UserControl x:Class="ApplicationTemplate.Views.Content.Diagnostics.HttpDebuggerView"
+			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:diag="using:ApplicationTemplate.Views.Content.Diagnostics"
+			 xmlns:nve="using:Nventive.View.Extensions"
+			 xmlns:nvc="using:Nventive.View.Converters"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:android="http://uno.ui/android"
+			 xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:xamarin="http://uno.ui/xamarin"
+			 mc:Ignorable="d xamarin android"
+			 d:DesignHeight="300"
+			 d:DesignWidth="400">
+
+	<UserControl.Resources>
+
+		<SolidColorBrush x:Key="NormalForegroundBrush"
+						 Color="#FFFFFFFF" />
+		<SolidColorBrush x:Key="DimForegroundBrush"
+						 Color="#BBFFFFFF" />
+		<SolidColorBrush x:Key="ErrorForegroundBrush"
+						 Color="#FFFF8888" />
+		<SolidColorBrush x:Key="SelectionBackgroundBrush"
+						 Color="#33FFFFFF" />
+
+		<Style x:Key="HttpDebuggerTextBlockStyle"
+			   TargetType="TextBlock">
+			<Setter Property="FontSize"
+					Value="10" />
+			<Setter Property="Foreground"
+					Value="{StaticResource NormalForegroundBrush}" />
+		</Style>
+
+		<Style x:Key="HttpDebuggerTextBoxStyle"
+			   TargetType="TextBox">
+			<Setter Property="FontSize"
+					Value="12" />
+			<android:Setter Property="FontFamily"
+							Value="monospace" />
+			<not_android:Setter Property="FontFamily"
+								Value="Courier New" />
+			<Setter Property="TextWrapping"
+					Value="Wrap" />
+			<Setter Property="AcceptsReturn"
+					Value="True" />
+			<!-- Workaround for this issue is to not set IsReadOnly to true. https://github.com/unoplatform/uno/issues/9908 -->
+			<!--<Setter Property="IsReadOnly"
+					Value="True" />-->
+			<Setter Property="IsSpellCheckEnabled"
+					Value="False" />
+			<Setter Property="Foreground"
+					Value="{StaticResource NormalForegroundBrush}" />
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="TextBox">
+						<Grid x:Name="Root"
+							  Background="#AA000000"
+							  BorderBrush="{TemplateBinding BorderBrush}"
+							  BorderThickness="{TemplateBinding BorderThickness}"
+							  CornerRadius="{TemplateBinding CornerRadius}"
+							  Padding="{TemplateBinding Padding}">
+
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="PointerOver" />
+									<VisualState x:Name="Pressed" />
+									<VisualState x:Name="Disabled" />
+									<VisualState x:Name="Focused">
+										<VisualState.Setters>
+											<Setter Target="Root.BorderBrush"
+													Value="{StaticResource TextBoxFilledFocusIndicatorColorBrush}" />
+										</VisualState.Setters>
+									</VisualState>
+								</VisualStateGroup>
+								<VisualStateGroup x:Name="HeaderStates">
+									<VisualState x:Name="NotEmpty" />
+									<VisualState x:Name="Empty" />
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+
+							<ScrollViewer x:Name="ContentElement"
+										  Grid.Column="1"
+										  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+										  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+										  IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+										  IsTabStop="False"
+										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+										  VerticalAlignment="Bottom"
+										  ZoomMode="Disabled"
+										  AutomationProperties.AccessibilityView="Raw">
+							</ScrollViewer>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<Style x:Key="HttpDebuggerButtonStyle"
+			   TargetType="Button">
+
+			<Setter Property="FontSize"
+					Value="11" />
+			<Setter Property="HorizontalAlignment"
+					Value="Stretch" />
+			<Setter Property="Foreground"
+					Value="White" />
+			<Setter Property="Background"
+					Value="#AA000000" />
+			<Setter Property="Padding"
+					Value="4,4" />
+			<Setter Property="MaxWidth"
+					Value="200" />
+			<Setter Property="MinWidth"
+					Value="0" />
+			<Setter Property="Margin"
+					Value="0,1" />
+			<Setter Property="BorderThickness"
+					Value="0" />
+			<Setter Property="MinHeight"
+					Value="0" />
+
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+
+						<Grid VerticalAlignment="{TemplateBinding VerticalAlignment}"
+							  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="PointerOver" />
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.1"
+															 To="0.8"
+															 Storyboard.TargetName="BackgroundBorder"
+															 Storyboard.TargetProperty="Opacity" />
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled" />
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
+							<!-- Background Border -->
+							<Border x:Name="BackgroundBorder"
+									Background="{TemplateBinding Background}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									BorderBrush="{TemplateBinding BorderBrush}" />
+
+							<!-- ContentPresenter -->
+							<ContentPresenter x:Name="ContentPresenter"
+											  Margin="{TemplateBinding Padding}"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  AutomationProperties.AccessibilityView="Raw"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<diag:HttpTraceStatusCustomValueConverter x:Key="StatusToForeground"
+												  ValueWhenPending="{StaticResource DimForegroundBrush}"
+												  ValueWhenReceived="{StaticResource NormalForegroundBrush}"
+												  ValueWhenFailed="{StaticResource ErrorForegroundBrush}"
+												  ValueWhenCancelled="{StaticResource DimForegroundBrush}"
+												  FallbackValue="{StaticResource DimForegroundBrush}" />
+
+		<Style x:Key="HttpDebuggerToggleButtonStyle"
+			   TargetType="ToggleButton">
+			<Setter Property="FontSize"
+					Value="11" />
+			<Setter Property="HorizontalAlignment"
+					Value="Stretch" />
+			<Setter Property="Foreground"
+					Value="White" />
+			<Setter Property="Background"
+					Value="#AA000000" />
+			<Setter Property="Padding"
+					Value="4,4" />
+			<Setter Property="MaxWidth"
+					Value="200" />
+			<Setter Property="MinWidth"
+					Value="0" />
+			<Setter Property="Margin"
+					Value="0,1" />
+			<Setter Property="BorderThickness"
+					Value="0" />
+			<Setter Property="MinHeight"
+					Value="0" />
+
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ToggleButton">
+
+						<Grid VerticalAlignment="{TemplateBinding VerticalAlignment}"
+							  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="PointerOver" />
+									<VisualState x:Name="Pressed">
+										<Storyboard>
+											<DoubleAnimation Duration="0:0:0.1"
+															 To="0.8"
+															 Storyboard.TargetName="BackgroundBorder"
+															 Storyboard.TargetProperty="Opacity" />
+										</Storyboard>
+									</VisualState>
+									<VisualState x:Name="Disabled" />
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
+							<!-- Background Border -->
+							<Border x:Name="BackgroundBorder"
+									Background="{TemplateBinding Background}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									BorderBrush="{TemplateBinding BorderBrush}" />
+
+							<!-- ContentPresenter -->
+							<ContentPresenter x:Name="ContentPresenter"
+											  Margin="{TemplateBinding Padding}"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  AutomationProperties.AccessibilityView="Raw"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
+		<nvc:FromNullableBoolToCustomValueConverter x:Key="BoolToToggleHeaderContent"
+													TrueValue="Show Headers"
+													NullOrFalseValue="Hide Headers" />
+
+		<nvc:FromNullableBoolToCustomValueConverter x:Key="BoolToToggleContentFormatContent"
+													TrueValue="Show Raw Content"
+													NullOrFalseValue="Format Content" />
+
+		<Style x:Key="HttpDebuggerTraceListViewItemStyle"
+			   TargetType="ListViewItem">
+
+			<Setter Property="Background"
+					Value="Transparent" />
+			<Setter Property="TabNavigation"
+					Value="Local" />
+			<Setter Property="IsHoldingEnabled"
+					Value="True" />
+			<Setter Property="HorizontalContentAlignment"
+					Value="Stretch" />
+			<Setter Property="VerticalAlignment"
+					Value="Top" />
+			<Setter Property="VerticalContentAlignment"
+					Value="Stretch" />
+			<Setter Property="MinHeight"
+					Value="0" />
+			<Setter Property="UseSystemFocusVisuals"
+					Value="True" />
+			<Setter Property="Padding"
+					Value="0" />
+
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="ListViewItem">
+
+						<Grid x:Name="ContentBorder"
+							  Background="{TemplateBinding Background}"
+							  BorderBrush="{TemplateBinding BorderBrush}"
+							  BorderThickness="{TemplateBinding BorderThickness}">
+
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="PointerOver" />
+									<VisualState x:Name="Pressed" />
+									<VisualState x:Name="Selected">
+										<VisualState.Setters>
+											<Setter Target="BorderBackground.Opacity"
+													Value="1" />
+										</VisualState.Setters>
+									</VisualState>
+									<VisualState x:Name="PointerOverSelected">
+										<VisualState.Setters>
+											<Setter Target="BorderBackground.Opacity"
+													Value="1" />
+										</VisualState.Setters>
+									</VisualState>
+									<VisualState x:Name="PressedSelected">
+										<VisualState.Setters>
+											<Setter Target="BorderBackground.Opacity"
+													Value="1" />
+										</VisualState.Setters>
+									</VisualState>
+								</VisualStateGroup>
+
+								<VisualStateGroup x:Name="DisabledStates">
+									<VisualState x:Name="Enabled" />
+									<VisualState x:Name="Disabled" />
+								</VisualStateGroup>
+
+								<!-- For MultiSelectStates states, use the complete style in Uno.UI. See links on top of this file. -->
+								<VisualStateGroup x:Name="MultiSelectStates" />
+
+								<!-- For reordering states, use the complete style in Uno.UI. See links on top of this file.-->
+								<VisualStateGroup x:Name="ReorderHintStates" />
+
+								<!-- For drag states, use the complete style in Uno.UI. See links on top of this file. -->
+								<VisualStateGroup x:Name="DragStates" />
+							</VisualStateManager.VisualStateGroups>
+
+							<Rectangle x:Name="BorderBackground"
+									   IsHitTestVisible="False"
+									   Fill="{StaticResource SelectionBackgroundBrush}"
+									   Opacity="0"
+									   Control.IsTemplateFocusTarget="True" />
+
+							<!-- ContentPresenter -->
+							<ContentPresenter x:Name="ContentPresenter"
+											  Content="{TemplateBinding Content}"
+											  ContentTransitions="{TemplateBinding ContentTransitions}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  xamarin:ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+
+	<Grid Background="Transparent">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<!-- General buttons -->
+		<StackPanel Orientation="Horizontal">
+			<Button Style="{StaticResource HttpDebuggerButtonStyle}"
+					Content="Clear"
+					Command="{Binding Clear}" />
+		</StackPanel>
+
+		<!-- List of traces -->
+		<ListView ItemsSource="{Binding Traces}"
+				  ItemContainerStyle="{StaticResource HttpDebuggerTraceListViewItemStyle}"
+				  SelectionMode="Single"
+				  IsItemClickEnabled="True"
+				  SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}"
+				  Grid.Row="1">
+			<ListView.ItemTemplate>
+				<DataTemplate>
+					<Grid VerticalAlignment="Center"
+						  Height="24">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="16" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="2*" />
+						</Grid.ColumnDefinitions>
+
+						<TextBlock Text="{Binding Icon}"
+								   Style="{StaticResource HttpDebuggerTextBlockStyle}"
+								   VerticalAlignment="Center" />
+
+						<TextBlock Text="{Binding MainLine}"
+								   Style="{StaticResource HttpDebuggerTextBlockStyle}"
+								   not_android:FontFamily="Courier New"
+								   android:FontFamily="monospace"
+								   Foreground="{Binding Trace.Status, Converter={StaticResource StatusToForeground}}"
+								   VerticalAlignment="Center"
+								   Grid.Column="1" />
+
+						<TextBlock Text="{Binding Trace.RequestUri.Host}"
+								   Style="{StaticResource HttpDebuggerTextBlockStyle}"
+								   Foreground="{Binding Trace.Status, Converter={StaticResource StatusToForeground}}"
+								   HorizontalAlignment="Right"
+								   TextTrimming="CharacterEllipsis"
+								   TextWrapping="NoWrap"
+								   VerticalAlignment="Center"
+								   Margin="2,0"
+								   Grid.Column="2" />
+
+						<TextBlock Text="{Binding Trace.RequestUri.LocalPath}"
+								   Style="{StaticResource HttpDebuggerTextBlockStyle}"
+								   Foreground="{Binding Trace.Status, Converter={StaticResource StatusToForeground}}"
+								   TextTrimming="None"
+								   TextWrapping="NoWrap"
+								   VerticalAlignment="Center"
+								   Grid.Column="3" />
+					</Grid>
+				</DataTemplate>
+			</ListView.ItemTemplate>
+		</ListView>
+
+		<!-- Details Panel -->
+		<Grid Grid.Row="2"
+			  Visibility="{Binding SelectedTrace, Converter={StaticResource NullToCollapsed}}">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="Auto" />
+				<RowDefinition Height="*" />
+			</Grid.RowDefinitions>
+			<Grid BorderThickness="0,0,0,1"
+				  BorderBrush="{StaticResource DimForegroundBrush}">
+				<TextBlock Text="Details"
+						   Style="{StaticResource HttpDebuggerTextBlockStyle}"
+						   FontSize="16" />
+
+				<Button Content="Close"
+						Command="{Binding CloseDetails}"
+						Style="{StaticResource HttpDebuggerButtonStyle}"
+						HorizontalAlignment="Right" />
+			</Grid>
+
+			<!-- Details ScrollViewer, its MaxHeight is set in code behind -->
+			<ScrollViewer x:Name="DetailsScrollViewer"
+						  Grid.Row="1">
+				<StackPanel>
+					<TextBlock Style="{StaticResource HttpDebuggerTextBlockStyle}"
+							   FontSize="12">
+						<Run Text="Status:" />
+						<Run Text="{Binding SelectedTrace.Trace.Status}" /><Run Text="," />
+						<Run Text="Elapsed:" />
+						<Run Text="{Binding SelectedTrace.Trace.ElapsedTime}" />
+					</TextBlock>
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Request"
+								   Style="{StaticResource HttpDebuggerTextBlockStyle}"
+								   VerticalAlignment="Center"
+								   FontSize="14" />
+
+						<StackPanel Orientation="Horizontal"
+									HorizontalAlignment="Right"
+									Spacing="2"
+									Grid.Column="1">
+
+							<ToggleButton Content="{Binding FormatRequestContent, Converter={StaticResource BoolToToggleContentFormatContent}}"
+										  IsChecked="{Binding FormatRequestContent, Mode=TwoWay}"
+										  Style="{StaticResource HttpDebuggerToggleButtonStyle}"
+										  HorizontalAlignment="Right" />
+
+							<ToggleButton Content="{Binding HideRequestHeaders, Converter={StaticResource BoolToToggleHeaderContent}}"
+										  IsChecked="{Binding HideRequestHeaders, Mode=TwoWay}"
+										  Style="{StaticResource HttpDebuggerToggleButtonStyle}"
+										  HorizontalAlignment="Right" />
+						</StackPanel>
+					</Grid>
+					<TextBox Text="{Binding RequestDetails}"
+							 Style="{StaticResource HttpDebuggerTextBoxStyle}" />
+
+					<Grid>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
+						<TextBlock Text="Response"
+								   Style="{StaticResource HttpDebuggerTextBlockStyle}"
+								   VerticalAlignment="Center"
+								   FontSize="14" />
+						<StackPanel Orientation="Horizontal"
+									HorizontalAlignment="Right"
+									Spacing="2"
+									Grid.Column="1">
+
+							<ToggleButton Content="{Binding FormatResponseContent, Converter={StaticResource BoolToToggleContentFormatContent}}"
+										  IsChecked="{Binding FormatResponseContent, Mode=TwoWay}"
+										  Style="{StaticResource HttpDebuggerToggleButtonStyle}"
+										  HorizontalAlignment="Right" />
+
+							<ToggleButton Content="{Binding HideResponseHeaders, Converter={StaticResource BoolToToggleHeaderContent}}"
+										  IsChecked="{Binding HideResponseHeaders, Mode=TwoWay}"
+										  Style="{StaticResource HttpDebuggerToggleButtonStyle}"
+										  HorizontalAlignment="Right" />
+						</StackPanel>
+					</Grid>
+					<TextBox Text="{Binding ResponseDetails}"
+							 Style="{StaticResource HttpDebuggerTextBoxStyle}" />
+				</StackPanel>
+			</ScrollViewer>
+		</Grid>
+	</Grid>
+</UserControl>

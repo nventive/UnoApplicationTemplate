@@ -1,0 +1,135 @@
+﻿<Page x:Class="ApplicationTemplate.Views.Content.LoginPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:ApplicationTemplate"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:ue="using:Nventive.View.Extensions"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  xmlns:android="http://uno.ui/android"
+	  xmlns:ios="http://uno.ui/ios"
+	  mc:Ignorable="d ios android">
+
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup>
+
+				<VisualState x:Name="BiggerFont">
+
+					<!-- This represents bigger phones than iPhone 5, SE -->
+					<VisualState.StateTriggers>
+						<AdaptiveTrigger MinWindowHeight="630" />
+					</VisualState.StateTriggers>
+
+					<!-- We change the font size to adapt the design for small and big phones -->
+					<VisualState.Setters>
+						<Setter Target="Login_Title.FontSize"
+								Value="60" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+
+		<!-- Background -->
+		<Image Source="{StaticResource BackgroundMustachesLightImage}"
+			   Stretch="UniformToFill" />
+
+		<ScrollViewer>
+			<StackPanel toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
+						VerticalAlignment="Center"
+						Margin="0,32">
+
+				<!-- Title -->
+				<TextBlock Text="{Binding Title}"
+						   x:Uid="Login_Title"
+						   Style="{StaticResource Headline2}"
+						   TextAlignment="Center"
+						   Margin="20,0" />
+
+				<StackPanel Margin="40,0">
+					
+					<!-- Quote -->
+					<TextBlock Text="{Binding Quote}"
+							   x:Uid="Login_Subtitle"
+							   Style="{StaticResource Body1}"
+							   Foreground="{StaticResource MaterialOnBackgroundBrush}"
+							   FontStyle="Italic"
+							   TextAlignment="Center"
+							   Margin="0,16,0,0" />
+
+					<!-- Email -->
+					<local:DataValidationView Model="{Binding Form}"
+											  PropertyName="Email"
+											  Margin="0,28,0,0">
+						<TextBox x:Name="EmailField"
+								 PlaceholderText="Email"
+								 x:Uid="Login_Email"
+								 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+								 ue:ControlExtensions.LostFocusCommandParameter="Email"
+								 InputScope="EmailSmtpAddress"
+								 ios:IsSpellCheckEnabled="False"
+								 ios:ReturnKeyType="Next"
+								 android:ImeOptions="Next"
+								 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
+					</local:DataValidationView>
+
+					<!-- Password -->
+					<local:DataValidationView Model="{Binding Form}"
+											  PropertyName="Password"
+											  Margin="0,8,0,0">
+						<PasswordBox x:Name="PasswordField"
+									 x:Uid="Login_Password"
+									 PlaceholderText="Password"
+									 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                     ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+                                     ue:ControlExtensions.LostFocusCommandParameter="Password"
+									 ios:ReturnKeyType="Next"
+									 android:ImeOptions="Next"
+									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
+					</local:DataValidationView>
+
+					<!-- Forgot Password Button -->
+					<HyperlinkButton Content="Forgot password ?"
+									 x:Uid="Login_ForgotPassword"
+									 Command="{Binding NavigateToForgotPasswordPage}"
+									 Foreground="{StaticResource MaterialOnBackgroundBrush}"                                                                                                                                                                                                                                                              
+									 Margin="0,4,0,0" />
+
+					<!-- Login Button -->
+					<Button x:Name="LoginButton"
+							Content="LOG IN"
+							x:Uid="Login_Login"
+							Command="{Binding Login}"
+							Style="{StaticResource MaterialContainedButtonStyle}"
+							HorizontalAlignment="Stretch"
+							Margin="0,24,0,0" />
+
+					<!-- Create Account Button -->
+					<Button x:Name="CreateAccountButton"
+							x:Uid="Login_CreateAccount"
+							Content="CREATE ACCOUNT"
+							Command="{Binding NavigateToCreateAccountPage}"
+							Style="{StaticResource MaterialOutlinedButtonStyle}"
+							HorizontalAlignment="Stretch"
+							Margin="0,16,0,0" />
+
+					<!-- Separator -->
+					<Rectangle Fill="{StaticResource SeparatorBrush}"
+							   Height="1"
+							   HorizontalAlignment="Stretch"
+							   Margin="0,32,0,0" />
+
+					<!-- Google Login Button -->
+					<Button x:Name="GoogleLoginButton"
+							x:Uid="Login_Google"
+							Content="CONTINUE WITH GOOGLE"
+							Style="{StaticResource GoogleButtonStyle}"
+							HorizontalAlignment="Stretch"
+							Margin="0,32,0,0" />
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>
