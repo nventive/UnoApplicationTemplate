@@ -16,7 +16,7 @@
 		<!-- Environments ListView -->
 		<ListView ItemsSource="{Binding Environments}"
 				  SelectedItem="{Binding SelectedEnvironment}"
-				  ue:ListViewBaseExtensions.Command="{Binding SelectEnvironment}"
+			    ue:ListViewBaseExtensions.Command="{Binding SelectEnvironment}"
 				  Background="White"
 				  VerticalAlignment="Top"
 				  IsItemClickEnabled="True"

@@ -176,11 +176,12 @@
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
 
-						<WebView x:Name="PART_WebView"
+						<!--Removed until we can exclude it from WinUI build-->
+						<!--<WebView x:Name="PART_WebView"
 								 Opacity="1"
 								 Margin="{TemplateBinding Padding}"
 								 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+								 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />-->
 
 						<Grid x:Name="LoadingGrid"
 							  Background="#40000000"

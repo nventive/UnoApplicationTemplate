@@ -1,5 +1,10 @@
-﻿using Windows.UI.Xaml;
+﻿#if WINUI
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+#else
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+#endif
 
 namespace ApplicationTemplate.Views.Content;
 
@@ -10,10 +15,10 @@ public sealed partial class SettingsPage : Page
 		this.InitializeComponent();
 	}
 
-	private void OnThemeButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+	private void OnThemeButtonClicked(object sender, RoutedEventArgs e)
 	{
 		// Set theme for window root.
-		if (Windows.UI.Xaml.Window.Current.Content is FrameworkElement root)
+		if (Window.Current.Content is FrameworkElement root)
 		{
 			switch (root.ActualTheme)
 			{

@@ -11,11 +11,10 @@ using Windows.UI.ViewManagement;
 //-:cnd:noEmit
 #if WINUI
 using Microsoft.UI.Xaml;
-using Application = Microsoft.UI.Xaml.Application;
+using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 
 #else
 using Windows.UI.Xaml;
-using Application = Windows.UI.Xaml.Application;
 #endif
 //-:cnd:noEmit
 namespace ApplicationTemplate;
@@ -46,7 +45,13 @@ sealed partial class App : Application
 
 	protected override void OnLaunched(LaunchActivatedEventArgs args)
 	{
-		InitializeAndStart(args);
+		InitializeAndStart(
+#if WINUI
+			args.UWPLaunchActivatedEventArgs
+#else
+			args
+#endif
+			);
 	}
 
 #if !WINUI
@@ -140,7 +145,7 @@ sealed partial class App : Application
 #if WINDOWS_UWP || WINDOWS
 //+:cnd:noEmit
 		var hasStatusBar = false;
-//-:cnd:noEmit
+		//-:cnd:noEmit
 #else
 		//+:cnd:noEmit
 		var hasStatusBar = true;
@@ -149,10 +154,14 @@ sealed partial class App : Application
 #endif
 		//+:cnd:noEmit
 
+#if WINUI
+		// TODO Add titlebar / status bar customization for net6
+#else
 		var statusBarHeight = hasStatusBar ? Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height : 0;
 
 		resources.Add("StatusBarDouble", (double)statusBarHeight);
 		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
 		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
+#endif
 	}
 }

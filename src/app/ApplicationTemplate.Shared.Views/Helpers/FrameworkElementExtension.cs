@@ -4,7 +4,11 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Windows;
 using Uno.Extensions;
+#if WINUI
+using Microsoft.UI.Xaml;
+#else
 using Windows.UI.Xaml;
+#endif
 
 namespace ApplicationTemplate.Views.Helpers;
 

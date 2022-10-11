@@ -11,6 +11,10 @@ using Uno;
 //+:cnd:noEmit
 using Windows.UI.Xaml;
 //-:cnd:noEmit
+#elif WINDOWS
+//+:cnd:noEmit
+using Microsoft.UI.Xaml;
+//-:cnd:noEmit
 #elif __ANDROID__ || __IOS__
 //+:cnd:noEmit
 using Windows.UI.Xaml;
@@ -197,7 +201,13 @@ internal static class ObservableExtensions
 		}
 		else
 		{
-			var dispatcher = new MainDispatcherScheduler(element.Dispatcher);
+			var dispatcher = new MainDispatcherScheduler(
+#if WINUI
+				element.DispatcherQueue
+#else
+				element.Dispatcher
+#endif
+				);
 
 			if (immediateSubscribe)
 			{

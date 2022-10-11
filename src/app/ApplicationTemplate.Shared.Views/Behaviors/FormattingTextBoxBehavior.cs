@@ -5,9 +5,15 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Text;
 using Uno.Extensions;
+#if WINUI
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
+#else
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+#endif
 
 namespace ApplicationTemplate.Views.Behaviors;
 
