@@ -2,7 +2,7 @@
 using Nventive.ExtendedSplashScreen;
 using Windows.ApplicationModel.Activation;
 //-:cnd:noEmit
-# WINUI
+#if WINUI
 using Microsoft.UI.Xaml.Controls;
 #else
 using Windows.UI.Xaml.Controls;

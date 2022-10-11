@@ -13,7 +13,13 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Uno.UI;
 using Windows.UI.Core;
+#if WINUI
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
+#else
+using Windows.UI.Core;
 using Windows.UI.Xaml;
+#endif
 
 namespace ApplicationTemplate.Views;
 
@@ -52,7 +58,10 @@ public sealed class Startup : StartupBase
 
 	protected override void OnInitialized(IServiceProvider services)
 	{
+		// TODO add async web view to net6 apps
+#if !NET6_0_OR_GREATER
 		AsyncWebView.AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView.AsyncWebView>>();
+#endif
 
 		HandleUnhandledExceptions(services);
 	}
@@ -62,9 +71,9 @@ public sealed class Startup : StartupBase
 		void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
 
 //-:cnd:noEmit
-#if WINDOWS_UWP || __ANDROID__ || __IOS__
+#if WINDOWS_UWP || WINDOWS || __ANDROID__ || __IOS__
 //+:cnd:noEmit
-		Windows.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
+		Application.Current.UnhandledException += (s, e) =>
 		{
 			OnError(e.Exception);
 			e.Handled = true;
@@ -102,7 +111,11 @@ public sealed class Startup : StartupBase
 
 	private static async Task SetShellViewModel()
 	{
+#if WINUI
+		App.Instance.Shell.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, SetDataContextUI);
+#else
 		await App.Instance.Shell.Dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, SetDataContextUI);
+#endif
 
 		void SetDataContextUI() // Runs on UI thread
 		{

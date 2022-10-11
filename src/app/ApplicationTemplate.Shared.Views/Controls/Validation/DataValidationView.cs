@@ -80,7 +80,7 @@ public partial class DataValidationView : ContentControl
 
 	private void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e)
 	{
-		_ = Dispatcher.RunAsync(Microsoft.UI.Core.CoreDispatcherPriority.Normal, ErrorsChangedUI);
+		_ = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ErrorsChangedUI);
 
 		void ErrorsChangedUI()
 		{

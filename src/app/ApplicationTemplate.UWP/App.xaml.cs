@@ -6,16 +6,16 @@ using Chinook.SectionsNavigation;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Graphics.Display;
+using Windows.Storage;
 using Windows.UI.ViewManagement;
 //-:cnd:noEmit
 #if WINUI
 using Microsoft.UI.Xaml;
 using Application = Microsoft.UI.Xaml.Application;
-using CurrentWindow = Microsoft.UI.Xaml.Window;
+
 #else
-using Application = Windows.UI.Xaml.Application;
-using CurrentWindow = Windows.UI.Xaml.Window.Current;
 using Windows.UI.Xaml;
+using Application = Windows.UI.Xaml.Application;
 #endif
 //-:cnd:noEmit
 namespace ApplicationTemplate;
@@ -28,11 +28,9 @@ sealed partial class App : Application
 
 		Startup = new Startup();
 		Startup.PreInitialize();
-		//-:cnd:noEmit
-#if !WINUI
+
 		InitializeComponent();
-#endif
-		//-:cnd:noEmit
+
 		ConfigureOrientation();
 	}
 
@@ -44,18 +42,20 @@ sealed partial class App : Application
 
 	public MultiFrame NavigationMultiFrame => Shell?.NavigationMultiFrame;
 
-	public Window CurrentWindow => CurrentWindow;
+	public Window CurrentWindow => Window.Current;
 
 	protected override void OnLaunched(LaunchActivatedEventArgs args)
 	{
 		InitializeAndStart(args);
 	}
 
+#if !WINUI
 	protected override void OnActivated(IActivatedEventArgs args)
 	{
 		// This is where your app launches if you use custom schemes, Universal Links, or Android App Links.
 		InitializeAndStart(args);
 	}
+#endif
 
 	private void InitializeAndStart(IActivatedEventArgs args)
 	{
@@ -66,9 +66,8 @@ sealed partial class App : Application
 		if (isFirstLaunch)
 		{
 			ConfigureViewSize();
-#if !WINUI
 			ConfigureStatusBar();
-#endif
+
 			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
 
 			Startup.ShellActivity.Start();
@@ -86,8 +85,8 @@ sealed partial class App : Application
 	private static string GetContentRootPath()
 	{
 		//-:cnd:noEmit
-#if WINDOWS_UWP || __ANDROID__ || __IOS__
-		return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+#if WINDOWS_UWP || WINDOWS || __ANDROID__ || __IOS__
+		return ApplicationData.Current.LocalFolder.Path;
 #else
 		return string.Empty;
 #endif
@@ -97,9 +96,9 @@ sealed partial class App : Application
 	private static string GetSettingsFolderPath()
 	{
 		//-:cnd:noEmit
-#if WINDOWS_UWP
+#if WINDOWS_UWP || WINDOWS
 //+:cnd:noEmit
-		var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
+		var folderPath = ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
 //-:cnd:noEmit
 #elif __ANDROID__ || __IOS__
 //+:cnd:noEmit
@@ -132,14 +131,13 @@ sealed partial class App : Application
 #endif
 		//+:cnd:noEmit
 	}
-	//-:cnd:noEmit
-#if !WINUI
+
 	private void ConfigureStatusBar()
 	{
-		var resources = Windows.UI.Xaml.Application.Current.Resources;
+		var resources = Application.Current.Resources;
 
 		//-:cnd:noEmit
-#if WINDOWS_UWP
+#if WINDOWS_UWP || WINDOWS
 //+:cnd:noEmit
 		var hasStatusBar = false;
 //-:cnd:noEmit
@@ -157,6 +155,4 @@ sealed partial class App : Application
 		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
 		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
 	}
-#endif
-	//-:cnd:noEmit
 }
