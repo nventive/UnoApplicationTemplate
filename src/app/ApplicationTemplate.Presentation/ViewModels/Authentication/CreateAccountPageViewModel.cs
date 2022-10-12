@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
@@ -30,6 +31,7 @@ public class CreateAccountPageViewModel : ViewModel
 	public IDynamicCommand CreateAccount => this.GetCommandFromTask(async ct =>
 	{
 		var validationResult = await Form.Validate(ct);
+		Debug.WriteLine(Form.DateOfBirth.ToString());
 
 		if (validationResult.IsValid && PasswordForm.PasswordHasMinimumLength == true && PasswordForm.PasswordHasNumber == true && PasswordForm.PasswordHasUppercase == true)
 		{

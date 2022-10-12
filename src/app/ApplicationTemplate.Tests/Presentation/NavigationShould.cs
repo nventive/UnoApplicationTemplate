@@ -5,6 +5,7 @@ using ApplicationTemplate.Presentation;
 using Chinook.SectionsNavigation;
 using Xunit;
 using Xunit.Abstractions;
+using Moq;
 
 namespace ApplicationTemplate.Tests;
 
@@ -101,12 +102,35 @@ public partial class NavigationShould : NavigationTestsBase
 	public async Task NavigateFromCreateAccountToDadJokesPage()
 	{
 		// TODO: The form has to be validated before we can navigate
+		var createAccountPageViewModel = new CreateAccountPageViewModel();
+
+		createAccountPageViewModel.Form.FirstName = "Nventive";
+		createAccountPageViewModel.Form.LastName = "Nventive";
+		createAccountPageViewModel.Form.Email = "nventive@nventive.com";
+		createAccountPageViewModel.Form.PhoneNumber = "(111) 111 1111";
+		createAccountPageViewModel.Form.PostalCode = "A1A 1A1";
+		createAccountPageViewModel.Form.DateOfBirth = DateTimeOffset.Parse("7/6/1994");
+		createAccountPageViewModel.Form.FavoriteDadNames = new[]
+		{
+			"Dad",
+			"Papa",
+			"Pa",
+			"Pop",
+			"Father",
+			"Padre",
+			"Père",
+			"Papi",
+		};
+		createAccountPageViewModel.Form.AgreeToTermsOfServices = true;
+
+		createAccountPageViewModel.PasswordForm.Password = "Abcdef12";
+
 
 		// Act
-		var currentSection = await AssertNavigateFromTo<CreateAccountPageViewModel, DadJokesPageViewModel>(() => new CreateAccountPageViewModel(), p => p.CreateAccount);
+		var currentSection = await AssertNavigateFromTo<CreateAccountPageViewModel, DadJokesPageViewModel>(() => createAccountPageViewModel, p => p.CreateAccount);
 
 		// Assert
-		Assert.IsType(typeof(DadJokesPageViewModel), currentSection);
+		Assert.IsType<DadJokesPageViewModel>(currentSection);
 	}
 
 	[Fact]
