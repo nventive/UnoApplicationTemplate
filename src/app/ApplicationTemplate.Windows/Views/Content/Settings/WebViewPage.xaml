@@ -1,7 +1,6 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.WebViewPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:awv="using:AsyncWebView">
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 
@@ -14,9 +13,9 @@
 		<CommandBar Content="{Binding Title}" />
 
 		<!-- WebView -->
-		<awv:AsyncWebView SourceUri="{Binding SourceUri}"
+		<!--<awv:AsyncWebView SourceUri="{Binding SourceUri}"
 						  HorizontalAlignment="Stretch"
 						  VerticalAlignment="Stretch"
-						  Grid.Row="1" />
+						  Grid.Row="1" />-->
 	</Grid>
 </Page>

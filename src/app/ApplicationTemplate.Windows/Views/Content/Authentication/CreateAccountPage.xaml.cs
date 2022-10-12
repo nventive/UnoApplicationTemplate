@@ -1,8 +1,4 @@
-﻿#if WINUI
-using Microsoft.UI.Xaml.Controls;
-#else
-using Windows.UI.Xaml.Controls;
-#endif
+﻿using Microsoft.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Views.Content;
 

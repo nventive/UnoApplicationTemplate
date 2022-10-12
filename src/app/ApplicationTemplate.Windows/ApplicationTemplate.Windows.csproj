@@ -34,8 +34,7 @@
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.3.0-dev.38" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.2.0-dev.26" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.4.1-feature.dotnet6.53" />
-		<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
-
+		<PackageReference Include="Xamarin.Essentials" Version="1.5.3.2" />
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>
 
@@ -87,7 +86,7 @@
 		<Content Include="Assets\Wide310x150Logo.scale-200.png" />
 		<Content Include="Assets\Wide310x150Logo.scale-400.png" />
 	</ItemGroup>
-	
+
 	<ItemGroup>
 		<Content Include="Assets\Fonts\Guillon-Regular.ttf" />
 		<Content Include="Assets\Fonts\Guillon-Bold.ttf" />
@@ -121,9 +120,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
-	  <ProjectReference Include="..\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj" />
-	  <ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
+		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
+		<ProjectReference Include="..\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj" />
+		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
 
 	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />

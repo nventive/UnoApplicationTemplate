@@ -11,15 +11,8 @@ using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Uno.UI;
-using Windows.UI.Core;
-#if WINUI
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
-#else
-using Windows.UI.Core;
-using Windows.UI.Xaml;
-#endif
 
 namespace ApplicationTemplate.Views;
 
@@ -59,9 +52,7 @@ public sealed class Startup : StartupBase
 	protected override void OnInitialized(IServiceProvider services)
 	{
 		// TODO add async web view to net6 apps
-#if !NET6_0_OR_GREATER
-		AsyncWebView.AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView.AsyncWebView>>();
-#endif
+		//AsyncWebView.AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView.AsyncWebView>>();
 
 		HandleUnhandledExceptions(services);
 	}
@@ -144,14 +135,15 @@ public sealed class Startup : StartupBase
 
 		void OnStateChanged(bool canNavigateBackOrCloseModal)
 		{
-			var dispatcher = services.GetRequiredService<CoreDispatcher>();
-			_ = dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, UpdateBackButtonUI);
+			var dispatcher = services.GetRequiredService<DispatcherQueue>();
+			dispatcher.TryEnqueue(DispatcherQueuePriority.Normal, UpdateBackButtonUI);
 
 			void UpdateBackButtonUI() // Runs on UI thread
 			{
-				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = canNavigateBackOrCloseModal
-				   ? AppViewBackButtonVisibility.Visible
-				   : AppViewBackButtonVisibility.Collapsed;
+				// TODO Find alternative way to show/hide back button
+				//SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = canNavigateBackOrCloseModal
+				//   ? AppViewBackButtonVisibility.Visible
+				//   : AppViewBackButtonVisibility.Collapsed;
 			}
 		}
 	}
@@ -161,9 +153,9 @@ public sealed class Startup : StartupBase
 	/// </summary>
 	private async Task AddSystemBackButtonSource(IServiceProvider services)
 	{
-		var dispatcher = services.GetRequiredService<CoreDispatcher>();
+		var dispatcher = services.GetRequiredService<DispatcherQueue>();
 		var backButtonManager = services.GetRequiredService<IBackButtonManager>();
-		await dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.High, AddSystemBackButtonSourceInner);
+		dispatcher.TryEnqueue(DispatcherQueuePriority.High, AddSystemBackButtonSourceInner);
 
 		// Runs on main thread.
 		void AddSystemBackButtonSourceInner()

@@ -5,15 +5,9 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Text;
 using Uno.Extensions;
-#if WINUI
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
-#else
-using Windows.UI.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-#endif
 
 namespace ApplicationTemplate.Views.Behaviors;
 
@@ -204,7 +198,7 @@ public partial class FormattingTextBoxBehavior
 			return;
 		}
 
-		_ = textbox.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+		textbox.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, () =>
 		{
 			textbox.Text = formattedText;
 			textbox.SelectionStart = selectionStart;

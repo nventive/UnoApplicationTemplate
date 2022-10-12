@@ -1,13 +1,8 @@
 ﻿using Chinook.SectionsNavigation;
+using Microsoft.UI.Xaml.Controls;
 using Nventive.ExtendedSplashScreen;
 using Windows.ApplicationModel.Activation;
-//-:cnd:noEmit
-#if WINUI
-using Microsoft.UI.Xaml.Controls;
-#else
-using Windows.UI.Xaml.Controls;
-#endif
-//-:cnd:noEmit
+
 namespace ApplicationTemplate;
 
 public sealed partial class Shell : UserControl

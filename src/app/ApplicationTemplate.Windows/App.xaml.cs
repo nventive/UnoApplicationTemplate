@@ -3,17 +3,22 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using ApplicationTemplate.Views;
 using Chinook.SectionsNavigation;
+using Microsoft.UI;
+using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.Storage;
 using Windows.UI.ViewManagement;
+using WinRT.Interop;
 
 namespace ApplicationTemplate;
 
 sealed partial class App : Application
 {
+	private Window _window;
+
 	public App()
 	{
 		Instance = this;
@@ -21,7 +26,11 @@ sealed partial class App : Application
 		Startup = new Startup();
 		Startup.PreInitialize();
 
-		InitializeComponent();
+		this.InitializeComponent();
+
+#if HAS_UNO || NETFX_CORE
+            this.Suspending += OnSuspending;
+#endif
 
 		ConfigureOrientation();
 	}
@@ -34,7 +43,7 @@ sealed partial class App : Application
 
 	public MultiFrame NavigationMultiFrame => Shell?.NavigationMultiFrame;
 
-	public Window CurrentWindow => Window.Current;
+	public Window CurrentWindow => _window;
 
 	protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
 	{
@@ -43,6 +52,13 @@ sealed partial class App : Application
 
 	private void InitializeAndStart(IActivatedEventArgs args)
 	{
+#if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
+		_window = new Window();
+		_window.Activate();
+#else
+        _window = Microsoft.UI.Xaml.Window.Current;
+#endif
+
 		Shell = CurrentWindow.Content as Shell;
 
 		var isFirstLaunch = Shell == null;
@@ -105,20 +121,25 @@ sealed partial class App : Application
 	private void ConfigureStatusBar()
 	{
 		var resources = Application.Current.Resources;
+		var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(this)));
 
 		//-:cnd:noEmit
 #if WINDOWS
-//+:cnd:noEmit
+		//+:cnd:noEmit
 		var hasStatusBar = false;
 		//-:cnd:noEmit
 #else
 		//+:cnd:noEmit
 		var hasStatusBar = true;
-		Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
+		appWindow.TitleBar.ForegroundColor = Colors.White;
 		//-:cnd:noEmit
 #endif
 		//+:cnd:noEmit
 
-		// TODO Add titlebar / status bar customization for net6
+		var statusBarHeight = hasStatusBar ? appWindow.TitleBar.Height : 0;
+
+		resources.Add("StatusBarDouble", (double)statusBarHeight);
+		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
+		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
 	}
 }
