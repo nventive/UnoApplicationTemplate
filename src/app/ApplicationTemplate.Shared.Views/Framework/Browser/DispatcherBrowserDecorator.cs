@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.UI.Core;
+using Microsoft.UI.Dispatching;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
 
@@ -15,9 +15,9 @@ namespace ApplicationTemplate;
 public class DispatcherBrowserDecorator : IBrowser
 {
 	private readonly IBrowser _innerBrowser;
-	private readonly CoreDispatcher _dispatcher;
+	private readonly DispatcherQueue _dispatcher;
 
-	public DispatcherBrowserDecorator(IBrowser browser, CoreDispatcher dispatcher)
+	public DispatcherBrowserDecorator(IBrowser browser, DispatcherQueue dispatcher)
 	{
 		_innerBrowser = browser;
 		_dispatcher = dispatcher;
@@ -25,41 +25,41 @@ public class DispatcherBrowserDecorator : IBrowser
 
 	public async Task OpenAsync(string uri)
 	{
-		await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri)));
+		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri)));
 	}
 
 	public async Task OpenAsync(string uri, BrowserLaunchMode launchMode)
 	{
-		await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri), launchMode));
+		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri), launchMode));
 	}
 
 	public async Task OpenAsync(string uri, BrowserLaunchOptions options)
 	{
-		await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri), options));
+		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri), options));
 	}
 
 	public async Task OpenAsync(Uri uri)
 	{
-		await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(uri));
+		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(uri));
 	}
 
 	public async Task OpenAsync(Uri uri, BrowserLaunchMode launchMode)
 	{
-		await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, () => _innerBrowser.OpenAsync(uri, launchMode));
+		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(uri, launchMode));
 	}
 
 	public async Task<bool> OpenAsync(Uri uri, BrowserLaunchOptions options)
 	{
-		return await DispatcherRunTaskAsync(CoreDispatcherPriority.Normal, async () => await _innerBrowser.OpenAsync(uri, options));
+		return await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, async () => await _innerBrowser.OpenAsync(uri, options));
 	}
 
 	/// <summary>
 	/// This method allows for executing an async Task with result on the CoreDispatcher.
 	/// </summary>
-	private async Task<TResult> DispatcherRunTaskAsync<TResult>(CoreDispatcherPriority priority, Func<Task<TResult>> asyncFunc)
+	private async Task<TResult> DispatcherRunTaskAsync<TResult>(DispatcherQueuePriority priority, Func<Task<TResult>> asyncFunc)
 	{
 		var completion = new TaskCompletionSource<TResult>();
-		await _dispatcher.RunAsync(priority, RunActionUI);
+		_dispatcher.TryEnqueue(priority, RunActionUI);
 		return await completion.Task;
 
 		async void RunActionUI()
@@ -79,10 +79,10 @@ public class DispatcherBrowserDecorator : IBrowser
 	/// <summary>
 	/// This method allows for executing an async Task without result on the CoreDispatcher.
 	/// </summary>
-	private async Task DispatcherRunTaskAsync(CoreDispatcherPriority priority, Func<Task> asyncFunc)
+	private async Task DispatcherRunTaskAsync(DispatcherQueuePriority priority, Func<Task> asyncFunc)
 	{
 		var completion = new TaskCompletionSource<Unit>();
-		await _dispatcher.RunAsync(priority, RunActionUI);
+		_dispatcher.TryEnqueue(priority, RunActionUI);
 		await completion.Task;
 
 		async void RunActionUI()

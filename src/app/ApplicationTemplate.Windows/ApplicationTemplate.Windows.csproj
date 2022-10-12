@@ -34,6 +34,7 @@
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.3.0-dev.38" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.2.0-dev.26" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.4.1-feature.dotnet6.53" />
+		<PackageReference Include="Xamarin.Essentials" Version="1.7.3" />
 
 		<Manifest Include="$(ApplicationManifest)" />
 	</ItemGroup>

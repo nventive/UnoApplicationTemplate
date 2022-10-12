@@ -5,23 +5,8 @@ using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
-using Uno;
-//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-using Windows.UI.Xaml;
-//-:cnd:noEmit
-#elif WINDOWS
-//+:cnd:noEmit
 using Microsoft.UI.Xaml;
-//-:cnd:noEmit
-#elif __ANDROID__ || __IOS__
-//+:cnd:noEmit
-using Windows.UI.Xaml;
-using FrameworkElement = Windows.UI.Xaml.FrameworkElement;
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
+using Uno;
 
 namespace ApplicationTemplate.Views.Helpers;
 

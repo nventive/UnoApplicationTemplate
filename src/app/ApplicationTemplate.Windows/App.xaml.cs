@@ -3,20 +3,13 @@ using System.Diagnostics;
 using System.Threading.Tasks;
 using ApplicationTemplate.Views;
 using Chinook.SectionsNavigation;
+using Microsoft.UI.Xaml;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.Storage;
 using Windows.UI.ViewManagement;
-//-:cnd:noEmit
-#if WINUI
-using Microsoft.UI.Xaml;
-using LaunchActivatedEventArgs = Microsoft.UI.Xaml.LaunchActivatedEventArgs;
 
-#else
-using Windows.UI.Xaml;
-#endif
-//-:cnd:noEmit
 namespace ApplicationTemplate;
 
 sealed partial class App : Application
@@ -43,24 +36,10 @@ sealed partial class App : Application
 
 	public Window CurrentWindow => Window.Current;
 
-	protected override void OnLaunched(LaunchActivatedEventArgs args)
+	protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
 	{
-		InitializeAndStart(
-#if WINUI
-			args.UWPLaunchActivatedEventArgs
-#else
-			args
-#endif
-			);
+		InitializeAndStart(args.UWPLaunchActivatedEventArgs);
 	}
-
-#if !WINUI
-	protected override void OnActivated(IActivatedEventArgs args)
-	{
-		// This is where your app launches if you use custom schemes, Universal Links, or Android App Links.
-		InitializeAndStart(args);
-	}
-#endif
 
 	private void InitializeAndStart(IActivatedEventArgs args)
 	{
@@ -70,7 +49,6 @@ sealed partial class App : Application
 
 		if (isFirstLaunch)
 		{
-			ConfigureViewSize();
 			ConfigureStatusBar();
 
 			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
@@ -90,7 +68,7 @@ sealed partial class App : Application
 	private static string GetContentRootPath()
 	{
 		//-:cnd:noEmit
-#if WINDOWS_UWP || WINDOWS || __ANDROID__ || __IOS__
+#if WINDOWS || __ANDROID__ || __IOS__
 		return ApplicationData.Current.LocalFolder.Path;
 #else
 		return string.Empty;
@@ -101,7 +79,7 @@ sealed partial class App : Application
 	private static string GetSettingsFolderPath()
 	{
 		//-:cnd:noEmit
-#if WINDOWS_UWP || WINDOWS
+#if WINDOWS
 //+:cnd:noEmit
 		var folderPath = ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
 //-:cnd:noEmit
@@ -124,25 +102,12 @@ sealed partial class App : Application
 		DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
 	}
 
-	private void ConfigureViewSize()
-	{
-		//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-		ApplicationView.PreferredLaunchViewSize = new Size(480, 800);
-		ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-		ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 480));
-//-:cnd:noEmit
-#endif
-		//+:cnd:noEmit
-	}
-
 	private void ConfigureStatusBar()
 	{
 		var resources = Application.Current.Resources;
 
 		//-:cnd:noEmit
-#if WINDOWS_UWP || WINDOWS
+#if WINDOWS
 //+:cnd:noEmit
 		var hasStatusBar = false;
 		//-:cnd:noEmit
@@ -154,14 +119,6 @@ sealed partial class App : Application
 #endif
 		//+:cnd:noEmit
 
-#if WINUI
 		// TODO Add titlebar / status bar customization for net6
-#else
-		var statusBarHeight = hasStatusBar ? Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height : 0;
-
-		resources.Add("StatusBarDouble", (double)statusBarHeight);
-		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
-		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
-#endif
 	}
 }
