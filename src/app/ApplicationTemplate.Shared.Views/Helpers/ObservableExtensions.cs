@@ -186,13 +186,7 @@ internal static class ObservableExtensions
 		}
 		else
 		{
-			var dispatcher = new MainDispatcherScheduler(
-#if WINUI
-				element.DispatcherQueue
-#else
-				element.Dispatcher
-#endif
-				);
+			var dispatcher = new MainDispatcherScheduler(element.DispatcherQueue);
 
 			if (immediateSubscribe)
 			{

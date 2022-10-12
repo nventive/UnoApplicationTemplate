@@ -102,11 +102,7 @@ public sealed class Startup : StartupBase
 
 	private static async Task SetShellViewModel()
 	{
-#if WINUI
 		App.Instance.Shell.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, SetDataContextUI);
-#else
-		await App.Instance.Shell.Dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, SetDataContextUI);
-#endif
 
 		void SetDataContextUI() // Runs on UI thread
 		{
