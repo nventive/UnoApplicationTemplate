@@ -6,11 +6,8 @@ using Chinook.SectionsNavigation;
 using Microsoft.UI;
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
-using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.Storage;
-using Windows.UI.ViewManagement;
 using WinRT.Interop;
 
 namespace ApplicationTemplate;
@@ -47,10 +44,10 @@ sealed partial class App : Application
 
 	protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
 	{
-		InitializeAndStart(args.UWPLaunchActivatedEventArgs);
+		InitializeAndStart();
 	}
 
-	private void InitializeAndStart(IActivatedEventArgs args)
+	private void InitializeAndStart()
 	{
 #if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
 		_window = new Window();
@@ -71,7 +68,7 @@ sealed partial class App : Application
 
 			Startup.ShellActivity.Start();
 
-			CurrentWindow.Content = Shell = new Shell(args);
+			CurrentWindow.Content = Shell = new Shell();
 
 			Startup.ShellActivity.Stop();
 		}

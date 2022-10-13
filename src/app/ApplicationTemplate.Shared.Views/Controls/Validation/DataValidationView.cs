@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
+using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
@@ -80,7 +81,7 @@ public partial class DataValidationView : ContentControl
 
 	private void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e)
 	{
-		_ = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ErrorsChangedUI);
+		DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, ErrorsChangedUI);
 
 		void ErrorsChangedUI()
 		{
