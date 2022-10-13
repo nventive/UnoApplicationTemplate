@@ -13,7 +13,7 @@ public sealed partial class SettingsPage : Page
 	private void OnThemeButtonClicked(object sender, RoutedEventArgs e)
 	{
 		// Set theme for window root.
-		if (Window.Current.Content is FrameworkElement root)
+		if (App.Window.Content is FrameworkElement root)
 		{
 			switch (root.ActualTheme)
 			{

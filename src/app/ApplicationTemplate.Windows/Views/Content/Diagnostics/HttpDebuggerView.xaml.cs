@@ -24,19 +24,19 @@ public sealed partial class HttpDebuggerView : UserControl
 	{
 		this.InitializeComponent();
 
-		var view = ApplicationView.GetForCurrentView();
+		var view = App.Window;
 		TrySetDetailsScrollViewerMaxHeight(view);
-		view.VisibleBoundsChanged += OnVisibleBoundsChanged;
+		view.SizeChanged += OnVisibleBoundsChanged;
 	}
 
-	private void OnVisibleBoundsChanged(ApplicationView sender, object args)
+	private void OnVisibleBoundsChanged(object sender, WindowSizeChangedEventArgs args)
 	{
-		TrySetDetailsScrollViewerMaxHeight(sender);
+		TrySetDetailsScrollViewerMaxHeight((Window)sender);
 	}
 
-	private void TrySetDetailsScrollViewerMaxHeight(ApplicationView applicationView)
+	private void TrySetDetailsScrollViewerMaxHeight(Window window)
 	{
-		var height = applicationView.VisibleBounds.Height;
+		var height = window.Bounds.Height;
 		if (height > 0)
 		{
 			DetailsScrollViewer.MaxHeight = height * 0.60;

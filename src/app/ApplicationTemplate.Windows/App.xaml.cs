@@ -14,7 +14,12 @@ namespace ApplicationTemplate;
 
 sealed partial class App : Application
 {
-	private Window _window;
+	private static Window m_window;
+
+	public static Window Window
+	{
+		get { return m_window; }
+	}
 
 	public App()
 	{
@@ -40,8 +45,6 @@ sealed partial class App : Application
 
 	public MultiFrame NavigationMultiFrame => Shell?.NavigationMultiFrame;
 
-	public Window CurrentWindow => _window;
-
 	protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
 	{
 		InitializeAndStart();
@@ -50,13 +53,13 @@ sealed partial class App : Application
 	private void InitializeAndStart()
 	{
 #if NET6_0_OR_GREATER && WINDOWS && !HAS_UNO
-		_window = new Window();
-		_window.Activate();
+		m_window = new Window();
+		m_window.Activate();
 #else
-        _window = Microsoft.UI.Xaml.Window.Current;
+        m_window = Microsoft.UI.Xaml.Window.Current;
 #endif
 
-		Shell = CurrentWindow.Content as Shell;
+		Shell = m_window.Content as Shell;
 
 		var isFirstLaunch = Shell == null;
 
@@ -68,12 +71,12 @@ sealed partial class App : Application
 
 			Startup.ShellActivity.Start();
 
-			CurrentWindow.Content = Shell = new Shell();
+			m_window.Content = Shell = new Shell();
 
 			Startup.ShellActivity.Stop();
 		}
 
-		CurrentWindow.Activate();
+		m_window.Activate();
 
 		_ = Task.Run(() => Startup.Start());
 	}
@@ -117,26 +120,26 @@ sealed partial class App : Application
 
 	private void ConfigureStatusBar()
 	{
-		var resources = Application.Current.Resources;
-		var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(this)));
+//		var resources = Instance.Resources;
+//		var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(this)));
 
-		//-:cnd:noEmit
-#if WINDOWS
-		//+:cnd:noEmit
-		var hasStatusBar = false;
-		//-:cnd:noEmit
-#else
-		//+:cnd:noEmit
-		var hasStatusBar = true;
-		appWindow.TitleBar.ForegroundColor = Colors.White;
-		//-:cnd:noEmit
-#endif
-		//+:cnd:noEmit
+//		//-:cnd: noEmit
+//#if WINDOWS
+//		//+:cnd: noEmit
+//		var hasStatusBar = false;
+//		//-:cnd: noEmit
+//#else
+//		//+:cnd:noEmit
+//		var hasStatusBar = true;
+//		appWindow.TitleBar.ForegroundColor = Colors.White;
+//		//-:cnd:noEmit
+//#endif
+//		//+:cnd: noEmit
 
-		var statusBarHeight = hasStatusBar ? appWindow.TitleBar.Height : 0;
+//		var statusBarHeight = hasStatusBar ? appWindow.TitleBar.Height : 0;
 
-		resources.Add("StatusBarDouble", (double)statusBarHeight);
-		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
-		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
+//		resources.Add("StatusBarDouble", (double)statusBarHeight);
+//		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
+//		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
 	}
 }

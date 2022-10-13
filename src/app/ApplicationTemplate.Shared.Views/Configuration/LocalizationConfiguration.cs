@@ -10,6 +10,7 @@ using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Windows.ApplicationModel.Resources;
+using Windows.Storage;
 
 namespace ApplicationTemplate.Views;
 
@@ -64,7 +65,7 @@ public static class LocalizationConfiguration
 //-:cnd:noEmit
 #if WINDOWS
 //+:cnd:noEmit
-		var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
+		var folderPath = ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
 //-:cnd:noEmit
 #elif __ANDROID__ || __IOS__
 //+:cnd:noEmit

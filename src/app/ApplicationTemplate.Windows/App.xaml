@@ -23,7 +23,7 @@
 				<ResourceDictionary Source="Views/Styles/Application/Icons.xaml" />
 				<ResourceDictionary Source="Views/Styles/Application/LayoutConstants.xaml" />
 
-				<ResourceDictionary Source="Views/Styles/Controls/AsyncWebView.xaml" />
+				<!--<ResourceDictionary Source="Views/Styles/Controls/AsyncWebView.xaml" />-->
 				<ResourceDictionary Source="Views/Styles/Controls/Button.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/BottomTabBarButton.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/CalendarView.xaml" />

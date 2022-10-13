@@ -8,6 +8,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Serilog;
 using Uno.Extensions;
+using Windows.Storage;
 
 namespace ApplicationTemplate;
 
@@ -114,7 +115,7 @@ public static class LoggingConfiguration
 		public static string GetLogFilesDirectory()
 		{
 #if WINDOWS
-			return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+			return ApplicationData.Current.LocalFolder.Path;
 #else
 			return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
 #endif
