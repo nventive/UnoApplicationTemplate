@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-#if WINUI
 using Microsoft.UI.Xaml.Controls;
-#else
-using Windows.UI.Xaml.Controls;
-#endif
 
 namespace ApplicationTemplate.Views;
 
