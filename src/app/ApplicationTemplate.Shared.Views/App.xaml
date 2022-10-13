@@ -32,7 +32,7 @@
 				<ResourceDictionary Source="Views/Styles/Controls/CommandBar.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/DataLoaderView.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/DataValidationView.xaml" />
-				<ResourceDictionary Source="Views/Styles/Controls/ExtendedSplashScreen.xaml" />
+				<!--<ResourceDictionary Source="Views/Styles/Controls/ExtendedSplashScreen.xaml" />-->
 				<ResourceDictionary Source="Views/Styles/Controls/FlipViewItem.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/Frame.xaml" />
 				<ResourceDictionary Source="Views/Styles/Controls/GridViewHeaderItem.xaml" />

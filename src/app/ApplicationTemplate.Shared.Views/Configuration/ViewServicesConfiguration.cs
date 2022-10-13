@@ -24,7 +24,7 @@ public static class ViewServicesConfiguration
 			.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
 			.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
 			.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
-				s.GetRequiredService<DispatcherQueue>(),
+				DispatcherQueue.GetForCurrentThread(),
 				DispatcherQueuePriority.Normal
 			))
 			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
