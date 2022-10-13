@@ -125,12 +125,15 @@ public partial class NavigationShould : NavigationTestsBase
 
 		createAccountPageViewModel.PasswordForm.Password = "Abcdef12";
 
-
 		// Act
 		var currentSection = await AssertNavigateFromTo<CreateAccountPageViewModel, DadJokesPageViewModel>(() => createAccountPageViewModel, p => p.CreateAccount);
 
 		// Assert
+		_testOutputHelper.WriteLine(currentSection.ToString());
 		Assert.IsType<DadJokesPageViewModel>(currentSection);
+
+		// expected: DadJokesPageViewModel
+		// actual: CreateAccountPageViewModel
 	}
 
 	[Fact]
