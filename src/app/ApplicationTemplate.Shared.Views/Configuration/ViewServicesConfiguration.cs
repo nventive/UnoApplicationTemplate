@@ -1,10 +1,12 @@
-﻿using System.Reactive;
+﻿using System;
+using System.Reactive;
 using System.Reactive.Concurrency;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
 
@@ -34,23 +36,37 @@ public static class ViewServicesConfiguration
 
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
 	{
+		//-:cnd:noEmit
+#if WINDOWS
+
+		Window currentWindow = new Window();
+		IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(currentWindow);
+		DispatcherQueue dispatcher = DispatcherQueue.GetForCurrentThread();
+
+
+#endif
 		return services.AddSingleton<IMessageDialogService>(s =>
-//-:cnd:noEmit
-#if WINDOWS_UWP || __IOS__ || __ANDROID__
-//+:cnd:noEmit
+			//-:cnd:noEmit
+#if WINDOWS || __IOS__ || __ANDROID__
+			//+:cnd:noEmit
 			new MessageDialogService.MessageDialogService(
+#if WINDOWS
+				dispatcher,
+#else
 				() => s.GetRequiredService<CoreDispatcher>(),
+#endif
 				new MessageDialogBuilderDelegate(
-					key => s.GetRequiredService<IStringLocalizer>()[key]
+					key => s.GetRequiredService<IStringLocalizer>()[key],
+					windowHandle
 				)
 			)
-//-:cnd:noEmit
+		//-:cnd:noEmit
 #else
 //+:cnd:noEmit
 			new AcceptOrDefaultMessageDialogService()
 //-:cnd:noEmit
 #endif
-//+:cnd:noEmit
+		//+:cnd:noEmit
 		);
 	}
 }

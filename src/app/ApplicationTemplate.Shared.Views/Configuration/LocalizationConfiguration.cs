@@ -62,7 +62,7 @@ public static class LocalizationConfiguration
 	private static string GetSettingFilePath()
 	{
 //-:cnd:noEmit
-#if WINDOWS_UWP
+#if WINDOWS
 //+:cnd:noEmit
 		var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
 //-:cnd:noEmit

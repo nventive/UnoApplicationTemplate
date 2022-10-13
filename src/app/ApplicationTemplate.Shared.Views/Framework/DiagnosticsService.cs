@@ -23,7 +23,7 @@ public class DiagnosticsService : IDiagnosticsService
 
 	public bool CanOpenSettingsFolder { get; } =
 //-:cnd:noEmit
-#if WINDOWS_UWP
+#if WINDOWS
 //+:cnd:noEmit
 		true;
 //-:cnd:noEmit
@@ -41,7 +41,7 @@ public class DiagnosticsService : IDiagnosticsService
 		_dispatcherScheduler.ScheduleTask(async (ct2, s) =>
 		{
 //-:cnd:noEmit
-#if WINDOWS_UWP
+#if WINDOWS
 //+:cnd:noEmit
 			await Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
 //-:cnd:noEmit

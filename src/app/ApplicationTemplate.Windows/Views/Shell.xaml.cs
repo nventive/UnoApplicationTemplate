@@ -12,14 +12,6 @@ public sealed partial class Shell : UserControl
 		this.InitializeComponent();
 
 		Instance = this;
-
-//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-		AppExtendedSplashScreen.SplashScreen = e?.SplashScreen;
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
 	}
 
 	public static Shell Instance { get; private set; }
