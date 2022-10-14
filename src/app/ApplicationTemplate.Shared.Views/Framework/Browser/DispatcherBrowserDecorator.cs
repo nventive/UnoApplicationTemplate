@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using ApplicationTemplate.Views;
 using Microsoft.UI.Dispatching;
-using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate;
@@ -29,12 +28,12 @@ public class DispatcherBrowserDecorator : IBrowser
 		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri)));
 	}
 
-	public async Task OpenAsync(string uri, BrowserLaunchMode launchMode)
+	public async Task OpenAsync(string uri, Microsoft.Maui.ApplicationModel.BrowserLaunchMode launchMode)
 	{
 		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri), launchMode));
 	}
 
-	public async Task OpenAsync(string uri, BrowserLaunchOptions options)
+	public async Task OpenAsync(string uri, Microsoft.Maui.ApplicationModel.BrowserLaunchOptions options)
 	{
 		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(new Uri(uri), options));
 	}
@@ -44,12 +43,12 @@ public class DispatcherBrowserDecorator : IBrowser
 		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(uri));
 	}
 
-	public async Task OpenAsync(Uri uri, BrowserLaunchMode launchMode)
+	public async Task OpenAsync(Uri uri, Microsoft.Maui.ApplicationModel.BrowserLaunchMode launchMode)
 	{
 		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _innerBrowser.OpenAsync(uri, launchMode));
 	}
 
-	public async Task<bool> OpenAsync(Uri uri, BrowserLaunchOptions options)
+	public async Task<bool> OpenAsync(Uri uri, Microsoft.Maui.ApplicationModel.BrowserLaunchOptions options)
 	{
 		return await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, async () => await _innerBrowser.OpenAsync(uri, options));
 	}

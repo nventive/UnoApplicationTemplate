@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "ApplicationTemplate.Windows": {
+      "commandName": "MsixPackage"
+    },
+    "WSL": {
+      "commandName": "WSL2",
+      "distributionName": ""
+    }
+  }
+}
