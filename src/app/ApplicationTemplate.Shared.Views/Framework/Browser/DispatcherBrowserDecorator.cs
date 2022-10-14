@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Reactive;
 using System.Text;
 using System.Threading.Tasks;
+using ApplicationTemplate.Views;
 using Microsoft.UI.Dispatching;
 using Xamarin.Essentials;
 using Xamarin.Essentials.Interfaces;
@@ -59,7 +60,7 @@ public class DispatcherBrowserDecorator : IBrowser
 	private async Task<TResult> DispatcherRunTaskAsync<TResult>(DispatcherQueuePriority priority, Func<Task<TResult>> asyncFunc)
 	{
 		var completion = new TaskCompletionSource<TResult>();
-		_dispatcher.TryEnqueue(priority, RunActionUI);
+		await _dispatcher.EnqueueAsync(RunActionUI, priority);
 		return await completion.Task;
 
 		async void RunActionUI()
@@ -82,7 +83,7 @@ public class DispatcherBrowserDecorator : IBrowser
 	private async Task DispatcherRunTaskAsync(DispatcherQueuePriority priority, Func<Task> asyncFunc)
 	{
 		var completion = new TaskCompletionSource<Unit>();
-		_dispatcher.TryEnqueue(priority, RunActionUI);
+		await _dispatcher.EnqueueAsync(RunActionUI, priority);
 		await completion.Task;
 
 		async void RunActionUI()

@@ -23,7 +23,8 @@ public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 	{
 		_dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
 		_connectivity = connectivity;
-		connectivity.ConnectivityChanged += OnConnectivityChanged;
+		// TODO Fix Xamarin.Essentials for Windows
+		//connectivity.ConnectivityChanged += OnConnectivityChanged;
 	}
 
 	private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)

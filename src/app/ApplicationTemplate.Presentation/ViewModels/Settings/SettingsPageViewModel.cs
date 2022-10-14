@@ -74,6 +74,8 @@ public partial class SettingsPageViewModel : ViewModel
 
 	private string GetVersionNumber()
 	{
-		return this.GetService<IAppInfo>().VersionString;
+		// TODO Fix Xamarin.Essentials for Windows
+		return string.Empty;
+		//return this.GetService<IAppInfo>().VersionString;
 	}
 }

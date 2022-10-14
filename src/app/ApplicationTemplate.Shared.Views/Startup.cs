@@ -102,7 +102,7 @@ public sealed class Startup : StartupBase
 
 	private static async Task SetShellViewModel()
 	{
-		App.Instance.Shell.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, SetDataContextUI);
+		await App.Instance.Shell.DispatcherQueue.EnqueueAsync(SetDataContextUI, DispatcherQueuePriority.Normal);
 
 		void SetDataContextUI() // Runs on UI thread
 		{
@@ -151,7 +151,7 @@ public sealed class Startup : StartupBase
 	{
 		var dispatcher = services.GetRequiredService<DispatcherQueue>();
 		var backButtonManager = services.GetRequiredService<IBackButtonManager>();
-		dispatcher.TryEnqueue(DispatcherQueuePriority.High, AddSystemBackButtonSourceInner);
+		await dispatcher.EnqueueAsync(AddSystemBackButtonSourceInner, DispatcherQueuePriority.High);
 
 		// Runs on main thread.
 		void AddSystemBackButtonSourceInner()
