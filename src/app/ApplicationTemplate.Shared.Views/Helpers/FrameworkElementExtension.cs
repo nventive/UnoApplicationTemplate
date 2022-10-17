@@ -5,6 +5,9 @@ using System.Reactive.Linq;
 using System.Windows;
 using Uno.Extensions;
 using Microsoft.UI.Xaml;
+using RoutedEventArgs = System.Windows.RoutedEventArgs;
+using FrameworkElement = System.Windows.FrameworkElement;
+using RoutedEventHandler = System.Windows.RoutedEventHandler;
 
 namespace ApplicationTemplate.Views.Helpers;
 
