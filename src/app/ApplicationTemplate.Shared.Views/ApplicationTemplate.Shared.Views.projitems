@@ -30,7 +30,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DebugConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherBrowserDecorator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DiagnosticsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DispatcherQueueExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
@@ -457,5 +456,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Framework\Browser\" />
   </ItemGroup>
 </Project>

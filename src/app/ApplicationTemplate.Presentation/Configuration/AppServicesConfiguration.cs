@@ -13,8 +13,6 @@ using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Logging;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate;
 
@@ -33,7 +31,6 @@ public static class AppServicesConfiguration
 	public static IServiceCollection AddAppServices(this IServiceCollection services)
 	{
 		return services
-			.AddXamarinEssentials()
 			.AddSingleton<IMessageDialogService, AcceptOrDefaultMessageDialogService>()
 			.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 			.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
@@ -42,14 +39,5 @@ public static class AppServicesConfiguration
 			.AddSingleton<IAuthenticationService, AuthenticationService>()
 			.AddSingleton<IUserProfileService, UserProfileService>()
 			.AddSingleton<DiagnosticsCountersService>();
-	}
-
-	private static IServiceCollection AddXamarinEssentials(this IServiceCollection services)
-	{
-		return services
-			.AddSingleton<IDeviceInfo, DeviceInfoImplementation>()
-			.AddSingleton<IAppInfo, AppInfoImplementation>()
-			.AddSingleton<IConnectivity, ConnectivityImplementation>()
-			.AddSingleton<IEmail, EmailImplementation>();
 	}
 }

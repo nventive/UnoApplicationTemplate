@@ -7,8 +7,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate.Views;
 
@@ -29,7 +27,6 @@ public static class ViewServicesConfiguration
 			))
 			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
-			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.DispatcherQueue))
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>()
 			.AddMessageDialog();
 	}

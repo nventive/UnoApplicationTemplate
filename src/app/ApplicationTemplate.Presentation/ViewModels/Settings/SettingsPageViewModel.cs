@@ -9,8 +9,6 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
-using Xamarin.Essentials;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -57,14 +55,14 @@ public partial class SettingsPageViewModel : ViewModel
 	{
 		var url = this.GetService<IStringLocalizer>()["PrivacyPolicyUrl"];
 
-		await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
+		//await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
 	});
 
 	public IDynamicCommand NavigateToTermsAndConditionsPage => this.GetCommandFromTask(async ct =>
 	{
 		var url = this.GetService<IStringLocalizer>()["TermsAndConditionsUrl"];
 
-		await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
+		//await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
 	});
 
 	private async Task<UserProfile> GetUserProfile(CancellationToken ct)
@@ -74,7 +72,6 @@ public partial class SettingsPageViewModel : ViewModel
 
 	private string GetVersionNumber()
 	{
-		// TODO Fix Xamarin.Essentials for Windows
 		return string.Empty;
 		//return this.GetService<IAppInfo>().VersionString;
 	}

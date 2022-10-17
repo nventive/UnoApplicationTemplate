@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using MallardMessageHandlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Windows.Networking.Connectivity;
 
 namespace ApplicationTemplate.Views;
 
@@ -45,8 +46,8 @@ public static class ApiConfiguration
 //-:cnd:noEmit
 #if WINDOWS || __ANDROID__ || __IOS__
 		// TODO #172362: Not implemented in Uno.
-		// return NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
-		return Task.FromResult(Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet);
+		return Task.FromResult(NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
+		//return Task.FromResult(Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet);
 #else
 		return Task.FromResult(true);
 #endif

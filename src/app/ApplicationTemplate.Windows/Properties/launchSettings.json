@@ -1,11 +1,12 @@
 ﻿{
-  "profiles": {
-    "ApplicationTemplate.Windows": {
-      "commandName": "MsixPackage"
-    },
-    "WSL": {
-      "commandName": "WSL2",
-      "distributionName": ""
-    }
-  }
+	"profiles": {
+		"Windows Machine": {
+			"commandName": "MsixPackage",
+			"nativeDebugging": false
+		},
+		"WSL": {
+			"commandName": "WSL2",
+			"distributionName": ""
+		}
+	}
 }
