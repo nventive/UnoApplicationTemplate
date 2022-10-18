@@ -1,7 +1,7 @@
 parameters:
   applicationEnvironment: '' # e.g. "Staging", "Production"
   deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
-  appCenterUWPSlug: ''
+  appCenterWindowsSlug: ''
   appCenteriOSSlug: ''
   appCenterAndroidSlug: ''
   androidKeyStoreFile: ''
@@ -10,12 +10,12 @@ parameters:
   appCenterDistributionGroup: ''
 
 jobs:
-- deployment: AppCenter_UWP
+- deployment: AppCenter_Windows
   pool: $(windowsPoolName)
 
   variables:
   - name: artifactName
-    value: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
+    value: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
   - name: releaseNotesArtifactName
     value: ReleaseNotes_${{ parameters.applicationEnvironment }}
 
@@ -35,10 +35,10 @@ jobs:
           artifact: $(releaseNotesArtifactName)
 
         - task: AppCenterDistribute@3
-          displayName: Deploy UWP to AppCenter
+          displayName: Deploy Windows to AppCenter
           inputs:
             serverEndpoint: ${{ parameters.appCenterServiceConnectionName }}
-            appSlug: ${{ parameters.appCenterUWPSlug }}
+            appSlug: ${{ parameters.appCenterWindowsSlug }}
             appFile: $(Pipeline.Workspace)/$(artifactName)/*.msixbundle
             releaseNotesOption: file
             releaseNotesFile: "$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md"
