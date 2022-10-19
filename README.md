@@ -20,7 +20,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
     - dotnet 7 and up: `dotnet new install ./`
     - older dotnet version: `dotnet new -i ./`
 
-    This will display a list of installed templates, look for this template and copy the command with the absolute path like this. (Note the quotes added, otherwise it doesn't work)
+    This will display a list of installed templates, look for this template and copy the command with the absolute path like this.
 
     - dotnet 7 and up: `dotnet new list`
     - older dotnet version: `dotnet new --list`
