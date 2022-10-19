@@ -15,7 +15,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 ### Installing the template
 
-1. In order to install the template, clone this repository on your machine, open a command prompt at its root, and run the following command
+1. In order to install the template, clone this repository on your machine, open a command prompt at its root and run the following command.
 
     - dotnet 7 and up: `dotnet new install ./`
     - older dotnet version: `dotnet new -i ./`
@@ -38,7 +38,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 [Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
 
 ### Uninstalling the template
-1. If you want to uninstall the template, run the following command.
+1. If you want to uninstall the template, open a command prompt at its root and run the following command.
 
     - dotnet 7 and up: `dotnet new uninstall ./`
     - older dotnet version: `dotnet new -u ./`
