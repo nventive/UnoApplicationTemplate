@@ -29,43 +29,43 @@
 		<Setter Property="CalendarViewDayItemStyle"
 				Value="{StaticResource CalendarViewDayItemStyle}" />
 		<Setter Property="FocusBorderBrush"
-				Value="{ThemeResource MaterialPrimaryFocusedBrush}" />
+				Value="{ThemeResource PrimaryFocusedBrush}" />
 		<Setter Property="SelectedHoverBorderBrush"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="SelectedPressedBorderBrush"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="SelectedBorderBrush"
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="HoverBorderBrush"
-				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
+				Value="{ThemeResource OnSurfaceHoverBrush}" />
 		<Setter Property="PressedBorderBrush"
-				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
+				Value="{ThemeResource OnSurfaceHoverBrush}" />
 		<Setter Property="CalendarItemBorderBrush"
-				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
+				Value="{ThemeResource OnSurfaceHoverBrush}" />
 		<Setter Property="TodayForeground"
-				Value="{ThemeResource MaterialOnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="BlackoutForeground"
-				Value="{ThemeResource MaterialOnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<win:Setter Property="SelectedForeground"
-					Value="{ThemeResource MaterialSurfaceBrush}" />
+					Value="{ThemeResource SurfaceBrush}" />
 		<not_win:Setter Property="SelectedForeground"
-						Value="{ThemeResource MaterialSurfaceBrush}" />
+						Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="PressedForeground"
-				Value="{ThemeResource MaterialOnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="OutOfScopeForeground"
-				Value="{ThemeResource MaterialOnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="CalendarItemForeground"
-				Value="{ThemeResource MaterialOnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="OutOfScopeBackground"
 				Value="Transparent" />
 		<Setter Property="CalendarItemBackground"
-				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
+				Value="{ThemeResource OnSurfaceHoverBrush}" />
 		<Setter Property="Foreground"
-				Value="{ThemeResource MaterialSurfaceBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="Background"
-				Value="{ThemeResource MaterialOnSurfaceHoverBrush}" />
+				Value="{ThemeResource OnSurfaceHoverBrush}" />
 		<Setter Property="BorderBrush" 
-				Value="{ThemeResource MaterialPrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="DayItemFontFamily"
 				Value="{StaticResource FontFamily01}" />
 		<Setter Property="DayItemFontSize"
@@ -103,11 +103,11 @@
 		<not_win:Setter Property="CalendarItemCornerRadius"
 						Value="35" />
 		<not_win:Setter Property="SelectedBackground"
-						Value="{ThemeResource MaterialPrimaryBrush}" />
+						Value="{ThemeResource PrimaryBrush}" />
 		<not_win:Setter Property="TodaySelectedBackground"
-						Value="{ThemeResource MaterialPrimaryBrush}" />
+						Value="{ThemeResource PrimaryBrush}" />
 		<not_win:Setter Property="TodayBackground"
-						Value="{ThemeResource MaterialOnSurfacePressedBrush}" />
+						Value="{ThemeResource OnSurfacePressedBrush}" />
 
 		<Setter Property="Template">
 			<Setter.Value>
@@ -160,13 +160,13 @@
 																<Setter Target="Text.BorderBrush"
 																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
 																<Setter Target="Text.Foreground"
-																		Value="{ThemeResource MaterialOnPrimaryMediumBrush}" />
+																		Value="{ThemeResource OnPrimaryMediumBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
 																<Setter Target="Text.Foreground"
-																		Value="{ThemeResource MaterialOnPrimaryLowBrush}" />
+																		Value="{ThemeResource OnPrimaryLowBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled" />
@@ -218,18 +218,18 @@
 																<Setter Target="Text.BorderBrush"
 																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
 																<Setter Target="Text.Foreground"
-																		Value="{StaticResource MaterialOnPrimaryMediumBrush}" />
+																		Value="{StaticResource OnPrimaryMediumBrush}" />
 																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{StaticResource MaterialOnPrimaryMediumBrush}" />
+																		Value="{StaticResource OnPrimaryMediumBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
 																<Setter Target="Text.Foreground"
-																		Value="{StaticResource MaterialOnPrimaryLowBrush}" />
+																		Value="{StaticResource OnPrimaryLowBrush}" />
 																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{StaticResource MaterialOnPrimaryLowBrush}" />
+																		Value="{StaticResource OnPrimaryLowBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled">
@@ -262,8 +262,6 @@
 										Value="False" />
 								<Setter Property="Template"
 										Value="{StaticResource ScrollViewerScrollBarlessTemplate}" />
-								<not_win:Setter Property="(uno:ScrollViewer.ShouldFallBackToNativeScrollBars)"
-												Value="False" />
 							</Style>
 						</Border.Resources>
 						<Grid MinWidth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=TemplateSettings.MinViewWidth}"

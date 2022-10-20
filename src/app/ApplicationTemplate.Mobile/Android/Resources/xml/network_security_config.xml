@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+	<base-config cleartextTrafficPermitted="true">
+		<trust-anchors>
+			<certificates src="system" />
+			<!--This is to make Fiddler work-->
+			<!--SHOULD NOT BE INCLUDED IN A PRODUCTION BUILD-->
+			<certificates src="user" />
+		</trust-anchors>
+	</base-config>
+</network-security-config>

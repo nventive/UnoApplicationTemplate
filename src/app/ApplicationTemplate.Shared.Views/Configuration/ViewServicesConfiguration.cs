@@ -41,24 +41,23 @@ public static class ViewServicesConfiguration
 
 		Window currentWindow = new Window();
 		IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(currentWindow);
-		DispatcherQueue dispatcher = DispatcherQueue.GetForCurrentThread();
-
-
 #endif
 		return services.AddSingleton<IMessageDialogService>(s =>
 			//-:cnd:noEmit
 #if WINDOWS || __IOS__ || __ANDROID__
 			//+:cnd:noEmit
 			new MessageDialogService.MessageDialogService(
+				DispatcherQueue.GetForCurrentThread(),
 #if WINDOWS
-				dispatcher,
-#else
-				() => s.GetRequiredService<CoreDispatcher>(),
-#endif
 				new MessageDialogBuilderDelegate(
 					key => s.GetRequiredService<IStringLocalizer>()[key],
 					windowHandle
 				)
+#else
+				new MessageDialogBuilderDelegate(
+					key => s.GetRequiredService<IStringLocalizer>()[key]
+				)
+#endif
 			)
 		//-:cnd:noEmit
 #else

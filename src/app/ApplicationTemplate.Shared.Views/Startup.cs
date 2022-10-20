@@ -13,6 +13,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
+using Uno.UI;
 
 namespace ApplicationTemplate.Views;
 
@@ -64,7 +65,7 @@ public sealed class Startup : StartupBase
 //-:cnd:noEmit
 #if WINDOWS || __ANDROID__ || __IOS__
 //+:cnd:noEmit
-		Application.Current.UnhandledException += (s, e) =>
+		App.Current.UnhandledException += (s, e) =>
 		{
 			OnError(e.Exception);
 			e.Handled = true;
@@ -192,14 +193,14 @@ public sealed class Startup : StartupBase
 				var currentVmType = state.CurrentState.GetViewModelType();
 
 				// We set the default status bar color to white
-				var statusBarColor = Windows.UI.Colors.White;
+				var statusBarColor = Microsoft.UI.Colors.White;
 
 				if (Window.Current.Content is FrameworkElement root && root.ActualTheme == ElementTheme.Dark)
 				{
 					// For dark theme, the status bar is black except for the pages in vmsAlternateColor
 					if (!vmsAlternateColor.Contains(currentVmType))
 					{
-						statusBarColor = Windows.UI.Colors.Black;
+						statusBarColor = Microsoft.UI.Colors.Black;
 					}
 				}
 				else
@@ -207,7 +208,7 @@ public sealed class Startup : StartupBase
 					// For light theme, the status bar is white except for the pages in vmsAlternateColor
 					if (vmsAlternateColor.Contains(currentVmType))
 					{
-						statusBarColor = Windows.UI.Colors.Black;
+						statusBarColor = Microsoft.UI.Colors.Black;
 					}
 				}
 

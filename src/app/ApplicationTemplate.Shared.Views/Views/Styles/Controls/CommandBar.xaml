@@ -75,8 +75,8 @@
 			<Setter.Value>
 				<DataTemplate>
 					<TextBlock Text="{Binding}"
-							   Style="{StaticResource Headline6}"
-							   Foreground="{ThemeResource MaterialOnPrimaryColor}" />
+							   Style="{StaticResource TitleMedium}"
+							   Foreground="{ThemeResource OnPrimaryColor}" />
 				</DataTemplate>
 			</Setter.Value>
 		</Setter>

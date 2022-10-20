@@ -24,7 +24,7 @@ public sealed partial class SettingsPage : Page
 #if __ANDROID__ || __IOS__
 //+:cnd:noEmit
 					// No need for the dispatcher here
-					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Microsoft.UI.Colors.Black;
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
@@ -35,7 +35,7 @@ public sealed partial class SettingsPage : Page
 #if __ANDROID__ || __IOS__
 //+:cnd:noEmit
 					// No need for the dispatcher here
-					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
+					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Microsoft.UI.Colors.White;
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit

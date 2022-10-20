@@ -5,11 +5,11 @@ using System;
 using ApplicationTemplate.Views.Helpers;
 using Foundation;
 using Microsoft.Extensions.Logging;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using UIKit;
-using Uno.Extensions;
 using Uno.Logging;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using Uno.Extensions;
 
 namespace ApplicationTemplate.Views.Behaviors;
 

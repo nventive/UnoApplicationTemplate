@@ -14,7 +14,7 @@
 			   BasedOn="{StaticResource MaterialToggleSwitchStyle}"
 			   TargetType="ToggleSwitch">
 		<Setter Property="Background"
-				Value="{ThemeResource MaterialOnSecondaryLowBrush}" />
+				Value="{ThemeResource OnSecondaryLowBrush}" />
 	</win:Style>
 
 

@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<item name="backgroundColor" type="color">#001E60</item>
+	<item name="primaryColor" type="color">#0D59CD</item>
+	<item name="white" type="color">#FFFFFFFF</item>
+	<item name="PrimaryColor" type="color">#0D59CD</item>
+	<item name="SurfaceVariantColor" type="color">#FFFFFFFF</item>
+</resources>

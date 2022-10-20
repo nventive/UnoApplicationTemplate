@@ -22,7 +22,7 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -43,7 +43,7 @@
 				<u:SwipeRefresh x:Name="RefreshContent"
 								RefreshCommand="{Binding Parent.RefreshQuotes}"
 								IsRefreshing="{Binding Parent.RefreshQuotes.IsExecuting}"
-								IndicatorColor="{StaticResource MaterialPrimaryBrush}">
+								IndicatorColor="{StaticResource PrimaryBrush}">
 
 					<!-- Quotes ListView -->
 					<ListView ItemsSource="{Binding Data}">
@@ -64,7 +64,7 @@
 									<ToggleButton IsChecked="{Binding IsFavorite}"
 												  Command="{Binding Parent.ToggleIsFavorite}"
 												  CommandParameter="{Binding}"
-												  Style="{StaticResource MaterialToggleButtonIconStyle}"
+												  Style="{StaticResource MaterialIconToggleButtonStyle}"
 												  HorizontalAlignment="Right"
 												  Grid.Column="2">
 
@@ -73,7 +73,7 @@
 
 											<!-- Icon -->
 											<u:PathControl Style="{StaticResource OutlinedHeartPathControlStyle}"
-														   Foreground="{ThemeResource MaterialOnSurfaceLowBrush}" />
+														   Foreground="{ThemeResource OnSurfaceLowBrush}" />
 										</ToggleButton.Content>
 
 										<!-- IsChecked:True Content -->

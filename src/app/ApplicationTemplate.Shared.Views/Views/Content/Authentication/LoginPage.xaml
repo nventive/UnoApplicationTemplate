@@ -10,7 +10,7 @@
 	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="d ios android">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup>
@@ -53,7 +53,7 @@
 					<TextBlock Text="{Binding Quote}"
 							   x:Uid="Login_Subtitle"
 							   Style="{StaticResource Body1}"
-							   Foreground="{StaticResource MaterialOnBackgroundBrush}"
+							   Foreground="{StaticResource OnBackgroundBrush}"
 							   FontStyle="Italic"
 							   TextAlignment="Center"
 							   Margin="0,16,0,0" />
@@ -94,7 +94,7 @@
 					<HyperlinkButton Content="Forgot password ?"
 									 x:Uid="Login_ForgotPassword"
 									 Command="{Binding NavigateToForgotPasswordPage}"
-									 Foreground="{StaticResource MaterialOnBackgroundBrush}"                                                                                                                                                                                                                                                              
+									 Foreground="{StaticResource OnBackgroundBrush}"                                                                                                                                                                                                                                                              
 									 Margin="0,4,0,0" />
 
 					<!-- Login Button -->
@@ -102,7 +102,6 @@
 							Content="LOG IN"
 							x:Uid="Login_Login"
 							Command="{Binding Login}"
-							Style="{StaticResource MaterialContainedButtonStyle}"
 							HorizontalAlignment="Stretch"
 							Margin="0,24,0,0" />
 

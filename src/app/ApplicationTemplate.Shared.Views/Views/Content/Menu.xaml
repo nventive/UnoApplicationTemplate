@@ -76,19 +76,19 @@
 			<utu:TabBar.Items>
 				<utu:TabBarItem Command="{Binding ShowHomeSection}">
 					<c:BottomTabBarButton IconStyle="{StaticResource HomePathControlStyle}"
-										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Foreground="{StaticResource OnPrimaryMediumBrush}"
 										  Content="Jokes"
 										  x:Uid="Menu_Home" />
 				</utu:TabBarItem>
 				<utu:TabBarItem Command="{Binding ShowPostsSection}">
 					<c:BottomTabBarButton IconStyle="{StaticResource PostsPathControlStyle}"
-										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Foreground="{StaticResource OnPrimaryMediumBrush}"
 										  Content="Posts"
 										  x:Uid="Menu_Posts" />
 				</utu:TabBarItem>
 				<utu:TabBarItem Command="{Binding ShowSettingsSection}">
 					<c:BottomTabBarButton IconStyle="{StaticResource SettingsPathControlStyle}"
-										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Foreground="{StaticResource OnPrimaryMediumBrush}"
 										  Content="Profile"
 										  x:Uid="Menu_Settings" />
 				</utu:TabBarItem>

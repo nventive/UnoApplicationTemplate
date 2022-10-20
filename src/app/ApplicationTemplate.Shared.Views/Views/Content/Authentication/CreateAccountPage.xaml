@@ -44,14 +44,14 @@
 					<TextBlock Text="Join the fun!"
 							   x:Uid="CreateAccount_Title"
 							   Style="{StaticResource Headline2}"
-							   Foreground="{StaticResource MaterialOnPrimaryBrush}"
+							   Foreground="{StaticResource OnPrimaryBrush}"
 							   TextAlignment="Center" />
 
 					<!-- Subtitle -->
 					<TextBlock Text="Only 2 seconds to create an account"
 							   x:Uid="CreateAccount_Subtitle"
 							   Style="{StaticResource Body1}"
-							   Foreground="{StaticResource MaterialOnPrimaryBrush}"
+							   Foreground="{StaticResource OnPrimaryBrush}"
 							   TextAlignment="Center"
 							   Margin="0,16,0,0" />
 
@@ -130,7 +130,7 @@
 					<TextBlock Text="Date of birth"
 							   x:Uid="CreateAccount_DateOfBirth"
 							   Style="{StaticResource Subtitle2}"
-							   Foreground="{StaticResource MaterialOnPrimaryBrush}"
+							   Foreground="{StaticResource OnPrimaryBrush}"
 							   Margin="0,12,0,0" />
 
 					<!-- Birth Day DatePicker -->
@@ -139,8 +139,8 @@
 						
 						<CalendarDatePicker x:Name="BirthDayField"
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-											Background="{StaticResource MaterialSurfaceBrush}"
-											Foreground="{StaticResource MaterialOnSurfaceBrush}"
+											Background="{StaticResource SurfaceBrush}"
+											Foreground="{StaticResource OnSurfaceBrush}"
 											HorizontalAlignment="Stretch"
 											MinHeight="56" />
 					</local:DataValidationView>
@@ -200,7 +200,7 @@
 								   Text="8 characters minimum"
 								   x:Uid="Password_Validation1"
 								   Style="{StaticResource Body3}"
-								   Foreground="{StaticResource MaterialOnPrimaryBrush}"
+								   Foreground="{StaticResource OnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
 								   not_android:Margin="8,3,0,0" />
@@ -222,7 +222,7 @@
 								   Text="One number"
 								   x:Uid="Password_Validation2"
 								   Style="{StaticResource Body3}"
-								   Foreground="{StaticResource MaterialOnPrimaryBrush}"
+								   Foreground="{StaticResource OnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
 								   not_android:Margin="8,3,0,0" />
@@ -244,7 +244,7 @@
 								   Text="One uppercase character"
 								   x:Uid="Password_Validation3"
 								   Style="{StaticResource Body3}"
-								   Foreground="{StaticResource MaterialOnPrimaryBrush}"
+								   Foreground="{StaticResource OnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
 								   not_android:Margin="8,3,0,0" />
@@ -254,7 +254,7 @@
 					<TextBlock Text="Favorite dad nickname (pick at least 1)"
 							   x:Uid="CreateAccount_FavoriteDadNames"
 							   Style="{StaticResource Subtitle2}"
-							   Foreground="{StaticResource MaterialOnPrimaryBrush}"
+							   Foreground="{StaticResource OnPrimaryBrush}"
 							   Margin="0,16,0,0" />
 
 					<!-- Favorite Dad names -->
@@ -262,7 +262,7 @@
 											  Model="{Binding Form}"
 											  Margin="0,4,0,0">
 						<!-- List -->
-						<Grid Background="{StaticResource MaterialSurfaceBrush}"
+						<Grid Background="{StaticResource SurfaceBrush}"
 							  CornerRadius="4">
 							<ListView ItemsSource="{Binding DadNames}"
 									  ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
@@ -283,7 +283,7 @@
 								  Content="I agree to the terms of services"
 								  x:Uid="CreateAccount_TermsOfServices"
 								  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								  Foreground="{StaticResource MaterialSurfaceBrush}"
+								  Foreground="{StaticResource SurfaceBrush}"
 								  Style="{StaticResource CustomMaterialCheckBoxStyle}"
 								  HorizontalAlignment="Left" />
 					</local:DataValidationView>

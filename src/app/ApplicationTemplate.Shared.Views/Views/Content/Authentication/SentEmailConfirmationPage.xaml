@@ -3,7 +3,7 @@
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:toolkit="using:Uno.UI.Toolkit">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 		
 		<!-- Background Image -->
 		<Image Source="{StaticResource BackgroundMustachesLightImage}"
@@ -18,7 +18,7 @@
 
 			<!-- CommandBar -->
 			<CommandBar Style="{StaticResource TransparentCommandBarStyle}"
-						toolkit:CommandBarExtensions.BackButtonForeground="{StaticResource MaterialOnBackgroundBrush}" />
+						toolkit:CommandBarExtensions.BackButtonForeground="{StaticResource OnBackgroundBrush}" />
 
 			<StackPanel VerticalAlignment="Center"
 						Margin="0,0,0,50"
@@ -33,7 +33,7 @@
 				<TextBlock Text="Email sent!"
 						   x:Uid="SentEmailConfirmation_Title"
 						   Style="{StaticResource Headline3}"
-						   Foreground="{StaticResource MaterialOnBackgroundBrush}"
+						   Foreground="{StaticResource OnBackgroundBrush}"
 						   TextAlignment="Center"
 						   Margin="36,12,36,0" />
 
@@ -41,7 +41,7 @@
 				<TextBlock Text="You can now go in your email to restart your account."
 						   x:Uid="SentEmailConfirmation_Subtitle"
 						   Style="{StaticResource Body1}"
-						   Foreground="{StaticResource MaterialOnBackgroundBrush}"
+						   Foreground="{StaticResource OnBackgroundBrush}"
 						   TextAlignment="Center"
 						   MaxWidth="230"
 						   Margin="0,16" />
