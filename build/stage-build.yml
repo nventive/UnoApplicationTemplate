@@ -52,7 +52,7 @@ jobs:
           additionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
           removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
 
-  - job: On_Windows # Build UWP and Android on a windows machine
+  - job: On_Windows # Build Windows and Android on a windows machine
     strategy:
       maxParallel: 3
       matrix:
@@ -61,10 +61,10 @@ jobs:
           ApplicationPlatform: Any CPU
           ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-        UWP:
-          ApplicationConfiguration: Release_UWP
+        Windows:
+          ApplicationConfiguration: Release_Windows
           ApplicationPlatform: Any CPU
-          ArtifactName: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
+          ArtifactName: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
         Tests:
           ApplicationConfiguration: Release_Tests

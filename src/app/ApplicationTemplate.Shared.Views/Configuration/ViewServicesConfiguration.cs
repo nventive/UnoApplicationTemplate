@@ -36,37 +36,14 @@ public static class ViewServicesConfiguration
 
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
 	{
-		//-:cnd:noEmit
-#if WINDOWS
-
-		Window currentWindow = new Window();
-		IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(currentWindow);
-		DispatcherQueue dispatcher = DispatcherQueue.GetForCurrentThread();
-
-
-#endif
 		return services.AddSingleton<IMessageDialogService>(s =>
-			//-:cnd:noEmit
-#if WINDOWS || __IOS__ || __ANDROID__
-			//+:cnd:noEmit
 			new MessageDialogService.MessageDialogService(
-#if WINDOWS
-				dispatcher,
-#else
-				() => s.GetRequiredService<CoreDispatcher>(),
-#endif
+				App.Window.DispatcherQueue,
 				new MessageDialogBuilderDelegate(
 					key => s.GetRequiredService<IStringLocalizer>()[key],
-					windowHandle
+					WinRT.Interop.WindowNative.GetWindowHandle(App.Window)
 				)
 			)
-		//-:cnd:noEmit
-#else
-//+:cnd:noEmit
-			new AcceptOrDefaultMessageDialogService()
-//-:cnd:noEmit
-#endif
-		//+:cnd:noEmit
 		);
 	}
 }
