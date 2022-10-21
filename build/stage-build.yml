@@ -56,11 +56,11 @@ jobs:
     strategy:
       maxParallel: 3
       matrix:
-        Android:
-          ApplicationConfiguration: Release_Android
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+        # Android:
+        #   ApplicationConfiguration: Release_Android
+        #   ApplicationPlatform: Any CPU
+        #   ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+        #   ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
         Windows:
           ApplicationConfiguration: Release_Windows
           ApplicationPlatform: Any CPU
@@ -88,31 +88,31 @@ jobs:
           androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
           pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
 
-  - job: On_Mac # Build iOS on a mac
-    strategy:
-      maxParallel: 3
-      matrix:
-        iOS:
-          ApplicationConfiguration: Release_iOS
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-    pool:
-      name: $(macOSPoolName)
-      demands:
-        - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
+  # - job: On_Mac # Build iOS on a mac
+  #   strategy:
+  #     maxParallel: 3
+  #     matrix:
+  #       iOS:
+  #         ApplicationConfiguration: Release_iOS
+  #         ApplicationPlatform: Any CPU
+  #         ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+  #         ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  #   pool:
+  #     name: $(macOSPoolName)
+  #     demands:
+  #       - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
 
-    variables:
-    - name: SkipUnknownFrameworks
-      value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
-    - group: ${{ parameters.iosVariableGroup }}
+  #   variables:
+  #   - name: SkipUnknownFrameworks
+  #     value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
+  #   - group: ${{ parameters.iosVariableGroup }}
 
-    steps:
-    - template: steps-build.yml
-      parameters:
-        pathToSrc: ${{ parameters.pathToSrc }}
-        solutionFileName: ${{ parameters.solutionFileName }}
-        pathToInfoPlist: ${{ parameters.pathToInfoPlist }}
-        iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
-        iosCertificateFile: ${{ parameters.iosCertificateFile }}
-        iosCertificatePassword: $(AppleCertificatePassword)
+  #   steps:
+  #   - template: steps-build.yml
+  #     parameters:
+  #       pathToSrc: ${{ parameters.pathToSrc }}
+  #       solutionFileName: ${{ parameters.solutionFileName }}
+  #       pathToInfoPlist: ${{ parameters.pathToInfoPlist }}
+  #       iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
+  #       iosCertificateFile: ${{ parameters.iosCertificateFile }}
+  #       iosCertificatePassword: $(AppleCertificatePassword)

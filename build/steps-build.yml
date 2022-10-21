@@ -66,23 +66,23 @@ steps:
   inputs:
     secureFile: ${{ parameters.androidKeyStoreFile }}
 
-- task: android-manifest-package-name@1
-  displayName: "Update bundle identifier"
-  condition: and(succeeded(), not(eq('${{ parameters.androidKeyStoreFile }}', '')))
-  inputs:
-    sourcePath: ${{ parameters.pathToAndroidManifest }}
-    packageName: $(ApplicationIdentifier)
-    appLabel: $(AppLabel) # The label of the app (displayed in launcher and in the OS)
-    printFile: true
+# - task: android-manifest-package-name@1
+#   displayName: "Update bundle identifier"
+#   condition: and(succeeded(), not(eq('${{ parameters.androidKeyStoreFile }}', '')))
+#   inputs:
+#     sourcePath: ${{ parameters.pathToAndroidManifest }}
+#     packageName: $(ApplicationIdentifier)
+#     appLabel: $(AppLabel) # The label of the app (displayed in launcher and in the OS)
+#     printFile: true
 
-- task: android-manifest-version@1
-  displayName: "Bump android manifest version"
-  condition: and(succeeded(), not(eq('${{ parameters.androidKeyStoreFile }}', '')))
-  inputs:
-    sourcePath: ${{ parameters.pathToAndroidManifest }}
-    versionCode: $(PreReleaseNumber)
-    versionName: $(MajorMinorPatch)
-    printFile: true
+# - task: android-manifest-version@1
+#   displayName: "Bump android manifest version"
+#   condition: and(succeeded(), not(eq('${{ parameters.androidKeyStoreFile }}', '')))
+#   inputs:
+#     sourcePath: ${{ parameters.pathToAndroidManifest }}
+#     versionCode: $(PreReleaseNumber)
+#     versionName: $(MajorMinorPatch)
+#     printFile: true
 
 - task: InstallAppleCertificate@2
   displayName: 'Install Apple certificate ${{ parameters.iosCertificateFile }}'
