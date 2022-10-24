@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
-using FluentAssertions;
-using FluentAssertions.Execution;
 using Moq;
 using Xunit;
 
@@ -33,33 +27,32 @@ public partial class UserProfileServiceShould
 		Assert.IsType<UserProfile>(results);
 	}
 
-	//[Fact]
-	//public async Task UpdateProfile_GivenAValidUserProfile()
-	//{
-	//	var userProfile =
-	//		new UserProfile { Id = "12345", FirstName = "Nventive", LastName = "Nventive", Email = "nventive@nventive.ca" };
+	[Fact]
+	public async Task UpdateProfile_GivenAValidUserProfile()
+	{
+		var userProfile =
+			new UserProfile { Id = "12345", FirstName = "Nventive", LastName = "Nventive", Email = "nventive@nventive.ca" };
 
-	//	// Arrange
-	//	var mockedUserProfileEndpoint = new Mock<IUserProfileEndpoint>();
-	//	mockedUserProfileEndpoint
-	//		.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>()))
-	//		.ReturnsAsync(userProfile.ToData());
+		// Arrange
+		var mockedUserProfileEndpoint = new Mock<IUserProfileEndpoint>();
+		mockedUserProfileEndpoint
+			.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>()))
+			.ReturnsAsync(userProfile.ToData());
 
-	//	var sut = new UserProfileService(mockedUserProfileEndpoint.Object);
+		var sut = new UserProfileService(mockedUserProfileEndpoint.Object);
 
-	//	var old = await sut.GetCurrent(CancellationToken.None);
+		var old = await sut.GetCurrent(CancellationToken.None);
 
-	//	userProfile =
-	//		new UserProfile { Id = "12345", FirstName = "Updated", LastName = "Nventive", Email = "nventive@nventive.ca" };
+		userProfile =
+			new UserProfile { Id = "12345", FirstName = "Updated", LastName = "Nventive", Email = "nventive@nventive.ca" };
 
-	//	mockedUserProfileEndpoint
-	//		.Setup(endpoint => endpoint.Update(It.IsAny<CancellationToken>(), userProfile.ToData()));
+		mockedUserProfileEndpoint
+			.Setup(endpoint => endpoint.Update(It.IsAny<CancellationToken>(), userProfile.ToData()));
 
-	//	// Act
-	//	await sut.Update(CancellationToken.None, userProfile);
-	//	var updated = await sut.GetCurrent(CancellationToken.None);
+		// Act
+		await sut.Update(CancellationToken.None, userProfile);
 
-	//	// Assert
-	//	Assert.NotEqual(updated.FirstName, old.FirstName);
-	//}
+		// Assert
+		// TODO
+	}
 }

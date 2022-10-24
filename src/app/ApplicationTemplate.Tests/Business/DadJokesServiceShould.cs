@@ -30,8 +30,8 @@ public partial class DadJokesServiceShould
 	public async Task GetAllData()
 	{
 		var mockedDadJokesEndpoint = new Mock<IDadJokesEndpoint>();
-		mockedDadJokesEndpoint
-			.Setup(endpoint => endpoint.FetchData(It.IsAny<CancellationToken>(), "hot"))
-			.ReturnsAsync();
+		//mockedDadJokesEndpoint
+		//	.Setup(endpoint => endpoint.FetchData(It.IsAny<CancellationToken>(), "hot"))
+		//	.ReturnsAsync();
 	}
 }
