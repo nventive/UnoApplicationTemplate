@@ -1,7 +1,13 @@
-﻿using System.Threading;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
+using FluentAssertions;
+using FluentAssertions.Execution;
 using Moq;
 using Xunit;
 
@@ -48,11 +54,27 @@ public partial class UserProfileServiceShould
 
 		mockedUserProfileEndpoint
 			.Setup(endpoint => endpoint.Update(It.IsAny<CancellationToken>(), userProfile.ToData()));
+		mockedUserProfileEndpoint
+			.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>()))
+			.ReturnsAsync(userProfile.ToData());
 
 		// Act
 		await sut.Update(CancellationToken.None, userProfile);
+		var updated = await sut.GetCurrent(CancellationToken.None);
 
 		// Assert
-		// TODO
+		using (new AssertionScope())
+		{
+			updated
+				.Should().NotBeNull();
+			updated.Id
+				.Should().Be("12345");
+			updated.FirstName
+				.Should().Be("Updated");
+			updated.LastName
+				.Should().Be("Nventive");
+			updated.Email
+				.Should().Be("nventive@nventive.ca");
+		}
 	}
 }

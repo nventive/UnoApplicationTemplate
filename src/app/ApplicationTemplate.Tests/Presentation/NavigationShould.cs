@@ -97,45 +97,6 @@ public partial class NavigationShould : NavigationTestsBase
 		Assert.IsType<ForgotPasswordPageViewModel>(currentSection);
 	}
 
-	//[Fact]
-	//// From CreateAccountPage to DadJokesPage
-	//public async Task NavigateFromCreateAccountToDadJokesPage()
-	//{
-	//	// TODO: The form has to be validated before we can navigate
-	//	var createAccountPageViewModel = new CreateAccountPageViewModel();
-
-	//	createAccountPageViewModel.Form.FirstName = "Nventive";
-	//	createAccountPageViewModel.Form.LastName = "Nventive";
-	//	createAccountPageViewModel.Form.Email = "nventive@nventive.com";
-	//	createAccountPageViewModel.Form.PhoneNumber = "(111) 111 1111";
-	//	createAccountPageViewModel.Form.PostalCode = "A1A 1A1";
-	//	createAccountPageViewModel.Form.DateOfBirth = DateTimeOffset.Parse("7/6/1994");
-	//	createAccountPageViewModel.Form.FavoriteDadNames = new[]
-	//	{
-	//		"Dad",
-	//		"Papa",
-	//		"Pa",
-	//		"Pop",
-	//		"Father",
-	//		"Padre",
-	//		"Père",
-	//		"Papi",
-	//	};
-	//	createAccountPageViewModel.Form.AgreeToTermsOfServices = true;
-
-	//	createAccountPageViewModel.PasswordForm.Password = "Abcdef12";
-
-	//	// Act
-	//	var currentSection = await AssertNavigateFromTo<CreateAccountPageViewModel, DadJokesPageViewModel>(() => createAccountPageViewModel, p => p.CreateAccount);
-
-	//	// Assert
-	//	_testOutputHelper.WriteLine(currentSection.ToString());
-	//	Assert.IsType<DadJokesPageViewModel>(currentSection);
-
-	//	// expected: DadJokesPageViewModel
-	//	// actual: CreateAccountPageViewModel
-	//}
-
 	[Fact]
 	// From CreateAccountPage to BackPage
 	public async Task NavigateToCreateAccountAndBack()
