@@ -17,7 +17,7 @@
 		<Setter Property="Padding"
 				Value="16,6" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnBackgroundBrush}" />
+				Value="{StaticResource OnBackgroundBrush}" />
 		<Setter Property="BorderBrush"
 				Value="Transparent" />
 		<Setter Property="FontFamily"
@@ -50,13 +50,13 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource MaterialPrimaryHoverBrush}" />
+												Value="{StaticResource PrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource MaterialPrimaryPressedBrush}" />
+												Value="{StaticResource PrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -96,7 +96,7 @@
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -104,7 +104,7 @@
 		<Setter Property="Padding"
 				Value="16,6" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnPrimaryBrush}" />
+				Value="{StaticResource OnPrimaryBrush}" />
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily02SemiBold}" />
 		<Setter Property="FontSize"
@@ -130,13 +130,13 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="Overlay.Background"
-												Value="{StaticResource MaterialOnPrimaryHoverBrush}" />
+												Value="{StaticResource OnPrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="Overlay.Background"
-												Value="{StaticResource MaterialOnPrimaryPressedBrush}" />
+												Value="{StaticResource OnPrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -181,7 +181,7 @@
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource SurfaceBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -189,9 +189,9 @@
 		<Setter Property="Padding"
 				Value="10,8,10,8" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource SurfaceBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="FontFamily"
@@ -218,17 +218,17 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource MaterialSecondaryHoverBrush}" />
+												Value="{StaticResource SecondaryHoverBrush}" />
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource MaterialSecondaryHoverBrush}" />
+												Value="{StaticResource SecondaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource MaterialSecondaryPressedBrush}" />
+												Value="{StaticResource SecondaryPressedBrush}" />
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource MaterialSecondaryPressedBrush}" />
+												Value="{StaticResource SecondaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -280,6 +280,6 @@
 	</Style>
 
 	<Style TargetType="Button"
-		   BasedOn="{StaticResource MaterialContainedButtonStyle}" />
+		   BasedOn="{StaticResource MaterialFilledButtonStyle}" />
 
 </ResourceDictionary>

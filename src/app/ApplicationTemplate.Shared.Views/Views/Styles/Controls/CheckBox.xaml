@@ -24,11 +24,11 @@
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily01Light}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceMediumBrush}" />
+				Value="{StaticResource OnSurfaceMediumBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialOnSurfaceMediumBrush}" />
+				Value="{StaticResource OnSurfaceMediumBrush}" />
 		<Setter Property="FontSize"
 				Value="12" />
 
@@ -55,14 +55,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -75,14 +75,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}" />
+																 From="{StaticResource LowOpacity}" />
 										</Storyboard>
 									</VisualTransition>
 								</VisualStateGroup.Transitions>
@@ -168,9 +168,9 @@
 								<VisualState x:Name="CheckedDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="BackgroundBorder.Opacity"
 												Value="0" />
 										<Setter Target="CheckedBackgroundBorder.Opacity"
@@ -245,9 +245,9 @@
 								<VisualState x:Name="IndeterminateDisabled">
 									<VisualState.Setters>
 										<Setter Target="CheckBoxContainer.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="ContentPresenter.Opacity"
-												Value="{StaticResource MaterialMediumOpacity}" />
+												Value="{StaticResource MediumOpacity}" />
 										<Setter Target="BackgroundBorder.Opacity"
 												Value="0" />
 										<Setter Target="CheckedBackgroundBorder.Opacity"
@@ -307,14 +307,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -338,14 +338,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -370,14 +370,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -402,14 +402,14 @@
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
 																 From="0"
-																 To="{StaticResource MaterialLowOpacity}" />
+																 To="{StaticResource LowOpacity}" />
 
 											<ios:DoubleAnimation Storyboard.TargetName="PressRing"
 																 Storyboard.TargetProperty="Opacity"
 																 BeginTime="{StaticResource MaterialDelayedBeginTime}"
 																 Duration="{StaticResource MaterialAnimationDuration}"
 																 EasingFunction="{StaticResource MaterialEaseInOutFunction}"
-																 From="{StaticResource MaterialLowOpacity}"
+																 From="{StaticResource LowOpacity}"
 																 To="0" />
 										</Storyboard>
 									</VisualTransition>
@@ -420,7 +420,7 @@
 								<VisualState x:Name="Focused">
 									<VisualState.Setters>
 										<Setter Target="FocusRing.Opacity"
-												Value="{StaticResource MaterialFocusedOpacity}" />
+												Value="{StaticResource FocusedOpacity}" />
 									</VisualState.Setters>
 								</VisualState>
 
@@ -451,7 +451,7 @@
 								 Stretch="Uniform"
 								 Width="{StaticResource FocusAreaSize}"
 								 Height="{StaticResource FocusAreaSize}"
-								 Fill="{StaticResource MaterialOnSurfaceLowBrush}"
+								 Fill="{StaticResource OnSurfaceLowBrush}"
 								 IsHitTestVisible="False"
 								 Opacity="0" />
 
@@ -472,7 +472,7 @@
 
 							<Path x:Name="HyphenGlyph"
 								  Data="{StaticResource CheckBoxHyphenGlyphPathStyle}"
-								  Fill="{StaticResource MaterialSurfaceBrush}"
+								  Fill="{StaticResource SurfaceBrush}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"
@@ -484,7 +484,7 @@
 
 							<Path x:Name="CheckGlyph"
 								  Data="{StaticResource CheckBoxCheckGlyphPathStyle}"
-								  Fill="{StaticResource MaterialSurfaceBrush}"
+								  Fill="{StaticResource SurfaceBrush}"
 								  VerticalAlignment="Center"
 								  HorizontalAlignment="Center"
 								  Stretch="Uniform"

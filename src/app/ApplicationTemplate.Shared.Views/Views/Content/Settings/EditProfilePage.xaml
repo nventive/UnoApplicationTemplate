@@ -8,7 +8,7 @@
 	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="android ios">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -50,7 +50,7 @@
 				<Button Content="Save"
 						x:Uid="Profile_Save"
 						Command="{Binding UpdateProfile}"
-						Style="{StaticResource MaterialContainedButtonStyle}"
+						Style="{StaticResource MaterialFilledButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="0,4" />
 			</StackPanel>

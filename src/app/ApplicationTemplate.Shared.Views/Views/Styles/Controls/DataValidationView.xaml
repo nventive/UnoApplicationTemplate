@@ -52,7 +52,7 @@
 						<!-- Error border -->
 						<Border x:Name="ErrorBorder"
 								Opacity="0"
-								BorderBrush="{StaticResource MaterialErrorBrush}"
+								BorderBrush="{StaticResource ErrorBrush}"
 								CornerRadius="4"
 								BorderThickness="2" />
 
@@ -64,7 +64,7 @@
 									<DataTemplate>
 										<TextBlock Text="{Binding ErrorMessage}"
 												   Style="{StaticResource Caption}"
-												   Foreground="{StaticResource MaterialErrorBrush}" />
+												   Foreground="{StaticResource ErrorBrush}" />
 									</DataTemplate>
 								</ItemsControl.ItemTemplate>
 							</ItemsControl>

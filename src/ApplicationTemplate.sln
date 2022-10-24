@@ -36,21 +36,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{4A31B4ED-94E
 		..\doc\Validation.md = ..\doc\Validation.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Tests", "app\ApplicationTemplate.Tests\ApplicationTemplate.Tests.csproj", "{666B7587-AAB4-485B-AA47-10F58793FA35}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.UITests", "app\ApplicationTemplate.UITests\ApplicationTemplate.UITests.csproj", "{AD16BCE5-0D8E-4552-AA10-D0ED5B40C2D5}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app-shared", "app-shared", "{D0BDE23D-F91F-4E0B-A38F-538D2605703B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Windows", "app\ApplicationTemplate.Windows\ApplicationTemplate.Windows.csproj", "{73752D85-43AA-4915-AE10-FC5B7B5D8AB0}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ApplicationTemplate.Views", "app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Views.shproj", "{746587E0-B8E4-4A78-A7EA-DBC356367712}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Business", "app\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj", "{E695B227-9044-4BD5-B849-AC9A9BD1A63E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Mobile", "app\ApplicationTemplate.Mobile\ApplicationTemplate.Mobile.csproj", "{D2E39863-1EF2-49B0-9BDD-169A3CE4FE7D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Client", "app\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj", "{9312744D-C66A-4118-90DD-E6E35B901C7D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Presentation", "app\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj", "{9C112C21-EB28-4234-B462-2D32CF077314}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Presentation", "app\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj", "{7195D0F6-7550-4167-94AD-B19CFB6D542B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.UITests", "app\ApplicationTemplate.UITests\ApplicationTemplate.UITests.csproj", "{9F2EB017-F072-48B3-9C3F-101217C46F94}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Client", "app\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj", "{30B8D572-DC9F-4FA3-B02F-E6C9E1B151F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Tests", "app\ApplicationTemplate.Tests\ApplicationTemplate.Tests.csproj", "{DC4867F4-2DF0-4805-925C-1AC8F97BC257}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Business", "app\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj", "{D6E0872B-120C-44FE-9A03-7CA034869412}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -384,13 +386,14 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{666B7587-AAB4-485B-AA47-10F58793FA35} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
-		{AD16BCE5-0D8E-4552-AA10-D0ED5B40C2D5} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
 		{73752D85-43AA-4915-AE10-FC5B7B5D8AB0} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
 		{746587E0-B8E4-4A78-A7EA-DBC356367712} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
-		{E695B227-9044-4BD5-B849-AC9A9BD1A63E} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
-		{9312744D-C66A-4118-90DD-E6E35B901C7D} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
-		{7195D0F6-7550-4167-94AD-B19CFB6D542B} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
+		{D2E39863-1EF2-49B0-9BDD-169A3CE4FE7D} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
+		{9C112C21-EB28-4234-B462-2D32CF077314} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
+		{9F2EB017-F072-48B3-9C3F-101217C46F94} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
+		{30B8D572-DC9F-4FA3-B02F-E6C9E1B151F5} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
+		{DC4867F4-2DF0-4805-925C-1AC8F97BC257} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
+		{D6E0872B-120C-44FE-9A03-7CA034869412} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8F5BE10-8B4B-4587-B7B4-09CA39838210}
@@ -398,5 +401,6 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{73752d85-43aa-4915-ae10-fc5b7b5d8ab0}*SharedItemsImports = 5
 		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{746587e0-b8e4-4a78-a7ea-dbc356367712}*SharedItemsImports = 13
+		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{d2e39863-1ef2-49b0-9bdd-169a3ce4fe7d}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

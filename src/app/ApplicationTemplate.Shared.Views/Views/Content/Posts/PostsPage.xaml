@@ -5,7 +5,7 @@
 	  xmlns:dl="using:Chinook.DataLoader">
 
 	<Grid x:Name="PostPage"
-		  Background="{StaticResource MaterialBackgroundBrush}">
+		  Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -27,14 +27,14 @@
 					<u:SwipeRefresh x:Name="RefreshContent"
 									RefreshCommand="{Binding Parent.RefreshPosts}"
 									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
-									IndicatorColor="{StaticResource MaterialPrimaryBrush}">
+									IndicatorColor="{StaticResource PrimaryBrush}">
 
 						<!-- ListView -->
 						<ListView ItemsSource="{Binding Data}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 
-									<StackPanel Background="{StaticResource MaterialSurfaceBrush}"
+									<StackPanel Background="{StaticResource SurfaceBrush}"
 												Margin="0,16,0,0"
 												Padding="16">
 
@@ -44,9 +44,9 @@
 
 										<!-- Body -->
 										<TextBlock Text="{Binding Body}"
-												   Foreground="{StaticResource MaterialOnSurfaceBrush}"
+												   Foreground="{StaticResource OnSurfaceBrush}"
 												   Style="{StaticResource Body2}"
-												   Opacity="{StaticResource MaterialMediumOpacity}"
+												   Opacity="{StaticResource MediumOpacity}"
 												   Margin="0,8,0,0" />
 
 										<StackPanel Orientation="Horizontal"
@@ -63,7 +63,6 @@
 											<Button Content="Edit"
 													Command="{Binding ElementName=PostPage, Path=DataContext.NavigateToPost}"
 													CommandParameter="{Binding}"
-													Style="{StaticResource MaterialContainedButtonStyle}"
 													Margin="4,0,0,0" />
 										</StackPanel>
 									</StackPanel>
@@ -77,21 +76,21 @@
 			<!-- Create New Post Button -->
 			<Button Command="{Binding NavigateToNewPost}"
 					CommandParameter="{Binding}"
-					Style="{StaticResource MaterialButtonIconStyle}"
+					Style="{StaticResource MaterialIconButtonStyle}"
 					Background="Transparent"
 					HorizontalAlignment="Right"
 					VerticalAlignment="Bottom"
 					Margin="24">
 
 				<!-- Border -->
-				<Border Background="{StaticResource MaterialSecondaryBrush}"
+				<Border Background="{StaticResource SecondaryBrush}"
 						CornerRadius="50"
 						Width="56"
 						Height="56">
 
 					<!-- Icon -->
 					<Path Data="{StaticResource PlusIcon}"
-						  Fill="{StaticResource MaterialOnSecondaryBrush}"
+						  Fill="{StaticResource OnSecondaryBrush}"
 						  Width="24"
 						  Height="24" />
 				</Border>

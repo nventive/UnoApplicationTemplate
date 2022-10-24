@@ -225,6 +225,6 @@
 	</Style>
 
 	<Style TargetType="awv:AsyncWebView"
-		   BasedOn="{StaticResource DefaultAsyncWebViewStyle}" />-->
-
+		   BasedOn="{StaticResource DefaultAsyncWebViewStyle}" />
+-->
 </ResourceDictionary>

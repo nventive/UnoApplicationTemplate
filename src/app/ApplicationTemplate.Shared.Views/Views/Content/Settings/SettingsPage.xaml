@@ -4,7 +4,7 @@
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:dl="using:Chinook.DataLoader">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -102,14 +102,14 @@
 					<TextBlock Text="This application makes use of the dadjokes API from Dadjokes.io, which contains thousands of jokes."
 							   x:Uid="Settings_Version_Details"
 							   Style="{StaticResource Body2}"
-							   Foreground="{StaticResource MaterialOnBackgroundBrush}"
-							   Opacity="{StaticResource MaterialMediumOpacity}" />
+							   Foreground="{StaticResource OnBackgroundBrush}"
+							   Opacity="{StaticResource MediumOpacity}" />
 
 					<!-- Replay tutorial -->
 					<Button Content="REPLAY TUTORIAL"
 							x:Uid="Settings_ReplayTutorial"
 							Command="{Binding NavigateToOnboardingPage}"
-							Style="{StaticResource MaterialContainedSecondaryButtonStyle}"
+							Style="{StaticResource MaterialFilledTonalButtonStyle}"
 							HorizontalAlignment="Left"
 							Margin="0,16,0,0" />
 				</StackPanel>
@@ -202,7 +202,7 @@
 				<Button Content="LOGOUT"
 						x:Uid="Settings_Logout"
 						Command="{Binding Logout}"
-						Background="{StaticResource MaterialPrimaryAccentBrush}"
+						Background="{StaticResource TertiaryBrush}"
 						HorizontalAlignment="Left"
 						Margin="24,16" />
 			</StackPanel>

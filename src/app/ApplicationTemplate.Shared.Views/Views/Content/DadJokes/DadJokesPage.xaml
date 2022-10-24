@@ -26,7 +26,7 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -44,7 +44,7 @@
 				<AppBarButton Command="{Binding NavigateToFilters}">
 					<AppBarButton.Icon>
 						<BitmapIcon UriSource="{StaticResource FilterImage}"
-									Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+									Foreground="{StaticResource OnPrimaryBrush}" />
 					</AppBarButton.Icon>
 				</AppBarButton>
 			</CommandBar.PrimaryCommands>
@@ -62,7 +62,7 @@
 				<u:SwipeRefresh x:Name="RefreshContent"
 								RefreshCommand="{Binding Parent.RefreshJokes}"
 								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
-								IndicatorColor="{StaticResource MaterialPrimaryBrush}">
+								IndicatorColor="{StaticResource PrimaryBrush}">
 
 					<!-- Jokes ListView -->
 					<ListView ItemsSource="{Binding Data}"
@@ -71,7 +71,7 @@
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								
-								<Grid Background="{StaticResource MaterialSurfaceBrush}"
+								<Grid Background="{StaticResource SurfaceBrush}"
 									  Margin="0,4">
 
 									<Grid.ColumnDefinitions>
@@ -96,7 +96,7 @@
 									<ToggleButton IsChecked="{Binding IsFavorite}"
 												  Command="{Binding Parent.ToggleIsFavorite}"
 												  CommandParameter="{Binding}"
-												  Style="{StaticResource MaterialToggleButtonIconStyle}"
+												  Style="{StaticResource MaterialIconToggleButtonStyle}"
 												  VerticalAlignment="Top"
 												  Margin="10"
 												  Grid.Column="2">
@@ -106,7 +106,7 @@
 
 											<!-- Icon -->
 											<u:PathControl Style="{StaticResource OutlinedHeartPathControlStyle}"
-														   Foreground="{ThemeResource MaterialOnSurfaceLowBrush}" />
+														   Foreground="{ThemeResource OnSurfaceLowBrush}" />
 										</ToggleButton.Content>
 
 										<!-- IsChecked:True Content -->

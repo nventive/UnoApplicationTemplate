@@ -13,9 +13,9 @@
 	******************************************************************
 	-->
 
-	<Style x:Key="Headline2"
+	<Style x:Key="HeadlineLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline2}">
+		   BasedOn="{StaticResource MaterialHeadlineLarge}">
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily01Bold}" />
 		<Setter Property="Foreground"
@@ -28,9 +28,9 @@
 				Value="-0.5" />
 	</Style>
 	
-	<Style x:Key="Headline3"
+	<Style x:Key="HeadlineMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline3}">
+		   BasedOn="{StaticResource MaterialHeadlineMedium}">
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily01Bold}" />
 		<Setter Property="FontWeight"
@@ -41,9 +41,9 @@
 				Value="56" />
 	</Style>
 
-	<Style x:Key="Headline5"
+	<Style x:Key="TitleLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline5}">
+		   BasedOn="{StaticResource MaterialTitleLarge}">
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily01SemiBold}" />
 		<Setter Property="Foreground"
@@ -69,9 +69,9 @@
 				Value="0.15" />
 	</Style>
 
-	<Style x:Key="Subtitle1"
+	<Style x:Key="TitleMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialSubtitle1}">
+		   BasedOn="{StaticResource MaterialTitleMedium}">
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily01}" />
 		<Setter Property="FontSize"
@@ -86,9 +86,9 @@
 				Value="0.2" />
 	</Style>
 
-	<Style x:Key="Subtitle2"
+	<Style x:Key="TitleSmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialSubtitle2}">
+		   BasedOn="{StaticResource MaterialTitleSmall}">
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily01}" />
 		<Setter Property="FontSize"
@@ -103,9 +103,9 @@
 				Value="0.1" />
 	</Style>
 
-	<Style x:Key="Body1"
+	<Style x:Key="BodyLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialBody1}">
+		   BasedOn="{StaticResource MaterialBodyLarge}">
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily01}" />
 		<Setter Property="Foreground"
@@ -116,9 +116,9 @@
 				Value="0.5" />
 	</Style>
 
-	<Style x:Key="Body2"
+	<Style x:Key="BodyMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialBody2}">
+		   BasedOn="{StaticResource MaterialBodyMedium}">
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily01}" />
 		<Setter Property="FontSize"
@@ -146,9 +146,9 @@
 				Value="0.4" />
 	</Style>
 
-	<Style x:Key="Caption"
+	<Style x:Key="BodySmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialCaption}">
+		   BasedOn="{StaticResource MaterialBodySmall}">
 		<Setter Property="FontFamily"
 				Value="{StaticResource FontFamily02}" />
 		<Setter Property="FontSize"
