@@ -43,12 +43,15 @@ public static class ViewServicesConfiguration
 		IntPtr windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(currentWindow);
 #endif
 		return services.AddSingleton<IMessageDialogService>(s =>
+			//-:cnd:noEmit
+#if WINDOWS || __IOS__ || __ANDROID__
+			//+:cnd:noEmit
 			new MessageDialogService.MessageDialogService(
 				DispatcherQueue.GetForCurrentThread(),
 #if WINDOWS
 				new MessageDialogBuilderDelegate(
 					key => s.GetRequiredService<IStringLocalizer>()[key],
-					WinRT.Interop.WindowNative.GetWindowHandle(App.Window)
+					windowHandle
 				)
 #else
 				new MessageDialogBuilderDelegate(
@@ -56,6 +59,13 @@ public static class ViewServicesConfiguration
 				)
 #endif
 			)
+		//-:cnd:noEmit
+#else
+//+:cnd:noEmit
+			new AcceptOrDefaultMessageDialogService()
+//-:cnd:noEmit
+#endif
+		//+:cnd:noEmit
 		);
 	}
 }

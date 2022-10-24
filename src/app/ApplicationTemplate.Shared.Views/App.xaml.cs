@@ -34,7 +34,7 @@ public sealed partial class App : Microsoft.UI.Xaml.Application
 
 		this.InitializeComponent();
 
-#if HAS_UNO || WINDOWS
+#if HAS_UNO
 		this.Suspending += OnSuspending;
 #endif
 
@@ -83,9 +83,8 @@ public sealed partial class App : Microsoft.UI.Xaml.Application
 
 		if (isFirstLaunch)
 		{
-#if WINDOWS
 			ConfigureStatusBar();
-#endif
+
 			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
 
 			Startup.ShellActivity.Start();
@@ -137,21 +136,29 @@ public sealed partial class App : Microsoft.UI.Xaml.Application
 		DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
 	}
 
-#if WINDOWS
-//-:cnd:noEmit
 	private void ConfigureStatusBar()
 	{
 		var resources = Instance.Resources;
 
-		var appWindow = AppWindow.GetFromWindowId(Win32Interop.GetWindowIdFromWindow(WindowNative.GetWindowHandle(this)));
+		//-:cnd:noEmit
+#if WINDOWS
+		//+:cnd:noEmit
+
 		var hasStatusBar = false;
+		//-:cnd:noEmit
+#else
+		//+:cnd:noEmit
 
-//		var statusBarHeight = hasStatusBar ? appWindow.TitleBar.Height : 0;
+		var hasStatusBar = true;
+		Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
 
-//		resources.Add("StatusBarDouble", (double)statusBarHeight);
-//		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
-//		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
-	}
-//-:cnd:noEmit
+		var statusBarHeight = hasStatusBar ? Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height : 0;
+
+		resources.Add("StatusBarDouble", (double)statusBarHeight);
+		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
+		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
+		//-:cnd:noEmit
 #endif
+		//+:cnd:noEmit
+	}
 }
