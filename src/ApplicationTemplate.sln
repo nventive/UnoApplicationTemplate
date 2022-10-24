@@ -56,13 +56,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Busines
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Presentation", "app\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj", "{AB67372C-6CF2-46A5-BC86-7CD257AF3FF0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app-tests", "app-tests", "{13F4CC20-8D55-48F0-BFC6-A50B81EAE026}"
+EndProject
 Global
-	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{746587e0-b8e4-4a78-a7ea-dbc356367712}*SharedItemsImports = 13
-		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{b7f111b6-6c94-41e1-bb0b-1895415d8261}*SharedItemsImports = 4
-		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{c76e144c-92ad-4b8f-93f4-232d1ccddaf0}*SharedItemsImports = 4
-		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{e020ffc0-80c4-45d8-afa9-a6954935fdde}*SharedItemsImports = 4
-	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM
@@ -740,15 +736,21 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E020FFC0-80C4-45D8-AFA9-A6954935FDDE} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
 		{B7F111B6-6C94-41E1-BB0B-1895415D8261} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
-		{666B7587-AAB4-485B-AA47-10F58793FA35} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
+		{666B7587-AAB4-485B-AA47-10F58793FA35} = {13F4CC20-8D55-48F0-BFC6-A50B81EAE026}
 		{C76E144C-92AD-4B8F-93F4-232D1CCDDAF0} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
 		{746587E0-B8E4-4A78-A7EA-DBC356367712} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
-		{AD16BCE5-0D8E-4552-AA10-D0ED5B40C2D5} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
+		{AD16BCE5-0D8E-4552-AA10-D0ED5B40C2D5} = {13F4CC20-8D55-48F0-BFC6-A50B81EAE026}
 		{EDCD3803-CFDB-442B-8C2D-E779BCD1178D} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
 		{553AF3B8-D5E7-4737-94A5-2ED0B65267E9} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
 		{AB67372C-6CF2-46A5-BC86-7CD257AF3FF0} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8F5BE10-8B4B-4587-B7B4-09CA39838210}
+	EndGlobalSection
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{746587e0-b8e4-4a78-a7ea-dbc356367712}*SharedItemsImports = 13
+		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{b7f111b6-6c94-41e1-bb0b-1895415d8261}*SharedItemsImports = 4
+		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{c76e144c-92ad-4b8f-93f4-232d1ccddaf0}*SharedItemsImports = 4
+		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{e020ffc0-80c4-45d8-afa9-a6954935fdde}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal
