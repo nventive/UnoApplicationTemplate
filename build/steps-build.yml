@@ -42,6 +42,13 @@ steps:
     configFilePath: $(Build.SourcesDirectory)/gitversion.yml
   displayName: 'Calculate version'
 
+- task: DotNetCoreCLI@2
+  displayName: 'Install dotnet 6 workloads'
+  inputs:
+    command: 'custom'
+    custom: 'workload'
+    arguments: 'install android ios'
+
 - task: MSBuild@1
   displayName: 'Restore solution packages'
   inputs:

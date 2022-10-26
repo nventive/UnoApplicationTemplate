@@ -16,14 +16,13 @@
 		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Http" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" />
-		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.5.0-dev.44" />
+		<PackageReference Include="Reactive.Annex" Version="0.5.0-dev.46" />
 		<PackageReference Include="Refit" Version="6.3.2" />
 		<PackageReference Include="System.Text.Json" Version="6.0.6" />
 		<PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.21" />
+		<PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.28" />
+		<PackageReference Include="Nventive.Persistence" Version="0.2.0-dev.28" />
 		<PackageReference Include="System.Reactive" Version="5.0.0" />
-		<PackageReference Include="Nventive.Persistence.Reactive" Version="0.2.0-dev.26" />
-		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.5.0-dev.44" />
-		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.2.0-dev.26" />
 	</ItemGroup>
 
 	<ItemGroup>
