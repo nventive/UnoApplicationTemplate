@@ -138,27 +138,27 @@ public sealed partial class App : Microsoft.UI.Xaml.Application
 
 	private void ConfigureStatusBar()
 	{
-		var resources = Instance.Resources;
+////		var resources = Instance.Resources;
 
-		//-:cnd:noEmit
-#if WINDOWS
-		//+:cnd:noEmit
+////		//-:cnd:noEmit
+////#if WINDOWS
+////		//+:cnd:noEmit
 
-		var hasStatusBar = false;
-		//-:cnd:noEmit
-#else
-		//+:cnd:noEmit
+////		var hasStatusBar = false;
+////		//-:cnd:noEmit
+////#else
+////		//+:cnd:noEmit
 
-		var hasStatusBar = true;
-		Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
+////		var hasStatusBar = true;
+////		Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
 
-		var statusBarHeight = hasStatusBar ? Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height : 0;
+////		var statusBarHeight = hasStatusBar ? Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height : 0;
 
-		resources.Add("StatusBarDouble", (double)statusBarHeight);
-		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
-		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
-		//-:cnd:noEmit
-#endif
-		//+:cnd:noEmit
+////		resources.Add("StatusBarDouble", (double)statusBarHeight);
+////		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
+////		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
+////		//-:cnd:noEmit
+////#endif
+////		//+:cnd:noEmit
 	}
 }
