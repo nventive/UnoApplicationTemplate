@@ -173,18 +173,6 @@
     </AndroidResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\ApplicationTemplate.UWP\App.xaml.cs" />
-    <ApplicationDefinition Include="..\ApplicationTemplate.UWP\App.xaml" Link="App.xaml" Visible="False" />
-    <Page Include="..\ApplicationTemplate.UWP\Views\**\*.xaml" Visible="False">
-      <Link>Views\%(RecursiveDir)%(FileName)%(Extension)</Link>
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Compile Include="..\ApplicationTemplate.UWP\Views\**\*.cs" Visible="False">
-      <Link>Views\%(RecursiveDir)%(FileName)%(Extension)</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Resources\color\" />
   </ItemGroup>
   <ItemGroup>
