@@ -7,6 +7,8 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Uno.Extensions;
+using Uno.Logging;
 
 namespace ApplicationTemplate;
 
@@ -42,12 +44,14 @@ public class BaseMock
 			? resourceName.Replace("/", ".")
 			: $"{GetType().Name}.{callerMemberName}.json";
 
-		var actualResourceName = assembly
-			.GetManifestResourceNames()
+		var resourceNames = assembly.GetManifestResourceNames();
+		var actualResourceName = resourceNames
 			.FirstOrDefault(name => name.EndsWith(desiredResourceName, StringComparison.OrdinalIgnoreCase));
 
 		if (actualResourceName == null)
 		{
+			var separator = "," + Environment.NewLine;
+			this.Log().Error($"No embedded resource found ending with '{desiredResourceName}'. The available resources are:{Environment.NewLine}{string.Join(separator, resourceNames)}");
 			throw new FileNotFoundException($"Couldn't find an embedded resource ending with '{desiredResourceName}'.", desiredResourceName);
 		}
 
