@@ -48,13 +48,13 @@ variables:
   # the URL should look like this: https://appcenter.ms/orgs/{orgId}/apps/{appId}; the slug is simply: "{orgId}/{appId}".
   AppCenterAndroidSlug: 'nventive-framework/Application-Template-1'
   AppCenteriOSSlug: 'nventive-framework/Application-Template'
-  AppCenterUWPSlug: 'nventive-framework/Application-Template-2'
+  AppCenterWindowsSlug: 'nventive-framework/Application-Template-2'
   AppCenterAndroidSlug_Production: 'nventive-framework/ApplicationTemplate-Production-1'
   AppCenteriOSSlug_Production: 'nventive-framework/ApplicationTemplate-Production'
-  AppCenterUWPSlug_Production: 'nventive-framework/ApplicationTemplate-Production-2'
+  AppCenterWindowsSlug_Production: 'nventive-framework/ApplicationTemplate-Production-2'
   AppCenterAndroidSlug_Canary: 'nventive-framework/Application-Template-Canary-1'
   AppCenteriOSSlug_Canary: 'nventive-framework/Application-Template-Canary'
-  AppCenterUWPSlug_Canary: 'nventive-framework/Application-Template-Canary-2'
+  AppCenterWindowsSlug_Canary: 'nventive-framework/Application-Template-Canary-2'
 
   # AppCenter Distribution Groups
   AppCenterDistributionGroup: '00000000-0000-0000-0000-000000000000'
@@ -65,25 +65,25 @@ variables:
   # AzureStorageAccountName:
 
   # Solution to build
-  SolutionFileName: ApplicationTemplate.sln
+  SolutionName: ApplicationTemplate
 
   # Paths to file
-  InfoPlistPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.iOS/Info.plist
-  AndroidManifestPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.Droid/Properties/AndroidManifest.xml
+  InfoPlistPath: '$(Build.SourcesDirectory)/src/app/$(SolutionName).Mobile/iOS/Info.plist'
+  AndroidManifestPath: '$(Build.SourcesDirectory)/src/app/$(SolutionName).Mobile/Android/AndroidManifest.xml'
 
   # Pool names
   windowsPoolName: 'windows 2022'
   macOSPoolName: 'macOS'
 
   # Versions to use
-  NUGET_VERSION: 6.1.0
+  NUGET_VERSION: 6.2.0
   XAMARIN_IOS_VERSION: 15.10
 
   # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
   # We make seperate folders so that releases can each download only the folder they need.
   AndroidArtifactName: Android
   iOSArtifactName: iOS
-  UWPArtifactName: UWP
+  WindowsArtifactName: Windows
   TestsArtifactName: Tests
 
   # Path where packages (nuget or app packages) will be copied to.

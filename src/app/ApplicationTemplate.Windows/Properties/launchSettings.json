@@ -1,0 +1,11 @@
+﻿{
+	"profiles": {
+		"Windows Machine": {
+			"commandName": "MsixPackage"
+		},
+		"WSL": {
+			"commandName": "WSL2",
+			"distributionName": ""
+		}
+	}
+}
