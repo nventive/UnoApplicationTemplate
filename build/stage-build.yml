@@ -52,41 +52,41 @@ jobs:
           additionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
           removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
 
-  - job: On_Windows # Build UWP and Android on a windows machine
-    strategy:
-      maxParallel: 3
-      matrix:
-        Android:
-          ApplicationConfiguration: Release_Android
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-        UWP:
-          ApplicationConfiguration: Release_UWP
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-        Tests:
-          ApplicationConfiguration: Release_Tests
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  # - job: On_Windows # Build UWP and Android on a windows machine
+  #   strategy:
+  #     maxParallel: 3
+  #     matrix:
+  #       Android:
+  #         ApplicationConfiguration: Release_Android
+  #         ApplicationPlatform: Any CPU
+  #         ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+  #         ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  #       UWP:
+  #         ApplicationConfiguration: Release_UWP
+  #         ApplicationPlatform: Any CPU
+  #         ArtifactName: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
+  #         ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  #       Tests:
+  #         ApplicationConfiguration: Release_Tests
+  #         ApplicationPlatform: Any CPU
+  #         ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
+  #         ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
 
-    pool:
-      name: $(windowsPoolName)
+  #   pool:
+  #     name: $(windowsPoolName)
 
-    variables:
-    - group: ${{ parameters.androidVariableGroup }}
+  #   variables:
+  #   - group: ${{ parameters.androidVariableGroup }}
 
-    container: windows
+  #   container: windows
 
-    steps:
-      - template: steps-build.yml
-        parameters:
-          pathToSrc: ${{ parameters.pathToSrc }}
-          solutionFileName: ${{ parameters.solutionFileName }}
-          androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
-          pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
+  #   steps:
+  #     - template: steps-build.yml
+  #       parameters:
+  #         pathToSrc: ${{ parameters.pathToSrc }}
+  #         solutionFileName: ${{ parameters.solutionFileName }}
+  #         androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
+  #         pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
 
   - job: On_Mac # Build iOS on a mac
     strategy:

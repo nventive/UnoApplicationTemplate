@@ -32,25 +32,25 @@ variables:
 stages:
 #-if false
 # This special if is used to remove those Dotnet_New stages for generated apps.
-- stage: Dotnet_New_GeneratedApp
-  jobs:
-  - template: build/stage-donetnew.yaml
+# - stage: Dotnet_New_GeneratedApp
+#   jobs:
+#   - template: build/stage-donetnew.yaml
 
-- stage: Build_Staging_GeneratedApp
-  dependsOn: Dotnet_New_GeneratedApp
-  jobs:
-  - template: build/stage-build.yml
-    parameters:
-      pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
-      solutionFileName: 'GeneratedApp.sln'
-      pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.iOS/Info.plist'
-      pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Droid/Properties/AndroidManifest.xml'
-      applicationEnvironment: Generated_Staging
-      androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      iosProvisioningProfileFile: $(InternalProvisioningProfile)
-      iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
+# - stage: Build_Staging_GeneratedApp
+#   dependsOn: Dotnet_New_GeneratedApp
+#   jobs:
+#   - template: build/stage-build.yml
+#     parameters:
+#       pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
+#       solutionFileName: 'GeneratedApp.sln'
+#       pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.iOS/Info.plist'
+#       pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Droid/Properties/AndroidManifest.xml'
+#       applicationEnvironment: Generated_Staging
+#       androidKeyStoreFile: $(InternalKeystore)
+#       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+#       iosProvisioningProfileFile: $(InternalProvisioningProfile)
+#       iosCertificateFile: $(InternalCertificate)
+#       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 #-endif
 - stage: Build_Staging
 #-if false
@@ -66,18 +66,18 @@ stages:
       iosCertificateFile: $(InternalCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 
-- stage: Build_Production
-  dependsOn: Build_Staging # Use dependsOn: [] if you want to run both builds in parallel.
-  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-  jobs:
-  - template: build/stage-build.yml
-    parameters:
-      applicationEnvironment: Production
-      androidKeyStoreFile: $(GooglePlayKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
-      iosProvisioningProfileFile: $(AppStoreProvisioningProfile)
-      iosCertificateFile: $(AppStoreCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
+# - stage: Build_Production
+#   dependsOn: Build_Staging # Use dependsOn: [] if you want to run both builds in parallel.
+#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+#   jobs:
+#   - template: build/stage-build.yml
+#     parameters:
+#       applicationEnvironment: Production
+#       androidKeyStoreFile: $(GooglePlayKeystore)
+#       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
+#       iosProvisioningProfileFile: $(AppStoreProvisioningProfile)
+#       iosCertificateFile: $(AppStoreCertificate)
+#       iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
 - stage: AppCenter_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
@@ -96,39 +96,39 @@ stages:
       appCenterServiceConnectionName: $(AppCenterServiceConnection)
       appCenterDistributionGroup: $(AppCenterDistributionGroup)
 
-- stage: AppCenter_Production
-  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-  dependsOn: Build_Production
+# - stage: AppCenter_Production
+#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+#   dependsOn: Build_Production
 
-  jobs:
-  - template: build/stage-release-appcenter.yml
-    parameters:
-      applicationEnvironment: Production
-      deploymentEnvironment: 'AppCenter Prod'
-      appCenterUWPSlug: $(AppCenterUWPSlug_Production)
-      appCenteriOSSlug: $(AppCenteriOSSlug_Production)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
-      androidKeyStoreFile: $(GooglePlayKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
-      appCenterServiceConnectionName: $(AppCenterServiceConnection)
-      appCenterDistributionGroup: $(AppCenterDistributionGroup)
+#   jobs:
+#   - template: build/stage-release-appcenter.yml
+#     parameters:
+#       applicationEnvironment: Production
+#       deploymentEnvironment: 'AppCenter Prod'
+#       appCenterUWPSlug: $(AppCenterUWPSlug_Production)
+#       appCenteriOSSlug: $(AppCenteriOSSlug_Production)
+#       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
+#       androidKeyStoreFile: $(GooglePlayKeystore)
+#       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
+#       appCenterServiceConnectionName: $(AppCenterServiceConnection)
+#       appCenterDistributionGroup: $(AppCenterDistributionGroup)
 
-- stage: AppStore
-  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-  dependsOn: Build_Production
+# - stage: AppStore
+#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+#   dependsOn: Build_Production
 
-  jobs:
-  - template: build/stage-release-appstore.yml
-    parameters:
-      applicationEnvironment: Production
-      deploymentEnvironment: AppStore
+#   jobs:
+#   - template: build/stage-release-appstore.yml
+#     parameters:
+#       applicationEnvironment: Production
+#       deploymentEnvironment: AppStore
 
-- stage: GooglePlay
-  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-  dependsOn: Build_Production
+# - stage: GooglePlay
+#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+#   dependsOn: Build_Production
 
-  jobs:
-  - template: build/stage-release-googleplay.yml
-    parameters:
-      applicationEnvironment: Production
-      deploymentEnvironment: GooglePlay
+#   jobs:
+#   - template: build/stage-release-googleplay.yml
+#     parameters:
+#       applicationEnvironment: Production
+#       deploymentEnvironment: GooglePlay
