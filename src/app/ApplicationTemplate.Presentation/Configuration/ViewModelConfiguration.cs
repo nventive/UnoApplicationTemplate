@@ -9,6 +9,7 @@ using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Uno.Extensions;
 
 namespace ApplicationTemplate;
 
@@ -63,7 +64,7 @@ public static class ViewModelConfiguration
 				.WithEmptySelector(GetIsEmpty)
 				.WithAnalytics(
 					onSuccess: async (ct, request, value) => { /* Some analytics */ },
-					onError: async (ct, request, error) => { /* Somme analytics */ }
+					onError: async (ct, request, error) => { typeof(ViewModelConfiguration).Log().LogError(error, "Error while loading {Request}.", request); }
 				)
 			);
 
