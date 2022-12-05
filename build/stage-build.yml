@@ -98,7 +98,6 @@ jobs:
           ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
     pool:
-      name: $(macOSPoolName)
       vmImage: macos-12
 
     variables:
