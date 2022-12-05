@@ -99,8 +99,7 @@ jobs:
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
     pool:
       name: $(macOSPoolName)
-      demands:
-        - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
+      vmImage: macos-12
 
     variables:
     - name: SkipUnknownFrameworks
