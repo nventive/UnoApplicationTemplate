@@ -10,75 +10,70 @@ parameters:
   appCenterDistributionGroup: ''
 
 jobs:
-# - deployment: AppCenter_Windows
-#   pool: $(windowsPoolName)
+- deployment: AppCenter_Android
+  pool:
+    vmImage: windows-2022
+  variables:
+  - name: artifactName
+    value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+  - name: releaseNotesArtifactName
+    value: ReleaseNotes_${{ parameters.applicationEnvironment }}
+  - group: ${{ parameters.androidVariableGroup }}
+  environment: ${{ parameters.deploymentEnvironment }}
+  strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            displayName: "Download Artifact" 
+            artifact: $(artifactName)
 
-#   variables:
-#   - name: artifactName
-#     value: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
-#   - name: releaseNotesArtifactName
-#     value: ReleaseNotes_${{ parameters.applicationEnvironment }}
+          - download: current
+            displayName: "Download Release Notes" 
+            artifact: $(releaseNotesArtifactName)
 
-#   environment: ${{ parameters.deploymentEnvironment }}
+          - task: AppCenterDistribute@3
+            displayName: Deploy Android to AppCenter
+            inputs:
+              serverEndpoint: ${{ parameters.appCenterServiceConnectionName }}
+              distributionGroupId: ${{ parameters.appCenterDistributionGroup }}
+              appSlug: ${{ parameters.appCenterAndroidSlug }}
+              appFile: '$(Pipeline.Workspace)/$(artifactName)/*Signed.aab'
+              releaseNotesOption: file
+              releaseNotesFile: "$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md"
+              isSilent: true
 
-#   container: windows
-
-#   strategy:
-#     runOnce:
-#       deploy:
-#         steps:
-
-#         - download: current
-#           artifact: $(artifactName)
-
-#         - download: current
-#           artifact: $(releaseNotesArtifactName)
-
-#         - task: AppCenterDistribute@3
-#           displayName: Deploy Windows to AppCenter
-#           inputs:
-#             serverEndpoint: ${{ parameters.appCenterServiceConnectionName }}
-#             appSlug: ${{ parameters.appCenterWindowsSlug }}
-#             appFile: $(Pipeline.Workspace)/$(artifactName)/*.msix
-#             releaseNotesOption: file
-#             releaseNotesFile: "$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md"
-#             isSilent: true
-
-#         - task: DeleteFiles@1
-#           displayName: "Remove downloaded artifacts (build)"
-#           condition: always()
-#           inputs:
-#             SourceFolder: $(Pipeline.Workspace)/$(artifactName)
-#             RemoveSourceFolder: true
-#             Contents: '**'
-
-#         - task: DeleteFiles@1
-#           displayName: "Remove downloaded artifacts (release notes)"
-#           condition: always()
-#           inputs:
-#             SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
-#             RemoveSourceFolder: true
-#             Contents: '**'
+          - task: DeleteFiles@1
+            displayName: "Remove Downloaded Artifacts (Build)"
+            condition: always()
+            inputs:
+              SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+              RemoveSourceFolder: true
+              Contents: '**'
+          
+          - task: DeleteFiles@1
+            displayName: "Remove Downloaded Artifacts (Release Notes)"
+            condition: always()
+            inputs:
+              SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
+              RemoveSourceFolder: true
+              Contents: '**'
 
 - deployment: AppCenter_iOS
   pool:
     name: $(macOSPoolName)
     demands:
     - fastlane
-
   variables:
   - name: artifactName
     value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
   - name: releaseNotesArtifactName
     value: ReleaseNotes_${{ parameters.applicationEnvironment }}
-
   environment: ${{ parameters.deploymentEnvironment }}
-
   strategy:
     runOnce:
       deploy:
         steps:
-
         - download: current
           displayName: "Download Artifact"
           artifact: $(artifactName)
@@ -115,56 +110,3 @@ jobs:
             SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
             RemoveSourceFolder: true
             Contents: '**'
-
-- deployment: AppCenter_Android
-  pool:
-    vmImage: windows-latest
-
-  variables:
-  - group: ${{ parameters.androidVariableGroup }}
-  - name: artifactName
-    value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
-  - name: releaseNotesArtifactName
-    value: ReleaseNotes_${{ parameters.applicationEnvironment }}
-
-  environment: ${{ parameters.deploymentEnvironment }}
-
-  strategy:
-      runOnce:
-        deploy:
-          steps:
-
-          - download: current
-            displayName: "Download Artifact" 
-            artifact: $(artifactName)
-
-          - download: current
-            displayName: "Download Release Notes" 
-            artifact: $(releaseNotesArtifactName)
-
-          - task: AppCenterDistribute@3
-            displayName: Deploy Android to AppCenter
-            inputs:
-              serverEndpoint: ${{ parameters.appCenterServiceConnectionName }}
-              distributionGroupId: ${{ parameters.appCenterDistributionGroup }}
-              appSlug: ${{ parameters.appCenterAndroidSlug }}
-              appFile: '$(Pipeline.Workspace)/$(artifactName)/*Signed.aab'
-              releaseNotesOption: file
-              releaseNotesFile: "$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md"
-              isSilent: true
-
-          - task: DeleteFiles@1
-            displayName: "Remove Downloaded Artifacts (Build)"
-            condition: always()
-            inputs:
-              SourceFolder: $(Pipeline.Workspace)/$(artifactName)
-              RemoveSourceFolder: true
-              Contents: '**'
-          
-          - task: DeleteFiles@1
-            displayName: "Remove Downloaded Artifacts (Release Notes)"
-            condition: always()
-            inputs:
-              SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
-              RemoveSourceFolder: true
-              Contents: '**'

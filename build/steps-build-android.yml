@@ -13,7 +13,7 @@ parameters:
   default: ''
 
 steps:
-#- template: templates/dotnet-install-windows.yml
+- template: templates/dotnet-install.yml
 
 #-if false
 - download: current
@@ -21,26 +21,7 @@ steps:
   artifact: GeneratedApp
 #-endif
 
-- task: UseDotNet@2
-  displayName: 'Install Latest .NET SDK'
-  inputs:
-    packageType: 'sdk'
-    version: '6.0.403'
-
-- powershell: dotnet workload install maui
-  displayName: Install Latest .NET MAUI Workload
-
-- task: gitversion/setup@0
-  retryCountOnTaskFailure: 3
-  inputs:
-    versionSpec: '5.10.1'
-  displayName: 'Install GitVersion'
-
-- task: gitversion/execute@0
-  inputs:
-    useConfigFile: true
-    configFilePath: $(Build.SourcesDirectory)/gitversion.yml
-  displayName: 'Calculate Version'
+- template: templates/gitversion.yml
 
 - task: DownloadSecureFile@1
   name: keyStore
@@ -63,17 +44,19 @@ steps:
     versionName: $(MajorMinorPatch)
     printFile: true
 
-- script: |
-    cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
-    dotnet build -f:$(BuildTargetFramework) -c:Release "/p:InformationalVersion=%GITVERSION_InformationalVersion%" /p:AndroidSigningKeyStore=$(keyStore.secureFilePath) /p:AndroidSigningStorePass=$(AndroidSigningStorePass) /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass) /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias) /p:AndroidKeyStore=true /bl:$(build.artifactstagingdirectory)/build-$(BuildTargetFramework).binlog /p:IsLightBuild=$(IsLightBuild)
+- script: >
+    dotnet $(dotNetCommand) ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
+    -f:$(BuildTargetFramework)
+    -c:Release
+    /p:InformationalVersion=$(GitVersion.InformationalVersion)
+    /p:AndroidSigningKeyStore=$(keyStore.secureFilePath)
+    /p:AndroidSigningStorePass=$(AndroidSigningStorePass)
+    /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass)
+    /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias)
+    /p:AndroidKeyStore=true
+    /bl:$(build.artifactstagingdirectory)/build-$(BuildTargetFramework).binlog
+    /p:IsLightBuild=$(IsLightBuild)
   displayName: Build Project for Release
-  condition: eq(variables['IsLightBuild'], 'true')
-
-- script: |
-    cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
-    dotnet publish -f:net6.0-android -c:Release "/p:InformationalVersion=%GITVERSION_InformationalVersion%" /p:AndroidSigningKeyStore=$(keyStore.secureFilePath) /p:AndroidSigningStorePass=$(AndroidSigningStorePass) /p:AndroidSigningKeyPass=$(AndroidSigningKeyPass) /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias) /p:AndroidKeyStore=true /bl:$(build.artifactstagingdirectory)/build-$(BuildTargetFramework).binlog /p:IsLightBuild=$(IsLightBuild)
-  displayName: Build Project for Release
-  condition: eq(variables['IsLightBuild'], 'false')
 
 - task: CopyFiles@2
   displayName: 'Copy Binary Files'

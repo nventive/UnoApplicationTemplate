@@ -54,17 +54,19 @@
 							<!-- Build Optimization for LightBuild (Faster Builds in Pull Requests). -->
 							<PropertyGroup>
 								<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
-								<AotAssemblies>False</AotAssemblies>
 								<EnableLLVM>False</EnableLLVM>
 								<Optimize>False</Optimize>
+								<RunAOTCompilation>False</RunAOTCompilation>
 							</PropertyGroup>
 						</When>
 						<Otherwise>
 							<PropertyGroup>
+								<!-- Currently doesn't work with AOT enabled. -->
+								<EnableLLVM>False</EnableLLVM>
+
 								<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
-								<AotAssemblies>True</AotAssemblies>
-								<EnableLLVM>True</EnableLLVM>
 								<Optimize>True</Optimize>
+								<RunAOTCompilation>True</RunAOTCompilation>
 							</PropertyGroup>
 						</Otherwise>
 					</Choose>
@@ -73,9 +75,11 @@
 			<ItemGroup>
 				<PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
 				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
+				<PackageReference Include="Mono.AotProfiler.Android" Version="6.0.0" />
 			</ItemGroup>
 			<ItemGroup>
 				<AndroidEnvironment Include="Android/environment.conf" />
+				<AndroidAotProfile Include="custom.aprof" />
 			</ItemGroup>
 		</When>
 		<When Condition="'$(TargetFramework)'=='net6.0-ios'">

@@ -19,7 +19,7 @@ parameters:
   default: ''
 
 steps:
-#- template: templates/dotnet-install-mac.yml
+- template: templates/dotnet-install.yml
 
 #-if false
 - download: current
@@ -27,26 +27,7 @@ steps:
   artifact: GeneratedApp
 #-endif
 
-- task: UseDotNet@2
-  displayName: 'Install Latest .NET SDK'
-  inputs:
-    packageType: 'sdk'
-    version: '6.0.403'
-
-- powershell: dotnet workload install maui
-  displayName: Install Latest .NET MAUI Workload
-
-- task: gitversion/setup@0
-  retryCountOnTaskFailure: 3
-  inputs:
-    versionSpec: '5.10.1'
-  displayName: 'Install GitVersion'
-
-- task: gitversion/execute@0
-  inputs:
-    useConfigFile: true
-    configFilePath: $(Build.SourcesDirectory)/gitversion.yml
-  displayName: 'Calculate Version'
+- template: templates/gitversion.yml
 
 - task: InstallAppleCertificate@2
   displayName: Install Certificate
@@ -79,15 +60,8 @@ steps:
 
 - bash: |
     cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
-    dotnet build -f:$(BuildTargetFramework) -c:Release /p:ApplicationIdentifier=$(ApplicationIdentifier) /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid) /p:ArchiveOnBuild=true /bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog "/p:InformationalVersion=$GITVERSION_INFORMATIONALVERSION" /p:IsLightBuild=$(IsLightBuild)
+    dotnet $(dotNetCommand) -f:$(BuildTargetFramework) -c:Release /p:ApplicationIdentifier=$(ApplicationIdentifier) /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid) /p:ArchiveOnBuild=true /bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog "/p:InformationalVersion=$GITVERSION_INFORMATIONALVERSION" /p:IsLightBuild=$(IsLightBuild)
   displayName: Build project for Release - $(BuildTargetFramework)
-  condition: eq(variables['IsLightBuild'], 'true')
-
-- bash: |
-    cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
-    dotnet publish -f:$(BuildTargetFramework) -c:Release /p:ApplicationIdentifier=$(ApplicationIdentifier) /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid) /p:ArchiveOnBuild=true /bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog "/p:InformationalVersion=$GITVERSION_INFORMATIONALVERSION" /p:IsLightBuild=$(IsLightBuild)
-  displayName: Build project for Release - $(BuildTargetFramework)
-  condition: eq(variables['IsLightBuild'], 'false')
 
 - task: CopyFiles@2
   displayName: 'Copy IPA'

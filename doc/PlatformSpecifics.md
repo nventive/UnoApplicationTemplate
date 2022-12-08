@@ -1,4 +1,4 @@
-# Platform specifics
+﻿# Platform specifics
 
 ## Android
 
@@ -20,23 +20,23 @@ This is a special type of compilation that uses a generated file (`custom.aprof`
 To generate this file, following the following steps:
 
 1. Open a command prompt or terminal against your Android project’s directory that contains the .csproj.
-1. Ensure only one Android device is attached.
-1. Execute the following command: `msbuild /t:BuildAndStartAotProfiling`
-1. Let your application run until it’s loaded.
-1. Execute the following command: `msbuild /t:FinishAotProfiling`.
-1. Use the file in your `.csproj` with LLVM enabled.
+2. Ensure only one Android device is attached.
+3. Execute the following command: `dotnet build -f net6.0-android -t:BuildAndStartAotProfiling`
+4. Let your application run until it’s loaded.
+5. Execute the following command: `dotnet build -f net6.0-android -t:FinishAotProfiling`.
+6. Use this configuration in your `.csproj`.
+
 ```xml
 <EnableLLVM>True</EnableLLVM>
 <AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
 <AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
+<PackageReference Include="Mono.AotProfiler.Android" Version="6.0.0" />
+<AndroidAotProfile Include="$(MSBuildThisFileDirectory)custom.aprof" />
 ```
 
-[For more information, follow this article.](https://devblogs.microsoft.com/xamarin/faster-android-startup-times-with-startup-tracing/)
+[For more information, follow this article.](https://devblogs.microsoft.com/dotnet/performance-improvements-in-dotnet-maui)
+[For more documentation, follow this GitHub.](https://github.com/jonathanpeppers/Mono.Profiler.Android)
 
 ### iOS
 
-
-
-### UWP
-
-
+### Windows

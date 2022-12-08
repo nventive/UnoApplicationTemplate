@@ -1,0 +1,12 @@
+steps:
+  - task: gitversion/setup@0
+    retryCountOnTaskFailure: 3
+    inputs:
+      versionSpec: '5.10.1'
+    displayName: 'Install GitVersion'
+
+  - task: gitversion/execute@0
+    inputs:
+      useConfigFile: true
+      configFilePath: $(Build.SourcesDirectory)/gitversion-config.yml
+    displayName: 'Calculate Version'

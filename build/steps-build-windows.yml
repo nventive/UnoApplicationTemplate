@@ -10,25 +10,13 @@
   default: ''
 
 steps:
-#- template: templates/dotnet-install-windows.yml
+- template: templates/dotnet-install.yml
 
 #-if false
 - download: current
   condition: eq('GeneratedApp.sln', '${{ parameters.solutionFileName }}')
   artifact: GeneratedApp
 #-endif
-
-- task: gitversion/setup@0
-  retryCountOnTaskFailure: 3
-  inputs:
-    versionSpec: '5.10.1'
-  displayName: 'Install GitVersion'
-
-- task: gitversion/execute@0
-  inputs:
-    useConfigFile: true
-    configFilePath: $(Build.SourcesDirectory)/gitversion.yml
-  displayName: 'Calculate Version'
 
 - script: >
     cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Windows
@@ -38,22 +26,9 @@ steps:
     -c:Release
     -r:win-x64
     -bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog
-    /p:Platform=$(ApplicationPlatform)
-    /p:PackageVersion=$(PreReleaseNumber)
-    /p:ApplicationBuildNumber=$(PreReleaseNumber)
-    /p:ApplicationEnvironment=$(ApplicationEnvironment)
-    /p:ApplicationVersion=$(MajorMinorPatch)
-    /p:ApplicationIdentifier=$(ApplicationIdentifier)
-    /p:IsLightBuild=$(IsLightBuild)
-    /p:InformationalVersion=$(GitVersion.InformationalVersion)
+    -p:Platform=$(ApplicationPlatform)
+    -p:ApplicationEnvironment=$(ApplicationEnvironment)
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
-
-- task: CopyFiles@2
-  displayName: 'Copy MSIX'
-  inputs:
-    Contents: '**/*.msix'
-    flattenFolders : true
-    TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
