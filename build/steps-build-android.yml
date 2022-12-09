@@ -72,7 +72,7 @@ steps:
     flattenFolders: true
 
 - publish: $(Build.ArtifactStagingDirectory)
-  displayName: 'Publish Artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
+  displayName: 'Publish Artifact'
   condition: always()
   artifact: $(ArtifactName)
 

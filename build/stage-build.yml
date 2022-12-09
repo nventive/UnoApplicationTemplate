@@ -42,7 +42,7 @@
 jobs:
   - job: On_Windows_ReleaseNotes
     pool:
-      vmImage : windows-2022
+      vmImage : $(windowsHostedAgentImage)
     variables:
       ArtifactName: ReleaseNotes_${{ parameters.applicationEnvironment }}
       ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
@@ -54,8 +54,9 @@ jobs:
 
   - job: OnWindows_Windows
     pool:
-      vmImage : windows-2022
+      vmImage : $(windowsHostedAgentImage)
     variables:
+      ApplicationConfiguration: Release
       ApplicationPlatform: x64
       ArtifactName: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
       ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
@@ -69,7 +70,7 @@ jobs:
 
   - job: OnWindows_Tests
     pool:
-      vmImage : windows-2022
+      vmImage : $(windowsHostedAgentImage)
     variables:
       ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
       ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
@@ -82,7 +83,7 @@ jobs:
 
   - job: OnWindows_Android
     pool:
-      vmImage : windows-2022
+      vmImage : $(windowsHostedAgentImage)
     variables:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}
@@ -112,7 +113,7 @@ jobs:
 
   - job: OnMac_iOS
     pool:
-      vmImage: macos-12
+      vmImage: $(macOSHostedAgentImage)
     variables:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}

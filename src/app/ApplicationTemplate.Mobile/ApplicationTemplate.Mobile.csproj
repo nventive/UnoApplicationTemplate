@@ -24,30 +24,34 @@
 	</ItemGroup>
 	<Choose>
 		<When Condition="'$(TargetFramework)'=='net6.0-android'">
+			<PropertyGroup>
+				<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
+				<BundleAssemblies>False</BundleAssemblies>
+			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
 					<PropertyGroup>
 						<AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
 						<UseHighDPIResources>False</UseHighDPIResources>
 						<EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-						<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 						<AotAssemblies>False</AotAssemblies>
 						<EnableLLVM>False</EnableLLVM>
 						<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
-						<BundleAssemblies>False</BundleAssemblies>
 						<AndroidDexTool>d8</AndroidDexTool>
+						<Optimize>False</Optimize>
+						<RunAOTCompilation>False</RunAOTCompilation>
 					</PropertyGroup>
 				</When>
 				<When Condition="'$(Configuration)'=='Release'">
 					<PropertyGroup>
 						<EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-						<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 						<AndroidManagedSymbols>True</AndroidManagedSymbols>
 						<AndroidEnableSGenConcurrent>True</AndroidEnableSGenConcurrent>
 						<AndroidAotAdditionalArguments>nodebug,no-write-symbols</AndroidAotAdditionalArguments>
 						<AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
-						<BundleAssemblies>False</BundleAssemblies>
 						<AndroidUseAapt2>True</AndroidUseAapt2>
+						<AndroidLinkMode>Full</AndroidLinkMode>
+						<AndroidLinkSkip>$(AssemblyName)</AndroidLinkSkip>
 					</PropertyGroup>
 					<Choose>
 						<When Condition="'$(IsLightBuild)'=='True'">
@@ -61,10 +65,10 @@
 						</When>
 						<Otherwise>
 							<PropertyGroup>
-								<!-- Currently doesn't work with AOT enabled. -->
-								<EnableLLVM>False</EnableLLVM>
-
 								<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
+								<!-- LLVM currently doesn't work with AOT enabled and custom profile. -->
+								<!-- See https://github.com/dotnet/runtime/issues/74021 for more details. -->
+								<EnableLLVM>False</EnableLLVM>
 								<Optimize>True</Optimize>
 								<RunAOTCompilation>True</RunAOTCompilation>
 							</PropertyGroup>
@@ -79,15 +83,18 @@
 			</ItemGroup>
 			<ItemGroup>
 				<AndroidEnvironment Include="Android/environment.conf" />
+				<LinkDescription Include="Android/LinkerExclusions.xml" />
 				<AndroidAotProfile Include="custom.aprof" />
 			</ItemGroup>
 		</When>
 		<When Condition="'$(TargetFramework)'=='net6.0-ios'">
+			<PropertyGroup>
+				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
+				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
+			</PropertyGroup>
 			<PropertyGroup Condition="'$(Platform)'=='iPhoneSimulator'">
 				<!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
-				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
-				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">

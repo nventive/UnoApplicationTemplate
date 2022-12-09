@@ -12,7 +12,7 @@ parameters:
 jobs:
 - deployment: AppCenter_Android
   pool:
-    vmImage: windows-2022
+    vmImage: $(windowsHostedAgentImage)
   variables:
   - name: artifactName
     value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}

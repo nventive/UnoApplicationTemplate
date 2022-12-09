@@ -80,7 +80,7 @@ steps:
     TargetFolder: '$(Build.ArtifactStagingDirectory)/${{ parameters.solutionName }}.Mobile.dSYM'
 
 - publish: $(Build.ArtifactStagingDirectory)
-  displayName: 'Publish Artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
+  displayName: 'Publish Artifact'
   condition: always()
   artifact: $(ArtifactName)
 
