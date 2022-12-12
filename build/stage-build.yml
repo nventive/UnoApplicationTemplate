@@ -14,6 +14,9 @@
 - name: iosProvisioningProfileFile
   type: string
   default: ''
+- name: iosCertificatePassword
+  type: string
+  default: ''
 - name: iosVariableGroup
   type: string
   default: ''
@@ -26,9 +29,9 @@
 - name: pathToSrc
   type: string
   default: '$(Build.SourcesDirectory)/src'
-- name: solutionFileName
+- name: solutionName
   type: string
-  default: '$(SolutionFileName)'
+  default: '$(SolutionName)'
 - name: pathToInfoPlist
   type: string
   default: '$(InfoPlistPath)'
@@ -39,80 +42,101 @@
 jobs:
   - job: On_Windows_ReleaseNotes
     pool:
-      name: $(windowsPoolName)
+      vmImage : $(windowsHostedAgentImage)
     variables:
       ArtifactName: ReleaseNotes_${{ parameters.applicationEnvironment }}
       ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-
-    container: windows
-
     steps:
       - template: steps-build-release-notes.yml
         parameters:
           additionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
           removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
 
-  - job: On_Windows # Build UWP and Android on a windows machine
-    strategy:
-      maxParallel: 3
-      matrix:
-        Android:
-          ApplicationConfiguration: Release_Android
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-        UWP:
-          ApplicationConfiguration: Release_UWP
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-        Tests:
-          ApplicationConfiguration: Release_Tests
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-
+  - job: OnWindows_Windows
     pool:
-      name: $(windowsPoolName)
-
+      vmImage : $(windowsHostedAgentImage)
     variables:
-    - group: ${{ parameters.androidVariableGroup }}
-
-    container: windows
-
+      ApplicationConfiguration: Release
+      ApplicationPlatform: x64
+      ArtifactName: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
+      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+      BuildTargetFramework: net6.0-windows10.0.19041.0
     steps:
-      - template: steps-build.yml
+      - template: steps-build-windows.yml
         parameters:
           pathToSrc: ${{ parameters.pathToSrc }}
-          solutionFileName: ${{ parameters.solutionFileName }}
-          androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
-          pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
+          solutionFileName: '${{ parameters.solutionName }}.sln'
+          solutionName: ${{ parameters.solutionName }}
 
-  - job: On_Mac # Build iOS on a mac
-    strategy:
-      maxParallel: 3
-      matrix:
-        iOS:
-          ApplicationConfiguration: Release_iOS
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  - job: OnWindows_Tests
     pool:
-      name: $(macOSPoolName)
-      demands:
-        - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
-
+      vmImage : $(windowsHostedAgentImage)
     variables:
-    - name: SkipUnknownFrameworks
-      value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
+      ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
+      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+    steps:
+      - template: steps-build-tests.yml
+        parameters:
+          pathToSrc: ${{ parameters.pathToSrc }}
+          solutionFileName: '${{ parameters.solutionName }}.sln'
+          solutionName: ${{ parameters.solutionName }}
+
+  - job: OnWindows_Android
+    pool:
+      vmImage : $(windowsHostedAgentImage)
+    variables:
+    - name: ApplicationEnvironment
+      value: ${{ parameters.applicationEnvironment }}
+    - name: ArtifactName
+      value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+    - name: ApplicationPlatform
+      value: AnyCPU
+    - name: BuildTargetFramework
+      value: net6.0-android
+
+    # For optimization, if we are on light build, we only build the project else we publish it.
+    - name: dotNetCommand
+      ${{ if eq(variables['IsLightBuild'], 'true') }}:
+        value: build
+      ${{ else }}:
+        value: publish
+
+    - group: ${{ parameters.androidVariableGroup }}
+
+    steps:
+    - template: steps-build-android.yml
+      parameters:
+        pathToSrc: ${{ parameters.pathToSrc }}
+        solutionName: ${{ parameters.solutionName }}
+        pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
+        androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
+
+  - job: OnMac_iOS
+    pool:
+      vmImage: $(macOSHostedAgentImage)
+    variables:
+    - name: ApplicationEnvironment
+      value: ${{ parameters.applicationEnvironment }}
+    - name: BuildTargetFramework
+      value: net6.0-ios
+    - name: ArtifactName
+      value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+
+    # For optimization, if we are on light build, we only build the project else we publish it.
+    - name: dotNetCommand
+      ${{ if eq(variables['IsLightBuild'], 'true') }}:
+        value: build
+      ${{ else }}:
+        value: publish
+
     - group: ${{ parameters.iosVariableGroup }}
 
     steps:
-    - template: steps-build.yml
+    - template: steps-build-ios.yml
       parameters:
         pathToSrc: ${{ parameters.pathToSrc }}
-        solutionFileName: ${{ parameters.solutionFileName }}
+        solutionName: ${{ parameters.solutionName }}
         pathToInfoPlist: ${{ parameters.pathToInfoPlist }}
-        iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
         iosCertificateFile: ${{ parameters.iosCertificateFile }}
-        iosCertificatePassword: $(AppleCertificatePassword)
+        iosCertificatePassword: ${{ parameters.iosCertificatePassword }}
+        iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
