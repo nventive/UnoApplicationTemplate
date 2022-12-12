@@ -157,5 +157,5 @@
 			</ItemGroup>
 		</When>
 	</Choose>
-	<Import Project="..\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems" Label="Shared" />
+	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
 </Project>

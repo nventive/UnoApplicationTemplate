@@ -60,8 +60,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Windows
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Mobile", "app\ApplicationTemplate.Mobile\ApplicationTemplate.Mobile.csproj", "{925099B5-4113-4E3E-8CBB-74D3077DF583}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ApplicationTemplate.Shared", "app\ApplicationTemplate.Shared\ApplicationTemplate.Shared.shproj", "{6279C845-92F8-4333-AB99-3D213163593C}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -311,15 +309,13 @@ Global
 		{AB67372C-6CF2-46A5-BC86-7CD257AF3FF0} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
 		{096FE097-B3C5-4E5B-874F-6A95C648F714} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
 		{925099B5-4113-4E3E-8CBB-74D3077DF583} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
-		{6279C845-92F8-4333-AB99-3D213163593C} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8F5BE10-8B4B-4587-B7B4-09CA39838210}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		app\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems*{096fe097-b3c5-4e5b-874f-6a95c648f714}*SharedItemsImports = 5
-		app\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems*{6279c845-92f8-4333-ab99-3d213163593c}*SharedItemsImports = 13
+		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{096fe097-b3c5-4e5b-874f-6a95c648f714}*SharedItemsImports = 5
 		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{746587e0-b8e4-4a78-a7ea-dbc356367712}*SharedItemsImports = 13
-		app\ApplicationTemplate.Shared\ApplicationTemplate.Shared.projitems*{925099b5-4113-4e3e-8cbb-74d3077df583}*SharedItemsImports = 5
+		app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems*{925099b5-4113-4e3e-8cbb-74d3077df583}*SharedItemsImports = 5
 	EndGlobalSection
 EndGlobal

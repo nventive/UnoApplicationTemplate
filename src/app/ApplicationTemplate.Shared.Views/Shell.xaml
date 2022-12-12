@@ -2,12 +2,15 @@
 			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:local="using:ApplicationTemplate.Views.Content"
-			 xmlns:splash="using:Nventive.ExtendedSplashScreen"
 			 xmlns:nav="using:Chinook.SectionsNavigation"
-			 xmlns:ue="using:Nventive.View.Extensions"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 mc:Ignorable="d">
+
+	<!--
+		xmlns:ue="using:Nventive.View.Extensions"
+		xmlns:splash="using:Nventive.ExtendedSplashScreen"
+	-->
 
 	<Grid>
 		<!-- We add grid rows to prevent overlapping of the MultiFrame and the Menu bar -->
@@ -16,6 +19,7 @@
 			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 
+		<!--
 		<nav:MultiFrame x:Name="RootNavigationMultiFrame"
 						CommaSeparatedSectionsFrameNames="Login,Home,Posts,Settings" />
 
@@ -32,6 +36,7 @@
 									 ue:MultipleTapExtension.Command="{Binding DiagnosticsOverlay.NavigateToDiagnosticsPage}"
 									 ue:MultipleTapExtension.TapCount="3"
 									 Grid.RowSpan="2" />
+		-->
 	</Grid>
 
 </UserControl>
