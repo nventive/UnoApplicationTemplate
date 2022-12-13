@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\LoggingConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -97,7 +98,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Configuration\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Authentication\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\DadJokes\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Diagnostics\" />

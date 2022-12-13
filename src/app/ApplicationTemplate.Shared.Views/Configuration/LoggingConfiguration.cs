@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +23,7 @@ public static class LoggingConfiguration
 
 		serilogConfiguration.ReadFrom.Configuration(hostBuilderContext.Configuration);
 //-:cnd:noEmit
-#if WINDOWS_UWP
+#if WINDOWS
 		serilogConfiguration.Enrich.With(new ThreadIdEnricher());
 #endif
 //+:cnd:noEmit
@@ -54,6 +52,8 @@ public static class LoggingConfiguration
 
 		loggingBuilder.AddSerilog(logger);
 		loggingBuilder.Services.AddSingleton<ILogFilesProvider>(logFilesProvider);
+
+		global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 	}
 
 	private static LoggerConfiguration AddConsoleLogging(LoggerConfiguration configuration)
@@ -81,7 +81,7 @@ public static class LoggingConfiguration
 #elif __IOS__
 			.Enrich.WithProperty("Platform", "iOS");
 #endif
-#elif WINDOWS_UWP
+#elif WINDOWS
 		return configuration
 			.WriteTo.File(logFilePath, outputTemplate: "{Timestamp:MM-dd HH:mm:ss.fffzzz} [{Platform}] Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}")
 			.Enrich.WithProperty("Platform", "UWP");
@@ -113,7 +113,7 @@ public static class LoggingConfiguration
 
 		public static string GetLogFilesDirectory()
 		{
-#if WINDOWS_UWP
+#if WINDOWS
 			return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
 			return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

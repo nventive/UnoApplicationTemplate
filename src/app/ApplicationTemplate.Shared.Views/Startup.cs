@@ -11,6 +11,7 @@ using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.UI.Dispatching;
 using Uno.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
@@ -23,7 +24,6 @@ public sealed class Startup : StartupBase
 		: base(new CoreStartup())
 	{
 	}
-
 
 	protected override void PreInitializeServices()
 	{
@@ -113,9 +113,9 @@ public sealed class Startup : StartupBase
 
 	private static async Task SetShellViewModel()
 	{
-		await App.Instance.Shell.Dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, SetDataContextUI);
+		App.Instance.Shell.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, SetDataContextUI);
 
-		void SetDataContextUI() // Runs on UI thread
+		void SetDataContextUI() // Runs on UI thread.
 		{
 			var shellViewModel = new ShellViewModel();
 #if false

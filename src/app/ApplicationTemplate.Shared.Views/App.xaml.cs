@@ -65,9 +65,9 @@ public sealed partial class App : Application
 			/*
 			ConfigureViewSize();
 			ConfigureStatusBar();
-
-			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
 			*/
+			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
+			
 
 			Startup.ShellActivity.Start();
 
