@@ -9,9 +9,12 @@
 				<XamlControlsResources xmlns="using:Microsoft.UI.Xaml.Controls" />
 
 				<!-- Load Toolkit resources -->
+				<!--
 				<ToolkitResources xmlns="using:Uno.Toolkit.UI" />
+				-->
 				
 				<!-- Uno material -->
+				<!--
 				<MaterialColors xmlns="using:Uno.Material"
 								OverrideSource="ms-appx:///Styles/Application/MaterialOverride.xaml" />
 				<MaterialResources xmlns="using:Uno.Material" />
@@ -48,6 +51,7 @@
 				<ResourceDictionary Source="Styles/Controls/TextBox.xaml" />
 				<ResourceDictionary Source="Styles/Controls/ToggleButton.xaml" />
 				<ResourceDictionary Source="Styles/Controls/ToggleSwitch.xaml" />
+				-->
 			</ResourceDictionary.MergedDictionaries>
 		</ResourceDictionary>
 	</Application.Resources>

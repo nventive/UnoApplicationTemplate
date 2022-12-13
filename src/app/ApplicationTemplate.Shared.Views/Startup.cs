@@ -24,8 +24,10 @@ public sealed class Startup : StartupBase
 	{
 	}
 
+
 	protected override void PreInitializeServices()
 	{
+#if false
 		LocalizationConfiguration.PreInitialize();
 
 //-:cnd:noEmit
@@ -36,10 +38,12 @@ public sealed class Startup : StartupBase
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
+#endif
 	}
 
 	protected override void InitializeViewServices(IHostBuilder hostBuilder)
 	{
+#if false
 		hostBuilder.ConfigureServices(s => s
 			.AddSingleton<StartupBase>(this)
 			.AddLocalization()
@@ -48,15 +52,19 @@ public sealed class Startup : StartupBase
 			.AddApi()
 			.AddPersistence()
 		);
+#endif
 	}
 
 	protected override void OnInitialized(IServiceProvider services)
 	{
+#if false
 		AsyncWebView.AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView.AsyncWebView>>();
 
 		HandleUnhandledExceptions(services);
+#endif
 	}
 
+#if false
 	private static void HandleUnhandledExceptions(IServiceProvider services)
 	{
 		void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
@@ -84,6 +92,7 @@ public sealed class Startup : StartupBase
 #endif
 //+:cnd:noEmit
 	}
+#endif
 
 	protected override async Task StartViewServices(IServiceProvider services, bool isFirstStart)
 	{
@@ -91,12 +100,14 @@ public sealed class Startup : StartupBase
 		{
 			// Start your view services here.
 			await SetShellViewModel();
+#if false
 			await AddSystemBackButtonSource(services);
 
 			HandleSystemBackVisibility(services);
 
 			// Set StatusBar color depending on current ViewModel
 			SetStatusBarColor(services);
+#endif
 		}
 	}
 
@@ -107,11 +118,14 @@ public sealed class Startup : StartupBase
 		void SetDataContextUI() // Runs on UI thread
 		{
 			var shellViewModel = new ShellViewModel();
+#if false
 			shellViewModel.AttachToView(App.Instance.Shell);
+#endif
 			App.Instance.Shell.DataContext = shellViewModel;
 		}
 	}
 
+#if false
 	/// <summary>
 	/// Sets the visibility of the system UI's back button based on the navigation controller.
 	/// </summary>
@@ -159,12 +173,14 @@ public sealed class Startup : StartupBase
 			backButtonManager.AddSource(source);
 		}
 	}
+#endif
 
 	protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
 	{
 		return serviceProvider.GetRequiredService<ILogger<Startup>>();
 	}
 
+#if false
 	private void SetStatusBarColor(IServiceProvider services)
 	{
 //-:cnd:noEmit
@@ -216,4 +232,5 @@ public sealed class Startup : StartupBase
 #endif
 //+:cnd:noEmit
 	}
+#endif
 }
