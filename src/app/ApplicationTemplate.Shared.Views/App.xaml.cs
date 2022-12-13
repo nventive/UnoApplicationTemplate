@@ -52,7 +52,6 @@ public sealed partial class App : Application
 	{
 #if WINDOWS
 		CurrentWindow = new Window();
-		CurrentWindow.Activate();
 #else
 		CurrentWindow = Microsoft.UI.Xaml.Window.Current;
 #endif
