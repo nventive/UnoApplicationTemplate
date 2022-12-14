@@ -12,7 +12,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
-using Uno.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
@@ -33,8 +32,7 @@ public sealed class Startup : StartupBase
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 //+:cnd:noEmit
-
-		FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+		Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit

@@ -36,7 +36,6 @@
 						<AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
 						<UseHighDPIResources>False</UseHighDPIResources>
 						<EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-						<AotAssemblies>False</AotAssemblies>
 						<EnableLLVM>False</EnableLLVM>
 						<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
 						<AndroidDexTool>d8</AndroidDexTool>

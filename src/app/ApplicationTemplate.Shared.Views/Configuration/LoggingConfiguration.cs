@@ -53,7 +53,9 @@ public static class LoggingConfiguration
 		loggingBuilder.AddSerilog(logger);
 		loggingBuilder.Services.AddSingleton<ILogFilesProvider>(logFilesProvider);
 
+#if __ANDROID__ || __IOS__
 		global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
+#endif
 	}
 
 	private static LoggerConfiguration AddConsoleLogging(LoggerConfiguration configuration)
