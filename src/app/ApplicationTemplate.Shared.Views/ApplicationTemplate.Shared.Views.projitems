@@ -17,6 +17,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\BlankPage.xaml.cs">
       <DependentUpon>BlankPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DispatcherQueueExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
@@ -116,7 +117,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Converters\" />
     <Folder Include="$(MSBuildThisFileDirectory)Framework\" />
     <Folder Include="$(MSBuildThisFileDirectory)Framework\Browser\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Helpers\" />
     <Folder Include="$(MSBuildThisFileDirectory)Styles\Application\" />
     <Folder Include="$(MSBuildThisFileDirectory)Styles\Controls\" />
   </ItemGroup>

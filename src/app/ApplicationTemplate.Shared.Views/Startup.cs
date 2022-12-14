@@ -113,14 +113,14 @@ public sealed class Startup : StartupBase
 
 	private static async Task SetShellViewModel()
 	{
-		App.Instance.Shell.DispatcherQueue.TryEnqueue(DispatcherQueuePriority.Normal, SetDataContextUI);
+		await App.Instance.Shell.DispatcherQueue.RunAsync(CoreDispatcherPriority.Normal, SetDataContextUI);
 
 		void SetDataContextUI() // Runs on UI thread.
 		{
 			var shellViewModel = new ShellViewModel();
-#if false
+
 			shellViewModel.AttachToView(App.Instance.Shell);
-#endif
+
 			App.Instance.Shell.DataContext = shellViewModel;
 		}
 	}
@@ -148,11 +148,11 @@ public sealed class Startup : StartupBase
 			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 			_ = dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, UpdateBackButtonUI);
 
-			void UpdateBackButtonUI() // Runs on UI thread
+			void UpdateBackButtonUI() // Runs on UI thread.
 			{
 				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = canNavigateBackOrCloseModal
-				   ? AppViewBackButtonVisibility.Visible
-				   : AppViewBackButtonVisibility.Collapsed;
+					? AppViewBackButtonVisibility.Visible
+					: AppViewBackButtonVisibility.Collapsed;
 			}
 		}
 	}
