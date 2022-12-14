@@ -8,7 +8,7 @@
 	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 	<Grid>
-		<TextBlock Text="Hello World"
+		<TextBlock Text="{Binding Counter}"
 				   HorizontalAlignment="Center"
 				   VerticalAlignment="Center" />
 	</Grid>

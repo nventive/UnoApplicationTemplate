@@ -6,40 +6,21 @@
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using Windows.UI.Core;
 
 namespace Microsoft.UI.Dispatching;
 
 internal static class DispatcherQueueExtensions
 {
 	/// <summary>
-	/// Convert <see cref="CoreDispatcherPriority"/> to <see cref="DispatcherQueuePriority"/>
-	/// </summary>
-	private static DispatcherQueuePriority ConvertToDispatcherQueuePriority(CoreDispatcherPriority priority)
-	{
-		switch (priority)
-		{
-			case CoreDispatcherPriority.Low:
-				return DispatcherQueuePriority.Low;
-			case CoreDispatcherPriority.Normal:
-				return DispatcherQueuePriority.Normal;
-			case CoreDispatcherPriority.High:
-				return DispatcherQueuePriority.High;
-			default:
-				return DispatcherQueuePriority.Normal;
-		}
-	}
-
-	/// <summary>
 	/// Invokes a given function on the target <see cref="DispatcherQueue"/> and returns a
 	/// <see cref="Task"/> that completes when the invocation of the function is completed.
 	/// </summary>
 	/// <param name="dispatcher">The target <see cref="DispatcherQueue"/> to invoke the code on.</param>
-	/// <param name="handler">The <see cref="DispatcherQueueHandler"/> to invoke.</param>
 	/// <param name="priority">The priority level for the function to invoke.</param>
+	/// <param name="handler">The <see cref="DispatcherQueueHandler"/> to invoke.</param>
 	/// <returns>A <see cref="Task"/> that completes when the invocation of <paramref name="handler"/> is over.</returns>
 	/// <remarks>If the current thread has access to <paramref name="dispatcher"/>, <paramref name="handler"/> will be invoked directly.</remarks>
-	internal static Task RunAsync(this DispatcherQueue dispatcher, CoreDispatcherPriority priority = CoreDispatcherPriority.Normal, DispatcherQueueHandler handler = default)
+	internal static Task RunAsync(this DispatcherQueue dispatcher, DispatcherQueuePriority priority = DispatcherQueuePriority.Normal, DispatcherQueueHandler handler = default)
 	{
 		// Run the function directly when we have thread access.
 		// Also reuse Task.CompletedTask in case of success,
@@ -58,7 +39,7 @@ internal static class DispatcherQueueExtensions
 			}
 		}
 
-		return TryEnqueueAsync(dispatcher, handler, ConvertToDispatcherQueuePriority(priority));
+		return TryEnqueueAsync(dispatcher, handler, priority);
 	}
 
 	/// <summary>
@@ -66,13 +47,13 @@ internal static class DispatcherQueueExtensions
 	/// <see cref="Task"/> that completes when the invocation of the function is completed.
 	/// </summary>
 	/// <param name="dispatcher">The target <see cref="DispatcherQueue"/> to invoke the code on.</param>
-	/// <param name="asyncAction">The <see cref="DispatcherQueueHandler"/> to invoke.</param>
 	/// <param name="priority">The priority level for the function to invoke.</param>
+	/// <param name="asyncAction">The <see cref="DispatcherQueueHandler"/> to invoke.</param>
 	/// <returns>A <see cref="Task"/> that completes when the invocation of <paramref name="asyncAction"/> is over.</returns>
 	/// <remarks>If the current thread has access to <paramref name="dispatcher"/>, <paramref name="asyncAction"/> will be invoked directly.</remarks>
-	internal static Task RunTaskAsync(this DispatcherQueue dispatcher, CoreDispatcherPriority priority, Func<Task> asyncAction)
+	internal static Task RunTaskAsync(this DispatcherQueue dispatcher, DispatcherQueuePriority priority, Func<Task> asyncAction)
 	{
-		return EnqueueAsync(dispatcher, asyncAction, ConvertToDispatcherQueuePriority(priority));
+		return EnqueueAsync(dispatcher, asyncAction, priority);
 	}
 
 	/// <summary>
@@ -80,13 +61,13 @@ internal static class DispatcherQueueExtensions
 	/// <see cref="Task"/> that completes when the invocation of the function is completed.
 	/// </summary>
 	/// <param name="dispatcher">The target <see cref="DispatcherQueue"/> to invoke the code on.</param>
-	/// <param name="asyncAction">The <see cref="DispatcherQueueHandler"/> to invoke.</param>
 	/// <param name="priority">The priority level for the function to invoke.</param>
+	/// <param name="asyncAction">The <see cref="DispatcherQueueHandler"/> to invoke.</param>
 	/// <returns>A <see cref="Task"/> that completes when the invocation of <paramref name="asyncAction"/> is over.</returns>
 	/// <remarks>If the current thread has access to <paramref name="dispatcher"/>, <paramref name="asyncAction"/> will be invoked directly.</remarks>
-	internal static Task<T> RunTaskAsync<T>(this DispatcherQueue dispatcher, CoreDispatcherPriority priority, Func<Task<T>> asyncAction)
+	internal static Task<T> RunTaskAsync<T>(this DispatcherQueue dispatcher, DispatcherQueuePriority priority, Func<Task<T>> asyncAction)
 	{
-		return EnqueueAsync(dispatcher, asyncAction, ConvertToDispatcherQueuePriority(priority));
+		return EnqueueAsync(dispatcher, asyncAction, priority);
 	}
 
 	internal static Task TryEnqueueAsync(DispatcherQueue dispatcher, DispatcherQueueHandler handler, DispatcherQueuePriority priority)

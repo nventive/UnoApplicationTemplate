@@ -47,8 +47,8 @@ public sealed class Startup : StartupBase
 			.AddLocalization()
 			*/
 			.AddNavigation()
-			/*
 			.AddViewServices()
+			/*
 			.AddApi()
 			.AddPersistence()
 			*/
@@ -113,7 +113,7 @@ public sealed class Startup : StartupBase
 
 	private static async Task SetShellViewModel()
 	{
-		await App.Instance.Shell.DispatcherQueue.RunAsync(CoreDispatcherPriority.Normal, SetDataContextUI);
+		await App.Instance.Shell.DispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, SetDataContextUI);
 
 		void SetDataContextUI() // Runs on UI thread.
 		{

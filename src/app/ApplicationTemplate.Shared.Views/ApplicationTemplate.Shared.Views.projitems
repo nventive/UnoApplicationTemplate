@@ -14,6 +14,7 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LoggingConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationConfiguration.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\ViewServicesConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Content\BlankPage.xaml.cs">
       <DependentUpon>BlankPage.xaml</DependentUpon>
     </Compile>

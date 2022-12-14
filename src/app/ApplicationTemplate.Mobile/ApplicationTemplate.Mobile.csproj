@@ -92,28 +92,23 @@
 		</When>
 		<When Condition="'$(TargetFramework)'=='net6.0-ios'">
 			<PropertyGroup>
-				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
-				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
-			</PropertyGroup>
-			<PropertyGroup Condition="'$(Platform)'=='iPhoneSimulator'">
+				<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+				<MtouchExtraArgs>$(MtouchExtraArgs) --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName)</MtouchExtraArgs>
 				<!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
+				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
+				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
 					<PropertyGroup>
-						<MtouchExtraArgs>--optimize=-remove-dynamic-registrar --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+						<CodesignEntitlements>./iOS/Entitlements.plist</CodesignEntitlements>
+						<MtouchDebug>True</MtouchDebug>
+						<MtouchExtraArgs>$(MtouchExtraArgs) --optimize=-remove-dynamic-registrar --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc</MtouchExtraArgs>
+						<Optimize>False</Optimize>
 					</PropertyGroup>
 					<PropertyGroup Condition="'$(Platform)'=='iPhone'">
 						<CodesignKey>iPhone Developer</CodesignKey>
-						<CodesignEntitlements>./iOS/Entitlements.plist</CodesignEntitlements>
-						<MtouchDebug>True</MtouchDebug>
-						<Optimize>False</Optimize>
-					</PropertyGroup>
-					<PropertyGroup Condition="'$(Platform)'=='iPhoneSimulator'">
-						<CodesignEntitlements>./iOS/Entitlements.plist</CodesignEntitlements>
-						<MtouchDebug>True</MtouchDebug>
-						<Optimize>False</Optimize>
 					</PropertyGroup>
 				</When>
 				<When Condition="'$(Configuration)'=='Release'">
@@ -145,7 +140,6 @@
 								<MtouchUseLlvm>True</MtouchUseLlvm>
 								<MtouchUseThumb>True</MtouchUseThumb>
 								<MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
-								<MtouchExtraArgs>--xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
 								<Optimize>True</Optimize>
 							</PropertyGroup>
 						</Otherwise>
