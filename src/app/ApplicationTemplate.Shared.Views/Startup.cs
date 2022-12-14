@@ -28,6 +28,7 @@ public sealed class Startup : StartupBase
 	{
 #if false
 		LocalizationConfiguration.PreInitialize();
+#endif
 
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
@@ -36,21 +37,22 @@ public sealed class Startup : StartupBase
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
-#endif
 	}
 
 	protected override void InitializeViewServices(IHostBuilder hostBuilder)
 	{
-#if false
 		hostBuilder.ConfigureServices(s => s
 			.AddSingleton<StartupBase>(this)
+			/*
 			.AddLocalization()
+			*/
 			.AddNavigation()
+			/*
 			.AddViewServices()
 			.AddApi()
 			.AddPersistence()
+			*/
 		);
-#endif
 	}
 
 	protected override void OnInitialized(IServiceProvider services)
@@ -68,7 +70,7 @@ public sealed class Startup : StartupBase
 		void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
 
 //-:cnd:noEmit
-#if WINDOWS_UWP || __ANDROID__ || __IOS__
+#if WINDOWS || __ANDROID__ || __IOS__
 //+:cnd:noEmit
 		Windows.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
 		{

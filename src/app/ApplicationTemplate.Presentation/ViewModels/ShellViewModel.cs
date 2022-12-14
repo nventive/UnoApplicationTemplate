@@ -1,5 +1,4 @@
-﻿using System;
-using Chinook.DynamicMvvm;
+﻿using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Presentation;
 

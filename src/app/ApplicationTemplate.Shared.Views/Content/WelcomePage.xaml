@@ -1,0 +1,30 @@
+﻿<Page x:Class="ApplicationTemplate.Views.Content.WelcomePage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<Grid Background="{StaticResource AlternateBackgroundBrush}">
+
+		<!-- Background Image -->
+		<Image Source="{StaticResource BackgroundMustachesImage}"
+			   Stretch="UniformToFill" />
+
+		<StackPanel HorizontalAlignment="Center"
+					VerticalAlignment="Center">
+
+			<!-- Image -->
+			<Image Source="{StaticResource LogoImage}"
+					Width="280"
+					HorizontalAlignment="Center" />
+
+			<!-- Message -->
+			<TextBlock Text="&quot;Welcome to the Assumption Club.&#x0A;I think we all know why we are here.&quot;"
+						x:Uid="Home_Text"
+						Style="{StaticResource Subtitle1}"
+						Foreground="{StaticResource AlternateOnBackgroundBrush}"
+						FontStyle="Italic"
+						TextAlignment="Center"
+						MaxWidth="344"
+						Margin="40,32,40,0" />
+		</StackPanel>
+	</Grid>
+</Page>
