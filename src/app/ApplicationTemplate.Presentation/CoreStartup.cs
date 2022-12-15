@@ -81,11 +81,13 @@ public sealed class CoreStartup : CoreStartupBase
 
 		var currentSettings = await applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
 
-		/*
-		if (currentSettings.IsOnboardingCompleted)
+		// TODO: Remove -> || true
+		if (currentSettings.IsOnboardingCompleted || true)
 		{
 			var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);
-			if (isAuthenticated)
+
+			// TODO: Remove -> && false
+			if (isAuthenticated && false)
 			{
 				await sectionsNavigator.SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 			}
@@ -98,9 +100,6 @@ public sealed class CoreStartup : CoreStartupBase
 		{
 			await sectionsNavigator.Navigate(ct, () => new OnboardingPageViewModel());
 		}
-		*/
-
-		await sectionsNavigator.Navigate(ct, () => new BlankPageViewModel());
 
 		services.GetRequiredService<IExtendedSplashscreenController>().Dismiss();
 	}

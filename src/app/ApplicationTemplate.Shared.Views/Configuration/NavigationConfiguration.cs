@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using ApplicationTemplate.Presentation;
 using ApplicationTemplate.Views.Content;
 using Chinook.SectionsNavigation;
-using Chinook.StackNavigation;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Views;
 
@@ -35,7 +32,9 @@ public static class NavigationConfiguration
 		{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
 		{ typeof(CreateAccountPageViewModel), typeof(CreateAccountPage) },
 		{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
+		*/
 		{ typeof(LoginPageViewModel), typeof(LoginPage) },
+		/*
 		{ typeof(OnboardingPageViewModel), typeof(OnboardingPage) },
 		{ typeof(SettingsPageViewModel), typeof(SettingsPage) },
 		{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
@@ -47,7 +46,6 @@ public static class NavigationConfiguration
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
 		*/
-		{ typeof(BlankPageViewModel), typeof(BlankPage) }
 	};
 
 	private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)

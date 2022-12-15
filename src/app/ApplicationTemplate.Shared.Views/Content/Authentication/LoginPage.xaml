@@ -4,17 +4,16 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="d ios android">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<!-- xmlns:ue="using:Nventive.View.Extensions" -->
 
+	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup>
-
 				<VisualState x:Name="BiggerFont">
 
 					<!-- This represents bigger phones than iPhone 5, SE -->
@@ -62,39 +61,43 @@
 					<local:DataValidationView Model="{Binding Form}"
 											  PropertyName="Email"
 											  Margin="0,28,0,0">
+						<!--
+						ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+						ue:ControlExtensions.LostFocusCommandParameter="Email"
+						ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}"
+						-->
 						<TextBox x:Name="EmailField"
 								 PlaceholderText="Email"
 								 x:Uid="Login_Email"
 								 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
-								 ue:ControlExtensions.LostFocusCommandParameter="Email"
 								 InputScope="EmailSmtpAddress"
 								 ios:IsSpellCheckEnabled="False"
 								 ios:ReturnKeyType="Next"
-								 android:ImeOptions="Next"
-								 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}" />
+								 android:ImeOptions="Next" />
 					</local:DataValidationView>
 
 					<!-- Password -->
 					<local:DataValidationView Model="{Binding Form}"
 											  PropertyName="Password"
 											  Margin="0,8,0,0">
+						<!--
+						ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+						ue:ControlExtensions.LostFocusCommandParameter="Password"
+						ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True"
+						-->
 						<PasswordBox x:Name="PasswordField"
 									 x:Uid="Login_Password"
 									 PlaceholderText="Password"
 									 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                                     ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
-                                     ue:ControlExtensions.LostFocusCommandParameter="Password"
 									 ios:ReturnKeyType="Next"
-									 android:ImeOptions="Next"
-									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True" />
+									 android:ImeOptions="Next" />
 					</local:DataValidationView>
 
 					<!-- Forgot Password Button -->
 					<HyperlinkButton Content="Forgot password ?"
 									 x:Uid="Login_ForgotPassword"
 									 Command="{Binding NavigateToForgotPasswordPage}"
-									 Foreground="{StaticResource MaterialOnBackgroundBrush}"                                                                                                                                                                                                                                                              
+									 Foreground="{StaticResource MaterialOnBackgroundBrush}"
 									 Margin="0,4,0,0" />
 
 					<!-- Login Button -->

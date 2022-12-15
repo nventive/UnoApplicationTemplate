@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:u="using:Nventive.View.Controls">
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!-- xmlns:u="using:Nventive.View.Controls" -->
 
 	<!-- This style is used instead of MaterialTextButtonStyle to show the icon to the right of the text -->
 	<Style x:Key="MaterialTextWithRightArrowButtonStyle"
@@ -81,7 +82,9 @@
 										  AutomationProperties.AccessibilityView="Raw" />
 						<Grid Grid.Column="1"
 							  Margin="16,0,0,0">
+							<!--
 							<u:PathControl Style="{StaticResource RightArrowPathControlStyle}" />
+							-->
 						</Grid>
 					</Grid>
 				</ControlTemplate>
@@ -166,10 +169,12 @@
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw" />
 						
+						<!--
 						<u:PathControl Style="{StaticResource RightArrowPathControlStyle}"
 									   Foreground="{StaticResource AlternateOnSurfaceBrush}"
 									   Margin="0,0,16,0"
 									   Grid.Column="1" />
+						-->
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>

@@ -26,9 +26,7 @@ public sealed class Startup : StartupBase
 
 	protected override void PreInitializeServices()
 	{
-#if false
 		LocalizationConfiguration.PreInitialize();
-#endif
 
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
