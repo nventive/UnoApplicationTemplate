@@ -11,7 +11,7 @@ using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Uno.UI;
+using Microsoft.UI.Dispatching;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 
@@ -24,35 +24,35 @@ public sealed class Startup : StartupBase
 	{
 	}
 
-
 	protected override void PreInitializeServices()
 	{
 #if false
 		LocalizationConfiguration.PreInitialize();
+#endif
 
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 //+:cnd:noEmit
-
-		FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+		Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
-#endif
 	}
 
 	protected override void InitializeViewServices(IHostBuilder hostBuilder)
 	{
-#if false
 		hostBuilder.ConfigureServices(s => s
 			.AddSingleton<StartupBase>(this)
+			/*
 			.AddLocalization()
+			*/
 			.AddNavigation()
 			.AddViewServices()
+			/*
 			.AddApi()
 			.AddPersistence()
+			*/
 		);
-#endif
 	}
 
 	protected override void OnInitialized(IServiceProvider services)
@@ -70,7 +70,7 @@ public sealed class Startup : StartupBase
 		void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
 
 //-:cnd:noEmit
-#if WINDOWS_UWP || __ANDROID__ || __IOS__
+#if WINDOWS || __ANDROID__ || __IOS__
 //+:cnd:noEmit
 		Windows.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
 		{
@@ -113,14 +113,14 @@ public sealed class Startup : StartupBase
 
 	private static async Task SetShellViewModel()
 	{
-		await App.Instance.Shell.Dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, SetDataContextUI);
+		await App.Instance.Shell.DispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, SetDataContextUI);
 
-		void SetDataContextUI() // Runs on UI thread
+		void SetDataContextUI() // Runs on UI thread.
 		{
 			var shellViewModel = new ShellViewModel();
-#if false
+
 			shellViewModel.AttachToView(App.Instance.Shell);
-#endif
+
 			App.Instance.Shell.DataContext = shellViewModel;
 		}
 	}
@@ -148,11 +148,11 @@ public sealed class Startup : StartupBase
 			var dispatcher = services.GetRequiredService<CoreDispatcher>();
 			_ = dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, UpdateBackButtonUI);
 
-			void UpdateBackButtonUI() // Runs on UI thread
+			void UpdateBackButtonUI() // Runs on UI thread.
 			{
 				SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = canNavigateBackOrCloseModal
-				   ? AppViewBackButtonVisibility.Visible
-				   : AppViewBackButtonVisibility.Collapsed;
+					? AppViewBackButtonVisibility.Visible
+					: AppViewBackButtonVisibility.Collapsed;
 			}
 		}
 	}

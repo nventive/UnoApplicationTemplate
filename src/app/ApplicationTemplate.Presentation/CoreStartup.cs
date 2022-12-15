@@ -81,6 +81,7 @@ public sealed class CoreStartup : CoreStartupBase
 
 		var currentSettings = await applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
 
+		/*
 		if (currentSettings.IsOnboardingCompleted)
 		{
 			var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);
@@ -97,6 +98,9 @@ public sealed class CoreStartup : CoreStartupBase
 		{
 			await sectionsNavigator.Navigate(ct, () => new OnboardingPageViewModel());
 		}
+		*/
+
+		await sectionsNavigator.Navigate(ct, () => new BlankPageViewModel());
 
 		services.GetRequiredService<IExtendedSplashscreenController>().Dismiss();
 	}

@@ -29,9 +29,7 @@ public sealed partial class App : Application
 
 	public Shell Shell { get; private set; }
 
-#if false
 	public MultiFrame NavigationMultiFrame => Shell?.NavigationMultiFrame;
-#endif
 
 	public Window CurrentWindow { get; private set; }
 
@@ -65,9 +63,9 @@ public sealed partial class App : Application
 			/*
 			ConfigureViewSize();
 			ConfigureStatusBar();
-
-			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
 			*/
+			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
+			
 
 			Startup.ShellActivity.Start();
 

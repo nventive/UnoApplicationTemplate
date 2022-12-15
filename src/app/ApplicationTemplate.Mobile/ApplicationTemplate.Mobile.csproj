@@ -11,11 +11,15 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">26.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
+		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Uno.WinUI" Version="4.6.19" />
 		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.6.19" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.6.19" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
 		<PackageReference Include="Uno.WinUI.Lottie" Version="4.6.19" />
+		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
@@ -34,7 +38,6 @@
 						<AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
 						<UseHighDPIResources>False</UseHighDPIResources>
 						<EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-						<AotAssemblies>False</AotAssemblies>
 						<EnableLLVM>False</EnableLLVM>
 						<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
 						<AndroidDexTool>d8</AndroidDexTool>
@@ -89,28 +92,23 @@
 		</When>
 		<When Condition="'$(TargetFramework)'=='net6.0-ios'">
 			<PropertyGroup>
-				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
-				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
-			</PropertyGroup>
-			<PropertyGroup Condition="'$(Platform)'=='iPhoneSimulator'">
+				<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+				<MtouchExtraArgs>$(MtouchExtraArgs) --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName)</MtouchExtraArgs>
 				<!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
+				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
+				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
 					<PropertyGroup>
-						<MtouchExtraArgs>--optimize=-remove-dynamic-registrar --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+						<CodesignEntitlements>./iOS/Entitlements.plist</CodesignEntitlements>
+						<MtouchDebug>True</MtouchDebug>
+						<MtouchExtraArgs>$(MtouchExtraArgs) --optimize=-remove-dynamic-registrar --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc</MtouchExtraArgs>
+						<Optimize>False</Optimize>
 					</PropertyGroup>
 					<PropertyGroup Condition="'$(Platform)'=='iPhone'">
 						<CodesignKey>iPhone Developer</CodesignKey>
-						<CodesignEntitlements>./iOS/Entitlements.plist</CodesignEntitlements>
-						<MtouchDebug>True</MtouchDebug>
-						<Optimize>False</Optimize>
-					</PropertyGroup>
-					<PropertyGroup Condition="'$(Platform)'=='iPhoneSimulator'">
-						<CodesignEntitlements>./iOS/Entitlements.plist</CodesignEntitlements>
-						<MtouchDebug>True</MtouchDebug>
-						<Optimize>False</Optimize>
 					</PropertyGroup>
 				</When>
 				<When Condition="'$(Configuration)'=='Release'">
@@ -142,7 +140,6 @@
 								<MtouchUseLlvm>True</MtouchUseLlvm>
 								<MtouchUseThumb>True</MtouchUseThumb>
 								<MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
-								<MtouchExtraArgs>--xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
 								<Optimize>True</Optimize>
 							</PropertyGroup>
 						</Otherwise>

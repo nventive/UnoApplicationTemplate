@@ -30,7 +30,7 @@ public sealed partial class Shell : UserControl
 
 #if false
 	public IExtendedSplashScreen ExtendedSplashScreen => this.AppExtendedSplashScreen;
+#endif
 
 	public MultiFrame NavigationMultiFrame => this.RootNavigationMultiFrame;
-#endif
 }

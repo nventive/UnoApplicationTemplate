@@ -19,18 +19,23 @@ public static class ViewServicesConfiguration
 	{
 		return services
 			.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
+			/*
 			.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
 			.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
 				s.GetRequiredService<CoreDispatcher>(),
 				CoreDispatcherPriority.Normal
 			))
-			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
+			*/
+			.AddSingleton<IDispatcherFactory, DispatcherFactory>();
+			/*
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>()
 			.AddMessageDialog();
+			*/
 	}
 
+#if false
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
 	{
 		return services.AddSingleton<IMessageDialogService>(s =>
@@ -52,4 +57,5 @@ public static class ViewServicesConfiguration
 //+:cnd:noEmit
 		);
 	}
+#endif
 }
