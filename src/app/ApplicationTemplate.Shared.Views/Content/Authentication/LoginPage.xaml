@@ -5,11 +5,10 @@
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="d ios android">
-
-	<!-- xmlns:ue="using:Nventive.View.Extensions" -->
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
 		<VisualStateManager.VisualStateGroups>
@@ -61,15 +60,14 @@
 					<local:DataValidationView Model="{Binding Form}"
 											  PropertyName="Email"
 											  Margin="0,28,0,0">
-						<!--
-						ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
-						ue:ControlExtensions.LostFocusCommandParameter="Email"
-						ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}"
-						-->
+
 						<TextBox x:Name="EmailField"
 								 PlaceholderText="Email"
 								 x:Uid="Login_Email"
 								 Text="{Binding Form.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+								 ue:ControlExtensions.LostFocusCommandParameter="Email"
+								 ue:TextBoxBehavior.NextControl="{Binding ElementName=PasswordField}"
 								 InputScope="EmailSmtpAddress"
 								 ios:IsSpellCheckEnabled="False"
 								 ios:ReturnKeyType="Next"
@@ -80,15 +78,14 @@
 					<local:DataValidationView Model="{Binding Form}"
 											  PropertyName="Password"
 											  Margin="0,8,0,0">
-						<!--
-						ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
-						ue:ControlExtensions.LostFocusCommandParameter="Password"
-						ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True"
-						-->
+
 						<PasswordBox x:Name="PasswordField"
 									 x:Uid="Login_Password"
 									 PlaceholderText="Password"
 									 Password="{Binding Form.Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+									 ue:ControlExtensions.LostFocusCommand="{Binding Form.ValidateProperty}"
+									 ue:ControlExtensions.LostFocusCommandParameter="Password"
+									 ue:PasswordBoxBehavior.DismissKeyboardOnEnter="True"
 									 ios:ReturnKeyType="Next"
 									 android:ImeOptions="Next" />
 					</local:DataValidationView>
