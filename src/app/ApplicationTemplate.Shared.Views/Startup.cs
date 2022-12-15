@@ -41,9 +41,7 @@ public sealed class Startup : StartupBase
 	{
 		hostBuilder.ConfigureServices(s => s
 			.AddSingleton<StartupBase>(this)
-			/*
 			.AddLocalization()
-			*/
 			.AddNavigation()
 			.AddViewServices()
 			/*
