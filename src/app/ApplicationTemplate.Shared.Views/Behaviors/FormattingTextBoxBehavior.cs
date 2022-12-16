@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Reactive.Concurrency;
-using System.Reactive.Disposables;
 using System.Text;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Uno.Extensions;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Views.Behaviors;
 
@@ -25,7 +22,7 @@ namespace ApplicationTemplate.Views.Behaviors;
 /// - 0000 0000 0000 0000  = credit card
 /// - A0A 0A0 = code postal
 /// </summary>
-public partial class FormattingTextBoxBehavior
+public sealed partial class FormattingTextBoxBehavior
 {
 	public const char AnyCharacter = '#';
 	public const char CapitalLetter = 'A';

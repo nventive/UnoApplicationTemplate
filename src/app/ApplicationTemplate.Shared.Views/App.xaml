@@ -51,8 +51,8 @@
 				<ResourceDictionary Source="Styles/Controls/ListViewItem.xaml" />
 				-->
 				<ResourceDictionary Source="Styles/Controls/PasswordBox.xaml" />
-				<!--
 				<ResourceDictionary Source="Styles/Controls/PathControl.xaml" />
+				<!--
 				<ResourceDictionary Source="Styles/Controls/RadioButton.xaml" />
 				-->
 				<ResourceDictionary Source="Styles/Controls/TextBlock.xaml" />

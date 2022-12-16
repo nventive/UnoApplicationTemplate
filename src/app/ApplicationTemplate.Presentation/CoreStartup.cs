@@ -80,14 +80,11 @@ public sealed class CoreStartup : CoreStartupBase
 		await sectionsNavigator.SetActiveSection(ct, "Login");
 
 		var currentSettings = await applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
-
-		// TODO: Remove -> || true
-		if (currentSettings.IsOnboardingCompleted || true)
+		if (currentSettings.IsOnboardingCompleted)
 		{
 			var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);
 
-			// TODO: Remove -> && false
-			if (isAuthenticated && false)
+			if (isAuthenticated)
 			{
 				await sectionsNavigator.SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 			}

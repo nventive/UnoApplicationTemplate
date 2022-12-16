@@ -46,8 +46,8 @@ public sealed class Startup : StartupBase
 			.AddViewServices()
 			/*
 			.AddApi()
-			.AddPersistence()
 			*/
+			.AddPersistence()
 		);
 	}
 

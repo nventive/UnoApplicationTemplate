@@ -30,12 +30,12 @@ public static class NavigationConfiguration
 		{ typeof(PostsPageViewModel), typeof(PostsPage) },
 		{ typeof(EditPostPageViewModel), typeof(EditPostPage) },
 		{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
+		*/
 		{ typeof(CreateAccountPageViewModel), typeof(CreateAccountPage) },
 		{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
-		*/
 		{ typeof(LoginPageViewModel), typeof(LoginPage) },
-		/*
 		{ typeof(OnboardingPageViewModel), typeof(OnboardingPage) },
+		/*
 		{ typeof(SettingsPageViewModel), typeof(SettingsPage) },
 		{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
 		{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
@@ -43,9 +43,9 @@ public static class NavigationConfiguration
 		{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
 		{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
 		{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
+		*/
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
-		*/
 	};
 
 	private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)
