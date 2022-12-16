@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.ComponentModel;
 using System.Linq;
-using System.Text;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
 namespace ApplicationTemplate;
 
-public partial class DataValidationView : ContentControl
+public sealed partial class DataValidationView : ContentControl
 {
 	private bool _isDefaultState = true;
 
@@ -80,7 +78,7 @@ public partial class DataValidationView : ContentControl
 
 	private void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e)
 	{
-		_ = Dispatcher.RunAsync(Windows.UI.Core.CoreDispatcherPriority.Normal, ErrorsChangedUI);
+		_ = DispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, ErrorsChangedUI);
 
 		void ErrorsChangedUI()
 		{

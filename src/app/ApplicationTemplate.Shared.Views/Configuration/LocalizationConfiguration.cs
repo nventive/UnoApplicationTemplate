@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
@@ -62,7 +61,7 @@ public static class LocalizationConfiguration
 	private static string GetSettingFilePath()
 	{
 //-:cnd:noEmit
-#if WINDOWS_UWP
+#if WINDOWS
 //+:cnd:noEmit
 		var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
 //-:cnd:noEmit

@@ -12,12 +12,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Configuration\LocalizationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LoggingConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\NavigationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ViewServicesConfiguration.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Content\BlankPage.xaml.cs">
-      <DependentUpon>BlankPage.xaml</DependentUpon>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Authentication\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationState.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationStateType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DispatcherQueueExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
@@ -91,11 +95,59 @@
     <PRIResource Include="$(MSBuildThisFileDirectory)Strings\fr\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="$(MSBuildThisFileDirectory)Content\BlankPage.xaml">
+    <Page Include="$(MSBuildThisFileDirectory)Content\Authentication\LoginPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Shell.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Application\Brushes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Application\ColorPalette.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Application\Fonts.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Application\Icons.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Application\LayoutConstants.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Application\MaterialOverride.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\Button.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\DataValidationView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\HyperlinkButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\PasswordBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\TextBlock.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\TextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -108,17 +160,13 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Behaviors\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Content\Authentication\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\DadJokes\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Diagnostics\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Posts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Settings\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Welcome\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Controls\Validation\" />
     <Folder Include="$(MSBuildThisFileDirectory)Converters\" />
     <Folder Include="$(MSBuildThisFileDirectory)Framework\" />
     <Folder Include="$(MSBuildThisFileDirectory)Framework\Browser\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Styles\Application\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Styles\Controls\" />
   </ItemGroup>
 </Project>

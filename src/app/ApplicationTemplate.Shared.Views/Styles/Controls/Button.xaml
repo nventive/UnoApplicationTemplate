@@ -79,6 +79,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw" />
+
 						<Grid Grid.Column="1"
 							  Margin="16,0,0,0">
 							<u:PathControl Style="{StaticResource RightArrowPathControlStyle}" />
