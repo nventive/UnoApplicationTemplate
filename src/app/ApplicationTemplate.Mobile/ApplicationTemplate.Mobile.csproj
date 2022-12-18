@@ -11,9 +11,6 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">26.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 	<ItemGroup>
-	  <None Remove="Android\Resources\values\Colors.xml" />
-	</ItemGroup>
-	<ItemGroup>
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.4.0-dev.34" />
@@ -93,9 +90,32 @@
 				<PackageReference Include="Mono.AotProfiler.Android" Version="6.0.0" />
 			</ItemGroup>
 			<ItemGroup>
+				<AndroidAotProfile Include="custom.aprof" />
 				<AndroidEnvironment Include="Android/environment.conf" />
 				<LinkDescription Include="Android/LinkerExclusions.xml" />
-				<AndroidAotProfile Include="custom.aprof" />
+			</ItemGroup>
+			<ItemGroup>
+				<!-- Android resources. -->
+				<AndroidResource Include="Android/Resources/values/Colors.xml" />
+				<AndroidResource Include="Android/Resources/values-night/Colors.xml" />
+				<AndroidResource Include="Android/Resources/values/Strings.xml" />
+				<AndroidResource Include="Android/Resources/values/Styles.xml" />
+				<AndroidResource Include="Android/Resources/drawable/splash.xml" />
+				<AndroidResource Include="Android/Resources/mipmap-mdpi/ic_launcher.png" />
+				<AndroidResource Include="Android/Resources/mipmap-hdpi/ic_launcher.png" />
+				<AndroidResource Include="Android/Resources/mipmap-xhdpi/ic_launcher.png" />
+				<AndroidResource Include="Android/Resources/mipmap-xxhdpi/ic_launcher.png" />
+				<AndroidResource Include="Android/Resources/mipmap-xxxhdpi/ic_launcher.png" />
+				<AndroidResource Include="Android/Resources/mipmap-mdpi/ic_launcher_foreground.png" />
+				<AndroidResource Include="Android/Resources/mipmap-hdpi/ic_launcher_foreground.png" />
+				<AndroidResource Include="Android/Resources/mipmap-xxhdpi/ic_launcher_foreground.png" />
+				<AndroidResource Include="Android/Resources/mipmap-xhdpi/ic_launcher_foreground.png" />
+				<AndroidResource Include="Android/Resources/mipmap-xxxhdpi/ic_launcher_foreground.png" />
+				<AndroidResource Include="Android/Resources/drawable-hdpi/Logo.png" />
+				<AndroidResource Include="Android/Resources/drawable-mdpi/Logo.png" />
+				<AndroidResource Include="Android/Resources/drawable-xhdpi/Logo.png" />
+				<AndroidResource Include="Android/Resources/drawable-xxhdpi/Logo.png" />
+				<AndroidResource Include="Android/Resources/drawable-xxxhdpi/Logo.png" />
 			</ItemGroup>
 		</When>
 		<When Condition="'$(TargetFramework)'=='net6.0-ios'">
@@ -112,7 +132,7 @@
 					<PropertyGroup>
 						<CodesignEntitlements>./iOS/Entitlements.plist</CodesignEntitlements>
 						<MtouchDebug>True</MtouchDebug>
-						<MtouchExtraArgs>$(MtouchExtraArgs) --optimize=-remove-dynamic-registrar --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc</MtouchExtraArgs>
+						<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc</MtouchExtraArgs>
 						<Optimize>False</Optimize>
 					</PropertyGroup>
 					<PropertyGroup Condition="'$(Platform)'=='iPhone'">
@@ -158,7 +178,61 @@
 				<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" />
 			</ItemGroup>
 			<ItemGroup>
-				<LinkDescription Include="iOS\LinkerExclusions.xml" />
+				<LinkDescription Include="iOS/LinkerExclusions.xml" />
+			</ItemGroup>
+			<ItemGroup>
+				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon.png" />
+				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon%402x.png" />
+				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon%403x.png" />
+				<InterfaceDefinition Include="iOS/LaunchScreen.storyboard" />
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Contents.json">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-1024.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-20.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-20@2x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-20@3x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-29.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-29@2x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-29@3x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-40.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-40@2x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-40@3x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-60@2x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-60@3x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-76.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Icon-76@2x.png">
+					<Visible>false</Visible>
+				</ImageAsset>
+				<ImageAsset Include="iOS\Media.xcassets\LaunchImages.launchimage\Contents.json">
+					<Visible>false</Visible>
+				</ImageAsset>
 			</ItemGroup>
 		</When>
 	</Choose>
