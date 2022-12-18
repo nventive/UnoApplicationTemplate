@@ -9,14 +9,14 @@ using Android.Text;
 using Android.Widget;
 using ApplicationTemplate.Views.Helpers;
 using Java.Lang;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Uno.Extensions;
 using Uno.Logging;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Views.Behaviors;
 
-public partial class FormattingTextBoxBehavior
+public sealed partial class FormattingTextBoxBehavior
 {
 	static partial void OnTextFormatChangedPartial(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{

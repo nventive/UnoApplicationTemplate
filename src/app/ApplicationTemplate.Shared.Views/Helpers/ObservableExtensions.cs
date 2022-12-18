@@ -1,23 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
-using System.Text;
+using Microsoft.UI.Xaml;
 using Uno;
-//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-using Windows.UI.Xaml;
-//-:cnd:noEmit
-#elif __ANDROID__ || __IOS__
-//+:cnd:noEmit
-using Windows.UI.Xaml;
-using FrameworkElement = Windows.UI.Xaml.FrameworkElement;
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
 
 namespace ApplicationTemplate.Views.Helpers;
 
@@ -197,7 +184,7 @@ internal static class ObservableExtensions
 		}
 		else
 		{
-			var dispatcher = new MainDispatcherScheduler(element.Dispatcher);
+			var dispatcher = new MainDispatcherScheduler(element.DispatcherQueue);
 
 			if (immediateSubscribe)
 			{
