@@ -11,6 +11,9 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">26.0</SupportedOSPlatformVersion>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Android\Resources\values\Colors.xml" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.4.0-dev.34" />
