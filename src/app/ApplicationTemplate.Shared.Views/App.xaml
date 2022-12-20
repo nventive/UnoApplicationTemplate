@@ -37,8 +37,8 @@
 				<ResourceDictionary Source="Styles/Controls/DataLoaderView.xaml" />
 				-->
 				<ResourceDictionary Source="Styles/Controls/DataValidationView.xaml" />
-				<!--
 				<ResourceDictionary Source="Styles/Controls/ExtendedSplashScreen.xaml" />
+				<!--
 				<ResourceDictionary Source="Styles/Controls/FlipViewItem.xaml" />
 				<ResourceDictionary Source="Styles/Controls/Frame.xaml" />
 				<ResourceDictionary Source="Styles/Controls/GridViewHeaderItem.xaml" />

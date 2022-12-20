@@ -3,6 +3,7 @@ using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
+using Microsoft.UI.Dispatching;
 using Windows.UI.Core;
 using Xamarin.Essentials.Implementation;
 using Xamarin.Essentials.Interfaces;
@@ -19,18 +20,20 @@ public static class ViewServicesConfiguration
 	{
 		return services
 			.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
-			/*
 			.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
+			/*
 			.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
-				s.GetRequiredService<CoreDispatcher>(),
-				CoreDispatcherPriority.Normal
+				Shell.Instance.DispatcherQueue,
+				DispatcherQueuePriority.Normal
 			))
 			*/
-			.AddSingleton<IDispatcherFactory, DispatcherFactory>();
+			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
 			/*
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
-			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>()
+			*/
+			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue));
+			/*
 			.AddMessageDialog();
 			*/
 	}
