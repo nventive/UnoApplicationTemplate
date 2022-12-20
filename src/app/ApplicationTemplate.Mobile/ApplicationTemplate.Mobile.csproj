@@ -185,7 +185,10 @@
 				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon.png" />
 				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon%402x.png" />
 				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon%403x.png" />
+				<!--
+				Removing this fix release build.
 				<InterfaceDefinition Include="iOS/LaunchScreen.storyboard" />
+				-->
 				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Contents.json">
 					<Visible>false</Visible>
 				</ImageAsset>
