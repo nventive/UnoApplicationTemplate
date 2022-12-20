@@ -76,6 +76,7 @@
 								<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
 								<!-- LLVM currently doesn't work with AOT enabled and custom profile. -->
 								<!-- See https://github.com/dotnet/runtime/issues/74021 for more details. -->
+								<!-- See https://github.com/xamarin/xamarin-android/issues/7352 for more details. -->
 								<EnableLLVM>False</EnableLLVM>
 								<Optimize>True</Optimize>
 								<RunAOTCompilation>True</RunAOTCompilation>
