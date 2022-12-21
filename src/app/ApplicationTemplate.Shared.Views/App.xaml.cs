@@ -34,12 +34,14 @@ public sealed partial class App : Application
 
 	protected override void OnLaunched(LaunchActivatedEventArgs args)
 	{
+//-:cnd:noEmit
 #if WINDOWS
 		CurrentWindow = new Window();
 		CurrentWindow.Activate();
 #else
 		CurrentWindow = Microsoft.UI.Xaml.Window.Current;
 #endif
+//+:cnd:noEmit
 
 		Shell = CurrentWindow.Content as Shell;
 

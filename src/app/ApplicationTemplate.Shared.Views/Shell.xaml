@@ -29,7 +29,9 @@
 								  Visibility="{Binding IsDiagnosticsOverlayEnabled, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
 								  Grid.RowSpan="2" />
 		-->
+
 		<splash:ExtendedSplashScreen x:Name="AppExtendedSplashScreen"
+									 WindowsDataTemplate="{StaticResource WindowsExtendedSplashScreenDataTemplate}"
 									 ue:MultipleTapExtension.Command="{Binding DiagnosticsOverlay.NavigateToDiagnosticsPage}"
 									 ue:MultipleTapExtension.TapCount="3"
 									 Grid.RowSpan="2" />
