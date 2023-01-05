@@ -1,5 +1,4 @@
-﻿using System;
-using System.Reactive.Linq;
+﻿using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
@@ -9,14 +8,14 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
-using Xamarin.Essentials;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate.Presentation;
 
 public partial class SettingsPageViewModel : ViewModel
 {
+	/*
 	public string VersionNumber => this.Get(GetVersionNumber);
+	*/
 
 	public IDataLoader<UserProfile> UserProfile => this.GetDataLoader(GetUserProfile, db => db
 		.TriggerFromObservable(this.GetService<IAuthenticationService>().GetAndObserveIsAuthenticated().Skip(1))
@@ -53,6 +52,7 @@ public partial class SettingsPageViewModel : ViewModel
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new OnboardingPageViewModel(isFromSettingsPage: true));
 	});
 
+	/*
 	public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>
 	{
 		var url = this.GetService<IStringLocalizer>()["PrivacyPolicyUrl"];
@@ -66,14 +66,17 @@ public partial class SettingsPageViewModel : ViewModel
 
 		await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
 	});
+	*/
 
 	private async Task<UserProfile> GetUserProfile(CancellationToken ct)
 	{
 		return await this.GetService<IUserProfileService>().GetCurrent(ct);
 	}
 
+	/*
 	private string GetVersionNumber()
 	{
 		return this.GetService<IAppInfo>().VersionString;
 	}
+	*/
 }

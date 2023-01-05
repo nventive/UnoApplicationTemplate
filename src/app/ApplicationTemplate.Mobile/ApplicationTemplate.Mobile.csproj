@@ -11,6 +11,7 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.1.0" />
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.3.0-dev.51" />
@@ -87,7 +88,7 @@
 				</When>
 			</Choose>
 			<ItemGroup>
-				<PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
+				<PackageReference Include="Xamarin.Google.Android.Material" Version="1.6.0" />
 				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
 				<PackageReference Include="Mono.AotProfiler.Android" Version="6.0.0" />
 			</ItemGroup>

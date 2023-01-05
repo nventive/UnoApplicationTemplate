@@ -44,9 +44,7 @@ public sealed class Startup : StartupBase
 			.AddLocalization()
 			.AddNavigation()
 			.AddViewServices()
-			/*
 			.AddApi()
-			*/
 			.AddPersistence()
 		);
 	}

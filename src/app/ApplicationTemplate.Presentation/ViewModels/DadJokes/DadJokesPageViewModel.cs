@@ -3,14 +3,12 @@ using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate;
 using ApplicationTemplate.Business;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using DynamicData;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -24,7 +22,7 @@ public partial class DadJokesPageViewModel : ViewModel
 	public IDynamicCommand RefreshJokes => this.GetCommandFromDataLoaderRefresh(Jokes);
 
 	public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
-		// Dispose the previous ItemViewModels when Quotes produces new values
+		// Dispose the previous ItemViewModels when Quotes produces new values.
 		.DisposePreviousData()
 		.TriggerOnNetworkReconnection(this.GetService<IConnectivity>())
 		.TriggerFromObservable(this.GetService<IDadJokesService>().GetAndObservePostTypeFilter().Skip(1))

@@ -27,6 +27,7 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.1.0" />
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.3.0-dev.51" />

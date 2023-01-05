@@ -32,7 +32,8 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 			*/
-			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue));
+			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
+			.AddSingleton<IConnectivity, Connectivity>();
 			/*
 			.AddMessageDialog();
 			*/
@@ -43,7 +44,7 @@ public static class ViewServicesConfiguration
 	{
 		return services.AddSingleton<IMessageDialogService>(s =>
 //-:cnd:noEmit
-#if WINDOWS_UWP || __IOS__ || __ANDROID__
+#if WINDOWS || __IOS__ || __ANDROID__
 //+:cnd:noEmit
 			new MessageDialogService.MessageDialogService(
 				() => s.GetRequiredService<CoreDispatcher>(),
