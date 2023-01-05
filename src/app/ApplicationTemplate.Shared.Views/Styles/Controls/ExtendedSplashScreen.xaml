@@ -2,8 +2,21 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:splash="using:Nventive.ExtendedSplashScreen">
 
+	<DataTemplate x:Key="WindowsExtendedSplashScreenDataTemplate">
+		<Grid Background="{StaticResource MaterialOnBackgroundColor}"
+			  HorizontalAlignment="Stretch"
+			  VerticalAlignment="Stretch">
+			<Image Source="ms-appx:///Images/SplashScreen.png"
+				   Stretch="None"
+				   HorizontalAlignment="Center"
+				   VerticalAlignment="Center" />
+		</Grid>
+	</DataTemplate>
+
 	<Style x:Key="DefaultExtendedSplashScreenStyle"
 		   TargetType="splash:ExtendedSplashScreen">
+		<Setter Property="WindowsDataTemplate"
+				Value="{StaticResource WindowsExtendedSplashScreenDataTemplate}" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="splash:ExtendedSplashScreen">
@@ -32,7 +45,11 @@
 								</VisualState>
 							</VisualStateGroup>
 						</VisualStateManager.VisualStateGroups>
+
+						<!-- The content presenter is trying to get a splash screen but it doesn't exist yet for Windows. -->
+						<!-- See https://github.com/microsoft/microsoft-ui-xaml/issues/4055 for more details. -->
 						<ContentPresenter x:Name="SplashScreenPresenter" />
+
 						<ProgressRing x:Name="ProgressRing"
 									  IsActive="True"
 									  Height="20"

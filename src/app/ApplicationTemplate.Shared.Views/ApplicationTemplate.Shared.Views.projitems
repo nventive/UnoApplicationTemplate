@@ -42,6 +42,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationStateType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationView.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DispatcherQueueExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FrameworkElementExtension.cs" />
@@ -178,6 +179,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\ExtendedSplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\HyperlinkButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -210,7 +215,6 @@
     <Folder Include="$(MSBuildThisFileDirectory)Content\Diagnostics\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Posts\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Settings\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Framework\" />
     <Folder Include="$(MSBuildThisFileDirectory)Framework\Browser\" />
   </ItemGroup>
 </Project>
