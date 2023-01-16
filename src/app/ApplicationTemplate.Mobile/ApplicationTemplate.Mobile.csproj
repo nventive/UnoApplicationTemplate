@@ -101,8 +101,8 @@
 				<AndroidEnvironment Include="Android/environment.conf" />
 				<LinkDescription Include="Android/LinkerExclusions.xml" />
 			</ItemGroup>
+			<!-- Android resources. -->
 			<ItemGroup>
-				<!-- Android resources. -->
 				<AndroidResource Include="Android/Resources/values/Colors.xml" />
 				<AndroidResource Include="Android/Resources/values-night/Colors.xml" />
 				<AndroidResource Include="Android/Resources/values/Strings.xml" />
@@ -123,6 +123,15 @@
 				<AndroidResource Include="Android/Resources/drawable-xhdpi/Logo.png" />
 				<AndroidResource Include="Android/Resources/drawable-xxhdpi/Logo.png" />
 				<AndroidResource Include="Android/Resources/drawable-xxxhdpi/Logo.png" />
+			</ItemGroup>
+			<!-- Network security configuration (For Fiddler). -->
+			<ItemGroup Condition="'$(ApplicationEnvironment)'!='Production'">
+				<AndroidResource Include="Android/Resources/xml/network_security_config.xml" />
+			</ItemGroup>
+			<ItemGroup Condition="'$(ApplicationEnvironment)'=='Production'">
+				<AndroidResource Include="Android/Resources/xml/network_security_config_prod.xml">
+					<LogicalName>Android/xml/network_security_config.xml</LogicalName>
+				</AndroidResource>
 			</ItemGroup>
 		</When>
 		<When Condition="'$(TargetFramework)'=='net6.0-ios'">
