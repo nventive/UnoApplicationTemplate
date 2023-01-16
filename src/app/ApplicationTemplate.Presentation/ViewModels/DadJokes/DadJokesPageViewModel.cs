@@ -24,7 +24,7 @@ public partial class DadJokesPageViewModel : ViewModel
 	public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
 		// Dispose the previous ItemViewModels when Quotes produces new values.
 		.DisposePreviousData()
-		.TriggerOnNetworkReconnection(this.GetService<IConnectivity>())
+		.TriggerOnNetworkReconnection(this.GetService<IConnectivityProvider>())
 		.TriggerFromObservable(this.GetService<IDadJokesService>().GetAndObservePostTypeFilter().Skip(1))
 	);
 

@@ -1,9 +1,7 @@
 ﻿using System.Net.Http;
-using System.Threading;
 using System.Threading.Tasks;
 using MallardMessageHandlers;
 using Microsoft.Extensions.DependencyInjection;
-using Windows.Networking.Connectivity;
 
 namespace ApplicationTemplate.Views;
 
@@ -13,7 +11,11 @@ public static class ApiConfiguration
 	{
 		return services
 			.AddMainHandler()
-			.AddSingleton<INetworkAvailabilityChecker>(new NetworkAvailabilityChecker(GetIsNetworkAvailable));
+			.AddSingleton<INetworkAvailabilityChecker>(serviceProvider =>
+			{
+				var connectivityProvider = serviceProvider.GetRequiredService<IConnectivityProvider>();
+				return new NetworkAvailabilityChecker(_ => Task.FromResult(connectivityProvider.NetworkAccess is NetworkAccess.Internet));
+			});
 	}
 
 	private static IServiceCollection AddMainHandler(this IServiceCollection services)
@@ -35,10 +37,5 @@ public static class ApiConfiguration
 #endif
 //+:cnd:noEmit
 		);
-	}
-
-	private static Task<bool> GetIsNetworkAvailable(CancellationToken ct)
-	{
-		return Task.FromResult(NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess);
 	}
 }

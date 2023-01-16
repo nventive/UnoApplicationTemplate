@@ -31,7 +31,7 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 			*/
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
-			.AddSingleton<IConnectivity, Connectivity>();
+			.AddSingleton<IConnectivityProvider, ConnectivityProvider>();
 			/*
 			.AddMessageDialog();
 			*/

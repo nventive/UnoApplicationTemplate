@@ -12,9 +12,9 @@ namespace ApplicationTemplate;
 public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 {
 	private readonly IDataLoader _dataLoader;
-	private readonly IConnectivity _connectivity;
+	private readonly IConnectivityProvider _connectivity;
 
-	public NetworkReconnectionDataLoaderTrigger(IDataLoader dataLoader, IConnectivity connectivity)
+	public NetworkReconnectionDataLoaderTrigger(IDataLoader dataLoader, IConnectivityProvider connectivity)
 		: base("NetworkReconnection")
 	{
 		_dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
@@ -42,7 +42,7 @@ public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 
 public static class NetworkReconnectionDataLoaderExtensions
 {
-	public static TBuilder TriggerOnNetworkReconnection<TBuilder>(this TBuilder dataLoaderBuilder, IConnectivity connectivity)
+	public static TBuilder TriggerOnNetworkReconnection<TBuilder>(this TBuilder dataLoaderBuilder, IConnectivityProvider connectivity)
 		where TBuilder : IDataLoaderBuilder
 		=> (TBuilder)dataLoaderBuilder.WithTrigger(dataLoader => new NetworkReconnectionDataLoaderTrigger(dataLoader, connectivity));
 }

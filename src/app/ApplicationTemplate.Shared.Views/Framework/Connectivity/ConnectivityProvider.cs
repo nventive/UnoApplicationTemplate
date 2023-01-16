@@ -5,14 +5,30 @@ using Windows.Networking.Connectivity;
 
 namespace ApplicationTemplate;
 
-public sealed class Connectivity : IConnectivity, IDisposable
+public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 {
-	public Connectivity()
+	private bool _subscribed = false;
+
+	public event EventHandler<ConnectivityChangedEventArgs> ConnectivityChanged
 	{
-		NetworkInformation.NetworkStatusChanged += OnNetworkStatusChanged;
+		add
+		{
+			if (!_subscribed)
+			{
+				_subscribed = true;
+				NetworkInformation.NetworkStatusChanged += OnNetworkStatusChanged;
+			}
+			InnerConnectivityChanged += value;
+		}
+
+		remove
+		{
+			UnsubscribeLocalEvent();
+			InnerConnectivityChanged -= value;
+		}
 	}
 
-	public event EventHandler<ConnectivityChangedEventArgs> ConnectivityChanged;
+	private event EventHandler<ConnectivityChangedEventArgs> InnerConnectivityChanged;
 
 	public NetworkAccess NetworkAccess
 	{
@@ -38,12 +54,22 @@ public sealed class Connectivity : IConnectivity, IDisposable
 
 	public void Dispose()
 	{
-		NetworkInformation.NetworkStatusChanged -= OnNetworkStatusChanged;
+		UnsubscribeLocalEvent();
+		InnerConnectivityChanged = null;
 		GC.SuppressFinalize(this);
+	}
+
+	private void UnsubscribeLocalEvent()
+	{
+		if (_subscribed)
+		{
+			_subscribed = false;
+			NetworkInformation.NetworkStatusChanged -= OnNetworkStatusChanged;
+		}
 	}
 
 	private void OnNetworkStatusChanged(object sender)
 	{
-		ConnectivityChanged.Invoke(sender, new ConnectivityChangedEventArgs(NetworkAccess));
+		InnerConnectivityChanged.Invoke(this, new ConnectivityChangedEventArgs(NetworkAccess));
 	}
 }
