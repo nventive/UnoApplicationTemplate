@@ -23,13 +23,9 @@
 		<PackageReference Include="Nventive.Persistence.Reactive" Version="0.4.0-dev.34" />
 		<PackageReference Include="Nventive.Persistence" Version="0.4.0-dev.34" />
 		<PackageReference Include="System.Reactive" Version="5.0.0" />
-
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-	  </PackageReference>
+		<PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 </Project>

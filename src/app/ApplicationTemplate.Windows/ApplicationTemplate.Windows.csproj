@@ -39,6 +39,10 @@
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Uno.Material.WinUI" Version="2.2.0" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.2.0" />
 	</ItemGroup>

@@ -22,6 +22,10 @@
 		<PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
 		<PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
 		<PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+		<PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.4" />
 		<PackageReference Include="Chinook.DynamicMvvm" Version="1.1.2" />
 		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="1.1.2" />
@@ -39,13 +43,6 @@
 
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435">
-	    <PrivateAssets>all</PrivateAssets>
-	    <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-	  </PackageReference>
 	</ItemGroup>
 
 </Project>
