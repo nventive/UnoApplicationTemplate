@@ -1,7 +1,6 @@
 parameters:
   applicationEnvironment: '' # e.g. "Staging", "Production"
   deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
-  appCenterUWPSlug: ''
   appCenteriOSSlug: ''
   appCenterAndroidSlug: ''
   androidKeyStoreFile: ''
@@ -10,56 +9,6 @@ parameters:
   appCenterDistributionGroup: ''
 
 jobs:
-- deployment: AppCenter_UWP
-  pool: $(windowsPoolName)
-
-  variables:
-  - name: artifactName
-    value: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
-  - name: releaseNotesArtifactName
-    value: ReleaseNotes_${{ parameters.applicationEnvironment }}
-
-  environment: ${{ parameters.deploymentEnvironment }}
-
-  container: windows
-
-  strategy:
-    runOnce:
-      deploy:
-        steps:
-
-        - download: current
-          artifact: $(artifactName)
-
-        - download: current
-          artifact: $(releaseNotesArtifactName)
-
-        - task: AppCenterDistribute@3
-          displayName: Deploy UWP to AppCenter
-          inputs:
-            serverEndpoint: ${{ parameters.appCenterServiceConnectionName }}
-            appSlug: ${{ parameters.appCenterUWPSlug }}
-            appFile: $(Pipeline.Workspace)/$(artifactName)/*.msixbundle
-            releaseNotesOption: file
-            releaseNotesFile: "$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md"
-            isSilent: true
-
-        - task: DeleteFiles@1
-          displayName: "Remove downloaded artifacts (build)"
-          condition: always()
-          inputs:
-            SourceFolder: $(Pipeline.Workspace)/$(artifactName)
-            RemoveSourceFolder: true
-            Contents: '**'
-
-        - task: DeleteFiles@1
-          displayName: "Remove downloaded artifacts (release notes)"
-          condition: always()
-          inputs:
-            SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
-            RemoveSourceFolder: true
-            Contents: '**'
-
 - deployment: AppCenter_iOS
   pool:
     name: $(macOSPoolName)
