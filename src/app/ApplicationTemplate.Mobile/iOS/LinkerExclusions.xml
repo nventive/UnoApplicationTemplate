@@ -4,9 +4,6 @@
 		<type fullname="System.Diagnostics.Debug">
 			<method name="WriteLine" />
 		</type>
-		<type fullname="System.Console">
-			<method name="WriteLine" />
-		</type>
 	</assembly>
 
 	<assembly fullname="Serilog.Extensions.Hosting" />

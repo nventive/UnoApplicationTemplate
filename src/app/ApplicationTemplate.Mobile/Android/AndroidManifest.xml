@@ -3,7 +3,31 @@
 		  package="com.nventive.internal.applicationtemplate"
 		  android:versionCode="1"
 		  android:versionName="1.0">
-	<uses-sdk android:minSdkVersion="26" android:targetSdkVersion="31" />
+
+	<uses-sdk android:minSdkVersion="26"
+			  android:targetSdkVersion="31" />
+
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-	<application android:label="ApplicationTemplate" />
+
+	<application android:label="ApplicationTemplate"
+				 android:networkSecurityConfig="@xml/network_security_config">
+
+		<!-- This is to use Google Maps. -->
+		<!-- See https://stackoverflow.com/questions/50461881/java-lang-noclassdeffounderrorfailed-resolution-of-lorg-apache-http-protocolve for more details. -->
+		<uses-library android:name="org.apache.http.legacy"
+					  android:required="false" />
+
+		<!-- This is to properly support widescreen devices. -->
+		<!-- See https://android-developers.googleblog.com/2017/03/update-your-app-to-take-advantage-of.html for more details. -->
+		<meta-data android:name="android.max_aspect" android:value="2.1" />
+
+		<!-- This is required to retrieve the internal log file and send it by email. -->
+		<provider android:name="androidx.core.content.FileProvider"
+				  android:authorities="${applicationId}"
+				  android:exported="false"
+				  android:grantUriPermissions="true">
+			<meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+					   android:resource="@xml/files" />
+		</provider>
+	</application>
 </manifest>
