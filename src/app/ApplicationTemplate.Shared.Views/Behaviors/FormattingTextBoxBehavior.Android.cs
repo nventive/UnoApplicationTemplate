@@ -2,9 +2,7 @@
 #if __ANDROID__
 //+:cnd:noEmit
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using Android.Text;
 using Android.Widget;
 using ApplicationTemplate.Views.Helpers;
@@ -20,9 +18,9 @@ public sealed partial class FormattingTextBoxBehavior
 {
 	static partial void OnTextFormatChangedPartial(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{
-		// On Android we use the native SetFilters() method, which is much more performant than overwriting the Text property. 
+		// On Android we use the native SetFilters() method, which is much more performant than overwriting the Text property.
 
-		string textFormat = (string)e.NewValue;
+		var textFormat = (string)e.NewValue;
 		if (!textFormat.HasValue())
 		{
 			return;
@@ -36,7 +34,7 @@ public sealed partial class FormattingTextBoxBehavior
 		else
 		{
 			// TextBoxView hasn't been materialized yet, set filters when TextBox loads
-			void loaded(object sender, RoutedEventArgs eLoaded)
+			void Loaded(object sender, RoutedEventArgs eLoaded)
 			{
 				MaterializeAllTemplates(sender as TextBox);
 				var textBoxViewInner = (sender as TextBox).FindAllChildren<DependencyObject>().OfType<EditText>().FirstOrDefault();
@@ -45,9 +43,9 @@ public sealed partial class FormattingTextBoxBehavior
 					typeof(FormattingTextBoxBehavior).Log().Error($"Could not find inner {nameof(EditText)}, input filters will not be applied.");
 				}
 				textBoxViewInner?.SetFilters(GetFilters(textFormat, sender as TextBox));
-				(sender as TextBox).Loaded -= loaded;
+				(sender as TextBox).Loaded -= Loaded;
 			}
-			(d as TextBox).Loaded += loaded;
+			(d as TextBox).Loaded += Loaded;
 		}
 	}
 
@@ -61,19 +59,19 @@ public sealed partial class FormattingTextBoxBehavior
 		textBoxView?.SetFilters(GetFilters(textFormat, textBox));
 	}
 
-	private static Android.Text.IInputFilter[] GetFilters(string textFormat, TextBox targetTextBox)
+	private static IInputFilter[] GetFilters(string textFormat, TextBox targetTextBox)
 	{
 		if (!textFormat.HasValue())
 		{
-			return new Android.Text.IInputFilter[0];
+			return Array.Empty<IInputFilter>();
 		}
 
 		return new IInputFilter[]
 		{
 			new FormattingTextInputFilter(textFormat, targetTextBox),
-			// Special characters filtered out from input seem to still hang around in the software keyboard's text buffer. We add the
-			// length filter last, otherwise these filtered characters would count toward the length limit.
-			new Android.Text.InputFilterLengthFilter(textFormat.Length)
+			// Special characters filtered out from input seem to still hang around in the software keyboard's text buffer.
+			// We add the length filter last, otherwise these filtered characters would count toward the length limit.
+			new InputFilterLengthFilter(textFormat.Length),
 		};
 	}
 
@@ -108,7 +106,7 @@ public sealed partial class FormattingTextBoxBehavior
 		{
 			if (source.Length() == 0)
 			{
-				// No changes
+				// No changes.
 				return null;
 			}
 			var filtered = FormatInput(source.ToString(), _stringFormat, dstart, start);
