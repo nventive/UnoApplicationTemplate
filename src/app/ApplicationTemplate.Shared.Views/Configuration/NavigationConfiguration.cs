@@ -41,7 +41,9 @@ public static class NavigationConfiguration
 		{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
 		{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
 		{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
+		*/
 		{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
+		/*
 		{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
 		*/
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },

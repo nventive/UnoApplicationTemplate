@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -7,8 +6,6 @@ using System.Linq;
 using System.Text;
 using Chinook.DynamicMvvm;
 using Microsoft.Extensions.Logging;
-using Xamarin.Essentials;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -23,6 +20,7 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 	{
 		var summary = GetSummary();
 
+		/*
 		var message = new EmailMessage
 		{
 			Subject = $"Diagnostics - {GetType().Assembly.GetName().Name} ({_now})",
@@ -38,14 +36,17 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 		}
 
 		await RunOnDispatcher(ct, _ => this.GetService<IEmail>().ComposeAsync(message));
+		*/
 
 		this.GetService<ILogger<SummaryDiagnosticsViewModel>>().LogInformation("Environment summary sent.");
 	});
 
 	private string GetSummary()
 	{
+		/*
 		var appInfo = this.GetService<IAppInfo>();
 		var deviceInfo = this.GetService<IDeviceInfo>();
+		*/
 		var logFilesProvider = this.GetService<ILogFilesProvider>();
 		var loggingOptions = this.GetOptionsValue<LoggingOutputOptions>();
 
@@ -57,6 +58,7 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 
 		stringBuilder.AppendLine($"Date on device (UTC): {_utcNow}");
 
+		/*
 		stringBuilder.AppendLine($"Version string: {appInfo.VersionString}");
 		stringBuilder.AppendLine($"Version: {appInfo.Version}");
 
@@ -69,6 +71,7 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 		stringBuilder.AppendLine($"Device type: {deviceInfo.Idiom}");
 
 		stringBuilder.AppendLine($"Device name: {deviceInfo.Manufacturer} {deviceInfo.Model}");
+		*/
 
 		// UserAgent Not available in X.E but we could do it in app, here's the implementation
 		// stringBuilder.AppendLine($"User agent: {environmentService.UserAgent}");

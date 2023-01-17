@@ -11,6 +11,7 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.1.0" />
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.3.0-dev.51" />
@@ -26,6 +27,10 @@
 		<PackageReference Include="Uno.WinUI.Lottie" Version="4.6.19" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
@@ -87,7 +92,7 @@
 				</When>
 			</Choose>
 			<ItemGroup>
-				<PackageReference Include="Xamarin.Google.Android.Material" Version="1.4.0.4" />
+				<PackageReference Include="Xamarin.Google.Android.Material" Version="1.7.0.1" />
 				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
 				<PackageReference Include="Mono.AotProfiler.Android" Version="6.0.0" />
 			</ItemGroup>

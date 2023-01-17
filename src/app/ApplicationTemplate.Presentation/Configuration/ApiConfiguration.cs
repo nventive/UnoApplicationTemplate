@@ -147,7 +147,7 @@ public static class ApiConfiguration
 			.AddSingleton<IAuthenticationTokenProvider<AuthenticationData>>(s => s.GetRequiredService<IAuthenticationService>())
 			.AddTransient<AuthenticationTokenHandler<AuthenticationData>>();
 	}
-	
+
 	private static void AddDefaultHeaders(HttpClient client, IServiceProvider serviceProvider)
 	{
 		client.DefaultRequestHeaders.Add("Accept-Language", CultureInfo.CurrentCulture.Name);

@@ -33,9 +33,9 @@
 				<ResourceDictionary Source="Styles/Controls/CalendarView.xaml" />
 				<ResourceDictionary Source="Styles/Controls/CheckBox.xaml" />
 				<ResourceDictionary Source="Styles/Controls/ComboBox.xaml" />
+				-->
 				<ResourceDictionary Source="Styles/Controls/CommandBar.xaml" />
 				<ResourceDictionary Source="Styles/Controls/DataLoaderView.xaml" />
-				-->
 				<ResourceDictionary Source="Styles/Controls/DataValidationView.xaml" />
 				<ResourceDictionary Source="Styles/Controls/ExtendedSplashScreen.xaml" />
 				<!--

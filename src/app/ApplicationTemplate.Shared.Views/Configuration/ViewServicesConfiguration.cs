@@ -5,8 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.UI.Dispatching;
 using Windows.UI.Core;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate.Views;
 
@@ -32,7 +30,8 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 			*/
-			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue));
+			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
+			.AddSingleton<IConnectivityProvider, ConnectivityProvider>();
 			/*
 			.AddMessageDialog();
 			*/
@@ -43,7 +42,7 @@ public static class ViewServicesConfiguration
 	{
 		return services.AddSingleton<IMessageDialogService>(s =>
 //-:cnd:noEmit
-#if WINDOWS_UWP || __IOS__ || __ANDROID__
+#if WINDOWS || __IOS__ || __ANDROID__
 //+:cnd:noEmit
 			new MessageDialogService.MessageDialogService(
 				() => s.GetRequiredService<CoreDispatcher>(),
