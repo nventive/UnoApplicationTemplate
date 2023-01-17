@@ -28,8 +28,8 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
 			/*
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
-			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 			*/
+			.AddSingleton<IBrowserService, BrowserService>(/*s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher)*/)
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
 			.AddSingleton<IConnectivityProvider, ConnectivityProvider>();
 			/*

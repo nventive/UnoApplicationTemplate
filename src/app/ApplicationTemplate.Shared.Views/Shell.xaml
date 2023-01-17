@@ -19,12 +19,12 @@
 		<nav:MultiFrame x:Name="RootNavigationMultiFrame"
 						CommaSeparatedSectionsFrameNames="Login,Home,Posts,Settings" />
 
-		<!--
 		<local:Menu x:Name="Menu"
 					DataContext="{Binding Menu}"
 					VerticalAlignment="Bottom"
 					Grid.Row="1" />
 
+		<!--
 		<local:DiagnosticsOverlay DataContext="{Binding DiagnosticsOverlay}"
 								  Visibility="{Binding IsDiagnosticsOverlayEnabled, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
 								  Grid.RowSpan="2" />
