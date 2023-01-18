@@ -102,7 +102,8 @@ public class IntegrationTestBase : IAsyncLifetime
 				.AddSingleton<IScheduler>(s => TaskPoolScheduler.Default)
 				.AddSingleton<IDispatcherScheduler>(s => new DispatcherSchedulerAdapter(
 					s.GetRequiredService<IScheduler>()
-				));
+				))
+				.AddSingleton(s => new Mock<ILauncherService>().Object);
 		});
 	}
 

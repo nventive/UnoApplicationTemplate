@@ -1,13 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ApplicationTemplate.Presentation;
-using Chinook.SectionsNavigation;
 using Xunit;
 
 namespace ApplicationTemplate.Tests;
 
-public partial class NavigationShould : NavigationTestsBase
+public sealed partial class NavigationShould : NavigationTestsBase
 {
 	[Fact]
 	public async Task NavigateToDifferentMenuSections()
