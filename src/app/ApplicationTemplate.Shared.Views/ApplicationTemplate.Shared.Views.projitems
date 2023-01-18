@@ -56,8 +56,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FiltersConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\LauncherServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\LauncherService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Browser\DispatcherLauncherServiceDecorator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Connectivity\ConnectivityProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
