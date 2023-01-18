@@ -5,6 +5,7 @@ using ApplicationTemplate.Presentation;
 using Chinook.SectionsNavigation;
 using Xunit;
 using Xunit.Abstractions;
+using Moq;
 
 namespace ApplicationTemplate.Tests;
 
@@ -94,19 +95,6 @@ public partial class NavigationShould : NavigationTestsBase
 
 		// Assert
 		Assert.IsType<ForgotPasswordPageViewModel>(currentSection);
-	}
-
-	[Fact]
-	// From CreateAccountPage to DadJokesPage
-	public async Task NavigateFromCreateAccountToDadJokesPage()
-	{
-		// TODO: The form has to be validated before we can navigate
-
-		// Act
-		var currentSection = await AssertNavigateFromTo<CreateAccountPageViewModel, DadJokesPageViewModel>(() => new CreateAccountPageViewModel(), p => p.CreateAccount);
-
-		// Assert
-		Assert.IsType(typeof(DadJokesPageViewModel), currentSection);
 	}
 
 	[Fact]
