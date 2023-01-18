@@ -36,7 +36,6 @@ stages:
     parameters:
       applicationEnvironment: Staging
       deploymentEnvironment: AppCenter
-      appCenterUWPSlug: $(AppCenterUWPSlug_Canary)
       appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
       androidKeyStoreFile: $(InternalKeystore)

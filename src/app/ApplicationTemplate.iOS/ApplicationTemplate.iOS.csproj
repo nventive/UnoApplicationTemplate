@@ -134,14 +134,14 @@
     <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Uwp.Managed" Version="2.3.0" />
     <PackageReference Include="Uno.UI" Version="4.4.20" />
     <PackageReference Include="Uno.UI.RemoteControl" Version="4.4.20" />
-    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="1.1.0" />
-    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="1.1.0" />
+    <PackageReference Include="Chinook.DynamicMvvm.Uno" Version="1.1.2" />
+    <PackageReference Include="Chinook.SectionsNavigation.Uno" Version="1.1.2" />
     <PackageReference Include="Chinook.DataLoader.Uno" Version="1.1.0" />
-    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="1.1.1" />
+    <PackageReference Include="Chinook.BackButtonManager.Uno" Version="1.1.2" />
     <PackageReference Include="Nventive.AsyncWebView.Uno" Version="0.4.0-dev.22" />
     <PackageReference Include="Nventive.ExtendedSplashScreen.Uno" Version="0.3.0-dev.38" />
     <PackageReference Include="Nventive.Persistence.Uno" Version="0.2.0-dev.26" />
-	  <PackageReference Include="Nventive.View.Uno" Version="0.4.1-dev.51" />
+    <PackageReference Include="Nventive.View.Uno" Version="0.4.1-dev.51" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Resources\Media.xcassets\AppIcons.appiconset\Contents.json">
