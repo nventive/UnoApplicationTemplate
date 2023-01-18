@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Uno.Extensions;
-using Uno.Logging;
 using Windows.System;
 
 namespace ApplicationTemplate;
