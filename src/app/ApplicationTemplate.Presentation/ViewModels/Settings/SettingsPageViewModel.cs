@@ -15,7 +15,7 @@ namespace ApplicationTemplate.Presentation;
 
 public sealed partial class SettingsPageViewModel : ViewModel
 {
-	[Inject] private IBrowserService _browserService;
+	[Inject] private ILauncherService _browserService;
 
 	/*
 	public string VersionNumber => this.Get(GetVersionNumber);
@@ -60,14 +60,14 @@ public sealed partial class SettingsPageViewModel : ViewModel
 	{
 		var url = this.GetService<IStringLocalizer>()["PrivacyPolicyUrl"];
 
-		await _browserService.OpenAsync(new Uri(url));
+		await _browserService.Launch(new Uri(url));
 	});
 
 	public IDynamicCommand NavigateToTermsAndConditionsPage => this.GetCommandFromTask(async ct =>
 	{
 		var url = this.GetService<IStringLocalizer>()["TermsAndConditionsUrl"];
 
-		await _browserService.OpenAsync(new Uri(url));
+		await _browserService.Launch(new Uri(url));
 	});
 
 	private async Task<UserProfile> GetUserProfile(CancellationToken ct)

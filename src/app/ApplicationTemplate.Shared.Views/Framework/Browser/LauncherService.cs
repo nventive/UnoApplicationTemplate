@@ -6,14 +6,14 @@ using Windows.System;
 
 namespace ApplicationTemplate;
 
-public sealed class BrowserService : IBrowserService
+public sealed class LauncherService : ILauncherService
 {
-	public async Task OpenAsync(Uri uri)
+	public async Task Launch(Uri uri)
 	{
 		var launchSucceeded = await Launcher.LaunchUriAsync(uri);
 		if (!launchSucceeded)
 		{
-			this.Log().Error($"Failed to launch URI: {uri}");
+			throw new LaunchFailedException($"Failed to launch URI: {uri}");
 		}
 	}
 }

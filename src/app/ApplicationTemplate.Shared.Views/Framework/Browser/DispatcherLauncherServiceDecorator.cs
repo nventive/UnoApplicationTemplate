@@ -6,27 +6,27 @@ using Microsoft.UI.Dispatching;
 namespace ApplicationTemplate;
 
 /// <summary>
-/// Invokes calls to an IBrowser on the dispatcher
+/// Invokes calls to an <see cref="ILauncherService"/> on the <see cref="DispatcherQueue"/>.
 /// </summary>
-public class DispatcherBrowserDecorator : IBrowserService
+public class DispatcherLauncherServiceDecorator : ILauncherService
 {
-	private readonly IBrowserService _browserService;
+	private readonly ILauncherService _launcherService;
 	private readonly DispatcherQueue _dispatcherQueue;
 
-	public DispatcherBrowserDecorator(IBrowserService browserService, DispatcherQueue dispatcherQueue)
+	public DispatcherLauncherServiceDecorator(ILauncherService launcherService, DispatcherQueue dispatcherQueue)
 	{
-		_browserService = browserService;
+		_launcherService = launcherService;
 		_dispatcherQueue = dispatcherQueue;
 	}
 
-	public async Task OpenAsync(string uri)
+	public async Task Launch(string uri)
 	{
-		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _browserService.OpenAsync(new Uri(uri)));
+		await Launch(new Uri(uri));
 	}
 
-	public async Task OpenAsync(Uri uri)
+	public async Task Launch(Uri uri)
 	{
-		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _browserService.OpenAsync(uri));
+		await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, () => _launcherService.Launch(uri));
 	}
 
 	/// <summary>
