@@ -29,7 +29,7 @@ public static class ViewServicesConfiguration
 			/*
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 			*/
-			.AddSingleton<IBrowserService, BrowserService>(/*s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher)*/)
+			.AddSingleton<IBrowserService>(s => new DispatcherBrowserDecorator(new BrowserService(), App.Instance.Shell.DispatcherQueue))
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
 			.AddSingleton<IConnectivityProvider, ConnectivityProvider>();
 			/*
