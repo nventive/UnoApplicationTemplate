@@ -48,13 +48,10 @@ variables:
   # the URL should look like this: https://appcenter.ms/orgs/{orgId}/apps/{appId}; the slug is simply: "{orgId}/{appId}".
   AppCenterAndroidSlug: 'nventive-framework/Application-Template-1'
   AppCenteriOSSlug: 'nventive-framework/Application-Template'
-  AppCenterUWPSlug: 'nventive-framework/Application-Template-2'
   AppCenterAndroidSlug_Production: 'nventive-framework/ApplicationTemplate-Production-1'
   AppCenteriOSSlug_Production: 'nventive-framework/ApplicationTemplate-Production'
-  AppCenterUWPSlug_Production: 'nventive-framework/ApplicationTemplate-Production-2'
   AppCenterAndroidSlug_Canary: 'nventive-framework/Application-Template-Canary-1'
   AppCenteriOSSlug_Canary: 'nventive-framework/Application-Template-Canary'
-  AppCenterUWPSlug_Canary: 'nventive-framework/Application-Template-Canary-2'
 
   # AppCenter Distribution Groups
   AppCenterDistributionGroup: '00000000-0000-0000-0000-000000000000'

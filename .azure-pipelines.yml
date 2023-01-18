@@ -88,7 +88,6 @@ stages:
     parameters:
       applicationEnvironment: Staging
       deploymentEnvironment: AppCenter
-      appCenterUWPSlug: $(AppCenterUWPSlug)
       appCenteriOSSlug: $(AppCenteriOSSlug)
       appCenterAndroidSlug: $(AppCenterAndroidSlug)
       androidKeyStoreFile: $(InternalKeystore)
@@ -105,7 +104,6 @@ stages:
     parameters:
       applicationEnvironment: Production
       deploymentEnvironment: 'AppCenter Prod'
-      appCenterUWPSlug: $(AppCenterUWPSlug_Production)
       appCenteriOSSlug: $(AppCenteriOSSlug_Production)
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
       androidKeyStoreFile: $(GooglePlayKeystore)
