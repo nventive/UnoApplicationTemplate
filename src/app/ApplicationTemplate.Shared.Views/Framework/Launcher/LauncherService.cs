@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reactive;
 using System.Threading.Tasks;
 using Microsoft.UI.Dispatching;
 
@@ -16,7 +15,7 @@ public sealed class LauncherService : ILauncherService
 
 	public async Task Launch(Uri uri)
 	{
-		var launchSucceeded = await Windows.System.Launcher.LaunchUriAsync(uri);
+		var launchSucceeded = await DispatcherRunTaskAsync(DispatcherQueuePriority.Normal, async () => await Windows.System.Launcher.LaunchUriAsync(uri));
 		if (!launchSucceeded)
 		{
 			throw new LaunchFailedException($"Failed to launch URI: {uri}");
@@ -45,33 +44,7 @@ public sealed class LauncherService : ILauncherService
 			}
 			catch (Exception exception)
 			{
-				completion.SetException(exception);
-			}
-		}
-	}
-
-	/// <summary>
-	/// This method allows for executing an async Task without result on the <see cref="DispatcherQueue"/>.
-	/// </summary>
-	/// <param name="dispatcherQueuePriority"><see cref="DispatcherQueuePriority"/>.</param>
-	/// <param name="asyncFunc">A function that will be execute on the <see cref="DispatcherQueue"/>.</param>
-	/// <returns><see cref="Task"/>.</returns>
-	private async Task DispatcherRunTaskAsync(DispatcherQueuePriority dispatcherQueuePriority, Func<Task> asyncFunc)
-	{
-		var completion = new TaskCompletionSource<Unit>();
-		await _dispatcherQueue.RunAsync(dispatcherQueuePriority, RunActionUI);
-		await completion.Task;
-
-		async void RunActionUI()
-		{
-			try
-			{
-				await asyncFunc();
-				completion.SetResult(Unit.Default);
-			}
-			catch (Exception exception)
-			{
-				completion.SetException(exception);
+				completion.SetException(new LaunchFailedException("An error occured while trying to launch an URI on the UI thread.", exception));
 			}
 		}
 	}

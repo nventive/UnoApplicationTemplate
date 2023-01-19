@@ -11,4 +11,9 @@ public sealed class LaunchFailedException : Exception
 		: base(message)
 	{
 	}
+
+	public LaunchFailedException(string message, Exception innerException)
+		: base(message, innerException)
+	{
+	}
 }
