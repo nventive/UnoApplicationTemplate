@@ -39,13 +39,25 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesPage.xaml.cs">
       <DependentUpon>DadJokesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Menu.xaml.cs">
+      <DependentUpon>Menu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Settings\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Welcome\OnboardingPage.xaml.cs">
       <DependentUpon>OnboardingPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Controls\BottomTabBarButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationState.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationStateType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\Validation\DataValidationView.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\DebugConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\FiltersConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherServiceExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Connectivity\ConnectivityProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
@@ -148,6 +160,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Menu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Settings\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Welcome\OnboardingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,6 +184,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Application\Converters.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Application\Fonts.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -177,6 +201,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Application\MaterialOverride.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\BottomTabBarButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -204,6 +232,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\ListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\ListViewHeaderItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\ListViewItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\PasswordBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -220,6 +260,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\ToggleButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\ToggleSwitch.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
@@ -230,7 +278,5 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\Diagnostics\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Posts\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Content\Settings\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Framework\Browser\" />
   </ItemGroup>
 </Project>

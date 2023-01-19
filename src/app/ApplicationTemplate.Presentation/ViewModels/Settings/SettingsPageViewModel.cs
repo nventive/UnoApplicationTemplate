@@ -1,4 +1,5 @@
-﻿using System.Reactive.Linq;
+﻿using System;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
@@ -8,11 +9,14 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
+using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public partial class SettingsPageViewModel : ViewModel
+public sealed partial class SettingsPageViewModel : ViewModel
 {
+	[Inject] private ILauncherService _browserService;
+
 	/*
 	public string VersionNumber => this.Get(GetVersionNumber);
 	*/
@@ -52,21 +56,19 @@ public partial class SettingsPageViewModel : ViewModel
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new OnboardingPageViewModel(isFromSettingsPage: true));
 	});
 
-	/*
 	public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>
 	{
 		var url = this.GetService<IStringLocalizer>()["PrivacyPolicyUrl"];
 
-		await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
+		await _browserService.Launch(new Uri(url));
 	});
 
 	public IDynamicCommand NavigateToTermsAndConditionsPage => this.GetCommandFromTask(async ct =>
 	{
 		var url = this.GetService<IStringLocalizer>()["TermsAndConditionsUrl"];
 
-		await this.GetService<IBrowser>().OpenAsync(new Uri(url), BrowserLaunchMode.External);
+		await _browserService.Launch(new Uri(url));
 	});
-	*/
 
 	private async Task<UserProfile> GetUserProfile(CancellationToken ct)
 	{

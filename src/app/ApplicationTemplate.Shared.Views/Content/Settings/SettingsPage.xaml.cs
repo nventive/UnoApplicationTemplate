@@ -1,5 +1,5 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Views.Content;
 
@@ -10,10 +10,10 @@ public sealed partial class SettingsPage : Page
 		this.InitializeComponent();
 	}
 
-	private void OnThemeButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+	private void OnThemeButtonClicked(object sender, RoutedEventArgs e)
 	{
 		// Set theme for window root.
-		if (Windows.UI.Xaml.Window.Current.Content is FrameworkElement root)
+		if (App.Instance.CurrentWindow.Content is FrameworkElement root)
 		{
 			switch (root.ActualTheme)
 			{
@@ -23,8 +23,8 @@ public sealed partial class SettingsPage : Page
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 //+:cnd:noEmit
-					// No need for the dispatcher here
-					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.Black;
+					// No need for the dispatcher here.
+					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Microsoft.UI.Colors.Black;
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
@@ -34,8 +34,8 @@ public sealed partial class SettingsPage : Page
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 //+:cnd:noEmit
-					// No need for the dispatcher here
-					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
+					// No need for the dispatcher here.
+					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Microsoft.UI.Colors.White;
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit

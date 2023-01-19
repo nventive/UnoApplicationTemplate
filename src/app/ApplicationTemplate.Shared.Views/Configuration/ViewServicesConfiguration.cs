@@ -19,17 +19,16 @@ public static class ViewServicesConfiguration
 		return services
 			.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
 			.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
-			/*
+
 			.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
 				Shell.Instance.DispatcherQueue,
 				DispatcherQueuePriority.Normal
 			))
-			*/
 			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
 			/*
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
-			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
 			*/
+			.AddSingleton<ILauncherService>(s => new LauncherService(Shell.Instance.DispatcherQueue))
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
 			.AddSingleton<IConnectivityProvider, ConnectivityProvider>();
 			/*

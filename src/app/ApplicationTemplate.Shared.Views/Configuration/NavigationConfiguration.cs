@@ -35,8 +35,8 @@ public static class NavigationConfiguration
 		{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
 		{ typeof(LoginPageViewModel), typeof(LoginPage) },
 		{ typeof(OnboardingPageViewModel), typeof(OnboardingPage) },
-		/*
 		{ typeof(SettingsPageViewModel), typeof(SettingsPage) },
+		/*
 		{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
 		{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
 		{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },

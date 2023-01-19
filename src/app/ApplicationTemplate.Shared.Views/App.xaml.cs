@@ -1,6 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ApplicationTemplate.Views;
 using Chinook.SectionsNavigation;
 using Microsoft.UI.Xaml;
@@ -49,10 +47,9 @@ public sealed partial class App : Application
 
 		if (isFirstLaunch)
 		{
-			/*
 			ConfigureViewSize();
 			ConfigureStatusBar();
-			*/
+
 			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
 
 			Startup.ShellActivity.Start();
@@ -80,66 +77,50 @@ public sealed partial class App : Application
 
 	private static string GetSettingsFolderPath()
 	{
+		var folderPath = string.Empty;
+
 //-:cnd:noEmit
 #if WINDOWS
-//+:cnd:noEmit
-		var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
-//-:cnd:noEmit
-#elif __ANDROID__ || __IOS__
-//+:cnd:noEmit
-		var folderPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-//-:cnd:noEmit
+		folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
 #else
-//+:cnd:noEmit
-		var folderPath = string.Empty;
-//-:cnd:noEmit
+		folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 #endif
 //+:cnd:noEmit
 
 		return folderPath;
 	}
 
-	private void ConfigureOrientation()
+	private static void ConfigureOrientation()
 	{
 		DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
 	}
 
-#if false
-	private void ConfigureViewSize()
+	private static void ConfigureStatusBar()
 	{
-//-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-		ApplicationView.PreferredLaunchViewSize = new Size(480, 800);
-		ApplicationView.PreferredLaunchWindowingMode = ApplicationViewWindowingMode.PreferredLaunchViewSize;
-		ApplicationView.GetForCurrentView().SetPreferredMinSize(new Size(320, 480));
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-	}
-
-	private void ConfigureStatusBar()
-	{
-		var resources = Windows.UI.Xaml.Application.Current.Resources;
+		var resources = Current.Resources;
+		var statusBarHeight = 0d;
 
 //-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-		var hasStatusBar = false;
-//-:cnd:noEmit
-#else
-//+:cnd:noEmit
-		var hasStatusBar = true;
-		Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Windows.UI.Colors.White;
-//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
+		Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Microsoft.UI.Colors.White;
+		statusBarHeight = Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height;
 #endif
 //+:cnd:noEmit
 
-		var statusBarHeight = hasStatusBar ? Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height : 0;
-
-		resources.Add("StatusBarDouble", (double)statusBarHeight);
+		resources.Add("StatusBarDouble", statusBarHeight);
 		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
 		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
 	}
+
+	private void ConfigureViewSize()
+	{
+//-:cnd:noEmit
+#if WINDOWS
+		var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(CurrentWindow);
+		var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
+		var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
+		appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 480, Height = 800 });
 #endif
+//+:cnd:noEmit
+	}
 }
