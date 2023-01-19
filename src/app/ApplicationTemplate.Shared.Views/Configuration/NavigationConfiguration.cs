@@ -25,11 +25,9 @@ public static class NavigationConfiguration
 
 	private static IReadOnlyDictionary<Type, Type> GetPageRegistrations() => new Dictionary<Type, Type>()
 	{
-		/*
 		{ typeof(WelcomePageViewModel), typeof(WelcomePage) },
 		{ typeof(PostsPageViewModel), typeof(PostsPage) },
 		{ typeof(EditPostPageViewModel), typeof(EditPostPage) },
-		*/
 		{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
 		{ typeof(CreateAccountPageViewModel), typeof(CreateAccountPage) },
 		{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
@@ -51,11 +49,4 @@ public static class NavigationConfiguration
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
 	};
-
-	private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)
-	{
-		frameSectionsNavigator.DefaultSetActiveSectionTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
-		frameSectionsNavigator.DefaultOpenModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
-		frameSectionsNavigator.DefaultCloseModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
-	}
 }
