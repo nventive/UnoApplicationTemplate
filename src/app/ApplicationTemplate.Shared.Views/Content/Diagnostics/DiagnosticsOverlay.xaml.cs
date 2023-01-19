@@ -1,5 +1,5 @@
-﻿using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
+﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Views.Content;
 
@@ -10,10 +10,10 @@ public sealed partial class DiagnosticsOverlay : UserControl
 		this.InitializeComponent();
 	}
 
-	private void OnThemeButtonClicked(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+	private void OnThemeButtonClicked(object sender, RoutedEventArgs e)
 	{
 		// Set theme for window root.
-		if (Windows.UI.Xaml.Window.Current.Content is FrameworkElement root)
+		if (App.Instance.CurrentWindow.Content is FrameworkElement root)
 		{
 			switch (root.ActualTheme)
 			{

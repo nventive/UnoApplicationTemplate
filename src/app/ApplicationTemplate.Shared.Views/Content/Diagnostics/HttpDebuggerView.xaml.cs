@@ -1,20 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using ApplicationTemplate.Client;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using Nventive.View.Converters;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.ViewManagement;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 
 namespace ApplicationTemplate.Views.Content.Diagnostics;
 
@@ -24,27 +13,60 @@ public sealed partial class HttpDebuggerView : UserControl
 	{
 		this.InitializeComponent();
 
-		var view = ApplicationView.GetForCurrentView();
-		TrySetDetailsScrollViewerMaxHeight(view);
-		view.VisibleBoundsChanged += OnVisibleBoundsChanged;
+		Loaded += OnLoaded;
+		Unloaded += OnUnloaded;
+	}
+
+	private void OnLoaded(object sender, RoutedEventArgs e)
+	{
+		var visibleBoundsHeight = 0d;
+
+//-:cnd:noEmit
+#if __WINDOWS__
+		var currentWindow = App.Instance.CurrentWindow;
+		currentWindow.SizeChanged += OnSizeChanged;
+		visibleBoundsHeight = currentWindow.Bounds.Height;
+#else
+		var applicationView = ApplicationView.GetForCurrentView();
+		applicationView.VisibleBoundsChanged += OnVisibleBoundsChanged;
+		visibleBoundsHeight = applicationView.VisibleBounds.Height;
+#endif
+//+:cnd:noEmit
+
+		TrySetDetailsScrollViewerMaxHeight(visibleBoundsHeight);
+	}
+
+	private void OnUnloaded(object sender, RoutedEventArgs e)
+	{
+		var applicationView = ApplicationView.GetForCurrentView();
+		applicationView.VisibleBoundsChanged -= OnVisibleBoundsChanged;
+	}
+
+	private void OnSizeChanged(object sender, WindowSizeChangedEventArgs args)
+	{
+		TrySetDetailsScrollViewerMaxHeight(args.Size.Height);
 	}
 
 	private void OnVisibleBoundsChanged(ApplicationView sender, object args)
 	{
-		TrySetDetailsScrollViewerMaxHeight(sender);
+		TrySetDetailsScrollViewerMaxHeight(sender.VisibleBounds.Height);
 	}
 
-	private void TrySetDetailsScrollViewerMaxHeight(ApplicationView applicationView)
+	/// <summary>
+	/// Sets the usable <see cref="ScrollViewer"/> height to 60%.
+	/// </summary>
+	/// <param name="visibleBoundsHeight">Application visible bounds height.</param>
+	private void TrySetDetailsScrollViewerMaxHeight(double visibleBoundsHeight)
 	{
-		var height = applicationView.VisibleBounds.Height;
-		if (height > 0)
+		if (visibleBoundsHeight > 0)
 		{
-			DetailsScrollViewer.MaxHeight = height * 0.60;
+			DetailsScrollViewer.MaxHeight = visibleBoundsHeight * 0.60;
 		}
 	}
 }
 
-public class HttpTraceStatusCustomValueConverter : ConverterBase
+[System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1402:File may only contain a single type", Justification = "Diagnostics related (Must be isolated | Domain driven).")]
+public sealed class HttpTraceStatusCustomValueConverter : ConverterBase
 {
 	public object FallbackValue { get; set; }
 

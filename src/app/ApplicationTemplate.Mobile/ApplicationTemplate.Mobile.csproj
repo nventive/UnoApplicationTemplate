@@ -7,6 +7,7 @@
 		<SingleProject>true</SingleProject>
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
+		<UseMauiEssentials>true</UseMauiEssentials>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-android'">26.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
 	</PropertyGroup>
@@ -15,10 +16,13 @@
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.3.0-dev.51" />
+		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="0.6.0-dev.58" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.4.0-dev.34" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.62" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
 		<PackageReference Include="Uno.Material.WinUI" Version="2.2.0" />
+		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
+		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.2.0" />
 		<PackageReference Include="Uno.WinUI" Version="4.6.19" />
 		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.6.19" Condition="'$(Configuration)'=='Debug'" />
@@ -27,10 +31,6 @@
 		<PackageReference Include="Uno.WinUI.Lottie" Version="4.6.19" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-		<PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
@@ -123,6 +123,7 @@
 				<AndroidResource Include="Android/Resources/drawable-xhdpi/Logo.png" />
 				<AndroidResource Include="Android/Resources/drawable-xxhdpi/Logo.png" />
 				<AndroidResource Include="Android/Resources/drawable-xxxhdpi/Logo.png" />
+				<AndroidResource Include="Android/Resources/xml/file_paths.xml" />
 			</ItemGroup>
 			<!-- Network security configuration (For Fiddler). -->
 			<ItemGroup Condition="'$(ApplicationEnvironment)'!='Production'">

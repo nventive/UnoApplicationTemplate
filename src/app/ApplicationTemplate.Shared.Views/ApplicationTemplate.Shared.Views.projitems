@@ -39,6 +39,18 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesPage.xaml.cs">
       <DependentUpon>DadJokesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\DiagnosticsOverlay.xaml.cs">
+      <DependentUpon>DiagnosticsOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\DiagnosticsPage.xaml.cs">
+      <DependentUpon>DiagnosticsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\EnvironmentPickerPage.xaml.cs">
+      <DependentUpon>EnvironmentPickerPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\HttpDebuggerView.xaml.cs">
+      <DependentUpon>HttpDebuggerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -56,10 +68,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FiltersConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\DiagnosticsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Mobile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Windows.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\DeviceInformation\DeviceInformationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Connectivity\ConnectivityProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Version\VersionProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DispatcherQueueExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FrameworkElementExtension.cs" />
@@ -160,6 +177,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\DiagnosticsOverlay.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\DiagnosticsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\EnvironmentPickerPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\HttpDebuggerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Menu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -212,6 +245,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\CalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\CheckBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\ComboBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\CommandBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +270,22 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\ExtendedSplashScreen.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\FlipViewItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\Frame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\GridViewHeaderItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\GridViewItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -252,6 +313,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\RadioButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Styles\Controls\TextBlock.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -276,7 +341,6 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Content\Diagnostics\" />
     <Folder Include="$(MSBuildThisFileDirectory)Content\Posts\" />
   </ItemGroup>
 </Project>

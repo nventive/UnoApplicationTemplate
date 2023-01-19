@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive.Concurrency;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using MessageDialogService;
 using Windows.Storage;
-using Windows.System;
 
 namespace ApplicationTemplate.Views;
 
@@ -23,14 +20,10 @@ public class DiagnosticsService : IDiagnosticsService
 
 	public bool CanOpenSettingsFolder { get; } =
 //-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
+#if __WINDOWS__
 		true;
-//-:cnd:noEmit
 #else
-//+:cnd:noEmit
 		false;
-//-:cnd:noEmit
 #endif
 //+:cnd:noEmit
 
@@ -41,10 +34,8 @@ public class DiagnosticsService : IDiagnosticsService
 		_dispatcherScheduler.ScheduleTask(async (ct2, s) =>
 		{
 //-:cnd:noEmit
-#if WINDOWS_UWP
-//+:cnd:noEmit
-			await Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
-//-:cnd:noEmit
+#if __WINDOWS__
+			await Windows.System.Launcher.LaunchFolderAsync(localFolder).AsTask(ct2);
 #endif
 //+:cnd:noEmit
 		});
@@ -53,9 +44,8 @@ public class DiagnosticsService : IDiagnosticsService
 	public async Task TestExceptionFromMainThread(CancellationToken ct)
 	{
 //-:cnd:noEmit
-		// This will not crash on Android as it can be safely handled.
+// This will not crash on Android as it can be safely handled.
 #if !__ANDROID__
-//+:cnd:noEmit
 		var confirmation = await _messageDialogService.ShowMessage(ct, mb => mb
 			.Title("Diagnostics")
 			.Content("This should crash your application. Make sure your analytics provider receives a crash log.")
@@ -67,7 +57,6 @@ public class DiagnosticsService : IDiagnosticsService
 		{
 			return;
 		}
-//-:cnd:noEmit
 #endif
 //+:cnd:noEmit
 

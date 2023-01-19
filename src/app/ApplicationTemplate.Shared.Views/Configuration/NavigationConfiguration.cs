@@ -29,8 +29,8 @@ public static class NavigationConfiguration
 		{ typeof(WelcomePageViewModel), typeof(WelcomePage) },
 		{ typeof(PostsPageViewModel), typeof(PostsPage) },
 		{ typeof(EditPostPageViewModel), typeof(EditPostPage) },
-		{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
 		*/
+		{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
 		{ typeof(CreateAccountPageViewModel), typeof(CreateAccountPage) },
 		{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
 		{ typeof(LoginPageViewModel), typeof(LoginPage) },
@@ -39,7 +39,9 @@ public static class NavigationConfiguration
 		/*
 		{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
 		{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
+		*/
 		{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
+		/*
 		{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
 		*/
 		{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },

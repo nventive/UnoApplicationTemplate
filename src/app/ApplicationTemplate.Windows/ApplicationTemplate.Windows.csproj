@@ -15,6 +15,7 @@
 		<UseWinUI>true</UseWinUI>
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<Configurations>Debug;Release</Configurations>
+		<DefineConstants>$(DefineConstants);__WINDOWS__</DefineConstants>
 	</PropertyGroup>
 	
 	<ItemGroup>
@@ -32,6 +33,7 @@
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.3.0-dev.51" />
+		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="0.6.0-dev.58" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.3" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22000.196" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
@@ -40,10 +42,8 @@
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-		<PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.435">
-			<PrivateAssets>all</PrivateAssets>
-			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-		</PackageReference>
+		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
+		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Material.WinUI" Version="2.2.0" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.2.0" />
 	</ItemGroup>
