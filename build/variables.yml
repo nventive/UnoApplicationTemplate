@@ -72,7 +72,7 @@ variables:
   AndroidManifestPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.Droid/Properties/AndroidManifest.xml
 
   # Pool names
-  windowsPoolName: 'windows-2022'
+  windowsPoolName: 'windows-latest'
   macOSPoolName: 'macOS'
 
   # Versions to use
