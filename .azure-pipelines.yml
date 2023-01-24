@@ -41,9 +41,9 @@ stages:
   - template: build/stage-build.yml
     parameters:
       pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
-      solutionFileName: 'GeneratedApp.sln'
-      pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.iOS/Info.plist'
-      pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Droid/Properties/AndroidManifest.xml'
+      solutionFileName: 'GeneratedApp'
+      pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/iOS/Info.plist'
+      pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/Android/AndroidManifest.xml'
       applicationEnvironment: Generated_Staging
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
@@ -98,7 +98,6 @@ stages:
 - stage: AppCenter_Production
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
-
   jobs:
   - template: build/stage-release-appcenter.yml
     parameters:
