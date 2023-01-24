@@ -98,7 +98,7 @@ jobs:
           ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
     pool:
-      vmImage: macos-12
+      vmImage: $(macOSPoolName)
 
     variables:
     - name: SkipUnknownFrameworks
