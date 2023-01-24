@@ -21,10 +21,6 @@ trigger:
     include:
       - main
 
-resources:
-  containers:
-    - container: windows
-
 variables:
 - template: build/variables.yml
 
