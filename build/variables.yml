@@ -72,8 +72,8 @@ variables:
   AndroidManifestPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.Droid/Properties/AndroidManifest.xml
 
   # Pool names
-  windowsPoolName: 'Azure Pipelines'
-  macOSPoolName: 'Azure Pipelines'
+  windowsPoolName: 'windows-2022'
+  macOSPoolName: 'macOS-latest'
 
   # Versions to use
   NUGET_VERSION: 6.1.0
