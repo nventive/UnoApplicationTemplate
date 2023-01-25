@@ -1,10 +1,9 @@
 jobs:
   - job: On_Windows_Dotnet_New
     pool:
-      name: $(windowsPoolName)
-    container: windows
-    
-    steps:    
+      vmImage: $(windowsPoolName)
+
+    steps:
     - script: dotnet new -i $(Build.SourcesDirectory)
       displayName: 'Install UnoApplicationTemplate'
 

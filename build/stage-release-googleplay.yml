@@ -8,8 +8,6 @@ jobs:
 
   environment: ${{ parameters.deploymentEnvironment }}
 
-  container: windows
-
   variables:
   - group: ApplicationTemplate.Distribution.GooglePlay
   - name: artifactName

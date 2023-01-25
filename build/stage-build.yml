@@ -43,9 +43,6 @@ jobs:
     variables:
       ArtifactName: ReleaseNotes_${{ parameters.applicationEnvironment }}
       ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-
-    container: windows
-
     steps:
       - template: steps-build-release-notes.yml
         parameters:
@@ -73,12 +70,10 @@ jobs:
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
 
     pool:
-      name: $(windowsPoolName)
+      vmImage : $(windowsPoolName)
 
     variables:
     - group: ${{ parameters.androidVariableGroup }}
-
-    container: windows
 
     steps:
       - template: steps-build.yml
