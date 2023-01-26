@@ -39,7 +39,7 @@
 jobs:
   - job: On_Windows_ReleaseNotes
     pool:
-      name: $(windowsPoolName)
+      vmImage: $(windowsHostedAgentImage)
     variables:
       ArtifactName: ReleaseNotes_${{ parameters.applicationEnvironment }}
       ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
@@ -50,6 +50,8 @@ jobs:
           removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
 
   - job: On_Windows # Build UWP and Android on a windows machine
+    pool:
+      vmImage : $(windowsHostedAgentImage)
     strategy:
       maxParallel: 3
       matrix:
@@ -68,10 +70,6 @@ jobs:
           ApplicationPlatform: Any CPU
           ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-
-    pool:
-      vmImage : $(windowsPoolName)
-
     variables:
     - group: ${{ parameters.androidVariableGroup }}
 
@@ -84,6 +82,8 @@ jobs:
           pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
 
   - job: On_Mac # Build iOS on a mac
+    pool:
+      vmImage: $(macOSHostedAgentImage)
     strategy:
       maxParallel: 3
       matrix:
@@ -92,8 +92,6 @@ jobs:
           ApplicationPlatform: Any CPU
           ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
           ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-    pool:
-      vmImage: $(macOSPoolName)
 
     variables:
     - name: SkipUnknownFrameworks

@@ -6,7 +6,7 @@ jobs:
 - deployment: AppStore_iOS
 
   pool:
-    vmImage: $(macOSPoolName)
+    name: $(macOSPoolName)
 
   environment: ${{ parameters.deploymentEnvironment }}
 

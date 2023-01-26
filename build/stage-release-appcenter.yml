@@ -11,7 +11,8 @@ parameters:
 
 jobs:
 - deployment: AppCenter_UWP
-  pool: $(windowsPoolName)
+  pool:
+    vmImage: $(windowsHostedAgentImage)
 
   variables:
   - name: artifactName
@@ -116,7 +117,7 @@ jobs:
 
 - deployment: AppCenter_Android
   pool:
-    vmImage: windows-latest
+    vmImage: $(windowsHostedAgentImage)
 
   variables:
   - group: ${{ parameters.androidVariableGroup }}

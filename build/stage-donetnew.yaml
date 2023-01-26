@@ -1,7 +1,7 @@
 jobs:
   - job: On_Windows_Dotnet_New
     pool:
-      vmImage: $(windowsPoolName)
+      vmImage: $(windowsHostedAgentImage)
 
     steps:
     - script: dotnet new -i $(Build.SourcesDirectory)
