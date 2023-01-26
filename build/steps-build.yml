@@ -27,7 +27,7 @@
 steps:
 #-if false
 - download: current
-  condition: eq('GeneratedApp', '${{ parameters.solutionFileName }}')
+  condition: eq('GeneratedApp.sln', '${{ parameters.solutionFileName }}')
   artifact: GeneratedApp
 #-endif
 
