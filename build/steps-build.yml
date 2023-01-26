@@ -27,7 +27,7 @@
 steps:
 #-if false
 - download: current
-  condition: eq('GeneratedApp.sln', '${{ parameters.solutionFileName }}')
+  condition: eq('GeneratedApp', '${{ parameters.solutionFileName }}')
   artifact: GeneratedApp
 #-endif
 
@@ -104,7 +104,7 @@ steps:
   inputs:
     infoPlistPath: ${{ parameters.pathToInfoPlist }}
     bundleShortVersionString: '$(MajorMinorPatch)'
-    bundleVersion: '$(PreReleaseNumber)' 
+    bundleVersion: '$(PreReleaseNumber)'
 
 - task: ios-bundle-identifier@1
   displayName: "Replace iOS bundle identifier"
@@ -137,7 +137,7 @@ steps:
       /p:AndroidKeyStore=true
       /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid)
       /p:ApplicationIdentifier=$(ApplicationIdentifier)
-      /p:IsLightBuild=$(IsLightBuild) 
+      /p:IsLightBuild=$(IsLightBuild)
       /bl
     configuration: $(ApplicationConfiguration)
     platform: $(ApplicationPlatform)
@@ -159,7 +159,7 @@ steps:
 - script: >
     dotnet test ${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}
     /p:Configuration=$(ApplicationConfiguration)
-    /p:CollectCoverage=true 
+    /p:CollectCoverage=true
     /p:CoverletOutputFormat=cobertura
     /p:CoverletOutput=${{ parameters.pathToSrc }}/coverage
     /p:ExcludeByFile="**/*.g.cs"

@@ -65,7 +65,7 @@ variables:
   # AzureStorageAccountName:
 
   # Solution to build
-  SolutionFileName: ApplicationTemplate.sln
+  SolutionFileName: ApplicationTemplate
 
   # Paths to file
   InfoPlistPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.iOS/Info.plist
@@ -76,7 +76,7 @@ variables:
 
   # Virtual machine images
   windowsHostedAgentImage: 'windows-2022'
-  macOSHostedAgentImage: 'macOS-12'
+  macOSHostedAgentImage: 'macOS-latest'
 
   # Versions to use
   NUGET_VERSION: 6.1.0
