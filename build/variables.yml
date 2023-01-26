@@ -65,7 +65,7 @@ variables:
   # AzureStorageAccountName:
 
   # Solution to build
-  SolutionFileName: ApplicationTemplate
+  SolutionFileName: ApplicationTemplate.sln
 
   # Paths to file
   InfoPlistPath: $(Build.SourcesDirectory)/src/app/ApplicationTemplate.iOS/Info.plist
