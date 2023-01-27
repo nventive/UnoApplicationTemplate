@@ -38,8 +38,8 @@ stages:
     parameters:
       pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
       solutionFileName: 'GeneratedApp.sln'
-      pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/iOS/Info.plist'
-      pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/Android/AndroidManifest.xml'
+      pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.iOS/Info.plist'
+      pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Droid/Properties/AndroidManifest.xml'
       applicationEnvironment: Generated_Staging
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
