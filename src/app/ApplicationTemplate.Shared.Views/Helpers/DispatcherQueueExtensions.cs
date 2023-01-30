@@ -1,7 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-// https://github.com/CommunityToolkit/__WINDOWS__CommunityToolkit/blob/main/License.md
-// See reference: https://github.com/CommunityToolkit/__WINDOWS__CommunityToolkit/blob/main/Microsoft.Toolkit.Uwp/Extensions/DispatcherQueueExtensions.cs
+// https://github.com/CommunityToolkit/WindowsCommunityToolkit/blob/main/License.md
+// See reference: https://github.com/CommunityToolkit/WindowsCommunityToolkit/blob/main/Microsoft.Toolkit.Uwp/Extensions/DispatcherQueueExtensions.cs
 
 using System;
 using System.Runtime.CompilerServices;
