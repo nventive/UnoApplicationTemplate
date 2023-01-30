@@ -7,14 +7,9 @@ public sealed class EmailAttachment
 {
 	public EmailAttachment(string contentType, string fullPath)
 	{
-		if (fullPath is null)
-		{
-			throw new ArgumentNullException(nameof(fullPath));
-		}
-
 		if (string.IsNullOrWhiteSpace(fullPath))
 		{
-			throw new ArgumentException("The file path cannot be empty.", nameof(fullPath));
+			throw new ArgumentException("The file path cannot be null or empty.", nameof(fullPath));
 		}
 
 		var fileName = Path.GetFileName(fullPath);
