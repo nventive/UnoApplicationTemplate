@@ -16,13 +16,14 @@ namespace ApplicationTemplate.Presentation;
 public sealed partial class SettingsPageViewModel : ViewModel
 {
 	[Inject] private ILauncherService _browserService;
+	[Inject] private IStringLocalizer _stringLocalizer;
+	[Inject] private ISectionsNavigator _sectionsNavigator;
+	[Inject] private IAuthenticationService _authenticationService;
 
-	/*
 	public string VersionNumber => this.Get(GetVersionNumber);
-	*/
 
 	public IDataLoader<UserProfile> UserProfile => this.GetDataLoader(GetUserProfile, db => db
-		.TriggerFromObservable(this.GetService<IAuthenticationService>().GetAndObserveIsAuthenticated().Skip(1))
+		.TriggerFromObservable(_authenticationService.GetAndObserveIsAuthenticated().Skip(1))
 	);
 
 	public IDynamicCommand Logout => this.GetCommandFromTask(async ct =>
@@ -36,36 +37,36 @@ public sealed partial class SettingsPageViewModel : ViewModel
 
 		if (logout == MessageDialogResult.Accept)
 		{
-			await this.GetService<IAuthenticationService>().Logout(ct);
-			await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: true);
+			await _authenticationService.Logout(ct);
+			await _sectionsNavigator.SetActiveSection(ct, "Login", () => new LoginPageViewModel(isFirstLogin: false), returnToRoot: true);
 		}
 	});
 
 	public IDynamicCommand NavigateToResetPasswordPage => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ResetPasswordPageViewModel());
+		await _sectionsNavigator.Navigate(ct, () => new ResetPasswordPageViewModel());
 	});
 
 	public IDynamicCommand NavigateToDiagnosticsPage => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new DiagnosticsPageViewModel());
+		await _sectionsNavigator.OpenModal(ct, () => new DiagnosticsPageViewModel());
 	});
 
 	public IDynamicCommand NavigateToOnboardingPage => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new OnboardingPageViewModel(isFromSettingsPage: true));
+		await _sectionsNavigator.Navigate(ct, () => new OnboardingPageViewModel(isFromSettingsPage: true));
 	});
 
 	public IDynamicCommand NavigateToPrivacyPolicyPage => this.GetCommandFromTask(async ct =>
 	{
-		var url = this.GetService<IStringLocalizer>()["PrivacyPolicyUrl"];
+		var url = _stringLocalizer["PrivacyPolicyUrl"];
 
 		await _browserService.Launch(new Uri(url));
 	});
 
 	public IDynamicCommand NavigateToTermsAndConditionsPage => this.GetCommandFromTask(async ct =>
 	{
-		var url = this.GetService<IStringLocalizer>()["TermsAndConditionsUrl"];
+		var url = _stringLocalizer["TermsAndConditionsUrl"];
 
 		await _browserService.Launch(new Uri(url));
 	});
@@ -75,10 +76,8 @@ public sealed partial class SettingsPageViewModel : ViewModel
 		return await this.GetService<IUserProfileService>().GetCurrent(ct);
 	}
 
-	/*
 	private string GetVersionNumber()
 	{
-		return this.GetService<IAppInfo>().VersionString;
+		return this.GetService<IVersionProvider>().VersionString;
 	}
-	*/
 }

@@ -23,7 +23,7 @@ public static class LoggingConfiguration
 
 		serilogConfiguration.ReadFrom.Configuration(hostBuilderContext.Configuration);
 //-:cnd:noEmit
-#if WINDOWS
+#if __WINDOWS__
 		serilogConfiguration.Enrich.With(new ThreadIdEnricher());
 #endif
 //+:cnd:noEmit
@@ -83,7 +83,7 @@ public static class LoggingConfiguration
 #elif __IOS__
 			.Enrich.WithProperty("Platform", "iOS");
 #endif
-#elif WINDOWS
+#elif __WINDOWS__
 		return configuration
 			.WriteTo.File(logFilePath, outputTemplate: "{Timestamp:MM-dd HH:mm:ss.fffzzz} [{Platform}] Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}")
 			.Enrich.WithProperty("Platform", "UWP");
@@ -115,7 +115,7 @@ public static class LoggingConfiguration
 
 		public static string GetLogFilesDirectory()
 		{
-#if WINDOWS
+#if __WINDOWS__
 			return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
 			return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

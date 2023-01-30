@@ -27,7 +27,15 @@
 				  android:exported="false"
 				  android:grantUriPermissions="true">
 			<meta-data android:name="android.support.FILE_PROVIDER_PATHS"
-					   android:resource="@xml/files" />
+					   android:resource="@xml/file_paths" />
 		</provider>
 	</application>
+
+	<queries>
+		<!-- This is required to access the MAUI Essentials email functionality. -->
+		<intent>
+			<action android:name="android.intent.action.SENDTO" />
+			<data android:scheme="mailto" />
+		</intent>
+	</queries>
 </manifest>

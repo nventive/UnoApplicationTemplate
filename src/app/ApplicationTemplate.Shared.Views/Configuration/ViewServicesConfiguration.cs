@@ -4,7 +4,6 @@ using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.UI.Dispatching;
-using Windows.UI.Core;
 
 namespace ApplicationTemplate.Views;
 
@@ -17,46 +16,47 @@ public static class ViewServicesConfiguration
 	public static IServiceCollection AddViewServices(this IServiceCollection services)
 	{
 		return services
-			.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
+			.AddSingleton(s => App.Instance.NavigationMultiFrame.DispatcherQueue)
 			.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
-
 			.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
-				Shell.Instance.DispatcherQueue,
+				s.GetRequiredService<DispatcherQueue>(),
 				DispatcherQueuePriority.Normal
 			))
 			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
-			/*
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
-			*/
-			.AddSingleton<ILauncherService>(s => new LauncherService(Shell.Instance.DispatcherQueue))
+			.AddSingleton<ILauncherService>(s => new LauncherService(s.GetRequiredService<DispatcherQueue>()))
+			.AddSingleton<IVersionProvider, VersionProvider>()
+			.AddSingleton<IDeviceInformationProvider, DeviceInformationProvider>()
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
-			.AddSingleton<IConnectivityProvider, ConnectivityProvider>();
-			/*
+			.AddSingleton<IConnectivityProvider, ConnectivityProvider>()
+			.AddSingleton<IEmailService, EmailService>()
 			.AddMessageDialog();
-			*/
 	}
 
-#if false
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
 	{
 		return services.AddSingleton<IMessageDialogService>(s =>
 //-:cnd:noEmit
-#if WINDOWS || __IOS__ || __ANDROID__
-//+:cnd:noEmit
+#if __WINDOWS__ || __IOS__ || __ANDROID__
 			new MessageDialogService.MessageDialogService(
-				() => s.GetRequiredService<CoreDispatcher>(),
+				s.GetRequiredService<DispatcherQueue>(),
+//-:cnd:noEmit
+#if __WINDOWS__
+				new MessageDialogBuilderDelegate(
+					key => s.GetRequiredService<IStringLocalizer>()[key],
+					WinRT.Interop.WindowNative.GetWindowHandle(App.Instance.CurrentWindow)
+				)
+#else
 				new MessageDialogBuilderDelegate(
 					key => s.GetRequiredService<IStringLocalizer>()[key]
 				)
-			)
-//-:cnd:noEmit
-#else
+#endif
 //+:cnd:noEmit
+			)
+#else
 			new AcceptOrDefaultMessageDialogService()
-//-:cnd:noEmit
 #endif
 //+:cnd:noEmit
 		);
 	}
-#endif
 }

@@ -33,7 +33,7 @@ public sealed partial class App : Application
 	protected override void OnLaunched(LaunchActivatedEventArgs args)
 	{
 //-:cnd:noEmit
-#if WINDOWS
+#if __WINDOWS__
 		CurrentWindow = new Window();
 		CurrentWindow.Activate();
 #else
@@ -59,7 +59,11 @@ public sealed partial class App : Application
 			Startup.ShellActivity.Stop();
 		}
 
+//-:cnd:noEmit
+#if !__WINDOWS__
 		CurrentWindow.Activate();
+#endif
+//+:cnd:noEmit
 
 		_ = Task.Run(() => Startup.Start());
 	}
@@ -67,7 +71,7 @@ public sealed partial class App : Application
 	private static string GetContentRootPath()
 	{
 //-:cnd:noEmit
-#if WINDOWS || __ANDROID__ || __IOS__
+#if __WINDOWS__ || __ANDROID__ || __IOS__
 		return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
 		return string.Empty;
@@ -80,8 +84,8 @@ public sealed partial class App : Application
 		var folderPath = string.Empty;
 
 //-:cnd:noEmit
-#if WINDOWS
-		folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
+#if __WINDOWS__
+		folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
 		folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 #endif
@@ -100,12 +104,12 @@ public sealed partial class App : Application
 		var resources = Current.Resources;
 		var statusBarHeight = 0d;
 
-//-:cnd:noEmit
+		//-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 		Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Microsoft.UI.Colors.White;
 		statusBarHeight = Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height;
 #endif
-//+:cnd:noEmit
+		//+:cnd:noEmit
 
 		resources.Add("StatusBarDouble", statusBarHeight);
 		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
@@ -115,7 +119,7 @@ public sealed partial class App : Application
 	private void ConfigureViewSize()
 	{
 //-:cnd:noEmit
-#if WINDOWS
+#if __WINDOWS__
 		var windowHandle = WinRT.Interop.WindowNative.GetWindowHandle(CurrentWindow);
 		var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
 		var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);

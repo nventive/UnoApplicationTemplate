@@ -52,6 +52,11 @@
 		<string>Media.xcassets/AppIcons.appiconset</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+		<!-- This is required to access the MAUI Essentials email functionality. -->
+		<key>LSApplicationQueriesSchemes</key>
+		<array>
+			<string>mailto</string>
+		</array>
 		<!--
 		Adjust this to your application's encryption usage.
 		<key>ITSAppUsesNonExemptEncryption</key>

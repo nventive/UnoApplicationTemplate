@@ -64,7 +64,7 @@ public sealed class Startup : StartupBase
 		void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
 
 //-:cnd:noEmit
-#if WINDOWS || __ANDROID__ || __IOS__
+#if __WINDOWS__ || __ANDROID__ || __IOS__
 //+:cnd:noEmit
 		Windows.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
 		{

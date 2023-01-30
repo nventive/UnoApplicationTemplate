@@ -31,14 +31,4 @@ public static class AppServicesConfiguration
 			.AddSingleton<IUserProfileService, UserProfileService>()
 			.AddSingleton<DiagnosticsCountersService>();
 	}
-
-	/*
-	private static IServiceCollection AddXamarinEssentials(this IServiceCollection services)
-	{
-		return services
-			.AddSingleton<IDeviceInfo, DeviceInfoImplementation>()
-			.AddSingleton<IAppInfo, AppInfoImplementation>()
-			.AddSingleton<IEmail, EmailImplementation>();
-	}
-	*/
 }
