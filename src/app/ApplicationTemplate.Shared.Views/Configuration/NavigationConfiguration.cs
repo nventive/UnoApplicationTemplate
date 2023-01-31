@@ -49,4 +49,18 @@ public static class NavigationConfiguration
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
 	};
+
+	/// <summary>
+	/// Disable navigation animations.
+	/// </summary>
+	/// <remarks>
+	/// Do not remove even if it's not used by default.
+	/// </remarks>
+	/// <param name="frameSectionsNavigator"><see cref="FrameSectionsNavigator"/>.</param>
+	private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)
+	{
+		frameSectionsNavigator.DefaultSetActiveSectionTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
+		frameSectionsNavigator.DefaultOpenModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
+		frameSectionsNavigator.DefaultCloseModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
+	}
 }
