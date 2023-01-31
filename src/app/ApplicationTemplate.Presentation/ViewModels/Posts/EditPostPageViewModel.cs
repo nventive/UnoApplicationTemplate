@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
-using Chinook.StackNavigation;
 using MessageDialogService;
 using Microsoft.Extensions.Localization;
 
@@ -14,8 +12,8 @@ public class EditPostPageViewModel : ViewModel
 {
 	public EditPostPageViewModel(Post post = null)
 	{
-		IsNewPost = post == null;
-		Title = post == null ? this.GetService<IStringLocalizer>()["EditPost_NewPost"] : post.Title;
+		IsNewPost = post is null;
+		Title = post is null ? this.GetService<IStringLocalizer>()["EditPost_NewPost"] : post.Title;
 		Form = this.AttachChild(new PostFormViewModel(post));
 
 		this.RegisterBackHandler(OnBackRequested);
@@ -63,7 +61,7 @@ public class EditPostPageViewModel : ViewModel
 				.CancelCommand()
 			);
 
-		if (result == MessageDialogResult.Ok)
+		if (result is MessageDialogResult.Ok)
 		{
 			await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
 		}

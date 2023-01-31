@@ -13,7 +13,7 @@ public partial class PostsPageViewModel : ViewModel
 {
 	private readonly Func<Task> _onGetPostsCalled;
 
-	private readonly ManualDataLoaderTrigger _deletePostTrigger = new ManualDataLoaderTrigger();
+	private readonly ManualDataLoaderTrigger _deletePostTrigger = new();
 
 	public PostsPageViewModel(Func<Task> onGetPostsCalled = null)
 	{
