@@ -12,6 +12,16 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Android\Assets\Fonts\Guillon-Black.ttf" />
+	  <None Remove="Android\Assets\Fonts\Guillon-Bold.ttf" />
+	  <None Remove="Android\Assets\Fonts\Guillon-Light.ttf" />
+	  <None Remove="Android\Assets\Fonts\Guillon-Regular.ttf" />
+	  <None Remove="Android\Assets\Fonts\Guillon-SemiBold.ttf" />
+	  <None Remove="Android\Assets\Fonts\Roboto-Medium.ttf" />
+	  <None Remove="Android\Assets\Fonts\Roboto-Regular.ttf" />
+	  <None Remove="Android\Assets\Fonts\segmdl2.ttf" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.1.0" />
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
