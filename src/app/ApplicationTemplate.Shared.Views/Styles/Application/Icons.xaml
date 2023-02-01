@@ -5,8 +5,8 @@
 	<x:String x:Key="BackgroundMustachesImage">ms-appx:///Assets/Background-Mustaches.png</x:String>
 	<x:String x:Key="BackgroundMustachesLightImage">ms-appx:///Assets/Background_Mustaches_Light.png</x:String>
 	<x:String x:Key="LettersImage">ms-appx:///Assets/Letters.png</x:String>
-	<x:String x:Key="FilterImage">ms-appx:///Assets/CommandBarCommands/filter.png</x:String>
-	<x:String x:Key="CloseIconImage">ms-appx:///Assets/CommandBarCommands/closeIcon.png</x:String>
+	<x:String x:Key="FilterImage">ms-appx:///Assets/CommandBar/filter.png</x:String>
+	<x:String x:Key="CloseIconImage">ms-appx:///Assets/CommandBar/closeIcon.png</x:String>
 	<x:String x:Key="LogoImage">ms-appx:///Assets/Logo.png</x:String>
 	<x:String x:Key="GoogleIconImage">ms-appx:///Assets/Google_Icon.png</x:String>
 
