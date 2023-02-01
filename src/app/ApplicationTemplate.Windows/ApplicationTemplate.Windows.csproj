@@ -19,6 +19,7 @@
 	</PropertyGroup>
 	
 	<ItemGroup>
+		<!-- TODO: Add missing images? -->
 		<Content Include="Images\SplashScreen.scale-200.png" />
 		<Content Include="Images\LockScreenLogo.scale-200.png" />
 		<Content Include="Images\Square150x150Logo.scale-200.png" />
@@ -26,6 +27,17 @@
 		<Content Include="Images\Square44x44Logo.targetsize-24_altform-unplated.png" />
 		<Content Include="Images\StoreLogo.png" />
 		<Content Include="Images\Wide310x150Logo.scale-200.png" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Content Include="Assets\Fonts\Guillon-Black.ttf" />
+		<Content Include="Assets\Fonts\Guillon-Bold.ttf" />
+		<Content Include="Assets\Fonts\Guillon-Light.ttf" />
+		<Content Include="Assets\Fonts\Guillon-Regular.ttf" />
+		<Content Include="Assets\Fonts\Guillon-SemiBold.ttf" />
+		<Content Include="Assets\Fonts\Roboto-Medium.ttf" />
+		<Content Include="Assets\Fonts\Roboto-Regular.ttf" />
+		<Content Include="Assets\Fonts\segmdl2.ttf" />
 	</ItemGroup>
 	
 	<ItemGroup>
