@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Client;
-
-public class FavoriteJokeData
+public sealed class FavoriteJokeData
 {
 	public FavoriteJokeData(string id, string title, string selftext, int totalAwardsReceived, string distinguished)
 	{

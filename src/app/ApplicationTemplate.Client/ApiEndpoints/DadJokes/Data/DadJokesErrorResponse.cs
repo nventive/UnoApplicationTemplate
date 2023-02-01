@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ApplicationTemplate.Client;
 
-public partial class DadJokesErrorResponse
+public sealed partial class DadJokesErrorResponse
 {
 	public DadJokesErrorResponse(string message)
 	{

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.Client;
 
-public record AuthenticationToken
+public sealed class AuthenticationToken
 {
-	public static AuthenticationToken Default { get; } = new AuthenticationToken(default, DateTimeOffset.MinValue, DateTimeOffset.MinValue);
-
 	public AuthenticationToken(string email, DateTimeOffset expiration, DateTimeOffset issuedAt)
 	{
 		Email = email;
@@ -15,14 +12,16 @@ public record AuthenticationToken
 		IssuedAt = issuedAt;
 	}
 
+	public static AuthenticationToken Default { get; } = new AuthenticationToken(default, DateTimeOffset.MinValue, DateTimeOffset.MinValue);
+
 	[JsonPropertyName("unique_name")]
-	public string Email { get; init; }
+	public string Email { get; }
 
 	[JsonPropertyName("exp")]
 	[JsonConverter(typeof(UnixTimestampJsonConverter))]
-	public DateTimeOffset Expiration { get; init; } = DateTimeOffset.MinValue;
+	public DateTimeOffset Expiration { get; } = DateTimeOffset.MinValue;
 
 	[JsonPropertyName("iat")]
 	[JsonConverter(typeof(UnixTimestampJsonConverter))]
-	public DateTimeOffset IssuedAt { get; init; } = DateTimeOffset.MinValue;
+	public DateTimeOffset IssuedAt { get; } = DateTimeOffset.MinValue;
 }

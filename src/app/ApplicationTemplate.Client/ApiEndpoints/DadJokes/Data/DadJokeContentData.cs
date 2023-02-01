@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Text;
-using Uno;
+﻿namespace ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Client;
-
-public class DadJokeContentData
+public sealed class DadJokeContentData
 {
 	public DadJokeContentData(string id, string title, string selftext, int totalAwardsReceived, string distinguished, bool isFavorite)
 	{

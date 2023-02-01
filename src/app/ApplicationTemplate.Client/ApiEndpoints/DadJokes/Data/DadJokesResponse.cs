@@ -1,6 +1,6 @@
 ﻿namespace ApplicationTemplate.Client;
 
-public partial class DadJokesResponse
+public sealed partial class DadJokesResponse
 {
 	public DadJokesResponse(DadJokesData data)
 	{

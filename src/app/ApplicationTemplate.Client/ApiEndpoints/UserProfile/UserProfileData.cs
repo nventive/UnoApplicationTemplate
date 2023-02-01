@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.Client;
 
-public record UserProfileData
+public sealed class UserProfileData
 {
 	public UserProfileData(string id, string firstName, string lastName, string email)
 	{
@@ -18,9 +15,9 @@ public record UserProfileData
 	[JsonConverter(typeof(StringJsonConverter))]
 	public string Id { get; }
 
-	public string FirstName { get; init; }
+	public string FirstName { get; }
 
-	public string LastName { get; init; }
+	public string LastName { get; }
 
-	public string Email { get; init; }
+	public string Email { get; }
 }

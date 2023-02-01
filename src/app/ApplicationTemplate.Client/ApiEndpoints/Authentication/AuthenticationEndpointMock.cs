@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -59,26 +57,25 @@ public class AuthenticationEndpointMock : IAuthenticationEndpoint
 		var encodedJwt = CreateJsonWebToken(token, timeToLive);
 		var jwt = new JwtData<AuthenticationToken>(encodedJwt, _serializerOptions);
 
-		return new AuthenticationData()
-		{
-			AccessToken = jwt.Token,
-			RefreshToken = Guid.NewGuid().ToString(format: null, CultureInfo.InvariantCulture),
-			Expiration = jwt.Payload.Expiration,
-		};
+		return new AuthenticationData(
+			accessToken: jwt.Token,
+			refreshToken: Guid.NewGuid().ToString(format: null, CultureInfo.InvariantCulture),
+			expiration: jwt.Payload.Expiration
+		);
 	}
 
 	private string CreateJsonWebToken(AuthenticationToken token = null, TimeSpan? timeToLive = null)
 	{
 		const string header = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"; // alg=HS256, type=JWT
-		const string signature = "QWqnPP8W6ymexz74P6quP-oG-wxr7vMGqrEL8y_tV6M"; // dummy stuff
+		const string signature = "QWqnPP8W6ymexz74P6quP-oG-wxr7vMGqrEL8y_tV6M"; // Dummy stuff.
 
 		var now = DateTimeOffset.Now;
 
-		token = (token ?? AuthenticationToken.Default) with
-		{
-			Expiration = now + (timeToLive ?? TimeSpan.FromMinutes(10)),
-			IssuedAt = now
-		};
+		token = new AuthenticationToken(
+			email: token?.Email ?? AuthenticationToken.Default.Email,
+			expiration: now + (timeToLive ?? TimeSpan.FromMinutes(10)),
+			issuedAt: now
+		);
 
 		string payload;
 		using (var stream = new MemoryStream())

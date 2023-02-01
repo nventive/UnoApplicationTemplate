@@ -7,7 +7,7 @@ using Nventive.Persistence;
 
 namespace ApplicationTemplate.Client;
 
-public partial class ApplicationSettingsService : IApplicationSettingsService
+public sealed partial class ApplicationSettingsService : IApplicationSettingsService
 {
 	private readonly IObservableDataPersister<ApplicationSettings> _dataPersister;
 

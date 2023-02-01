@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.Client;
 
-public record PostData
+public sealed class PostData
 {
 	public PostData(long id, string title, string body, long userIdentifier)
 	{
@@ -15,14 +12,14 @@ public record PostData
 		UserIdentifier = userIdentifier;
 	}
 
-	public long Id { get; init; }
+	public long Id { get; }
 
-	public string Title { get; init; }
+	public string Title { get; }
 
-	public string Body { get; init; }
+	public string Body { get; }
 
 	[JsonPropertyName("UserId")]
-	public long UserIdentifier { get; init; }
+	public long UserIdentifier { get; }
 
 	public bool Exists => Id != 0;
 

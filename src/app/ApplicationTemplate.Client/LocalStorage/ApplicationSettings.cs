@@ -1,21 +1,21 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 
 namespace ApplicationTemplate.Client;
 
 public record ApplicationSettings
 {
-	public static ApplicationSettings Default { get; } = new ApplicationSettings();
-
 	public ApplicationSettings(
 		AuthenticationData authenticationData = null,
 		bool isOnboardingCompleted = false,
-		ImmutableDictionary<string, FavoriteJokeData> favoriteQuotes = null)
+		ImmutableDictionary<string, FavoriteJokeData> favoriteQuotes = null
+	)
 	{
 		AuthenticationData = authenticationData;
 		IsOnboardingCompleted = isOnboardingCompleted;
 		FavoriteQuotes = favoriteQuotes ?? ImmutableDictionary<string, FavoriteJokeData>.Empty;
 	}
+
+	public static ApplicationSettings Default { get; } = new ApplicationSettings();
 
 	public AuthenticationData AuthenticationData { get; init; }
 

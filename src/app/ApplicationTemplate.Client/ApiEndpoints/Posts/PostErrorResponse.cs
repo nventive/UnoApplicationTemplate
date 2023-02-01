@@ -1,11 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Client;
-
-public class PostErrorResponse
+public sealed class PostErrorResponse
 {
+	public PostErrorResponse(PostData data, ErrorData error)
+	{
+		Data = data;
+		Error = error;
+	}
+
 	public PostData Data { get; }
 
 	public ErrorData Error { get; }

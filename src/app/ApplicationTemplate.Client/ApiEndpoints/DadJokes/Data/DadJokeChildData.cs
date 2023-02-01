@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Client;
-
-public partial class DadJokeChildData
+public sealed partial class DadJokeChildData
 {
 	public DadJokeChildData(DadJokeContentData data)
 	{

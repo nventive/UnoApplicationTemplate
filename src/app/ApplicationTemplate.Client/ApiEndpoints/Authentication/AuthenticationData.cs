@@ -4,12 +4,9 @@ using MallardMessageHandlers;
 
 namespace ApplicationTemplate.Client;
 
-public class AuthenticationData : IAuthenticationToken
+public sealed class AuthenticationData : IAuthenticationToken
 {
-	public AuthenticationData(
-		string accessToken = default,
-		string refreshToken = default,
-		DateTimeOffset expiration = default)
+	public AuthenticationData(string accessToken = default, string refreshToken = default, DateTimeOffset expiration = default)
 	{
 		AccessToken = accessToken;
 		RefreshToken = refreshToken;
@@ -20,12 +17,12 @@ public class AuthenticationData : IAuthenticationToken
 	public AuthenticationToken AccessTokenPayload => AccessToken == null ? null : new JwtData<AuthenticationToken>(AccessToken).Payload;
 
 	[JsonPropertyName("access_token")]
-	public string AccessToken { get; init; }
+	public string AccessToken { get; }
 
 	[JsonPropertyName("refresh_token")]
-	public string RefreshToken { get; init; }
+	public string RefreshToken { get; }
 
-	public DateTimeOffset Expiration { get; init; }
+	public DateTimeOffset Expiration { get; }
 
 	public string Email => AccessTokenPayload?.Email;
 

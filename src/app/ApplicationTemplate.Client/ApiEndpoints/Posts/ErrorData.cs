@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿namespace ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Client;
-
-public class ErrorData
+public sealed class ErrorData
 {
 }
