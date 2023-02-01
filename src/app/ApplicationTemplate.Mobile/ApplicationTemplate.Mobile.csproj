@@ -125,17 +125,6 @@
 				<AndroidResource Include="Android\Resources\drawable-xxxhdpi\Logo.png" />
 				<AndroidResource Include="Android\Resources\xml\file_paths.xml" />
 			</ItemGroup>
-			<!-- Android assets. -->
-			<ItemGroup>
-				<AndroidAsset Include="Android\Assets\Fonts\Guillon-Black.ttf" />
-				<AndroidAsset Include="Android\Assets\Fonts\Guillon-Bold.ttf" />
-				<AndroidAsset Include="Android\Assets\Fonts\Guillon-Light.ttf" />
-				<AndroidAsset Include="Android\Assets\Fonts\Guillon-Regular.ttf" />
-				<AndroidAsset Include="Android\Assets\Fonts\Guillon-SemiBold.ttf" />
-				<AndroidAsset Include="Android\Assets\Fonts\Roboto-Medium.ttf" />
-				<AndroidAsset Include="Android\Assets\Fonts\Roboto-Regular.ttf" />
-				<AndroidAsset Include="Android\Assets\Fonts\segmdl2.ttf" />
-			</ItemGroup>
 			<!-- Network security configuration (For Fiddler). -->
 			<ItemGroup Condition="'$(ApplicationEnvironment)'!='Production'">
 				<AndroidResource Include="Android\Resources\xml\network_security_config.xml" />
@@ -211,14 +200,6 @@
 				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon.png" />
 				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon%402x.png" />
 				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon%403x.png" />
-				<BundleResource Include="iOS\Resources\Fonts\Guillon-Black.ttf" />
-				<BundleResource Include="iOS\Resources\Fonts\Guillon-Bold.ttf" />
-				<BundleResource Include="iOS\Resources\Fonts\Guillon-Light.ttf" />
-				<BundleResource Include="iOS\Resources\Fonts\Guillon-Regular.ttf" />
-				<BundleResource Include="iOS\Resources\Fonts\Guillon-SemiBold.ttf" />
-				<BundleResource Include="iOS\Resources\Fonts\Roboto-Medium.ttf" />
-				<BundleResource Include="iOS\Resources\Fonts\Roboto-Regular.ttf" />
-				<BundleResource Include="iOS\Resources\Fonts\segmdl2.ttf" />
 				<!--
 				Removing this fix release build.
 				<InterfaceDefinition Include="iOS\LaunchScreen.storyboard" />

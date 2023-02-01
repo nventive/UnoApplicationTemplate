@@ -17,7 +17,7 @@
 		<Configurations>Debug;Release</Configurations>
 		<DefineConstants>$(DefineConstants);__WINDOWS__</DefineConstants>
 	</PropertyGroup>
-	
+
 	<ItemGroup>
 		<!-- TODO: Add missing images? -->
 		<Content Include="Images\SplashScreen.scale-200.png" />
@@ -29,17 +29,6 @@
 		<Content Include="Images\Wide310x150Logo.scale-200.png" />
 	</ItemGroup>
 
-	<ItemGroup>
-		<Content Include="Assets\Fonts\Guillon-Black.ttf" />
-		<Content Include="Assets\Fonts\Guillon-Bold.ttf" />
-		<Content Include="Assets\Fonts\Guillon-Light.ttf" />
-		<Content Include="Assets\Fonts\Guillon-Regular.ttf" />
-		<Content Include="Assets\Fonts\Guillon-SemiBold.ttf" />
-		<Content Include="Assets\Fonts\Roboto-Medium.ttf" />
-		<Content Include="Assets\Fonts\Roboto-Regular.ttf" />
-		<Content Include="Assets\Fonts\segmdl2.ttf" />
-	</ItemGroup>
-	
 	<ItemGroup>
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.1.0" />
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />

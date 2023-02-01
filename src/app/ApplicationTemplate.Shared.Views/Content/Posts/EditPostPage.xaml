@@ -19,7 +19,7 @@
 					<AppBarButton.Icon>
 
 						<!-- Icon -->
-						<BitmapIcon UriSource="ms-appx:///Assets/CommandBarCommands/closeIcon.png" />
+						<BitmapIcon UriSource="ms-appx:///Assets/CommandBar/closeIcon.png" />
 					</AppBarButton.Icon>
 				</AppBarButton>
 			</toolkit:CommandBarExtensions.NavigationCommand>
