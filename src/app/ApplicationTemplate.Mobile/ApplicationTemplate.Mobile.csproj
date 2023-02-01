@@ -24,11 +24,11 @@
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.2.0" />
-		<PackageReference Include="Uno.WinUI" Version="4.6.19" />
-		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.6.19" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.WinUI" Version="4.7.30" />
+		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.7.30" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.6.19" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
-		<PackageReference Include="Uno.WinUI.Lottie" Version="4.6.19" />
+		<PackageReference Include="Uno.WinUI.Lottie" Version="4.7.30" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
@@ -98,32 +98,32 @@
 			</ItemGroup>
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
-				<AndroidEnvironment Include="Android/environment.conf" />
-				<LinkDescription Include="Android/LinkerExclusions.xml" />
+				<AndroidEnvironment Include="Android\environment.conf" />
+				<LinkDescription Include="Android\LinkerExclusions.xml" />
 			</ItemGroup>
 			<!-- Android resources. -->
 			<ItemGroup>
-				<AndroidResource Include="Android/Resources/values/Colors.xml" />
-				<AndroidResource Include="Android/Resources/values-night/Colors.xml" />
-				<AndroidResource Include="Android/Resources/values/Strings.xml" />
-				<AndroidResource Include="Android/Resources/values/Styles.xml" />
-				<AndroidResource Include="Android/Resources/drawable/splash.xml" />
-				<AndroidResource Include="Android/Resources/mipmap-mdpi/ic_launcher.png" />
-				<AndroidResource Include="Android/Resources/mipmap-hdpi/ic_launcher.png" />
-				<AndroidResource Include="Android/Resources/mipmap-xhdpi/ic_launcher.png" />
-				<AndroidResource Include="Android/Resources/mipmap-xxhdpi/ic_launcher.png" />
-				<AndroidResource Include="Android/Resources/mipmap-xxxhdpi/ic_launcher.png" />
-				<AndroidResource Include="Android/Resources/mipmap-mdpi/ic_launcher_foreground.png" />
-				<AndroidResource Include="Android/Resources/mipmap-hdpi/ic_launcher_foreground.png" />
-				<AndroidResource Include="Android/Resources/mipmap-xxhdpi/ic_launcher_foreground.png" />
-				<AndroidResource Include="Android/Resources/mipmap-xhdpi/ic_launcher_foreground.png" />
-				<AndroidResource Include="Android/Resources/mipmap-xxxhdpi/ic_launcher_foreground.png" />
-				<AndroidResource Include="Android/Resources/drawable-hdpi/Logo.png" />
-				<AndroidResource Include="Android/Resources/drawable-mdpi/Logo.png" />
-				<AndroidResource Include="Android/Resources/drawable-xhdpi/Logo.png" />
-				<AndroidResource Include="Android/Resources/drawable-xxhdpi/Logo.png" />
-				<AndroidResource Include="Android/Resources/drawable-xxxhdpi/Logo.png" />
-				<AndroidResource Include="Android/Resources/xml/file_paths.xml" />
+				<AndroidResource Include="Android\Resources\values\Colors.xml" />
+				<AndroidResource Include="Android\Resources\values-night\Colors.xml" />
+				<AndroidResource Include="Android\Resources\values\Strings.xml" />
+				<AndroidResource Include="Android\Resources\values\Styles.xml" />
+				<AndroidResource Include="Android\Resources\drawable\splash.xml" />
+				<AndroidResource Include="Android\Resources\mipmap-mdpi\ic_launcher.png" />
+				<AndroidResource Include="Android\Resources\mipmap-hdpi\ic_launcher.png" />
+				<AndroidResource Include="Android\Resources\mipmap-xhdpi\ic_launcher.png" />
+				<AndroidResource Include="Android\Resources\mipmap-xxhdpi\ic_launcher.png" />
+				<AndroidResource Include="Android\Resources\mipmap-xxxhdpi\ic_launcher.png" />
+				<AndroidResource Include="Android\Resources\mipmap-mdpi\ic_launcher_foreground.png" />
+				<AndroidResource Include="Android\Resources\mipmap-hdpi\ic_launcher_foreground.png" />
+				<AndroidResource Include="Android\Resources\mipmap-xxhdpi\ic_launcher_foreground.png" />
+				<AndroidResource Include="Android\Resources\mipmap-xhdpi\ic_launcher_foreground.png" />
+				<AndroidResource Include="Android\Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
+				<AndroidResource Include="Android\Resources\drawable-hdpi\Logo.png" />
+				<AndroidResource Include="Android\Resources\drawable-mdpi\Logo.png" />
+				<AndroidResource Include="Android\Resources\drawable-xhdpi\Logo.png" />
+				<AndroidResource Include="Android\Resources\drawable-xxhdpi\Logo.png" />
+				<AndroidResource Include="Android\Resources\drawable-xxxhdpi\Logo.png" />
+				<AndroidResource Include="Android\Resources\xml\file_paths.xml" />
 			</ItemGroup>
 			<!-- Android assets. -->
 			<ItemGroup>
@@ -138,11 +138,11 @@
 			</ItemGroup>
 			<!-- Network security configuration (For Fiddler). -->
 			<ItemGroup Condition="'$(ApplicationEnvironment)'!='Production'">
-				<AndroidResource Include="Android/Resources/xml/network_security_config.xml" />
+				<AndroidResource Include="Android\Resources\xml\network_security_config.xml" />
 			</ItemGroup>
 			<ItemGroup Condition="'$(ApplicationEnvironment)'=='Production'">
-				<AndroidResource Include="Android/Resources/xml/network_security_config_prod.xml">
-					<LogicalName>Android/xml/network_security_config.xml</LogicalName>
+				<AndroidResource Include="Android\Resources\xml\network_security_config_prod.xml">
+					<LogicalName>Android\xml\network_security_config.xml</LogicalName>
 				</AndroidResource>
 			</ItemGroup>
 		</When>
@@ -154,7 +154,7 @@
 				<MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
 				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
-				<CodesignEntitlements>./iOS/Entitlements.plist</CodesignEntitlements>
+				<CodesignEntitlements>iOS\Entitlements.plist</CodesignEntitlements>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
@@ -205,12 +205,12 @@
 				<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" />
 			</ItemGroup>
 			<ItemGroup>
-				<LinkDescription Include="iOS/LinkerExclusions.xml" />
+				<LinkDescription Include="iOS\LinkerExclusions.xml" />
 			</ItemGroup>
 			<ItemGroup>
-				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon.png" />
-				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon%402x.png" />
-				<BundleResource Include="iOS/Resources/Assets/splashscreen_icon%403x.png" />
+				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon.png" />
+				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon%402x.png" />
+				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon%403x.png" />
 				<BundleResource Include="iOS\Resources\Fonts\Guillon-Black.ttf" />
 				<BundleResource Include="iOS\Resources\Fonts\Guillon-Bold.ttf" />
 				<BundleResource Include="iOS\Resources\Fonts\Guillon-Light.ttf" />
@@ -221,7 +221,7 @@
 				<BundleResource Include="iOS\Resources\Fonts\segmdl2.ttf" />
 				<!--
 				Removing this fix release build.
-				<InterfaceDefinition Include="iOS/LaunchScreen.storyboard" />
+				<InterfaceDefinition Include="iOS\LaunchScreen.storyboard" />
 				-->
 				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Contents.json">
 					<Visible>false</Visible>
