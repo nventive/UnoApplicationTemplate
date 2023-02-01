@@ -36,6 +36,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Authentication\SentEmailConfirmationPage.xaml.cs">
       <DependentUpon>SentEmailConfirmationPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesFiltersPage.xaml.cs">
+      <DependentUpon>DadJokesFiltersPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesPage.xaml.cs">
       <DependentUpon>DadJokesPage.xaml</DependentUpon>
     </Compile>
@@ -59,6 +62,12 @@
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Posts\PostsPage.xaml.cs">
       <DependentUpon>PostsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Settings\EditProfilePage.xaml.cs">
+      <DependentUpon>EditProfilePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Settings\LicensesPage.xaml.cs">
+      <DependentUpon>LicensesPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
@@ -182,6 +191,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesFiltersPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -211,6 +224,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Posts\PostsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Settings\EditProfilePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Settings\LicensesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

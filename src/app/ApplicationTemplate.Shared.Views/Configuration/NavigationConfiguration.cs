@@ -34,18 +34,14 @@ public static class NavigationConfiguration
 		{ typeof(LoginPageViewModel), typeof(LoginPage) },
 		{ typeof(OnboardingPageViewModel), typeof(OnboardingPage) },
 		{ typeof(SettingsPageViewModel), typeof(SettingsPage) },
-		/*
 		{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
+		/*
 		{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
 		*/
 		{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
-		/*
 		{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
-		*/
 		{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
-		/*
 		{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
-		*/
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
 	};
