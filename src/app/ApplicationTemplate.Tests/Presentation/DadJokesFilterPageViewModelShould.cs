@@ -10,7 +10,7 @@ using Xunit.Abstractions;
 
 namespace ApplicationTemplate.Tests;
 
-public class DadJokesFilterPageViewModelShould : NavigationTestsBase
+public sealed class DadJokesFilterPageViewModelShould : NavigationTestsBase
 {
 	public DadJokesFilterPageViewModelShould(ITestOutputHelper output) : base(output)
 	{

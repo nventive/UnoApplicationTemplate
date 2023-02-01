@@ -5,7 +5,7 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests;
 
-public class PostEndpointShould : IntegrationTestBase<IPostEndpoint>
+public sealed class PostEndpointShould : IntegrationTestBase<IPostEndpoint>
 {
 	[Fact]
 	public async Task GetAll()
