@@ -246,6 +246,10 @@
 			</Setter>
 		</Style>
 
+		<nvc:FromNullableBoolToCustomValueConverter x:Key="BoolToIsEnabledContent"
+													TrueValue="Disable"
+													NullOrFalseValue="Enable" />
+
 		<nvc:FromNullableBoolToCustomValueConverter x:Key="BoolToToggleHeaderContent"
 													TrueValue="Show Headers"
 													NullOrFalseValue="Hide Headers" />
@@ -354,7 +358,12 @@
 		</Grid.RowDefinitions>
 
 		<!-- General buttons -->
-		<StackPanel Orientation="Horizontal">
+		<StackPanel Orientation="Horizontal"
+					Spacing="2">
+			<ToggleButton Content="{Binding IsEnabled, Converter={StaticResource BoolToIsEnabledContent}}"
+						  IsChecked="{Binding IsEnabled, Mode=TwoWay}"
+						  Command="{Binding NotifyNeedsRestart}"
+						  Style="{StaticResource HttpDebuggerToggleButtonStyle}" />
 			<Button Style="{StaticResource HttpDebuggerButtonStyle}"
 					Content="Clear"
 					Command="{Binding Clear}" />
