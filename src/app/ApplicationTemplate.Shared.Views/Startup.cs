@@ -54,6 +54,27 @@ public sealed class Startup : StartupBase
 		HandleUnhandledExceptions(services);
 	}
 
+	protected override async Task StartViewServices(IServiceProvider services, bool isFirstStart)
+	{
+		if (isFirstStart)
+		{
+			// Start your view services here.
+			await SetShellViewModel();
+
+			await AddSystemBackButtonSource(services);
+
+			HandleSystemBackVisibility(services);
+
+			// Set StatusBar color depending on current ViewModel.
+			SetStatusBarColor(services);
+		}
+	}
+
+	protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
+	{
+		return serviceProvider.GetRequiredService<ILogger<Startup>>();
+	}
+
 	private static void HandleUnhandledExceptions(IServiceProvider services)
 	{
 		void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
@@ -61,7 +82,7 @@ public sealed class Startup : StartupBase
 //-:cnd:noEmit
 #if __WINDOWS__ || __ANDROID__ || __IOS__
 
-		Microsoft.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
+		Application.Current.UnhandledException += (s, e) =>
 		{
 			OnError(e.Exception);
 			e.Handled = true;
@@ -79,27 +100,11 @@ public sealed class Startup : StartupBase
 //+:cnd:noEmit
 	}
 
-	protected override async Task StartViewServices(IServiceProvider services, bool isFirstStart)
-	{
-		if (isFirstStart)
-		{
-			// Start your view services here.
-			await SetShellViewModel();
-
-			await AddSystemBackButtonSource(services);
-
-			HandleSystemBackVisibility(services);
-
-			// Set Status Bar color depending on current View Model.
-			SetStatusBarColor(services);
-		}
-	}
-
 	private static async Task SetShellViewModel()
 	{
 		await App.Instance.Shell.DispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, SetDataContextUI);
 
-		void SetDataContextUI() // Runs on UI thread.
+		static void SetDataContextUI() // Runs on UI thread.
 		{
 			var shellViewModel = new ShellViewModel();
 
@@ -165,11 +170,6 @@ public sealed class Startup : StartupBase
 //+:cnd:noEmit
 	}
 
-	protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
-	{
-		return serviceProvider.GetRequiredService<ILogger<Startup>>();
-	}
-
 	private void SetStatusBarColor(IServiceProvider services)
 	{
 //-:cnd:noEmit
@@ -190,35 +190,33 @@ public sealed class Startup : StartupBase
 			.GetRequiredService<ISectionsNavigator>()
 			.ObserveProcessedState()
 			.ObserveOn(dispatcher)
-			.Subscribe(
-				onNext: state =>
+			.Subscribe(onNext: state =>
+			{
+				var currentVmType = state.CurrentState.GetViewModelType();
+
+				// We set the default status bar color to white.
+				var statusBarColor = Microsoft.UI.Colors.White;
+
+				if (App.Instance.CurrentWindow.Content is FrameworkElement root && root.ActualTheme == ElementTheme.Dark)
 				{
-					var currentVmType = state.CurrentState.GetViewModelType();
-
-					// We set the default status bar color to white.
-					var statusBarColor = Microsoft.UI.Colors.White;
-
-					if (App.Instance.CurrentWindow.Content is FrameworkElement root && root.ActualTheme == ElementTheme.Dark)
+					// For dark theme, the status bar is black except for the pages in vmsAlternateColor.
+					if (!vmsAlternateColor.Contains(currentVmType))
 					{
-						// For dark theme, the status bar is black except for the pages in vmsAlternateColor.
-						if (!vmsAlternateColor.Contains(currentVmType))
-						{
-							statusBarColor = Microsoft.UI.Colors.Black;
-						}
+						statusBarColor = Microsoft.UI.Colors.Black;
 					}
-					else
+				}
+				else
+				{
+					// For light theme, the status bar is white except for the pages in vmsAlternateColor.
+					if (vmsAlternateColor.Contains(currentVmType))
 					{
-						// For light theme, the status bar is white except for the pages in vmsAlternateColor.
-						if (vmsAlternateColor.Contains(currentVmType))
-						{
-							statusBarColor = Microsoft.UI.Colors.Black;
-						}
+						statusBarColor = Microsoft.UI.Colors.Black;
 					}
+				}
 
-					Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = statusBarColor;
-				},
-				onError: e => Logger.LogError(e, "Failed to set status bar color.")
-			);
+				Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = statusBarColor;
+			},
+			onError: e => Logger.LogError(e, "Failed to set status bar color."));
 #endif
 //+:cnd:noEmit
 	}
