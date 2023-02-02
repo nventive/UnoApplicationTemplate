@@ -65,6 +65,12 @@ public partial class HttpDebuggerViewModel : ViewModel
 		}
 	);
 
+	public bool IsEnabled
+	{
+		get => this.GetFromOptionsMonitor<DiagnosticsOptions, bool>(o => o.IsHttpDebuggerEnabled);
+		set => this.Set(value);
+	}
+
 	public bool HideRequestHeaders
 	{
 		get => this.GetFromOptionsMonitor<DiagnosticsOptions, bool>(o => o.HttpDebugger.HideRequestHeaders);
@@ -140,6 +146,8 @@ public partial class HttpDebuggerViewModel : ViewModel
 	{
 		_httpDebuggerService.ClearTraces();
 	});
+
+	public IDynamicCommand NotifyNeedsRestart => this.GetNotifyNeedsRestartCommand();
 
 	private static string GetChildName(long sequenceId)
 	{

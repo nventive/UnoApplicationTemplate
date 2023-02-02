@@ -36,12 +36,5 @@ public class SettingsDiagnosticsViewModel : ViewModel
 		set => this.Set(value);
 	}
 
-	public IDynamicCommand NotifyNeedsRestart => this.GetCommandFromTask(async ct =>
-	{
-		await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
-			.Title("Diagnostics")
-			.Content("Restart the application to apply your changes.")
-			.OkCommand()
-		);
-	});
+	public IDynamicCommand NotifyNeedsRestart => this.GetNotifyNeedsRestartCommand();
 }
