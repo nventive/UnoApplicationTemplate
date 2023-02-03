@@ -2,7 +2,6 @@
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
-using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
@@ -12,8 +11,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml;
 using Windows.UI.Core;
-using Windows.UI.Xaml;
 
 namespace ApplicationTemplate.Views;
 
@@ -30,9 +29,7 @@ public sealed class Startup : StartupBase
 
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
-//+:cnd:noEmit
 		Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
-//-:cnd:noEmit
 #endif
 //+:cnd:noEmit
 	}
@@ -53,40 +50,9 @@ public sealed class Startup : StartupBase
 	{
 #if false
 		AsyncWebView.AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView.AsyncWebView>>();
-
+#endif
 		HandleUnhandledExceptions(services);
-#endif
 	}
-
-#if false
-	private static void HandleUnhandledExceptions(IServiceProvider services)
-	{
-		void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
-
-//-:cnd:noEmit
-#if __WINDOWS__ || __ANDROID__ || __IOS__
-//+:cnd:noEmit
-		Windows.UI.Xaml.Application.Current.UnhandledException += (s, e) =>
-		{
-			OnError(e.Exception);
-			e.Handled = true;
-		};
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-//-:cnd:noEmit
-#if __ANDROID__
-//+:cnd:noEmit
-		Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser += (s, e) =>
-		{
-			OnError(e.Exception);
-			e.Handled = true;
-		};
-//-:cnd:noEmit
-#endif
-//+:cnd:noEmit
-	}
-#endif
 
 	protected override async Task StartViewServices(IServiceProvider services, bool isFirstStart)
 	{
@@ -94,22 +60,51 @@ public sealed class Startup : StartupBase
 		{
 			// Start your view services here.
 			await SetShellViewModel();
-#if false
+
 			await AddSystemBackButtonSource(services);
 
 			HandleSystemBackVisibility(services);
 
-			// Set StatusBar color depending on current ViewModel
+			// Set StatusBar color depending on current ViewModel.
 			SetStatusBarColor(services);
-#endif
 		}
+	}
+
+	protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
+	{
+		return serviceProvider.GetRequiredService<ILogger<Startup>>();
+	}
+
+	private static void HandleUnhandledExceptions(IServiceProvider services)
+	{
+		void OnError(Exception e, bool isTerminating = false) => ErrorConfiguration.OnUnhandledException(e, isTerminating, services);
+
+//-:cnd:noEmit
+#if __WINDOWS__ || __ANDROID__ || __IOS__
+
+		Application.Current.UnhandledException += (s, e) =>
+		{
+			OnError(e.Exception);
+			e.Handled = true;
+		};
+#endif
+//+:cnd:noEmit
+//-:cnd:noEmit
+#if __ANDROID__
+		Android.Runtime.AndroidEnvironment.UnhandledExceptionRaiser += (s, e) =>
+		{
+			OnError(e.Exception);
+			e.Handled = true;
+		};
+#endif
+//+:cnd:noEmit
 	}
 
 	private static async Task SetShellViewModel()
 	{
 		await App.Instance.Shell.DispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, SetDataContextUI);
 
-		void SetDataContextUI() // Runs on UI thread.
+		static void SetDataContextUI() // Runs on UI thread.
 		{
 			var shellViewModel = new ShellViewModel();
 
@@ -119,12 +114,13 @@ public sealed class Startup : StartupBase
 		}
 	}
 
-#if false
 	/// <summary>
 	/// Sets the visibility of the system UI's back button based on the navigation controller.
 	/// </summary>
 	private void HandleSystemBackVisibility(IServiceProvider services)
 	{
+//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
 		var multiNavigationController = services.GetRequiredService<ISectionsNavigator>();
 
 		Observable
@@ -139,8 +135,8 @@ public sealed class Startup : StartupBase
 
 		void OnStateChanged(bool canNavigateBackOrCloseModal)
 		{
-			var dispatcher = services.GetRequiredService<CoreDispatcher>();
-			_ = dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.Normal, UpdateBackButtonUI);
+			var dispatcherQueue = services.GetRequiredService<DispatcherQueue>();
+			_ = dispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, UpdateBackButtonUI);
 
 			void UpdateBackButtonUI() // Runs on UI thread.
 			{
@@ -149,6 +145,8 @@ public sealed class Startup : StartupBase
 					: AppViewBackButtonVisibility.Collapsed;
 			}
 		}
+#endif
+//+:cnd:noEmit
 	}
 
 	/// <summary>
@@ -156,9 +154,11 @@ public sealed class Startup : StartupBase
 	/// </summary>
 	private async Task AddSystemBackButtonSource(IServiceProvider services)
 	{
-		var dispatcher = services.GetRequiredService<CoreDispatcher>();
+//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
+		var dispatcherQueue = services.GetRequiredService<DispatcherQueue>();
 		var backButtonManager = services.GetRequiredService<IBackButtonManager>();
-		await dispatcher.RunAsync((CoreDispatcherPriority)CoreDispatcherPriority.High, AddSystemBackButtonSourceInner);
+		await dispatcherQueue.RunAsync(DispatcherQueuePriority.High, AddSystemBackButtonSourceInner);
 
 		// Runs on main thread.
 		void AddSystemBackButtonSourceInner()
@@ -166,30 +166,24 @@ public sealed class Startup : StartupBase
 			var source = new SystemNavigationBackButtonSource();
 			backButtonManager.AddSource(source);
 		}
-	}
 #endif
-
-	protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
-	{
-		return serviceProvider.GetRequiredService<ILogger<Startup>>();
+//+:cnd:noEmit
 	}
 
-#if false
 	private void SetStatusBarColor(IServiceProvider services)
 	{
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
-//+:cnd:noEmit
 		var dispatcher = services.GetRequiredService<IDispatcherScheduler>();
 
-		// These are pages with a different background color, needing a different status bar color
-		Type[] vmsAlternateColor =
+		// These are pages with a different background color, needing a different status bar color.
+		var vmsAlternateColor = new Type[]
 		{
 			typeof(OnboardingPageViewModel),
 			typeof(LoginPageViewModel),
 			typeof(ForgotPasswordFormViewModel),
 			typeof(ResetPasswordPageViewModel),
-			typeof(SentEmailConfirmationPageViewModel)
+			typeof(SentEmailConfirmationPageViewModel),
 		};
 
 		services
@@ -200,31 +194,30 @@ public sealed class Startup : StartupBase
 			{
 				var currentVmType = state.CurrentState.GetViewModelType();
 
-				// We set the default status bar color to white
-				var statusBarColor = Windows.UI.Colors.White;
+				// We set the default status bar color to white.
+				var statusBarColor = Microsoft.UI.Colors.White;
 
-				if (Window.Current.Content is FrameworkElement root && root.ActualTheme == ElementTheme.Dark)
+				if (App.Instance.CurrentWindow.Content is FrameworkElement root && root.ActualTheme == ElementTheme.Dark)
 				{
-					// For dark theme, the status bar is black except for the pages in vmsAlternateColor
+					// For dark theme, the status bar is black except for the pages in vmsAlternateColor.
 					if (!vmsAlternateColor.Contains(currentVmType))
 					{
-						statusBarColor = Windows.UI.Colors.Black;
+						statusBarColor = Microsoft.UI.Colors.Black;
 					}
 				}
 				else
 				{
-					// For light theme, the status bar is white except for the pages in vmsAlternateColor
+					// For light theme, the status bar is white except for the pages in vmsAlternateColor.
 					if (vmsAlternateColor.Contains(currentVmType))
 					{
-						statusBarColor = Windows.UI.Colors.Black;
+						statusBarColor = Microsoft.UI.Colors.Black;
 					}
 				}
 
 				Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = statusBarColor;
-			}, e => Logger.LogError(e, "Failed to set status bar color."));
-//-:cnd:noEmit
+			},
+			onError: e => Logger.LogError(e, "Failed to set status bar color."));
 #endif
 //+:cnd:noEmit
 	}
-#endif
 }
