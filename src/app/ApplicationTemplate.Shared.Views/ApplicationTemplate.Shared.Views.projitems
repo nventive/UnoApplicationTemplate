@@ -94,6 +94,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Connectivity\ConnectivityProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Version\VersionProvider.Mobile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Version\VersionProvider.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Version\VersionProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DispatcherQueueExtensions.cs" />
