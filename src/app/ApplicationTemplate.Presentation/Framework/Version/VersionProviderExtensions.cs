@@ -13,6 +13,6 @@ public static class VersionProviderExtensions
 	public static string GetFullVersionString(this IVersionProvider versionProvider)
 	{
 		var version = versionProvider.Version;
-		return $"{version.Major}.{version.Minor}.{version.Build} ({version.Revision})";
+		return $"{version.Major}.{version.Minor}.{version.Build} ({versionProvider.BuildString})";
 	}
 }
