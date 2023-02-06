@@ -5,15 +5,9 @@ namespace ApplicationTemplate;
 public interface IVersionProvider
 {
 	/// <summary>
-	/// Gets the application version build.
-	/// </summary>
-	/// <returns>The application version build number, or -1 if it's undefined.</returns>
-	public int Build { get; }
-
-	/// <summary>
 	/// Gets the application version build string.
 	/// </summary>
-	/// <returns>The application version build string.</returns>
+	/// <returns>The application version build number string, or "-1" if it's undefined.</returns>
 	public string BuildString { get; }
 
 	/// <summary>
@@ -23,7 +17,7 @@ public interface IVersionProvider
 	public Version Version { get; }
 
 	/// <summary>
-	/// Gets the application version string (Major.Minor.Build.Revision).
+	/// Gets the application version string (Major.Minor.Build).
 	/// </summary>
 	/// <returns>The application version string.</returns>
 	public string VersionString { get; }

@@ -78,6 +78,6 @@ public sealed partial class SettingsPageViewModel : ViewModel
 
 	private string GetVersionNumber()
 	{
-		return this.GetService<IVersionProvider>().VersionString;
+		return this.GetService<IVersionProvider>().GetFullVersionString();
 	}
 }
