@@ -125,10 +125,7 @@ steps:
     msbuildVersion: latest
     msbuildArchitecture: x86
     msbuildArguments: >
-      /p:PackageVersion=$(PreReleaseNumber)
-      /p:ApplicationBuildNumber=$(PreReleaseNumber)
       /p:ApplicationEnvironment=$(ApplicationEnvironment)
-      /p:ApplicationVersion=$(MajorMinorPatch)
       /p:AndroidBuildApplicationPackage=true
       /p:AndroidSigningKeyStore=$(keyStore.secureFilePath)
       /p:AndroidSigningStorePass=$(AndroidSigningStorePass)
@@ -136,7 +133,6 @@ steps:
       /p:AndroidSigningKeyAlias=$(AndroidSigningKeyAlias)
       /p:AndroidKeyStore=true
       /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid)
-      /p:ApplicationIdentifier=$(ApplicationIdentifier)
       /p:IsLightBuild=$(IsLightBuild) 
       /bl
     configuration: $(ApplicationConfiguration)
@@ -154,7 +150,7 @@ steps:
   condition: and(succeeded(), not(eq('${{ parameters.iosProvisioningProfileFile }}', '')))
   inputs:
     filePath: '$(System.DefaultWorkingDirectory)/build/build-ios.sh'
-    arguments: '"${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}" "$(ApplicationConfiguration)" "$(ApplicationPlatform)" "$(provisioningProfile.provisioningProfileUuid)" "$(ApplicationIdentifier)" "$(PreReleaseNumber)"'
+    arguments: '"${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}" "$(ApplicationConfiguration)" "$(ApplicationPlatform)" "$(provisioningProfile.provisioningProfileUuid)"'
 
 - script: >
     dotnet test ${{ parameters.pathToSrc }}/${{ parameters.solutionFileName }}
