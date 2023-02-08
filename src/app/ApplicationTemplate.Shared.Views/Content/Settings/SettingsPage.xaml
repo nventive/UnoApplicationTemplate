@@ -5,7 +5,6 @@
 	  xmlns:dl="using:Chinook.DataLoader">
 
 	<Grid Background="{StaticResource MaterialBackgroundBrush}">
-
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
