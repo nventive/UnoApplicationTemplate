@@ -1,14 +1,14 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:toolkit="using:Uno.UI.Toolkit">
+					xmlns:toolkit="using:Uno.UI.Toolkit"
+					xmlns:c="using:ApplicationTemplate.Views.Controls">
 
 	<!-- 
 		IMPORTANT DOCUMENTATION
 		https://github.com/unoplatform/uno/blob/master/doc/articles/controls/CommandBar.md
 	-->
 
-	<!-- TODO: Remove when Material fixes the issue it has -->
 	<win:ControlTemplate x:Key="XamlMaterialCommandBarTemplate"
 						 TargetType="CommandBar">
 		<!-- Simplified CommandBar template that adds support for Uno.UI.CommandBarExtensions.NavigationCommand on Windows. -->
@@ -27,11 +27,11 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<!-- note: NavigationCommand is an AppBarButton, not ICommand -->
-				<ContentControl Content="{Binding (toolkit:CommandBarExtensions.NavigationCommand), RelativeSource={RelativeSource TemplatedParent}}"
+				<!-- Note: NavigationCommand is an AppBarButton, not an ICommand. -->
+				<ContentControl Content="{Binding (toolkit:CommandBarExtensions.NavigationCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullableAppBarButtonToAppBarButton}}"
 								Foreground="{TemplateBinding Foreground}"
-								Height="{StaticResource MaterialCommandBarHeight}"
-								Width="{StaticResource MaterialCommandBarHeight}"
+								MaxHeight="{StaticResource MaterialCommandBarHeight}"
+								MaxWidth="{StaticResource MaterialCommandBarHeight}"
 								IsTabStop="False" />
 
 				<!--
@@ -68,7 +68,7 @@
 
 	<win:Style x:Key="MaterialCommandBarStyle"
 			   TargetType="CommandBar">
-		<!-- Setting content to empty to avoid getting the datacontext -->
+		<!-- Setting content to empty to avoid getting the DataContext. -->
 		<Setter Property="Content"
 				Value="" />
 		<Setter Property="ContentTemplate">
@@ -122,11 +122,13 @@
 		<Setter Property="toolkit:CommandBarExtensions.BackButtonForeground"
 				Value="{StaticResource AlternateOnBackgroundBrush}" />
 		<Setter Property="Height"
-				Value="56" />
+				Value="NaN" />
 		<Setter Property="Background"
 				Value="Transparent" />
 		<Setter Property="Foreground"
 				Value="{StaticResource AlternateOnBackgroundBrush}" />
+		<win:Setter Property="Template"
+				Value="{StaticResource XamlMaterialCommandBarTemplate}" />
 	</Style>
 	
 	<!-- Default Style -->

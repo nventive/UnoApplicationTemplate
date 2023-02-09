@@ -39,7 +39,7 @@ public sealed partial class App : Application
 #else
 		CurrentWindow = Microsoft.UI.Xaml.Window.Current;
 #endif
-//+:cnd:noEmit
+		//+:cnd:noEmit
 
 		Shell = CurrentWindow.Content as Shell;
 
