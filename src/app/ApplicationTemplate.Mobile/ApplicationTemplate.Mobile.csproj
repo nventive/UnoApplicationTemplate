@@ -65,7 +65,8 @@
 						<AndroidAotAdditionalArguments>nodebug,no-write-symbols</AndroidAotAdditionalArguments>
 						<AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
 						<AndroidUseAapt2>True</AndroidUseAapt2>
-						<AndroidLinkMode>Full</AndroidLinkMode>
+						<!--Linker is disabled because exclusions don't work on Net 6: https://github.com/unoplatform/uno/issues/11248-->
+						<!--<AndroidLinkMode>Full</AndroidLinkMode>-->
 						<AndroidLinkSkip>$(AssemblyName)</AndroidLinkSkip>
 					</PropertyGroup>
 					<Choose>
@@ -181,6 +182,8 @@
 						</When>
 						<Otherwise>
 							<PropertyGroup>
+								<!--Linker is disabled because exclusions don't work on Net 6: https://github.com/unoplatform/uno/issues/11248-->
+								<!--<MtouchLink>Full</MtouchLink>-->
 								<OptimizePNGs>True</OptimizePNGs>
 								<MtouchUseLlvm>True</MtouchUseLlvm>
 								<MtouchUseThumb>True</MtouchUseThumb>
