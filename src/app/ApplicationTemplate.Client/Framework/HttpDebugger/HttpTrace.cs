@@ -40,6 +40,8 @@ public record HttpTrace
 	public IEnumerable<KeyValuePair<string, IEnumerable<string>>> ResponseHeaders { get; init; }
 
 	public IEnumerable<KeyValuePair<string, IEnumerable<string>>> ResponseContentHeaders { get; init; }
+
+	public Exception Exception { get; init; }
 }
 
 /// <summary>

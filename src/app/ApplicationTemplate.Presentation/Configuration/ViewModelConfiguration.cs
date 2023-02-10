@@ -65,6 +65,7 @@ public static class ViewModelConfiguration
 					onSuccess: async (ct, request, value) => { /* Some analytics */ },
 					onError: async (ct, request, error) => { /* Somme analytics */ }
 				)
+				.WithLoggedErrors(s.GetRequiredService<ILogger<IDataLoader>>())
 			);
 
 			bool GetIsEmpty(IDataLoaderState state)
