@@ -45,6 +45,7 @@ public class HttpDebuggerHandler : DelegatingHandler
 			_debuggerService.UpdateTrace(trace with
 			{
 				ElapsedTime = timer.Elapsed,
+				Exception = exception,
 				Status = exception is OperationCanceledException ? HttpTraceStatus.Cancelled : HttpTraceStatus.Failed
 			});
 			throw;

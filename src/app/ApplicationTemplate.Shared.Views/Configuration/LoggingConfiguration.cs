@@ -63,7 +63,13 @@ public static class LoggingConfiguration
 		return configuration
 //-:cnd:noEmit
 #if __ANDROID__
-			.WriteTo.AndroidLog(outputTemplate: "{Message:lj} {Exception}{NewLine}");
+			// The native Android logs capture some information by default, which means we don't have to print everything in the message itself.
+#if DEBUG
+			// In debug however, we want to add the log level so that the VSColor extension properly colorizes our output.
+			.WriteTo.AndroidLog(outputTemplate: "{Level:u1}/ {Message:lj} {Exception}");
+#else
+			.WriteTo.AndroidLog(outputTemplate: "{Message:lj} {Exception}");
+#endif
 #elif __IOS__
 			.WriteTo.NSLog(outputTemplate: "{Level:u1}/{SourceContext}: {Message:lj} {Exception}");
 #else

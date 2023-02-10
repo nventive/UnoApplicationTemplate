@@ -198,7 +198,7 @@ public partial class HttpDebuggerViewModel : ViewModel
 	{
 		if (trace.Status != HttpTraceStatus.Received)
 		{
-			return "No response received.";
+			return $"No response received.{Environment.NewLine}{Environment.NewLine}{trace.Exception}";
 		}
 
 		var sb = new StringBuilder();
