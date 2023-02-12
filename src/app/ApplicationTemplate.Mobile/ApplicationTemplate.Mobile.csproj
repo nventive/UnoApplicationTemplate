@@ -12,6 +12,20 @@
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net6.0-ios'">14.2</SupportedOSPlatformVersion>
 		<NoWarn>Uno0001</NoWarn>
 	</PropertyGroup>
+	<!-- Linker configuration. -->
+	<PropertyGroup>
+		<PublishTrimmed>True</PublishTrimmed>
+		<TrimMode>link</TrimMode>
+		<Property>
+			<!-- See https://github.com/unoplatform/uno/issues/11248 for more details. -->
+			<Target Name="_LinkerAdjust" AfterTargets="_PrepareLinking">
+				<!-- See https://github.com/dotnet/runtime/issues/81979 for more details. -->
+				<PropertyGroup>
+					<_ExtraTrimmerArgs>$(_ExtraTrimmerArgs) --keep-metadata all</_ExtraTrimmerArgs>
+				</PropertyGroup>
+			</Target>
+		</Property>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.2.0" />
@@ -66,9 +80,6 @@
 						<AndroidAotAdditionalArguments>nodebug,no-write-symbols</AndroidAotAdditionalArguments>
 						<AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
 						<AndroidUseAapt2>True</AndroidUseAapt2>
-						<!--Linker is disabled because exclusions don't work on Net 6: https://github.com/unoplatform/uno/issues/11248-->
-						<!--<AndroidLinkMode>Full</AndroidLinkMode>-->
-						<AndroidLinkSkip>$(AssemblyName)</AndroidLinkSkip>
 					</PropertyGroup>
 					<Choose>
 						<When Condition="'$(IsLightBuild)'=='True'">
@@ -103,7 +114,7 @@
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
 				<AndroidEnvironment Include="Android\environment.conf" />
-				<LinkDescription Include="Android\LinkerExclusions.xml" />
+				<TrimmerRootDescriptor Include="Android\LinkerExclusions.xml" />
 			</ItemGroup>
 			<!-- Android resources. -->
 			<ItemGroup>
@@ -184,8 +195,6 @@
 						</When>
 						<Otherwise>
 							<PropertyGroup>
-								<!--Linker is disabled because exclusions don't work on Net 6: https://github.com/unoplatform/uno/issues/11248-->
-								<!--<MtouchLink>Full</MtouchLink>-->
 								<OptimizePNGs>True</OptimizePNGs>
 								<MtouchUseLlvm>True</MtouchUseLlvm>
 								<MtouchUseThumb>True</MtouchUseThumb>
@@ -200,7 +209,7 @@
 				<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.4.0" />
 			</ItemGroup>
 			<ItemGroup>
-				<LinkDescription Include="iOS\LinkerExclusions.xml" />
+				<TrimmerRootDescriptor Include="iOS\LinkerExclusions.xml" />
 			</ItemGroup>
 			<ItemGroup>
 				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon.png" />
