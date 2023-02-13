@@ -12,7 +12,7 @@ using Xunit;
 
 namespace ApplicationTemplate.Tests.Business;
 
-public partial class PostServiceShould
+public sealed partial class PostServiceShould
 {
 	[Fact]
 	public async Task GetAllPosts()

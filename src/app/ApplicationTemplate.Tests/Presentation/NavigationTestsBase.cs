@@ -147,7 +147,7 @@ public class NavigationTestsBase : IntegrationTestBase
 	/// <param name="navigationCommand">A function that returns a command to execute before asserting the destination is TDestinationViewModel</param>
 	/// <param name="sourceSection">The section name.</param>
 	/// <returns>A task that when completed will contain the new section name.</returns>
-	protected async Task<string> AssertSetActiceSection<TSourceViewModel, TDestinationViewModel>(Func<TSourceViewModel> sourceVMBuilder, Func<TSourceViewModel, IDynamicCommand> navigationCommand, string sourceSection)
+	protected async Task<string> AssertSetActiveSection<TSourceViewModel, TDestinationViewModel>(Func<TSourceViewModel> sourceVMBuilder, Func<TSourceViewModel, IDynamicCommand> navigationCommand, string sourceSection)
 		where TSourceViewModel : ViewModel
 	{
 		await SetActiveSection(DefaultCancellationToken, sourceSection, sourceVMBuilder);

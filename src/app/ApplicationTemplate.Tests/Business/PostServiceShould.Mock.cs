@@ -4,7 +4,7 @@ using ApplicationTemplate.Client;
 
 namespace ApplicationTemplate.Tests.Business;
 
-public partial class PostServiceShould
+public sealed partial class PostServiceShould
 {
 	// Mocked database
 	private PostData[] _mockedPosts = new PostData[]
