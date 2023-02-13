@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -25,7 +23,7 @@ public static class LoggingConfiguration
 
 		serilogConfiguration.ReadFrom.Configuration(hostBuilderContext.Configuration);
 //-:cnd:noEmit
-#if WINDOWS_UWP
+#if __WINDOWS__
 		serilogConfiguration.Enrich.With(new ThreadIdEnricher());
 #endif
 //+:cnd:noEmit
@@ -54,6 +52,10 @@ public static class LoggingConfiguration
 
 		loggingBuilder.AddSerilog(logger);
 		loggingBuilder.Services.AddSingleton<ILogFilesProvider>(logFilesProvider);
+
+#if __ANDROID__ || __IOS__
+		global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
+#endif
 	}
 
 	private static LoggerConfiguration AddConsoleLogging(LoggerConfiguration configuration)
@@ -61,7 +63,13 @@ public static class LoggingConfiguration
 		return configuration
 //-:cnd:noEmit
 #if __ANDROID__
-			.WriteTo.AndroidLog(outputTemplate: "{Message:lj} {Exception}{NewLine}");
+			// The native Android logs capture some information by default, which means we don't have to print everything in the message itself.
+#if DEBUG
+			// In debug however, we want to add the log level so that the VSColor extension properly colorizes our output.
+			.WriteTo.AndroidLog(outputTemplate: "{Level:u1}/ {Message:lj} {Exception}");
+#else
+			.WriteTo.AndroidLog(outputTemplate: "{Message:lj} {Exception}");
+#endif
 #elif __IOS__
 			.WriteTo.NSLog(outputTemplate: "{Level:u1}/{SourceContext}: {Message:lj} {Exception}");
 #else
@@ -81,7 +89,7 @@ public static class LoggingConfiguration
 #elif __IOS__
 			.Enrich.WithProperty("Platform", "iOS");
 #endif
-#elif WINDOWS_UWP
+#elif __WINDOWS__
 		return configuration
 			.WriteTo.File(logFilePath, outputTemplate: "{Timestamp:MM-dd HH:mm:ss.fffzzz} [{Platform}] Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}")
 			.Enrich.WithProperty("Platform", "UWP");
@@ -113,7 +121,7 @@ public static class LoggingConfiguration
 
 		public static string GetLogFilesDirectory()
 		{
-#if WINDOWS_UWP
+#if __WINDOWS__
 			return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
 			return Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

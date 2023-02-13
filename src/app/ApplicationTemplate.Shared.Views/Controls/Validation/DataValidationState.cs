@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.Text;
+﻿using System.Collections.Immutable;
 
 namespace ApplicationTemplate;
 
-public class DataValidationState
+public sealed class DataValidationState
 {
 	public DataValidationState(DataValidationStateType stateType, ImmutableList<object> errors = null)
 	{

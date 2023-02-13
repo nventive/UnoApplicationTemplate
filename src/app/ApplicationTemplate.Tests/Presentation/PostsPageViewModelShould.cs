@@ -12,7 +12,7 @@ using Xunit.Abstractions;
 
 namespace ApplicationTemplate.Tests;
 
-public partial class PostsPageViewModelShould : NavigationTestsBase
+public sealed class PostsPageViewModelShould : NavigationTestsBase
 {
 	public PostsPageViewModelShould(ITestOutputHelper output) : base(output)
 	{

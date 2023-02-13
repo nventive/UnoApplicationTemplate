@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Text;
-using System.Threading;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using MallardMessageHandlers;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate.Views;
@@ -16,7 +11,11 @@ public static class ApiConfiguration
 	{
 		return services
 			.AddMainHandler()
-			.AddSingleton<INetworkAvailabilityChecker>(new NetworkAvailabilityChecker(GetIsNetworkAvailable));
+			.AddSingleton<INetworkAvailabilityChecker>(serviceProvider =>
+			{
+				var connectivityProvider = serviceProvider.GetRequiredService<IConnectivityProvider>();
+				return new NetworkAvailabilityChecker(_ => Task.FromResult(connectivityProvider.NetworkAccess is NetworkAccess.Internet));
+			});
 	}
 
 	private static IServiceCollection AddMainHandler(this IServiceCollection services)
@@ -29,7 +28,7 @@ public static class ApiConfiguration
 //-:cnd:noEmit
 #elif __ANDROID__
 //+:cnd:noEmit
-			new Xamarin.Android.Net.AndroidClientHandler()
+			new Xamarin.Android.Net.AndroidMessageHandler()
 //-:cnd:noEmit
 #else
 //+:cnd:noEmit
@@ -38,18 +37,5 @@ public static class ApiConfiguration
 #endif
 //+:cnd:noEmit
 		);
-	}
-
-	private static Task<bool> GetIsNetworkAvailable(CancellationToken ct)
-	{
-//-:cnd:noEmit
-#if WINDOWS_UWP || __ANDROID__ || __IOS__
-		// TODO #172362: Not implemented in Uno.
-		// return NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel() == NetworkConnectivityLevel.InternetAccess;
-		return Task.FromResult(Xamarin.Essentials.Connectivity.NetworkAccess == Xamarin.Essentials.NetworkAccess.Internet);
-#else
-		return Task.FromResult(true);
-#endif
-//+:cnd:noEmit
 	}
 }

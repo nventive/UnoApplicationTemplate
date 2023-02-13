@@ -1,14 +1,20 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using ApplicationTemplate.Presentation;
-using Chinook.SectionsNavigation;
+using Moq;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace ApplicationTemplate.Tests;
 
-public partial class NavigationShould : NavigationTestsBase
+public sealed partial class NavigationShould : NavigationTestsBase
 {
+	private readonly ITestOutputHelper _testOutputHelper;
+
+	public NavigationShould(ITestOutputHelper testOutputHelper)
+	{
+		_testOutputHelper = testOutputHelper;
+	}
+
 	[Fact]
 	public async Task NavigateToDifferentMenuSections()
 	{
@@ -37,7 +43,7 @@ public partial class NavigationShould : NavigationTestsBase
 		var sourceSection = "Settings";
 
 		// Act
-		var currentSection = await AssertSetActiceSection<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.Logout, sourceSection);
+		var currentSection = await AssertSetActiveSection<SettingsPageViewModel, LoginPageViewModel>(() => new SettingsPageViewModel(), p => p.Logout, sourceSection);
 
 		// Assert
 		Assert.NotEqual(sourceSection, currentSection);
@@ -46,11 +52,50 @@ public partial class NavigationShould : NavigationTestsBase
 	[Fact]
 	public async Task NavigateToDiagnosticsPageAndBack()
 	{
-		var diagnosticsViewModel = await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(
-			() => new SettingsPageViewModel(),
-			p => p.NavigateToDiagnosticsPage
-		);
+		var diagnosticsViewModel = await AssertNavigateFromTo<SettingsPageViewModel, DiagnosticsPageViewModel>(() => new SettingsPageViewModel(), p => p.NavigateToDiagnosticsPage);
 
 		await AssertNavigateTo<SettingsPageViewModel>(() => diagnosticsViewModel.NavigateBack);
+	}
+
+	[Fact]
+	public async Task NavigateFromLoginToDadJokesPage()
+	{
+		// Arrange
+		var sourceSection = "Login";
+
+		// Act
+		var currentSection = await AssertSetActiveSection<LoginPageViewModel, DadJokesPageViewModel>(() => new LoginPageViewModel(false), p => p.NavigateToHome, sourceSection);
+
+		// Assert
+		Assert.NotEqual(sourceSection, currentSection);
+		Assert.Equal("Home", currentSection);
+	}
+
+	[Fact]
+	public async Task NavigateFromLoginToCreateAccountPage()
+	{
+		// Act
+		var currentSection = await AssertNavigateFromTo<LoginPageViewModel, CreateAccountPageViewModel>(() => new LoginPageViewModel(false), p => p.NavigateToCreateAccountPage);
+
+		// Assert
+		Assert.IsType<CreateAccountPageViewModel>(currentSection);
+	}
+
+	[Fact]
+	public async Task NavigateFromLoginToForgotPasswordPage()
+	{
+		// Act
+		var currentSection = await AssertNavigateFromTo<LoginPageViewModel, ForgotPasswordPageViewModel>(() => new LoginPageViewModel(false), p => p.NavigateToForgotPasswordPage);
+
+		// Assert
+		Assert.IsType<ForgotPasswordPageViewModel>(currentSection);
+	}
+
+	[Fact]
+	public async Task NavigateToCreateAccountAndBack()
+	{
+		var createAccountViewModel = await AssertNavigateFromTo<LoginPageViewModel, CreateAccountPageViewModel>(() => new LoginPageViewModel(false), p => p.NavigateToCreateAccountPage);
+
+		await AssertNavigateTo<LoginPageViewModel>(() => createAccountViewModel.NavigateBack);
 	}
 }

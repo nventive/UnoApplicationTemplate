@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Windows.UI.Core;
+﻿using Microsoft.UI.Dispatching;
 
 namespace ApplicationTemplate;
 
-public class ExtendedSplashscreenController : IExtendedSplashscreenController
+public sealed class ExtendedSplashscreenController : IExtendedSplashscreenController
 {
-	private readonly CoreDispatcher _coreDispatcher;
+	private readonly DispatcherQueue _dispatcherQueue;
 
-	public ExtendedSplashscreenController(CoreDispatcher coreDispatcher)
+	public ExtendedSplashscreenController(DispatcherQueue dispatcherQueue)
 	{
-		_coreDispatcher = coreDispatcher;
+		_dispatcherQueue = dispatcherQueue;
 	}
 
 	public void Dismiss()
 	{
-		_ = _coreDispatcher.RunAsync(CoreDispatcherPriority.Normal, DismissSplashScreen);
+		_ = _dispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, DismissSplashScreen);
 
-		void DismissSplashScreen() // Runs on UI thread
+		void DismissSplashScreen() // Runs on UI thread.
 		{
 			Shell.Instance.ExtendedSplashScreen.Dismiss();
 		}

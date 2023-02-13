@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -7,8 +6,6 @@ using System.Linq;
 using System.Text;
 using Chinook.DynamicMvvm;
 using Microsoft.Extensions.Logging;
-using Xamarin.Essentials;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -23,7 +20,7 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 	{
 		var summary = GetSummary();
 
-		var message = new EmailMessage
+		var message = new Email
 		{
 			Subject = $"Diagnostics - {GetType().Assembly.GetName().Name} ({_now})",
 			Body = summary,
@@ -33,19 +30,20 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 		{
 			if (File.Exists(logFilePath))
 			{
-				message.Attachments.Add(new EmailAttachment(logFilePath, contentType: "text/plain"));
+				message.Attachments.Add(new EmailAttachment(contentType: "text/plain", fullPath: logFilePath));
 			}
 		}
 
-		await RunOnDispatcher(ct, _ => this.GetService<IEmail>().ComposeAsync(message));
+		await RunOnDispatcher(ct, _ => this.GetService<IEmailService>().Compose(message));
 
 		this.GetService<ILogger<SummaryDiagnosticsViewModel>>().LogInformation("Environment summary sent.");
 	});
 
 	private string GetSummary()
 	{
-		var appInfo = this.GetService<IAppInfo>();
-		var deviceInfo = this.GetService<IDeviceInfo>();
+		var versionProvider = this.GetService<IVersionProvider>();
+		var deviceInformationProvider = this.GetService<IDeviceInformationProvider>();
+
 		var logFilesProvider = this.GetService<ILogFilesProvider>();
 		var loggingOptions = this.GetOptionsValue<LoggingOutputOptions>();
 
@@ -54,23 +52,16 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 		stringBuilder.AppendLine($"Project: {GetType().Assembly.GetName().Name}");
 
 		stringBuilder.AppendLine($"Date on device: {_now}");
-
 		stringBuilder.AppendLine($"Date on device (UTC): {_utcNow}");
 
-		stringBuilder.AppendLine($"Version string: {appInfo.VersionString}");
-		stringBuilder.AppendLine($"Version: {appInfo.Version}");
+		stringBuilder.AppendLine($"Version: {versionProvider.VersionString}");
+		stringBuilder.AppendLine($"Build: {versionProvider.BuildString}");
 
-		stringBuilder.AppendLine($"Build number: {appInfo.Version.Build}");
-		stringBuilder.AppendLine($"Build string: {appInfo.BuildString}");
+		stringBuilder.AppendLine($"OS: {deviceInformationProvider.OperatingSystem}");
+		stringBuilder.AppendLine($"OS version: {deviceInformationProvider.OperatingSystemVersion}");
+		stringBuilder.AppendLine($"Device type: {deviceInformationProvider.DeviceType}");
 
-		stringBuilder.AppendLine($"OS Version: {deviceInfo.Version}");
-
-		stringBuilder.AppendLine($"Device type: {deviceInfo.DeviceType}");
-		stringBuilder.AppendLine($"Device type: {deviceInfo.Idiom}");
-
-		stringBuilder.AppendLine($"Device name: {deviceInfo.Manufacturer} {deviceInfo.Model}");
-
-		// UserAgent Not available in X.E but we could do it in app, here's the implementation
+		// UserAgent Not available in X.E but we could do it in app, here's the implementation.
 		// stringBuilder.AppendLine($"User agent: {environmentService.UserAgent}");
 		// Android: UserAgent = $"{applicationName}/{AppVersion.ToString()}({DeviceType}; Android {OSVersionNumber})";
 		// iOS :UserAgent = $"{applicationName}/{AppVersion.ToString()}({DeviceType}; iOS {OSVersionNumber})";
@@ -82,15 +73,12 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 
 //-:cnd:noEmit
 #if DEBUG
-//+:cnd:noEmit
 		var isDebug = true;
-//-:cnd:noEmit
 #else
-//+:cnd:noEmit
 		var isDebug = false;
-//-:cnd:noEmit
 #endif
 //+:cnd:noEmit
+
 		stringBuilder.AppendLine($"Debug build: {isDebug}");
 
 		stringBuilder.AppendLine($"Console logging enabled: {loggingOptions.IsConsoleLoggingEnabled}");

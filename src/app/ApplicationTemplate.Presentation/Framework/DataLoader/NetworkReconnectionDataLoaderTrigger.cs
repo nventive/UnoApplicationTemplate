@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Chinook.DataLoader;
 using MallardMessageHandlers;
-using Xamarin.Essentials;
-using Xamarin.Essentials.Interfaces;
 
 namespace ApplicationTemplate;
 
@@ -16,9 +12,9 @@ namespace ApplicationTemplate;
 public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 {
 	private readonly IDataLoader _dataLoader;
-	private readonly IConnectivity _connectivity;
+	private readonly IConnectivityProvider _connectivity;
 
-	public NetworkReconnectionDataLoaderTrigger(IDataLoader dataLoader, IConnectivity connectivity)
+	public NetworkReconnectionDataLoaderTrigger(IDataLoader dataLoader, IConnectivityProvider connectivity)
 		: base("NetworkReconnection")
 	{
 		_dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
@@ -28,7 +24,7 @@ public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 
 	private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
 	{
-		// Should only refresh when loader is in NoNetwork AND network is now active
+		/// Should only refresh when <see cref="IDataLoader" /> state is <see cref="NoNetworkException"/> AND network access is <see cref="NetworkAccess.Internet"/>.
 		if (_dataLoader.State.Error is NoNetworkException &&
 			e.NetworkAccess == NetworkAccess.Internet)
 		{
@@ -46,7 +42,7 @@ public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 
 public static class NetworkReconnectionDataLoaderExtensions
 {
-	public static TBuilder TriggerOnNetworkReconnection<TBuilder>(this TBuilder dataLoaderBuilder, IConnectivity connectivity)
+	public static TBuilder TriggerOnNetworkReconnection<TBuilder>(this TBuilder dataLoaderBuilder, IConnectivityProvider connectivity)
 		where TBuilder : IDataLoaderBuilder
-		=> (TBuilder)dataLoaderBuilder.WithTrigger(d => new NetworkReconnectionDataLoaderTrigger(d, connectivity));
+		=> (TBuilder)dataLoaderBuilder.WithTrigger(dataLoader => new NetworkReconnectionDataLoaderTrigger(dataLoader, connectivity));
 }

@@ -7,13 +7,13 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
-public class CreateAccountFormViewModel : ViewModel
+public sealed class CreateAccountFormViewModel : ViewModel
 {
 	public CreateAccountFormViewModel()
 	{
 		this.AddValidation(this.GetProperty(x => x.DateOfBirth));
-		// TODO : https://dev.azure.com/nventive/Practice%20committees/_workitems/edit/251910
-		//this.AddValidation(this.GetProperty(x => x.FavoriteDadNames));
+		/* TODO : https://dev.azure.com/nventive/Practice%20committees/_workitems/edit/251910
+		 * this.AddValidation(this.GetProperty(x => x.FavoriteDadNames)); */
 		this.AddValidation(this.GetProperty(x => x.AgreeToTermsOfServices));
 	}
 
@@ -99,16 +99,18 @@ public class CreateAccountFormValidator : AbstractValidator<CreateAccountFormVie
 			.MustBe18OrOlder()
 			.WithMessage(localizer["CreateAccount_DateOfBirthValidation"]);
 
-		//RuleFor(x => x.FavoriteDadNames)
-		//	.Must(favDadNames =>
-		//	{
-		//		if (favDadNames == null)
-		//		{
-		//			return false;
-		//		}
-		//		return favDadNames.Length >= 1;
-		//	})
-		//	.WithMessage(localizer["CreateAccount_FavoriteDadNameValidation"]);
+		/*
+		RuleFor(x => x.FavoriteDadNames)
+			.Must(favDadNames =>
+			{
+				if (favDadNames == null)
+				{
+					return false;
+				}
+				return favDadNames.Length >= 1;
+			})
+			.WithMessage(localizer["CreateAccount_FavoriteDadNameValidation"]);
+		*/
 
 		RuleFor(x => x.AgreeToTermsOfServices)
 			.Equal(true)

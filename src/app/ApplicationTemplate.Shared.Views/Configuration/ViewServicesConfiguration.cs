@@ -3,9 +3,7 @@ using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
-using Windows.UI.Core;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Essentials.Interfaces;
+using Microsoft.UI.Dispatching;
 
 namespace ApplicationTemplate.Views;
 
@@ -18,16 +16,20 @@ public static class ViewServicesConfiguration
 	public static IServiceCollection AddViewServices(this IServiceCollection services)
 	{
 		return services
-			.AddSingleton(s => App.Instance.NavigationMultiFrame.Dispatcher)
+			.AddSingleton(s => App.Instance.NavigationMultiFrame.DispatcherQueue)
 			.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
 			.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
-				s.GetRequiredService<CoreDispatcher>(),
-				CoreDispatcherPriority.Normal
+				s.GetRequiredService<DispatcherQueue>(),
+				DispatcherQueuePriority.Normal
 			))
 			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
-			.AddSingleton<IBrowser>(s => new DispatcherBrowserDecorator(new BrowserImplementation(), App.Instance.Shell.Dispatcher))
-			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>()
+			.AddSingleton<ILauncherService>(s => new LauncherService(s.GetRequiredService<DispatcherQueue>()))
+			.AddSingleton<IVersionProvider, VersionProvider>()
+			.AddSingleton<IDeviceInformationProvider, DeviceInformationProvider>()
+			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
+			.AddSingleton<IConnectivityProvider, ConnectivityProvider>()
+			.AddSingleton<IEmailService, EmailService>()
 			.AddMessageDialog();
 	}
 
@@ -35,19 +37,24 @@ public static class ViewServicesConfiguration
 	{
 		return services.AddSingleton<IMessageDialogService>(s =>
 //-:cnd:noEmit
-#if WINDOWS_UWP || __IOS__ || __ANDROID__
-//+:cnd:noEmit
+#if __WINDOWS__ || __IOS__ || __ANDROID__
 			new MessageDialogService.MessageDialogService(
-				() => s.GetRequiredService<CoreDispatcher>(),
+				s.GetRequiredService<DispatcherQueue>(),
+//-:cnd:noEmit
+#if __WINDOWS__
+				new MessageDialogBuilderDelegate(
+					key => s.GetRequiredService<IStringLocalizer>()[key],
+					WinRT.Interop.WindowNative.GetWindowHandle(App.Instance.CurrentWindow)
+				)
+#else
 				new MessageDialogBuilderDelegate(
 					key => s.GetRequiredService<IStringLocalizer>()[key]
 				)
-			)
-//-:cnd:noEmit
-#else
+#endif
 //+:cnd:noEmit
+			)
+#else
 			new AcceptOrDefaultMessageDialogService()
-//-:cnd:noEmit
 #endif
 //+:cnd:noEmit
 		);

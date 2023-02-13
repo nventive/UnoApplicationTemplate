@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
@@ -62,7 +61,7 @@ public static class LocalizationConfiguration
 	private static string GetSettingFilePath()
 	{
 //-:cnd:noEmit
-#if WINDOWS_UWP
+#if __WINDOWS__
 //+:cnd:noEmit
 		var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
 //-:cnd:noEmit
@@ -121,13 +120,15 @@ public class ResourceLoaderStringLocalizer : IStringLocalizer
 			resource = null;
 		}
 
-		resource = resource ?? name;
+		var resourceNotFound = resource is null;
+
+		resource ??= name;
 
 		var value = arguments.Any()
 			? string.Format(CultureInfo.CurrentCulture, resource, arguments)
 			: resource;
 
-		return new LocalizedString(name, value, resourceNotFound: resource == null, searchedLocation: SearchLocation);
+		return new LocalizedString(name, value, resourceNotFound: resourceNotFound, searchedLocation: SearchLocation);
 	}
 
 	/// <inheritdoc/>
@@ -146,11 +147,11 @@ public class ThreadCultureOverrideService : IThreadCultureOverrideService
 	/// <summary>
 	/// Initializes a new instance of the <see cref="ThreadCultureOverrideService"/> class.
 	/// </summary>
-	/// <param name="uiThread">UI thread</param>
-	/// <param name="supportedLanguages">Supported languages</param>
-	/// <param name="fallbackCulture">Fallback culture</param>
-	/// <param name="settingFilePath">Path to the file where the preference will be stored</param>
-	/// <param name="logger">Logger</param>
+	/// <param name="uiThread">UI thread.</param>
+	/// <param name="supportedLanguages">Supported languages.</param>
+	/// <param name="fallbackCulture">Fallback culture.</param>
+	/// <param name="settingFilePath">Path to the file where the preference will be stored.</param>
+	/// <param name="logger">Logger.</param>
 	public ThreadCultureOverrideService(
 		Thread uiThread,
 		string[] supportedLanguages,
@@ -186,11 +187,11 @@ public class ThreadCultureOverrideService : IThreadCultureOverrideService
 				culture = _fallbackCulture;
 			}
 
-			// Override the current thread culture
+			// Override the current thread culture.
 			_uiThread.CurrentCulture = culture;
 			_uiThread.CurrentUICulture = culture;
 
-			// Override any new thread culture
+			// Override any new thread culture.
 			CultureInfo.DefaultThreadCurrentCulture = culture;
 			CultureInfo.DefaultThreadCurrentUICulture = culture;
 
@@ -199,7 +200,6 @@ public class ThreadCultureOverrideService : IThreadCultureOverrideService
 		catch (Exception e)
 		{
 			_logger.LogError(e, "Failed to apply the culture override.");
-
 			return false;
 		}
 	}

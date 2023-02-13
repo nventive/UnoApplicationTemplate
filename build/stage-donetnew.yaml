@@ -1,16 +1,14 @@
 jobs:
   - job: On_Windows_Dotnet_New
     pool:
-      name: $(windowsPoolName)
-    container: windows
-    
-    steps:    
+      vmImage : windows-2022
+    steps:
     - script: dotnet new -i $(Build.SourcesDirectory)
       displayName: 'Install UnoApplicationTemplate'
 
     - script: dotnet new nv-mobile -n GeneratedApp
-      displayName: 'Generate project using dotnet new'
+      displayName: 'Generate Project'
 
     - publish: GeneratedApp
-      displayName: 'Publish GeneratedApp folder'
+      displayName: 'Publish GeneratedApp Folder'
       artifact: GeneratedApp

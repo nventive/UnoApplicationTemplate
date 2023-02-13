@@ -65,6 +65,12 @@ public partial class HttpDebuggerViewModel : ViewModel
 		}
 	);
 
+	public bool IsEnabled
+	{
+		get => this.GetFromOptionsMonitor<DiagnosticsOptions, bool>(o => o.IsHttpDebuggerEnabled);
+		set => this.Set(value);
+	}
+
 	public bool HideRequestHeaders
 	{
 		get => this.GetFromOptionsMonitor<DiagnosticsOptions, bool>(o => o.HttpDebugger.HideRequestHeaders);
@@ -141,6 +147,8 @@ public partial class HttpDebuggerViewModel : ViewModel
 		_httpDebuggerService.ClearTraces();
 	});
 
+	public IDynamicCommand NotifyNeedsRestart => this.GetNotifyNeedsRestartCommand();
+
 	private static string GetChildName(long sequenceId)
 	{
 		return sequenceId.ToString(CultureInfo.InvariantCulture);
@@ -190,7 +198,7 @@ public partial class HttpDebuggerViewModel : ViewModel
 	{
 		if (trace.Status != HttpTraceStatus.Received)
 		{
-			return "No response received.";
+			return $"No response received.{Environment.NewLine}{Environment.NewLine}{trace.Exception}";
 		}
 
 		var sb = new StringBuilder();

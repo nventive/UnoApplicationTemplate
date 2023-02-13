@@ -5,15 +5,15 @@ using System;
 using ApplicationTemplate.Views.Helpers;
 using Foundation;
 using Microsoft.Extensions.Logging;
+using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using UIKit;
 using Uno.Extensions;
 using Uno.Logging;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
 
 namespace ApplicationTemplate.Views.Behaviors;
 
-public partial class FormattingTextBoxBehavior
+public sealed partial class FormattingTextBoxBehavior
 {
 	static partial void OnTextFormatChangedPartial(DependencyObject d, DependencyPropertyChangedEventArgs e)
 	{

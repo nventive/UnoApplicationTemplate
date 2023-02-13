@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive.Concurrency;
-using System.Text;
 using System.Text.Json;
 using ApplicationTemplate.Client;
 using Microsoft.Extensions.DependencyInjection;

@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using ApplicationTemplate.Presentation;
 using ApplicationTemplate.Views.Content;
 using Chinook.SectionsNavigation;
-using Chinook.StackNavigation;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Views;
 
@@ -38,7 +35,9 @@ public static class NavigationConfiguration
 		{ typeof(OnboardingPageViewModel), typeof(OnboardingPage) },
 		{ typeof(SettingsPageViewModel), typeof(SettingsPage) },
 		{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
+		/*
 		{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
+		*/
 		{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
 		{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
 		{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
@@ -47,6 +46,13 @@ public static class NavigationConfiguration
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
 	};
 
+	/// <summary>
+	/// Disable navigation animations.
+	/// </summary>
+	/// <remarks>
+	/// Do not remove even if it's not used by default.
+	/// </remarks>
+	/// <param name="frameSectionsNavigator"><see cref="FrameSectionsNavigator"/>.</param>
 	private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)
 	{
 		frameSectionsNavigator.DefaultSetActiveSectionTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
