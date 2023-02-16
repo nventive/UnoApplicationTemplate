@@ -52,16 +52,16 @@
 		</CommandBar>
 
 		<!-- DataLoaderView -->
-		<dl:DataLoaderView Source="{Binding Jokes}"
-						   RefreshCommand="{Binding RefreshJokes}"
+		<dl:DataLoaderView x:Name="JokesDataLoader"
+						   Source="{Binding Jokes}"
 						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
 						   Grid.Row="1">
 			<DataTemplate>
 
 				<!-- SwipeRefresh -->
 				<u:SwipeRefresh x:Name="RefreshContent"
-								RefreshCommand="{Binding Parent.RefreshJokes}"
-								IsRefreshing="{Binding Parent.RefreshJokes.IsExecuting}"
+								RefreshCommand="{Binding ElementName=JokesDataLoader, Path=RefreshCommand}"
+								IsRefreshing="{Binding ElementName=JokesDataLoader, Path=RefreshCommand.IsExecuting}"
 								IndicatorColor="{StaticResource MaterialPrimaryBrush}">
 
 					<!-- Jokes ListView -->

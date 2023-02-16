@@ -19,14 +19,14 @@
 		<Grid Grid.Row="1">
 
 			<!-- DataLoader View -->
-			<dl:DataLoaderView Source="{Binding Posts}"
-							   RefreshCommand="{Binding RefreshPosts}">
+			<dl:DataLoaderView x:Name="PostsDataLoaderView"
+							   Source="{Binding Posts}">
 				<DataTemplate>
 
 					<!-- Swipe to Refresh -->
 					<u:SwipeRefresh x:Name="RefreshContent"
-									RefreshCommand="{Binding Parent.RefreshPosts}"
-									IsRefreshing="{Binding Parent.RefreshPosts.IsExecuting}"
+									RefreshCommand="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand}"
+									IsRefreshing="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand.IsExecuting}"
 									IndicatorColor="{StaticResource MaterialPrimaryBrush}">
 
 						<!-- ListView -->

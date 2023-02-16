@@ -35,8 +35,6 @@ public partial class PostsPageViewModel : ViewModel
 		await this.GetService<IStackNavigator>().Navigate(ct, () => new EditPostPageViewModel(post));
 	});
 
-	public IDynamicCommand RefreshPosts => this.GetCommandFromDataLoaderRefresh(Posts);
-
 	public IDataLoader Posts => this.GetDataLoader(GetPosts, d => d.WithTrigger(_deletePostTrigger));
 
 	private async Task<ImmutableList<Post>> GetPosts(CancellationToken ct)
