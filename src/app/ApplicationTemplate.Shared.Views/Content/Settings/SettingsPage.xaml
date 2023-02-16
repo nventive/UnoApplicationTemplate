@@ -201,7 +201,7 @@
 				<Button Content="LOGOUT"
 						x:Uid="Settings_Logout"
 						Command="{Binding Logout}"
-						Background="{StaticResource MaterialPrimaryAccentBrush}"
+						Background="{StaticResource PrimaryAccentBrush}"
 						HorizontalAlignment="Left"
 						Margin="24,16" />
 			</StackPanel>

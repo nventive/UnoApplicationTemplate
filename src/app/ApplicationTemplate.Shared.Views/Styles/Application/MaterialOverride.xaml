@@ -14,14 +14,13 @@
 		<ResourceDictionary x:Key="Light">
 			<Color x:Key="MaterialPrimaryColor">#0D59CD</Color>
 			<Color x:Key="MaterialOnPrimaryColor">#FFFFFF</Color>
-			<Color x:Key="MaterialPrimaryDarkColor">#0A447D</Color>
-			<Color x:Key="MaterialPrimaryLightColor">#0A68C8</Color>
-			<Color x:Key="MaterialPrimaryAccentColor">#F9423A</Color>
+			<Color x:Key="MaterialPrimaryVariantDarkColor">#0A447D</Color>
+			<Color x:Key="MaterialPrimaryVariantLightColor">#0A68C8</Color>
 
 			<Color x:Key="MaterialSecondaryColor">#5BC5F2</Color>
 			<Color x:Key="MaterialOnSecondaryColor">#001E60</Color>
-			<Color x:Key="MaterialSecondaryDarkColor">#4FB0D2</Color>
-			<Color x:Key="MaterialSecondaryLightColor">#68D2F8</Color>
+			<Color x:Key="MaterialSecondaryVariantDarkColor">#4FB0D2</Color>
+			<Color x:Key="MaterialSecondaryVariantLightColor">#68D2F8</Color>
 
 			<Color x:Key="MaterialBackgroundColor">#F5FAFF</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#001E60</Color>
@@ -31,21 +30,18 @@
 
 			<Color x:Key="MaterialErrorColor">#D93B27</Color>
 			<Color x:Key="MaterialOnErrorColor">#FDEFED</Color>
-			<Color x:Key="MaterialSuccessColor">#59DF9F</Color>
-			<Color x:Key="MaterialOnSuccessColor">#105132</Color>
 		</ResourceDictionary>
 
 		<ResourceDictionary x:Key="Dark">
 			<Color x:Key="MaterialPrimaryColor">#89C5FF</Color>
 			<Color x:Key="MaterialOnPrimaryColor">#121821</Color>
-			<Color x:Key="MaterialPrimaryDarkColor">#4FA1F0</Color>
-			<Color x:Key="MaterialPrimaryLightColor">#AED7FF</Color>
-			<Color x:Key="MaterialPrimaryAccentColor">#F9423A</Color>
+			<Color x:Key="MaterialPrimaryVariantDarkColor">#4FA1F0</Color>
+			<Color x:Key="MaterialPrimaryVariantLightColor">#AED7FF</Color>
 
 			<Color x:Key="MaterialSecondaryColor">#FCA58B</Color>
 			<Color x:Key="MaterialOnSecondaryColor">#302B29</Color>
-			<Color x:Key="MaterialSecondaryDarkColor">#FA825D</Color>
-			<Color x:Key="MaterialSecondaryLightColor">#FDC9B8</Color>
+			<Color x:Key="MaterialSecondaryVariantDarkColor">#FA825D</Color>
+			<Color x:Key="MaterialSecondaryVariantLightColor">#FDC9B8</Color>
 
 			<Color x:Key="MaterialBackgroundColor">#1C2025</Color>
 			<Color x:Key="MaterialOnBackgroundColor">#FFF</Color>
@@ -55,8 +51,6 @@
 
 			<Color x:Key="MaterialErrorColor">#E8897D</Color>
 			<Color x:Key="MaterialOnErrorColor">#32110D</Color>
-			<Color x:Key="MaterialSuccessColor">#105132</Color>
-			<Color x:Key="MaterialOnSuccessColor">#9BECC5</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

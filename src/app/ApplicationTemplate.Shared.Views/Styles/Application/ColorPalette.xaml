@@ -6,6 +6,16 @@
 
 	<ResourceDictionary.ThemeDictionaries>
 		<ResourceDictionary x:Key="Light">
+			<Color x:Key="PrimaryAccentColor">#F9423A</Color>
+
+			<Color x:Key="SuccessColor">#59DF9F</Color>
+			<Color x:Key="OnSuccessColor">#105132</Color>
+		</ResourceDictionary>
+		<ResourceDictionary x:Key="Dark">
+			<Color x:Key="PrimaryAccentColor">#F9423A</Color>
+
+			<Color x:Key="SuccessColor">#105132</Color>
+			<Color x:Key="OnSuccessColor">#9BECC5</Color>
 		</ResourceDictionary>
 	</ResourceDictionary.ThemeDictionaries>
 </ResourceDictionary>

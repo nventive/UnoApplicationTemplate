@@ -5,17 +5,13 @@
 	<x:Int32 x:Key="BrushesWorkaround">0</x:Int32>
 
 	<!-- Success brushes -->
-	<SolidColorBrush x:Key="MaterialSuccessBrush"
-					 Color="{ThemeResource MaterialSuccessColor}" />
-	<SolidColorBrush x:Key="MaterialOnSuccessBrush"
-					 Color="{ThemeResource MaterialOnSuccessColor}" />
+	<SolidColorBrush x:Key="SuccessBrush"
+					 Color="{ThemeResource SuccessColor}" />
+	<SolidColorBrush x:Key="OnSuccessBrush"
+					 Color="{ThemeResource OnSuccessColor}" />
 
-	<SolidColorBrush x:Key="MaterialPrimaryAccentBrush"
-					 Color="{ThemeResource MaterialPrimaryAccentColor}" />
-
-	<SolidColorBrush x:Key="MaterialPrimaryDarkBrush"
-					 Color="{ThemeResource MaterialPrimaryDarkColor}" />
-
+	<SolidColorBrush x:Key="PrimaryAccentBrush"
+					 Color="{ThemeResource PrimaryAccentColor}" />
 	
 	<SolidColorBrush x:Key="SeparatorBrush"
 					 Color="{ThemeResource MaterialOnSurfaceColor}"
