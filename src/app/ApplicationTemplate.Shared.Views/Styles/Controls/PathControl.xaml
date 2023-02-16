@@ -62,7 +62,7 @@
 	<Style x:Key="SuccessCheckPathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialSuccessBrush}" />
+				Value="{StaticResource SuccessBrush}" />
 		<Setter Property="Stretch"
 				Value="Uniform" />
 		<Setter Property="Height"
