@@ -27,7 +27,7 @@
 		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="1.1.2" />
 		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="1.1.2" />
 		<PackageReference Include="Chinook.DynamicMvvm.CollectionTracking" Version="1.1.2" />
-		<PackageReference Include="Chinook.DataLoader" Version="1.1.0" />
+		<PackageReference Include="Chinook.DataLoader" Version="1.2.0" />
 		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="1.1.0" />
 		<PackageReference Include="Chinook.BackButtonManager" Version="1.1.2" />
 		<PackageReference Include="Chinook.SectionsNavigation" Version="1.1.2" />

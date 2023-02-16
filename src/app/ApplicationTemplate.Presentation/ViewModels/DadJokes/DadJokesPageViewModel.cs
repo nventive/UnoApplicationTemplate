@@ -19,8 +19,6 @@ public partial class DadJokesPageViewModel : ViewModel
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
 	});
 
-	public IDynamicCommand RefreshJokes => this.GetCommandFromDataLoaderRefresh(Jokes);
-
 	public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
 		// Dispose the previous ItemViewModels when Quotes produces new values.
 		.DisposePreviousData()

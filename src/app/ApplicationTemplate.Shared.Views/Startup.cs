@@ -3,8 +3,10 @@ using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
+using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
@@ -51,7 +53,28 @@ public sealed class Startup : StartupBase
 #if false
 		AsyncWebView.AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView.AsyncWebView>>();
 #endif
+		// Configures a default refresh command for all DataLoaderView controls.
+		DataLoaderView.DefaultRefreshCommandProvider = GetDataLoaderViewRefreshCommand;
+
 		HandleUnhandledExceptions(services);
+
+		ICommand GetDataLoaderViewRefreshCommand(DataLoaderView dataLoaderView)
+		{
+			return services
+				.GetRequiredService<IDynamicCommandBuilderFactory>()
+				.CreateFromTask(
+					name: "DataLoaderViewRefreshCommand",
+					execute: async (ct) =>
+					{
+						var context = new DataLoaderContext();
+
+						context["IsForceRefreshing"] = true;
+
+						await dataLoaderView.DataLoader.Load(ct, context);
+					},
+					viewModel: (IViewModel)App.Instance.Shell.DataContext)
+				.Build();
+		}
 	}
 
 	protected override async Task StartViewServices(IServiceProvider services, bool isFirstStart)
