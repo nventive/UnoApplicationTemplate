@@ -7,7 +7,7 @@ namespace ApplicationTemplate;
 [Activity(
 	MainLauncher = true,
 	ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
-	WindowSoftInputMode = SoftInput.AdjustNothing | SoftInput.StateHidden,
+	WindowSoftInputMode = SoftInput.AdjustResize | SoftInput.StateHidden,
 	ScreenOrientation = ScreenOrientation.Portrait,
 	ResizeableActivity = false,
 	LaunchMode = LaunchMode.SingleTask
