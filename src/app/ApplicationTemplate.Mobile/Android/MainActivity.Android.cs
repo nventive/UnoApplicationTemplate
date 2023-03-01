@@ -17,11 +17,8 @@ public sealed class MainActivity : Microsoft.UI.Xaml.ApplicationActivity
 {
 	protected override void OnCreate(Bundle bundle)
 	{
-		if (Build.VERSION.SdkInt >= BuildVersionCodes.S)
-		{
-			// Support the ExtendedSplashScreen on Android 12+.
-			Nventive.ExtendedSplashScreen.ExtendedSplashScreen.AndroidSplashScreen = AndroidX.Core.SplashScreen.SplashScreen.InstallSplashScreen(this);
-		}
+		// Support the ExtendedSplashScreen on Android 12+.
+		Nventive.ExtendedSplashScreen.ExtendedSplashScreen.AndroidSplashScreen = AndroidX.Core.SplashScreen.SplashScreen.InstallSplashScreen(this);
 
 		base.OnCreate(bundle);
 	}
