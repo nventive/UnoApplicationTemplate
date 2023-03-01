@@ -4,6 +4,17 @@
 		<item name="android:windowIsTranslucent">true</item>
 		<item name="android:windowAnimationStyle">@android:style/Animation</item>
 	</style>
+
+	<!-- This defines the SplashScreen theme -->
+	<style name="AppTheme.Starting" parent="Theme.SplashScreen">
+		<!-- Set the splash screen background. -->
+		<item name="windowSplashScreenBackground">@color/primaryColor</item>
+		<!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an animated drawable. -->
+		<item name="windowSplashScreenAnimatedIcon">@drawable/Logo</item>
+		<!-- Set the theme of the Activity that directly follows your splash screen. -->
+		<item name="postSplashScreenTheme">@style/AppTheme</item>
+	</style>
+	
 	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
 		<!-- This removes the ActionBar -->
 		<item name="windowActionBar">false</item>
