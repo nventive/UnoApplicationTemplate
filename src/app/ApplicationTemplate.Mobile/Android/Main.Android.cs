@@ -10,7 +10,7 @@ namespace ApplicationTemplate.Droid;
 	Icon = "@mipmap/ic_launcher",
 	LargeHeap = true,
 	HardwareAccelerated = true,
-	Theme = "@style/AppTheme",
+	Theme = "@style/AppTheme.Starting",
 	AllowBackup = false,
 	ResizeableActivity = false
 )]
