@@ -6,11 +6,33 @@ using Chinook.SectionsNavigation;
 
 namespace ApplicationTemplate.Presentation;
 
-public partial class DiagnosticsOverlayViewModel : ViewModel
+public sealed partial class DiagnosticsOverlayViewModel : ViewModel
 {
-	private DiagnosticsCountersService DiagnosticsCountersService => this.GetService<DiagnosticsCountersService>();
+	public DiagnosticsOverlayViewModel()
+	{
+		Tabs = new TabViewModel[]
+		{
+			this.AttachChild(new HttpDebuggerViewModel(), "HttpDebugger"),
+			this.AttachChild(new NavigationDebuggerViewModel(), "NavigationDebugger"),
+		};
+		Tabs.SetActiveTabIndex(-1);
+	}
 
-	public HttpDebuggerViewModel HttpDebugger => this.GetChild(() => new HttpDebuggerViewModel());
+	public TabViewModel[] Tabs { get; }
+
+	public int ActiveTabIndex
+	{
+		get => this.Get(initialValue: -1);
+		set
+		{
+			this.Set(value);
+			Tabs.SetActiveTabIndex(value);
+		}
+	}
+
+	public TabViewModel ActiveTabViewModel => this.GetFromDynamicProperty(this.GetProperty(that => that.ActiveTabIndex), i => i < 0 ? null : Tabs[i]);
+
+	private DiagnosticsCountersService DiagnosticsCountersService => this.GetService<DiagnosticsCountersService>();
 
 	public IDynamicCommand CollectMemory => this.GetCommand(() =>
 	{
@@ -47,7 +69,26 @@ public partial class DiagnosticsOverlayViewModel : ViewModel
 	public bool IsDiagnosticsExpanded
 	{
 		get => this.Get<bool>();
-		set => this.Set(value);
+		set
+		{
+			this.Set(value);
+			if (value)
+			{
+				if (ActiveTabIndex < 0)
+				{
+					// Select the first tab when opening the Overlay the first time.
+					ActiveTabIndex = 0;
+				}
+
+				// Reactivates the active tab when we expand the Overlay.
+				Tabs.SetActiveTabIndex(ActiveTabIndex);
+			}
+			else
+			{
+				// Deactivates all tabs when we collapsed the Overlay.
+				Tabs.SetActiveTabIndex(-1);
+			}
+		}
 	}
 
 	public IDynamicCommand ToggleMore => this.GetCommand(() =>

@@ -24,7 +24,7 @@
 			<uc:FromNullableBoolToCustomValueConverter x:Key="IsExpandedToCornerRadius"
 													   TrueValue="0"
 													   NullOrFalseValue="8,0,0,8" />
-			
+
 			<!-- Diagnostics Counter TextBlockStyle -->
 			<Style x:Key="DiagnosticsCounterTextBlockStyle"
 				   TargetType="TextBlock">
@@ -50,7 +50,7 @@
 			<!-- Diagnostics Overlay ButtonStyle -->
 			<Style x:Key="DiagnosticsOverlayButtonStyle"
 				   TargetType="Button">
-				
+
 				<Setter Property="FontSize"
 						Value="11" />
 				<Setter Property="HorizontalAlignment"
@@ -71,11 +71,11 @@
 						Value="0" />
 				<Setter Property="MinHeight"
 						Value="0" />
-				
+
 				<Setter Property="Template">
 					<Setter.Value>
 						<ControlTemplate TargetType="Button">
-							
+
 							<Grid VerticalAlignment="{TemplateBinding VerticalAlignment}"
 								  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
 
@@ -114,18 +114,153 @@
 					</Setter.Value>
 				</Setter>
 			</Style>
+
+			<Style x:Key="DiagnosticsTabListViewItemStyle"
+				   TargetType="ListViewItem">
+
+				<Setter Property="Background"
+						Value="#BB000000" />
+				<Setter Property="HorizontalContentAlignment"
+						Value="Stretch" />
+				<Setter Property="VerticalAlignment"
+						Value="Top" />
+				<Setter Property="VerticalContentAlignment"
+						Value="Stretch" />
+				<Setter Property="MinHeight"
+						Value="0" />
+				<Setter Property="MinWidth"
+						Value="0" />
+				<Setter Property="Padding"
+						Value="4" />
+
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="ListViewItem">
+
+							<Grid x:Name="ContentBorder"
+								  Background="{TemplateBinding Background}"
+								  BorderBrush="{TemplateBinding BorderBrush}"
+								  BorderThickness="{TemplateBinding BorderThickness}">
+
+								<VisualStateManager.VisualStateGroups>
+									<VisualStateGroup x:Name="CommonStates">
+										<VisualState x:Name="Normal" />
+										<VisualState x:Name="PointerOver" />
+										<VisualState x:Name="Pressed" />
+										<VisualState x:Name="Selected">
+											<VisualState.Setters>
+												<Setter Target="SelectionIndicator.Opacity"
+														Value="1" />
+											</VisualState.Setters>
+										</VisualState>
+										<VisualState x:Name="PointerOverSelected">
+											<VisualState.Setters>
+												<Setter Target="SelectionIndicator.Opacity"
+														Value="1" />
+											</VisualState.Setters>
+										</VisualState>
+										<VisualState x:Name="PressedSelected">
+											<VisualState.Setters>
+												<Setter Target="SelectionIndicator.Opacity"
+														Value="1" />
+											</VisualState.Setters>
+										</VisualState>
+									</VisualStateGroup>
+
+									<VisualStateGroup x:Name="DisabledStates">
+										<VisualState x:Name="Enabled" />
+										<VisualState x:Name="Disabled" />
+									</VisualStateGroup>
+
+									<!-- For MultiSelectStates states, use the complete style in Uno.UI. See links on top of this file. -->
+									<VisualStateGroup x:Name="MultiSelectStates" />
+
+									<!-- For reordering states, use the complete style in Uno.UI. See links on top of this file.-->
+									<VisualStateGroup x:Name="ReorderHintStates" />
+
+									<!-- For drag states, use the complete style in Uno.UI. See links on top of this file. -->
+									<VisualStateGroup x:Name="DragStates" />
+								</VisualStateManager.VisualStateGroups>
+
+								<Rectangle x:Name="SelectionIndicator"
+										   IsHitTestVisible="False"
+										   HorizontalAlignment="Stretch"
+										   VerticalAlignment="Bottom"
+										   Height="1"
+										   Fill="White"
+										   Opacity="0" />
+
+								<!-- ContentPresenter -->
+								<ContentPresenter x:Name="ContentPresenter"
+												  Margin="{TemplateBinding Padding}"
+												  Content="{TemplateBinding Content}"
+												  ContentTransitions="{TemplateBinding ContentTransitions}"
+												  ContentTemplate="{TemplateBinding ContentTemplate}"
+												  xamarin:ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
+												  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+												  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+							</Grid>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
+			<Style x:Key="DiagnosticsHorizontalListViewStyle"
+				   TargetType="ListView"
+				   BasedOn="{StaticResource DefaultListViewStyle}">
+
+				<Setter Property="ItemsPanel">
+					<Setter.Value>
+						<ItemsPanelTemplate>
+							<StackPanel Orientation="Horizontal" />
+						</ItemsPanelTemplate>
+					</Setter.Value>
+				</Setter>
+
+				<Setter Property="Template">
+					<Setter.Value>
+						<ControlTemplate TargetType="ListView">
+							<ScrollViewer x:Name="ScrollViewer"
+										  xamarin:Style="{StaticResource ListViewBaseScrollViewerStyle}"
+										  TabNavigation="{TemplateBinding TabNavigation}"
+										  HorizontalScrollMode="Enabled"
+										  HorizontalScrollBarVisibility="Hidden"
+										  IsHorizontalScrollChainingEnabled="True"
+										  IsHorizontalRailEnabled="True"
+										  VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+										  VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+										  IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+										  IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+										  ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
+										  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+										  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+										  AutomationProperties.AccessibilityView="Raw">
+
+								<ItemsPresenter Header="{TemplateBinding Header}"
+												HeaderTemplate="{TemplateBinding HeaderTemplate}"
+												HeaderTransitions="{TemplateBinding HeaderTransitions}"
+												Footer="{TemplateBinding Footer}"
+												FooterTemplate="{TemplateBinding FooterTemplate}"
+												FooterTransitions="{TemplateBinding FooterTransitions}"
+												Padding="{TemplateBinding Padding}" />
+							</ScrollViewer>
+						</ControlTemplate>
+					</Setter.Value>
+				</Setter>
+			</Style>
+
 		</ResourceDictionary>
 	</UserControl.Resources>
 
 	<Grid>
-		
+
 		<Grid Background="#AA000000"
 			  BorderThickness="1"
 			  BorderBrush="#000000"
 			  CornerRadius="{Binding IsDiagnosticsExpanded, Converter={StaticResource IsExpandedToCornerRadius}}"
 			  HorizontalAlignment="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToHorizontalStretch}, FallbackValue=Right}"
 			  VerticalAlignment="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVerticalStretch}, FallbackValue=Top}"
-			  Padding="2,2,0,2"
+			  Padding="0"
 			  Margin="0,100,0,0">
 
 			<Grid.RowDefinitions>
@@ -232,14 +367,35 @@
 
 			<!-- Diagnostics expanded content -->
 			<Grid Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
-						Grid.Row="0"
-						Grid.RowSpan="3"
-						Padding="0,0,50,0">
+				  Grid.Row="0"
+				  Grid.RowSpan="3"
+				  Padding="0,0,50,0">
+				<Grid.RowDefinitions>
+					<RowDefinition Height="Auto" />
+					<RowDefinition Height="*" />
+				</Grid.RowDefinitions>
 
-				<!-- Custom Diagnostics content; currently the HttpDebuggerView. -->
-				<diag:HttpDebuggerView DataContext="{Binding HttpDebugger}"
-									   VerticalAlignment="Stretch"/>
+				<!-- Tab bar -->
+				<ListView Style="{StaticResource DiagnosticsHorizontalListViewStyle}"
+						  ItemsSource="{Binding Tabs}"
+						  ItemContainerStyle="{StaticResource DiagnosticsTabListViewItemStyle}"
+						  SelectionMode="Single"
+						  SelectedIndex="{Binding ActiveTabIndex, Mode=TwoWay}">
+					<ListView.ItemTemplate>
+						<DataTemplate>
+							<StackPanel>
+								<TextBlock Text="{Binding Title}"
+										   Foreground="White"
+										   FontSize="12"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListView.ItemTemplate>
+				</ListView>
 
+				<!-- Active diagnostics tab. (This includes things like the HttpDebuggerView.) -->
+				<diag:DiagnosticsTabPresenter ViewModel="{Binding ActiveTabViewModel}"
+											  Grid.Row="1"
+											  Margin="2,2,2,0" />
 			</Grid>
 
 			<StackPanel HorizontalAlignment="Right"
@@ -258,7 +414,7 @@
 				<!-- Toggle Alignment Grid Button -->
 				<Button Content="Grid"
 						Command="{Binding ToggleAlignmentGrid}"
-						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />				
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
 				<!-- Theme Button -->
 				<Button Content="Theme"

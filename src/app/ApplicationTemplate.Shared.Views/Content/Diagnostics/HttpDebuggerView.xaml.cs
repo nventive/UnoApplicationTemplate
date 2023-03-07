@@ -38,8 +38,15 @@ public sealed partial class HttpDebuggerView : UserControl
 
 	private void OnUnloaded(object sender, RoutedEventArgs e)
 	{
+//-:cnd:noEmit
+#if __WINDOWS__
+		var currentWindow = App.Instance.CurrentWindow;
+		currentWindow.SizeChanged -= OnSizeChanged;
+#else
 		var applicationView = ApplicationView.GetForCurrentView();
 		applicationView.VisibleBoundsChanged -= OnVisibleBoundsChanged;
+#endif
+//+:cnd:noEmit
 	}
 
 	private void OnSizeChanged(object sender, WindowSizeChangedEventArgs args)
