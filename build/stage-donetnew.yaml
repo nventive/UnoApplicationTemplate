@@ -1,7 +1,7 @@
 jobs:
   - job: On_Windows_Dotnet_New
     pool:
-      vmImage : windows-2022
+      name : $(windowsAgent)
     steps:
     - script: dotnet new -i $(Build.SourcesDirectory)
       displayName: 'Install UnoApplicationTemplate'

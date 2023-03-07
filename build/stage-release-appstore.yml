@@ -6,7 +6,7 @@ jobs:
 - deployment: AppStore_iOS
 
   pool:
-    name: $(macOSPoolName)
+    name: $(macOSAgent)
     demands:
       - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
 

@@ -71,13 +71,16 @@ variables:
   InfoPlistPath: '$(Build.SourcesDirectory)/src/app/$(SolutionName).Mobile/iOS/Info.plist'
   AndroidManifestPath: '$(Build.SourcesDirectory)/src/app/$(SolutionName).Mobile/Android/AndroidManifest.xml'
 
-  # Virtual machine images
-  windowsHostedAgentImage: 'windows-2022'
-  macOSHostedAgentImage: 'macOS-12'
-  macOSPoolName: 'macOS'
+  # Agents to use
+  # Uncomment to make usage of hosted agents instead of on prem below
+  # If using hosted, replace name: in the pool node with vmImage:
+  #windowsAgent: "windows-2022" 
+  #macOSAgent: "macOS-12"
+  windowsAgent: 'windows 2022-23'
+  macOSAgent: 'macOS-2023'
 
   # Versions to use
-  XAMARIN_IOS_VERSION: 15.10
+  XAMARIN_IOS_VERSION: 16.1.1
 
   # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
   # We make seperate folders so that releases can each download only the folder they need.

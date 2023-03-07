@@ -12,7 +12,7 @@ parameters:
 jobs:
 - deployment: AppCenter_Android
   pool:
-    vmImage: $(windowsHostedAgentImage)
+    name: $(windowsAgent)
   variables:
   - name: artifactName
     value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
@@ -61,7 +61,7 @@ jobs:
 
 - deployment: AppCenter_iOS
   pool:
-    name: $(macOSPoolName)
+    name: $(macOSAgent)
     demands:
     - fastlane
   variables:

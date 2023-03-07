@@ -40,80 +40,82 @@
   default: '$(AndroidManifestPath)'
 
 jobs:
-  - job: On_Windows_ReleaseNotes
-    pool:
-      vmImage : $(windowsHostedAgentImage)
-    variables:
-      ArtifactName: ReleaseNotes_${{ parameters.applicationEnvironment }}
-      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-    steps:
-      - template: steps-build-release-notes.yml
-        parameters:
-          additionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
-          removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
+  # - job: On_Windows_ReleaseNotes
+  #   pool:
+  #     name : $(windowsAgent)
+  #   variables:
+  #     ArtifactName: ReleaseNotes_${{ parameters.applicationEnvironment }}
+  #     ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  #   steps:
+  #     - template: steps-build-release-notes.yml
+  #       parameters:
+  #         additionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
+  #         removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
 
-  - job: OnWindows_Windows
-    pool:
-      vmImage : $(windowsHostedAgentImage)
-    variables:
-      ApplicationConfiguration: Release
-      ApplicationPlatform: x64
-      ArtifactName: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
-      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-      BuildTargetFramework: net6.0-windows10.0.19041.0
-    steps:
-      - template: steps-build-windows.yml
-        parameters:
-          pathToSrc: ${{ parameters.pathToSrc }}
-          solutionFileName: '${{ parameters.solutionName }}.sln'
-          solutionName: ${{ parameters.solutionName }}
+  # - job: OnWindows_Windows
+  #   pool:
+  #     name : $(windowsAgent)
+  #   variables:
+  #     ApplicationConfiguration: Release
+  #     ApplicationPlatform: x64
+  #     ArtifactName: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
+  #     ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  #     BuildTargetFramework: net6.0-windows10.0.19041.0
+  #   steps:
+  #     - template: steps-build-windows.yml
+  #       parameters:
+  #         pathToSrc: ${{ parameters.pathToSrc }}
+  #         solutionFileName: '${{ parameters.solutionName }}.sln'
+  #         solutionName: ${{ parameters.solutionName }}
 
-  - job: OnWindows_Tests
-    pool:
-      vmImage : $(windowsHostedAgentImage)
-    variables:
-      ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
-      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-    steps:
-      - template: steps-build-tests.yml
-        parameters:
-          pathToSrc: ${{ parameters.pathToSrc }}
-          solutionFileName: '${{ parameters.solutionName }}.sln'
-          solutionName: ${{ parameters.solutionName }}
+  # - job: OnWindows_Tests
+  #   pool:
+  #     name : $(windowsAgent)
+  #   variables:
+  #     ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
+  #     ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  #   steps:
+  #     - template: steps-build-tests.yml
+  #       parameters:
+  #         pathToSrc: ${{ parameters.pathToSrc }}
+  #         solutionFileName: '${{ parameters.solutionName }}.sln'
+  #         solutionName: ${{ parameters.solutionName }}
 
-  - job: OnWindows_Android
-    pool:
-      vmImage : $(windowsHostedAgentImage)
-    variables:
-    - name: ApplicationEnvironment
-      value: ${{ parameters.applicationEnvironment }}
-    - name: ArtifactName
-      value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
-    - name: ApplicationPlatform
-      value: AnyCPU
-    - name: BuildTargetFramework
-      value: net6.0-android
+  # - job: OnWindows_Android
+  #   pool:
+  #     name : $(windowsAgent)
+  #   variables:
+  #   - name: ApplicationEnvironment
+  #     value: ${{ parameters.applicationEnvironment }}
+  #   - name: ArtifactName
+  #     value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+  #   - name: ApplicationPlatform
+  #     value: AnyCPU
+  #   - name: BuildTargetFramework
+  #     value: net6.0-android
 
-    # For optimization, if we are on light build, we only build the project else we publish it.
-    - name: dotNetCommand
-      ${{ if eq(variables['IsLightBuild'], 'true') }}:
-        value: build
-      ${{ else }}:
-        value: publish
+  #   # For optimization, if we are on light build, we only build the project else we publish it.
+  #   - name: dotNetCommand
+  #     ${{ if eq(variables['IsLightBuild'], 'true') }}:
+  #       value: build
+  #     ${{ else }}:
+  #       value: publish
 
-    - group: ${{ parameters.androidVariableGroup }}
+  #   - group: ${{ parameters.androidVariableGroup }}
 
-    steps:
-    - template: steps-build-android.yml
-      parameters:
-        pathToSrc: ${{ parameters.pathToSrc }}
-        solutionName: ${{ parameters.solutionName }}
-        pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
-        androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
+  #   steps:
+  #   - template: steps-build-android.yml
+  #     parameters:
+  #       pathToSrc: ${{ parameters.pathToSrc }}
+  #       solutionName: ${{ parameters.solutionName }}
+  #       pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
+  #       androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
 
   - job: OnMac_iOS
     pool:
-      vmImage: $(macOSHostedAgentImage)
+      name: $(macOSAgent)
+      demands:
+      - agent.name -equals MACOS-C1CAFEBA-308C-4120-A7BE-31FCA6804D1E
     variables:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}
