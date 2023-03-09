@@ -9,35 +9,41 @@ using System.Text;
 using System.Text.Json;
 using ApplicationTemplate.Client;
 using Chinook.DynamicMvvm;
+using Chinook.DynamicMvvm.Deactivation;
 using DynamicData;
 using Uno;
 using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
-public partial class HttpDebuggerViewModel : ViewModel
+public sealed partial class HttpDebuggerViewModel : TabViewModel
 {
 	[Inject] private IHttpDebuggerService _httpDebuggerService;
 
 	public HttpDebuggerViewModel()
 	{
+		Title = "HTTP";
 		_httpDebuggerService.TraceUpdated += OnTraceUpdated;
 		AddDisposable(Disposable.Create(() => _httpDebuggerService.TraceUpdated -= OnTraceUpdated));
 
-		AddDisposable(_httpDebuggerService
-			.Traces
-			.Connect()
-			.Transform(sequenceId => this.GetChild(
-				() => new HttpTraceItemViewModel(_httpDebuggerService.GetTrace(sequenceId)),
-				name: GetChildName(sequenceId))
-			)
-			.ObserveOn(this.GetService<IDispatcherScheduler>())
-			.Bind(out var traces)
-			.DisposeMany()
-			.Subscribe()
-		);
+		this.AddDeactivatableSubscription(() =>
+		{
+			var subscription = _httpDebuggerService
+				.Traces
+				.Connect()
+				.Transform(sequenceId => this.GetChild(
+					() => new HttpTraceItemViewModel(_httpDebuggerService.GetTrace(sequenceId)),
+					name: GetChildName(sequenceId))
+				)
+				.ObserveOn(this.GetService<IDispatcherScheduler>())
+				.Bind(out var traces)
+				.DisposeMany()
+				.Subscribe();
 
-		Traces = traces;
+			Traces = traces;
+			return subscription;
+		},
+		isDeactivated: true);
 	}
 
 	private void OnTraceUpdated(object sender, TraceUpdatedEventArgs e)
@@ -48,7 +54,11 @@ public partial class HttpDebuggerViewModel : ViewModel
 		}
 	}
 
-	public ReadOnlyObservableCollection<HttpTraceItemViewModel> Traces { get; private set; }
+	public ReadOnlyObservableCollection<HttpTraceItemViewModel> Traces
+	{
+		get => this.Get(initialValue: default(ReadOnlyObservableCollection<HttpTraceItemViewModel>));
+		private set => this.Set(value);
+	}
 
 	public int SelectedIndex
 	{

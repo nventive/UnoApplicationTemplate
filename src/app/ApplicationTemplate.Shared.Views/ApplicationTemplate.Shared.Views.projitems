@@ -48,6 +48,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\DiagnosticsPage.xaml.cs">
       <DependentUpon>DiagnosticsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\DiagnosticsTabPresenter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\EnvironmentPickerPage.xaml.cs">
       <DependentUpon>EnvironmentPickerPage.xaml</DependentUpon>
     </Compile>

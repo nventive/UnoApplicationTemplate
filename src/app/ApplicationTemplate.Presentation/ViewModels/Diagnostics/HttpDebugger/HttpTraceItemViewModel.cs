@@ -6,7 +6,7 @@ using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Presentation;
 
-public class HttpTraceItemViewModel : ViewModel
+public sealed class HttpTraceItemViewModel : ViewModel
 {
 	private readonly HttpTrace _trace;
 
