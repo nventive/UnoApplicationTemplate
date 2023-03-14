@@ -71,7 +71,15 @@ public sealed class CoreStartup : CoreStartupBase
 		}
 	}
 
-	private async Task ExecuteInitialNavigation(CancellationToken ct, IServiceProvider services)
+	/// <summary>
+	/// Executes the initial navigation.
+	/// </summary>
+	/// <remarks>
+	/// This can be invoked from diagnostics to reset the app navigation.
+	/// </remarks>
+	/// <param name="ct">The cancellation token.</param>
+	/// <param name="services">The service provider.</param>
+	public static async Task ExecuteInitialNavigation(CancellationToken ct, IServiceProvider services)
 	{
 		var applicationSettingsService = services.GetRequiredService<IApplicationSettingsService>();
 		var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();

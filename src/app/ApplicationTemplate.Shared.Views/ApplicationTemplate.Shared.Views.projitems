@@ -55,6 +55,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\HttpDebuggerView.xaml.cs">
       <DependentUpon>HttpDebuggerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\NavigationDebuggerView.xaml.cs">
+      <DependentUpon>NavigationDebuggerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -217,6 +220,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\HttpDebuggerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\NavigationDebuggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

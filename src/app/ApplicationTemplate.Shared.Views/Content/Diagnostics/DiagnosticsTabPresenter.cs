@@ -28,6 +28,7 @@ public sealed partial class DiagnosticsTabPresenter : ContentControl
 		that.Content = e.NewValue switch
 		{
 			HttpDebuggerViewModel => new HttpDebuggerView() { DataContext = e.NewValue },
+			NavigationDebuggerViewModel => new NavigationDebuggerView() { DataContext = e.NewValue },
 			_ => new Border(),
 		};
 	}
