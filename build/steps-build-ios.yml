@@ -63,22 +63,22 @@ steps:
     dotnet $(dotNetCommand) -f:$(BuildTargetFramework) -c:Release /p:ApplicationIdentifier=$(ApplicationIdentifier) /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid) /p:ArchiveOnBuild=true /bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog "/p:InformationalVersion=$GITVERSION_INFORMATIONALVERSION" /p:IsLightBuild=$(IsLightBuild)
   displayName: Build project for Release - $(BuildTargetFramework)
 
-# - task: CopyFiles@2
-#   displayName: 'Copy IPA'
-#   inputs:
-#     Contents: '**/*.ipa'
-#     flattenFolders : true
-#     SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/$(BuildTargetFramework)'
-#     TargetFolder: '$(Build.ArtifactStagingDirectory)'
-#     CleanTargetFolder: true
+- task: CopyFiles@2
+  displayName: 'Copy IPA'
+  inputs:
+    Contents: '**/*.ipa'
+    flattenFolders : true
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/$(BuildTargetFramework)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+    CleanTargetFolder: true
 
-# - task: CopyFiles@2
-#   displayName: 'Copy DSYM'
-#   inputs:
-#     Contents: '**/*.dSYM/**'
-#     flattenFolders : true
-#     SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/$(BuildTargetFramework)'
-#     TargetFolder: '$(Build.ArtifactStagingDirectory)/${{ parameters.solutionName }}.Mobile.dSYM'
+- task: CopyFiles@2
+  displayName: 'Copy DSYM'
+  inputs:
+    Contents: '**/*.dSYM/**'
+    flattenFolders : true
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/$(BuildTargetFramework)'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/${{ parameters.solutionName }}.Mobile.dSYM'
 
 - publish: $(Build.ArtifactStagingDirectory)
   displayName: 'Publish Artifact'
