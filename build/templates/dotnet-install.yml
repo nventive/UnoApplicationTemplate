@@ -1,10 +1,11 @@
 steps:
   - task: UseDotNet@2
-    displayName: 'Install .NET SDK'
+    displayName: .NET Version
     inputs:
-      installationPath: '$(Agent.TempDirectory)'
-      useGlobalJson: true
       packageType: 'sdk'
+      version: '7.0.102'
 
-  - powershell: dotnet workload install maui --source https://api.nuget.org/v3/index.json
-    displayName: Install .NET MAUI Workload
+  - task: CmdLine@2
+    displayName: 'Install Maui'
+    inputs:
+      script: 'dotnet workload install maui'
