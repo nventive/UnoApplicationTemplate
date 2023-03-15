@@ -3,6 +3,13 @@ jobs:
     pool:
       name : $(windowsAgent)
     steps:
+    - task: UseDotNet@2
+      displayName: 'Install .NET SDK'
+      inputs:
+        installationPath: '$(Agent.TempDirectory)/dotnet'
+        useGlobalJson: true
+        packageType: 'sdk'
+
     - script: dotnet new -i $(Build.SourcesDirectory)
       displayName: 'Install UnoApplicationTemplate'
 

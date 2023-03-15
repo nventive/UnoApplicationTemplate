@@ -1,9 +1,10 @@
 steps:
   - task: UseDotNet@2
-    displayName: .NET Version
+    displayName: 'Install .NET SDK'
     inputs:
+      installationPath: '$(Agent.TempDirectory)/dotnet'
+      useGlobalJson: true
       packageType: 'sdk'
-      version: '7.0.102'
 
   - task: CmdLine@2
     displayName: 'Install Maui'
