@@ -19,7 +19,7 @@ parameters:
   default: ''
 
 steps:
-- template: templates/dotnet-install.yml
+# - template: templates/dotnet-install.yml
 
 #-if false
 - download: current
