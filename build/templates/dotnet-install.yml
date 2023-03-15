@@ -2,6 +2,7 @@ steps:
   - task: UseDotNet@2
     displayName: 'Install .NET SDK'
     inputs:
+      installationPath: '$(Agent.ToolsDirectory)/dotnet'
       useGlobalJson: true
       packageType: 'sdk'
 
