@@ -35,7 +35,6 @@ steps:
     certSecureFile: ${{ parameters.iosCertificateFile }}
     certPwd: $(AppleCertificatePassword)
     keychain: temp
-    deleteCert: true
 
 - task: InstallAppleProvisioningProfile@1
   displayName: 'Install Apple Provisioning Profile'
