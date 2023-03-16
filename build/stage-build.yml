@@ -114,8 +114,7 @@ jobs:
   - job: OnMac_iOS
     pool:
       name: $(macOSAgent)
-      demands:
-      - agent.name -equals MACOS-C1CAFEBA-308C-4120-A7BE-31FCA6804D1E
+      
     variables:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}
