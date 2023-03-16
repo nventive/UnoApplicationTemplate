@@ -16,12 +16,6 @@ pr:
    - main
    - release/*
    - feature/*
-   
-# This section allows to queue build when ran manually
-resources:
-  pipelines:
-  - pipeline: UnoAppTemplate
-    source: 'nventive.UnoApplicationTemplate'
 
 trigger:
   branches:
