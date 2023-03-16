@@ -114,6 +114,8 @@ jobs:
   - job: OnMac_iOS
     pool:
       name: $(macOSAgent)
+      demands:
+      - Agent.Version -equals 3.218.0
       
     variables:
     - name: ApplicationEnvironment
