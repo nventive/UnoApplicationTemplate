@@ -200,7 +200,7 @@
 								<MtouchUseThumb>True</MtouchUseThumb>
 								<MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
 								<Optimize>True</Optimize>
-								<PublishTrimmed>False</PublishTrimmed>
+								<PublishTrimmed>True</PublishTrimmed>
 								<TrimMode>link</TrimMode>
 								<Property>
 									<!-- See https://github.com/unoplatform/uno/issues/11248 for more details. -->
