@@ -10,6 +10,9 @@ jobs:
         useGlobalJson: true
         packageType: 'sdk'
 
+    - script: dotnet nuget locals all --clear
+      displayName: 'Clear nuget cache for previous installed template'
+
     - script: dotnet new install $(Build.SourcesDirectory)
       displayName: 'Install UnoApplicationTemplate'
 
