@@ -10,7 +10,7 @@ jobs:
         useGlobalJson: true
         packageType: 'sdk'
 
-    - script: dotnet new install --force $(Build.SourcesDirectory)
+    - script: dotnet new -i $(Build.SourcesDirectory) --force
       displayName: 'Install UnoApplicationTemplate'
 
     - script: dotnet new nv-mobile -n GeneratedApp
