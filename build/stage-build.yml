@@ -115,7 +115,7 @@ jobs:
     pool:
       name: $(macOSAgent)
       demands:
-      - agent.name -equals MACOS-C1CAFEBA-308C-4120-A7BE-31FCA6804D1E
+      - Agent.Version -equals 3.218.0
     variables:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}
