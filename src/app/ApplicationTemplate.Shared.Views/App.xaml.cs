@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
 using ApplicationTemplate.Views;
 using Chinook.SectionsNavigation;
+using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
+using Uno.Extensions;
 using Windows.Graphics.Display;
 
 namespace ApplicationTemplate;
@@ -18,6 +20,14 @@ public sealed partial class App : Application
 		InitializeComponent();
 
 		ConfigureOrientation();
+
+//-:cnd:noEmit
+#if __MOBILE__
+		LeavingBackground += OnLeavingBackground;
+		Resuming += OnResuming;
+		Suspending += OnSuspending;
+#endif
+//+:cnd:noEmit
 	}
 
 	public static App Instance { get; private set; }
@@ -32,6 +42,11 @@ public sealed partial class App : Application
 
 	protected override void OnLaunched(LaunchActivatedEventArgs args)
 	{
+		InitializeAndStart();
+	}
+
+	private void InitializeAndStart()
+	{
 //-:cnd:noEmit
 #if __WINDOWS__
 		CurrentWindow = new Window();
@@ -39,7 +54,7 @@ public sealed partial class App : Application
 #else
 		CurrentWindow = Microsoft.UI.Xaml.Window.Current;
 #endif
-		//+:cnd:noEmit
+//+:cnd:noEmit
 
 		Shell = CurrentWindow.Content as Shell;
 
@@ -60,7 +75,7 @@ public sealed partial class App : Application
 		}
 
 //-:cnd:noEmit
-#if !__WINDOWS__
+#if __MOBILE__
 		CurrentWindow.Activate();
 #endif
 //+:cnd:noEmit
@@ -68,10 +83,38 @@ public sealed partial class App : Application
 		_ = Task.Run(() => Startup.Start());
 	}
 
+	//-:cnd:noEmit
+#if __MOBILE__
+	/// <summary>
+	/// This is where your app launches if you use custom schemes, Universal Links, or Android App Links.
+	/// </summary>
+	/// <param name="args"><see cref="Windows.ApplicationModel.Activation.IActivatedEventArgs"/>.</param>
+	protected override void OnActivated(Windows.ApplicationModel.Activation.IActivatedEventArgs args)
+	{
+		InitializeAndStart();
+	}
+
+	private void OnLeavingBackground(object sender, Windows.ApplicationModel.LeavingBackgroundEventArgs e)
+	{
+		this.Log().LogInformation("Application is leaving background.");
+	}
+
+	private void OnResuming(object sender, object e)
+	{
+		this.Log().LogInformation("Application is resuming.");
+	}
+
+	private void OnSuspending(object sender, Windows.ApplicationModel.SuspendingEventArgs e)
+	{
+		this.Log().LogInformation("Application is suspending.");
+	}
+#endif
+//+:cnd:noEmit
+
 	private static string GetContentRootPath()
 	{
 //-:cnd:noEmit
-#if __WINDOWS__ || __ANDROID__ || __IOS__
+#if __WINDOWS__ || __MOBILE__
 		return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
 		return string.Empty;
@@ -104,12 +147,12 @@ public sealed partial class App : Application
 		var resources = Current.Resources;
 		var statusBarHeight = 0d;
 
-		//-:cnd:noEmit
-#if __ANDROID__ || __IOS__
+//-:cnd:noEmit
+#if __MOBILE__
 		Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Microsoft.UI.Colors.White;
 		statusBarHeight = Windows.UI.ViewManagement.StatusBar.GetForCurrentView().OccludedRect.Height;
 #endif
-		//+:cnd:noEmit
+//+:cnd:noEmit
 
 		resources.Add("StatusBarDouble", statusBarHeight);
 		resources.Add("StatusBarThickness", new Thickness(0, statusBarHeight, 0, 0));
@@ -124,6 +167,10 @@ public sealed partial class App : Application
 		var windowId = Microsoft.UI.Win32Interop.GetWindowIdFromWindow(windowHandle);
 		var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
 		appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 480, Height = 800 });
+
+		// Sets a title bar icon.
+		// Workaround. See https://github.com/microsoft/microsoft-ui-xaml/issues/6773 for more details.
+		appWindow.SetIcon("Images\\TitleBarIcon.ico");
 #endif
 //+:cnd:noEmit
 	}
