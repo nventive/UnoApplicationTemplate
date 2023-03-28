@@ -3,14 +3,18 @@
 		<LangVersion>10.0</LangVersion>
 	</PropertyGroup>
 	<PropertyGroup>
-		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
+		<TargetFrameworks>net7.0-ios</TargetFrameworks>
 		<SingleProject>true</SingleProject>
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
 		<UseMauiEssentials>true</UseMauiEssentials>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-android'">26.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-ios'">14.2</SupportedOSPlatformVersion>
 		<NoWarn>Uno0001</NoWarn>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+	  <ProvisioningType>manual</ProvisioningType>
+	  <CodesignKey>iPhone Developer</CodesignKey>
+	  <CodesignProvision>App template development</CodesignProvision>
 	</PropertyGroup>
 		<!-- Linker configuration. -->
 	<ItemGroup>
@@ -41,114 +45,6 @@
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
 	<Choose>
-		<When Condition="'$(TargetFramework)'=='net7.0-android'">
-			<PropertyGroup>
-				<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
-				<BundleAssemblies>False</BundleAssemblies>
-			</PropertyGroup>
-			<Choose>
-				<When Condition="'$(Configuration)'=='Debug'">
-					<PropertyGroup>
-						<AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
-						<UseHighDPIResources>False</UseHighDPIResources>
-						<EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
-						<EnableLLVM>False</EnableLLVM>
-						<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
-						<AndroidDexTool>d8</AndroidDexTool>
-						<Optimize>False</Optimize>
-						<RunAOTCompilation>False</RunAOTCompilation>
-					</PropertyGroup>
-				</When>
-				<When Condition="'$(Configuration)'=='Release'">
-					<PropertyGroup>
-						<EmbedAssembliesIntoApk>True</EmbedAssembliesIntoApk>
-						<AndroidManagedSymbols>True</AndroidManagedSymbols>
-						<AndroidEnableSGenConcurrent>True</AndroidEnableSGenConcurrent>
-						<AndroidAotAdditionalArguments>nodebug,no-write-symbols</AndroidAotAdditionalArguments>
-						<AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
-						<AndroidUseAapt2>True</AndroidUseAapt2>
-					</PropertyGroup>
-					<Choose>
-						<When Condition="'$(IsLightBuild)'=='True'">
-							<!-- Build Optimization for LightBuild (Faster Builds in Pull Requests). -->
-							<PropertyGroup>
-								<AndroidEnableProfiledAot>False</AndroidEnableProfiledAot>
-								<EnableLLVM>False</EnableLLVM>
-								<Optimize>False</Optimize>
-								<RunAOTCompilation>False</RunAOTCompilation>
-								<PublishTrimmed>False</PublishTrimmed>
-							</PropertyGroup>
-						</When>
-						<Otherwise>
-							<PropertyGroup>
-								<AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
-								<!-- LLVM currently doesn't work with AOT enabled and custom profile. -->
-								<!-- See https://github.com/dotnet/runtime/issues/74021 for more details. -->
-								<!-- See https://github.com/xamarin/xamarin-android/issues/7352 for more details. -->
-								<EnableLLVM>False</EnableLLVM>
-								<Optimize>True</Optimize>
-								<RunAOTCompilation>True</RunAOTCompilation>
-								<PublishTrimmed>True</PublishTrimmed>
-								<TrimMode>link</TrimMode>
-								<Property>
-									<!-- See https://github.com/unoplatform/uno/issues/11248 for more details. -->
-									<Target Name="_LinkerAdjust" AfterTargets="_PrepareLinking">
-										<!-- See https://github.com/dotnet/runtime/issues/81979 for more details. -->
-										<PropertyGroup>
-											<_ExtraTrimmerArgs>$(_ExtraTrimmerArgs) --keep-metadata all</_ExtraTrimmerArgs>
-										</PropertyGroup>
-									</Target>
-								</Property>
-							</PropertyGroup>
-						</Otherwise>
-					</Choose>
-				</When>
-			</Choose>
-			<ItemGroup>
-				<PackageReference Include="Xamarin.Google.Android.Material" Version="1.7.0.1" />
-				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
-				<PackageReference Include="Mono.AotProfiler.Android" Version="6.0.0" />
-				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.8.0" />
-			</ItemGroup>
-			<ItemGroup>
-				<AndroidAotProfile Include="custom.aprof" />
-				<AndroidEnvironment Include="Android\environment.conf" />
-				<TrimmerRootDescriptor Include="Android\LinkerExclusions.xml" />
-			</ItemGroup>
-			<!-- Android resources. -->
-			<ItemGroup>
-				<AndroidResource Include="Android\Resources\values\Colors.xml" />
-				<AndroidResource Include="Android\Resources\values-night\Colors.xml" />
-				<AndroidResource Include="Android\Resources\values\Strings.xml" />
-				<AndroidResource Include="Android\Resources\values\Styles.xml" />
-				<AndroidResource Include="Android\Resources\drawable\splash.xml" />
-				<AndroidResource Include="Android\Resources\mipmap-mdpi\ic_launcher.png" />
-				<AndroidResource Include="Android\Resources\mipmap-hdpi\ic_launcher.png" />
-				<AndroidResource Include="Android\Resources\mipmap-xhdpi\ic_launcher.png" />
-				<AndroidResource Include="Android\Resources\mipmap-xxhdpi\ic_launcher.png" />
-				<AndroidResource Include="Android\Resources\mipmap-xxxhdpi\ic_launcher.png" />
-				<AndroidResource Include="Android\Resources\mipmap-mdpi\ic_launcher_foreground.png" />
-				<AndroidResource Include="Android\Resources\mipmap-hdpi\ic_launcher_foreground.png" />
-				<AndroidResource Include="Android\Resources\mipmap-xxhdpi\ic_launcher_foreground.png" />
-				<AndroidResource Include="Android\Resources\mipmap-xhdpi\ic_launcher_foreground.png" />
-				<AndroidResource Include="Android\Resources\mipmap-xxxhdpi\ic_launcher_foreground.png" />
-				<AndroidResource Include="Android\Resources\drawable-hdpi\Logo.png" />
-				<AndroidResource Include="Android\Resources\drawable-mdpi\Logo.png" />
-				<AndroidResource Include="Android\Resources\drawable-xhdpi\Logo.png" />
-				<AndroidResource Include="Android\Resources\drawable-xxhdpi\Logo.png" />
-				<AndroidResource Include="Android\Resources\drawable-xxxhdpi\Logo.png" />
-				<AndroidResource Include="Android\Resources\xml\file_paths.xml" />
-			</ItemGroup>
-			<!-- Network security configuration (For Fiddler). -->
-			<ItemGroup Condition="'$(ApplicationEnvironment)'!='Production'">
-				<AndroidResource Include="Android\Resources\xml\network_security_config.xml" />
-			</ItemGroup>
-			<ItemGroup Condition="'$(ApplicationEnvironment)'=='Production'">
-				<AndroidResource Include="Android\Resources\xml\network_security_config_prod.xml">
-					<LogicalName>Android\xml\network_security_config.xml</LogicalName>
-				</AndroidResource>
-			</ItemGroup>
-		</When>
 		<When Condition="'$(TargetFramework)'=='net7.0-ios'">
 			<PropertyGroup>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
@@ -173,7 +69,9 @@
 				<When Condition="'$(Configuration)'=='Release'">
 					<PropertyGroup>
 						<BuildIpa>True</BuildIpa>
-						<CodesignKey>iPhone Distribution</CodesignKey>
+						<ProvisioningType>manual</ProvisioningType>
+						<CodesignKey>iPhone Developer</CodesignKey>
+						<CodesignProvision>App template development</CodesignProvision>
 						<RuntimeIdentifier>ios-arm64</RuntimeIdentifier>
 					</PropertyGroup>
 					<Choose>
