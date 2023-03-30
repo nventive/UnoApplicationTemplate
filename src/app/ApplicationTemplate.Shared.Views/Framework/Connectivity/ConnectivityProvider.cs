@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reactive.Concurrency;
+using System.Threading;
 using Uno.Extensions;
 using Uno.Logging;
 using Windows.Networking.Connectivity;
@@ -34,7 +36,15 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 	{
 		get
 		{
+#if __WINDOWS__
+			// This is null if we access it from the UI thread.
+			var networkConnectivityLevel = DefaultScheduler.Instance.Run(
+				func: () => NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel(),
+				cancellationToken: CancellationToken.None
+			).Result;
+#else
 			var networkConnectivityLevel = NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel();
+#endif
 			switch (networkConnectivityLevel)
 			{
 				case NetworkConnectivityLevel.None:

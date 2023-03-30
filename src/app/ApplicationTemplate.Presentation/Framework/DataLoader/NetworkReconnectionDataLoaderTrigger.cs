@@ -19,7 +19,7 @@ public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 	{
 		_dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
 		_connectivity = connectivity;
-		connectivity.ConnectivityChanged += OnConnectivityChanged;
+		_connectivity.ConnectivityChanged += OnConnectivityChanged;
 	}
 
 	private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
