@@ -115,7 +115,7 @@ jobs:
     pool:
       name: $(macOSAgent)
       demands:
-      - Agent.Version -equals 3.218.0
+      - Agent.ComputerName -equals MACOSAGTM2PRO01
       
     variables:
     - name: ApplicationEnvironment
