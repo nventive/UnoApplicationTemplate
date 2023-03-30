@@ -32,6 +32,7 @@ public sealed class Startup : StartupBase
 //-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 		Uno.UI.FeatureConfiguration.Style.ConfigureNativeFrameNavigation();
+		Uno.UI.FeatureConfiguration.AutomationPeer.UseSimpleAccessibility = true;
 #endif
 //+:cnd:noEmit
 	}
