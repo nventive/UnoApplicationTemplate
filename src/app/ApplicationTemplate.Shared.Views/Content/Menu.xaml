@@ -74,21 +74,24 @@
 		</Grid.RenderTransform>
 		<utu:TabBar>
 			<utu:TabBar.Items>
-				<utu:TabBarItem Command="{Binding ShowHomeSection}">
+				<utu:TabBarItem>
 					<c:BottomTabBarButton IconStyle="{StaticResource HomePathControlStyle}"
 										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Command="{Binding ShowHomeSection}"
 										  Content="Jokes"
 										  x:Uid="Menu_Home" />
 				</utu:TabBarItem>
-				<utu:TabBarItem Command="{Binding ShowPostsSection}">
+				<utu:TabBarItem>
 					<c:BottomTabBarButton IconStyle="{StaticResource PostsPathControlStyle}"
 										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Command="{Binding ShowPostsSection}"
 										  Content="Posts"
 										  x:Uid="Menu_Posts" />
 				</utu:TabBarItem>
-				<utu:TabBarItem Command="{Binding ShowSettingsSection}">
+				<utu:TabBarItem>
 					<c:BottomTabBarButton IconStyle="{StaticResource SettingsPathControlStyle}"
 										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
+										  Command="{Binding ShowSettingsSection}"
 										  Content="Profile"
 										  x:Uid="Menu_Settings" />
 				</utu:TabBarItem>
