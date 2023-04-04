@@ -1,6 +1,7 @@
 ﻿//-:cnd:noEmit
 #if __WINDOWS__
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace ApplicationTemplate;
@@ -19,6 +20,7 @@ public sealed partial class EmailService : IEmailService
 		{
 			Subject = email.Subject,
 			Body = email.Body,
+			To = email.To.ToList(),
 		};
 
 		foreach (var attachment in email.Attachments)
