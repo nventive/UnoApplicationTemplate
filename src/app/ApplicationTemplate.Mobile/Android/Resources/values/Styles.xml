@@ -28,6 +28,9 @@
 		<!-- This makes the status bar translucent and allows content to be drawn behind -->
 		<item name="android:windowTranslucentStatus">true</item>
 
+		<!-- This makes the navigation bar translucent and allows content to be drawn behind -->
+		<item name="android:windowTranslucentNavigation">true</item>
+
 		<!-- This makes the scrollviewer show a edge when reaching the maximum scrollable area. -->
 		<!-- Change this to ripple_material_dark if you are using dark lists or any accent color. -->
 		<item name="android:colorEdgeEffect">@color/ripple_material_light</item>
