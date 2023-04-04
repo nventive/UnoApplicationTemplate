@@ -1,5 +1,5 @@
 ﻿//-:cnd:noEmit
-#if __ANDROID__ || __IOS__
+#if __MOBILE__
 using System.Threading.Tasks;
 
 namespace ApplicationTemplate;
@@ -12,6 +12,7 @@ public sealed partial class EmailService : IEmailService
 		{
 			Subject = email.Subject,
 			Body = email.Body,
+			To = email.To,
 		};
 
 		foreach (var attachment in email.Attachments)
