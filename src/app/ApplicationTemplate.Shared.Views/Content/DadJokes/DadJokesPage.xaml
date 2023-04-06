@@ -1,4 +1,4 @@
-﻿<Page x:Class="ApplicationTemplate.Views.Content.DadJokesPage"
+<Page x:Class="ApplicationTemplate.Views.Content.DadJokesPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -19,14 +19,14 @@
 
 					<!-- No Result Text -->
 					<TextBlock Text="There are no results."
-							   Style="{StaticResource Body1}"
+							   Style="{StaticResource BodyLarge}"
 							   HorizontalAlignment="Center" />
 				</StackPanel>
 			</Grid>
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -44,7 +44,7 @@
 				<AppBarButton Command="{Binding NavigateToFilters}">
 					<AppBarButton.Icon>
 						<BitmapIcon UriSource="{StaticResource FilterImage}"
-									Foreground="{StaticResource MaterialOnPrimaryBrush}" />
+									Foreground="{StaticResource OnPrimaryBrush}" />
 					</AppBarButton.Icon>
 				</AppBarButton>
 			</CommandBar.PrimaryCommands>
@@ -62,7 +62,7 @@
 				<u:SwipeRefresh x:Name="RefreshContent"
 								RefreshCommand="{Binding ElementName=JokesDataLoader, Path=RefreshCommand}"
 								IsRefreshing="{Binding ElementName=JokesDataLoader, Path=RefreshCommand.IsExecuting}"
-								IndicatorColor="{StaticResource MaterialPrimaryBrush}">
+								IndicatorColor="{StaticResource PrimaryBrush}">
 
 					<!-- Jokes ListView -->
 					<ListView ItemsSource="{Binding Data}"
@@ -71,7 +71,7 @@
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								
-								<Grid Background="{StaticResource MaterialSurfaceBrush}"
+								<Grid Background="{StaticResource SurfaceBrush}"
 									  Margin="0,4">
 
 									<Grid.ColumnDefinitions>
@@ -83,12 +83,12 @@
 
 										<!-- Joke Setup -->
 										<TextBlock Text="{Binding Quote.Title}"
-												   Style="{StaticResource Subtitle2}"
+												   Style="{StaticResource TitleSmall}"
 												   Grid.Row="0" />
 
 										<!-- Joke Punchline -->
 										<TextBlock Text="{Binding Quote.Selftext}"
-												   Style="{StaticResource Headline6}"
+												   Style="{StaticResource TitleLarge}"
 												   Grid.Row="1" />
 									</StackPanel>
 
@@ -96,7 +96,7 @@
 									<ToggleButton IsChecked="{Binding IsFavorite}"
 												  Command="{Binding Parent.ToggleIsFavorite}"
 												  CommandParameter="{Binding}"
-												  Style="{StaticResource MaterialToggleButtonIconStyle}"
+												  Style="{StaticResource IconToggleButtonStyle}"
 												  VerticalAlignment="Top"
 												  Margin="10"
 												  Grid.Column="2">
@@ -106,7 +106,7 @@
 
 											<!-- Icon -->
 											<u:PathControl Style="{StaticResource OutlinedHeartPathControlStyle}"
-														   Foreground="{ThemeResource MaterialOnSurfaceLowBrush}" />
+														   Foreground="{ThemeResource OnSurfaceLowBrush}" />
 										</ToggleButton.Content>
 
 										<!-- IsChecked:True Content -->

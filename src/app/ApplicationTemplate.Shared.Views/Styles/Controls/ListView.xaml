@@ -17,7 +17,7 @@
 	-->
 
 	<Style TargetType="ListView"
-		   BasedOn="{StaticResource MaterialListViewStyle}"
+		   BasedOn="{StaticResource ListViewStyle}"
 		   x:Key="DefaultListViewStyle">
 		<Setter Property="Template">
 			<Setter.Value>

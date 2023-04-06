@@ -254,11 +254,11 @@
     <value>Ravi de
 te revoir !</value>
   </data>
-  <data name="Login_Subtitle1" xml:space="preserve">
+  <data name="Login_TitleMedium" xml:space="preserve">
     <value>"Bienvenue au Club de l'Assomption.
 Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
-  <data name="Login_Subtitle2" xml:space="preserve">
+  <data name="Login_TitleSmall" xml:space="preserve">
     <value>"Comment appelle-t-on cela lorsqu'un utilisateur d'Apple vous regarde dans les yeux ? IContact."</value>
   </data>
   <data name="Login_Email.PlaceholderText" xml:space="preserve">

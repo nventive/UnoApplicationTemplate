@@ -18,8 +18,6 @@
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Center" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
 		<Setter Property="Padding"
 				Value="20,9.5,20,7.5" />
 		<Setter Property="MinWidth"

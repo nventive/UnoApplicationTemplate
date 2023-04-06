@@ -3,7 +3,7 @@
 
 	<Style x:Key="DefaultToggleButtonStyle"
 		   TargetType="ToggleButton"
-		   BasedOn="{StaticResource MaterialTextToggleButtonStyle}" />
+		   BasedOn="{StaticResource TextToggleButtonStyle}" />
 
 	<!--Default Style-->
 	<Style TargetType="ToggleButton"

@@ -13,5 +13,5 @@
 
 	<!--Default Style-->
 	<Style TargetType="RadioButton"
-		   BasedOn="{StaticResource MaterialRadioButtonStyle}" />
+		   BasedOn="{StaticResource RadioButtonStyle}" />
 </ResourceDictionary>
