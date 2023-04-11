@@ -3,23 +3,21 @@
 
 	<!-- Styles -->
 	<Style x:Key="TextBoxStyle"
-		   BasedOn="{StaticResource MaterialOutlinedTextBoxStyle}"
+		   BasedOn="{StaticResource OutlinedTextBoxStyle}"
 		   TargetType="TextBox">
 
 		<Setter Property="MinHeight"
 				Value="56" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceMediumBrush}" />
+				Value="{StaticResource OnSurfaceMediumBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource SurfaceBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialOnSurfaceLowBrush}" />
+				Value="{StaticResource OnSurfaceLowBrush}" />
 		<Setter Property="SelectionHighlightColor"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0.5" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily02}" />
 		<Setter Property="FontWeight"
 				Value="Medium" />
 		<Setter Property="FontSize"

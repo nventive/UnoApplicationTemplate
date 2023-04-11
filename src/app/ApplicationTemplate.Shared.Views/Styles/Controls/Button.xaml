@@ -2,8 +2,26 @@
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:u="using:Nventive.View.Controls">
 
+	<!--There's an open descussion to find a way to avoid rounded buttons from Uno Material
+		Discussion: https://github.com/unoplatform/uno/discussions/11909-->
+	<!-- Override FilledButtonStyle to avoid rounding buttons -->
+	<Style	x:Key="FilledButtonStyle"
+			TargetType="Button"
+			BasedOn="{StaticResource FilledButtonStyle}">
+		<Setter Property="CornerRadius"
+				Value="4" />
+	</Style>
+
+	<!-- Override OutlinedButtonStyle to remove rounding -->
+	<Style	x:Key="OutlinedButtonStyle"
+			TargetType="Button"
+			BasedOn="{StaticResource OutlinedButtonStyle}">
+		<Setter Property="CornerRadius"
+				Value="4" />
+	</Style>
+	
 	<!-- This style is used instead of MaterialTextButtonStyle to show the icon to the right of the text -->
-	<Style x:Key="MaterialTextWithRightArrowButtonStyle"
+	<Style x:Key="TextWithRightArrowButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Height"
@@ -17,11 +35,9 @@
 		<Setter Property="Padding"
 				Value="16,6" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnBackgroundBrush}" />
+				Value="{StaticResource OnBackgroundBrush}" />
 		<Setter Property="BorderBrush"
 				Value="Transparent" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily02SemiBold}" />
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="CharacterSpacing"
@@ -50,13 +66,13 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource MaterialPrimaryHoverBrush}" />
+												Value="{StaticResource PrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource MaterialPrimaryPressedBrush}" />
+												Value="{StaticResource PrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -90,14 +106,14 @@
 		</Setter>
 	</Style>
 
-	<!-- This style is used instead of MaterialContainedButtonStyle to show the icon to the right of the text -->
-	<Style x:Key="MaterialContainedWithRightArrowButtonStyle"
+	<!-- This style is used instead of FilledButtonStyle to show the icon to the right of the text -->
+	<Style x:Key="ContainedWithRightArrowButtonStyle"
 		   TargetType="Button">
 
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialPrimaryBrush}" />
+				Value="{StaticResource PrimaryBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -105,9 +121,7 @@
 		<Setter Property="Padding"
 				Value="16,6" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnPrimaryBrush}" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily02SemiBold}" />
+				Value="{StaticResource OnPrimaryBrush}" />
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="CharacterSpacing"
@@ -131,13 +145,13 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="Overlay.Background"
-												Value="{StaticResource MaterialOnPrimaryHoverBrush}" />
+												Value="{StaticResource OnPrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="Overlay.Background"
-												Value="{StaticResource MaterialOnPrimaryPressedBrush}" />
+												Value="{StaticResource OnPrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -166,7 +180,7 @@
 										  HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
 										  AutomationProperties.AccessibilityView="Raw" />
-						
+
 						<u:PathControl Style="{StaticResource RightArrowPathControlStyle}"
 									   Foreground="{StaticResource AlternateOnSurfaceBrush}"
 									   Margin="0,0,16,0"
@@ -182,7 +196,7 @@
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Background"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource SurfaceBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -190,13 +204,11 @@
 		<Setter Property="Padding"
 				Value="10,8,10,8" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource MaterialSurfaceBrush}" />
+				Value="{StaticResource SurfaceBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily02}" />
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="CharacterSpacing"
@@ -219,17 +231,17 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource MaterialSecondaryHoverBrush}" />
+												Value="{StaticResource SecondaryHoverBrush}" />
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource MaterialSecondaryHoverBrush}" />
+												Value="{StaticResource SecondaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource MaterialSecondaryPressedBrush}" />
+												Value="{StaticResource SecondaryPressedBrush}" />
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource MaterialSecondaryPressedBrush}" />
+												Value="{StaticResource SecondaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -259,13 +271,11 @@
 		</Setter>
 	</Style>
 
-	<Style x:Key="MaterialTextWithRightArrowAlternativeButtonStyle"
+	<Style x:Key="TextWithRightArrowAlternativeButtonStyle"
 		   TargetType="Button"
-		   BasedOn="{StaticResource MaterialTextWithRightArrowButtonStyle}">
+		   BasedOn="{StaticResource TextWithRightArrowButtonStyle}">
 		<Setter Property="BorderThickness"
 				Value="0" />
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
 		<Setter Property="FontSize"
 				Value="16" />
 		<Setter Property="HorizontalAlignment"
@@ -281,6 +291,6 @@
 	</Style>
 
 	<Style TargetType="Button"
-		   BasedOn="{StaticResource MaterialContainedButtonStyle}" />
+		   BasedOn="{StaticResource FilledButtonStyle}" />
 
 </ResourceDictionary>

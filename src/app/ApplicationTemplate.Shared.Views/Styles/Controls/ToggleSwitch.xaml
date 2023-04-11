@@ -10,15 +10,15 @@
 	<!-- ResourceDictionary containing only 1 item doesn't work if that item refers Material resources. -->
 	<x:Int32 x:Key="ToggleSwitchWorkaround">0</x:Int32>
 
-	<win:Style x:Key="MaterialToggleSwitchStyle"
-			   BasedOn="{StaticResource MaterialToggleSwitchStyle}"
+	<win:Style x:Key="ToggleSwitchStyle"
+			   BasedOn="{StaticResource ToggleSwitchStyle}"
 			   TargetType="ToggleSwitch">
 		<Setter Property="Background"
-				Value="{ThemeResource MaterialOnSecondaryLowBrush}" />
+				Value="{ThemeResource OnSecondaryLowBrush}" />
 	</win:Style>
 
 
 	<Style TargetType="ToggleSwitch"
-		   BasedOn="{StaticResource MaterialToggleSwitchStyle}" />
+		   BasedOn="{StaticResource ToggleSwitchStyle}" />
 
 </ResourceDictionary>

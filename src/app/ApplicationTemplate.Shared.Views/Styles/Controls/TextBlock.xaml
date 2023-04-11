@@ -13,41 +13,31 @@
 	******************************************************************
 	-->
 
-	<Style x:Key="Headline2"
+	<Style x:Key="HeadlineLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline2}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01Bold}" />
+		   BasedOn="{StaticResource HeadlineLarge}">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="FontWeight"
 				Value="Bold" />
-		<Setter Property="LineHeight"
-				Value="62" />
 		<Setter Property="CharacterSpacing"
 				Value="-0.5" />
 	</Style>
 	
-	<Style x:Key="Headline3"
+	<Style x:Key="HeadlineMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline3}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01Bold}" />
+		   BasedOn="{StaticResource HeadlineMedium}">
 		<Setter Property="FontWeight"
 				Value="Bold" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="LineHeight"
-				Value="56" />
+				Value="{StaticResource OnSurfaceBrush}" />
 	</Style>
 
-	<Style x:Key="Headline5"
+	<Style x:Key="TitleLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline5}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01SemiBold}" />
+		   BasedOn="{StaticResource TitleLarge}">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="FontWeight"
 				Value="Medium" />
 		<Setter Property="LineHeight"
@@ -56,105 +46,80 @@
 				Value="0.18" />
 	</Style>
 
-	<Style x:Key="Headline6"
+	<Style x:Key="TitleMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialHeadline6}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01SemiBold}" />
-		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
-		<Setter Property="LineHeight"
-				Value="24" />
-		<Setter Property="CharacterSpacing"
-				Value="0.15" />
-	</Style>
-
-	<Style x:Key="Subtitle1"
-		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialSubtitle1}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
+		   BasedOn="{StaticResource TitleMedium}">
 		<Setter Property="FontSize"
 				Value="18" />
 		<Setter Property="FontStyle"
 				Value="Italic" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
 				Value="0.2" />
 	</Style>
 
-	<Style x:Key="Subtitle2"
+	<Style x:Key="TitleSmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialSubtitle2}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
+		   BasedOn="{StaticResource TitleSmall}">
 		<Setter Property="FontSize"
 				Value="16" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
 				Value="0.1" />
 	</Style>
 
-	<Style x:Key="Body1"
+	<Style x:Key="BodyLarge"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialBody1}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
+		   BasedOn="{StaticResource BodyLarge}">
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
 				Value="0.5" />
 	</Style>
 
-	<Style x:Key="Body2"
+	<Style x:Key="BodyMedium"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialBody2}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01}" />
+		   BasedOn="{StaticResource BodyMedium}">
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="20" />
 		<Setter Property="CharacterSpacing"
 				Value="0.25" />
 	</Style>
 
-	<Style x:Key="Body3"
+	<Style x:Key="BodyMediumLight"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialBody2}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily01Light}" />
+		   BasedOn="{StaticResource BodyMedium}">
 		<Setter Property="FontSize"
 				Value="12" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="17" />
 		<Setter Property="CharacterSpacing"
 				Value="0.4" />
 	</Style>
 
-	<Style x:Key="Caption"
+	<Style x:Key="BodySmall"
 		   TargetType="TextBlock"
-		   BasedOn="{StaticResource MaterialCaption}">
-		<Setter Property="FontFamily"
-				Value="{StaticResource FontFamily02}" />
+		   BasedOn="{StaticResource BodySmall}">
 		<Setter Property="FontSize"
 				Value="12" />
 		<Setter Property="Foreground"
-				Value="{StaticResource MaterialOnSurfaceBrush}" />
+				Value="{StaticResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="17" />
 		<Setter Property="CharacterSpacing"
