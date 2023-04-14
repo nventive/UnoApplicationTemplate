@@ -15,6 +15,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.Android.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.iOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Behaviors\MenuMarginBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ApiConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LocalizationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LoggingConfiguration.cs" />
