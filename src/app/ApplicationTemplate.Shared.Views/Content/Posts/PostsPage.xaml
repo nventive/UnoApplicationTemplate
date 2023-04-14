@@ -2,10 +2,13 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:u="using:Nventive.View.Controls"
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  xmlns:b="using:ApplicationTemplate.Views.Behaviors"
 	  xmlns:dl="using:Chinook.DataLoader">
 
 	<Grid x:Name="PostPage"
-		  Background="{StaticResource BackgroundBrush}">
+		  Background="{StaticResource BackgroundBrush}"
+		  toolkit:VisibleBoundsPadding.PaddingMask="Bottom">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -16,7 +19,8 @@
 		<CommandBar Content="Posts"
 					x:Uid="Posts_CommandBar" />
 
-		<Grid Grid.Row="1">
+		<Grid Grid.Row="1"
+			  b:MenuMarginBehavior.IsMarginEnabled="True">
 
 			<!-- DataLoader View -->
 			<dl:DataLoaderView x:Name="PostsDataLoaderView"
