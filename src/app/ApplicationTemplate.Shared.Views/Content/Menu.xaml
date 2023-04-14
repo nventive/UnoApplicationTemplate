@@ -8,9 +8,7 @@
 							 xmlns:toolkit="using:Uno.UI.Toolkit"
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
-	<Grid x:Name="MenuRoot"
-		  Background="{StaticResource AlternateBackgroundBrush}"
-		  toolkit:VisibleBoundsPadding.PaddingMask="Bottom">
+	<Grid x:Name="MenuRoot">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 
@@ -45,7 +43,7 @@
 							<DiscreteObjectKeyFrame KeyTime="0"
 													Value="Visible" />
 						</ObjectAnimationUsingKeyFrames>
-						
+
 						<DoubleAnimation Storyboard.TargetName="MenuRoot"
 										 Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
 										 To="0"
@@ -72,27 +70,40 @@
 			<TranslateTransform x:Name="MenuTranslateTransform"
 								Y="100" />
 		</Grid.RenderTransform>
-		<utu:TabBar>
-			<utu:TabBar.Items>
-				<utu:TabBarItem Command="{Binding ShowHomeSection}">
-					<c:BottomTabBarButton IconStyle="{StaticResource HomePathControlStyle}"
-										  Foreground="{StaticResource OnPrimaryMediumBrush}"
-										  Content="Jokes"
-										  x:Uid="Menu_Home" />
-				</utu:TabBarItem>
-				<utu:TabBarItem Command="{Binding ShowPostsSection}">
-					<c:BottomTabBarButton IconStyle="{StaticResource PostsPathControlStyle}"
-										  Foreground="{StaticResource OnPrimaryMediumBrush}"
-										  Content="Posts"
-										  x:Uid="Menu_Posts" />
-				</utu:TabBarItem>
-				<utu:TabBarItem Command="{Binding ShowSettingsSection}">
-					<c:BottomTabBarButton IconStyle="{StaticResource SettingsPathControlStyle}"
-										  Foreground="{StaticResource OnPrimaryMediumBrush}"
-										  Content="Profile"
-										  x:Uid="Menu_Settings" />
-				</utu:TabBarItem>
-			</utu:TabBar.Items>
-		</utu:TabBar>
+
+		<Grid x:Name="MenuTabBars"
+			  Background="{StaticResource AlternateBackgroundBrush}">
+
+			<Grid.RowDefinitions>
+				<RowDefinition Height="62" />
+				<!-- SafeAreaRow.Height is set in code behind -->
+				<!-- Menu has a different logic than SafeAreaRowBehavior -->
+				<RowDefinition x:Name="SafeAreaRow"
+							   Height="0" />
+			</Grid.RowDefinitions>
+
+			<utu:TabBar>
+				<utu:TabBar.Items>
+					<utu:TabBarItem Command="{Binding ShowHomeSection}">
+						<c:BottomTabBarButton IconStyle="{StaticResource HomePathControlStyle}"
+											  Foreground="{StaticResource OnPrimaryMediumBrush}"
+											  Content="Jokes"
+											  x:Uid="Menu_Home" />
+					</utu:TabBarItem>
+					<utu:TabBarItem Command="{Binding ShowPostsSection}">
+						<c:BottomTabBarButton IconStyle="{StaticResource PostsPathControlStyle}"
+											  Foreground="{StaticResource OnPrimaryMediumBrush}"
+											  Content="Posts"
+											  x:Uid="Menu_Posts" />
+					</utu:TabBarItem>
+					<utu:TabBarItem Command="{Binding ShowSettingsSection}">
+						<c:BottomTabBarButton IconStyle="{StaticResource SettingsPathControlStyle}"
+											  Foreground="{StaticResource OnPrimaryMediumBrush}"
+											  Content="Profile"
+											  x:Uid="Menu_Settings" />
+					</utu:TabBarItem>
+				</utu:TabBar.Items>
+			</utu:TabBar>
+		</Grid>
 	</Grid>
 </local:AttachableUserControl>
