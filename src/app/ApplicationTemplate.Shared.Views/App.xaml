@@ -10,13 +10,11 @@
 
 				<!-- Load Toolkit resources -->
 				<ToolkitResources xmlns="using:Uno.Toolkit.UI" />
-				
+
 				<!-- Uno material -->
-				<MaterialFonts xmlns="using:Uno.Material"
-							   OverrideSource="ms-appx:///Styles/Application/Fonts.xaml" />
-				<MaterialColorsV2 xmlns="using:Uno.Material"
-								  OverrideSource="ms-appx:///Styles/Application/MaterialOverride.xaml" />
-				<MaterialResourcesV2 xmlns="using:Uno.Material" />
+				<MaterialTheme xmlns="using:Uno.Material"
+							   FontOverrideSource="ms-appx:///Styles/Application/Fonts.xaml"
+							   ColorOverrideSource="ms-appx:///Styles/Application/MaterialOverride.xaml" />
 
 				<ResourceDictionary Source="Styles/Application/ColorPalette.xaml" />
 				<ResourceDictionary Source="Styles/Application/Brushes.xaml" />
