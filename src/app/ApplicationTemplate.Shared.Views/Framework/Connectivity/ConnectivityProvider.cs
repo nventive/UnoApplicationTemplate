@@ -19,14 +19,15 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 			{
 				_subscribed = true;
 				NetworkInformation.NetworkStatusChanged += OnNetworkStatusChanged;
+				this.Log().Debug("Subscribed to NetworkInformation.NetworkStatusChanged.");
 			}
 			InnerConnectivityChanged += value;
 		}
 
 		remove
 		{
-			UnsubscribeLocalEvent();
 			InnerConnectivityChanged -= value;
+			UnsubscribeLocalEvent();
 		}
 	}
 
@@ -64,17 +65,18 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 
 	public void Dispose()
 	{
-		UnsubscribeLocalEvent();
 		InnerConnectivityChanged = null;
+		UnsubscribeLocalEvent();
 		GC.SuppressFinalize(this);
 	}
 
 	private void UnsubscribeLocalEvent()
 	{
-		if (_subscribed)
+		if (_subscribed && InnerConnectivityChanged is null)
 		{
 			_subscribed = false;
 			NetworkInformation.NetworkStatusChanged -= OnNetworkStatusChanged;
+			this.Log().Debug("Unsubscribed to NetworkInformation.NetworkStatusChanged because no subscriptions were left on the ConnectivityProvider.ConnectivityChanged event.");
 		}
 	}
 
