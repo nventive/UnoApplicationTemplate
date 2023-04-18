@@ -386,7 +386,7 @@
 							<StackPanel>
 								<TextBlock Text="{Binding Title}"
 										   Foreground="White"
-										   FontSize="12"/>
+										   FontSize="12" />
 							</StackPanel>
 						</DataTemplate>
 					</ListView.ItemTemplate>
@@ -411,11 +411,6 @@
 						Command="{Binding ToggleHttpDebugger}"
 						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
-				<!-- Toggle Alignment Grid Button -->
-				<Button Content="Grid"
-						Command="{Binding ToggleAlignmentGrid}"
-						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
-
 				<!-- Theme Button -->
 				<Button Content="Theme"
 						Click="OnThemeButtonClicked"
@@ -435,6 +430,11 @@
 								   Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}" />
 					</Grid>
 				</Button>
+
+				<!-- Close Button -->
+				<Button Content="X"
+						Command="{Binding CloseDiagnostic}"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 			</StackPanel>
 		</Grid>
 	</Grid>
