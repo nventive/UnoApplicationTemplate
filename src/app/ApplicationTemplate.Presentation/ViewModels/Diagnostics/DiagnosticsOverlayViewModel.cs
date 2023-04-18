@@ -46,18 +46,38 @@ public sealed partial class DiagnosticsOverlayViewModel : ViewModel
 		await this.GetService<ISectionsNavigator>().OpenModal(ct, () => new DiagnosticsPageViewModel());
 	});
 
+	/// <summary>
+	/// Gets a value indicating whether the diagnostic overlay has been enabled by the user.
+	/// </summary>
 	public bool IsDiagnosticsOverlayEnabled => this.GetFromOptionsMonitor<DiagnosticsOptions, bool>(o => o.IsDiagnosticsOverlayEnabled);
 
-	public bool IsAlignmentGridEnabled
+	/// <summary>
+	/// Gets a value indicating whether gets whether the user has closed manually the diagnostic overlay.
+	/// </summary>
+	public bool IsClosed
 	{
 		get => this.Get<bool>();
-		set => this.Set(value);
+		private set => this.Set(value);
 	}
 
-	public IDynamicCommand ToggleAlignmentGrid => this.GetCommand(() =>
+	public IDynamicCommand CloseDiagnostic => this.GetCommand(() =>
 	{
-		IsAlignmentGridEnabled = !IsAlignmentGridEnabled;
+		IsClosed = true;
 	});
+
+	/// <summary>
+	/// Gets a value indicating whether the diagnostic overlay should be displayed.
+	/// </summary>
+	public bool ShouldDisplayOverlay => this.GetFromObservable(ObserveShouldDisplayOverlay(), initialValue: IsDiagnosticsOverlayEnabled);
+
+	private IObservable<bool> ObserveShouldDisplayOverlay()
+	{
+		return Observable.CombineLatest(
+			this.GetProperty(x => x.IsDiagnosticsOverlayEnabled).GetAndObserve(),
+			this.GetProperty(x => x.IsClosed).GetAndObserve(),
+			(isEnabled, isClosed) => isEnabled && !isClosed
+		);
+	}
 
 	public IDynamicCommand ToggleHttpDebugger => this.GetCommand(() =>
 	{
