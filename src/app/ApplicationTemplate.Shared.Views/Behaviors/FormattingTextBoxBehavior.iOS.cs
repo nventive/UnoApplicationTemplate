@@ -134,11 +134,7 @@ public sealed partial class FormattingTextBoxBehavior
 		}
 
 #region restore uno implementations
-		//public override bool ShouldChangeCharacters(UITextField textField, NSRange range, string replacementString) => _delegate.ShouldChangeCharacters(textField, range, replacementString);
-
 		public override bool ShouldReturn(UITextField textField) => _delegate.ShouldReturn(textField);
-
-		public override bool ShouldBeginEditing(UITextField textField) => _delegate.ShouldBeginEditing(textField);
 
 		public override void EditingStarted(UITextField textField) => _delegate.EditingStarted(textField);
 
