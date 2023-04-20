@@ -3,9 +3,9 @@
 					xmlns:dl="using:Chinook.DataLoader">
 
 	<DataTemplate x:Key="DataLoaderViewEmptyTemplate">
-		<Grid Background="{StaticResource MaterialBackgroundBrush}">
+		<Grid Background="{StaticResource BackgroundBrush}">
 			<TextBlock Text="Nothing to show here"
-					   Style="{StaticResource Body1}"
+					   Style="{StaticResource BodyLarge}"
 					   HorizontalAlignment="Center"
 					   VerticalAlignment="Top"
 					   Margin="0,44,0,0" />
@@ -22,7 +22,7 @@
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<TextBlock Style="{StaticResource Body1}"
+			<TextBlock Style="{StaticResource BodyLarge}"
 					   Foreground="White"
 					   HorizontalAlignment="Left"
 					   VerticalAlignment="Center">
@@ -34,7 +34,6 @@
 			<Button Content="Try Again"
 					Background="#990000"
 					HorizontalAlignment="Center"
-					Style="{StaticResource MaterialContainedButtonStyle}"
 					Command="{Binding View.RefreshCommand}"
 					Grid.Column="1" />
 		</Grid>
@@ -42,7 +41,7 @@
 
 	<!-- Error State -->
 	<DataTemplate x:Key="DataLoaderViewErrorTemplate">
-		<Grid Background="{StaticResource MaterialBackgroundBrush}">
+		<Grid Background="{StaticResource BackgroundBrush}">
 			<StackPanel VerticalAlignment="Center"
 						HorizontalAlignment="Stretch">
 
@@ -50,14 +49,14 @@
 				<Canvas Width="210"
 						Height="226">
 					<Path Data="{StaticResource ErrorStateHalfCircleIcon}"
-						  Fill="{StaticResource MaterialPrimaryBrush}" />
+						  Fill="{StaticResource PrimaryBrush}" />
 					<Path Data="{StaticResource ErrorStateMustacheIcon}"
-						  Fill="{StaticResource MaterialSecondaryBrush}" />
+						  Fill="{StaticResource SecondaryBrush}" />
 					<Rectangle Canvas.Top="74"
 							   Canvas.Left="22"
 							   Width="67"
 							   Height="5"
-							   Fill="{StaticResource MaterialErrorBrush}">
+							   Fill="{StaticResource ErrorBrush}">
 						<Rectangle.RenderTransform>
 							<RotateTransform CenterX="34.6439"
 											 CenterY="65.7733"
@@ -65,27 +64,26 @@
 						</Rectangle.RenderTransform>
 					</Rectangle>
 					<Path Data="{StaticResource ErrorStateHatIcon}"
-						  Stroke="{StaticResource MaterialErrorBrush}"
+						  Stroke="{StaticResource ErrorBrush}"
 						  StrokeThickness="5" />
 				</Canvas>
 
 				<!-- Title -->
 				<TextBlock Text="Something went wrong"
-						   Foreground="{StaticResource MaterialOnBackgroundBrush}"
-						   Style="{StaticResource Headline5}"
+						   Foreground="{StaticResource OnBackgroundBrush}"
+						   Style="{StaticResource TitleLarge}"
 						   TextAlignment="Center"
 						   Margin="0,0,0,8" />
 
 				<!-- Message -->
 				<TextBlock Text="Please try again."
-						   Foreground="{StaticResource MaterialOnSurfaceMediumBrush}"
-						   Style="{StaticResource Body1}"
+						   Foreground="{StaticResource OnSurfaceMediumBrush}"
+						   Style="{StaticResource BodyLarge}"
 						   TextAlignment="Center" />
 
 				<!-- Try Again Button -->
 				<Button Content="RELOAD PAGE"
 						HorizontalAlignment="Stretch"
-						Style="{StaticResource MaterialContainedButtonStyle}"
 						Command="{Binding View.RefreshCommand}"
 						Margin="22,24,22,0" />
 			</StackPanel>

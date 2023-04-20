@@ -4,7 +4,7 @@
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:dl="using:Chinook.DataLoader">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
@@ -27,7 +27,7 @@
 							<StackPanel Padding="24,24,24,0">
 
 								<!-- Full Name -->
-								<TextBlock Style="{StaticResource Headline5}">
+								<TextBlock Style="{StaticResource TitleLarge}">
 									
 									<!-- First Name -->
 									<Run Text="{Binding Data.FirstName}" />
@@ -39,12 +39,12 @@
 								<!-- Email Label -->
 								<TextBlock Text="Email"
 									   x:Uid="Settings_Email"
-									   Style="{StaticResource Subtitle2}"
+									   Style="{StaticResource TitleSmall}"
 									   Margin="0,16,0,0" />
 
 								<!-- Email Value -->
 								<TextBlock Text="{Binding Data.Email}"
-										   Style="{StaticResource Body2}" />
+										   Style="{StaticResource BodyMedium}" />
 							</StackPanel>
 							
 							<!-- Separator -->
@@ -59,9 +59,9 @@
 								<!-- Password -->
 								<TextBlock Text="Password"
 											x:Uid="Settings_Password"
-											Style="{StaticResource Subtitle2}" />
+											Style="{StaticResource TitleSmall}" />
 								<TextBlock Text="xxxxxxxx"
-											Style="{StaticResource Body2}" />
+											Style="{StaticResource BodyMedium}" />
 
 								<!-- Change password -->
 								<Button Content="CHANGE PASSWORD"
@@ -86,7 +86,7 @@
 						  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
 						  ue:MultipleTapExtension.TapCount="3">
 
-						<TextBlock Style="{StaticResource Subtitle2}">
+						<TextBlock Style="{StaticResource TitleSmall}">
 
 							<!-- Label -->
 							<Run Text="DAD Jokes - Version"
@@ -100,15 +100,15 @@
 					<!-- API Info -->
 					<TextBlock Text="This application makes use of the dadjokes API from Dadjokes.io, which contains thousands of jokes."
 							   x:Uid="Settings_Version_Details"
-							   Style="{StaticResource Body2}"
-							   Foreground="{StaticResource MaterialOnBackgroundBrush}"
-							   Opacity="{StaticResource MaterialMediumOpacity}" />
+							   Style="{StaticResource BodyMedium}"
+							   Foreground="{StaticResource OnBackgroundBrush}"
+							   Opacity="{StaticResource MediumOpacity}" />
 
 					<!-- Replay tutorial -->
 					<Button Content="REPLAY TUTORIAL"
 							x:Uid="Settings_ReplayTutorial"
 							Command="{Binding NavigateToOnboardingPage}"
-							Style="{StaticResource MaterialContainedSecondaryButtonStyle}"
+							Style="{StaticResource FilledButtonStyle}"
 							HorizontalAlignment="Left"
 							Margin="0,16,0,0" />
 				</StackPanel>
@@ -130,12 +130,12 @@
 						<!-- Label -->
 						<TextBlock Text="Notification"
 								   x:Uid="Settings_Notification"
-								   Style="{StaticResource Subtitle2}" />
+								   Style="{StaticResource TitleSmall}" />
 						
 						<!-- Info -->
 						<TextBlock Text="I agree to receive notifications when there are new jokes."
 								   x:Uid="Settings_Notification_Details"
-								   Style="{StaticResource Body2}" />
+								   Style="{StaticResource BodyMedium}" />
 					</StackPanel>
 
 					<!-- ToggleSwitch -->
@@ -160,7 +160,7 @@
 					<!-- Label -->
 					<TextBlock Text="Dark mode"
 							   x:Uid="Settings_DarkMode"
-							   Style="{StaticResource Subtitle2}"
+							   Style="{StaticResource TitleSmall}"
 							   VerticalAlignment="Center" />
 
 					<!-- ToggleSwitch -->
@@ -179,7 +179,7 @@
 				<Button Content="Privacy policy"
 						x:Uid="Settings_PrivacyPolicy"
 						Command="{Binding NavigateToPrivacyPolicyPage}"
-						Style="{StaticResource MaterialTextWithRightArrowAlternativeButtonStyle}" />
+						Style="{StaticResource TextWithRightArrowAlternativeButtonStyle}" />
 
 				<!-- Separator -->
 				<Rectangle Fill="{StaticResource SeparatorBrush}" 
@@ -190,7 +190,7 @@
 				<Button Content="Terms &amp; conditions"
 						x:Uid="Settings_TermsAndConditions"
 						Command="{Binding NavigateToTermsAndConditionsPage}"
-						Style="{StaticResource MaterialTextWithRightArrowAlternativeButtonStyle}" />
+						Style="{StaticResource TextWithRightArrowAlternativeButtonStyle}" />
 
 				<!-- Separator -->
 				<Rectangle Fill="{StaticResource SeparatorBrush}" 

@@ -1,4 +1,4 @@
-﻿<local:AttachableUserControl x:Class="ApplicationTemplate.Views.Content.Menu"
+<local:AttachableUserControl x:Class="ApplicationTemplate.Views.Content.Menu"
 							 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 							 xmlns:local="using:ApplicationTemplate.Views"
 							 xmlns:ne="using:Nventive.View.Extensions"
@@ -76,22 +76,22 @@
 			<utu:TabBar.Items>
 				<utu:TabBarItem>
 					<c:BottomTabBarButton IconStyle="{StaticResource HomePathControlStyle}"
-										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 										  Command="{Binding ShowHomeSection}"
+										  Foreground="{StaticResource OnPrimaryMediumBrush}"
 										  Content="Jokes"
 										  x:Uid="Menu_Home" />
 				</utu:TabBarItem>
 				<utu:TabBarItem>
 					<c:BottomTabBarButton IconStyle="{StaticResource PostsPathControlStyle}"
-										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 										  Command="{Binding ShowPostsSection}"
+										  Foreground="{StaticResource OnPrimaryMediumBrush}"
 										  Content="Posts"
 										  x:Uid="Menu_Posts" />
 				</utu:TabBarItem>
 				<utu:TabBarItem>
 					<c:BottomTabBarButton IconStyle="{StaticResource SettingsPathControlStyle}"
-										  Foreground="{StaticResource MaterialOnPrimaryMediumBrush}"
 										  Command="{Binding ShowSettingsSection}"
+										  Foreground="{StaticResource OnPrimaryMediumBrush}"
 										  Content="Profile"
 										  x:Uid="Menu_Settings" />
 				</utu:TabBarItem>

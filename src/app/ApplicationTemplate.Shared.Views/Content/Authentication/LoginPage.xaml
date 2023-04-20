@@ -10,7 +10,7 @@
 	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="d ios android">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup>
 				<VisualState x:Name="BiggerFont">
@@ -41,7 +41,7 @@
 				<!-- Title -->
 				<TextBlock Text="{Binding Title}"
 						   x:Uid="Login_Title"
-						   Style="{StaticResource Headline2}"
+						   Style="{StaticResource HeadlineLarge}"
 						   TextAlignment="Center"
 						   Margin="20,0" />
 
@@ -50,8 +50,8 @@
 					<!-- Quote -->
 					<TextBlock Text="{Binding Quote}"
 							   x:Uid="Login_Subtitle"
-							   Style="{StaticResource Body1}"
-							   Foreground="{StaticResource MaterialOnBackgroundBrush}"
+							   Style="{StaticResource BodyLarge}"
+							   Foreground="{StaticResource OnBackgroundBrush}"
 							   FontStyle="Italic"
 							   TextAlignment="Center"
 							   Margin="0,16,0,0" />
@@ -94,7 +94,7 @@
 					<HyperlinkButton Content="Forgot password ?"
 									 x:Uid="Login_ForgotPassword"
 									 Command="{Binding NavigateToForgotPasswordPage}"
-									 Foreground="{StaticResource MaterialOnBackgroundBrush}"
+									 Foreground="{StaticResource OnBackgroundBrush}"
 									 Margin="0,4,0,0" />
 
 					<!-- Login Button -->
@@ -102,7 +102,6 @@
 							Content="LOG IN"
 							x:Uid="Login_Login"
 							Command="{Binding Login}"
-							Style="{StaticResource MaterialContainedButtonStyle}"
 							HorizontalAlignment="Stretch"
 							Margin="0,24,0,0" />
 
@@ -111,7 +110,7 @@
 							x:Uid="Login_CreateAccount"
 							Content="CREATE ACCOUNT"
 							Command="{Binding NavigateToCreateAccountPage}"
-							Style="{StaticResource MaterialOutlinedButtonStyle}"
+							Style="{StaticResource OutlinedButtonStyle}"
 							HorizontalAlignment="Stretch"
 							Margin="0,16,0,0" />
 
