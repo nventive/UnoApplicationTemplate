@@ -108,7 +108,7 @@
 					<Button Content="REPLAY TUTORIAL"
 							x:Uid="Settings_ReplayTutorial"
 							Command="{Binding NavigateToOnboardingPage}"
-							Style="{StaticResource ContainedSecondaryButtonStyle}"
+							Style="{StaticResource FilledButtonStyle}"
 							HorizontalAlignment="Left"
 							Margin="0,16,0,0" />
 				</StackPanel>
