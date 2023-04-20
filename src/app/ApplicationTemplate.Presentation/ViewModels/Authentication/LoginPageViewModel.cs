@@ -27,7 +27,7 @@ public class LoginPageViewModel : ViewModel
 
 	public string Quote
 	{
-		get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_Subtitle1"] : this.GetService<IStringLocalizer>()["Login_Subtitle2"];
+		get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_TitleMedium"] : this.GetService<IStringLocalizer>()["Login_TitleSmall"];
 		set => this.Set(value);
 	}
 

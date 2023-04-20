@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<LangVersion>10.0</LangVersion>
 	</PropertyGroup>
@@ -36,15 +36,15 @@
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.4.0-dev.36" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.62" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
-		<PackageReference Include="Uno.Material.WinUI" Version="2.2.0" />
+		<PackageReference Include="Uno.Material.WinUI" Version="2.5.3" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.2.0" />
-		<PackageReference Include="Uno.WinUI" Version="4.7.30" />
-		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.7.30" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.6.19" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.5.8" />
+		<PackageReference Include="Uno.WinUI" Version="4.7.44" />
+		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.7.44" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.7.44" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.0" />
-		<PackageReference Include="Uno.WinUI.Lottie" Version="4.7.30" />
+		<PackageReference Include="Uno.WinUI.Lottie" Version="4.7.44" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>

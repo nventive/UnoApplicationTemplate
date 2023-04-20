@@ -13,13 +13,13 @@
 
 			<!-- No Favorite Text -->
 			<TextBlock Text="You don't have any favorites"
-					   Style="{StaticResource Body1}"
+					   Style="{StaticResource BodyLarge}"
 					   VerticalAlignment="Center"
 					   HorizontalAlignment="Center" />
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -42,7 +42,7 @@
 
 			<!-- Most Awards CheckBox -->
 			<TextBlock Text="Type of posts"
-					   Style="{StaticResource Subtitle1}"
+					   Style="{StaticResource TitleMedium}"
 					   Margin="0,15" />
 
 			<!-- New Posts CheckBox -->
@@ -69,7 +69,7 @@
 			<!-- Filter Button -->
 			<Button Content="Filter"
 					Command="{Binding FiltersAndNavigate}"
-					Style="{StaticResource MaterialOutlinedButtonStyle}"
+					Style="{StaticResource OutlinedButtonStyle}"
 					Margin="0,16,0,0" />
 		</StackPanel>
 	</Grid>

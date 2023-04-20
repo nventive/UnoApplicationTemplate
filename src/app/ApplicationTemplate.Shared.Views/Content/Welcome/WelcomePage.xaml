@@ -19,7 +19,7 @@
 			<!-- Message -->
 			<TextBlock Text="&quot;Welcome to the Assumption Club.&#x0A;I think we all know why we are here.&quot;"
 						x:Uid="Home_Text"
-						Style="{StaticResource Subtitle1}"
+						Style="{StaticResource TitleMedium}"
 						Foreground="{StaticResource AlternateOnBackgroundBrush}"
 						FontStyle="Italic"
 						TextAlignment="Center"

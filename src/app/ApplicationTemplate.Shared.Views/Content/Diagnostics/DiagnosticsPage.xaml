@@ -4,7 +4,7 @@
 	  xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
 	  xmlns:core="using:Microsoft.Xaml.Interactions.Core">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -15,7 +15,7 @@
 		<CommandBar Content="Diagnostics">
 			<CommandBar.PrimaryCommands>
 				<AppBarButton Content="Close"
-							  Foreground="{StaticResource MaterialOnBackgroundBrush}"
+							  Foreground="{StaticResource OnBackgroundBrush}"
 							  Command="{Binding CloseModal}" />
 			</CommandBar.PrimaryCommands>
 		</CommandBar>
@@ -50,7 +50,7 @@
 
 						<!-- Icon -->
 						<Path Data="{StaticResource ChevronIcon}"
-							  Fill="{StaticResource MaterialOnPrimaryBrush}"
+							  Fill="{StaticResource OnPrimaryBrush}"
 							  VerticalAlignment="Center"
 							  Margin="16,0,4,0"
 							  Grid.Column="2" />
@@ -66,11 +66,11 @@
 							   Margin="0,24,0,8" />
 
 					<!-- Value -->
-					<Border Background="{StaticResource MaterialPrimaryVariantDarkBrush}"
+					<Border Background="{StaticResource PrimaryVariantDarkBrush}"
 							Padding="8,4">
 						<TextBlock Text="{Binding Summary}"
 								   FontSize="11"
-								   Foreground="{StaticResource MaterialOnPrimaryBrush}"
+								   Foreground="{StaticResource OnPrimaryBrush}"
 								   TextWrapping="Wrap" />
 					</Border>
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Reactive.Concurrency;
+using System.Threading;
 using Uno.Extensions;
 using Uno.Logging;
 using Windows.Networking.Connectivity;
@@ -17,14 +19,15 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 			{
 				_subscribed = true;
 				NetworkInformation.NetworkStatusChanged += OnNetworkStatusChanged;
+				this.Log().Debug("Subscribed to NetworkInformation.NetworkStatusChanged.");
 			}
 			InnerConnectivityChanged += value;
 		}
 
 		remove
 		{
-			UnsubscribeLocalEvent();
 			InnerConnectivityChanged -= value;
+			UnsubscribeLocalEvent();
 		}
 	}
 
@@ -34,7 +37,15 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 	{
 		get
 		{
+#if __WINDOWS__
+			// This is null if we access it from the UI thread.
+			var networkConnectivityLevel = DefaultScheduler.Instance.Run(
+				func: () => NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel(),
+				cancellationToken: CancellationToken.None
+			).Result;
+#else
 			var networkConnectivityLevel = NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel();
+#endif
 			switch (networkConnectivityLevel)
 			{
 				case NetworkConnectivityLevel.None:
@@ -54,17 +65,18 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 
 	public void Dispose()
 	{
-		UnsubscribeLocalEvent();
 		InnerConnectivityChanged = null;
+		UnsubscribeLocalEvent();
 		GC.SuppressFinalize(this);
 	}
 
 	private void UnsubscribeLocalEvent()
 	{
-		if (_subscribed)
+		if (_subscribed && InnerConnectivityChanged is null)
 		{
 			_subscribed = false;
 			NetworkInformation.NetworkStatusChanged -= OnNetworkStatusChanged;
+			this.Log().Debug("Unsubscribed to NetworkInformation.NetworkStatusChanged because no subscriptions were left on the ConnectivityProvider.ConnectivityChanged event.");
 		}
 	}
 

@@ -4,7 +4,7 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:toolkit="using:Uno.UI.Toolkit">
 
-	<Grid Background="{StaticResource MaterialBackgroundBrush}">
+	<Grid Background="{StaticResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -58,7 +58,7 @@
 				<Button Content="Cancel"
 						x:Uid="EditPost_Cancel"
 						Command="{Binding Cancel}"
-						Style="{StaticResource MaterialOutlinedButtonStyle}"
+						Style="{StaticResource OutlinedButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="5" />
 
@@ -66,7 +66,6 @@
 				<Button Content="Save"
 						x:Uid="EditPost_Save"
 						Command="{Binding Save}"
-						Style="{StaticResource MaterialContainedButtonStyle}"
 						HorizontalAlignment="Stretch"
 						Margin="5" />
 			</StackPanel>

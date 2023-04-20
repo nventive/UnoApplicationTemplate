@@ -14,7 +14,7 @@
 					 Color="{ThemeResource PrimaryAccentColor}" />
 	
 	<SolidColorBrush x:Key="SeparatorBrush"
-					 Color="{ThemeResource MaterialOnSurfaceColor}"
+					 Color="{ThemeResource OnSurfaceColor}"
 					 Opacity="0.12" />
 
 	<!--
@@ -22,27 +22,27 @@
 		So we have those brushes to avoid the 
 	-->
 	<SolidColorBrush x:Key="AlternateBackgroundBrush"
-					 Color="{ThemeResource MaterialOnBackgroundColor}" />
+					 Color="{ThemeResource OnBackgroundColor}" />
 	<SolidColorBrush x:Key="AlternateOnBackgroundBrush"
-					 Color="{ThemeResource MaterialBackgroundColor}" />
+					 Color="{ThemeResource BackgroundColor}" />
 	<SolidColorBrush x:Key="AlternateSurfacedBrush"
-					 Color="{ThemeResource MaterialOnSurfaceColor}" />
+					 Color="{ThemeResource OnSurfaceColor}" />
 	<SolidColorBrush x:Key="AlternateOnSurfaceBrush"
-					 Color="{ThemeResource MaterialSurfaceColor}" />
+					 Color="{ThemeResource SurfaceColor}" />
 	
 	<!-- ToggleSwitch Brushes -->
 
 	<!-- Toggle On -->
-	<StaticResource x:Key="MaterialToggleSwitchOnBackgroundBrush"
-					ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="ToggleSwitchOnBackgroundBrush"
+					ResourceKey="OnSurfaceLowBrush" />
 
 	<!-- Toggle Off -->
-	<StaticResource x:Key="MaterialToggleSwitchOffBackgroundBrush"
-					ResourceKey="MaterialOnSurfaceLowBrush" />
+	<StaticResource x:Key="ToggleSwitchOffBackgroundBrush"
+					ResourceKey="OnSurfaceLowBrush" />
 
 	<!-- Toggle On Disabled -->
-	<StaticResource x:Key="MaterialToggleSwitchOnLowButtonBrush"
-					ResourceKey="MaterialOnSurfaceMediumBrush" />
-	<StaticResource x:Key="MaterialToggleSwitchOnLowBackgroundBrush"
-					ResourceKey="MaterialOnSurfaceSelectedBrush" />
+	<StaticResource x:Key="ToggleSwitchOnLowButtonBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="ToggleSwitchOnLowBackgroundBrush"
+					ResourceKey="OnSurfaceSelectedBrush" />
 </ResourceDictionary>

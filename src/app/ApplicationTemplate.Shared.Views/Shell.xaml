@@ -25,7 +25,7 @@
 					Grid.Row="1" />
 
 		<local:DiagnosticsOverlay DataContext="{Binding DiagnosticsOverlay}"
-								  Visibility="{Binding IsDiagnosticsOverlayEnabled, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
+								  Visibility="{Binding ShouldDisplayOverlay, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
 								  Grid.RowSpan="2" />
 
 		<splash:ExtendedSplashScreen x:Name="AppExtendedSplashScreen"
