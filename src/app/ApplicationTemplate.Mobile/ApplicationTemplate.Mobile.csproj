@@ -196,7 +196,7 @@
 						<Otherwise>
 							<PropertyGroup>
 								<OptimizePNGs>True</OptimizePNGs>
-								<MtouchUseLlvm>True</MtouchUseLlvm>
+								<MtouchUseLlvm>false</MtouchUseLlvm>
 								<MtouchUseThumb>True</MtouchUseThumb>
 								<MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
 								<Optimize>True</Optimize>
