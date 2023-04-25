@@ -42,6 +42,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesPage.xaml.cs">
       <DependentUpon>DadJokesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\ConfigurationDebuggerView.xaml.cs">
+      <DependentUpon>ConfigurationDebuggerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\DiagnosticsOverlay.xaml.cs">
       <DependentUpon>DiagnosticsOverlay.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\ConfigurationDebuggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

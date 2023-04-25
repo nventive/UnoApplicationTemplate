@@ -14,6 +14,7 @@ public sealed partial class DiagnosticsOverlayViewModel : ViewModel
 		{
 			this.AttachChild(new HttpDebuggerViewModel(), "HttpDebugger"),
 			this.AttachChild(new NavigationDebuggerViewModel(), "NavigationDebugger"),
+			this.AttachChild(new ConfigurationDebuggerViewModel(), "ConfigurationDebugger"),
 		};
 		Tabs.SetActiveTabIndex(-1);
 	}
