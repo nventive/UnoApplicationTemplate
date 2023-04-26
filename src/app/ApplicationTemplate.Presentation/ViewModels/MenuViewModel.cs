@@ -11,6 +11,7 @@ using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Uno;
+using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -37,6 +38,12 @@ public partial class MenuViewModel : ViewModel
 
 	public string MenuState => this.GetFromObservable(ObserveMenuState(), initialValue: "Closed");
 
+	public int SelectedIndex
+	{
+		get => this.Get<int>(initialValue: 0);
+		set => this.Set(value);
+	}
+
 	public IDynamicCommand ShowHomeSection => this.GetCommandFromTask(async ct =>
 		await _navigator.SetActiveSection(ct, nameof(Section.Home), () => new DadJokesPageViewModel()));
 
@@ -52,6 +59,7 @@ public partial class MenuViewModel : ViewModel
 			.Select(state =>
 			{
 				var vmType = state.GetViewModelType();
+				SelectedIndex = _viewModelsWithBottomMenu.IndexOf(vmType);
 				return _viewModelsWithBottomMenu.Contains(vmType) ? "Open" : "Closed";
 			})
 			.DistinctUntilChanged()
