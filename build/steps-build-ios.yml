@@ -59,9 +59,7 @@ steps:
 
 - bash: |
     cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
-    dotnet $(dotNetCommand) /nodeReuse:False -f:$(BuildTargetFramework) -c:Release -verbosity:diag /p:ApplicationIdentifier=$(ApplicationIdentifier) /p:MSBUILDENSURESTDOUTFORTASKPROCESSES=1 /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid) /p:ArchiveOnBuild=true /bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog "/p:InformationalVersion=$GITVERSION_INFORMATIONALVERSION" /p:IsLightBuild=$(IsLightBuild)
-  env:
-    MSBUILDENSURESTDOUTFORTASKPROCESSES: 1
+    dotnet build -f:$(BuildTargetFramework) -c:Release -verbosity:diag /p:ApplicationIdentifier=$(ApplicationIdentifier) /p:ArchiveOnBuild=true /bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog "/p:InformationalVersion=$GITVERSION_INFORMATIONALVERSION" /p:IsLightBuild=$(IsLightBuild)
   displayName: Build project for Release - $(BuildTargetFramework)
 
 - task: CopyFiles@2
