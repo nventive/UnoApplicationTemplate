@@ -60,7 +60,7 @@ jobs:
       ApplicationPlatform: x64
       ArtifactName: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
       ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-      BuildTargetFramework: net6.0-windows10.0.19041.0
+      BuildTargetFramework: net7.0-windows10.0.22621.0
     steps:
       - template: steps-build-windows.yml
         parameters:
@@ -92,7 +92,7 @@ jobs:
     - name: ApplicationPlatform
       value: AnyCPU
     - name: BuildTargetFramework
-      value: net6.0-android
+      value: net7.0-android
 
     # For optimization, if we are on light build, we only build the project else we publish it.
     - name: dotNetCommand
@@ -118,7 +118,7 @@ jobs:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}
     - name: BuildTargetFramework
-      value: net6.0-ios
+      value: net7.0-ios
     - name: ArtifactName
       value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
 
