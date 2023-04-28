@@ -30,7 +30,7 @@ To generate this file, following the following steps:
 <EnableLLVM>True</EnableLLVM>
 <AndroidEnableProfiledAot>True</AndroidEnableProfiledAot>
 <AndroidUseDefaultAotProfile>False</AndroidUseDefaultAotProfile>
-<PackageReference Include="Mono.AotProfiler.Android" Version="6.0.0" />
+<PackageReference Include="Mono.AotProfiler.Android" Version="7.0.0" />
 <AndroidAotProfile Include="$(MSBuildThisFileDirectory)custom.aprof" />
 ```
 

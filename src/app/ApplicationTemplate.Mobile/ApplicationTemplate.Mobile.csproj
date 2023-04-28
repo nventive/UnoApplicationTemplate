@@ -108,7 +108,7 @@
 			<ItemGroup>
 				<PackageReference Include="Xamarin.Google.Android.Material" Version="1.7.0.1" />
 				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
-				<PackageReference Include="Mono.AotProfiler.Android" Version="6.0.0" />
+				<PackageReference Include="Mono.AotProfiler.Android" Version="7.0.0" />
 				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.8.0" />
 			</ItemGroup>
 			<ItemGroup>
