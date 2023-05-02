@@ -77,7 +77,7 @@ variables:
   macOSPoolName: 'macOS'
 
   # Versions to use
-  XAMARIN_IOS_VERSION: 15.10
+  XAMARIN_IOS_VERSION: 16.1.1
 
   # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
   # We make seperate folders so that releases can each download only the folder they need.
