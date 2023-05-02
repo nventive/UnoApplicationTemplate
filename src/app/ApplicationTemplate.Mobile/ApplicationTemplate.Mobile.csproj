@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<LangVersion>10.0</LangVersion>
 	</PropertyGroup>
@@ -159,6 +159,8 @@
 				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
 				<CodesignEntitlements>iOS\Entitlements.plist</CodesignEntitlements>
+				<ProvisioningType>manual</ProvisioningType>
+				<CodesignProvision>ApplicationTemplate - Development</CodesignProvision>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
