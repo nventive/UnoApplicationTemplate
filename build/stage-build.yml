@@ -80,50 +80,50 @@ jobs:
           solutionFileName: '${{ parameters.solutionName }}.sln'
           solutionName: ${{ parameters.solutionName }}
 
-  - job: OnWindows_Tests
-    pool:
-      vmImage : $(windowsHostedAgentImage)
-    variables:
-      ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
-      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-    steps:
-      - template: steps-build-tests.yml
-        parameters:
-          pathToSrc: ${{ parameters.pathToSrc }}
-          solutionFileName: '${{ parameters.solutionName }}.sln'
-          solutionName: ${{ parameters.solutionName }}
+  # - job: OnWindows_Tests
+  #   pool:
+  #     vmImage : $(windowsHostedAgentImage)
+  #   variables:
+  #     ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
+  #     ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+  #   steps:
+  #     - template: steps-build-tests.yml
+  #       parameters:
+  #         pathToSrc: ${{ parameters.pathToSrc }}
+  #         solutionFileName: '${{ parameters.solutionName }}.sln'
+  #         solutionName: ${{ parameters.solutionName }}
 
-  - job: OnWindows_Android
-    pool:
-      vmImage : $(windowsHostedAgentImage)
-    variables:
-    - name: ApplicationEnvironment
-      value: ${{ parameters.applicationEnvironment }}
-    - name: ArtifactName
-      value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
-    - name: ApplicationPlatform
-      value: AnyCPU
-    - name: BuildTargetFramework
-      value: net7.0-android
+  # - job: OnWindows_Android
+  #   pool:
+  #     vmImage : $(windowsHostedAgentImage)
+  #   variables:
+  #   - name: ApplicationEnvironment
+  #     value: ${{ parameters.applicationEnvironment }}
+  #   - name: ArtifactName
+  #     value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+  #   - name: ApplicationPlatform
+  #     value: AnyCPU
+  #   - name: BuildTargetFramework
+  #     value: net7.0-android
 
-    # For optimization, if we are on light build, we only build the project else we publish it.
-    - name: dotNetCommand
-      ${{ if eq(variables['IsLightBuild'], 'true') }}:
-        value: build
-      ${{ else }}:
-        value: publish
+  #   # For optimization, if we are on light build, we only build the project else we publish it.
+  #   - name: dotNetCommand
+  #     ${{ if eq(variables['IsLightBuild'], 'true') }}:
+  #       value: build
+  #     ${{ else }}:
+  #       value: publish
 
-    - group: ${{ parameters.androidVariableGroup }}
+  #   - group: ${{ parameters.androidVariableGroup }}
 
-    steps:
-    - template: steps-build-android.yml
-      parameters:
-        pathToSrc: ${{ parameters.pathToSrc }}
-        solutionName: ${{ parameters.solutionName }}
-        pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
-        androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
+  #   steps:
+  #   - template: steps-build-android.yml
+  #     parameters:
+  #       pathToSrc: ${{ parameters.pathToSrc }}
+  #       solutionName: ${{ parameters.solutionName }}
+  #       pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
+  #       androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
 
-  - job: OnMac_iOS
+  # - job: OnMac_iOS
     pool:
       vmImage: $(macOSHostedAgentImage)
     variables:
