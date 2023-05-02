@@ -16,6 +16,7 @@
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<Configurations>Debug;Release</Configurations>
 		<DefineConstants>$(DefineConstants);__WINDOWS__</DefineConstants>
+		<WindowsAppSDKSelfContained>true</WindowsAppSDKSelfContained>
 	</PropertyGroup>
 
 	<ItemGroup>

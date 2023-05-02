@@ -124,31 +124,31 @@ jobs:
   #       androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
 
   # - job: OnMac_iOS
-    pool:
-      vmImage: $(macOSHostedAgentImage)
-    variables:
-    - name: ApplicationEnvironment
-      value: ${{ parameters.applicationEnvironment }}
-    - name: BuildTargetFramework
-      value: net7.0-ios
-    - name: ArtifactName
-      value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+  #   pool:
+  #     vmImage: $(macOSHostedAgentImage)
+  #   variables:
+  #   - name: ApplicationEnvironment
+  #     value: ${{ parameters.applicationEnvironment }}
+  #   - name: BuildTargetFramework
+  #     value: net7.0-ios
+  #   - name: ArtifactName
+  #     value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
 
-    # For optimization, if we are on light build, we only build the project else we publish it.
-    - name: dotNetCommand
-      ${{ if eq(variables['IsLightBuild'], 'true') }}:
-        value: build
-      ${{ else }}:
-        value: publish
+  #   # For optimization, if we are on light build, we only build the project else we publish it.
+  #   - name: dotNetCommand
+  #     ${{ if eq(variables['IsLightBuild'], 'true') }}:
+  #       value: build
+  #     ${{ else }}:
+  #       value: publish
 
-    - group: ${{ parameters.iosVariableGroup }}
+  #   - group: ${{ parameters.iosVariableGroup }}
 
-    steps:
-    - template: steps-build-ios.yml
-      parameters:
-        pathToSrc: ${{ parameters.pathToSrc }}
-        solutionName: ${{ parameters.solutionName }}
-        pathToInfoPlist: ${{ parameters.pathToInfoPlist }}
-        iosCertificateFile: ${{ parameters.iosCertificateFile }}
-        iosCertificatePassword: ${{ parameters.iosCertificatePassword }}
-        iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
+  #   steps:
+  #   - template: steps-build-ios.yml
+  #     parameters:
+  #       pathToSrc: ${{ parameters.pathToSrc }}
+  #       solutionName: ${{ parameters.solutionName }}
+  #       pathToInfoPlist: ${{ parameters.pathToInfoPlist }}
+  #       iosCertificateFile: ${{ parameters.iosCertificateFile }}
+  #       iosCertificatePassword: ${{ parameters.iosCertificatePassword }}
+  #       iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
