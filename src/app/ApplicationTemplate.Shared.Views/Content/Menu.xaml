@@ -72,7 +72,7 @@
 			<TranslateTransform x:Name="MenuTranslateTransform"
 								Y="100" />
 		</Grid.RenderTransform>
-		<utu:TabBar>
+		<utu:TabBar SelectedIndex="{Binding SelectedIndex, Mode=TwoWay}">
 			<utu:TabBar.Items>
 				<utu:TabBarItem Command="{Binding ShowHomeSection}">
 					<c:BottomTabBarButton IconStyle="{StaticResource HomePathControlStyle}"
