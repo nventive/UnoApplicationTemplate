@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -17,6 +18,7 @@ namespace ApplicationTemplate;
 public static class ConfigurationConfiguration
 {
 	public const string AppSettingsFileName = "appsettings";
+	public const string AppSettingsOverrideFileNameWithExtension = AppSettingsFileName + ".override.json";
 
 //-:cnd:noEmit
 #if PRODUCTION
@@ -49,6 +51,9 @@ public static class ConfigurationConfiguration
 		return hostBuilder
 			.AddConfiguration()
 			.ConfigureHostConfiguration(b => b
+				// Readonly configuration (from code, not from any file)
+				.AddReadOnlyConfiguration(folderPath)
+
 				// appsettings.json
 				.AddBaseConfiguration()
 
@@ -58,6 +63,24 @@ public static class ConfigurationConfiguration
 				// appsettings.override.json
 				.AddUserOverrideConfiguration(folderPath)
 			);
+	}
+
+	/// <summary>
+	/// Adds the read-only configuration source containing the values that cannot come from appsettings.json files.
+	/// </summary>
+	/// <param name="configurationBuilder">The configuration builder.</param>
+	/// <param name="folderPath">The folder containing the configuration override files.</param>
+	private static IConfigurationBuilder AddReadOnlyConfiguration(this IConfigurationBuilder configurationBuilder, string folderPath)
+	{
+		return configurationBuilder.AddInMemoryCollection(GetCodeConfiguration(folderPath));
+
+		IEnumerable<KeyValuePair<string, string>> GetCodeConfiguration(string folderPath)
+		{
+			var prefix = ApplicationTemplateConfigurationExtensions.DefaultOptionsName<ReadOnlyConfigurationOptions>() + ":";
+
+			yield return new KeyValuePair<string, string>(prefix + nameof(ReadOnlyConfigurationOptions.ConfigurationOverrideFolderPath), folderPath);
+			yield return new KeyValuePair<string, string>(prefix + nameof(ReadOnlyConfigurationOptions.DefaultEnvironment), DefaultEnvironment);
+		}
 	}
 
 	/// <summary>
@@ -104,7 +127,7 @@ public static class ConfigurationConfiguration
 	/// <param name="folderPath">The folder path indicating where the override file should be.</param>
 	private static IConfigurationBuilder AddUserOverrideConfiguration(this IConfigurationBuilder configurationBuilder, string folderPath)
 	{
-		return configurationBuilder.Add(new WritableJsonConfigurationSource(Path.Combine(folderPath, AppSettingsFileName + ".override.json")));
+		return configurationBuilder.Add(new WritableJsonConfigurationSource(Path.Combine(folderPath, AppSettingsOverrideFileNameWithExtension)));
 	}
 
 	/// <summary>
@@ -118,8 +141,9 @@ public static class ConfigurationConfiguration
 			throw new ArgumentNullException(nameof(hostBuilder));
 		}
 
-		return hostBuilder.ConfigureServices((ctx, s) =>
-			s.AddSingleton(a => ctx.Configuration)
+		return hostBuilder.ConfigureServices((ctx, s) => s
+			.AddSingleton(a => ctx.Configuration)
+			.BindOptionsToConfiguration<ReadOnlyConfigurationOptions>(ctx.Configuration)
 		);
 	}
 
