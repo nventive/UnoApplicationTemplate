@@ -58,7 +58,7 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 		stringBuilder.AppendLine($"Build: {versionProvider.BuildString}");
 
 		stringBuilder.AppendLine($"OS: {deviceInformationProvider.OperatingSystem}");
-		stringBuilder.AppendLine($"OS version: {deviceInformationProvider.OperatingSystemVersion}");
+		stringBuilder.AppendLine($"OS version: {DecodeSytemVersion(deviceInformationProvider.OperatingSystemVersion)}");
 		stringBuilder.AppendLine($"Device type: {deviceInformationProvider.DeviceType}");
 
 		// UserAgent Not available in X.E but we could do it in app, here's the implementation.
@@ -138,5 +138,16 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 		}
 
 		return stringBuilder.ToString();
+	}
+
+	private Version DecodeSytemVersion(string operatingSystemVersion)
+	{
+		// The OS Version provided from DeviceFamilyVersion needs to be decoded to show the OS Version that we commonly use.
+		var v = ulong.Parse(operatingSystemVersion);
+		var major = (v & 0xFFFF000000000000L) >> 48;
+		var minor = (v & 0x0000FFFF00000000L) >> 32;
+		var build = (v & 0x00000000FFFF0000L) >> 16;
+		var revision = v & 0x000000000000FFFFL;
+		return new Version((int)major, (int)minor, (int)build, (int)revision);
 	}
 }
