@@ -5,12 +5,14 @@ using System.Reactive.Disposables;
 using System.Text;
 using System.Text.Json;
 using Chinook.DynamicMvvm;
+using MessageDialogService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Primitives;
+using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed class ConfigurationDebuggerViewModel : TabViewModel
+public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 {
 	private static readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
 	{
@@ -19,6 +21,8 @@ public sealed class ConfigurationDebuggerViewModel : TabViewModel
 
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "It will actually be disposed because we're using AddDisposable.")]
 	private readonly SerialDisposable _changeCallback = new();
+
+	[Inject] private IDiagnosticsService _diagnosticsService;
 
 	public ConfigurationDebuggerViewModel()
 	{
@@ -44,6 +48,17 @@ public sealed class ConfigurationDebuggerViewModel : TabViewModel
 			.GetReloadToken()
 			.RegisterChangeCallback(OnConfigurationChanged, config);
 	}
+
+	public IDynamicCommand DeleteConfigurationOverride => this.GetCommandFromTask(async ct =>
+	{
+		_diagnosticsService.DeleteConfigurationOverrideFile();
+
+		await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
+			.Title("Diagnostics")
+			.Content("The configuration override was deleted. Restart the application to see your changes.")
+			.OkCommand()
+		);
+	});
 
 	/// <summary>
 	/// Gets the ­­JSON representation of the configuration.

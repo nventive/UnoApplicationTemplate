@@ -1,8 +1,12 @@
 ﻿using System;
+using System.IO;
 using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
 using MessageDialogService;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Windows.Storage;
 
 namespace ApplicationTemplate.Views;
@@ -11,11 +15,25 @@ public class DiagnosticsService : IDiagnosticsService
 {
 	private readonly IMessageDialogService _messageDialogService;
 	private readonly IDispatcherScheduler _dispatcherScheduler;
+	private readonly IOptions<ReadOnlyConfigurationOptions> _configurationOptions;
+	private readonly ILogger _logger;
 
-	public DiagnosticsService(IMessageDialogService messageDialogService, IDispatcherScheduler dispatcherScheduler)
+	public DiagnosticsService(IMessageDialogService messageDialogService, IDispatcherScheduler dispatcherScheduler, IOptions<ReadOnlyConfigurationOptions> configurationOptions, ILogger<DiagnosticsService> logger)
 	{
 		_messageDialogService = messageDialogService;
 		_dispatcherScheduler = dispatcherScheduler;
+		_configurationOptions = configurationOptions;
+		_logger = logger;
+	}
+
+	public void DeleteConfigurationOverrideFile()
+	{
+		_logger.LogDebug("Deleting configuration override file.");
+
+		var filePath = Path.Combine(_configurationOptions.Value.ConfigurationOverrideFolderPath, ConfigurationConfiguration.AppSettingsOverrideFileNameWithExtension);
+		File.Delete(filePath);
+
+		_logger.LogInformation("Deleted configuration override file.");
 	}
 
 	public bool CanOpenSettingsFolder { get; } =

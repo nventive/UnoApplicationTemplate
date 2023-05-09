@@ -89,13 +89,80 @@
 			</Setter>
 		</Style>
 
+		<Style x:Key="ConfigurationDebuggerButtonStyle"
+			   TargetType="Button">
+
+			<Setter Property="FontSize"
+					Value="12" />
+			<Setter Property="HorizontalAlignment"
+					Value="Left" />
+			<Setter Property="Foreground"
+					Value="White" />
+			<Setter Property="Background"
+					Value="#AA000000" />
+			<Setter Property="Padding"
+					Value="4,4" />
+			<Setter Property="MinWidth"
+					Value="0" />
+			<Setter Property="Margin"
+					Value="0,1" />
+			<Setter Property="BorderThickness"
+					Value="0" />
+			<Setter Property="MinHeight"
+					Value="0" />
+
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+
+						<Grid VerticalAlignment="{TemplateBinding VerticalAlignment}"
+							  HorizontalAlignment="{TemplateBinding HorizontalAlignment}">
+
+							<VisualStateManager.VisualStateGroups>
+								<VisualStateGroup x:Name="CommonStates">
+									<VisualState x:Name="Normal" />
+									<VisualState x:Name="PointerOver" />
+									<VisualState x:Name="Pressed">
+										<VisualState.Setters>
+											<Setter Target="BackgroundBorder.Opacity"
+													Value="0.8" />
+										</VisualState.Setters>
+									</VisualState>
+									<VisualState x:Name="Disabled" />
+								</VisualStateGroup>
+							</VisualStateManager.VisualStateGroups>
+
+							<!-- Background Border -->
+							<Border x:Name="BackgroundBorder"
+									Background="{TemplateBinding Background}"
+									BorderThickness="{TemplateBinding BorderThickness}"
+									BorderBrush="{TemplateBinding BorderBrush}" />
+
+							<!-- ContentPresenter -->
+							<ContentPresenter x:Name="ContentPresenter"
+											  Margin="{TemplateBinding Padding}"
+											  Content="{TemplateBinding Content}"
+											  ContentTemplate="{TemplateBinding ContentTemplate}"
+											  AutomationProperties.AccessibilityView="Raw"
+											  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+											  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+
 	</UserControl.Resources>
 
 	<Grid>
 		<ScrollViewer>
-			<StackPanel>
+			<StackPanel Margin="0,0,0,200">
 				<TextBox Text="{Binding ConfigurationAsJson}"
 						 Style="{StaticResource ConfigurationDebuggerTextBoxStyle}" />
+
+				<Button Content="Delete configuration override file"
+						Command="{Binding DeleteConfigurationOverride}"
+						Style="{StaticResource ConfigurationDebuggerButtonStyle}"/>
 			</StackPanel>
 		</ScrollViewer>
 
