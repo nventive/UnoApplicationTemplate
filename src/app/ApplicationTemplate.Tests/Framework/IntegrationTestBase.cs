@@ -52,7 +52,7 @@ public class IntegrationTestBase : IAsyncLifetime
 	{
 		var coreStartup = new CoreStartup();
 		coreStartup.PreInitialize();
-		coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, ConfigureLogging, extraHostConfiguration);
+		coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, environmentManager: new TestEnvironmentManager(), ConfigureLogging, extraHostConfiguration);
 
 		_coreStartup = coreStartup;
 	}
