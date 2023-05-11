@@ -43,6 +43,7 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 	{
 		var versionProvider = this.GetService<IVersionProvider>();
 		var deviceInformationProvider = this.GetService<IDeviceInformationProvider>();
+		var environmentManager = this.GetService<IEnvironmentManager>();
 
 		var logFilesProvider = this.GetService<ILogFilesProvider>();
 		var loggingOptions = this.GetOptionsValue<LoggingOutputOptions>();
@@ -67,9 +68,9 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 		// iOS :UserAgent = $"{applicationName}/{AppVersion.ToString()}({DeviceType}; iOS {OSVersionNumber})";
 		stringBuilder.AppendLine($"Culture: {CultureInfo.CurrentCulture.Name}");
 
-		stringBuilder.AppendLine($"Environment: {ConfigurationConfiguration.AppEnvironment.GetCurrent(null)}");
+		stringBuilder.AppendLine($"Environment: {environmentManager.Current}");
 
-		stringBuilder.AppendLine($"Build environment: {ConfigurationConfiguration.DefaultEnvironment}");
+		stringBuilder.AppendLine($"Build environment: {environmentManager.Default}");
 
 //-:cnd:noEmit
 #if DEBUG
@@ -143,7 +144,7 @@ public partial class SummaryDiagnosticsViewModel : ViewModel
 	private Version DecodeSytemVersion(string operatingSystemVersion)
 	{
 		// The OS Version provided from DeviceFamilyVersion needs to be decoded to show the OS Version that we commonly use.
-		var v = ulong.Parse(operatingSystemVersion);
+		var v = ulong.Parse(operatingSystemVersion, CultureInfo.InvariantCulture);
 		var major = (v & 0xFFFF000000000000L) >> 48;
 		var minor = (v & 0x0000FFFF00000000L) >> 32;
 		var build = (v & 0x00000000FFFF0000L) >> 16;

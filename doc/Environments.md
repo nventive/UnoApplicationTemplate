@@ -14,17 +14,17 @@ By default, the template offers the following runtime environments, defined by t
 
 You can add / remove runtime environments by simply adding or removing appsettings files (e.g. `appsettings.myenvironment.json` will create a new runtime environment named `myenvironment`).
 
-This is configured inside the [AppSettingsConfiguration.cs](../src/app/ApplicationTemplate.Shared/Configuration/AppSettingsConfiguration.cs) file.
+This is governed by `IEnvironmentManager` and configured inside the [ConfigurationConfiguration.cs](../src/app/ApplicationTemplate.Presentation/Configuration/ConfigurationConfiguration.cs) file.
 
 - The default runtime environment is set based on a compile-time directive (e.g. production).
 
-- You can get the current environment using `AppSettingsConfiguration.AppEnvironment.GetCurrent`.
+- You can get the current environment using `IEnvironmentManager.Current`.
 
-- You can get all the possible environments using `AppSettingsConfiguration.AppEnvironment.GetAll`.
+- You can get all the possible environments using `IEnvironmentManager.AvailableEnvironments`.
 
-- You can set the current environment using `AppSettingsConfiguration.AppEnvironment.SetCurrent`. If the environment doesn't exist, you will get an exception.
+- You can set the current environment using `IEnvironmentManager.Override`. If the environment doesn't exist, you will get an exception.
 
-- The current environment is persisted into a file that is processed at startup; this allows the environment to affect your IoC and be faster than accessing any settings service (e.g. no IoC, no deserialization, etc.).
+- When using `EnvironmentManager` (the default implementation of `IEnvironmentManager`), the current environment is persisted into a file that is processed at startup; this allows the environment to affect your IoC and be faster than accessing any settings service (e.g. no IoC, no deserialization, etc.).
 
 - The current environment is also used when configuring the `IHostBuilder`. For example, you can do the following:
   ```csharp

@@ -5,12 +5,15 @@ using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
+using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public class EnvironmentPickerPageViewModel : ViewModel
+public sealed partial class EnvironmentPickerPageViewModel : ViewModel
 {
 	private readonly string _currentEnvironment;
+
+	[Inject] private IEnvironmentManager _environmentManager;
 
 	public EnvironmentPickerPageViewModel(string currentEnvironment)
 	{
@@ -26,10 +29,10 @@ public class EnvironmentPickerPageViewModel : ViewModel
 	public bool RequiresRestart
 	{
 		get => this.Get<bool>();
-		set => this.Set(value);
+		private set => this.Set(value);
 	}
 
-	public IEnumerable<string> Environments => this.GetFromTask(GetEnvironments);
+	public IEnumerable<string> Environments => _environmentManager.AvailableEnvironments;
 
 	public IDynamicCommand SelectEnvironment => this.GetCommandFromTask<string>(async (ct, environment) =>
 	{
@@ -40,15 +43,10 @@ public class EnvironmentPickerPageViewModel : ViewModel
 			return;
 		}
 
-		ConfigurationConfiguration.AppEnvironment.SetCurrent(environment);
+		_environmentManager.Override(environment);
 
 		// TODO #173219 : Disable back button
 
 		RequiresRestart = true;
 	});
-
-	private Task<string[]> GetEnvironments(CancellationToken ct)
-	{
-		return Task.FromResult(ConfigurationConfiguration.AppEnvironment.GetAll());
-	}
 }
