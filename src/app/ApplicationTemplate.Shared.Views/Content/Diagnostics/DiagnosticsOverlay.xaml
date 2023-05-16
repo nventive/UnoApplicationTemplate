@@ -5,6 +5,7 @@
 			 xmlns:uc="using:Nventive.View.Converters"
 			 xmlns:diag="using:ApplicationTemplate.Views.Content.Diagnostics"
 			 xmlns:xamarin="http://uno.ui/xamarin"
+			 xmlns:not_ios="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 mc:Ignorable="xamarin">
 
 	<UserControl.Resources>
@@ -253,7 +254,6 @@
 	</UserControl.Resources>
 
 	<Grid>
-
 		<Grid Background="#AA000000"
 			  BorderThickness="1"
 			  BorderBrush="#000000"
@@ -269,8 +269,7 @@
 				<RowDefinition Height="*" />
 			</Grid.RowDefinitions>
 
-			<StackPanel DataContext="{Binding Counters}"
-						HorizontalAlignment="Right"
+			<StackPanel HorizontalAlignment="Right"
 						Padding="4"
 						xamarin:IsHitTestVisible="False">
 
@@ -280,7 +279,7 @@
 					
 					<!--Label & Value -->
 					<Run Text="AVM:" />
-					<Run Text="{Binding ActiveViewModels}" />
+					<Run Text="{Binding Counters.ActiveViewModels}" />
 
 					<!-- Tool Tip -->
 					<ToolTipService.ToolTip>
@@ -295,7 +294,7 @@
 					
 					<!--Label & Value -->
 					<Run Text="UVM:" />
-					<Run Text="{Binding UncollectedViewModels}" />
+					<Run Text="{Binding Counters.UncollectedViewModels}" />
 					
 					<!-- Tool Tip -->
 					<ToolTipService.ToolTip>
@@ -310,7 +309,7 @@
 					
 					<!--Label & Value -->
 					<Run Text="AP:" />
-					<Run Text="{Binding ActiveProperties}" />
+					<Run Text="{Binding Counters.ActiveProperties}" />
 					
 					<!-- Tool Tip -->
 					<ToolTipService.ToolTip>
@@ -325,7 +324,7 @@
 					
 					<!--Label & Value -->
 					<Run Text="UP:" />
-					<Run Text="{Binding UncollectedProperties}" />
+					<Run Text="{Binding Counters.UncollectedProperties}" />
 					
 					<!-- Tool Tip -->
 					<ToolTipService.ToolTip>
@@ -340,7 +339,7 @@
 					
 					<!--Label & Value -->
 					<Run Text="AC:" />
-					<Run Text="{Binding ActiveCommands}" />
+					<Run Text="{Binding Counters.ActiveCommands}" />
 					
 					<!-- Tool Tip -->
 					<ToolTipService.ToolTip>
@@ -355,12 +354,46 @@
 					
 					<!--Label & Value -->
 					<Run Text="UC:" />
-					<Run Text="{Binding UncollectedCommands}" />
+					<Run Text="{Binding Counters.UncollectedCommands}" />
 					
 					<!-- Tool Tip -->
 					<ToolTipService.ToolTip>
 						<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
 								 Content="Number of uncollected commands (Disposed - Destroyed)" />
+					</ToolTipService.ToolTip>
+				</TextBlock>
+
+				<!-- Private Memory Size -->
+				<!-- Not available on iOS for now. -->
+				<!-- See https://github.com/dotnet/runtime/issues/86251 for more details. -->
+				<not_ios:TextBlock Grid.Row="1"
+								   Foreground="LightBlue"
+								   Style="{StaticResource DiagnosticsCounterTextBlockStyle}"
+								   TextAlignment="Right">
+
+					<!-- Label & Value -->
+					<Run Text="{Binding PrivateMemorySize}" />
+
+					<!-- Tool Tip -->
+					<ToolTipService.ToolTip>
+						<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
+								 Content="Amount of private memory allocated for the application." />
+					</ToolTipService.ToolTip>
+				</not_ios:TextBlock>
+
+				<!-- Managed Memory Size -->
+				<TextBlock Grid.Row="1"
+						   Foreground="CornflowerBlue"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}"
+						   TextAlignment="Right">
+
+					<!-- Label & Value -->
+					<Run Text="{Binding ManagedMemorySize}" />
+
+					<!-- Tool Tip -->
+					<ToolTipService.ToolTip>
+						<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
+								 Content="Amount of managed memory allocated for the application." />
 					</ToolTipService.ToolTip>
 				</TextBlock>
 			</StackPanel>

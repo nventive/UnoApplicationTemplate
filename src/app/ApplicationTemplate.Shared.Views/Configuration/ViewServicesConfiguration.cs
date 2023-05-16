@@ -30,6 +30,7 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
 			.AddSingleton<IConnectivityProvider, ConnectivityProvider>()
 			.AddSingleton<IEmailService, EmailService>()
+			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddMessageDialog();
 	}
 

@@ -13,6 +13,12 @@ namespace ApplicationTemplate.Views.Content.Diagnostics;
 /// </summary>
 public sealed partial class DiagnosticsTabPresenter : ContentControl
 {
+	public DiagnosticsTabPresenter()
+	{
+		HorizontalContentAlignment = HorizontalAlignment.Stretch;
+		VerticalContentAlignment = VerticalAlignment.Stretch;
+	}
+
 	public TabViewModel ViewModel
 	{
 		get { return (TabViewModel)GetValue(ViewModelProperty); }
@@ -29,6 +35,7 @@ public sealed partial class DiagnosticsTabPresenter : ContentControl
 		{
 			HttpDebuggerViewModel => new HttpDebuggerView() { DataContext = e.NewValue },
 			NavigationDebuggerViewModel => new NavigationDebuggerView() { DataContext = e.NewValue },
+			ConfigurationDebuggerViewModel => new ConfigurationDebuggerView() { DataContext = e.NewValue },
 			_ => new Border(),
 		};
 	}
