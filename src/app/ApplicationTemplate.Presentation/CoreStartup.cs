@@ -28,10 +28,10 @@ public sealed class CoreStartup : CoreStartupBase
 	{
 	}
 
-	protected override IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath)
+	protected override IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath, IEnvironmentManager environmentManager)
 	{
 		return hostBuilder
-			.AddConfiguration(settingsFolderPath)
+			.AddConfiguration(settingsFolderPath, environmentManager)
 			.ConfigureServices((context, s) => s
 				.AddDiagnostics(context.Configuration)
 				.AddMock(context.Configuration)

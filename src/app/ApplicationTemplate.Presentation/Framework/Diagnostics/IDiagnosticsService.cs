@@ -8,6 +8,8 @@ namespace ApplicationTemplate;
 
 public interface IDiagnosticsService
 {
+	void DeleteConfigurationOverrideFile();
+
 	Task TestExceptionFromMainThread(CancellationToken ct);
 
 	void OpenSettingsFolder();

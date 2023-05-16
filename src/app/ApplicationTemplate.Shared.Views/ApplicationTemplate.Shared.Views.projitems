@@ -42,6 +42,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesPage.xaml.cs">
       <DependentUpon>DadJokesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\ConfigurationDebuggerView.xaml.cs">
+      <DependentUpon>ConfigurationDebuggerView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\DiagnosticsOverlay.xaml.cs">
       <DependentUpon>DiagnosticsOverlay.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Connectivity\ConnectivityProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Memory\MemoryProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Memory\MemoryProvider.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Version\VersionProvider.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Version\VersionProvider.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Version\VersionProvider.cs" />
@@ -204,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\DadJokes\DadJokesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\ConfigurationDebuggerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
