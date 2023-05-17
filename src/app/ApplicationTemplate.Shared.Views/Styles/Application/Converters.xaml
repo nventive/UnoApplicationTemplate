@@ -33,4 +33,6 @@
 	<converters:DebugConverter x:Key="Debug" />
 
 	<converters:FromNullableAppBarButtonToAppBarButtonConverter x:Key="NullableAppBarButtonToAppBarButton" />
+
+	<converters:FromDataValidationStateToVoiceOverStringConverter x:Key="DataValidationStateToVoiceOverString" />
 </ResourceDictionary>

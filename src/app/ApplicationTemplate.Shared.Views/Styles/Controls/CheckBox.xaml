@@ -1,4 +1,4 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
@@ -475,7 +475,6 @@
 								  Width="12"
 								  Height="4"
 								  Opacity="0"
-								  AutomationProperties.AccessibilityView="Raw"
 								  xamarin:Margin="0,2,0,0" />
 
 							<Path x:Name="CheckGlyph"
@@ -499,7 +498,8 @@
 										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
 										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
 										  Grid.Column="1"
-										  TextWrapping="Wrap" />
+										  TextWrapping="Wrap"
+										  AutomationProperties.AccessibilityView="Raw" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
