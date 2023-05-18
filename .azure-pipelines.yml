@@ -46,7 +46,7 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS.TestFlight'
 #-endif
 - stage: Build_Staging
 #-if false
@@ -60,9 +60,9 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS.TestFlight'
 
-- stage: AppCenter_Staging
+- stage: AppCenter_TestFlight_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Staging
   jobs:
@@ -77,6 +77,11 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       appCenterServiceConnectionName: $(AppCenterServiceConnection)
       appCenterDistributionGroup: $(AppCenterDistributionGroup)
+
+  - template: build/stage-release-appstore.yml
+    parameters:
+      applicationEnvironment: Staging
+      deploymentEnvironment: TestFlight
 
 - stage: Build_Production
   dependsOn: Build_Staging

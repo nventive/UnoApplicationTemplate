@@ -24,7 +24,7 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS.TestFlight'
       removeHyperlinksFromReleaseNotes: true
 
 - stage: AppCenter_Canary

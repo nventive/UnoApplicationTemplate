@@ -58,6 +58,16 @@ steps:
     bundleIdentifier: $(ApplicationIdentifier)
     printFile: true
 
+- task: LaunchIconBadge@1 
+  condition: ne(variables['ApplicationEnvironment'], 'Production')
+  inputs:
+    bannerVersionNameText: $(ApplicationEnvironment)
+    bannerVersionNameColor: $(BannerVersionNameColor)
+    contents: '$(Build.SourcesDirectory)/src/app/ApplicationTemplate.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon-*.png'
+    bannerVersionNamePosition: 'bottomRight'
+    bannerVersionNumberPosition: 'top'
+    bannerVersionNumberText: '$(MajorMinorPatch)'
+
 - bash: |
     cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
     dotnet $(dotNetCommand) -f:$(BuildTargetFramework) -c:Release /p:ApplicationIdentifier=$(ApplicationIdentifier) /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid) /p:ArchiveOnBuild=true /bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog "/p:InformationalVersion=$GITVERSION_INFORMATIONALVERSION" /p:IsLightBuild=$(IsLightBuild)
