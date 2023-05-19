@@ -4,6 +4,8 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.Configuration;
@@ -23,10 +25,14 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 	private readonly SerialDisposable _changeCallback = new();
 
 	[Inject] private IDiagnosticsService _diagnosticsService;
+	[Inject] private IEnvironmentManager _environmentManager;
 
 	public ConfigurationDebuggerViewModel()
 	{
 		Title = "Configuration";
+		AvailableEnvironments = _environmentManager.AvailableEnvironments;
+		ResetEnvironmentContent = $"Reset to default ({_environmentManager.Default})";
+		CurrentEnvironment = _environmentManager.Current;
 
 		var config = this.GetService<IConfiguration>();
 		UpdateJson(config);
@@ -60,6 +66,15 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 		);
 	});
 
+	public IDynamicCommand ResetEnvironment => this.GetCommandFromTask(async ct =>
+	{
+		_environmentManager.ClearOverride();
+		NextEnvironment = _environmentManager.Next;
+
+		// We set the property using the Set method instead of directly using the property to avoid invoking OnSelectedEnvironmentChanged.
+		this.Set(_environmentManager.Default, nameof(SelectedEnvironment));
+	});
+
 	/// <summary>
 	/// Gets the ­­JSON representation of the configuration.
 	/// The JSON has its full hierarchy to look as close as possible to appsettings.json content.
@@ -68,6 +83,39 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 	{
 		get => this.Get(initialValue: default(string));
 		private set => this.Set(value);
+	}
+
+	public string CurrentEnvironment { get; }
+
+	public string NextEnvironment
+	{
+		get => this.Get(initialValue: _environmentManager.Next);
+		private set => this.Set(value);
+	}
+
+	public bool IsNextEnvironmentDifferentThanCurrent => this.GetFromDynamicProperty(
+		source: this.GetProperty(x => x.NextEnvironment),
+		selector: next => next != CurrentEnvironment
+	);
+
+	public string ResetEnvironmentContent { get; }
+
+	public string[] AvailableEnvironments { get; }
+
+	public string SelectedEnvironment
+	{
+		get => this.Get(initialValue: _environmentManager.Current);
+		set
+		{
+			this.Set(value);
+			_ = Task.Run(OnSelectedEnvironmentChanged);
+		}
+	}
+
+	private void OnSelectedEnvironmentChanged()
+	{
+		_environmentManager.Override(SelectedEnvironment);
+		NextEnvironment = _environmentManager.Next;
 	}
 
 	private void UpdateJson(IConfiguration config)

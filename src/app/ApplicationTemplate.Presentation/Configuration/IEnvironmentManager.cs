@@ -15,18 +15,26 @@ public interface IEnvironmentManager
 	string Current { get; }
 
 	/// <summary>
+	/// Gets the next environment that will become the current one when the application restarts.
+	/// </summary>
+	/// <remarks>
+	/// This value changes when using <see cref="Override(string)"/> and <see cref="ClearOverride"/>.
+	/// </remarks>
+	string Next { get; }
+
+	/// <summary>
 	/// Gets the default environment (based on the build variables).
 	/// </summary>
 	string Default { get; }
 
 	/// <summary>
-	/// Overrides the current environment with one provided by <see cref="AvailableEnvironments"/>.
+	/// Overrides the current environment with one provided by <see cref="AvailableEnvironments"/> and sets <see cref="Next"/>.
 	/// </summary>
 	/// <param name="environment">The environment to use as override.</param>
 	void Override(string environment);
 
 	/// <summary>
-	/// Clears the current environment override and returns to the default value.
+	/// Clears the current environment override and set <see cref="Next"/> to the value of <see cref="Default"/>.
 	/// </summary>
 	void ClearOverride();
 
