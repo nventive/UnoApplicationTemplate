@@ -37,7 +37,7 @@ jobs:
             teamId: $(AppleTeamId)
             teamName: $(AppleTeamName)
             appSpecificPassword: '$(AppleAppSpecificPasswordFastLane)'
-            appSpecificId: '$(AppleStoreConnectIdentifier)' # allows to bypass 2FA when specified with appSpecificPassword
+            appSpecificId: '$(AppleStoreConnectIdentifier)' # allows to bypass 2FA when specified with appSpecificPassword.
 
         - task: DeleteFiles@1
           displayName: "Remove downloaded artifacts"

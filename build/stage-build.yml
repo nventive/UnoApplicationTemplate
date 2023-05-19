@@ -121,7 +121,7 @@ jobs:
       value: net6.0-ios
     - name: ArtifactName
       value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
-    - name: BannerVersionNameColor # determines the color of the banner to apply based on env (can only be defined outside template)
+    - name: BannerVersionNameColor # determines the color of the banner to apply based on env (can only be defined outside template).
       ${{ if eq( parameters['applicationEnvironment'], 'Staging' ) }}: 
         value: '$(AppIconBannerColorStaging)'
       # ${{ if eq( parameters['applicationEnvironment'], 'QA' ) }}: 
