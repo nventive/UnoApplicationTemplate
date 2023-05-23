@@ -61,6 +61,7 @@ stages:
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS.TestFlight'
+      BannerVersionNameText: "STAGING"
 
 - stage: AppCenter_TestFlight_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))

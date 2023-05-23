@@ -17,6 +17,9 @@ parameters:
 - name: pathToInfoPlist
   type: string
   default: ''
+- name: BannerVersionNameText
+  type: string
+  default: ''
 
 steps:
 - template: templates/dotnet-install.yml
@@ -61,7 +64,7 @@ steps:
 - task: LaunchIconBadge@1 
   condition: ne(variables['ApplicationEnvironment'], 'Production')
   inputs:
-    bannerVersionNameText: $(ApplicationEnvironment)
+    bannerVersionNameText: ${{ parameters.BannerVersionNameText }}
     bannerVersionNameColor: $(BannerVersionNameColor)
     contents: '$(Build.SourcesDirectory)/src/app/ApplicationTemplate.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon-*.png'
     bannerVersionNamePosition: 'bottomRight'
