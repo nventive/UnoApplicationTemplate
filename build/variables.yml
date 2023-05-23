@@ -74,7 +74,7 @@ variables:
   # Virtual machine images
   windowsHostedAgentImage: 'windows-2022'
   macOSHostedAgentImage: 'macOS-12'
-  macOSPoolName: 'macOS'
+  macOSPoolName: 'macOS-2023'
 
   # Versions to use
   XAMARIN_IOS_VERSION: 16.1.1
