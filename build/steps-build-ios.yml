@@ -62,7 +62,7 @@ steps:
     printFile: true
 
 - task: LaunchIconBadge@1 
-  condition: ne(variables['ApplicationEnvironment'], 'Production')
+  condition: and(succeeded(), ne(variables['ApplicationEnvironment'], 'Production'))
   inputs:
     bannerVersionNameText: ${{ parameters.BannerVersionNameText }}
     bannerVersionNameColor: $(BannerVersionNameColor)
