@@ -17,6 +17,9 @@ parameters:
 - name: pathToInfoPlist
   type: string
   default: ''
+- name: BannerVersionNameText
+  type: string
+  default: ''
 
 steps:
 - template: templates/dotnet-install.yml
@@ -57,6 +60,16 @@ steps:
     sourcePath: ${{ parameters.pathToInfoPlist }}
     bundleIdentifier: $(ApplicationIdentifier)
     printFile: true
+
+- task: LaunchIconBadge@1 
+  condition: and(succeeded(), ne(variables['ApplicationEnvironment'], 'Production'))
+  inputs:
+    bannerVersionNameText: ${{ parameters.BannerVersionNameText }}
+    bannerVersionNameColor: $(BannerVersionNameColor)
+    contents: '$(Build.SourcesDirectory)/src/app/ApplicationTemplate.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon-*.png'
+    bannerVersionNamePosition: 'bottomRight'
+    bannerVersionNumberPosition: 'top'
+    bannerVersionNumberText: '$(MajorMinorPatch)'
 
 - bash: |
     cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
