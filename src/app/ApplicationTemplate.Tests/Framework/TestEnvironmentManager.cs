@@ -19,6 +19,8 @@ public class TestEnvironmentManager : IEnvironmentManager
 
 	public string Current { get; }
 
+	public string Next => Current;
+
 	public string Default { get; }
 
 	public string[] AvailableEnvironments { get; } = new string[] { "DEVELOPMENT", "STAGING", "PRODUCTION" };

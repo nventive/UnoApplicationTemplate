@@ -38,9 +38,12 @@ public class EnvironmentManager : IEnvironmentManager
 		Current = File.Exists(_overrideSettingFilePath)
 			? File.ReadAllText(_overrideSettingFilePath)
 			: Default;
+		Next = Current;
 	}
 
-	public string Current { get; private set; }
+	public string Current { get; }
+
+	public string Next { get; private set; }
 
 	public string Default => DefaultEnvironment;
 
@@ -49,6 +52,8 @@ public class EnvironmentManager : IEnvironmentManager
 	public void ClearOverride()
 	{
 		File.Delete(_overrideSettingFilePath);
+
+		Next = Default;
 	}
 
 	public void Override(string environment)
@@ -70,7 +75,7 @@ public class EnvironmentManager : IEnvironmentManager
 			writer.Write(environment);
 		}
 
-		Current = environment;
+		Next = environment;
 	}
 
 	public static string[] GetAll()
