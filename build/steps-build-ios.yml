@@ -66,7 +66,7 @@ steps:
   inputs:
     bannerVersionNameText: ${{ parameters.BannerVersionNameText }}
     bannerVersionNameColor: $(BannerVersionNameColor)
-    contents: '$(Build.SourcesDirectory)/src/app/ApplicationTemplate.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon-*.png'
+    contents: '$(Build.SourcesDirectory)/src/app/${{ parameters.solutionName }}.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon-*.png'
     bannerVersionNamePosition: 'bottomRight'
     bannerVersionNumberPosition: 'top'
     bannerVersionNumberText: '$(MajorMinorPatch)'
