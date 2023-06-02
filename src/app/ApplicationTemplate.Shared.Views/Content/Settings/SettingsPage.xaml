@@ -12,7 +12,8 @@
 
 		<!-- CommandBar -->
 		<CommandBar Content="Profile"
-					x:Uid="Settings_CommandBar" />
+					x:Uid="Settings_CommandBar"
+					AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 
 		<ScrollViewer Grid.Row="1">
 			<StackPanel>
@@ -27,7 +28,8 @@
 							<StackPanel Padding="24,24,24,0">
 
 								<!-- Full Name -->
-								<TextBlock Style="{StaticResource TitleLarge}">
+								<TextBlock Style="{StaticResource TitleLarge}"
+										   AutomationProperties.AccessibilityView="{Binding Parent.AccessibilityViewForSubModalViewModels}">
 									
 									<!-- First Name -->
 									<Run Text="{Binding Data.FirstName}" />
@@ -38,44 +40,49 @@
 
 								<!-- Email Label -->
 								<TextBlock Text="Email"
-									   x:Uid="Settings_Email"
-									   Style="{StaticResource TitleSmall}"
-									   Margin="0,16,0,0" />
+										   x:Uid="Settings_Email"
+										   Style="{StaticResource TitleSmall}"
+										   Margin="0,16,0,0"
+										   AutomationProperties.AccessibilityView="{Binding Parent.AccessibilityViewForSubModalViewModels}" />
 
 								<!-- Email Value -->
 								<TextBlock Text="{Binding Data.Email}"
-										   Style="{StaticResource BodyMedium}" />
+										   Style="{StaticResource BodyMedium}"
+										   AutomationProperties.AccessibilityView="{Binding Parent.AccessibilityViewForSubModalViewModels}" />
 							</StackPanel>
-							
+
 							<!-- Separator -->
 							<Rectangle Fill="{StaticResource SeparatorBrush}"
-									Height="1"
-									HorizontalAlignment="Stretch"
-									Margin="0,16,0,0" />
+									   Height="1"
+									   HorizontalAlignment="Stretch"
+									   Margin="0,16,0,0" />
 
 							<!-- Password Section -->
 							<StackPanel Padding="24,16,24,0">
-								
+
 								<!-- Password -->
 								<TextBlock Text="Password"
-											x:Uid="Settings_Password"
-											Style="{StaticResource TitleSmall}" />
+										   x:Uid="Settings_Password"
+										   Style="{StaticResource TitleSmall}"
+										   AutomationProperties.AccessibilityView="{Binding Parent.AccessibilityViewForSubModalViewModels}" />
 								<TextBlock Text="xxxxxxxx"
-											Style="{StaticResource BodyMedium}" />
+										   Style="{StaticResource BodyMedium}"
+										   AutomationProperties.AccessibilityView="{Binding Parent.AccessibilityViewForSubModalViewModels}" />
 
 								<!-- Change password -->
 								<Button Content="CHANGE PASSWORD"
 										x:Uid="Settings_ChangePassword"
 										Command="{Binding Parent.NavigateToResetPasswordPage}"
 										HorizontalAlignment="Left"
-										Margin="0,16,0,0" />
+										Margin="0,16,0,0"
+										AutomationProperties.AccessibilityView="{Binding Parent.AccessibilityViewForSubModalViewModels}" />
 							</StackPanel>
 						</StackPanel>
 					</DataTemplate>
 				</dl:DataLoaderView>
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -86,7 +93,8 @@
 						  ue:MultipleTapExtension.Command="{Binding NavigateToDiagnosticsPage}"
 						  ue:MultipleTapExtension.TapCount="3">
 
-						<TextBlock Style="{StaticResource TitleSmall}">
+						<TextBlock Style="{StaticResource TitleSmall}"
+								   AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}">
 
 							<!-- Label -->
 							<Run Text="DAD Jokes - Version"
@@ -102,7 +110,8 @@
 							   x:Uid="Settings_Version_Details"
 							   Style="{StaticResource BodyMedium}"
 							   Foreground="{StaticResource OnBackgroundBrush}"
-							   Opacity="{StaticResource MediumOpacity}" />
+							   Opacity="{StaticResource MediumOpacity}"
+							   AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 
 					<!-- Replay tutorial -->
 					<Button Content="REPLAY TUTORIAL"
@@ -110,11 +119,12 @@
 							Command="{Binding NavigateToOnboardingPage}"
 							Style="{StaticResource FilledButtonStyle}"
 							HorizontalAlignment="Left"
-							Margin="0,16,0,0" />
+							Margin="0,16,0,0"
+							AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 				</StackPanel>
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -126,26 +136,29 @@
 					</Grid.ColumnDefinitions>
 
 					<StackPanel VerticalAlignment="Center">
-						
+
 						<!-- Label -->
 						<TextBlock Text="Notification"
 								   x:Uid="Settings_Notification"
-								   Style="{StaticResource TitleSmall}" />
-						
+								   Style="{StaticResource TitleSmall}"
+								   AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
+
 						<!-- Info -->
 						<TextBlock Text="I agree to receive notifications when there are new jokes."
 								   x:Uid="Settings_Notification_Details"
-								   Style="{StaticResource BodyMedium}" />
+								   Style="{StaticResource BodyMedium}"
+								   AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 					</StackPanel>
 
 					<!-- ToggleSwitch -->
 					<ToggleSwitch VerticalAlignment="Center"
 								  Margin="20,0,0,0"
-								  Grid.Column="1" />
+								  Grid.Column="1"
+								  AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 				</Grid>
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -161,17 +174,19 @@
 					<TextBlock Text="Dark mode"
 							   x:Uid="Settings_DarkMode"
 							   Style="{StaticResource TitleSmall}"
-							   VerticalAlignment="Center" />
+							   VerticalAlignment="Center"
+							   AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 
 					<!-- ToggleSwitch -->
 					<ToggleSwitch Toggled="OnThemeButtonClicked"
 								  VerticalAlignment="Center"
 								  Margin="20,0,0,0"
-								  Grid.Column="1" />
+								  Grid.Column="1"
+								  AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 				</Grid>
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -179,10 +194,11 @@
 				<Button Content="Privacy policy"
 						x:Uid="Settings_PrivacyPolicy"
 						Command="{Binding NavigateToPrivacyPolicyPage}"
-						Style="{StaticResource TextWithRightArrowAlternativeButtonStyle}" />
+						Style="{StaticResource TextWithRightArrowAlternativeButtonStyle}"
+						AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -190,10 +206,11 @@
 				<Button Content="Terms &amp; conditions"
 						x:Uid="Settings_TermsAndConditions"
 						Command="{Binding NavigateToTermsAndConditionsPage}"
-						Style="{StaticResource TextWithRightArrowAlternativeButtonStyle}" />
+						Style="{StaticResource TextWithRightArrowAlternativeButtonStyle}"
+						AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -203,7 +220,8 @@
 						Command="{Binding Logout}"
 						Background="{StaticResource PrimaryAccentBrush}"
 						HorizontalAlignment="Left"
-						Margin="24,16" />
+						Margin="24,16"
+						AutomationProperties.AccessibilityView="{Binding AccessibilityViewForSubModalViewModels}" />
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

@@ -49,6 +49,8 @@ public sealed partial class SettingsPageViewModel : ViewModel
 
 	public IDynamicCommand NavigateToDiagnosticsPage => this.GetCommandFromTask(async ct =>
 	{
+		DeactivateAccessibilityView();
+
 		await _sectionsNavigator.OpenModal(ct, () => new DiagnosticsPageViewModel());
 	});
 
