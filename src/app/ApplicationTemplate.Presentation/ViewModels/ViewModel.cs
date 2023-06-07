@@ -18,20 +18,29 @@ namespace ApplicationTemplate.Presentation;
 public class ViewModel : ViewModelBase, INavigableViewModel
 {
 	// Add properties or commands you want to have on all your ViewModels
+	private readonly ISectionsNavigator _sectionsNavigator;
 
 	public ViewModel()
 	{
 		(this as IInjectable)?.Inject((t, n) => this.GetService(t));
+		_sectionsNavigator = this.GetService<ISectionsNavigator>();
+	}
+
+	public bool IsModalActive
+	{
+		get => this.Get(initialValue: false);
+		set => this.Set(value);
 	}
 
 	public IDynamicCommand NavigateBack => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
+		await _sectionsNavigator.NavigateBackOrCloseModal(ct);
 	});
 
 	public IDynamicCommand CloseModal => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().CloseModal(ct);
+		GetViewModelUnderModal().IsModalActive = false;
+		await _sectionsNavigator.CloseModal(ct);
 	});
 
 	void INavigableViewModel.SetView(object view)
@@ -49,5 +58,11 @@ public class ViewModel : ViewModelBase, INavigableViewModel
 	public async Task RunOnDispatcher(CancellationToken ct, Func<CancellationToken, Task> action)
 	{
 		await this.GetService<IDispatcherScheduler>().Run(ct2 => action(ct2), ct);
+	}
+
+	private ViewModel GetViewModelUnderModal()
+	{
+		var activeSectionStack = _sectionsNavigator.State.ActiveSection.State.Stack;
+		return activeSectionStack[activeSectionStack.Count - 1].ViewModel as ViewModel;
 	}
 }

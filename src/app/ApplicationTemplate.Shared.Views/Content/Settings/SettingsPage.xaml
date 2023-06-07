@@ -1,10 +1,12 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.SettingsPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:b="using:ApplicationTemplate.Views.Behaviors"
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:dl="using:Chinook.DataLoader">
 
-	<Grid Background="{StaticResource BackgroundBrush}">
+	<Grid b:AccessibilityBehavior.IsAccessibilityDisabled="{Binding IsModalActive}"
+		  Background="{StaticResource BackgroundBrush}">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
