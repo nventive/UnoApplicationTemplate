@@ -24,12 +24,6 @@ public class ViewModel : ViewModelBase, INavigableViewModel
 		(this as IInjectable)?.Inject((t, n) => this.GetService(t));
 	}
 
-	public string AccessibilityViewForSubModalViewModels
-	{
-		get => this.Get(initialValue: "Content");
-		private set => this.Set(value);
-	}
-
 	public IDynamicCommand NavigateBack => this.GetCommandFromTask(async ct =>
 	{
 		await this.GetService<ISectionsNavigator>().NavigateBackOrCloseModal(ct);
@@ -37,23 +31,8 @@ public class ViewModel : ViewModelBase, INavigableViewModel
 
 	public IDynamicCommand CloseModal => this.GetCommandFromTask(async ct =>
 	{
-		var sectionNavigator = this.GetService<ISectionsNavigator>();
-
-		var viewModelUnderModal = sectionNavigator.State.ActiveSection.State.Stack[0].ViewModel as ViewModel;
-		viewModelUnderModal.ActivateAccessibilityView();
-
-		await sectionNavigator.CloseModal(ct);
+		await this.GetService<ISectionsNavigator>().CloseModal(ct);
 	});
-
-	protected void ActivateAccessibilityView()
-	{
-		AccessibilityViewForSubModalViewModels = "Content";
-	}
-
-	protected void DeactivateAccessibilityView()
-	{
-		AccessibilityViewForSubModalViewModels = "Raw";
-	}
 
 	void INavigableViewModel.SetView(object view)
 	{
