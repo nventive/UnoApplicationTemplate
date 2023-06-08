@@ -52,6 +52,7 @@
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
+		<ProjectReference Include="..\ReviewService\ReviewService.csproj" />
 	</ItemGroup>
 	<Choose>
 		<When Condition="'$(TargetFramework)'=='net6.0-android'">
