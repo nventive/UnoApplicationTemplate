@@ -24,4 +24,8 @@
 		<PackageReference Include="Nventive.Persistence" Version="0.4.0-dev.36" />
 		<PackageReference Include="System.Reactive" Version="5.0.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\ReviewService.Abstractions\ReviewService.Abstractions.csproj" />
+	</ItemGroup>
 </Project>
