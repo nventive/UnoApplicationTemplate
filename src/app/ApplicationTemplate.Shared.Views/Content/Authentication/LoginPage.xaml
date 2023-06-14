@@ -10,7 +10,7 @@
 	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="d ios android">
 
-	<Grid Background="{StaticResource BackgroundBrush}">
+	<Grid Background="{ThemeResource BackgroundBrush}">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup>
 				<VisualState x:Name="BiggerFont">
@@ -30,7 +30,7 @@
 		</VisualStateManager.VisualStateGroups>
 
 		<!-- Background -->
-		<Image Source="{StaticResource BackgroundMustachesLightImage}"
+		<Image Source="{ThemeResource BackgroundMustachesLightImage}"
 			   Stretch="UniformToFill" />
 
 		<ScrollViewer>
@@ -51,7 +51,7 @@
 					<TextBlock Text="{Binding Quote}"
 							   x:Uid="Login_Subtitle"
 							   Style="{StaticResource BodyLarge}"
-							   Foreground="{StaticResource OnBackgroundBrush}"
+							   Foreground="{ThemeResource OnBackgroundBrush}"
 							   FontStyle="Italic"
 							   TextAlignment="Center"
 							   Margin="0,16,0,0" />
@@ -94,7 +94,7 @@
 					<HyperlinkButton Content="Forgot password ?"
 									 x:Uid="Login_ForgotPassword"
 									 Command="{Binding NavigateToForgotPasswordPage}"
-									 Foreground="{StaticResource OnBackgroundBrush}"
+									 Foreground="{ThemeResource OnBackgroundBrush}"
 									 Margin="0,4,0,0" />
 
 					<!-- Login Button -->
@@ -115,7 +115,7 @@
 							Margin="0,16,0,0" />
 
 					<!-- Separator -->
-					<Rectangle Fill="{StaticResource SeparatorBrush}"
+					<Rectangle Fill="{ThemeResource SeparatorBrush}"
 							   Height="1"
 							   HorizontalAlignment="Stretch"
 							   Margin="0,32,0,0" />

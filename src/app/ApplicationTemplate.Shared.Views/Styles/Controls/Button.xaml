@@ -196,7 +196,7 @@
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Background"
-				Value="{StaticResource SurfaceBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -204,9 +204,9 @@
 		<Setter Property="Padding"
 				Value="10,8,10,8" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource SurfaceBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="FontSize"
@@ -231,17 +231,17 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource SecondaryHoverBrush}" />
+												Value="{ThemeResource SecondaryHoverBrush}" />
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource SecondaryHoverBrush}" />
+												Value="{ThemeResource SecondaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource SecondaryPressedBrush}" />
+												Value="{ThemeResource SecondaryPressedBrush}" />
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource SecondaryPressedBrush}" />
+												Value="{ThemeResource SecondaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -249,7 +249,7 @@
 
 						<StackPanel Orientation="Horizontal"
 									HorizontalAlignment="Center">
-							<Image Source="{StaticResource GoogleIconImage}"
+							<Image Source="{ThemeResource GoogleIconImage}"
 								   Height="20"
 								   Width="20" />
 
