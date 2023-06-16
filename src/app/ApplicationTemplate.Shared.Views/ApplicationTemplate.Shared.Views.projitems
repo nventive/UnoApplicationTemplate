@@ -79,6 +79,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\StarRating\StarRatingTestingPage.xaml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Content\Welcome\OnboardingPage.xaml.cs">
       <DependentUpon>OnboardingPage.xaml</DependentUpon>
     </Compile>
@@ -257,6 +258,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Settings\SettingsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\StarRating\StarRatingTestingPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

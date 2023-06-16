@@ -1,0 +1,54 @@
+﻿<Page x:Class="ApplicationTemplate.Views.Content.StarRatingTestingPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:local="using:ApplicationTemplate.Views.Content.StarRating"
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  mc:Ignorable="d"
+	  Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+	<Grid Background="{StaticResource BackgroundBrush}">
+
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
+
+		<!-- CommandBar -->
+		<CommandBar Content="Star Rating Testing Page" />
+
+		<ScrollViewer Grid.Row="1">
+			<StackPanel Margin="20">
+
+				<!-- Review Requesting -->
+				<StackPanel>
+
+					<!-- Label -->
+					<TextBlock Text="Star rating prompt"
+							   FontWeight="Bold"
+							   Margin="0,24,0,8" />
+
+					<!-- Test Review Request Button -->
+					<Button Content="Test review request"
+							Command="{Binding TestReviewRequest}"
+							HorizontalAlignment="Stretch"
+							Padding="12"
+							Margin="0,4" />
+
+				</StackPanel>
+
+				<!-- StarRating Conditions -->
+				<StackPanel>
+
+					<!-- Label -->
+					<TextBlock Text="Star rating conditions "
+							   FontWeight="Bold"
+							   Margin="0,24,0,8" />
+
+					<!--TODO Add Buttons for conditions testing-->
+
+				</StackPanel>
+			</StackPanel>
+		</ScrollViewer>
+	</Grid>
+</Page>

@@ -24,6 +24,35 @@
 			<StackPanel Margin="20">
 
 				<!-- Environment picker -->
+				<Button Command="{Binding NavigateToStarRatingTestingPage}"
+						HorizontalAlignment="Stretch"
+						HorizontalContentAlignment="Stretch"
+						Padding="12"
+						Margin="0,4">
+					
+					<Grid HorizontalAlignment="Stretch"
+						  VerticalAlignment="Stretch">
+
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="Auto" />
+						</Grid.ColumnDefinitions>
+
+						<!-- Label -->
+						<TextBlock Text="StarRating Testing Page"
+								   VerticalAlignment="Center" />
+
+						<!-- Icon -->
+						<Path Data="{StaticResource ChevronIcon}"
+							  Fill="{StaticResource OnPrimaryBrush}"
+							  VerticalAlignment="Center"
+							  Margin="16,0,4,0"
+							  Grid.Column="2" />
+					</Grid>
+				</Button>
+
+				<!-- Environment picker -->
 				<Button Command="{Binding NavigateToEnvironmentPickerPage}"
 						HorizontalAlignment="Stretch"
 						HorizontalContentAlignment="Stretch"
