@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApplicationTemplate.Presentation;
+using ApplicationTemplate.Presentation.ViewModels;
 using ApplicationTemplate.Views.Content;
 using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,6 +45,7 @@ public static class NavigationConfiguration
 		{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
+		{ typeof(StarRatingTestingPageViewModel), typeof(StarRatingTestingPage) },
 	};
 
 	/// <summary>

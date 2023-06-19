@@ -28,25 +28,25 @@ variables:
 stages:
 #-if false
 # This special if is used to remove those Dotnet_New stages for generated application.
-- stage: Dotnet_New_GeneratedApp
-  jobs:
-  - template: build/stage-donetnew.yaml
+# - stage: Dotnet_New_GeneratedApp
+#   jobs:
+#   - template: build/stage-donetnew.yaml
 
-- stage: Build_Staging_GeneratedApp
-  dependsOn: Dotnet_New_GeneratedApp
-  jobs:
-  - template: build/stage-build.yml
-    parameters:
-      pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
-      solutionName: 'GeneratedApp'
-      pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/iOS/Info.plist'
-      pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/Android/AndroidManifest.xml'
-      applicationEnvironment: Generated_Staging
-      androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      iosProvisioningProfileFile: $(InternalProvisioningProfile)
-      iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS.TestFlight'
+# - stage: Build_Staging_GeneratedApp
+#   dependsOn: Dotnet_New_GeneratedApp
+#   jobs:
+#   - template: build/stage-build.yml
+#     parameters:
+#       pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
+#       solutionName: 'GeneratedApp'
+#       pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/iOS/Info.plist'
+#       pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/Android/AndroidManifest.xml'
+#       applicationEnvironment: Generated_Staging
+#       androidKeyStoreFile: $(InternalKeystore)
+#       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+#       iosProvisioningProfileFile: $(InternalProvisioningProfile)
+#       iosCertificateFile: $(InternalCertificate)
+#       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS.TestFlight'
 #-endif
 - stage: Build_Staging
 #-if false
