@@ -5,6 +5,7 @@ using System.Text;
 using ApplicationTemplate.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
+using ReviewService.Abstractions;
 
 namespace ApplicationTemplate;
 
@@ -22,7 +23,8 @@ public static class PersistenceConfiguration
 	public static IServiceCollection AddPersistence(this IServiceCollection services)
 	{
 		return services
-			.AddSingleton(s => CreateDataPersister(s, defaultValue: ApplicationSettings.Default));
+			.AddSingleton(s => CreateDataPersister(s, defaultValue: ApplicationSettings.Default))
+			.AddSingleton(s => CreateDataPersister(s, defaultValue: new ReviewSettingsCustom()));
 	}
 
 	private static IObservableDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
