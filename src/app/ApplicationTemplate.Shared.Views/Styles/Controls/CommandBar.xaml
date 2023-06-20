@@ -130,6 +130,10 @@
 
 		<Setter Property="toolkit:VisibleBoundsPadding.PaddingMask"
 				Value="Top" />
+
+		<!-- This is used so the screen reader doesn't read the page title twice (especially on iOS). -->
+		<Setter Property="AutomationProperties.AccessibilityView"
+				Value="Raw" />
 	</Style>
 
 	<Style x:Key="TransparentCommandBarStyle"
