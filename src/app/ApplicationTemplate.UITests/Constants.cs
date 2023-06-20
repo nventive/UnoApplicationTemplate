@@ -4,7 +4,7 @@ namespace ApplicationTemplate.UITests;
 
 public static class Constants
 {
-	public const string IOSAppName = "com.nventive.internal.applicationtemplate";
+	public const string IOSAppName = "com.nventive.applicationtemplate";
 	public const string AndroidAppName = "com.nventive.internal.applicationtemplate";
 	public const string IOSDeviceNameOrId = "00008030-000865912E90802E";
 

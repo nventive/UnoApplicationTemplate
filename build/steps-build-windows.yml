@@ -28,6 +28,7 @@ steps:
     -bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog
     -p:Platform=$(ApplicationPlatform)
     -p:ApplicationEnvironment=$(ApplicationEnvironment)
+    -p:PublishSingleFile=true
   displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
 
 - publish: $(Build.ArtifactStagingDirectory)

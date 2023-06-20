@@ -16,5 +16,5 @@ public interface IDadJokesEndpoint
 	/// <param name="typePost"><see cref="string"/></param>
 	/// <returns>List of quotes</returns>
 	[Get("/{typePost}.json")]
-	Task<DadJokesResponse> FetchData(CancellationToken ct, string typePost);
+	Task<DadJokesResponse> FetchData(CancellationToken ct, [AliasAs("typePost")] string typePost);
 }
