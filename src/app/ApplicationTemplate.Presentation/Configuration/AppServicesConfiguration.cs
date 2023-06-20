@@ -4,7 +4,6 @@ using ApplicationTemplate.Client;
 using ApplicationTemplate.Presentation;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
-using ReviewService.Abstractions;
 
 namespace ApplicationTemplate;
 
@@ -26,7 +25,6 @@ public static class AppServicesConfiguration
 			.AddSingleton<IMessageDialogService, AcceptOrDefaultMessageDialogService>()
 			.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 			.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
-			.AddSingleton<IReviewSettingsSource<ReviewSettings>, ReviewSettingsSource>()
 			.AddSingleton<IPostService, PostService>()
 			.AddSingleton<IDadJokesService, DadJokesService>()
 			.AddSingleton<IAuthenticationService, AuthenticationService>()

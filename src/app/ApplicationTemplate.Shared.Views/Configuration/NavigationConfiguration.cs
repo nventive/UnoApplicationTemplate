@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApplicationTemplate.Presentation;
-using ApplicationTemplate.Presentation.ViewModels;
 using ApplicationTemplate.Views.Content;
 using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;

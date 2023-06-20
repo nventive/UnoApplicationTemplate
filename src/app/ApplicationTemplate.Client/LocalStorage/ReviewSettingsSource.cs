@@ -1,6 +1,6 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
+using Nventive.Persistence;
 using ReviewService.Abstractions;
 
 namespace ApplicationTemplate.Client;
@@ -8,17 +8,29 @@ namespace ApplicationTemplate.Client;
 /// <summary>
 /// Implementation of <see cref="IReviewSettingsSource{TReviewSettings}"/>.
 /// </summary>
-public sealed class ReviewSettingsSource : IReviewSettingsSource<ReviewSettings>
+public sealed class ReviewSettingsSource : IReviewSettingsSource<ReviewSettingsCustom>
 {
-	/// <inheritdoc/>
-	public Task<ReviewSettings> Read(CancellationToken ct)
+	private readonly IObservableDataPersister<ReviewSettingsCustom> _dataPersister;
+
+	public ReviewSettingsSource(IObservableDataPersister<ReviewSettingsCustom> dataPersister)
 	{
-		throw new NotImplementedException();
+		_dataPersister = dataPersister;
 	}
 
 	/// <inheritdoc/>
-	public Task Write(CancellationToken ct, ReviewSettings reviewSettings)
+	public async Task<ReviewSettingsCustom> Read(CancellationToken ct)
 	{
-		throw new NotImplementedException();
+		var result = await _dataPersister.Load(ct, defaultValue: default);
+
+		return result;
+	}
+
+	/// <inheritdoc/>
+	public async Task Write(CancellationToken ct, ReviewSettingsCustom reviewSettings)
+	{
+		await _dataPersister.Update(ct, context =>
+		{
+			context.Commit(reviewSettings);
+		});
 	}
 }

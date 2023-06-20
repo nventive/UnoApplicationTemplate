@@ -16,11 +16,23 @@ public static class ReviewServiceExtensions
 	/// <typeparam name="TReviewSettings">The type of the object that we use for tracking.</typeparam>
 	/// <param name="reviewService"><see cref="IReviewService{TReviewSettings}"/>.</param>
 	/// <param name="ct">The cancellation token.</param>
-	/// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-	public static Task TrackApplicationLaunched<TReviewSettings>(this IReviewService<TReviewSettings> reviewService, CancellationToken ct)
+	/// <returns><see cref="Task"/>.</returns>
+	public static async Task TrackApplicationLaunched<TReviewSettings>(this IReviewService<TReviewSettings> reviewService, CancellationToken ct)
 		where TReviewSettings : ReviewSettings
 	{
-		throw new NotImplementedException();
+		await reviewService.UpdateReviewSettings(ct, reviewSettings =>
+		{
+			return reviewSettings.ApplicationFirstLaunched is null
+				? (reviewSettings with
+				{
+					ApplicationFirstLaunched = DateTimeOffset.Now,
+					ApplicationLaunchCount = reviewSettings.ApplicationLaunchCount + 1
+				})
+				: (reviewSettings with
+				{
+					ApplicationLaunchCount = reviewSettings.ApplicationLaunchCount + 1,
+				});
+		});
 	}
 
 	/// <summary>
@@ -30,10 +42,13 @@ public static class ReviewServiceExtensions
 	/// <param name="reviewService"><see cref="IReviewService{TReviewSettings}"/>.</param>
 	/// <param name="ct"><see cref="CancellationToken"/>.</param>
 	/// <returns><see cref="Task"/>.</returns>
-	public static Task TrackPrimaryActionCompleted<TReviewSettings>(this IReviewService<TReviewSettings> reviewService, CancellationToken ct)
+	public static async Task TrackPrimaryActionCompleted<TReviewSettings>(this IReviewService<TReviewSettings> reviewService, CancellationToken ct)
 		where TReviewSettings : ReviewSettings
 	{
-		throw new NotImplementedException();
+		await reviewService.UpdateReviewSettings(
+			ct,
+			reviewSettings => reviewSettings with { PrimaryActionCompletedCount = reviewSettings.PrimaryActionCompletedCount + 1 }
+		);
 	}
 
 	/// <summary>
@@ -43,9 +58,12 @@ public static class ReviewServiceExtensions
 	/// <param name="reviewService"><see cref="IReviewService{TReviewSettings}"/>.</param>
 	/// <param name="ct"><see cref="CancellationToken"/>.</param>
 	/// <returns><see cref="Task"/>.</returns>
-	public static Task TrackSecondaryActionCompleted<TReviewSettings>(this IReviewService<TReviewSettings> reviewService, CancellationToken ct)
+	public static async Task TrackSecondaryActionCompleted<TReviewSettings>(this IReviewService<TReviewSettings> reviewService, CancellationToken ct)
 		where TReviewSettings : ReviewSettings
 	{
-		throw new NotImplementedException();
+		await reviewService.UpdateReviewSettings(
+			ct,
+			reviewSettings => reviewSettings with { SecondaryActionCompletedCount = reviewSettings.SecondaryActionCompletedCount + 1 }
+		);
 	}
 }

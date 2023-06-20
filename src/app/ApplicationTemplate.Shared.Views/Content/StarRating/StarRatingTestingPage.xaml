@@ -45,7 +45,26 @@
 							   FontWeight="Bold"
 							   Margin="0,24,0,8" />
 
-					<!--TODO Add Buttons for conditions testing-->
+					<!-- Test track Application Launched -->
+					<Button Content="Test track Application Launched"
+							Command="{Binding TestApplicationLaunched}"
+							HorizontalAlignment="Stretch"
+							Padding="12"
+							Margin="0,4" />
+
+					<!-- Test track primary action count -->
+					<Button Content="Test track primary action count"
+							Command="{Binding TestPrimaryActionCount}"
+							HorizontalAlignment="Stretch"
+							Padding="12"
+							Margin="0,4" />
+
+					<!-- Test track secondary action count -->
+					<Button Content="Test track secondary action count"
+							Command="{Binding TestSecondaryActionCount}"
+							HorizontalAlignment="Stretch"
+							Padding="12"
+							Margin="0,4" />
 
 				</StackPanel>
 			</StackPanel>

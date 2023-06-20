@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Microsoft.Extensions.Localization;
+using ReviewService.Abstractions;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -40,6 +40,7 @@ public partial class OnboardingPageViewModel : ViewModel
 	{
 		await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(isFirstLogin: true));
 		await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
+		await this.GetService<IReviewService<ReviewSettingsCustom>>().TrackOnboardingCompleted(ct);
 	}
 
 	public OnboardingItemViewModel[] OnboardingItems

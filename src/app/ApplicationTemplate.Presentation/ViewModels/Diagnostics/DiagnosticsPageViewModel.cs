@@ -1,5 +1,4 @@
-﻿using ApplicationTemplate.Presentation.ViewModels;
-using Chinook.DynamicMvvm;
+﻿using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Uno;
