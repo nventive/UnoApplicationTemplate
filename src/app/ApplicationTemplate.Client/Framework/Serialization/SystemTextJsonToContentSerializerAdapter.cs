@@ -41,7 +41,7 @@ public class SystemTextJsonToContentSerializerAdapter : IHttpContentSerializer
 
 	public string GetFieldNameForProperty(PropertyInfo propertyInfo)
 	{
-		throw new NotImplementedException();
+		return propertyInfo.Name;
 	}
 
 	public HttpContent ToHttpContent<T>(T item)
