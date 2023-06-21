@@ -263,6 +263,8 @@
 											  Model="{Binding Form}"
 											  Margin="0,4,0,0">
 						<!-- List -->
+						<!-- TODO: When OS voiceover is enabled Dad name is read twice and checkbox doesn't work
+							 Uno Issue: https://github.com/unoplatform/uno/issues/12329-->
 						<Grid Background="{StaticResource SurfaceBrush}"
 							  CornerRadius="4">
 							<!--Remove this line from listView Properties to avoid crash on Windows App: ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
