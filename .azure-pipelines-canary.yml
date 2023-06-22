@@ -28,7 +28,7 @@ stages:
       removeHyperlinksFromReleaseNotes: true
       BannerVersionNameText: "CANARY"
 
-- stage: AppCenter_TestFlight_Canary
+- stage: AppCenter_Canary
   condition: and(succeeded(), eq(variables['IsCanary'], 'true'))
   dependsOn: Build_Canary
 
@@ -44,8 +44,3 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       appCenterServiceConnectionName: $(AppCenterCanaryServiceConnection)
       appCenterDistributionGroup: $(AppCenterCanaryDistributionGroup)
-
-  - template: build/stage-release-appstore.yml
-    parameters:
-      applicationEnvironment: Staging
-      deploymentEnvironment: TestFlight
