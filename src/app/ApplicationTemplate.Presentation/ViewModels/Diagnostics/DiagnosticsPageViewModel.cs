@@ -1,8 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-using Chinook.DynamicMvvm;
+﻿using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Uno;
@@ -26,6 +22,11 @@ public sealed partial class DiagnosticsPageViewModel : ViewModel
 	public IDynamicCommand NavigateToEnvironmentPickerPage => this.GetCommandFromTask(async ct =>
 	{
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new EnvironmentPickerPageViewModel(CurrentEnvironment));
+	});
+
+	public IDynamicCommand NavigateToStarRatingTestingPage => this.GetCommandFromTask(async ct =>
+	{
+		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new StarRatingTestingPageViewModel());
 	});
 
 	public string CurrentEnvironment

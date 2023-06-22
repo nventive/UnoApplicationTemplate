@@ -6,7 +6,7 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<LangVersion>10.0</LangVersion>
 		<IsTestProject>True</IsTestProject>
-		<DefineConstants>NETFRAMEWORK</DefineConstants>
+		<DefineConstants>TESTS</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
