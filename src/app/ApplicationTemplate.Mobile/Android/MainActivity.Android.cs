@@ -20,6 +20,8 @@ public sealed class MainActivity : Microsoft.UI.Xaml.ApplicationActivity
 		// Support the ExtendedSplashScreen on Android 12+.
 		Nventive.ExtendedSplashScreen.ExtendedSplashScreen.AndroidSplashScreen = AndroidX.Core.SplashScreen.SplashScreen.InstallSplashScreen(this);
 
+		Microsoft.Maui.ApplicationModel.Platform.Init(this, bundle);
+
 		base.OnCreate(bundle);
 	}
 }
