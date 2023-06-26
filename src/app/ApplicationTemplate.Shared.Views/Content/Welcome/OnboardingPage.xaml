@@ -7,92 +7,31 @@
 
 	<Page.Resources>
 		<ResourceDictionary>
-
-			<!-- Selected Index to Button Content -->
-			<uc:PartitionConverter x:Key="SelectedIndexToButtonContent"
-								   DefaultValue="SKIP"
-								   x:Uid="Onboarding_Skip">
-				<uc:IntervalPartition LowerBound="2"
-									  InRangeValue="CONTINUE"
-									  x:Uid="Onboarding_Continue" />
-			</uc:PartitionConverter>
-
-
-			<!-- Selected Index to Button Style -->
-			<uc:PartitionConverter x:Key="SelectedIndexToButtonStyle"
-								   DefaultValue="{StaticResource TextWithRightArrowButtonStyle}">
-				<uc:IntervalPartition LowerBound="2"
-									  InRangeValue="{StaticResource ContainedWithRightArrowButtonStyle}" />
-			</uc:PartitionConverter>
-
-			<!-- Onboarding ItemTemplate -->
-			<DataTemplate x:Key="OnboardingItemTemplate">
-				<Grid VerticalAlignment="Center"
-					  Height="340">
-
-					<!-- Image -->
-					<Image Source="{Binding ImageUrl}"
-						   Width="223"
-						   VerticalAlignment="Bottom"
-						   HorizontalAlignment="Center"
-						   Margin="0,0,0,50" />
-
-					<!-- Message -->
-					<TextBlock Text="{Binding PrimaryText}"
-							   Style="{StaticResource TitleLarge}"
-							   Foreground="{StaticResource OnBackgroundBrush}"
-							   MaxWidth="300"
-							   VerticalAlignment="Bottom"
-							   HorizontalTextAlignment="Center"
-							   Margin="0,0,0,20" />
-				</Grid>
-			</DataTemplate>
-
-			<!-- Onboarding Index Indicator Template -->
-			<DataTemplate x:Key="OnboardingIndexIndicatorTemplate">
-				<StackPanel Margin="0,56">
-					<Ellipse  Fill="{StaticResource SecondaryDraggedBrush}"
-							  Height="12"
-							  Width="12"
-							  Margin="8,0" />
-				</StackPanel>
-			</DataTemplate>
-
-			<!-- Onboarding SelectedIndex Indicator Template -->
-			<DataTemplate x:Key="OnboardingSelectedIndexIndicatorTemplate">
-				<StackPanel Margin="0,56">
-					<Ellipse  Fill="{StaticResource SecondaryBrush}"
-							  Height="12"
-							  Width="12"
-							  Margin="8,0" />
-				</StackPanel>
-			</DataTemplate>
+			<x:String x:Key="SearchIcon">ms-appx:///Assets/Search_Icon.png</x:String>
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource BackgroundBrush}">
+	<Grid Background="{ThemeResource BackgroundBrush}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+		</Grid.RowDefinitions>
 
-		<!-- Background Pattern -->
-		<Image Source="{StaticResource BackgroundMustachesLightImage}"
-			   Stretch="UniformToFill" />
+		<!-- CommandBar -->
+		<CommandBar Content="CommandBar"
+					Grid.Row="0">
+			<CommandBar.PrimaryCommands>
+				<!-- Search Button -->
+				<AppBarButton>
+					<AppBarButton.Icon>
+						<BitmapIcon UriSource="{StaticResource SearchIcon}"
+									Foreground="{ThemeResource SeparatorBrush}" />
+					</AppBarButton.Icon>
+				</AppBarButton>
+			</CommandBar.PrimaryCommands>
+		</CommandBar>
 
-		<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
-
-			<!-- Onboarding Slideshow -->
-			<u:ImageSlideshow x:Name="OnboardingSlideshow"
-							  ItemsSource="{Binding OnboardingItems}"
-							  ItemTemplate="{StaticResource OnboardingItemTemplate}"
-							  IndexIndicatorTemplate="{StaticResource OnboardingIndexIndicatorTemplate}"
-							  SelectedIndexIndicatorTemplate="{StaticResource OnboardingSelectedIndexIndicatorTemplate}" />
-
-			<!-- Skip/Complete Button -->
-			<Button Content="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonContent}}"
-					Command="{Binding NavigateToNextPage}"
-					Style="{Binding ElementName=OnboardingSlideshow, Path=SelectedIndex, Converter={StaticResource SelectedIndexToButtonStyle}}"
-					FontSize="14"
-					HorizontalAlignment="Right"
-					VerticalAlignment="Top"
-					Margin="24" />
-		</Grid>
+		<TextBlock Text="TEST"
+				   Grid.Row="1"/>
 	</Grid>
 </Page>
