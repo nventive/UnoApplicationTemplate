@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,22 +15,22 @@ namespace ReviewService;
 public sealed class ReviewService<TReviewSettings> : IReviewService<TReviewSettings>
 	where TReviewSettings : ReviewSettings
 {
+	private readonly ILogger _logger;
 	private readonly IReviewPrompter _reviewPrompter;
 	private readonly IReviewSettingsSource<TReviewSettings> _reviewSettingsSource;
-	private readonly ReviewConditionCallback<TReviewSettings>[] _reviewConditions;
-	private readonly ILogger _logger;
+	private readonly IList<IReviewCondition<TReviewSettings>> _reviewConditions;
 
 	public ReviewService(
 		ILogger<ReviewService<TReviewSettings>> logger,
 		IReviewPrompter reviewPrompter,
 		IReviewSettingsSource<TReviewSettings> reviewSettingsSource,
-		ReviewConditionCallback<TReviewSettings>[] reviewConditions
+		IReviewConditionsBuilder<TReviewSettings> reviewConditionStrategyBuilder
 	)
 	{
 		_logger = logger;
 		_reviewPrompter = reviewPrompter;
 		_reviewSettingsSource = reviewSettingsSource;
-		_reviewConditions = reviewConditions;
+		_reviewConditions = reviewConditionStrategyBuilder?.Conditions ?? ReviewConditionsBuilder.Default<TReviewSettings>().Conditions;
 	}
 
 	/// <inheritdoc/>
@@ -54,8 +55,7 @@ public sealed class ReviewService<TReviewSettings> : IReviewService<TReviewSetti
 		_logger.LogDebug("Evaluating conditions.");
 
 		var currentSettings = await _reviewSettingsSource.Read(ct);
-		var reviewConditionTasks = _reviewConditions.Select(async condition => await condition(ct, currentSettings, DateTimeOffset.Now));
-
+		var reviewConditionTasks = _reviewConditions.Select(async condition => await condition.Validate(ct, currentSettings, DateTimeOffset.Now));
 		var result = (await Task.WhenAll(reviewConditionTasks)).All(x => x is true);
 
 		if (result)
