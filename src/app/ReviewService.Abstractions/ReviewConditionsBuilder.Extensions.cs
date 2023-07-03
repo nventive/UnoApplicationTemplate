@@ -2,6 +2,8 @@
 
 namespace ReviewService.Abstractions;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("StyleCop.CSharp.MaintainabilityRules", "SA1625:Element documentation should not be copied and pasted", Justification = "Returns the parameter itself.")]
+
 /// <summary>
 /// Extensions for <see cref="IReviewConditionsBuilder{TReviewSettings}"/>.
 /// </summary>

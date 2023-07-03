@@ -5,7 +5,6 @@ using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
 using ReviewService;
 using ReviewService.Abstractions;
@@ -72,5 +71,23 @@ public static class ViewServicesConfiguration
 #endif
 //+:cnd:noEmit
 		);
+	}
+
+	private static IServiceCollection AddReviewService(this IServiceCollection services)
+	{
+		return services.AddSingleton<IReviewService<ReviewSettingsCustom>>(s =>
+		{
+			return new ReviewService<ReviewSettingsCustom>(
+				s.GetRequiredService<ILogger<ReviewService<ReviewSettingsCustom>>>(),
+				s.GetRequiredService<IReviewPrompter>(),
+				s.GetRequiredService<IReviewSettingsSource<ReviewSettingsCustom>>(),
+				new ReviewConditionCallback<ReviewSettingsCustom>[]
+				{
+					ReviewCondition.PrimaryActionCompletedAtLeast<ReviewSettingsCustom>(1),
+					ReviewCondition.SecondaryActionCompletedAtLeast<ReviewSettingsCustom>(1),
+					ReviewCondition.ApplicationLaunchedAtLeast<ReviewSettingsCustom>(1),
+				}
+			);
+		});
 	}
 }
