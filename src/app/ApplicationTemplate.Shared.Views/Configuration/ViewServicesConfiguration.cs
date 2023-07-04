@@ -37,7 +37,11 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
 			.AddSingleton<IReviewSettingsSource<ReviewSettingsCustom>, ReviewSettingsSource>()
-			.AddTransient(s => ReviewConditionsBuilder.Empty<ReviewSettingsCustom>())
+			.AddTransient(
+				s => ReviewConditionsBuilder.Empty<ReviewSettingsCustom>()
+					.ApplicationOnboardingCompleted()
+					.MinimumPrimaryActionsCompleted(3)
+			)
 			.AddSingleton<IReviewService<ReviewSettingsCustom>, ReviewService<ReviewSettingsCustom>>()
 			.AddMessageDialog();
 	}
