@@ -4,11 +4,11 @@ parameters:
 
 jobs:
 - deployment:  GooglePlay_Android
-  pool: $(windowsPoolName)
+
+  pool:
+    vmImage: $(windowsHostedAgentImage)
 
   environment: ${{ parameters.deploymentEnvironment }}
-
-  container: windows
 
   variables:
   - group: ApplicationTemplate.Distribution.GooglePlay
@@ -19,7 +19,6 @@ jobs:
     runOnce:
       deploy:
         steps:
-
         - download: current
           artifact: $(artifactName)
 
