@@ -44,7 +44,7 @@ public class LoginPageViewModel : ViewModel
 		if (validationResult.IsValid)
 		{
 			await this.GetService<IAuthenticationService>().Login(ct, Form.Email.Trim(), Form.Password);
-			await NavigateToHome.Execute();
+			await NavigateToHome.Execute(ct);
 		}
 	});
 

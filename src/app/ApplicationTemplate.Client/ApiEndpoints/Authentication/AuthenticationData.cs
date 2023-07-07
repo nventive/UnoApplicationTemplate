@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using MallardMessageHandlers;
 
@@ -17,15 +18,15 @@ public class AuthenticationData : IAuthenticationToken
 	}
 
 	[JsonIgnore]
-	public AuthenticationToken AccessTokenPayload => AccessToken == null ? null : new JwtData<AuthenticationToken>(AccessToken).Payload;
+	public AuthenticationToken AccessTokenPayload => AccessToken == null ? null : new JwtData<AuthenticationToken>(AccessToken, JsonSerializerOptions.Default).Payload;
 
 	[JsonPropertyName("access_token")]
-	public string AccessToken { get; init; }
+	public string AccessToken { get; set; }
 
 	[JsonPropertyName("refresh_token")]
-	public string RefreshToken { get; init; }
+	public string RefreshToken { get; set; }
 
-	public DateTimeOffset Expiration { get; init; }
+	public DateTimeOffset Expiration { get; set; }
 
 	public string Email => AccessTokenPayload?.Email;
 

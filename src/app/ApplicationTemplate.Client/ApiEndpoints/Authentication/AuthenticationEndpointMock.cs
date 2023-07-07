@@ -38,7 +38,7 @@ public class AuthenticationEndpointMock : IAuthenticationEndpoint
 		// We add a delay to simulate a long API call
 		await Task.Delay(TimeSpan.FromSeconds(2));
 
-		return CreateAuthenticationData();
+		return CreateAuthenticationData(email);
 	}
 
 	public async Task<AuthenticationData> RefreshToken(CancellationToken ct, AuthenticationData unauthorizedToken)
@@ -51,34 +51,25 @@ public class AuthenticationEndpointMock : IAuthenticationEndpoint
 		// We add a delay to simulate a long API call
 		await Task.Delay(TimeSpan.FromSeconds(2));
 
-		return CreateAuthenticationData(unauthorizedToken.AccessTokenPayload);
+		return CreateAuthenticationData(token: unauthorizedToken.AccessTokenPayload);
 	}
 
-	private AuthenticationData CreateAuthenticationData(AuthenticationToken token = null, TimeSpan? timeToLive = null)
+	private AuthenticationData CreateAuthenticationData(string email = null, AuthenticationToken token = null, TimeSpan? timeToLive = null)
 	{
-		var encodedJwt = CreateJsonWebToken(token, timeToLive);
+		var encodedJwt = CreateJsonWebToken(email, token, timeToLive);
 		var jwt = new JwtData<AuthenticationToken>(encodedJwt, _serializerOptions);
 
-		return new AuthenticationData()
-		{
-			AccessToken = jwt.Token,
-			RefreshToken = Guid.NewGuid().ToString(format: null, CultureInfo.InvariantCulture),
-			Expiration = jwt.Payload.Expiration,
-		};
+		return new AuthenticationData(jwt.Token, Guid.NewGuid().ToString(format: null, CultureInfo.InvariantCulture), jwt.Payload.Expiration);
 	}
 
-	private string CreateJsonWebToken(AuthenticationToken token = null, TimeSpan? timeToLive = null)
+	private string CreateJsonWebToken(string email = null, AuthenticationToken token = null, TimeSpan? timeToLive = null)
 	{
 		const string header = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"; // alg=HS256, type=JWT
 		const string signature = "QWqnPP8W6ymexz74P6quP-oG-wxr7vMGqrEL8y_tV6M"; // dummy stuff
 
 		var now = DateTimeOffset.Now;
 
-		token = (token ?? AuthenticationToken.Default) with
-		{
-			Expiration = now + (timeToLive ?? TimeSpan.FromMinutes(10)),
-			IssuedAt = now
-		};
+		token = token ?? new AuthenticationToken(default, DateTimeOffset.MinValue, DateTimeOffset.MinValue);
 
 		string payload;
 		using (var stream = new MemoryStream())

@@ -1,28 +1,27 @@
 ﻿using System;
+using System.IO;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.Client;
 
-public record AuthenticationToken
+public class AuthenticationToken
 {
-	public static AuthenticationToken Default { get; } = new AuthenticationToken(default, DateTimeOffset.MinValue, DateTimeOffset.MinValue);
-
-	public AuthenticationToken(string email, DateTimeOffset expiration, DateTimeOffset issuedAt)
+	public AuthenticationToken(string unique_name, DateTimeOffset exp, DateTimeOffset iat)
 	{
-		Email = email;
-		Expiration = expiration;
-		IssuedAt = issuedAt;
+		Email = unique_name;
+		Expiration = exp;
+		IssuedAt = iat;
 	}
 
 	[JsonPropertyName("unique_name")]
-	public string Email { get; init; }
+	public string Email { get; set; }
 
 	[JsonPropertyName("exp")]
 	[JsonConverter(typeof(UnixTimestampJsonConverter))]
-	public DateTimeOffset Expiration { get; init; } = DateTimeOffset.MinValue;
+	public DateTimeOffset Expiration { get; set; }
 
 	[JsonPropertyName("iat")]
 	[JsonConverter(typeof(UnixTimestampJsonConverter))]
-	public DateTimeOffset IssuedAt { get; init; } = DateTimeOffset.MinValue;
+	public DateTimeOffset IssuedAt { get; set; }
 }

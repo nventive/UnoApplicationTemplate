@@ -83,16 +83,13 @@ public sealed class CoreStartup : CoreStartupBase
 	{
 		var applicationSettingsService = services.GetRequiredService<IApplicationSettingsService>();
 		var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
-		var authenticationService = services.GetRequiredService<IAuthenticationService>();
 
 		await sectionsNavigator.SetActiveSection(ct, "Login");
 
 		var currentSettings = await applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
 		if (currentSettings.IsOnboardingCompleted)
 		{
-			var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);
-
-			if (isAuthenticated)
+			if (currentSettings.AuthenticationData != default && currentSettings.AuthenticationData.Expiration > DateTimeOffset.Now)
 			{
 				await sectionsNavigator.SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 			}
