@@ -6,6 +6,8 @@ namespace ApplicationTemplate.Client;
 
 public class AuthenticationData : IAuthenticationToken
 {
+	public AuthenticationData() { }
+
 	public AuthenticationData(
 		string accessToken = default,
 		string refreshToken = default,
@@ -20,12 +22,12 @@ public class AuthenticationData : IAuthenticationToken
 	public AuthenticationToken AccessTokenPayload => AccessToken == null ? null : new JwtData<AuthenticationToken>(AccessToken).Payload;
 
 	[JsonPropertyName("access_token")]
-	public string AccessToken { get; init; }
+	public string AccessToken { get; set; }
 
 	[JsonPropertyName("refresh_token")]
-	public string RefreshToken { get; init; }
+	public string RefreshToken { get; set; }
 
-	public DateTimeOffset Expiration { get; init; }
+	public DateTimeOffset Expiration { get; set; }
 
 	public string Email => AccessTokenPayload?.Email;
 

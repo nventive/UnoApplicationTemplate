@@ -14,6 +14,11 @@ namespace ApplicationTemplate.Presentation;
 
 public partial class DadJokesPageViewModel : ViewModel
 {
+	public DadJokesPageViewModel()
+	{
+		Console.WriteLine("init");
+	}
+
 	public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 	{
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
