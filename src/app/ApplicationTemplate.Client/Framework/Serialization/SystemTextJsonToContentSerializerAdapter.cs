@@ -1,9 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 
@@ -13,7 +18,7 @@ namespace ApplicationTemplate;
 /// This serializer adapter enables usage of the
 /// System.Text.Json serializers with Refit.
 /// </summary>
-public class SystemTextJsonToContentSerializerAdapter : IContentSerializer
+public class SystemTextJsonToContentSerializerAdapter : IHttpContentSerializer
 {
 	private static readonly MediaTypeHeaderValue _jsonMediaType = new MediaTypeHeaderValue("application/json") { CharSet = Encoding.UTF8.WebName };
 
@@ -24,25 +29,32 @@ public class SystemTextJsonToContentSerializerAdapter : IContentSerializer
 		_serializerOptions = serializerOptions;
 	}
 
-	public async Task<T> DeserializeAsync<T>(HttpContent content)
+	public async Task<T?> FromHttpContentAsync<T>(HttpContent content, CancellationToken cancellationToken = default)
 	{
 		if (content is null)
 		{
 			throw new ArgumentNullException(nameof(content));
 		}
 
-		using (var stream = await content.ReadAsStreamAsync().ConfigureAwait(false))
-		{
-			return await JsonSerializer.DeserializeAsync<T>(stream, _serializerOptions).ConfigureAwait(false);
-		}
+		var item = await content.ReadFromJsonAsync<T>(_serializerOptions, cancellationToken).ConfigureAwait(false);
+		return item;
 	}
 
-	public Task<HttpContent> SerializeAsync<T>(T item)
+	public string GetFieldNameForProperty(PropertyInfo propertyInfo)
 	{
-		var json = JsonSerializer.Serialize(item, _serializerOptions);
-		var content = new StringContent(json);
-		content.Headers.ContentType = _jsonMediaType;
+		if (propertyInfo is null)
+		{
+			throw new ArgumentNullException(nameof(propertyInfo));
+		}
 
-		return Task.FromResult<HttpContent>(content);
+		return propertyInfo.GetCustomAttributes<JsonPropertyNameAttribute>(true)
+			.Select(a => a.Name)
+			.FirstOrDefault();
+	}
+
+	public HttpContent ToHttpContent<T>(T item)
+	{
+		var content = JsonContent.Create(item, options: _serializerOptions);
+		return content;
 	}
 }
