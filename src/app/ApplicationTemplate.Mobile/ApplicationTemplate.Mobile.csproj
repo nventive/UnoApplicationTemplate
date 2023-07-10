@@ -15,16 +15,7 @@
 	<!-- Linker configuration. -->
 	<PropertyGroup>
 		<PublishTrimmed>True</PublishTrimmed>
-		<TrimMode>link</TrimMode>
-		<Property>
-			<!-- See https://github.com/unoplatform/uno/issues/11248 for more details. -->
-			<Target Name="_LinkerAdjust" AfterTargets="_PrepareLinking">
-				<!-- See https://github.com/dotnet/runtime/issues/81979 for more details. -->
-				<PropertyGroup>
-					<_ExtraTrimmerArgs>$(_ExtraTrimmerArgs) --keep-metadata all</_ExtraTrimmerArgs>
-				</PropertyGroup>
-			</Target>
-		</Property>
+		<TrimMode>partial</TrimMode>
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="1.1.2" />
