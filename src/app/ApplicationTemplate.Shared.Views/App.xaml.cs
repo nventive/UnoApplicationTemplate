@@ -83,7 +83,7 @@ public sealed partial class App : Application
 		_ = Task.Run(() => Startup.Start());
 	}
 
-	//-:cnd:noEmit
+//-:cnd:noEmit
 #if __MOBILE__
 	/// <summary>
 	/// This is where your app launches if you use custom schemes, Universal Links, or Android App Links.
@@ -124,17 +124,13 @@ public sealed partial class App : Application
 
 	private static string GetSettingsFolderPath()
 	{
-		var folderPath = string.Empty;
-
 //-:cnd:noEmit
 #if __WINDOWS__
-		folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
+		return Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 #else
-		folderPath = System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
+		return System.Environment.GetFolderPath(System.Environment.SpecialFolder.MyDocuments);
 #endif
 //+:cnd:noEmit
-
-		return folderPath;
 	}
 
 	private static void ConfigureOrientation()

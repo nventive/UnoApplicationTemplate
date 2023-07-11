@@ -35,6 +35,8 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
     - To get help: `dotnet new nv-mobile -h`
 
+	:warning: The use of periods (.) in the project name is not supported and may result in building issues. 
+
 [Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
 
 ### Uninstalling the template
