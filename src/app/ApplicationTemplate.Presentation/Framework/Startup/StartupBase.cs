@@ -75,7 +75,7 @@ public abstract class StartupBase
 
 		InitializeActivity.Start();
 
-		CoreStartup.Initialize(contentRootPath, settingsFolderPath, loggingConfigurator, InitializeViewServices);
+		CoreStartup.Initialize(contentRootPath, settingsFolderPath, new EnvironmentManager(settingsFolderPath), loggingConfigurator, InitializeViewServices);
 
 		Logger = GetOrCreateLogger(ServiceProvider);
 

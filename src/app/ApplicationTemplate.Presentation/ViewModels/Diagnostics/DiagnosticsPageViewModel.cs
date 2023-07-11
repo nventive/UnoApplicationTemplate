@@ -5,11 +5,14 @@ using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
+using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public class DiagnosticsPageViewModel : ViewModel
+public sealed partial class DiagnosticsPageViewModel : ViewModel
 {
+	[Inject] private IEnvironmentManager _environmentManager;
+
 	public IViewModel SummaryDiagnostics => this.GetChild<SummaryDiagnosticsViewModel>();
 
 	public IViewModel ExceptionDiagnostics => this.GetChild<ExceptionsDiagnosticsViewModel>();
@@ -27,12 +30,7 @@ public class DiagnosticsPageViewModel : ViewModel
 
 	public string CurrentEnvironment
 	{
-		get => this.GetFromTask(GetCurrentEnvironment);
-		set => this.Set(value);
-	}
-
-	private Task<string> GetCurrentEnvironment(CancellationToken ct)
-	{
-		return Task.FromResult(ConfigurationConfiguration.AppEnvironment.GetCurrent(null));
+		get => this.Get(initialValue: _environmentManager.Current);
+		private set => this.Set(value);
 	}
 }

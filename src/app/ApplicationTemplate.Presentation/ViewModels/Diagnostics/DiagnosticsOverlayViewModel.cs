@@ -1,13 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reactive.Linq;
+using ByteSizeLib;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
+using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
 public sealed partial class DiagnosticsOverlayViewModel : ViewModel
 {
+	[Inject] private IMemoryProvider _memoryProvider;
+
 	public DiagnosticsOverlayViewModel()
 	{
 		Tabs = new TabViewModel[]
@@ -125,4 +129,14 @@ public sealed partial class DiagnosticsOverlayViewModel : ViewModel
 			h => DiagnosticsCountersService.CountersChanged -= h
 		)
 		.Select(_ => DiagnosticsCountersService.Counters);
+
+	public string PrivateMemorySize => this.GetFromObservable(
+		source: _memoryProvider.ObservePrivateMemorySize().Select(x => ByteSize.FromBytes(x).ToString("0.#")),
+		initialValue: string.Empty
+	);
+
+	public string ManagedMemorySize => this.GetFromObservable(
+		source: _memoryProvider.ObserveManagedMemorySize().Select(x => ByteSize.FromBytes(x).ToString("0.#")),
+		initialValue: string.Empty
+	);
 }

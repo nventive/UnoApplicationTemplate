@@ -52,11 +52,13 @@ public abstract class CoreStartupBase : IDisposable
 	/// </summary>
 	/// <param name="contentRootPath">Specifies the content root directory to be used by the host.</param>
 	/// <param name="settingsFolderPath">The folder path indicating where the override files are.</param>
+	/// <param name="environmentManager">The environment manager.</param>
 	/// <param name="loggingConfiguration">The delegate to call to configure logging.</param>
 	/// <param name="extraHostConfiguration">Extra host configuration</param>
 	public void Initialize(
 		string contentRootPath,
 		string settingsFolderPath,
+		IEnvironmentManager environmentManager,
 		LoggingConfigurator loggingConfiguration = null,
 		Action<IHostBuilder> extraHostConfiguration = null)
 	{
@@ -75,7 +77,7 @@ public abstract class CoreStartupBase : IDisposable
 		// We use 2 hosts. The first one is used during the setup of the second.
 		// The first one is mainly used to setup loggers to debug the initialization code.
 
-		var hostServices = CreateHostServices(contentRootPath, settingsFolderPath, loggingConfiguration);
+		var hostServices = CreateHostServices(contentRootPath, settingsFolderPath, loggingConfiguration, environmentManager);
 		Logger = GetOrCreateLogger(hostServices);
 
 		BuildCoreHostActivity.Stop();
@@ -91,7 +93,8 @@ public abstract class CoreStartupBase : IDisposable
 			})
 			// We add the LoggerFactory so that the configuration providers can use loggers.
 			.ConfigureHostConfiguration(b => b.Properties["HostLoggerFactory"] = hostServices.GetService<ILoggerFactory>()),
-			settingsFolderPath
+			settingsFolderPath,
+			environmentManager
 		);
 
 		extraHostConfiguration?.Invoke(hostBuilder);
@@ -121,8 +124,9 @@ public abstract class CoreStartupBase : IDisposable
 	/// </summary>
 	/// <param name="hostBuilder">The hostbuilder in which services must be added.</param>
 	/// <param name="settingsFolderPath">The folder path indicating where the override files are.</param>
+	/// <param name="environmentManager">The environment manager.</param>
 	/// <returns>The original host builder with the new services added.</returns>
-	protected abstract IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath);
+	protected abstract IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath, IEnvironmentManager environmentManager);
 
 	/// <summary>
 	/// This method will be called once the app is initialized.
@@ -170,11 +174,11 @@ public abstract class CoreStartupBase : IDisposable
 	/// <returns>Task that completes when the services are started.</returns>
 	protected abstract Task StartServices(IServiceProvider services, bool isFirstStart);
 
-	private IServiceProvider CreateHostServices(string contentRootPath, string settingsFolderPath, LoggingConfigurator loggingConfiguration)
+	private IServiceProvider CreateHostServices(string contentRootPath, string settingsFolderPath, LoggingConfigurator loggingConfiguration, IEnvironmentManager environmentManager)
 	{
 		var coreHost = new HostBuilder()
 			.UseContentRoot(contentRootPath)
-			.AddConfiguration(settingsFolderPath)
+			.AddConfiguration(settingsFolderPath, environmentManager)
 			.ConfigureLogging((hostBuilderContext, loggingBuilder) =>
 			{
 				loggingConfiguration(hostBuilderContext, loggingBuilder, isAppLogging: false);

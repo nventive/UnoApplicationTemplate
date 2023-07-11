@@ -38,6 +38,9 @@
 - name: pathToAndroidManifest
   type: string
   default: '$(AndroidManifestPath)'
+- name: BannerVersionNameText
+  type: string
+  default: ''
 
 jobs:
   - job: On_Windows_ReleaseNotes
@@ -152,3 +155,4 @@ jobs:
         iosCertificateFile: ${{ parameters.iosCertificateFile }}
         iosCertificatePassword: ${{ parameters.iosCertificatePassword }}
         iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
+        BannerVersionNameText: ${{ parameters.BannerVersionNameText }}
