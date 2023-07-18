@@ -153,6 +153,7 @@ public static class ApiConfiguration
 	private static void AddDefaultHeaders(HttpClient client, IServiceProvider serviceProvider)
 	{
 		client.DefaultRequestHeaders.Add("Accept-Language", CultureInfo.CurrentCulture.Name);
+		client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "DadJokesApp/1.0.0");
 
 		// TODO #172779: Looks like our UserAgent is not of a valid format.
 		// TODO #183437: Find alternative for UserAgent.
