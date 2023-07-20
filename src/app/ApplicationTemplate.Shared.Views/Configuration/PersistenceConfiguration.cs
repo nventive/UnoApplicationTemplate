@@ -4,6 +4,7 @@ using System.Text.Json;
 using ApplicationTemplate.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
+using ReviewService;
 
 namespace ApplicationTemplate.Views;
 
@@ -21,6 +22,7 @@ public static class PersistenceConfiguration
 	public static IServiceCollection AddPersistence(this IServiceCollection services)
 	{
 		return services
+			.AddSingleton(s => CreateDataPersister(s, defaultValue: new ReviewSettings()))
 			.AddSingleton(s => CreateSecureDataPersister(s, defaultValue: ApplicationSettings.Default));
 	}
 
@@ -50,20 +52,25 @@ public static class PersistenceConfiguration
 //-:cnd:noEmit
 #else
 //+:cnd:noEmit
-		return CreateDataPersister(services, defaultValue);
+		return CreateObservableDataPersister(services, defaultValue);
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
 	}
 
-	private static IObservableDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	private static IDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
 	{
 		return UnoDataPersister.CreateFromFile<T>(
 			FolderType.WorkingData,
 			typeof(T).Name + ".json",
 			async (ct, s) => await JsonSerializer.DeserializeAsync<T>(s, options: services.GetService<JsonSerializerOptions>(), ct),
 			async (ct, v, s) => await JsonSerializer.SerializeAsync<T>(s, v, options: services.GetService<JsonSerializerOptions>(), ct)
-		)
-		.ToObservablePersister(services.GetRequiredService<IBackgroundScheduler>());
+		);
+	}
+
+	private static IObservableDataPersister<T> CreateObservableDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	{
+		return CreateDataPersister(services, defaultValue)
+			.ToObservablePersister(services.GetRequiredService<IBackgroundScheduler>());
 	}
 }

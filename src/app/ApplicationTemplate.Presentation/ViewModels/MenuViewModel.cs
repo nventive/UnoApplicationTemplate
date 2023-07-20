@@ -20,6 +20,7 @@ public sealed partial class MenuViewModel : ViewModel
 	}
 
 	[Inject] private ISectionsNavigator _sectionsNavigator;
+	[Inject] private IReviewService _reviewService;
 
 	/// <summary>
 	/// The list of ViewModel types on which the bottom menu should be visible.
@@ -36,7 +37,10 @@ public sealed partial class MenuViewModel : ViewModel
 	public int SelectedIndex => this.GetFromObservable<int>(ObserveSelectedIndex(), initialValue: 0);
 
 	public IDynamicCommand ShowHomeSection => this.GetCommandFromTask(async ct =>
-		await _sectionsNavigator.SetActiveSection(ct, nameof(Section.Home), () => new DadJokesPageViewModel()));
+	{
+		await _sectionsNavigator.SetActiveSection(ct, nameof(Section.Home), () => new DadJokesPageViewModel());
+		await _reviewService.TryRequestReview(ct);
+	});
 
 	public IDynamicCommand ShowPostsSection => this.GetCommandFromTask(async ct =>
 		await _sectionsNavigator.SetActiveSection(ct, nameof(Section.Posts), () => new PostsPageViewModel()));
