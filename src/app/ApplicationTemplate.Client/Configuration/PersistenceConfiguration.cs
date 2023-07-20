@@ -5,6 +5,7 @@ using System.Text;
 using ApplicationTemplate.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
+using ReviewService;
 
 namespace ApplicationTemplate;
 
@@ -22,13 +23,20 @@ public static class PersistenceConfiguration
 	public static IServiceCollection AddPersistence(this IServiceCollection services)
 	{
 		return services
-			.AddSingleton(s => CreateDataPersister(s, defaultValue: ApplicationSettings.Default));
+			.AddSingleton(s => CreateDataPersister(s, defaultValue: new ReviewSettings()))
+			.AddSingleton(s => CreateObservableDataPersister(s, defaultValue: ApplicationSettings.Default));
 	}
 
-	private static IObservableDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	private static IDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
 	{
-		// Tests projects must not use any real persistence (files on disc).
+		// Tests projects must not use any real persistence (files on disk).
 		return new MemoryDataPersister<T>(defaultValue)
+			.ToObservablePersister(services.GetRequiredService<IBackgroundScheduler>());
+	}
+
+	private static IObservableDataPersister<T> CreateObservableDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	{
+		return CreateDataPersister(services, defaultValue)
 			.ToObservablePersister(services.GetRequiredService<IBackgroundScheduler>());
 	}
 }

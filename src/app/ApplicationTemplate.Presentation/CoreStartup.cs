@@ -17,6 +17,7 @@ using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using ReviewService;
 using Uno.Disposables;
 using Uno.Extensions;
 
@@ -42,6 +43,7 @@ public sealed class CoreStartup : CoreStartupBase
 				.AddErrorHandling()
 				.AddSerialization()
 				.AddLocalization()
+				.AddReviewServices()
 				.AddAppServices()
 			);
 	}
@@ -62,6 +64,7 @@ public sealed class CoreStartup : CoreStartupBase
 		if (isFirstStart)
 		{
 			// Start your services here.
+			await services.GetRequiredService<IReviewService>().TrackApplicationLaunched(CancellationToken.None);
 
 			NotifyUserOnSessionExpired(services);
 

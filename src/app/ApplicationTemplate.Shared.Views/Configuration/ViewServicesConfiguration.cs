@@ -4,6 +4,7 @@ using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.UI.Dispatching;
+using ReviewService;
 
 namespace ApplicationTemplate.Views;
 
@@ -31,6 +32,7 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IConnectivityProvider, ConnectivityProvider>()
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
+			.AddSingleton<IReviewPrompter, ReviewPrompter>()
 			.AddMessageDialog();
 	}
 

@@ -70,6 +70,7 @@ This repository provides documentation on different topics under the [doc](doc/)
 - [Validation](doc/Validation.md)
 - [Error handling](doc/ErrorHandling.md)
 - [Scheduling](doc/Scheduling.md)
+- [Reviews (app star ratings)](doc/Reviews.md)
 
 ## Changelog
 
