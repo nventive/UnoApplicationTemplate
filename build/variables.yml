@@ -28,13 +28,13 @@ variables:
   # Make sure you have the following secured files in your Azure pipeline library.
   #
   # Android
-  InternalKeystore: com.nventive.internal.applicationtemplate.jks # This should be the internal keystore used for internal builds.
-  GooglePlayKeystore: com.nventive.applicationtemplate.jks # This should be the official keystore used for Google Play.
+  InternalKeystore: com.nventive.internal.applicationtemplate.jks # This is the internal keystore used for internal builds.
+  GooglePlayKeystore: com.nventive.applicationtemplate.jks # This is the official keystore used for Google Play.
   # iOS
-  InternalProvisioningProfile: com.nventive.applicationtemplate.mobileprovision # This should be the internal provisioning profile for internal builds.
-  InternalCertificate: nventive.p12 # This should be the certificate from the nventive Apple account used to sign internal builds.
-  AppStoreProvisioningProfile: com.nventive.applicationtemplate.mobileprovision # This should be the client provisioning profile for the AppStore (Production distribution).
-  AppStoreCertificate: nventive.p12 # This should be the client production certificate used to sign AppStore builds.
+  InternalProvisioningProfile: com.nventive.applicationtemplate.mobileprovision # This is the internal provisioning profile for internal builds.
+  InternalCertificate: nventive.p12 # This is the certificate from the nventive Apple account used to sign internal builds.
+  AppStoreProvisioningProfile: com.nventive.applicationtemplate.mobileprovision # This is the client provisioning profile for the AppStore (Production distribution).
+  AppStoreCertificate: nventive.p12 # This is the client production certificate used to sign AppStore builds.
 
   # Prerequisites - Service connections
   # Make sure you have the following service connections in your Azure pipeline library.

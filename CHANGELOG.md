@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 * Support for Android 11 (March, 2021)
 
 ### Changed
+* Update template to support .NET 7
 * Improved the build pipeline cleanup process
 * Concurrent access token refreshing
 
