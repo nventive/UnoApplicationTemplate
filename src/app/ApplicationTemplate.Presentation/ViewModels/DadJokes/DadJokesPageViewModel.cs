@@ -9,7 +9,7 @@ using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using DynamicData;
-using Uno;
+using ReviewService;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -32,7 +32,8 @@ public partial class DadJokesPageViewModel : ViewModel
 
 	public IDynamicCommand ToggleIsFavorite => this.GetCommandFromTask<DadJokesItemViewModel>(async (ct, item) =>
 	{
-		await _dadJokesService.SetIsFavorite(ct, item.Quote, !item.IsFavorite);
+		await this.GetService<IDadJokesService>().SetIsFavorite(ct, item.Quote, !item.IsFavorite);
+		await this.GetService<IReviewService>().TrackPrimaryActionCompleted(ct);
 	});
 
 	private async Task<DadJokesItemViewModel[]> LoadJokes(CancellationToken ct, IDataLoaderRequest request)

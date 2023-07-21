@@ -24,7 +24,7 @@ We use [Serilog](https://www.nuget.org/packages/Serilog/) to implement log provi
   - We use [Serilog.Settings.Configuration](https://www.nuget.org/packages/Serilog.Settings.Configuration) to load the log filters from [appsettings.json](../src/app/ApplicationTemplate.Shared/appsettings.json); _filters are different between environments_.
   - We use [Serilog.Extensions.Hosting](https://www.nuget.org/packages/Serilog.Extensions.Hosting/) to configure the loggers with `GenericHost`.
 
-The loggers are configured inside the [Startup.cs](../src/app/ApplicationTemplate.Shared/Startup.cs) file.
+The loggers are configured inside the [Startup.cs](../src/app/ApplicationTemplate.Shared.Views/Startup.cs) file.
 
 ## Logging
 
