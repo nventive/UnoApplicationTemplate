@@ -8,7 +8,7 @@
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
 		<UseMauiEssentials>true</UseMauiEssentials>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-android'">26.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-android'">29.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-ios'">14.2</SupportedOSPlatformVersion>
 		<NoWarn>Uno0001</NoWarn>
 	</PropertyGroup>
