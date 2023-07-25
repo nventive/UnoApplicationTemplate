@@ -21,7 +21,7 @@ steps:
 - script: >
     cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Windows
 
-    dotnet build
+    dotnet $(dotNetCommand)
     -f:$(BuildTargetFramework)
     -c:Release
     -r:win-x64

@@ -74,11 +74,7 @@ public class AuthenticationEndpointMock : IAuthenticationEndpoint
 
 		var now = DateTimeOffset.Now;
 
-		token = (token ?? AuthenticationToken.Default) with
-		{
-			Expiration = now + (timeToLive ?? TimeSpan.FromMinutes(10)),
-			IssuedAt = now
-		};
+		token = token ?? new AuthenticationToken(default, DateTimeOffset.MinValue, DateTimeOffset.MinValue);
 
 		string payload;
 		using (var stream = new MemoryStream())

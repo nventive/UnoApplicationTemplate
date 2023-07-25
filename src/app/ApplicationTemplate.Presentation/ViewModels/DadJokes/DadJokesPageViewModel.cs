@@ -10,14 +10,18 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using DynamicData;
 using ReviewService;
+using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
 public partial class DadJokesPageViewModel : ViewModel
 {
+	[Inject] private IDadJokesService _dadJokesService;
+	[Inject] private ISectionsNavigator _sectionsNavigator;
+
 	public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new DadJokesFiltersPageViewModel());
+		await _sectionsNavigator.Navigate(ct, () => new DadJokesFiltersPageViewModel());
 	});
 
 	public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
@@ -36,7 +40,7 @@ public partial class DadJokesPageViewModel : ViewModel
 	private async Task<DadJokesItemViewModel[]> LoadJokes(CancellationToken ct, IDataLoaderRequest request)
 	{
 		await SetupFavoritesUpdate(ct);
-		var quotes = await this.GetService<IDadJokesService>().FetchData(ct);
+		var quotes = await _dadJokesService.FetchData(ct);
 
 		return quotes
 			.Select(q => this.GetChild(() => new DadJokesItemViewModel(this, q), q.Id))
@@ -50,7 +54,7 @@ public partial class DadJokesPageViewModel : ViewModel
 		if (!TryGetDisposable(FavoritesKey, out var _))
 		{
 			// Get the observable list of favorites.
-			var favorites = await this.GetService<IDadJokesService>().GetFavorites(ct);
+			var favorites = await _dadJokesService.GetFavorites(ct);
 
 			// Subscribe to the observable list to update the current items.
 			var subscription = favorites

@@ -62,7 +62,7 @@ steps:
   displayName: 'Copy Binary Files'
   retryCountOnTaskFailure: 3
   inputs:
-    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net6.0-android'
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net7.0-android'
     Contents: |
       **/*.aab
       **/*.apk

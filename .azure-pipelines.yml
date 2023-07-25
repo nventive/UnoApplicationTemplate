@@ -46,7 +46,7 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS.TestFlight'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 #-endif
 - stage: Build_Staging
 #-if false
@@ -60,7 +60,7 @@ stages:
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS.TestFlight'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
       BannerVersionNameText: "STAGING"
 
 - stage: AppCenter_TestFlight_Staging
