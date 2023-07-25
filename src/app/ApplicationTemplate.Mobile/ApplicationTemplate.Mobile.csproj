@@ -155,7 +155,6 @@
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
 					<PropertyGroup>
-						<ProvisioningType>manual</ProvisioningType>
 						<MtouchDebug>True</MtouchDebug>
 						<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc</MtouchExtraArgs>
 						<Optimize>False</Optimize>

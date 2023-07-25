@@ -21,9 +21,11 @@ To generate this file, following the following steps:
 
 1. Open a command prompt or terminal against your Android project’s directory that contains the .csproj.
 2. Ensure only one Android device is attached.
-3. Execute the following command: `dotnet build -f net6.0-android -t:BuildAndStartAotProfiling`
+3. Execute the following command: `dotnet build -f net7.0-android -t:BuildAndStartAotProfiling`
+    - The dotnet version targetted must match the one specified in the mobile csproj.
 4. Let your application run until it’s loaded.
-5. Execute the following command: `dotnet build -f net6.0-android -t:FinishAotProfiling`.
+5. Execute the following command: `dotnet build -f net7.0-android -t:FinishAotProfiling`.
+    - The dotnet version targetted must match the one specified in the mobile csproj. 
 6. Use this configuration in your `.csproj`.
 
 ```xml
