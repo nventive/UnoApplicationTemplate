@@ -1,17 +1,17 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net472</TargetFramework>
+		<TargetFramework>net7.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
-		<LangVersion>10.0</LangVersion>
+		<LangVersion>11.0</LangVersion>
 		<IsTestProject>True</IsTestProject>
-		<DefineConstants>NETFRAMEWORK</DefineConstants>
+		<DefineConstants>TESTS</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<PackageReference Include="AutoFixture.Xunit2" Version="4.15.0" />
-		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.11.0" />
+		<PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.5.0" />
 		<PackageReference Include="Serilog.Sinks.XUnit" Version="3.0.3" />
 		<PackageReference Include="Moq" Version="4.13.0" />
 		<PackageReference Include="FluentAssertions" Version="5.9.0" />
