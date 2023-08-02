@@ -28,14 +28,15 @@
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.62" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
-		<PackageReference Include="Uno.Material.WinUI" Version="2.5.3" />
+		<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.6.0-dev.2" />
+		<PackageReference Include="Uno.Material.WinUI" Version="3.0.0-dev.319" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="2.5.8" />
-		<PackageReference Include="Uno.WinUI" Version="4.8.24" />
-		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.24" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.WinUI.Lottie" Version="4.8.24" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.24" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="4.0.0-dev.60" />
+		<PackageReference Include="Uno.WinUI" Version="5.0.0-dev.1734" />
+		<PackageReference Include="Uno.WinUI.RemoteControl" Version="5.0.0-dev.1734" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.0-dev.1734" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.0-dev.1734" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
