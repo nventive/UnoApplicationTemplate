@@ -7,4 +7,6 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj" />
 	</ItemGroup>
+
+	<Import Project="..\..\winappsdk-workaround.targets" />
 </Project>

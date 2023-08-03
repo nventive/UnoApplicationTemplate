@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{8711E408
 		..\Directory.Build.props = ..\Directory.Build.props
 		..\gitversion-config.yml = ..\gitversion-config.yml
 		..\stylecop.json = ..\stylecop.json
+		winappsdk-workaround.targets = winappsdk-workaround.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "doc", "doc", "{4A31B4ED-94EB-43BC-91DD-7B142DEB887C}"

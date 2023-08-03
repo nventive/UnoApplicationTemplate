@@ -4,7 +4,7 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  xmlns:utu="using:Uno.Toolkit.UI"
 	  xmlns:ue="using:Nventive.View.Extensions"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:ios="http://uno.ui/ios"
@@ -34,7 +34,7 @@
 			   Stretch="UniformToFill" />
 
 		<ScrollViewer>
-			<StackPanel toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
+			<StackPanel utu:SafeArea.Insets="Top,Bottom"
 						VerticalAlignment="Center"
 						Margin="0,32">
 

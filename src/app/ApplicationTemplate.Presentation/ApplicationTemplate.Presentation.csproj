@@ -43,4 +43,5 @@
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
 	</ItemGroup>
 
+	<Import Project="..\..\winappsdk-workaround.targets" />
 </Project>

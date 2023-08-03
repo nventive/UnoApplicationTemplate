@@ -5,12 +5,11 @@
 							 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 							 xmlns:c="using:ApplicationTemplate.Views.Controls"
 							 xmlns:utu="using:Uno.Toolkit.UI"
-							 xmlns:toolkit="using:Uno.UI.Toolkit"
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
 	<Grid x:Name="MenuRoot"
 		  Background="{StaticResource AlternateBackgroundBrush}"
-		  toolkit:VisibleBoundsPadding.PaddingMask="Bottom">
+		  utu:SafeArea.Insets="Bottom">
 		<VisualStateManager.VisualStateGroups>
 			<VisualStateGroup x:Name="MenuStates">
 

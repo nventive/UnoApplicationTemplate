@@ -86,6 +86,7 @@
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Material.WinUI" Version="3.0.0-dev.319" />
+		<PackageReference Include="Uno.Toolkit.WinUI" Version="4.0.0-dev.62" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="4.0.0-dev.62" />
 		<PackageReference Include="Uno.WinUI" Version="5.0.0-dev.1734" />
 	</ItemGroup>
@@ -124,4 +125,5 @@
 	</ItemGroup>
 
 	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
+	<Import Project="..\..\winappsdk-workaround.targets" />
 </Project>

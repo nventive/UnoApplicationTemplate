@@ -36,6 +36,7 @@
 		<PackageReference Include="Uno.WinUI" Version="5.0.0-dev.1734" />
 		<PackageReference Include="Uno.WinUI.RemoteControl" Version="5.0.0-dev.1734" Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.0-dev.1734" />
+		<PackageReference Include="Uno.Toolkit.WinUI" Version="4.0.0-dev.62" />
 		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.0-dev.1734" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />

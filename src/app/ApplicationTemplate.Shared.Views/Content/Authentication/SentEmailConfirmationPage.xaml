@@ -1,6 +1,7 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.SentEmailConfirmationPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:utu="using:Uno.Toolkit.UI"
 	  xmlns:toolkit="using:Uno.UI.Toolkit">
 
 	<Grid Background="{StaticResource BackgroundBrush}">
@@ -9,7 +10,7 @@
 		<Image Source="{StaticResource BackgroundMustachesLightImage}"
 			   Stretch="UniformToFill" />
 
-		<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
+		<Grid utu:SafeArea.Insets="Top,Bottom">
 			
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
