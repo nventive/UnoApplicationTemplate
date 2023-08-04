@@ -12,8 +12,8 @@ public sealed class CreateAccountFormViewModel : ViewModel
 	public CreateAccountFormViewModel()
 	{
 		this.AddValidation(this.GetProperty(x => x.DateOfBirth));
-		/* TODO : https://dev.azure.com/nventive/Practice%20committees/_workitems/edit/251910
-		 * this.AddValidation(this.GetProperty(x => x.FavoriteDadNames)); */
+		// Restore validation when this issue is resolved: https://github.com/nventive/Nventive.View/issues/41
+		// this.AddValidation(this.GetProperty(x => x.FavoriteDadNames));
 		this.AddValidation(this.GetProperty(x => x.AgreeToTermsOfServices));
 	}
 

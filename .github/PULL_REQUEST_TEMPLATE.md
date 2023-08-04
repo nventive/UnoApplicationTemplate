@@ -26,6 +26,7 @@ Please check if your PR fulfills the following requirements:
 - [ ] Documentation (XML or comments) has been added and/or existing documentation has been updated
 - [ ] [Architecture documents](./doc/Architecture.md) have been updated
 - [ ] Tested on all relevant platforms
+- [ ] TODO comments are hints for next steps for users of the template and not planned work.
 
 
 ## Other information

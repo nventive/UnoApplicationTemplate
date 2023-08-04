@@ -25,6 +25,8 @@ public static class NavigationConfiguration
 
 	private static IReadOnlyDictionary<Type, Type> GetPageRegistrations() => new Dictionary<Type, Type>()
 	{
+		// TODO: Add your ViewModel and Page associations here.
+
 		{ typeof(WelcomePageViewModel), typeof(WelcomePage) },
 		{ typeof(PostsPageViewModel), typeof(PostsPage) },
 		{ typeof(EditPostPageViewModel), typeof(EditPostPage) },

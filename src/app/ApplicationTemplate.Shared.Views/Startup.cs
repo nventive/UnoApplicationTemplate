@@ -38,6 +38,8 @@ public sealed class Startup : StartupBase
 
 	protected override void InitializeViewServices(IHostBuilder hostBuilder)
 	{
+		// TODO: Configure your platform-specific service implementations from here.
+
 		hostBuilder.ConfigureServices(s => s
 			.AddSingleton<StartupBase>(this)
 			.AddLocalization()
@@ -81,7 +83,8 @@ public sealed class Startup : StartupBase
 	{
 		if (isFirstStart)
 		{
-			// Start your view services here.
+			// TODO: Start your platform-specific services from here.
+
 			await SetShellViewModel();
 
 			await AddSystemBackButtonSource(services);

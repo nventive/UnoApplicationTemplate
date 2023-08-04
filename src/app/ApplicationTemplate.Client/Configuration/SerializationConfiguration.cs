@@ -8,6 +8,8 @@ using Nventive.Persistence;
 
 namespace ApplicationTemplate;
 
+// TODO: Add the types you want to use in JSON source-generator-based deserialization here.
+
 [JsonSerializable(typeof(AuthenticationToken))]
 [JsonSerializable(typeof(AuthenticationData))]
 [JsonSerializable(typeof(ApplicationSettings))]

@@ -26,7 +26,7 @@ public static class ReviewConfiguration
 	{
 		return services
 			.AddTransient(s => ReviewConditionsBuilder
-				// TODO: Customize this for your application. See https://github.com/nventive/ReviewService#configure-conditions for more details.
+				// TODO: Customize conditions of review prompt. See https://github.com/nventive/ReviewService#configure-conditions for more details.
 				// The current conditions are for easy debugging and should not be used in production.
 				.Empty()
 				.MinimumPrimaryActionsCompleted(3)

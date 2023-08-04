@@ -45,8 +45,6 @@ public sealed partial class EnvironmentPickerPageViewModel : ViewModel
 
 		_environmentManager.Override(environment);
 
-		// TODO #173219 : Disable back button
-
 		RequiresRestart = true;
 	});
 }

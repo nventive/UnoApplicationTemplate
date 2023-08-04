@@ -13,7 +13,7 @@ public sealed partial class EmailService : IEmailService
 		throw new NotImplementedException();
 
 //-:cnd:noEmit
-/* TODO: Use when Uno implementation is working and supporting attachments.
+/* Restore this code when Uno implementation is working and supporting attachments.
  * See https://github.com/unoplatform/uno/issues/2432 for more details. */
 #if false
 		var emailMessage = new Windows.ApplicationModel.Email.EmailMessage()

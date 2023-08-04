@@ -63,7 +63,7 @@ public static class LocalizationConfiguration
 //-:cnd:noEmit
 #if __WINDOWS__
 //+:cnd:noEmit
-		var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path; // TODO: Tests can use that?
+		var folderPath = Windows.Storage.ApplicationData.Current.LocalFolder.Path;
 //-:cnd:noEmit
 #elif __ANDROID__ || __IOS__
 //+:cnd:noEmit

@@ -266,7 +266,7 @@
 						<Grid Background="{StaticResource SurfaceBrush}"
 							  CornerRadius="4">
 							<!--Remove this line from listView Properties to avoid crash on Windows App: ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
-								TODO : https://dev.azure.com/nventive/Practice%20committees/_workitems/edit/251910-->
+								Restore when the following issue is resolved : https://github.com/nventive/Nventive.View/issues/41-->
 							<ListView ItemsSource="{Binding DadNames}"
 									  ItemContainerStyle="{StaticResource CheckedListViewItemStyle}"
 									  SelectionMode="Single"

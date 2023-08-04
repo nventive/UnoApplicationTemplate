@@ -9,6 +9,12 @@ This is a mobile app project template using [Uno Platform](https://github.com/un
 - There is scaffolding code showing sample features.
   When you run as-is, you get a _Dad Jokes_ application.
 
+## Requirements
+
+This template largely relies on Uno Platform, if you want to make sure you got everything installed correctly on your machine, we encourage you to use `uno-check`, the documentation is available [here](https://platform.uno/docs/articles/uno-check.html)
+
+In addition to that, **Visual Studio 2022 with .Net 7 are required**.
+
 ## Getting Started
 
 We use `dotnet` project templates to easily create new projects. It simplifies the **project renaming** and supports **conditional inclusions**.
@@ -17,13 +23,13 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 1. In order to install the template, clone this repository on your machine, open a command prompt at its root and run the following command.
 
-    - dotnet 7 and up: `dotnet new install ./`
-    - older dotnet version: `dotnet new -i ./`
+    - `dotnet new install ./`
 
     This will display a list of installed templates, look for this template and copy the command with the absolute path like this.
 
-    - dotnet 7 and up: `dotnet new list`
-    - older dotnet version: `dotnet new --list`
+    - `dotnet new list`
+
+[Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
 
 ### Running the template to generate a new project
 
@@ -37,19 +43,22 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 	:warning: The use of periods (.) in the project name is not supported and may result in building issues. 
 
-[Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
+### Next Steps
+
+1. Open the solution file from the generated folder using Visual Studio. 
+
+   It's located at `MyProjectName/src/MyProjectName.sln`.
+
+1. In Visual Studio, go to the **VIEW** menu and open the **Task List** to get hints on next steps.
+   
+   This template comes with several pointers on what you're most likely to change next.
+   
+   ![](doc/images/VisualStudioTaskListForNextSteps.PNG)
 
 ### Uninstalling the template
 1. If you want to uninstall the template, open a command prompt at its root and run the following command.
 
-    - dotnet 7 and up: `dotnet new uninstall ./`
-    - older dotnet version: `dotnet new -u ./`
-
-## Requirements
-
-This template largely relies on Uno Platform, if you want to make sure you got everything installed correctly on your machine, we encourage you to use `uno-check`, the documentation is available [here](https://platform.uno/docs/articles/uno-check.html)
-
-In addition to that, **Visual Studio 2022 is required** since C# 10 is used.
+    - `dotnet new uninstall ./`
 
 ## Documentation
 
