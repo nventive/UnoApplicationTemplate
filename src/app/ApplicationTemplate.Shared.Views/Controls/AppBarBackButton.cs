@@ -16,7 +16,7 @@ namespace ApplicationTemplate.Views.Controls;
 /// Must be used with <see cref="Uno.UI.Toolkit.CommandBarExtensions.NavigationCommandProperty"/>.
 /// </summary>
 /// <remarks>
-/// TODO: See if it could be made with <see cref="Chinook.BackButtonManager.IBackButtonSource"/> or in a better way.
+/// We could investigate to see if it could be made with <see cref="Chinook.BackButtonManager.IBackButtonSource"/> or in a better way.
 /// </remarks>
 public sealed partial class AppBarBackButton : AppBarButton
 {

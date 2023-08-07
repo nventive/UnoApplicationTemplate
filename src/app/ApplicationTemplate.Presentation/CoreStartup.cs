@@ -31,6 +31,10 @@ public sealed class CoreStartup : CoreStartupBase
 
 	protected override IHostBuilder InitializeServices(IHostBuilder hostBuilder, string settingsFolderPath, IEnvironmentManager environmentManager)
 	{
+		// TODO: Configure your core services from here.
+		// Core service implementations can be used on any platform.
+		// Platform specific implementations override the core implementations and are configured from the Startup class.
+
 		return hostBuilder
 			.AddConfiguration(settingsFolderPath, environmentManager)
 			.ConfigureServices((context, s) => s
@@ -50,6 +54,8 @@ public sealed class CoreStartup : CoreStartupBase
 
 	protected override void OnInitialized(IServiceProvider services)
 	{
+		// At this point all services are registered and can be used.
+
 		ViewModelBase.DefaultServiceProvider = services;
 
 		InitializeLoggerFactories(services);
@@ -63,7 +69,8 @@ public sealed class CoreStartup : CoreStartupBase
 	{
 		if (isFirstStart)
 		{
-			// Start your services here.
+			// TODO: Start your core services and customize the initial navigation logic here.
+
 			await services.GetRequiredService<IReviewService>().TrackApplicationLaunched(CancellationToken.None);
 
 			NotifyUserOnSessionExpired(services);

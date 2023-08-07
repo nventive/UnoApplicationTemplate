@@ -31,6 +31,8 @@ public static class ApiConfiguration
 	/// <returns>The updated <see cref="IServiceCollection"/>.</returns>
 	public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
 	{
+		// TODO: Configure your HTTP endpoints here.
+
 		// For example purpose: the following line loads the DadJokesEndpoint configuration section and make IOptions<DadJokesEndpointOptions> available for DI.
 		services.BindOptionsToConfiguration<DadJokesEndpointOptions>(configuration);
 
@@ -154,10 +156,6 @@ public static class ApiConfiguration
 	{
 		client.DefaultRequestHeaders.Add("Accept-Language", CultureInfo.CurrentCulture.Name);
 		client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", "DadJokesApp/1.0.0");
-
-		// TODO #172779: Looks like our UserAgent is not of a valid format.
-		// TODO #183437: Find alternative for UserAgent.
-		// client.DefaultRequestHeaders.TryAddWithoutValidation("User-Agent", serviceProvider.GetRequiredService<IEnvironmentService>().UserAgent);
 	}
 
 	/// <summary>

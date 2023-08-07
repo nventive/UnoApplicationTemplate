@@ -8,7 +8,7 @@ using static ApplicationTemplate.ConfigurationConfiguration;
 namespace ApplicationTemplate;
 
 /// <summary>
-/// This implementation of <see cref="IEnvironmentManager"> uses local files to support the override features.</see>
+/// This implementation of <see cref="IEnvironmentManager"/> uses local files to support the override features.
 /// </summary>
 public class EnvironmentManager : IEnvironmentManager
 {
