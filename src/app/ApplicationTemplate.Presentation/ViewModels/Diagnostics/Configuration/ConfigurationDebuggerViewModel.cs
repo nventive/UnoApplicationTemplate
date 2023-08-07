@@ -66,6 +66,34 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 		);
 	});
 
+	public string ConfigurationKey
+	{
+		get => this.Get(initialValue: string.Empty);
+		set => this.Set(value);
+	}
+
+	public string ConfigurationValue
+	{
+		get => this.Get(initialValue: string.Empty);
+		set => this.Set(value);
+	}
+
+	public bool CanSave => this.GetFromDynamicProperty(
+		source: this.GetProperty(x => x.ConfigurationKey),
+		selector: key => !string.IsNullOrEmpty(key)
+	);
+
+	public IDynamicCommand Save => this.GetCommand(() =>
+		{
+			var config = this.GetService<IConfiguration>();
+			config[ConfigurationKey] = ConfigurationValue;
+
+			// Clear the input value, but keep the input key.
+			ConfigurationValue = string.Empty;
+		},
+		c => c.WithCanExecute(this.GetProperty(x => x.CanSave))
+	);
+
 	public IDynamicCommand ResetEnvironment => this.GetCommandFromTask(async ct =>
 	{
 		_environmentManager.ClearOverride();
