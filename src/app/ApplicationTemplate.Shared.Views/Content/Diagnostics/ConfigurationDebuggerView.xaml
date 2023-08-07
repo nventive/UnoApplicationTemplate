@@ -12,7 +12,7 @@
 			 mc:Ignorable="d xamarin android"
 			 d:DesignHeight="300"
 			 d:DesignWidth="400">
-	
+
 	<UserControl.Resources>
 		<Style x:Key="ConfigurationDebuggerSubtitleStyle"
 			   TargetType="TextBlock">
@@ -23,7 +23,7 @@
 			<Setter Property="FontWeight"
 					Value="SemiBold" />
 		</Style>
-		
+
 		<Style x:Key="ConfigurationDebuggerBodyStyle"
 			   TargetType="TextBlock">
 			<Setter Property="FontSize"
@@ -33,6 +33,9 @@
 			<Setter Property="FontWeight"
 					Value="Normal" />
 		</Style>
+
+		<SolidColorBrush x:Key="FocusBorderBrush"
+						 Color="#88FFFFFF" />
 
 		<Style x:Key="ConfigurationDebuggerTextBoxStyle"
 			   TargetType="TextBox">
@@ -53,6 +56,8 @@
 					Value="False" />
 			<Setter Property="Foreground"
 					Value="White" />
+			<Setter Property="BorderBrush"
+					Value="#44FFFFFF" />
 			<Setter Property="Padding"
 					Value="2" />
 			<Setter Property="Template">
@@ -74,7 +79,7 @@
 									<VisualState x:Name="Focused">
 										<VisualState.Setters>
 											<Setter Target="Root.BorderBrush"
-													Value="{StaticResource TextBoxFilledFocusIndicatorColorBrush}" />
+													Value="{StaticResource FocusBorderBrush}" />
 										</VisualState.Setters>
 									</VisualState>
 								</VisualStateGroup>
@@ -151,7 +156,14 @@
 													Value="0.8" />
 										</VisualState.Setters>
 									</VisualState>
-									<VisualState x:Name="Disabled" />
+									<VisualState x:Name="Disabled">
+										<VisualState.Setters>
+											<Setter Target="BackgroundBorder.Opacity"
+													Value="0.6" />
+											<Setter Target="ContentPresenter.Opacity"
+													Value="0.5" />
+										</VisualState.Setters>
+									</VisualState>
 								</VisualStateGroup>
 							</VisualStateManager.VisualStateGroups>
 
@@ -389,7 +401,7 @@
 								<ContentPresenter x:Name="ContentPresenter"
 												  Grid.Column="1"
 												  MaxLines="1"
-												  VerticalAlignment="Center"/>
+												  VerticalAlignment="Center" />
 
 								<!--  Down  -->
 								<Path x:Name="DropDownGlyph_Down"
@@ -460,32 +472,62 @@
 	<Grid>
 		<ScrollViewer>
 			<StackPanel Margin="0,0,0,200">
-				<!-- Json Configuration --> 
+				<!-- Json Configuration -->
 				<TextBox Text="{Binding ConfigurationAsJson}"
 						 Style="{StaticResource ConfigurationDebuggerTextBoxStyle}" />
+
+				<!-- Configuration Editor -->
+
+				<!-- Subtitle -->
+				<TextBlock Text="Editor"
+						   Style="{StaticResource ConfigurationDebuggerSubtitleStyle}"
+						   Margin="0,4,0,0" />
+
+				<!-- Configuration Key Input -->
+				<TextBox Text="{Binding ConfigurationKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+						 Style="{StaticResource ConfigurationDebuggerTextBoxStyle}"
+						 Padding="4,8"/>
+
+				<Grid Margin="0,2,4,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<!-- Configuration Value Input -->
+					<TextBox Text="{Binding ConfigurationValue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource ConfigurationDebuggerTextBoxStyle}"
+							 FontSize="12"
+							 Padding="4,6"/>
+
+					<Button Content="Save"
+							Command="{Binding Save}"
+							Style="{StaticResource ConfigurationDebuggerButtonStyle}"							
+							Grid.Column="1"
+							Margin="2,0,0,0"/>
+				</Grid>
 
 				<!-- Clear configuration override button -->
 				<Button Content="Delete configuration override file"
 						Command="{Binding DeleteConfigurationOverride}"
-						Style="{StaticResource ConfigurationDebuggerButtonStyle}"/>
-
+						Style="{StaticResource ConfigurationDebuggerButtonStyle}" />
 
 				<!-- Environment Editor -->
 
 				<!-- Subtitle -->
 				<TextBlock Text="Environment"
 						   Style="{StaticResource ConfigurationDebuggerSubtitleStyle}"
-						   Margin="0,8,0,0" />
+						   Margin="0,4,0,0" />
 
 				<!-- Description -->
 				<TextBlock Style="{StaticResource ConfigurationDebuggerBodyStyle}">
 					<Run Text="The app was launched using:" />
 					<Run Text="{Binding CurrentEnvironment}"
-						 Foreground="{Binding IsNextEnvironmentDifferentThanCurrent, Converter={StaticResource TrueToYellow}}" /><Run Text="."/><LineBreak />
+						 Foreground="{Binding IsNextEnvironmentDifferentThanCurrent, Converter={StaticResource TrueToYellow}}" /><Run Text="." /><LineBreak />
 					<Run Text="Upon next launch, it will be:" />
 					<Run Text="{Binding NextEnvironment}"
 						 Foreground="{Binding IsNextEnvironmentDifferentThanCurrent, Converter={StaticResource TrueToYellow}}" /><Run Text="." />
-				</TextBlock>				
+				</TextBlock>
 
 				<StackPanel Orientation="Horizontal">
 					<!-- Picker -->
@@ -499,7 +541,7 @@
 					<Button Content="{Binding ResetEnvironmentContent}"
 							Command="{Binding ResetEnvironment}"
 							Style="{StaticResource ConfigurationDebuggerButtonStyle}"
-							Margin="4,0"/>
+							Margin="4,0" />
 
 				</StackPanel>
 			</StackPanel>

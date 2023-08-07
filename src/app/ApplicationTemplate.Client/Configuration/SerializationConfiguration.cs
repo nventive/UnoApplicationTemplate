@@ -23,6 +23,7 @@ namespace ApplicationTemplate;
 [JsonSerializable(typeof(DadJokeChildData))]
 [JsonSerializable(typeof(DadJokeContentData))]
 [JsonSerializable(typeof(Dictionary<string, string>))]
+[JsonSerializable(typeof(IDictionary<string, string>))]
 public partial class JsonContext : JsonSerializerContext
 {
 }
