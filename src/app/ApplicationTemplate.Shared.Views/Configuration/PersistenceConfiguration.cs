@@ -22,7 +22,7 @@ public static class PersistenceConfiguration
 	public static IServiceCollection AddPersistence(this IServiceCollection services)
 	{
 		return services
-			.AddSingleton(s => CreateDataPersister(s, defaultValue: new ReviewSettings()))
+			.AddSingleton(s => CreateDataPersister(s, defaultValue: new ReviewSettings(), SerializationConfiguration.NoSourceGenerationJsonSerializerOptions))
 			.AddSingleton(s => CreateSecureDataPersister(s, defaultValue: ApplicationSettings.Default));
 	}
 
@@ -58,13 +58,13 @@ public static class PersistenceConfiguration
 //+:cnd:noEmit
 	}
 
-	private static IDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	private static IDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T), JsonSerializerOptions jsonSerializerOptions = null)
 	{
 		return UnoDataPersister.CreateFromFile<T>(
 			FolderType.WorkingData,
 			typeof(T).Name + ".json",
-			async (ct, s) => await JsonSerializer.DeserializeAsync<T>(s, options: services.GetService<JsonSerializerOptions>(), ct),
-			async (ct, v, s) => await JsonSerializer.SerializeAsync<T>(s, v, options: services.GetService<JsonSerializerOptions>(), ct)
+			async (ct, s) => await JsonSerializer.DeserializeAsync<T>(s, options: jsonSerializerOptions ?? services.GetService<JsonSerializerOptions>(), ct),
+			async (ct, v, s) => await JsonSerializer.SerializeAsync<T>(s, v, options: jsonSerializerOptions ?? services.GetService<JsonSerializerOptions>(), ct)
 		);
 	}
 

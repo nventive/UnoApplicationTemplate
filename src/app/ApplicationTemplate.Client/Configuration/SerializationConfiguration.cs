@@ -34,9 +34,11 @@ public partial class JsonContext : JsonSerializerContext
 /// </summary>
 public static class SerializationConfiguration
 {
-	public static JsonSerializerOptions DefaultJsonSerializerOptions { get; } = GetDefaultOptions();
+	public static JsonSerializerOptions DefaultJsonSerializerOptions { get; } = GetOptionsWithSourceGeneration();
 
-	private static JsonSerializerOptions GetDefaultOptions()
+	public static JsonSerializerOptions NoSourceGenerationJsonSerializerOptions { get; } = GetBaseOptions();
+
+	private static JsonSerializerOptions GetBaseOptions()
 	{
 		// These options allow some more cases than just the default.
 		var options = new JsonSerializerOptions
@@ -45,8 +47,14 @@ public static class SerializationConfiguration
 			NumberHandling = JsonNumberHandling.AllowReadingFromString,
 			PropertyNameCaseInsensitive = true,
 		};
-		options.AddContext<JsonContext>();
 
+		return options;
+	}
+
+	private static JsonSerializerOptions GetOptionsWithSourceGeneration()
+	{
+		var options = GetBaseOptions();
+		options.AddContext<JsonContext>();
 		return options;
 	}
 
