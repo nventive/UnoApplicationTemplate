@@ -483,10 +483,26 @@
 						   Style="{StaticResource ConfigurationDebuggerSubtitleStyle}"
 						   Margin="0,4,0,0" />
 
-				<!-- Configuration Key Input -->
-				<TextBox Text="{Binding ConfigurationKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-						 Style="{StaticResource ConfigurationDebuggerTextBoxStyle}"
-						 Padding="4,8"/>
+				<Grid Margin="0,2,4,0">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+					
+					<!-- Configuration Key Input -->
+					<TextBox Text="{Binding ConfigurationKey, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+							 Style="{StaticResource ConfigurationDebuggerTextBoxStyle}"
+							 Padding="4,8" />
+
+					<!-- Picker for existing keys -->
+					<ComboBox ItemsSource="{Binding AllKeys}"
+							  SelectedItem="{Binding SelectedKey, Mode=TwoWay}"
+							  Style="{StaticResource ConfigurationDebuggerComboBoxStyle}"
+							  Grid.Column="1"
+							  Height="30"
+							  Width="40"
+							  Margin="2,0,0,0"/>
+				</Grid>
 
 				<Grid Margin="0,2,4,0">
 					<Grid.ColumnDefinitions>
@@ -504,6 +520,7 @@
 							Command="{Binding Save}"
 							Style="{StaticResource ConfigurationDebuggerButtonStyle}"							
 							Grid.Column="1"
+							Width="40"
 							Margin="2,0,0,0"/>
 				</Grid>
 

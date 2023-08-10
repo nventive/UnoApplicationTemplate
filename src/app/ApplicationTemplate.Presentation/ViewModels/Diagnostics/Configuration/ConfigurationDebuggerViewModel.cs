@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Disposables;
+using System.Reflection;
 using System.Text;
 using System.Text.Json;
 using System.Threading;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Primitives;
+using Microsoft.Extensions.DependencyInjection;
 using Uno;
 
 namespace ApplicationTemplate.Presentation;
@@ -23,6 +24,7 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "It will actually be disposed because we're using AddDisposable.")]
 	private readonly SerialDisposable _changeCallback = new();
+	private readonly string[] _initialKeys;
 
 	[Inject] private IDiagnosticsService _diagnosticsService;
 	[Inject] private IEnvironmentManager _environmentManager;
@@ -33,6 +35,8 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 		AvailableEnvironments = _environmentManager.AvailableEnvironments;
 		ResetEnvironmentContent = $"Reset to default ({_environmentManager.Default})";
 		CurrentEnvironment = _environmentManager.Current;
+
+		_initialKeys = GetAllKeys();
 
 		var config = this.GetService<IConfiguration>();
 		UpdateJson(config);
@@ -66,6 +70,28 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 		);
 	});
 
+	/// <summary>
+	/// Gets all possible values for the <see cref="SelectedKey"/> property.
+	/// </summary>
+	public string[] AllKeys
+	{
+		get => this.Get(initialValue: _initialKeys);
+		private set => this.Set(value);
+	}
+
+	public string SelectedKey
+	{
+		get => this.Get(initialValue: default(string));
+		set
+		{
+			ConfigurationKey = value;
+			ConfigurationValue = this.GetService<IConfiguration>()[value];
+
+			// Erase the selection from the ComboBox because we put it in the TextBox.
+			Task.Run(() => RaisePropertyChanged(nameof(SelectedKey)));
+		}
+	}
+
 	public string ConfigurationKey
 	{
 		get => this.Get(initialValue: string.Empty);
@@ -90,6 +116,12 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 
 			// Clear the input value, but keep the input key.
 			ConfigurationValue = string.Empty;
+
+			// Add the new key to the list if necessary.
+			if (!AllKeys.Contains(ConfigurationKey))
+			{
+				AllKeys = GetAllKeys();
+			}
 		},
 		c => c.WithCanExecute(this.GetProperty(x => x.CanSave))
 	);
@@ -182,6 +214,113 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 				"false" or "False" => false,
 				_ => section.Value,
 			};
+		}
+	}
+
+	private string[] GetAllKeys()
+	{
+		var ignoredPrefixes = GetIgnoredPrefixes().ToArray();
+
+		return Enumerable
+			.Union(
+				GetKeysFromConfiguration(), // We get what is currently in the IConfiguration.
+				GetKeysFromOptionsTypes() // We add what might be missing from the IConfiguration (because default values aren't shown in the IConfiguration).
+			)
+			.Where(key => !ignoredPrefixes.Any(key.StartsWith))
+			.OrderBy(key => key)
+			.ToArray();
+
+		static IEnumerable<string> GetIgnoredPrefixes()
+		{
+			yield return "contentRoot";
+			yield return "Environment";
+			yield return ApplicationTemplateConfigurationExtensions.DefaultOptionsName<ReadOnlyConfigurationOptions>();
+		}
+	}
+
+	private static List<string> GetKeysFromOptionsTypes()
+	{
+		var optionsTypes = GetAssemblies().SelectMany(a => a.GetTypes().Where(t => t.Name.EndsWith("Options") && !t.IsAbstract && t.IsClass)).ToArray();
+		var keys = new List<string>();
+
+		foreach (var optionsType in optionsTypes)
+		{
+			GenerateKeysFromType(optionsType, keys);
+		}
+
+		return keys;
+
+		IEnumerable<Assembly> GetAssemblies()
+		{
+			// You could add more assemblies if you want to scan for more "Options" suffixed types.
+			yield return Assembly.GetAssembly(typeof(SerializationConfiguration)); // Client assembly
+			yield return Assembly.GetExecutingAssembly(); // Presentation assembly
+		}
+
+		static void GenerateKeysFromType(Type type, List<string> keys, string parentKey = null)
+		{
+			foreach (var property in type.GetProperties())
+			{
+				parentKey ??= ApplicationTemplateConfigurationExtensions.DefaultOptionsName(type);
+				var key = $"{parentKey}:{property.Name}";
+				var propertyType = property.PropertyType;
+
+				if (!propertyType.IsPrimitive
+					&& propertyType != typeof(string)
+					&& propertyType != typeof(Uri)
+					&& propertyType != typeof(TimeSpan)
+				)
+				{
+					GenerateKeysFromType(property.PropertyType, keys, key);
+				}
+				else
+				{
+					keys.Add(key);
+				}
+			}
+		}
+	}
+
+	private List<string> GetKeysFromConfiguration()
+	{
+		var configuration = this.GetService<IConfiguration>();
+		var keys = new List<string>();
+		ExtractKeys(configuration, keys);
+		RemoveTopLevelKeys(keys);
+		return keys;
+
+		// Extract keys from the configuration.
+		static void ExtractKeys(IConfiguration configuration, List<string> keys, string parentKey = null)
+		{
+			foreach (var child in configuration.GetChildren())
+			{
+				var currentKey = parentKey is null
+					? child.Key
+					: $"{parentKey}:{child.Key}";
+
+				keys.Add(currentKey);
+				ExtractKeys(child, keys, currentKey);
+			}
+		}
+
+		// Removes keys that represent container objects.
+		static void RemoveTopLevelKeys(List<string> keys)
+		{
+			for (int i = 0; i < keys.Count; i++)
+			{
+				var current = keys[i];
+
+				for (int j = i + 1; j < keys.Count; j++)
+				{
+					var next = keys[j];
+					if (next.StartsWith(current))
+					{
+						keys.RemoveAt(i);
+						--i;
+						break;
+					}
+				}
+			}
 		}
 	}
 }
