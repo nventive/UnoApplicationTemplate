@@ -84,13 +84,6 @@ public sealed partial class DiagnosticsOverlayViewModel : ViewModel
 		);
 	}
 
-	public IDynamicCommand ToggleHttpDebugger => this.GetCommand(() =>
-	{
-		// The HttpDebugger is currently the only thing in the expanded view.
-		// This method will change when we add more things to the expanded view.
-		IsDiagnosticsExpanded = !IsDiagnosticsExpanded;
-	});
-
 	public bool IsDiagnosticsExpanded
 	{
 		get => this.Get<bool>();
@@ -116,9 +109,46 @@ public sealed partial class DiagnosticsOverlayViewModel : ViewModel
 		}
 	}
 
+	public bool IsOverlayOnTheLeft
+	{
+		get => this.GetFromOptionsMonitor<DiagnosticsOptions, bool>(o => o.IsDiagnosticsOverlayOnTheLeft);
+		set => this.Set(value);
+	}
+
+	/// <summary>
+	/// Gets the VisualState name of the DiagnosticsOverlay.
+	/// </summary>
+	public string OverlayState => this.GetFromObservable(ObserveOverlayState(), initialValue: "MinimizedRight");
+
+	private IObservable<string> ObserveOverlayState()
+	{
+		return Observable.CombineLatest(
+			this.GetProperty(x => x.IsDiagnosticsExpanded).GetAndObserve(),
+			this.GetProperty(x => x.IsOverlayOnTheLeft).GetAndObserve(),
+			(isExpanded, isLeft) =>
+			{
+				if (isExpanded)
+				{
+					return "Expanded";
+				}
+
+				if (isLeft)
+				{
+					return "MinimizedLeft";
+				}
+
+				return "MinimizedRight";
+			});
+	}
+
 	public IDynamicCommand ToggleMore => this.GetCommand(() =>
 	{
 		IsDiagnosticsExpanded = !IsDiagnosticsExpanded;
+	});
+
+	public IDynamicCommand ToggleSide => this.GetCommand(() =>
+	{
+		IsOverlayOnTheLeft = !IsOverlayOnTheLeft;
 	});
 
 	public CountersData Counters => this.GetFromObservable(ObserveCounters, DiagnosticsCountersService.Counters);

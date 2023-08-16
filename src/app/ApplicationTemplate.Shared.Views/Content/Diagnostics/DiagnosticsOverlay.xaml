@@ -3,28 +3,15 @@
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:uc="using:Nventive.View.Converters"
+			 xmlns:nve="using:Nventive.View.Extensions"
 			 xmlns:diag="using:ApplicationTemplate.Views.Content.Diagnostics"
 			 xmlns:xamarin="http://uno.ui/xamarin"
 			 xmlns:not_ios="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 mc:Ignorable="xamarin">
+			 mc:Ignorable="xamarin"
+			 nve:BindableVisualState.VisualStateName="{Binding OverlayState}">
 
 	<UserControl.Resources>
 		<ResourceDictionary>
-
-			<!-- True to HorizontalStretch -->
-			<uc:FromNullableBoolToCustomValueConverter x:Key="TrueToHorizontalStretch"
-													   TrueValue="Stretch"
-													   NullOrFalseValue="Right" />
-
-			<!-- True to VerticalStretch -->
-			<uc:FromNullableBoolToCustomValueConverter x:Key="TrueToVerticalStretch"
-													   TrueValue="Stretch"
-													   NullOrFalseValue="Top" />
-
-			<!-- IsExpanded to CornerRadius -->
-			<uc:FromNullableBoolToCustomValueConverter x:Key="IsExpandedToCornerRadius"
-													   TrueValue="0"
-													   NullOrFalseValue="8,0,0,8" />
 
 			<!-- Diagnostics Counter TextBlockStyle -->
 			<Style x:Key="DiagnosticsCounterTextBlockStyle"
@@ -254,12 +241,41 @@
 	</UserControl.Resources>
 
 	<Grid>
-		<Grid Background="#AA000000"
+		<VisualStateManager.VisualStateGroups>
+			<VisualStateGroup x:Name="ExpandStates">
+				<VisualState x:Name="MinimizedRight" />
+				<VisualState x:Name="MinimizedLeft">
+					<VisualState.Setters>
+						<Setter Target="RootGrid.CornerRadius"
+								Value="0,8,8,0" />
+						<Setter Target="RootGrid.HorizontalAlignment"
+								Value="Left" />
+					</VisualState.Setters>
+				</VisualState>
+				<VisualState x:Name="Expanded">
+					<VisualState.Setters>
+						<Setter Target="RootGrid.CornerRadius"
+								Value="0" />
+						<Setter Target="RootGrid.HorizontalAlignment"
+								Value="Stretch" />
+						<Setter Target="RootGrid.VerticalAlignment"
+								Value="Stretch" />
+						<Setter Target="ExpandedContainerGrid.Visibility"
+								Value="Visible" />
+						<Setter Target="ExpandButton.Content"
+								Value="Minimize" />
+					</VisualState.Setters>
+				</VisualState>
+			</VisualStateGroup>
+		</VisualStateManager.VisualStateGroups>
+		
+		<Grid x:Name="RootGrid"
+			  Background="#AA000000"
 			  BorderThickness="1"
 			  BorderBrush="#000000"
-			  CornerRadius="{Binding IsDiagnosticsExpanded, Converter={StaticResource IsExpandedToCornerRadius}}"
-			  HorizontalAlignment="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToHorizontalStretch}, FallbackValue=Right}"
-			  VerticalAlignment="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVerticalStretch}, FallbackValue=Top}"
+			  CornerRadius="8,0,0,8"
+			  HorizontalAlignment="Right"
+			  VerticalAlignment="Top"
 			  Padding="0"
 			  Margin="0,100,0,0">
 
@@ -399,7 +415,8 @@
 			</StackPanel>
 
 			<!-- Diagnostics expanded content -->
-			<Grid Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
+			<Grid x:Name="ExpandedContainerGrid"
+				  Visibility="Collapsed"
 				  Grid.Row="0"
 				  Grid.RowSpan="3"
 				  Padding="0,0,50,0">
@@ -439,30 +456,21 @@
 						Command="{Binding CollectMemory}"
 						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
-				<!-- Toggle Http Debugger Button -->
-				<Button Content="Http"
-						Command="{Binding ToggleHttpDebugger}"
-						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
-
 				<!-- Theme Button -->
 				<Button Content="Theme"
 						Click="OnThemeButtonClicked"
 						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
 				<!-- More Button -->
-				<Button Command="{Binding ToggleMore}"
-						Style="{StaticResource DiagnosticsOverlayButtonStyle}">
-					<Grid>
+				<Button x:Name="ExpandButton"
+						Content="Expand"
+						Command="{Binding ToggleMore}"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
-						<!-- Not Expended Content -->
-						<TextBlock Text="&lt;"
-								   Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToCollapsed}, FallbackValue=Collapsed}" />
-
-						<!-- Expended Content -->
-						<TextBlock Text=">"
-								   Visibility="{Binding IsDiagnosticsExpanded, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}" />
-					</Grid>
-				</Button>
+				<!-- Move Button -->
+				<Button Content="Move"
+						Command="{Binding ToggleSide}"
+						Style="{StaticResource DiagnosticsOverlayButtonStyle}" />
 
 				<!-- Close Button -->
 				<Button Content="X"

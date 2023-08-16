@@ -39,6 +39,8 @@ public class DiagnosticsOptions
 
 	public bool IsDiagnosticsOverlayEnabled { get; set; }
 
+	public bool IsDiagnosticsOverlayOnTheLeft { get; set; }
+
 	public bool IsHttpDebuggerEnabled { get; set; }
 
 	public HttpDebuggerOptions HttpDebugger { get; set; } = new();
