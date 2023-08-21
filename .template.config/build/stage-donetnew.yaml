@@ -1,4 +1,6 @@
 jobs:
+    # This job installs the template and then uses it to generate a project.
+    # The generated project folder is published to be built in a later stage.
   - job: On_Windows_Dotnet_New
     pool:
       vmImage : windows-2022

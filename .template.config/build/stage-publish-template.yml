@@ -1,0 +1,34 @@
+
+jobs:
+- job: On_Windows_NuGet_Pack
+  pool:
+    vmImage : windows-2022
+  steps:
+  
+  - template: ../../build/templates/gitversion.yml
+
+  - task: NuGetCommand@2
+    inputs:
+      command: 'custom'
+      arguments: > 
+        pack $(Build.SourcesDirectory)/.template.config/build/NV.Templates.Mobile.nuspec
+        -NoDefaultExcludes
+        -Version $(GitVersion.SemVer)
+        -OutputDirectory $(Build.ArtifactStagingDirectory)
+
+  - publish: $(Build.ArtifactStagingDirectory)
+    displayName: 'Publish NuGet Package'
+    condition: always()
+    artifact: 'NuGetPackage'
+
+  - task: NuGetCommand@2
+    displayName: 'Push to Nuget.org'
+    inputs:
+      command: 'push'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/*.nupkg'
+      nuGetFeedType: 'external'
+      publishFeedCredentials: 'NuGet.org - nventive'
+
+  - task: PostBuildCleanup@3
+    displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
+    condition: always()

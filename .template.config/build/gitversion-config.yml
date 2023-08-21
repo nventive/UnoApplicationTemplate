@@ -1,0 +1,27 @@
+# The version is driven by conventional commits via xxx-version-bump-message.
+# Anything merged to main creates a new stable version.
+# Only builds from main and feature/* are pushed to nuget.org.
+
+assembly-versioning-scheme: MajorMinorPatch
+mode: MainLine
+next-version: '' # Use git tags to set the base version.
+continuous-delivery-fallback-tag: ""
+commit-message-incrementing: Enabled
+major-version-bump-message: "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\\([\\w\\s-]*\\))?(!:|:.*\\n\\n((.+\\n)+\\n)?BREAKING CHANGE:\\s.+)"
+minor-version-bump-message: "^(feat)(\\([\\w\\s-]*\\))?:"
+patch-version-bump-message: "^(build|chore|docs|fix|perf|refactor|revert|style|test)(\\([\\w\\s-]*\\))?:"
+no-bump-message: "^(ci)(\\([\\w\\s-]*\\))?:" # You can use the "ci" type to avoid bumping the version when your changes are limited to the build or .github folders.
+branches:
+  main:
+    regex: ^master$|^main$
+    tag: ''
+  dev:
+    regex: dev/.*?/(.*?)
+    tag: dev.{BranchName}
+    source-branches: [main]
+  feature:
+    tag: feature.{BranchName}
+    regex: feature/(.*?)
+    source-branches: [main]
+ignore:
+  sha: []

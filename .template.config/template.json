@@ -28,8 +28,7 @@
             "**/*.lock.json",
             "**/.vs/**",
             "**/.git/**",
-            "template-scripts/**",
-            "**/stage-dotnetnew.yaml"
+            "template-scripts/**"
           ],
           "copyOnly": [
             "**/*.aprof" 

@@ -28,6 +28,11 @@
 - You can generate/replace guids as described in this [github sample](https://github.com/dotnet/dotnet-template-samples/tree/master/14-guid).
   - For example, it is important for manifests to make sure generated apps have different identifiers.
 
+## GitVersion
+
+For the template itself, we use the **MainLine** mode for GitVersion. This is the same mode as most of our open source packages.
+
+For the generated app, we use the **ContinuousDeployment** mode for GitVersion.
 
 ## References
 
