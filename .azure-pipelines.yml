@@ -30,7 +30,7 @@ stages:
 # This special if is used to remove those Dotnet_New stages for generated application.
 - stage: Dotnet_New_GeneratedApp
   jobs:
-  - template: build/stage-donetnew.yaml
+  - template: .template.config/build/stage-donetnew.yaml
 
 - stage: Build_Staging_GeneratedApp
   dependsOn: Dotnet_New_GeneratedApp
@@ -47,6 +47,15 @@ stages:
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
+
+- stage: Publish_Template_Package
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+  dependsOn:
+   - Build_Staging_GeneratedApp
+   - Build_Staging
+  jobs:
+  - template: .template.config/build/stage-publish-template.yml
+
 #-endif
 - stage: Build_Staging
 #-if false
