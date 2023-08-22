@@ -13,7 +13,7 @@ jobs:
       arguments: > 
         pack $(Build.SourcesDirectory)/.template.config/build/NV.Templates.Mobile.nuspec
         -NoDefaultExcludes
-        -Version $(GitVersion.SemVer)
+        -Version $(GitVersion.MajorMinorPatch)
         -OutputDirectory $(Build.ArtifactStagingDirectory)
 
   - publish: $(Build.ArtifactStagingDirectory)

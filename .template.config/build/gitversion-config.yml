@@ -14,7 +14,7 @@ no-bump-message: "^(ci)(\\([\\w\\s-]*\\))?:" # You can use the "ci" type to avoi
 branches:
   main:
     regex: ^master$|^main$
-    tag: ''
+    tag: 'stable'
   dev:
     regex: dev/.*?/(.*?)
     tag: dev.{BranchName}

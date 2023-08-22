@@ -11,7 +11,7 @@ steps:
     inputs:
       useConfigFile: true
       configFilePath: $(Build.SourcesDirectory)/.template.config/build/gitversion-config.yml
-    displayName: 'Calculate Version'
+    displayName: 'Calculate Template Version'
 #-endif
 
   - task: gitversion/execute@0
@@ -22,4 +22,4 @@ steps:
     inputs:
       useConfigFile: true
       configFilePath: $(Build.SourcesDirectory)/gitversion-config.yml
-    displayName: 'Calculate Version'
+    displayName: 'Calculate App Version'
