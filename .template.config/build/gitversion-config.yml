@@ -10,7 +10,7 @@ commit-message-incrementing: Enabled
 major-version-bump-message: "^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test)(\\([\\w\\s-]*\\))?(!:|:.*\\n\\n((.+\\n)+\\n)?BREAKING CHANGE:\\s.+)"
 minor-version-bump-message: "^(feat)(\\([\\w\\s-]*\\))?:"
 patch-version-bump-message: "^(build|chore|docs|fix|perf|refactor|revert|style|test)(\\([\\w\\s-]*\\))?:"
-no-bump-message: "^(ci)(\\([\\w\\s-]*\\))?:" # You can use the "ci" type to avoid bumping the version when your changes are limited to the build or .github folders.
+no-bump-message: "^(ci)(\\([\\w\\s-]*\\))?:" # You can use the "ci" type to avoid bumping the version when your changes are limited to the .github folders.
 branches:
   main:
     regex: ^master$|^main$
