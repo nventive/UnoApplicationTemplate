@@ -11,37 +11,36 @@ This is a mobile app project template using [Uno Platform](https://github.com/un
 
 ## Requirements
 
+Visual Studio 2022 with .Net 7 are required.
+
 This template largely relies on Uno Platform, if you want to make sure you got everything installed correctly on your machine, we encourage you to use `uno-check`, the documentation is available [here](https://platform.uno/docs/articles/uno-check.html)
 
-In addition to that, **Visual Studio 2022 with .Net 7 are required**.
+> 💡 It's also possible to use this template for a pure WinUI application, without any mobile aspect.
+> All you would have to do is remove the `.Mobile` csproj from the generated solution.
+
 
 ## Getting Started
 
 We use `dotnet` project templates to easily create new projects. It simplifies the **project renaming** and supports **conditional inclusions**.
 
-### Installing the template
+### Generate a new project
 
-1. In order to install the template, clone this repository on your machine, open a command prompt at its root and run the following command.
+1. Install the template using this command.
+   
+   `donet new install NV.Templates.Mobile`
 
-    - `dotnet new install ./`
-
-    This will display a list of installed templates, look for this template and copy the command with the absolute path like this.
-
-    - `dotnet new list`
-
-[Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
-
-### Running the template to generate a new project
-
-1. To run the template and create a new project, run the following command in the root folder that will contain the new project.
-
+1. To run the template and create a new project, run the following command in the folder that will contain the new project.
+    
     `dotnet new nv-mobile -n MyProjectName`
+    
+    > ⚠ The use of periods (`.`) in the project name is not supported and may result in compilation issues later on.
 
-    The following options are available when running the command.
+   > 💡 If all your projects are regrouped in a folder like `C:\Repos`, you want to be in that folder.
+   > The command would generate all the project files under `C:\Repos\MyProjectName`.
 
-    - To get help: `dotnet new nv-mobile -h`
+   The following options are available when running the command.
 
-	:warning: The use of periods (.) in the project name is not supported and may result in building issues. 
+   - To get help: `dotnet new nv-mobile -h`
 
 ### Next Steps
 
@@ -54,11 +53,6 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
    This template comes with several pointers on what you're most likely to change next.
    
    ![](doc/images/VisualStudioTaskListForNextSteps.PNG)
-
-### Uninstalling the template
-1. If you want to uninstall the template, open a command prompt at its root and run the following command.
-
-    - `dotnet new uninstall ./`
 
 ## Documentation
 
@@ -80,6 +74,29 @@ This repository provides documentation on different topics under the [doc](doc/)
 - [Error handling](doc/ErrorHandling.md)
 - [Scheduling](doc/Scheduling.md)
 - [Reviews (app star ratings)](doc/Reviews.md)
+
+## Debuging or Testing the Template
+Here's how to install the template directly from the code, in the case that you want to modify it and would like to test your changes.
+
+### Installing the template
+
+1. Uninstall the template from nuget.org (if applicable).
+   - `dotnet new uninstall NV.Templates.Mobile`
+
+1. Clone this repository on your machine.
+1. Open a command prompt at the root of the cloned repository.
+1. Run the following command.
+
+    - `dotnet new install ./`
+
+[Read this for more information on custom templates](https://docs.microsoft.com/en-us/dotnet/core/tools/custom-templates).
+
+### Uninstalling the template
+1. Open a command prompt at the root of the cloned repository. 
+1. Run the following command.
+
+    - `dotnet new uninstall ./`
+
 
 ## Changelog
 
