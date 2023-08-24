@@ -7,6 +7,42 @@ jobs:
   
   - template: ../../build/templates/gitversion.yml
 
+  - powershell: |
+      $versionInfo = @{
+          Major = "$(gitversion.Major)"
+          Minor = "$(gitversion.Minor)"
+          Patch = "$(gitversion.Patch)"
+          MajorMinorPatch = "$(gitversion.MajorMinorPatch)"
+          PreReleaseTag = "$(gitversion.PreReleaseTag)"
+          SemVer = "$(gitversion.SemVer)"
+          BranchName = "$(gitversion.BranchName)"
+          FullBuildMetaData = "$(gitversion.FullBuildMetaData)"
+          InformationalVersion = "$(gitversion.InformationalVersion)"
+          Sha = "$(gitversion.Sha)"
+          ShortSha = "$(gitversion.ShortSha)"
+          CommitDate = "$(gitversion.CommitDate)"
+      }
+      $versionInfo | ConvertTo-Json | Out-File $(Build.SourcesDirectory)/tools/template-version.json -Encoding utf8
+    displayName: 'Create JSON file capturing the template version'
+    env:
+      gitversion: $(gitversion.outputs.version)
+
+  - powershell: |
+      Rename-Item -Path "$(Build.SourcesDirectory)/README.md" -NewName "TEMPLATE_README.md"
+    displayName: 'Rename README to TEMPLATE_README'
+
+  - powershell: >
+      ./.template.config/build/GenerateAppReadme.ps1
+      -InputPath "$(Build.SourcesDirectory)/APP_README.md"
+      -OutputPath "$(Build.SourcesDirectory)/README.md"
+      -VersionNumber "$(gitversion.MajorMinorPatch)"
+      -CommitShortSha "$(gitversion.ShortSha)"
+      -CommitFullSha "$(gitversion.Sha)"
+      -CommitDate "$(gitversion.CommitDate)"
+    displayName: 'Generate the README from APP_README including version information'
+    env:
+      gitversion: $(gitversion.outputs.version)
+
   - task: NuGetCommand@2
     inputs:
       command: 'custom'

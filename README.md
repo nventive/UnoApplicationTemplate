@@ -44,6 +44,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 ### Next Steps
 
+1. Open the `README.md` and complete the documentation TODOs.
 1. Open the solution file from the generated folder using Visual Studio. 
 
    It's located at `MyProjectName/src/MyProjectName.sln`.
@@ -59,6 +60,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 This repository provides documentation on different topics under the [doc](doc/) folder.
 
 - [Architecture](doc/Architecture.md)
+- [Startup](doc/Startup.md)
 - [Dependency Injection](doc/DependencyInjection.md)
 - [Configuration](doc/Configuration.md)
 - [HTTP](doc/HTTP.md)
@@ -66,7 +68,6 @@ This repository provides documentation on different topics under the [doc](doc/)
 - [Diagnostics](doc/Diagnostics.md)
 - [Platform specifics](doc/PlatformSpecifics.md)
 - [Serialization](doc/Serialization.md)
-- [Startup](doc/Startup.md)
 - [Testing](doc/Testing.md)
 - [Environments](doc/Environments.md)
 - [Localization](doc/Localization.md)
@@ -75,7 +76,7 @@ This repository provides documentation on different topics under the [doc](doc/)
 - [Scheduling](doc/Scheduling.md)
 - [Reviews (app star ratings)](doc/Reviews.md)
 
-## Debuging or Testing the Template
+## Debugging or Testing the Template
 Here's how to install the template directly from the code, in the case that you want to modify it and would like to test your changes.
 
 ### Installing the template
@@ -96,7 +97,6 @@ Here's how to install the template directly from the code, in the case that you 
 1. Run the following command.
 
     - `dotnet new uninstall ./`
-
 
 ## Changelog
 

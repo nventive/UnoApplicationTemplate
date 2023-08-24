@@ -5,8 +5,8 @@
     <version>1.0.0</version><!-- This is overriden by the build, but still useful when testing locally. -->
     <title>NV.Templates.Mobile</title>
     <authors>nventive</authors>
-    <description>Template for a mobile .Net application using Uno Platform.</description>
-    <readme>README.md</readme>
+    <description>Template for a mobile .Net application using the MVVM architecture and Uno Platform as the UI framework.</description>
+    <readme>TEMPLATE_README.md</readme>
     <icon>images\nv_logo128.png</icon>
     <copyright>Copyright (c) 2023, nventive</copyright>
     <license type="expression">Apache-2.0</license>
@@ -18,8 +18,9 @@
     </packageTypes>
   </metadata>
   <files>
-    <file src="..\..\**" target="content" exclude="**\bin\**\*;**\obj\**\*;**\.git\**;**\.github\**;**\.vs\**\*;**\*.user;**\*.lock.json;**\package-lock.json" />
-    <file src="..\..\README.md" />
+    <file src="..\..\**" target="content" exclude="**\bin\**\*;**\obj\**\*;**\.git\**;**\.github\**;**\.vs\**\*;**\*.user;**\*.lock.json;**\package-lock.json;**\TEMPLATE_README.md;**\APP_README.md" />
+    <file src="..\..\TEMPLATE_README.md" />
+    <file src="..\..\APP_README.md" target="content/tools" />
     <file src="..\images\nv_logo128.png" target="images" />
   </files>
 </package>
