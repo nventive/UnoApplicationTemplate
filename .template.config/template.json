@@ -28,9 +28,15 @@
             "**/*.lock.json",
             "**/.vs/**",
             "**/.git/**",
-            "template-scripts/**"
+            "template-scripts/**",
+            "**/.mergify.yml",
+            "CHANGELOG.md",
+            "CODE_OF_CONDUCT.md",
+            "CONTRIBUTING.md",
+            "LICENSE"
           ],
           "copyOnly": [
+            "**/*README.md",
             "**/*.aprof" 
           ]
         }

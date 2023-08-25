@@ -5,6 +5,17 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 0.76.X
+* Renamed `script` folder to `tools`.
+* Removed the following files because they're associated with the template and not the generated app.
+  - `.mergify.yml`
+  - `LICENSE`
+  - `CHANGELOG.md`
+  - `CODE_OF_CONDUCT.md`
+  - `CONTRIBUTING.md`
+* (Template) Introduce the APP_README.md template to generate a better README for the generated projects.
+* Update the solution structure image.
+
 ## 0.75.X - 2023-08-22
 Initial release on nuget.org.
 

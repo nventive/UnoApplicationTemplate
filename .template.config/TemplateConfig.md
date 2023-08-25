@@ -12,7 +12,7 @@
     //+:cnd:noEmit
     ```
 
-- You can run `template-scripts\escape-if-directives.linq` in linqpad to automatically escape #if directives.
+- You can run `tools\escape-if-directives.linq` in linqpad to automatically escape #if directives.
 - To remove the escape syntax, you use the search-and-replace feature of vscode:
   ```
   Search: //[-+]:cnd.+

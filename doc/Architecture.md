@@ -1,4 +1,4 @@
-# Software Architecture
+﻿# Software Architecture
 
 ## Context
 
@@ -8,15 +8,11 @@ _[Create this diagram from the [architecture file](diagrams/architecture.drawio)
 
 ![Context diagram](diagrams/architecture-context.png)
 
----
-
 ## Functional Overview
 
 This is a summary of the functionalities available to the user.
 
 _[Insert list of functionalities here]_
-
----
 
 ## Application Structure
 
@@ -26,18 +22,18 @@ _[Create this diagram from the [architecture file](diagrams/architecture.drawio)
 
 ![Structure diagram](diagrams/architecture-structure.png)
 
----
-
 ## Solution Structure
 
-The application solution is divided in 2 main areas.
+The application solution is divided in 3 main areas.
+
+![Solution diagram](diagrams/solution-structure.png)
+
 - `app-heads` contains the _runnable_ heads.
-- `app-shared` contains the shared code used by the heads.
+- `app-tests` contains the tests.
+- `app-shared` contains the shared code used by the heads and the tests.
   - It's divided per application layer.
   - You can only put platform-specific code (things like `#if __IOS__`) in the Views layer.
   The other layers are `.Net Standard 2.0` libraries that are platform agnostic.
-
-![Solution diagram](diagrams/solution-structure.png)
 
 ### Client (DAL)
 The _data access layer_ is where you would put external dependencies such as API endpoints and local storage.
@@ -56,8 +52,6 @@ The view layer implements the user interface (UI).
 It contains all the XAML, converters, templates, styles, assets, and other UI resources.
 This layer also contains platform-specific implementations of services.
 For that reason, it also contains a good portion of the configuration.
-
----
 
 ## Topics
 
