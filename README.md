@@ -27,7 +27,7 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
 
 1. Install the template using this command.
    
-   `donet new install NV.Templates.Mobile`
+   `dotnet new install NV.Templates.Mobile`
 
 1. To run the template and create a new project, run the following command in the folder that will contain the new project.
     
