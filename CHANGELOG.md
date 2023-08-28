@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
 ## 0.76.X
+* (Template) Fixed usage of guids to prevent having conflicts with generating multiple projects with the template.
 * Renamed `script` folder to `tools`.
 * Removed the following files because they're associated with the template and not the generated app.
   - `.mergify.yml`
