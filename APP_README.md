@@ -30,6 +30,13 @@ All development is expected to be done from Visual Studio in a Windows environme
 ### Pipelines Requirements
 The pipelines (for continuous integration, testing, and delivery) of this project are made for [Azure Pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines?view=azure-devops).
 
+#### Required Knowledge
+If you're unfamiliar with Azure Pipeline, you should at least read about the following topics.
+- [Key Concepts](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops)
+- [Set a secret variable in a variable group](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/set-secret-variables?view=azure-devops&tabs=yaml%2Cbash#set-a-secret-variable-in-a-variable-group)
+- [Add a secure file](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/secure-files?view=azure-devops#add-a-secure-file)
+
+#### Required Infrastructure
 - You need an Azure DevOps organization project with Pipelines enabled.
   - You can follow [this guide](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/pipelines-sign-up?view=azure-devops) for more details.
 - For compilation, access to the the following [Microsoft-hosted agents](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&tabs=yaml) is required.
@@ -44,6 +51,7 @@ The pipelines (for continuous integration, testing, and delivery) of this projec
 |-:|-|
 `.azuredevops/` | Used to store the pull request template used by Azure DevOps.
 `build/` | Regroups all yaml files used that compose the pipelines defined in `.azure-pipelines.yml`.
+`build/gitversion-config.yml` | Contains the configuration for the GitVersion tool that is used to compute the version number in the pipelines.
 `.azure-pipelines.yml` | Defines the main CI/CD pipeline of the project.
 `.azure-pipelines-canary.yml` | Defines the canary pipeline of the project.<br/>Canary pipelines allow to detect regressions by periodically creating versions of the app in which all the dependencies are updated to their latest version.
 `doc/` | Regroups all the documentation of the project, with the only exception of `README.md`, which is located at the root of the repository.<br/><br/>**There are many topics covered. Make sure you check them out.**
@@ -53,7 +61,6 @@ The pipelines (for continuous integration, testing, and delivery) of this projec
 `.editorconfig`<br/>& `stylecop.json` | Configure the code formatting rules and analyzers of Visual Studio.
 `.gitignore` | Contains the git ignore rules.
 `Directory.Build.props` | Regroups build configuration that apply to all `.csproj`.
-`gitversion-config.yml` | Contains the configuration for the GitVersion tool that is used to compute the version number in the pipelines.
 `nuget.config` | Contains the configuration for NuGet packages.
 `tools/` | Offers a place to put custom tools and scripts. It also contains some information about the version of the template that was used to generate the project.
 
@@ -63,33 +70,10 @@ See [Solution Structure in Architecture.md](doc/Architecture.md#solution-structu
 
 ## Pipelines
 
-### Required Knowledge
-If you're unfamiliar with Azure Pipeline, you should at least read about the following topics.
-- [Key Concepts](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/key-pipelines-concepts?view=azure-devops)
-- [Set a secret variable in a variable group](https://learn.microsoft.com/en-us/azure/devops/pipelines/process/set-secret-variables?view=azure-devops&tabs=yaml%2Cbash#set-a-secret-variable-in-a-variable-group)
-- [Add a secure file](https://learn.microsoft.com/en-us/azure/devops/pipelines/library/secure-files?view=azure-devops#add-a-secure-file)
+This project uses Azure Pipelines to automate some processes.
+They are described in details in [AzurePipelines.md](doc/AzurePipelines.md).
 
-### Pipeline Code
-This project uses CI/CD pipelines that are implemented as yaml code.
-They are declared in the following files.
-- `.azure-pipelines.yml`
-- `.azure-pipelines-canary.yml`
-
-These pipelines are divided in parameterized stages that are defined accross several files, all located under [`build/`](build/).
-The more complex stages are also divided into several steps files, again all located under the [`build/`](build/) folder.
-
-At high level, the CI/CD pipelines do the following:
-- **Build** the app in **staging**.
-  - **Deploy** the staging app (to AppCenter and/or TestFlight and GooglePlay).
-- **Build** the app in **production**.
-  - **Deploy** the production app (to TestFlight and GooglePlay).
-
-They also run automated tests during the build steps.
-
-### Variable Groups and Secrets
-These pipelines rely on a few variable groups and secrets in order to fully work. These are documented in [`variables.yml`](build/variables.yml).
-
-### Pipelines in Azure DevOps
+### Pipelines Summary
 TODO: Fill the following table with your own pipelines.
 
 | Link | Code Entry Point | Goal | Triggers |

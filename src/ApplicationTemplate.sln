@@ -5,13 +5,14 @@ VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app-heads", "app-heads", "{961D0213-0BCB-4CE1-85E2-261F6E272982}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{8711E408-6454-47A3-889D-3BB97AFDD2DB}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "root", "root", "{8711E408-6454-47A3-889D-3BB97AFDD2DB}"
 	ProjectSection(SolutionItems) = preProject
 		..\.azure-pipelines-canary.yml = ..\.azure-pipelines-canary.yml
 		..\.azure-pipelines.yml = ..\.azure-pipelines.yml
+		..\.editorconfig = ..\.editorconfig
 		..\.gitignore = ..\.gitignore
 		..\Directory.Build.props = ..\Directory.Build.props
-		..\gitversion-config.yml = ..\gitversion-config.yml
+		..\nuget.config = ..\nuget.config
 		..\stylecop.json = ..\stylecop.json
 	EndProjectSection
 EndProject
@@ -59,6 +60,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Windows
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Mobile", "app\ApplicationTemplate.Mobile\ApplicationTemplate.Mobile.csproj", "{925099B5-4113-4E3E-8CBB-74D3077DF583}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{6E8378CB-E6FB-4090-9AF5-9D3CD059FECE}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\canary-merge.yml = ..\build\canary-merge.yml
+		..\build\gitversion-config.yml = ..\build\gitversion-config.yml
+		..\build\stage-build.yml = ..\build\stage-build.yml
+		..\build\stage-release-appcenter.yml = ..\build\stage-release-appcenter.yml
+		..\build\stage-release-appstore.yml = ..\build\stage-release-appstore.yml
+		..\build\stage-release-googleplay.yml = ..\build\stage-release-googleplay.yml
+		..\build\steps-build-android.yml = ..\build\steps-build-android.yml
+		..\build\steps-build-ios.yml = ..\build\steps-build-ios.yml
+		..\build\steps-build-release-notes.yml = ..\build\steps-build-release-notes.yml
+		..\build\steps-build-tests.yml = ..\build\steps-build-tests.yml
+		..\build\steps-build-windows.yml = ..\build\steps-build-windows.yml
+		..\build\variables.yml = ..\build\variables.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{560A7587-83FE-4092-A4CF-508AE33104BF}"
+	ProjectSection(SolutionItems) = preProject
+		..\build\templates\gitversion.yml = ..\build\templates\gitversion.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -304,6 +326,7 @@ Global
 		{AB67372C-6CF2-46A5-BC86-7CD257AF3FF0} = {D0BDE23D-F91F-4E0B-A38F-538D2605703B}
 		{096FE097-B3C5-4E5B-874F-6A95C648F714} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
 		{925099B5-4113-4E3E-8CBB-74D3077DF583} = {961D0213-0BCB-4CE1-85E2-261F6E272982}
+		{560A7587-83FE-4092-A4CF-508AE33104BF} = {6E8378CB-E6FB-4090-9AF5-9D3CD059FECE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8F5BE10-8B4B-4587-B7B4-09CA39838210}

@@ -1,5 +1,7 @@
 ﻿# Uno Platform Application Template
 
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](LICENSE) ![Version](https://img.shields.io/nuget/v/NV.Templates.Mobile?style=flat-square) ![Downloads](https://img.shields.io/nuget/dt/NV.Templates.Mobile?style=flat-square)
+
 This is a mobile app project template using [Uno Platform](https://github.com/unoplatform/uno) and the latest .NET practices.
 
 - It uses the MVVM pattern.
@@ -8,6 +10,14 @@ This is a mobile app project template using [Uno Platform](https://github.com/un
 - There are built-in [logs](doc/Logging.md) and [diagnostics tools](doc/Diagnostics.md).
 - There is scaffolding code showing sample features.
   When you run as-is, you get a _Dad Jokes_ application.
+
+## Preview
+From left to right: WinUI, iOS, and Android.
+![Platform-Comparison-Preview](https://user-images.githubusercontent.com/39710855/264705525-d070952c-04c7-4f4a-b6af-957f8415fb3e.png)
+> Note that scaling was adjusted to better fit this preview and therefore this image isn't representative of the actual device sizes.
+
+### Diagnostics Tools
+![Diagnostics-Overlay-Preview](https://user-images.githubusercontent.com/39710855/264691340-dbc9d137-a199-4969-94d7-7dd430e08da7.gif)
 
 ## Requirements
 
