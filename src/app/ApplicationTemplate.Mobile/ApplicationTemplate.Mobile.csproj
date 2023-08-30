@@ -17,6 +17,9 @@
 		<PublishTrimmed>True</PublishTrimmed>
 		<TrimMode>partial</TrimMode>
 	</PropertyGroup>
+	<PropertyGroup Condition="'$(TargetFramework)'=='net7.0-ios'">
+	  <ProvisioningType>manual</ProvisioningType>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="1.1.2" />
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.2.0" />
