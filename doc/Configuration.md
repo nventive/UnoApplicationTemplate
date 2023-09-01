@@ -18,6 +18,16 @@ Check the `AddAppSettings` method from [AppSettingsConfiguration.cs](../src/app/
 
 ## Accessing
 
+- The `IConfiguration` interface is registered as a service to simplify the process of resolving an application setting.
+
+  ```csharp
+  // You can resolve the configuration in the constructor of a service using the IoC.
+  public class MyService(IConfiguration configuration) { ... }
+
+  // You can resolve the configuration from a view model using the IoC.
+  var configuration = this.GetService<IConfiguration>();
+  ```
+
 - Custom properties can be added to the configuration. They can then be resolved using `IConfiguration`. 
 
   Assuming this is the content of your `appsettings.json`.
@@ -48,16 +58,6 @@ Check the `AddAppSettings` method from [AppSettingsConfiguration.cs](../src/app/
 
       ...
   }
-  ```
-
-- The `IConfiguration` interface is registered as a service to simplify the process of resolving an application setting.
-
-  ```csharp
-  // You can resolve the configuration in the constructor of a service using the IoC.
-  public class MyService(IConfiguration configuration) { ... }
-
-  // You can resolve the configuration from a view model using the IoC.
-  var configuration = this.GetService<IConfiguration>();
   ```
 
 ## References

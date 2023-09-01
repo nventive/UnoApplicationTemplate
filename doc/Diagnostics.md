@@ -8,13 +8,17 @@ This overlay shows various counters and buttons.
 The overlay is accessible from anywhere in your app.
 This is useful when you want to see something happening live.
 
+![Diagnostics-Overlay-Preview](https://user-images.githubusercontent.com/39710855/264691340-dbc9d137-a199-4969-94d7-7dd430e08da7.gif)
+
 **Feel free to add more counters and buttons to ease your work!**
 
 The default counters track the amount of active and uncollected ViewModel, DynamicProperties, and DynamicCommands.
 The default buttons include commands such as the following.
 - **Collect** runs the garbage collector.
 - **Theme** toggles between the light and dark theme for the whole application.
-- **<** opens the expanded view of the overlay.
+- **Expand/Minimize** opens or closes the expanded view of the overlay.
+- **Move** moves the overlay left or right.
+- **X** hides the overlay.
 
 ## Diagnostics Page
 The diagnostics page is a regular app page.
@@ -38,7 +42,10 @@ It also has various diagnostics utilities such as the following.
 
 ## Http Debugger
 
-On the diagnostics overlay, tap on the **Http** button to show the `HttpDebuggerView`.
+On the expanded diagnostics overlay, tap on the **HTTP** button to show the `HttpDebuggerView`.
+
+![HTTP-Debugger-Screenshot](https://user-images.githubusercontent.com/39710855/264707239-2c9758ee-2d89-42a1-8843-58c3a85710fd.png)
+
 This view shows all the http calls and their status.
 You can click on items to see more details, such as headers, content, elapsed time, etc.
 Check the following for more details.
@@ -46,3 +53,16 @@ Check the following for more details.
 - [`HttpDebuggerHandler`](..\src\app\ApplicationTemplate.Client\Framework\HttpDebugger\HttpDebuggerHandler.cs)
 - [`HttpDebuggerViewModel`](..\src\app\ApplicationTemplate.Presentation\ViewModels\Diagnostics\HttpDebugger\HttpDebuggerViewModel.cs)
 - [`HttpDebuggerView`](..\src\app\ApplicationTemplate.UWP\Views\Content\Diagnostics\HttpDebuggerView.xaml)
+
+## Configuration Debugger
+
+On the expanded diagnostics overlay, tap on the **Configuration** button to show the `ConfigurationDebuggerView`.
+
+![Configuration-Debugger-Screenshot](https://user-images.githubusercontent.com/39710855/264707102-bb020245-4d9b-4152-b72a-121344f42ec5.png)
+
+This view shows a JSON representation of the configuration.
+
+It also allows the following actions:
+- Edit the configuration.
+- Change the environment.
+- Delete the configuration override file.
