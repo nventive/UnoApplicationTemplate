@@ -1,6 +1,6 @@
-# Diagnostics Tools
+# Diagnostic Tools
 
-This template comes with multiple built-in diagnostics tools.
+This template comes with multiple built-in diagnostic tools.
 
 ## Diagnostics Overlay
 When you start the application in debug, you'll notice a box on the side of the screen.

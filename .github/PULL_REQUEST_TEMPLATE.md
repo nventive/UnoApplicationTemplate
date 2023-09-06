@@ -39,7 +39,7 @@ No matter your changes, these checks always apply.
 - [ ] Documentation files were updated according with the changes.
   - Update `README.md` and `TemplateConfig.md` if you made changes to **templating**.
   - Update `AzurePipelines.md` and `APP_README.md` if you made changes to **pipelines**.
-  - Update `Diagnostics.md` if you made changes to **diagnostics tools**.
+  - Update `Diagnostics.md` if you made changes to **diagnostic tools**.
   - Update `Architecture.md` and its diagrams if you made **architecture decisions** or if you introduced new **recipes**.
   - ...and so forth: Make sure you update the documentation files associated to the recipes you changed. Review the topics by looking at the content of the `doc/` folder.
 - [ ] Images about the template are referenced from the [wiki](https://github.com/nventive/UnoApplicationTemplate/wiki/Images) and added as images in this git.

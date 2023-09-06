@@ -1,6 +1,6 @@
 ﻿# Logging
 
-We use [Microsoft.Extensions.Logging](https://www.nuget.org/packages/Microsoft.Extensions.Logging) for logging abstractions.
+We use [Microsoft.Extensions.Logging](https://www.nuget.org/packages/Microsoft.Extensions.Logging) for logging abstractions and [Serilog](https://www.nuget.org/packages/Serilog/) as the implementation.
 
 For more documentation on logging, read the references listed at the bottom.
 
@@ -18,13 +18,13 @@ We use the following convention for log levels:
 ## Log providers
 
 We use [Serilog](https://www.nuget.org/packages/Serilog/) to implement log providers (called sinks).
-  - We use [Serilog.Sinks.Xamarin](https://www.nuget.org/packages/Serilog.Sinks.Xamarin/) for native console logging (not supported by [Microsoft.Extensions.Logging.Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/)).
+  - We use [Serilog.Sinks.Xamarin](https://www.nuget.org/packages/Serilog.Sinks.Xamarin/) for native console logging.
   - We use [Serilog.Sinks.File](https://www.nuget.org/packages/Serilog.Sinks.File) for file logging.
   - We use [Serilog.Sinks.XUnit](https://www.nuget.org/packages/Serilog.Sinks.XUnit) for xUnit test logging.
   - We use [Serilog.Settings.Configuration](https://www.nuget.org/packages/Serilog.Settings.Configuration) to load the log filters from [appsettings.json](../src/app/ApplicationTemplate.Shared/appsettings.json); _filters are different between environments_.
   - We use [Serilog.Extensions.Hosting](https://www.nuget.org/packages/Serilog.Extensions.Hosting/) to configure the loggers with `GenericHost`.
 
-The loggers are configured inside the [Startup.cs](../src/app/ApplicationTemplate.Shared.Views/Startup.cs) file.
+The loggers are configured inside the [LoggingConfiguration.cs](..\src\app\ApplicationTemplate.Shared.Views\Configuration\LoggingConfiguration.cs) file.
 
 ## Logging
 

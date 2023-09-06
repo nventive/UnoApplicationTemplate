@@ -12,12 +12,6 @@ For more documentation on HTTP requests, read the references listed at the botto
 
 - We use [Refit](https://www.nuget.org/packages/Refit/) to generate the implementation of the client layer.
 
-## Caching and policies
-
-- We may use [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) to leverage request policies (e.g. retry, timeout, etc.).
-
-- We may use [MonkeyCache](https://github.com/jamesmontemagno/monkey-cache) to leverage API response caching.
-
 ## Mocking
 
 - We use a simple `BaseMock` class to support mocking scenarios. You simply add embbedded resources (.json files) that contain the mocked responses into your project.

@@ -1,6 +1,6 @@
 # Localization
 
-We use [Microsoft.Extensions.Localization](https://www.nuget.org/packages/Microsoft.Extensions.Localization) for any configuration related work.
+We use [Microsoft.Extensions.Localization](https://www.nuget.org/packages/Microsoft.Extensions.Localization) for any localization related work.
 
 For more documentation on localization, read the references listed at the bottom.
 

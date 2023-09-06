@@ -7,7 +7,7 @@ This is a mobile app project template using [Uno Platform](https://github.com/un
 - It uses the MVVM pattern.
 - Code is organized by [application layer](doc/Architecture.md#Solution-Structure).
 - It comes with [dependency injection](doc/DependencyInjection.md).
-- There are built-in [logs](doc/Logging.md) and [diagnostics tools](doc/Diagnostics.md).
+- There are built-in [logs](doc/Logging.md) and [diagnostic tools](doc/Diagnostics.md).
 - There is scaffolding code showing sample features.
   When you run as-is, you get a _Dad Jokes_ application.
 
@@ -16,7 +16,7 @@ From left to right: WinUI, iOS, and Android.
 ![Platform-Comparison-Preview](https://user-images.githubusercontent.com/39710855/264705525-d070952c-04c7-4f4a-b6af-957f8415fb3e.png)
 > Note that scaling was adjusted to better fit this preview and therefore this image isn't representative of the actual device sizes.
 
-### Diagnostics Tools
+### Diagnostic Tools
 ![Diagnostics-Overlay-Preview](https://user-images.githubusercontent.com/39710855/264691340-dbc9d137-a199-4969-94d7-7dd430e08da7.gif)
 
 ## Requirements
@@ -65,26 +65,31 @@ We use `dotnet` project templates to easily create new projects. It simplifies t
    
    ![](doc/images/VisualStudioTaskListForNextSteps.PNG)
 
-## Documentation
-
+## Architecture and Recipes
 This repository provides documentation on different topics under the [doc](doc/) folder.
 
-- [Architecture](doc/Architecture.md)
-- [Startup](doc/Startup.md)
-- [Dependency Injection](doc/DependencyInjection.md)
-- [Configuration](doc/Configuration.md)
-- [HTTP](doc/HTTP.md)
-- [Logging](doc/Logging.md)
-- [Diagnostics](doc/Diagnostics.md)
-- [Platform specifics](doc/PlatformSpecifics.md)
-- [Serialization](doc/Serialization.md)
-- [Testing](doc/Testing.md)
-- [Environments](doc/Environments.md)
-- [Localization](doc/Localization.md)
-- [Validation](doc/Validation.md)
-- [Error handling](doc/ErrorHandling.md)
-- [Scheduling](doc/Scheduling.md)
-- [Reviews (app star ratings)](doc/Reviews.md)
+### Architecture
+
+The software architecture of the application is documented in the [Architecture](doc/Architecture.md) document.
+
+### Summary of Recipes
+| Topic | Recipe/Implementation |
+|-|-|
+UI Framework | [WinUI](https://learn.microsoft.com/en-us/windows/apps/winui/)<br/>[Uno Platform](https://platform.uno/)
+[MVVM](doc/Architecture.md#mvvm---viewmodels) | [Chinook.DynamicMvvm](https://github.com/nventive/Chinook.DynamicMvvm)
+[Dependency Injection](doc/DependencyInjection.md) | [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)<br/>[Microsoft.Extensions.DependencyInjection](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.dependencyinjection)
+[Configuration](doc/Configuration.md) | [Microsoft.Extensions.Configuration](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration)
+[Runtime Environments](doc/Environments.md) | [Microsoft.Extensions.Configuration](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.configuration)
+Design System | [Uno.Material](https://platform.uno/docs/articles/external/uno.themes/doc/material-getting-started.html)<br/>[Material Design](https://m3.material.io/)
+[HTTP](doc/HTTP.md) | [Refit](https://github.com/reactiveui/refit)<br/>[Microsoft.Extensions.Http](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.http)
+[Async Data Loading](doc/DataLoading.md) | [Chinook.DataLoader](https://github.com/nventive/Chinook.DataLoader)
+[Logging](doc/Logging.md) | [Serilog](https://serilog.net/)<br/>[Microsoft.Extensions.Logging](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.logging)
+[Testing](doc/Testing.md) | [xUnit](https://github.com/xunit/xunit)
+[Serialization](doc/Serialization.md) | [System.Text.Json](https://docs.microsoft.com/en-us/dotnet/api/system.text.json)
+[Localization](doc/Localization.md) | [Microsoft.Extensions.Localization](https://learn.microsoft.com/en-us/dotnet/api/microsoft.extensions.localization)
+[Navigation](doc/Architecture.md#navigation) | [Chinook.Navigation](https://github.com/nventive/Chinook.Navigation)<br/>[Chinook.BackButtonManager](https://github.com/nventive/Chinook.BackButtonManager)
+[Validation](doc/Validation.md) | [FluentValidation](https://fluentvalidation.net/)
+[App Reviews](doc/Reviews.md) | [ReviewService](https://github.com/nventive/ReviewService)
 
 ## Debugging or Testing the Template
 Here's how to install the template directly from the code, in the case that you want to modify it and would like to test your changes.

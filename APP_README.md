@@ -64,9 +64,10 @@ If you're unfamiliar with Azure Pipeline, you should at least read about the fol
 `nuget.config` | Contains the configuration for NuGet packages.
 `tools/` | Offers a place to put custom tools and scripts. It also contains some information about the version of the template that was used to generate the project.
 
-## Solution Structure
+## Software Architecture
 
-See [Solution Structure in Architecture.md](doc/Architecture.md#solution-structure).
+The software architecture of the application is documented in the [Architecture.md](doc/Architecture.md) document.
+It covers things like the application context, the functional overview, the application structure, the solution structure, the recipes, and more.
 
 ## Pipelines
 
