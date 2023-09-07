@@ -52,9 +52,6 @@ public sealed class Startup : StartupBase
 
 	protected override void OnInitialized(IServiceProvider services)
 	{
-#if false
-		AsyncWebView.AsyncWebView.Logger = services.GetRequiredService<ILogger<AsyncWebView.AsyncWebView>>();
-#endif
 		// Configures a default refresh command for all DataLoaderView controls.
 		DataLoaderView.DefaultRefreshCommandProvider = GetDataLoaderViewRefreshCommand;
 
