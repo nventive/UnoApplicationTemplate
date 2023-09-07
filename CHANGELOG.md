@@ -22,6 +22,8 @@ Prefix your items with `(Template)` if the change is about the template and not 
   - `CONTRIBUTING.md`
 * (Template) Introduce the APP_README.md template to generate a better README for the generated projects.
 * Update the solution structure image.
+* Added window title to Windows.
+* Removed AsyncWebView.
 
 ## 0.75.X - 2023-08-22
 Initial release on nuget.org.

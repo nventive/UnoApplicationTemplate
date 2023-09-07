@@ -37,9 +37,6 @@ public static class NavigationConfiguration
 		{ typeof(OnboardingPageViewModel), typeof(OnboardingPage) },
 		{ typeof(SettingsPageViewModel), typeof(SettingsPage) },
 		{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
-		/*
-		{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
-		*/
 		{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
 		{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
 		{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },

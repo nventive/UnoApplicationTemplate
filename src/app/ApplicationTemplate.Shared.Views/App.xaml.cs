@@ -62,7 +62,7 @@ public sealed partial class App : Application
 
 		if (isFirstLaunch)
 		{
-			ConfigureViewSize();
+			ConfigureWindow();
 			ConfigureStatusBar();
 
 			Startup.Initialize(GetContentRootPath(), GetSettingsFolderPath(), LoggingConfiguration.ConfigureLogging);
@@ -155,7 +155,7 @@ public sealed partial class App : Application
 		resources.Add("StatusBarGridLength", new GridLength(statusBarHeight, GridUnitType.Pixel));
 	}
 
-	private void ConfigureViewSize()
+	private void ConfigureWindow()
 	{
 //-:cnd:noEmit
 #if __WINDOWS__
@@ -164,9 +164,10 @@ public sealed partial class App : Application
 		var appWindow = Microsoft.UI.Windowing.AppWindow.GetFromWindowId(windowId);
 		appWindow.Resize(new Windows.Graphics.SizeInt32 { Width = 480, Height = 800 });
 
-		// Sets a title bar icon.
+		// Sets a title bar icon and title.
 		// Workaround. See https://github.com/microsoft/microsoft-ui-xaml/issues/6773 for more details.
 		appWindow.SetIcon("Images\\TitleBarIcon.ico");
+		appWindow.Title = "ApplicationTemplate";
 #endif
 //+:cnd:noEmit
 	}

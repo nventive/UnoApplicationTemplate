@@ -22,9 +22,6 @@
 				<ResourceDictionary Source="Styles/Application/Fonts.xaml" />
 				<ResourceDictionary Source="Styles/Application/Icons.xaml" />
 				<ResourceDictionary Source="Styles/Application/LayoutConstants.xaml" />
-				<!--
-				<ResourceDictionary Source="Styles/Controls/AsyncWebView.xaml" />
-				-->
 				<ResourceDictionary Source="Styles/Controls/Button.xaml" />
 				<ResourceDictionary Source="Styles/Controls/BottomTabBarButton.xaml" />
 				<ResourceDictionary Source="Styles/Controls/CalendarView.xaml" />
