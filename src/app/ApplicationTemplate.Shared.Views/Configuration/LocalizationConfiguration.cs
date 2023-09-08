@@ -23,6 +23,7 @@ public static class LocalizationConfiguration
 
 	private static CultureInfo[] SupportedCultures { get; } = new CultureInfo[]
 	{
+		// TODO: Set your supported cultures here.
 		new CultureInfo("en-CA"),
 		new CultureInfo("fr-CA"),
 	};
@@ -186,6 +187,9 @@ public class ThreadCultureOverrideService : IThreadCultureOverrideService
 			{
 				culture = _fallbackCulture;
 			}
+
+			// Set the language override. This is necessary on WinUI for the ResourceLoader to work.
+			Windows.Globalization.ApplicationLanguages.PrimaryLanguageOverride = culture.TwoLetterISOLanguageName;
 
 			// Override the current thread culture.
 			_uiThread.CurrentCulture = culture;
