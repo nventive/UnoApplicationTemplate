@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
 ## 0.76.X
+* Removed unused and deprecated package.
 * Fixed WinUI app always being in French.
 * Improved architecture documentation by adding a **Technical Overview** section listing all major recipes.
 * Renamed the `build` solution folder to `root` to better represent its content and added new `build` solution folder containing the content of the `build` folder.
