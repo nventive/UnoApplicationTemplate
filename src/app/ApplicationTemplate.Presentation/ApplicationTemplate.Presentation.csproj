@@ -18,7 +18,6 @@
 		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
 		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.2" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Filter" Version="1.1.2" />
 		<PackageReference Include="ReviewService" Version="1.0.0" />
 		<PackageReference Include="Uno.SourceGenerationTasks" Version="4.2.0" />
 		<PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
