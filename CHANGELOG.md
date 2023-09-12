@@ -5,6 +5,14 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 1.0.X
+- Removed the UI tests project.
+- Split the automated tests into 2 projects: 
+  - **ApplicationTemplate.Tests.Unit** for unit tests.
+  - **ApplicationTemplate.Tests.Functional** for functional tests.
+- Added `azure-pipelines-api-integration-tests.yml` as an API Integration Tests Pipeline.
+- Removed the installation of the mobile dotnet workloads for pipelines test steps.
+
 ## 0.76.X
 * Removed deprecated info.plist keys.
 * Removed unused and deprecated package.

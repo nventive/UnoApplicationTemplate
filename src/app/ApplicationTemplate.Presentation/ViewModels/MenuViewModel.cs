@@ -25,14 +25,17 @@ public sealed partial class MenuViewModel : ViewModel
 	/// <summary>
 	/// The list of ViewModel types on which the bottom menu should be visible.
 	/// </summary>
-	private Type[] _viewModelsWithBottomMenu = new Type[]
+	private static Type[] _viewModelsWithBottomMenu = new Type[]
 	{
 		typeof(DadJokesPageViewModel),
 		typeof(PostsPageViewModel),
 		typeof(SettingsPageViewModel),
 	};
 
-	public string MenuState => this.GetFromObservable(ObserveMenuState(), initialValue: "Closed");
+	public string MenuState => this.GetFromObservable(
+		ObserveMenuState(),
+		initialValue: GetMenuState(_sectionsNavigator.State.GetViewModelType())
+	);
 
 	public int SelectedIndex => this.GetFromObservable<int>(ObserveSelectedIndex(), initialValue: 0);
 
@@ -54,7 +57,7 @@ public sealed partial class MenuViewModel : ViewModel
 			.Select(state =>
 			{
 				var vmType = state.GetViewModelType();
-				return _viewModelsWithBottomMenu.Contains(vmType) ? "Open" : "Closed";
+				return GetMenuState(vmType);
 			})
 			.DistinctUntilChanged()
 			// On iOS, when Visual states are changed too fast, they break. This is a workaround for this bug.
@@ -75,4 +78,6 @@ public sealed partial class MenuViewModel : ViewModel
 				};
 			})
 			.DistinctUntilChanged();
+
+	private static string GetMenuState(Type viewModelType) => _viewModelsWithBottomMenu.Contains(viewModelType) ? "Open" : "Closed";
 }

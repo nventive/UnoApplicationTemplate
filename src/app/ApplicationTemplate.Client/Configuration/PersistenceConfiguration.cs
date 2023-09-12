@@ -27,14 +27,14 @@ public static class PersistenceConfiguration
 			.AddSingleton(s => CreateObservableDataPersister(s, defaultValue: ApplicationSettings.Default));
 	}
 
-	private static IDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	public static IDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
 	{
 		// Tests projects must not use any real persistence (files on disk).
 		return new MemoryDataPersister<T>(defaultValue)
 			.ToObservablePersister(services.GetRequiredService<IBackgroundScheduler>());
 	}
 
-	private static IObservableDataPersister<T> CreateObservableDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	public static IObservableDataPersister<T> CreateObservableDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
 	{
 		return CreateDataPersister(services, defaultValue)
 			.ToObservablePersister(services.GetRequiredService<IBackgroundScheduler>());

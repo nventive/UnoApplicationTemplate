@@ -2,6 +2,7 @@
 using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
 using ApplicationTemplate.Presentation;
+using ApplicationTemplate.Presentation.Framework.Connectivity;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,6 +24,7 @@ public static class AppServicesConfiguration
 	{
 		return services
 			.AddSingleton<IMessageDialogService, AcceptOrDefaultMessageDialogService>()
+			.AddSingleton<IConnectivityProvider, MockedConnectivityProvider>()
 			.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 			.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
 			.AddSingleton<IPostService, PostService>()

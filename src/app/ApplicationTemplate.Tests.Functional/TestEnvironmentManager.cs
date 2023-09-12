@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ApplicationTemplate.Tests;
+﻿namespace ApplicationTemplate.Tests;
 
 /// <summary>
 /// This implementation of <see cref="IEnvironmentManager"/> doesn't support the override features.
@@ -13,6 +7,11 @@ public class TestEnvironmentManager : IEnvironmentManager
 {
 	public TestEnvironmentManager(string currentEnvironment = "DEVELOPMENT", string defaultEnvironment = "DEVELOPMENT")
 	{
+		if (currentEnvironment is "PRODUCTION" || defaultEnvironment is "PRODUCTION")
+		{
+			throw new ArgumentException("The production environment should not be used for tests.");
+		}
+
 		Current = currentEnvironment;
 		Default = defaultEnvironment;
 	}
