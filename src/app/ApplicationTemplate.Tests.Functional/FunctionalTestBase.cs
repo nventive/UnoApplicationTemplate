@@ -6,7 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Moq;
+using NSubstitute;
 using Serilog;
 using Xunit.Abstractions;
 
@@ -127,7 +127,7 @@ public class FunctionalTestBase : IAsyncLifetime
 				.AddSingleton<IDispatcherScheduler>(s => new DispatcherSchedulerAdapter(
 					s.GetRequiredService<IScheduler>()
 				))
-				.AddSingleton(s => new Mock<ILauncherService>().Object);
+				.AddSingleton(s => Substitute.For<ILauncherService>());
 		});
 	}
 

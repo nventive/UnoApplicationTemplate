@@ -25,16 +25,18 @@ For more documentation on testing, read the references listed at the bottom.
     result.UserIdentifier.Should().Be(post.UserIdentifier);
     ```
 
-- We use [Moq](https://www.nuget.org/packages/Moq/) to mock behaviors. An example of a mocked object could look like this:
+- We use [NSubstitute](https://www.nuget.org/packages/NSubstitute/) to mock behaviors. An example of a mocked object could look like this:
 
     ```csharp
-    var mock = new Mock<IService>();
-    mock.Setup(m => m.MyMethod("parameter")).Returns(true);
+    // Arrange
+    var service = Substitute.For<IService>();
+    service.MyMethod("parameter").Returns(true);
 
-    var myService = mock.Object;
-    myService.MyMethod("parameter");
-
-    mock.Verify(m => m.MyMethod("parameter"), Times.AtMostOnce());
+    // Act
+    mock.MyMethod("parameter");
+    
+    // Assert
+    mock.Received(1).MyMethod("parameter");
     ```
 
 ## Functional Testing
@@ -216,5 +218,5 @@ See https://github.com/danielpalme/ReportGenerator/issues/455.
 
 - [Getting started with xUnit](https://xunit.net/docs/getting-started/netfx/visual-studio)
 - [Getting started with Fluent Assertions](https://fluentassertions.com/introduction)
-- [How to use Moq](https://github.com/moq/moq4)
+- [How to use NSubstitute](https://github.com/nsubstitute/NSubstitute)
 - [How to use Coverlet](https://github.com/coverlet-coverage/coverlet)
