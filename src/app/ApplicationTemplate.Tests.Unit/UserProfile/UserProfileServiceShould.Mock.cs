@@ -1,6 +1,6 @@
 ﻿using ApplicationTemplate.Client;
 
-namespace ApplicationTemplate.Tests.Business;
+namespace ApplicationTemplate.Tests;
 
 public sealed partial class UserProfileServiceShould
 {

@@ -51,9 +51,4 @@ public partial class OnboardingPageViewModel : ViewModel
 			new OnboardingItemViewModel(this.GetService<IStringLocalizer>()["Onboarding_Content"], "ms-appx:///Assets/Tutorial_ThirdScreen_Icon.png")
 		};
 	}
-
-	public static implicit operator OnboardingPageViewModel(OnboardingItemViewModel v)
-	{
-		throw new NotImplementedException();
-	}
 }

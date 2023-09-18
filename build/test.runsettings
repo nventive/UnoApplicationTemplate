@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RunSettings>
+  <LoggerRunSettings>
+    <Loggers>      
+      <Logger friendlyName="trx" enabled="True">
+        <Configuration>
+          <LogFileName>output.trx</LogFileName>
+        </Configuration>
+      </Logger>
+    </Loggers>
+  </LoggerRunSettings>
+
+  <DataCollectors>
+    <DataCollector friendlyName="XPlat Code Coverage">
+      <Configuration>
+        <Format>cobertura</Format>
+        <ExcludeByFiles>**/*.g.cs</ExcludeByFiles>
+        <SingleHit>false</SingleHit>
+        <SkipAutoProps>true</SkipAutoProps>
+        <IncludeTestAssembly>false</IncludeTestAssembly>          
+      </Configuration>
+    </DataCollector>
+  </DataCollectors>
+
+  <TestProject>
+    <Configuration>Release</Configuration>
+  </TestProject>
+</RunSettings>

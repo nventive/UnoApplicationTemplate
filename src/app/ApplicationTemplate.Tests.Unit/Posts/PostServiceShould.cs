@@ -10,7 +10,7 @@ using FluentAssertions.Execution;
 using Moq;
 using Xunit;
 
-namespace ApplicationTemplate.Tests.Business;
+namespace ApplicationTemplate.Tests;
 
 public sealed partial class PostServiceShould
 {

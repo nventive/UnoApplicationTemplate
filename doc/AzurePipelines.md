@@ -4,6 +4,7 @@
 This project uses CI/CD pipelines that are implemented as yaml code.
 They are declared in the following files.
 - `.azure-pipelines.yml`
+- `.azure-pipelines-api-integration-tests.yml`
 - `build/canary-merge.yml`
 - `.azure-pipelines-canary.yml`
 
@@ -75,6 +76,16 @@ This stage is in charge of pushing the iOS version to the Apple AppStore. Given 
 
 ### GooglePlay Console Release Stage ([stage-release-googleplay.yml](../build/stage-release-googleplay.yml))
 Similar to the App Store stage, this stage pushes the **AAB** produced by the build to the Google Play Store. This is also meant for a properly signed AAB.
+
+## API Integration Tests Pipeline [.azure-pipelines-api-integration-tests.yml](../.azure-pipelines-api-integration-tests.yml)
+This pipeline is in charge of running all tests, including the API integration tests.
+It runs all the tests and merges their coverage results into one file to have a better idea of the overall coverage.
+
+The API integration tests are the ones defined in the Functional Tests project.
+Their configuration is simply changed so that they use real endpoint implementations instead of mocked implementations.
+This is done by setting the environment variable `USE_REAL_APIS` to `true`.
+
+This pipeline should be setup as a **scheduled pipeline** that runs every night and **should NOT be part of build validation**. PRs should not be blocked when APIs are down.
 
 ## Canary Pipelines
 Canary pipelines allow to detect regressions by periodically creating versions of the app in which all the dependencies are updated to their latest version.
