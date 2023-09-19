@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 1.1.X
+- Replaced Moq by NSubstitute.
+
 ## 1.0.X
 - Removed the UI tests project.
 - Split the automated tests into 2 projects: 

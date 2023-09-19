@@ -8,7 +8,7 @@ using ApplicationTemplate.Business;
 using ApplicationTemplate.Client;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 namespace ApplicationTemplate.Tests;
@@ -19,12 +19,12 @@ public sealed partial class UserProfileServiceShould
 	public async Task GetCurrentProfile()
 	{
 		// Arrange
-		var mockedUserProfileEndpoint = new Mock<IUserProfileEndpoint>();
+		var mockedUserProfileEndpoint = Substitute.For<IUserProfileEndpoint>();
 		mockedUserProfileEndpoint
-			.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>()))
-			.ReturnsAsync(GetMockedUserProfile);
+			.Get(Arg.Any<CancellationToken>())
+			.Returns(Task.FromResult(GetMockedUserProfile()));
 
-		var sut = new UserProfileService(mockedUserProfileEndpoint.Object);
+		var sut = new UserProfileService(mockedUserProfileEndpoint);
 
 		// Act
 		var results = await sut.GetCurrent(CancellationToken.None);
@@ -41,12 +41,12 @@ public sealed partial class UserProfileServiceShould
 			new UserProfile { Id = "12345", FirstName = "Nventive", LastName = "Nventive", Email = "nventive@nventive.ca" };
 
 		// Arrange
-		var mockedUserProfileEndpoint = new Mock<IUserProfileEndpoint>();
+		var mockedUserProfileEndpoint = Substitute.For<IUserProfileEndpoint>();
 		mockedUserProfileEndpoint
-			.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>()))
-			.ReturnsAsync(userProfile.ToData());
+			.Get(Arg.Any<CancellationToken>())
+			.Returns(Task.FromResult(userProfile.ToData()));
 
-		var sut = new UserProfileService(mockedUserProfileEndpoint.Object);
+		var sut = new UserProfileService(mockedUserProfileEndpoint);
 
 		var old = await sut.GetCurrent(CancellationToken.None);
 
@@ -54,10 +54,8 @@ public sealed partial class UserProfileServiceShould
 			new UserProfile { Id = "12345", FirstName = "Updated", LastName = "Nventive", Email = "nventive@nventive.ca" };
 
 		mockedUserProfileEndpoint
-			.Setup(endpoint => endpoint.Update(It.IsAny<CancellationToken>(), userProfile.ToData()));
-		mockedUserProfileEndpoint
-			.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>()))
-			.ReturnsAsync(userProfile.ToData());
+			.Get(Arg.Any<CancellationToken>())
+			.Returns(userProfile.ToData());
 
 		// Act
 		await sut.Update(CancellationToken.None, userProfile);

@@ -7,7 +7,7 @@ using ApplicationTemplate.Client;
 using AutoFixture.Xunit2;
 using FluentAssertions;
 using FluentAssertions.Execution;
-using Moq;
+using NSubstitute;
 using Xunit;
 
 namespace ApplicationTemplate.Tests;
@@ -18,12 +18,12 @@ public sealed partial class PostServiceShould
 	public async Task GetAllPosts()
 	{
 		// Arrange
-		var mockedPostEndpoint = new Mock<IPostEndpoint>();
+		var mockedPostEndpoint = Substitute.For<IPostEndpoint>();
 		mockedPostEndpoint
-			.Setup(endpoint => endpoint.GetAll(It.IsAny<CancellationToken>()))
-			.ReturnsAsync(GetMockedPosts().ToArray());
+			.GetAll(Arg.Any<CancellationToken>())
+			.Returns(Task.FromResult(GetMockedPosts().ToArray()));
 
-		var sut = new PostService(mockedPostEndpoint.Object);
+		var sut = new PostService(mockedPostEndpoint);
 
 		// Act
 		var results = await sut.GetPosts(CancellationToken.None);
@@ -38,12 +38,12 @@ public sealed partial class PostServiceShould
 	public async Task GetPost_WhenGivenIdIsValid(long givenId)
 	{
 		// Arrange
-		var mockedPostEndpoint = new Mock<IPostEndpoint>();
+		var mockedPostEndpoint = Substitute.For<IPostEndpoint>();
 		mockedPostEndpoint
-			.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>(), givenId))
-			.ReturnsAsync(GetMockedPost(givenId));
+			.Get(Arg.Any<CancellationToken>(), givenId)
+			.Returns(Task.FromResult(GetMockedPost(givenId)));
 
-		var sut = new PostService(mockedPostEndpoint.Object);
+		var sut = new PostService(mockedPostEndpoint);
 
 		// Act
 		var result = await sut.GetPost(CancellationToken.None, givenId);
@@ -67,15 +67,15 @@ public sealed partial class PostServiceShould
 	public async Task GetPostThrowException_WhenGivenIdIsInvalid(int givenId)
 	{
 		// Arrange
-		var mockedPostEndpoint = new Mock<IPostEndpoint>();
+		var mockedPostEndpoint = Substitute.For<IPostEndpoint>();
 		mockedPostEndpoint
-			.Setup(endpoint => endpoint.Get(It.IsAny<CancellationToken>(), It.IsAny<long>()))
-			.ReturnsAsync(GetMockedPosts()
+			.Get(Arg.Any<CancellationToken>(), Arg.Any<long>())
+			.Returns(Task.FromResult(GetMockedPosts()
 				.Where(post => post.Id == givenId)
-				.FirstOrDefault()
+				.FirstOrDefault())
 			);
 
-		var sut = new PostService(mockedPostEndpoint.Object);
+		var sut = new PostService(mockedPostEndpoint);
 
 		// Act
 		var result = await sut.GetPost(CancellationToken.None, givenId);
@@ -99,12 +99,12 @@ public sealed partial class PostServiceShould
 
 		var randomId = new Random().Next(1, int.MaxValue);
 
-		var mockedPostEndpoint = new Mock<IPostEndpoint>();
+		var mockedPostEndpoint = Substitute.For<IPostEndpoint>();
 		mockedPostEndpoint
-			.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), It.IsAny<PostData>()))
-			.ReturnsAsync((post with { Id = randomId }).ToData());
+			.Create(Arg.Any<CancellationToken>(), Arg.Any<PostData>())
+			.Returns(Task.FromResult((post with { Id = randomId }).ToData()));
 
-		var sut = new PostService(mockedPostEndpoint.Object);
+		var sut = new PostService(mockedPostEndpoint);
 
 		// Act
 		var result = await sut.Create(CancellationToken.None, post);
@@ -131,12 +131,12 @@ public sealed partial class PostServiceShould
 		// Arrange
 		var post = new Post { Title = "My title", Body = "My body", UserIdentifier = 100 };
 
-		var mockedPostEndpoint = new Mock<IPostEndpoint>();
+		var mockedPostEndpoint = Substitute.For<IPostEndpoint>();
 		mockedPostEndpoint
-			.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), post.ToData()))
-			.ReturnsAsync(default(PostData));
+			.Create(Arg.Any<CancellationToken>(), post.ToData())
+			.Returns(Task.FromResult(default(PostData)));
 
-		var sut = new PostService(mockedPostEndpoint.Object);
+		var sut = new PostService(mockedPostEndpoint);
 
 		// Act
 		var result = await sut.Create(CancellationToken.None, post);
@@ -156,12 +156,12 @@ public sealed partial class PostServiceShould
 
 		// This part is the part that must be defined by the API contract.
 		// Since there is none here, we are assuming it's giving us a null object when the body is null
-		var mockedPostEndpoint = new Mock<IPostEndpoint>();
+		var mockedPostEndpoint = Substitute.For<IPostEndpoint>();
 		mockedPostEndpoint
-			.Setup(endpoint => endpoint.Create(It.IsAny<CancellationToken>(), post.ToData()))
-			.ReturnsAsync(default(PostData));
+			.Create(Arg.Any<CancellationToken>(), post.ToData())
+			.Returns(Task.FromResult(default(PostData)));
 
-		var sut = new PostService(mockedPostEndpoint.Object);
+		var sut = new PostService(mockedPostEndpoint);
 
 		// Act
 		var result = await sut.Create(CancellationToken.None, post);
@@ -179,12 +179,12 @@ public sealed partial class PostServiceShould
 
 		// This part is the part that must be defined by the API contract.
 		// Since there is none here, we are assuming it's giving us a null object when the body is null
-		var mockedPostEndpoint = new Mock<IPostEndpoint>();
+		var mockedPostEndpoint = Substitute.For<IPostEndpoint>();
 		mockedPostEndpoint
-			.Setup(endpoint => endpoint.Update(It.IsAny<CancellationToken>(), post.Id, post.ToData()))
-			.ReturnsAsync(post.ToData());
+			.Update(Arg.Any<CancellationToken>(), post.Id, post.ToData())
+			.Returns(Task.FromResult(post.ToData()));
 
-		var sut = new PostService(mockedPostEndpoint.Object);
+		var sut = new PostService(mockedPostEndpoint);
 
 		// Act
 		var result = await sut.Update(CancellationToken.None, post.Id, post);
@@ -211,12 +211,12 @@ public sealed partial class PostServiceShould
 		// Arrange
 		var postId = 1;
 
-		var mockedPostEndpoint = new Mock<IPostEndpoint>();
+		var mockedPostEndpoint = Substitute.For<IPostEndpoint>();
 		mockedPostEndpoint
-			.Setup(endpoint => endpoint.Delete(It.IsAny<CancellationToken>(), postId))
+			.Delete(Arg.Any<CancellationToken>(), postId)
 			.Returns(Task.CompletedTask);
 
-		var sut = new PostService(mockedPostEndpoint.Object);
+		var sut = new PostService(mockedPostEndpoint);
 
 		// Act
 		Func<Task> act = () => sut.Delete(CancellationToken.None, postId);
