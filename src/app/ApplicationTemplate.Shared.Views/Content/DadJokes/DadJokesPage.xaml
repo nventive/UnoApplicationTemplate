@@ -26,7 +26,7 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource BackgroundBrush}">
+	<Grid Background="{ThemeResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -44,7 +44,7 @@
 				<AppBarButton Command="{Binding NavigateToFilters}">
 					<AppBarButton.Icon>
 						<BitmapIcon UriSource="{StaticResource FilterImage}"
-									Foreground="{StaticResource OnPrimaryBrush}" />
+									Foreground="{ThemeResource OnPrimaryBrush}" />
 					</AppBarButton.Icon>
 				</AppBarButton>
 			</CommandBar.PrimaryCommands>
@@ -62,7 +62,7 @@
 				<u:SwipeRefresh x:Name="RefreshContent"
 								RefreshCommand="{Binding ElementName=JokesDataLoader, Path=RefreshCommand}"
 								IsRefreshing="{Binding ElementName=JokesDataLoader, Path=RefreshCommand.IsExecuting}"
-								IndicatorColor="{StaticResource PrimaryBrush}">
+								IndicatorColor="{ThemeResource PrimaryBrush}">
 
 					<!-- Jokes ListView -->
 					<ListView ItemsSource="{Binding Data}"
@@ -71,7 +71,7 @@
 						<ListView.ItemTemplate>
 							<DataTemplate>
 								
-								<Grid Background="{StaticResource SurfaceBrush}"
+								<Grid Background="{ThemeResource SurfaceBrush}"
 									  Margin="0,4">
 
 									<Grid.ColumnDefinitions>

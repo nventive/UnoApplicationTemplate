@@ -9,13 +9,13 @@
 		<Setter Property="MinHeight"
 				Value="56" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceMediumBrush}" />
+				Value="{ThemeResource OnSurfaceMediumBrush}" />
 		<Setter Property="Background"
-				Value="{StaticResource SurfaceBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource OnSurfaceLowBrush}" />
+				Value="{ThemeResource OnSurfaceLowBrush}" />
 		<Setter Property="SelectionHighlightColor"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="BorderThickness"
 				Value="0.5" />
 		<Setter Property="FontWeight"

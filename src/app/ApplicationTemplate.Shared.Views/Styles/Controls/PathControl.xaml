@@ -87,7 +87,7 @@
 	<Style x:Key="ErrorXPathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Foreground"
-				Value="{StaticResource ErrorBrush}" />
+				Value="{ThemeResource ErrorBrush}" />
 		<Setter Property="Stretch"
 				Value="Uniform" />
 		<Setter Property="Height"
@@ -137,7 +137,7 @@
 	<Style x:Key="DarkCirclePathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnBackgroundBrush}" />
+				Value="{ThemeResource OnBackgroundBrush}" />
 		<Setter Property="Stretch"
 				Value="Uniform" />
 		<Setter Property="Height"
@@ -186,7 +186,7 @@
 	<Style x:Key="OutlinedHeartPathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"	
@@ -212,7 +212,7 @@
 	<Style x:Key="FilledHeartPathControlStyle"
 		   TargetType="u:PathControl">
 		<Setter Property="Foreground"
-				Value="{StaticResource ErrorBrush}" />
+				Value="{ThemeResource ErrorBrush}" />
 		<Setter Property="VerticalContentAlignment"
 				Value="Stretch" />
 		<Setter Property="HorizontalContentAlignment"

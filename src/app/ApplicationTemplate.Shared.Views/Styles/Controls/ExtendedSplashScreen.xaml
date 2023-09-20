@@ -3,7 +3,7 @@
 					xmlns:splash="using:Nventive.ExtendedSplashScreen">
 
 	<DataTemplate x:Key="WindowsExtendedSplashScreenDataTemplate">
-		<Grid Background="{StaticResource OnBackgroundColor}"
+		<Grid Background="{ThemeResource OnBackgroundBrush}"
 			  HorizontalAlignment="Stretch"
 			  VerticalAlignment="Stretch">
 			<Image Source="ms-appx:///Images/SplashScreen.png"

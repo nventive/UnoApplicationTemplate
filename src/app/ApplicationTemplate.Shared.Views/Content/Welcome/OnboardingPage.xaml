@@ -40,7 +40,7 @@
 					<!-- Message -->
 					<TextBlock Text="{Binding PrimaryText}"
 							   Style="{StaticResource TitleLarge}"
-							   Foreground="{StaticResource OnBackgroundBrush}"
+							   Foreground="{ThemeResource OnBackgroundBrush}"
 							   MaxWidth="300"
 							   VerticalAlignment="Bottom"
 							   HorizontalTextAlignment="Center"
@@ -51,7 +51,7 @@
 			<!-- Onboarding Index Indicator Template -->
 			<DataTemplate x:Key="OnboardingIndexIndicatorTemplate">
 				<StackPanel Margin="0,56">
-					<Ellipse  Fill="{StaticResource SecondaryDraggedBrush}"
+					<Ellipse  Fill="{ThemeResource SecondaryDraggedBrush}"
 							  Height="12"
 							  Width="12"
 							  Margin="8,0" />
@@ -61,7 +61,7 @@
 			<!-- Onboarding SelectedIndex Indicator Template -->
 			<DataTemplate x:Key="OnboardingSelectedIndexIndicatorTemplate">
 				<StackPanel Margin="0,56">
-					<Ellipse  Fill="{StaticResource SecondaryBrush}"
+					<Ellipse  Fill="{ThemeResource SecondaryBrush}"
 							  Height="12"
 							  Width="12"
 							  Margin="8,0" />
@@ -70,7 +70,7 @@
 		</ResourceDictionary>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource BackgroundBrush}">
+	<Grid Background="{ThemeResource BackgroundBrush}">
 
 		<!-- Background Pattern -->
 		<Image Source="{StaticResource BackgroundMustachesLightImage}"

@@ -4,7 +4,7 @@
 	  xmlns:local="using:ApplicationTemplate"
 	  xmlns:toolkit="using:Uno.UI.Toolkit">
 
-	<Grid Background="{StaticResource BackgroundBrush}">
+	<Grid Background="{ThemeResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

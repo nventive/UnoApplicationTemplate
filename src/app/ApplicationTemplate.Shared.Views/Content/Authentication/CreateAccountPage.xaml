@@ -44,14 +44,14 @@
 					<TextBlock Text="Join the fun!"
 							   x:Uid="CreateAccount_Title"
 							   Style="{StaticResource HeadlineLarge}"
-							   Foreground="{StaticResource OnPrimaryBrush}"
+							   Foreground="{ThemeResource OnPrimaryBrush}"
 							   TextAlignment="Center" />
 
 					<!-- Subtitle -->
 					<TextBlock Text="Only 2 seconds to create an account"
 							   x:Uid="CreateAccount_Subtitle"
 							   Style="{StaticResource BodyLarge}"
-							   Foreground="{StaticResource OnPrimaryBrush}"
+							   Foreground="{ThemeResource OnPrimaryBrush}"
 							   TextAlignment="Center"
 							   Margin="0,16,0,0" />
 
@@ -130,7 +130,7 @@
 					<TextBlock Text="Date of birth"
 							   x:Uid="CreateAccount_DateOfBirth"
 							   Style="{StaticResource TitleSmall}"
-							   Foreground="{StaticResource OnPrimaryBrush}"
+							   Foreground="{ThemeResource OnPrimaryBrush}"
 							   Margin="0,12,0,0" />
 
 					<!-- Birth Day DatePicker -->
@@ -140,8 +140,8 @@
 						<!-- Issue: https://github.com/unoplatform/Uno.Themes/issues/969 -->
 						<CalendarDatePicker x:Name="BirthDayField"
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-											Background="{StaticResource SurfaceBrush}"
-											Foreground="{StaticResource OnSurfaceBrush}"
+											Background="{ThemeResource SurfaceBrush}"
+											Foreground="{ThemeResource OnSurfaceBrush}"
 											HorizontalAlignment="Stretch"
 											MinHeight="56" />
 					</local:DataValidationView>
@@ -201,7 +201,7 @@
 								   Text="8 characters minimum"
 								   x:Uid="Password_Validation1"
 								   Style="{StaticResource BodyMediumLight}"
-								   Foreground="{StaticResource OnPrimaryBrush}"
+								   Foreground="{ThemeResource OnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
 								   not_android:Margin="8,3,0,0" />
@@ -223,7 +223,7 @@
 								   Text="One number"
 								   x:Uid="Password_Validation2"
 								   Style="{StaticResource BodyMediumLight}"
-								   Foreground="{StaticResource OnPrimaryBrush}"
+								   Foreground="{ThemeResource OnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
 								   not_android:Margin="8,3,0,0" />
@@ -245,7 +245,7 @@
 								   Text="One uppercase character"
 								   x:Uid="Password_Validation3"
 								   Style="{StaticResource BodyMediumLight}"
-								   Foreground="{StaticResource OnPrimaryBrush}"
+								   Foreground="{ThemeResource OnPrimaryBrush}"
 								   VerticalAlignment="Center"
 								   android:Margin="8,0,0,0"
 								   not_android:Margin="8,3,0,0" />
@@ -255,7 +255,7 @@
 					<TextBlock Text="Favorite dad nickname (pick at least 1)"
 							   x:Uid="CreateAccount_FavoriteDadNames"
 							   Style="{StaticResource TitleSmall}"
-							   Foreground="{StaticResource OnPrimaryBrush}"
+							   Foreground="{ThemeResource OnPrimaryBrush}"
 							   Margin="0,16,0,0" />
 
 					<!-- Favorite Dad names -->
@@ -263,7 +263,7 @@
 											  Model="{Binding Form}"
 											  Margin="0,4,0,0">
 						<!-- List -->
-						<Grid Background="{StaticResource SurfaceBrush}"
+						<Grid Background="{ThemeResource SurfaceBrush}"
 							  CornerRadius="4">
 							<!--Remove this line from listView Properties to avoid crash on Windows App: ue:ListViewBaseMultipleSelectionBehavior.SelectedItems="{Binding Form.FavoriteDadNames, Mode=TwoWay}"
 								Restore when the following issue is resolved : https://github.com/nventive/Nventive.View/issues/41-->
@@ -285,7 +285,7 @@
 								  Content="I agree to the terms of services"
 								  x:Uid="CreateAccount_TermsOfServices"
 								  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								  Foreground="{StaticResource SurfaceBrush}"
+								  Foreground="{ThemeResource SurfaceBrush}"
 								  Style="{StaticResource CustomCheckBoxStyle}"
 								  HorizontalAlignment="Left" />
 					</local:DataValidationView>

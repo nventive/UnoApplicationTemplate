@@ -3,7 +3,7 @@
 					xmlns:dl="using:Chinook.DataLoader">
 
 	<DataTemplate x:Key="DataLoaderViewEmptyTemplate">
-		<Grid Background="{StaticResource BackgroundBrush}">
+		<Grid Background="{ThemeResource BackgroundBrush}">
 			<TextBlock Text="Nothing to show here"
 					   Style="{StaticResource BodyLarge}"
 					   HorizontalAlignment="Center"
@@ -41,7 +41,7 @@
 
 	<!-- Error State -->
 	<DataTemplate x:Key="DataLoaderViewErrorTemplate">
-		<Grid Background="{StaticResource BackgroundBrush}">
+		<Grid Background="{ThemeResource BackgroundBrush}">
 			<StackPanel VerticalAlignment="Center"
 						HorizontalAlignment="Stretch">
 
@@ -49,14 +49,14 @@
 				<Canvas Width="210"
 						Height="226">
 					<Path Data="{StaticResource ErrorStateHalfCircleIcon}"
-						  Fill="{StaticResource PrimaryBrush}" />
+						  Fill="{ThemeResource PrimaryBrush}" />
 					<Path Data="{StaticResource ErrorStateMustacheIcon}"
-						  Fill="{StaticResource SecondaryBrush}" />
+						  Fill="{ThemeResource SecondaryBrush}" />
 					<Rectangle Canvas.Top="74"
 							   Canvas.Left="22"
 							   Width="67"
 							   Height="5"
-							   Fill="{StaticResource ErrorBrush}">
+							   Fill="{ThemeResource ErrorBrush}">
 						<Rectangle.RenderTransform>
 							<RotateTransform CenterX="34.6439"
 											 CenterY="65.7733"
@@ -64,20 +64,20 @@
 						</Rectangle.RenderTransform>
 					</Rectangle>
 					<Path Data="{StaticResource ErrorStateHatIcon}"
-						  Stroke="{StaticResource ErrorBrush}"
+						  Stroke="{ThemeResource ErrorBrush}"
 						  StrokeThickness="5" />
 				</Canvas>
 
 				<!-- Title -->
 				<TextBlock Text="Something went wrong"
-						   Foreground="{StaticResource OnBackgroundBrush}"
+						   Foreground="{ThemeResource OnBackgroundBrush}"
 						   Style="{StaticResource TitleLarge}"
 						   TextAlignment="Center"
 						   Margin="0,0,0,8" />
 
 				<!-- Message -->
 				<TextBlock Text="Please try again."
-						   Foreground="{StaticResource OnSurfaceMediumBrush}"
+						   Foreground="{ThemeResource OnSurfaceMediumBrush}"
 						   Style="{StaticResource BodyLarge}"
 						   TextAlignment="Center" />
 
@@ -263,7 +263,7 @@
 										  Padding="{TemplateBinding Padding}" />
 
 						<ProgressRing x:Name="LoadingIndicator"
-									  Foreground="Black"
+									  Foreground="{ThemeResource OnBackgroundBrush}"
 									  Visibility="Collapsed"
 									  IsActive="False"
 									  Width="20"
