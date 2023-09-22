@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
 ## 1.1.X
+- Update Uno Material packages to latest version.
+- Fix colors not changing when changing the theme.
 - Replaced Moq by NSubstitute.
 
 ## 1.0.X

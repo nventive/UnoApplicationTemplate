@@ -36,8 +36,8 @@ To generate this file, following the following steps:
 <AndroidAotProfile Include="$(MSBuildThisFileDirectory)custom.aprof" />
 ```
 
-[For more information, follow this article.](https://devblogs.microsoft.com/dotnet/performance-improvements-in-dotnet-maui)
-[For more documentation, follow this GitHub.](https://github.com/jonathanpeppers/Mono.Profiler.Android)
+- [For more information, check this article.](https://devblogs.microsoft.com/dotnet/performance-improvements-in-dotnet-maui)
+- [For more documentation, check this GitHub.](https://github.com/jonathanpeppers/Mono.Profiler.Android)
 
 ### iOS
 

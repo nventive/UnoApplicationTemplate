@@ -36,7 +36,7 @@
 			<CommandBar Style="{StaticResource TransparentCommandBarStyle}" />
 
 			<ScrollViewer>
-				
+
 				<StackPanel VerticalAlignment="Center"
 							Margin="44,44,44,32">
 
@@ -59,7 +59,7 @@
 					<local:DataValidationView PropertyName="FirstName"
 											  Model="{Binding Form}"
 											  Margin="0,32,0,0">
-						
+
 						<TextBox PlaceholderText="First Name"
 								 x:Uid="CreateAccount_FirstName"
 								 Text="{Binding Form.FirstName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
@@ -75,7 +75,7 @@
 					<local:DataValidationView PropertyName="LastName"
 											  Model="{Binding Form}"
 											  Margin="0,12,0,0">
-						
+
 						<TextBox x:Name="LastNameField"
 								 PlaceholderText="Last Name"
 								 x:Uid="CreateAccount_LastName"
@@ -92,7 +92,7 @@
 					<local:DataValidationView PropertyName="Email"
 											  Model="{Binding Form}"
 											  Margin="0,12,0,0">
-						
+
 						<TextBox x:Name="EmailField"
 								 PlaceholderText="Enter an email"
 								 x:Uid="CreateAccount_Email"
@@ -110,7 +110,7 @@
 					<local:DataValidationView PropertyName="PhoneNumber"
 											  Model="{Binding Form}"
 											  Margin="0,12,0,0">
-						
+
 						<TextBox x:Name="PhoneNumberField"
 								 PlaceholderText="Phone Number (000) 000-0000"
 								 x:Uid="CreateAccount_PhoneNumber"
@@ -136,12 +136,8 @@
 					<!-- Birth Day DatePicker -->
 					<local:DataValidationView PropertyName="DateOfBirth"
 											  Model="{Binding Form}">
-						<!-- On Uno Material V2 the Background and the Foreground properties don't take the correct values -->
-						<!-- Issue: https://github.com/unoplatform/Uno.Themes/issues/969 -->
 						<CalendarDatePicker x:Name="BirthDayField"
 											Date="{Binding Form.DateOfBirth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-											Background="{ThemeResource SurfaceBrush}"
-											Foreground="{ThemeResource OnSurfaceBrush}"
 											HorizontalAlignment="Stretch"
 											MinHeight="56" />
 					</local:DataValidationView>
@@ -171,7 +167,7 @@
 					<local:DataValidationView PropertyName="Password"
 											  Model="{Binding PasswordForm}"
 											  Margin="0,8,0,0">
-						
+
 						<PasswordBox x:Name="PasswordField"
 									 x:Uid="CreateAccount_Password"
 									 PlaceholderText="Choose a password"
@@ -276,21 +272,41 @@
 
 					<!-- Terms of Service Agreement -->
 					<local:DataValidationView PropertyName="AgreeToTermsOfServices"
-											Model="{Binding Form}"
-											Margin="0,12,0,0">
+											  Model="{Binding Form}"
+											  Margin="0,12,0,0">
 
 						<!-- Checkbox -->
-						<!-- TODO: Remove custom style once this issue has been resolved : https://github.com/unoplatform/Uno.Themes/issues/823 -->
 						<CheckBox x:Name="TermsOfServiceCheckBox"
 								  Content="I agree to the terms of services"
 								  x:Uid="CreateAccount_TermsOfServices"
 								  IsChecked="{Binding Form.AgreeToTermsOfServices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-								  Foreground="{ThemeResource SurfaceBrush}"
-								  Style="{StaticResource CustomCheckBoxStyle}"
-								  HorizontalAlignment="Left" />
+								  HorizontalAlignment="Left">
+							<CheckBox.Resources>
+								<SolidColorBrush x:Key="CheckBoxForegroundUnchecked"
+												 Color="{ThemeResource OnPrimaryColor}" />
+								<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPointerOver"
+												 Color="{ThemeResource OnPrimaryColor}" />
+								<SolidColorBrush x:Key="CheckBoxForegroundUncheckedPressed"
+												 Color="{ThemeResource OnPrimaryColor}" />
+
+								<SolidColorBrush x:Key="CheckBoxForegroundChecked"
+												 Color="{ThemeResource OnPrimaryColor}" />
+								<SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver"
+												 Color="{ThemeResource OnPrimaryColor}" />
+								<SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed"
+												 Color="{ThemeResource OnPrimaryColor}" />
+
+								<SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUnchecked"
+												 Color="{ThemeResource OnPrimaryColor}" />
+								<SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPointerOver"
+												 Color="{ThemeResource OnPrimaryColor}" />
+								<SolidColorBrush x:Key="CheckBoxCheckBackgroundStrokeUncheckedPressed"
+												 Color="{ThemeResource OnPrimaryColor}" />
+							</CheckBox.Resources>
+						</CheckBox>
 					</local:DataValidationView>
 
-						<!-- Confirm Button -->
+					<!-- Confirm Button -->
 					<Button x:Name="ConfirmButton"
 							Content="CREATE AN ACCOUNT"
 							x:Uid="CreateAccount_Confirm"
