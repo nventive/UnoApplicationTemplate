@@ -17,7 +17,7 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource HeadlineLarge}">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="FontWeight"
 				Value="Bold" />
 		<Setter Property="CharacterSpacing"
@@ -30,14 +30,14 @@
 		<Setter Property="FontWeight"
 				Value="Bold" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 	</Style>
 
 	<Style x:Key="TitleLarge"
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource TitleLarge}">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="FontWeight"
 				Value="Medium" />
 		<Setter Property="LineHeight"
@@ -54,7 +54,7 @@
 		<Setter Property="FontStyle"
 				Value="Italic" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
@@ -69,7 +69,7 @@
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
@@ -80,7 +80,7 @@
 		   TargetType="TextBlock"
 		   BasedOn="{StaticResource BodyLarge}">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="24" />
 		<Setter Property="CharacterSpacing"
@@ -93,7 +93,7 @@
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="20" />
 		<Setter Property="CharacterSpacing"
@@ -106,7 +106,7 @@
 		<Setter Property="FontSize"
 				Value="12" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="17" />
 		<Setter Property="CharacterSpacing"
@@ -119,7 +119,7 @@
 		<Setter Property="FontSize"
 				Value="12" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="LineHeight"
 				Value="17" />
 		<Setter Property="CharacterSpacing"

@@ -19,7 +19,7 @@
 
 	<!--
 		Some of the pages design flip the dichotomy of Background colors with their OnBackground complement.
-		So we have those brushes to avoid the 
+		So we have those brushes to avoid using material brushes contrary to their design.
 	-->
 	<SolidColorBrush x:Key="AlternateBackgroundBrush"
 					 Color="{ThemeResource OnBackgroundColor}" />

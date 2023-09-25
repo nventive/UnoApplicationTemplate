@@ -5,7 +5,7 @@
 		   BasedOn="{StaticResource HyperlinkButtonStyle}"
 		   TargetType="HyperlinkButton">
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceMediumBrush}" />
+				Value="{ThemeResource OnSurfaceMediumBrush}" />
 		<Setter Property="FontSize"
 				Value="12" />
 	</Style>

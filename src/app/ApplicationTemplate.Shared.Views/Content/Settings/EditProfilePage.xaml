@@ -8,7 +8,7 @@
 	  xmlns:ios="http://uno.ui/ios"
 	  mc:Ignorable="android ios">
 
-	<Grid Background="{StaticResource BackgroundBrush}">
+	<Grid Background="{ThemeResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />

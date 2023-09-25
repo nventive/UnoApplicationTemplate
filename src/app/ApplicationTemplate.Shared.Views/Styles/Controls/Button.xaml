@@ -35,7 +35,7 @@
 		<Setter Property="Padding"
 				Value="16,6" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnBackgroundBrush}" />
+				Value="{ThemeResource OnBackgroundBrush}" />
 		<Setter Property="BorderBrush"
 				Value="Transparent" />
 		<Setter Property="FontSize"
@@ -66,13 +66,13 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource PrimaryHoverBrush}" />
+												Value="{ThemeResource PrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource PrimaryPressedBrush}" />
+												Value="{ThemeResource PrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -113,7 +113,7 @@
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Background"
-				Value="{StaticResource PrimaryBrush}" />
+				Value="{ThemeResource PrimaryBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -121,7 +121,7 @@
 		<Setter Property="Padding"
 				Value="16,6" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnPrimaryBrush}" />
+				Value="{ThemeResource OnPrimaryBrush}" />
 		<Setter Property="FontSize"
 				Value="14" />
 		<Setter Property="CharacterSpacing"
@@ -145,13 +145,13 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="Overlay.Background"
-												Value="{StaticResource OnPrimaryHoverBrush}" />
+												Value="{ThemeResource OnPrimaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="Overlay.Background"
-												Value="{StaticResource OnPrimaryPressedBrush}" />
+												Value="{ThemeResource OnPrimaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>
@@ -196,7 +196,7 @@
 		<Setter Property="Height"
 				Value="40" />
 		<Setter Property="Background"
-				Value="{StaticResource SurfaceBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="HorizontalContentAlignment"
 				Value="Center" />
 		<Setter Property="VerticalContentAlignment"
@@ -204,9 +204,9 @@
 		<Setter Property="Padding"
 				Value="10,8,10,8" />
 		<Setter Property="Foreground"
-				Value="{StaticResource OnSurfaceBrush}" />
+				Value="{ThemeResource OnSurfaceBrush}" />
 		<Setter Property="BorderBrush"
-				Value="{StaticResource SurfaceBrush}" />
+				Value="{ThemeResource SurfaceBrush}" />
 		<Setter Property="BorderThickness"
 				Value="1" />
 		<Setter Property="FontSize"
@@ -231,17 +231,17 @@
 								<VisualState x:Name="PointerOver">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource SecondaryHoverBrush}" />
+												Value="{ThemeResource SecondaryHoverBrush}" />
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource SecondaryHoverBrush}" />
+												Value="{ThemeResource SecondaryHoverBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 								<VisualState x:Name="Pressed">
 									<VisualState.Setters>
 										<Setter Target="RootGrid.Background"
-												Value="{StaticResource SecondaryPressedBrush}" />
+												Value="{ThemeResource SecondaryPressedBrush}" />
 										<Setter Target="RootGrid.BorderBrush"
-												Value="{StaticResource SecondaryPressedBrush}" />
+												Value="{ThemeResource SecondaryPressedBrush}" />
 									</VisualState.Setters>
 								</VisualState>
 							</VisualStateGroup>

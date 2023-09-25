@@ -209,18 +209,18 @@
 																<Setter Target="Text.BorderBrush"
 																		Value="{ThemeResource CalendarViewNavigationButtonBorderBrushPointerOver}" />
 																<Setter Target="Text.Foreground"
-																		Value="{StaticResource OnPrimaryMediumBrush}" />
+																		Value="{ThemeResource OnPrimaryMediumBrush}" />
 																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{StaticResource OnPrimaryMediumBrush}" />
+																		Value="{ThemeResource OnPrimaryMediumBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 
 														<VisualState x:Name="Pressed">
 															<VisualState.Setters>
 																<Setter Target="Text.Foreground"
-																		Value="{StaticResource OnPrimaryLowBrush}" />
+																		Value="{ThemeResource OnPrimaryLowBrush}" />
 																<Setter Target="DownArrowGlyph.Fill"
-																		Value="{StaticResource OnPrimaryLowBrush}" />
+																		Value="{ThemeResource OnPrimaryLowBrush}" />
 															</VisualState.Setters>
 														</VisualState>
 														<VisualState x:Name="Disabled">

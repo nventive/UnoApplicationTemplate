@@ -5,7 +5,7 @@
 	  xmlns:dl="using:Chinook.DataLoader">
 
 	<Grid x:Name="PostPage"
-		  Background="{StaticResource BackgroundBrush}">
+		  Background="{ThemeResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -27,14 +27,14 @@
 					<u:SwipeRefresh x:Name="RefreshContent"
 									RefreshCommand="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand}"
 									IsRefreshing="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand.IsExecuting}"
-									IndicatorColor="{StaticResource PrimaryBrush}">
+									IndicatorColor="{ThemeResource PrimaryBrush}">
 
 						<!-- ListView -->
 						<ListView ItemsSource="{Binding Data}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
 
-									<StackPanel Background="{StaticResource SurfaceBrush}"
+									<StackPanel Background="{ThemeResource SurfaceBrush}"
 												Margin="0,16,0,0"
 												Padding="16">
 
@@ -44,7 +44,7 @@
 
 										<!-- Body -->
 										<TextBlock Text="{Binding Body}"
-												   Foreground="{StaticResource OnSurfaceBrush}"
+												   Foreground="{ThemeResource OnSurfaceBrush}"
 												   Style="{StaticResource BodyMedium}"
 												   Opacity="{StaticResource MediumOpacity}"
 												   Margin="0,8,0,0" />
@@ -83,14 +83,14 @@
 					Margin="24">
 
 				<!-- Border -->
-				<Border Background="{StaticResource SecondaryBrush}"
+				<Border Background="{ThemeResource SecondaryBrush}"
 						CornerRadius="50"
 						Width="56"
 						Height="56">
 
 					<!-- Icon -->
 					<Path Data="{StaticResource PlusIcon}"
-						  Fill="{StaticResource OnSecondaryBrush}"
+						  Fill="{ThemeResource OnSecondaryBrush}"
 						  Width="24"
 						  Height="24" />
 				</Border>

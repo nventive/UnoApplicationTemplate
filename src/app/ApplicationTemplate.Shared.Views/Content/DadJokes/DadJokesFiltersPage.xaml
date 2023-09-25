@@ -19,7 +19,7 @@
 		</DataTemplate>
 	</Page.Resources>
 
-	<Grid Background="{StaticResource BackgroundBrush}">
+	<Grid Background="{ThemeResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
