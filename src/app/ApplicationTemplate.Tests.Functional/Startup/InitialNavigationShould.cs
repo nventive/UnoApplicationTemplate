@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using ApplicationTemplate.Tests;
 
 namespace Startup;

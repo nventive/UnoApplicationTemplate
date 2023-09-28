@@ -40,7 +40,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Tests.U
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "ApplicationTemplate.Views", "app\ApplicationTemplate.Shared.Views\ApplicationTemplate.Views.shproj", "{746587E0-B8E4-4A78-A7EA-DBC356367712}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Client", "app\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj", "{EDCD3803-CFDB-442B-8C2D-E779BCD1178D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Access", "app\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj", "{EDCD3803-CFDB-442B-8C2D-E779BCD1178D}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app-shared", "app-shared", "{D0BDE23D-F91F-4E0B-A38F-538D2605703B}"
 EndProject

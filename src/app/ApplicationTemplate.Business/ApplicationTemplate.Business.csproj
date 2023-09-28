@@ -5,6 +5,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj" />
+		<ProjectReference Include="..\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj" />
 	</ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ For more documentation on HTTP requests, read the references listed at the botto
 
 - We use `DelegatingHandler` to create HTTP request / response pipelines. There are lot of delegating handlers implementation in the community, we provide some in [MallardMessageHandlers](https://github.com/nventive/MallardMessageHandlers).
 
-- We use [Refit](https://www.nuget.org/packages/Refit/) to generate the implementation of the client layer.
+- We use [Refit](https://www.nuget.org/packages/Refit/) to generate the HTTP implementations in the data access layer.
 
 ## Mocking
 

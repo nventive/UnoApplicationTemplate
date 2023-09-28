@@ -1,4 +1,4 @@
-﻿using ApplicationTemplate.Client;
+﻿using ApplicationTemplate.DataAccess;
 
 namespace ApplicationTemplate.Tests;
 

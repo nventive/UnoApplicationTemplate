@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;

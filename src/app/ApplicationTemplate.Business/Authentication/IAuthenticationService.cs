@@ -2,7 +2,7 @@
 using System.Reactive;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using MallardMessageHandlers;
 
 namespace ApplicationTemplate.Business;

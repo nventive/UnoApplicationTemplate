@@ -253,7 +253,7 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 		IEnumerable<Assembly> GetAssemblies()
 		{
 			// You could add more assemblies if you want to scan for more "Options" suffixed types.
-			yield return Assembly.GetAssembly(typeof(SerializationConfiguration)); // Client assembly
+			yield return Assembly.GetAssembly(typeof(SerializationConfiguration)); // Access assembly
 			yield return Assembly.GetExecutingAssembly(); // Presentation assembly
 		}
 

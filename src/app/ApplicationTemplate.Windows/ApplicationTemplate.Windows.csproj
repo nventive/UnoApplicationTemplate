@@ -103,8 +103,8 @@
 	</ItemGroup>
 	
 	<ItemGroup>
+		<ProjectReference Include="..\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
-		<ProjectReference Include="..\ApplicationTemplate.Client\ApplicationTemplate.Client.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
 	

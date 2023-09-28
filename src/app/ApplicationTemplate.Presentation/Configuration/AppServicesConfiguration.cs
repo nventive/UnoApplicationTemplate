@@ -1,6 +1,6 @@
 ﻿using System.Reactive.Concurrency;
 using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using ApplicationTemplate.Presentation;
 using ApplicationTemplate.Presentation.Framework.Connectivity;
 using MessageDialogService;
