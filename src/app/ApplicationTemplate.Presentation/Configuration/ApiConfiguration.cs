@@ -7,7 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate;
 using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using MallardMessageHandlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

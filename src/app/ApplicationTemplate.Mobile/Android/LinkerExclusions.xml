@@ -12,7 +12,7 @@
 	<assembly fullname="Microsoft.Extensions.Options" />
 	<assembly fullname="Microsoft.Extensions.Http" />
 
-	<assembly fullname="ApplicationTemplate.Client" />
+	<assembly fullname="ApplicationTemplate.Access" />
 	<assembly fullname="ApplicationTemplate.Business" />
 	<assembly fullname="ApplicationTemplate.Presentation" />
 

@@ -12,7 +12,7 @@ The package ReviewService.NativePrompters is installed in the Mobile and Windows
 
 ### Review Settings Source
 
-We use a custom implementation of `IReviewSettingsSource` called [DataPersisterReviewSettingsSource](../src/app/ApplicationTemplate.Client/LocalStorage/DataPersisterReviewSettingsSource.cs) to persist the review data on disk.
+We use a custom implementation of `IReviewSettingsSource` called [DataPersisterReviewSettingsSource](../src/app/ApplicationTemplate.Access/LocalStorage/DataPersisterReviewSettingsSource.cs) to persist the review data on disk.
 
 ## Reference
 

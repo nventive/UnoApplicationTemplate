@@ -4,7 +4,7 @@ using System.Reactive.Threading.Tasks;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using ApplicationTemplate.Presentation;
 using Chinook.BackButtonManager;
 using Chinook.DataLoader;

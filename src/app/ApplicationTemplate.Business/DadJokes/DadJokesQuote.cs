@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 
 namespace ApplicationTemplate.Business;
 

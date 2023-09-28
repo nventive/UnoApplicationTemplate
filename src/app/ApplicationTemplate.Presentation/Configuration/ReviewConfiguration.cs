@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 using ReviewService;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 
 namespace ApplicationTemplate.Tests;
 

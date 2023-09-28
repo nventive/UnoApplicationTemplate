@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using FluentAssertions;
 using FluentAssertions.Execution;
 using NSubstitute;

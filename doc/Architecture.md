@@ -35,12 +35,14 @@ The application solution is divided in 3 main areas.
   - You can only put platform-specific code (things like `#if __IOS__`) in the Views layer.
   The other layers are `.Net Standard 2.0` libraries that are platform agnostic.
 
-### Client (DAL)
+### Access (DAL)
 The _data access layer_ is where you would put external dependencies such as API endpoints and local storage.
 This is where you put serializable entities.
+The associated `csproj` is named `Access` (and not `DataAccess`) so that it shows as the first element alphabetically.
+The root namespace is however configured to be `DataAccess`.
 
 ### Business
-The business layer is where you put your business services and entities that manipulate data from the client layer.
+The business layer is where you put your business services and entities that manipulate data from the data access layer.
 Entities from the business layer are usually immutable and they don't need to be serializable.
 
 ### Presentation
@@ -97,14 +99,14 @@ See [Logging.md](Logging.md) for more details.
 ### Testing
 The architecture of application was designed with automated testing in mind.
 Automated testing explains why the application is divided in layers that are not multi-targeted.
-> i.e. The Client, Business, and Presentation libs target only .net7.0, and **not** .net7.0-ios nor .net7.0-android.
+> i.e. The Access, Business, and Presentation libs target only .net7.0, and **not** .net7.0-ios nor .net7.0-android.
 
 It also explains the separation of `Startup` and `CoreStartup`. `CoreStartup` can setup all the services that are non-UI dependent which can then be used to run simulations of the application using ViewModels that aren't attached to any UI.
 
 See [Testing.md](Testing.md) for more details.
 
-## Client (DAL)
-Client services (also referred to as _repositories_) are always declared using an interface and implemented in a separate class. These interfaces are meant to be used from the business layer.
+## Access (DAL)
+Data access services (also referred to as _repositories_) are always declared using an interface and implemented in a separate class. These interfaces are meant to be used from the business layer.
 
 ### HTTP Requests
 

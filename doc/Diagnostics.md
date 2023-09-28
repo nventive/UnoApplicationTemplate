@@ -49,8 +49,8 @@ On the expanded diagnostics overlay, tap on the **HTTP** button to show the `Htt
 This view shows all the http calls and their status.
 You can click on items to see more details, such as headers, content, elapsed time, etc.
 Check the following for more details.
-- [`IHttpDebuggerService`](..\src\app\ApplicationTemplate.Client\Framework\HttpDebugger\IHttpDebuggerService.cs)
-- [`HttpDebuggerHandler`](..\src\app\ApplicationTemplate.Client\Framework\HttpDebugger\HttpDebuggerHandler.cs)
+- [`IHttpDebuggerService`](..\src\app\ApplicationTemplate.Access\Framework\HttpDebugger\IHttpDebuggerService.cs)
+- [`HttpDebuggerHandler`](..\src\app\ApplicationTemplate.Access\Framework\HttpDebugger\HttpDebuggerHandler.cs)
 - [`HttpDebuggerViewModel`](..\src\app\ApplicationTemplate.Presentation\ViewModels\Diagnostics\HttpDebugger\HttpDebuggerViewModel.cs)
 - [`HttpDebuggerView`](..\src\app\ApplicationTemplate.UWP\Views\Content\Diagnostics\HttpDebuggerView.xaml)
 

@@ -7,7 +7,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using System.Text;
 using System.Text.Json;
-using ApplicationTemplate.Client;
+using ApplicationTemplate.DataAccess;
 using Chinook.DynamicMvvm;
 using Chinook.DynamicMvvm.Deactivation;
 using DynamicData;
