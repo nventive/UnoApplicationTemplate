@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess;
 
-public interface IApplicationSettingsService
+public interface IApplicationSettingsRepository
 {
 	/// <summary>
 	/// Gets and observes the current <see cref="ApplicationSettings"/>.

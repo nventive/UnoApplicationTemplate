@@ -7,7 +7,7 @@ using Refit;
 
 namespace ApplicationTemplate.DataAccess;
 
-public interface IDadJokesEndpoint
+public interface IDadJokesRepository
 {
 	/// <summary>
 	/// Returns a list of dad jokes based on /r/dadjokes.

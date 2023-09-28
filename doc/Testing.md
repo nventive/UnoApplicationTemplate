@@ -43,7 +43,7 @@ For more documentation on testing, read the references listed at the bottom.
 
 This template comes with full support for functional testing without any UI.
 You can run simulations of the app with simple code and test complex scenarios.
-Functional tests can be configured to use mocked or real API endpoints.
+Functional tests can be configured to use mocked or real API connections.
 
 This template provides a `FunctionalTestBase` class that bootstraps the application with all its services and configurations.
 This is an example of a functional test.
@@ -98,9 +98,9 @@ public sealed class DadJokesShould : FunctionalTestBase
 {
   protected override void ConfigureHost(IHostBuilder hostBuilder)
   {
-    // Use a custom implementation of IDadJokesEndpoint.
+    // Use a custom implementation of IDadJokesRepository.
     hostBuilder.ConfigureServices(serviceCollection =>
-      serviceCollection.AddSingleton<IDadJokesEndpoint, CustomDadJokesImplementation>()
+      serviceCollection.AddSingleton<IDadJokesRepository, CustomDadJokesImplementation>()
     );
   }
 }

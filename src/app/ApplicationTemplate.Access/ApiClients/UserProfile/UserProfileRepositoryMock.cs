@@ -8,11 +8,11 @@ using MallardMessageHandlers;
 
 namespace ApplicationTemplate.DataAccess;
 
-public class UserProfileEndpointMock : BaseMock, IUserProfileEndpoint
+public class UserProfileRepositoryMock : BaseMock, IUserProfileRepository
 {
 	private readonly IAuthenticationTokenProvider<AuthenticationData> _tokenProvider;
 
-	public UserProfileEndpointMock(
+	public UserProfileRepositoryMock(
 		IAuthenticationTokenProvider<AuthenticationData> tokenProvider,
 		JsonSerializerOptions serializerOptions)
 		: base(serializerOptions)

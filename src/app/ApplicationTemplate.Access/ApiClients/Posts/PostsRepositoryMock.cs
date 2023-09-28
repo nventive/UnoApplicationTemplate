@@ -8,9 +8,9 @@ using Refit;
 
 namespace ApplicationTemplate.DataAccess;
 
-public class PostEndpointMock : BaseMock, IPostEndpoint
+public class PostsRepositoryMock : BaseMock, IPostsRepository
 {
-	public PostEndpointMock(JsonSerializerOptions serializerOptions)
+	public PostsRepositoryMock(JsonSerializerOptions serializerOptions)
 		: base(serializerOptions)
 	{
 	}

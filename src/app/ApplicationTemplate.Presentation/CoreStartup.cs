@@ -91,7 +91,7 @@ public sealed class CoreStartup : CoreStartupBase
 	/// <param name="services">The service provider.</param>
 	public static async Task ExecuteInitialNavigation(CancellationToken ct, IServiceProvider services)
 	{
-		var applicationSettingsService = services.GetRequiredService<IApplicationSettingsService>();
+		var applicationSettingsService = services.GetRequiredService<IApplicationSettingsRepository>();
 		var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
 		var authenticationService = services.GetRequiredService<IAuthenticationService>();
 

@@ -12,21 +12,21 @@ namespace ApplicationTemplate.Business;
 
 public partial class UserProfileService : IUserProfileService
 {
-	private readonly IUserProfileEndpoint _profileEndpoint;
+	private readonly IUserProfileRepository _profileRepository;
 
-	public UserProfileService(IUserProfileEndpoint profileEndpoint)
+	public UserProfileService(IUserProfileRepository profileRepository)
 	{
-		_profileEndpoint = profileEndpoint ?? throw new ArgumentNullException(nameof(profileEndpoint));
+		_profileRepository = profileRepository ?? throw new ArgumentNullException(nameof(profileRepository));
 	}
 
 	public async Task<UserProfile> GetCurrent(CancellationToken ct)
 	{
-		return UserProfile.FromData(await _profileEndpoint.Get(ct));
+		return UserProfile.FromData(await _profileRepository.Get(ct));
 	}
 
 	/// <inheritdoc/>
 	public async Task Update(CancellationToken ct, UserProfile userProfile)
 	{
-		await _profileEndpoint.Update(ct, userProfile.ToData());
+		await _profileRepository.Update(ct, userProfile.ToData());
 	}
 }

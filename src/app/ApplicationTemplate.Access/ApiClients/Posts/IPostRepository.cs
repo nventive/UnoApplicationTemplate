@@ -8,7 +8,7 @@ using Refit;
 namespace ApplicationTemplate.DataAccess;
 
 [Headers("Authorization: Bearer")]
-public interface IPostEndpoint
+public interface IPostsRepository
 {
 	/// <summary>
 	/// Gets the list of all posts.

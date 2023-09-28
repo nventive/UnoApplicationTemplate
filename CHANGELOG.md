@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
 ## 2.0.X
+- Renamed the classes providing data to use the `Repository` suffix instead of `Endpoint` or `Service`.
 - Renamed the Client library to Access.
   - This properly orders the layers in the solution explorer (alphabetically).
 - Renamed the Client namespace to DataAccess.

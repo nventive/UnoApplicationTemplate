@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess;
 
-public class AuthenticationEndpointMock : IAuthenticationEndpoint
+public class AuthenticationRepositoryMock : IAuthenticationRepository
 {
 	private readonly JsonSerializerOptions _serializerOptions;
 
-	public AuthenticationEndpointMock(JsonSerializerOptions serializerOptions)
+	public AuthenticationRepositoryMock(JsonSerializerOptions serializerOptions)
 	{
 		_serializerOptions = serializerOptions;
 	}

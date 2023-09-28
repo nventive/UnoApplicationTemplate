@@ -18,7 +18,7 @@ namespace ApplicationTemplate;
 
 /// <summary>
 /// This class is used for API configuration.
-/// - Configures API endpoints.
+/// - Configures API clients.
 /// - Configures HTTP handlers.
 /// </summary>
 public static class ApiConfiguration
@@ -31,10 +31,10 @@ public static class ApiConfiguration
 	/// <returns>The updated <see cref="IServiceCollection"/>.</returns>
 	public static IServiceCollection AddApi(this IServiceCollection services, IConfiguration configuration)
 	{
-		// TODO: Configure your HTTP endpoints here.
+		// TODO: Configure your HTTP clients here.
 
-		// For example purpose: the following line loads the DadJokesEndpoint configuration section and make IOptions<DadJokesEndpointOptions> available for DI.
-		services.BindOptionsToConfiguration<DadJokesEndpointOptions>(configuration);
+		// For example purpose: the following line loads the DadJokesRepository configuration section and make IOptions<DadJokesApiClientOptions> available for DI.
+		services.BindOptionsToConfiguration<DadJokesApiClientOptions>(configuration);
 
 		services
 			.AddMainHandler()
@@ -43,46 +43,46 @@ public static class ApiConfiguration
 			.AddAuthenticationTokenHandler()
 			.AddTransient<HttpDebuggerHandler>()
 			.AddResponseContentDeserializer()
-			.AddAuthenticationEndpoint()
-			.AddPostEndpoint(configuration)
-			.AddUserProfileEndpoint()
-			.AddDadJokesEndpoint(configuration);
+			.AddAuthentication()
+			.AddPosts(configuration)
+			.AddUserProfile()
+			.AddDadJokes(configuration);
 
 		return services;
 	}
 
-	private static IServiceCollection AddUserProfileEndpoint(this IServiceCollection services)
+	private static IServiceCollection AddUserProfile(this IServiceCollection services)
 	{
-		// This one doesn't have an actual remote endpoint yet. It's always a mock implementation.
-		return services.AddSingleton<IUserProfileEndpoint, UserProfileEndpointMock>();
+		// This one doesn't have an actual remote API yet. It's always a mock implementation.
+		return services.AddSingleton<IUserProfileRepository, UserProfileRepositoryMock>();
 	}
 
-	private static IServiceCollection AddAuthenticationEndpoint(this IServiceCollection services)
+	private static IServiceCollection AddAuthentication(this IServiceCollection services)
 	{
-		// This one doesn't have an actual remote endpoint yet. It's always a mock implementation.
-		return services.AddSingleton<IAuthenticationEndpoint, AuthenticationEndpointMock>();
+		// This one doesn't have an actual remote API yet. It's always a mock implementation.
+		return services.AddSingleton<IAuthenticationRepository, AuthenticationRepositoryMock>();
 	}
 
-	private static IServiceCollection AddPostEndpoint(this IServiceCollection services, IConfiguration configuration)
+	private static IServiceCollection AddPosts(this IServiceCollection services, IConfiguration configuration)
 	{
 		return services
 			.AddSingleton<IErrorResponseInterpreter<PostErrorResponse>>(s => new ErrorResponseInterpreter<PostErrorResponse>(
 				(request, response, deserializedResponse) => deserializedResponse.Error != null,
-				(request, response, deserializedResponse) => new PostEndpointException(deserializedResponse)
+				(request, response, deserializedResponse) => new PostRepositoryException(deserializedResponse)
 			))
 			.AddTransient<ExceptionInterpreterHandler<PostErrorResponse>>()
-			.AddEndpoint<IPostEndpoint, PostEndpointMock>(configuration, "PostEndpoint", b => b
+			.AddApiClient<IPostsRepository, PostsRepositoryMock>(configuration, "PostApiClient", b => b
 				.AddHttpMessageHandler<ExceptionInterpreterHandler<PostErrorResponse>>()
 				.AddHttpMessageHandler<AuthenticationTokenHandler<AuthenticationData>>()
 			);
 	}
 
-	private static IServiceCollection AddDadJokesEndpoint(this IServiceCollection services, IConfiguration configuration)
+	private static IServiceCollection AddDadJokes(this IServiceCollection services, IConfiguration configuration)
 	{
-		return services.AddEndpoint<IDadJokesEndpoint, DadJokesEndpointMock>(configuration, "DadJokesEndpoint");
+		return services.AddApiClient<IDadJokesRepository, DadJokesRepositoryMock>(configuration, "DadJokesApiClient");
 	}
 
-	private static IServiceCollection AddEndpoint<TInterface, TMock>(
+	private static IServiceCollection AddApiClient<TInterface, TMock>(
 		this IServiceCollection services,
 		IConfiguration configuration,
 		string name,
@@ -98,7 +98,7 @@ public static class ApiConfiguration
 		}
 		else
 		{
-			var options = configuration.GetSection(name).Get<EndpointOptions>();
+			var options = configuration.GetSection(name).Get<ApiClientOptions>();
 			var diagnosticsOptions = configuration.ReadOptions<DiagnosticsOptions>();
 			var httpClientBuilder = services
 				.AddRefitHttpClient<TInterface>()

@@ -19,12 +19,12 @@ public sealed partial class UserProfileServiceShould
 	public async Task GetCurrentProfile()
 	{
 		// Arrange
-		var mockedUserProfileEndpoint = Substitute.For<IUserProfileEndpoint>();
-		mockedUserProfileEndpoint
+		var mockedUserProfileRepository = Substitute.For<IUserProfileRepository>();
+		mockedUserProfileRepository
 			.Get(Arg.Any<CancellationToken>())
 			.Returns(Task.FromResult(GetMockedUserProfile()));
 
-		var sut = new UserProfileService(mockedUserProfileEndpoint);
+		var sut = new UserProfileService(mockedUserProfileRepository);
 
 		// Act
 		var results = await sut.GetCurrent(CancellationToken.None);
@@ -41,19 +41,19 @@ public sealed partial class UserProfileServiceShould
 			new UserProfile { Id = "12345", FirstName = "Nventive", LastName = "Nventive", Email = "nventive@nventive.ca" };
 
 		// Arrange
-		var mockedUserProfileEndpoint = Substitute.For<IUserProfileEndpoint>();
-		mockedUserProfileEndpoint
+		var mockedUserProfileRepository = Substitute.For<IUserProfileRepository>();
+		mockedUserProfileRepository
 			.Get(Arg.Any<CancellationToken>())
 			.Returns(Task.FromResult(userProfile.ToData()));
 
-		var sut = new UserProfileService(mockedUserProfileEndpoint);
+		var sut = new UserProfileService(mockedUserProfileRepository);
 
 		var old = await sut.GetCurrent(CancellationToken.None);
 
 		userProfile =
 			new UserProfile { Id = "12345", FirstName = "Updated", LastName = "Nventive", Email = "nventive@nventive.ca" };
 
-		mockedUserProfileEndpoint
+		mockedUserProfileRepository
 			.Get(Arg.Any<CancellationToken>())
 			.Returns(userProfile.ToData());
 
