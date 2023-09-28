@@ -39,7 +39,7 @@ public partial class OnboardingPageViewModel : ViewModel
 	public async Task NavigateToLogin(CancellationToken ct)
 	{
 		await this.GetService<ISectionsNavigator>().NavigateAndClear(ct, () => new LoginPageViewModel(isFirstLogin: true));
-		await this.GetService<IApplicationSettingsService>().CompleteOnboarding(ct);
+		await this.GetService<IApplicationSettingsRepository>().CompleteOnboarding(ct);
 	}
 
 	public OnboardingItemViewModel[] OnboardingItems

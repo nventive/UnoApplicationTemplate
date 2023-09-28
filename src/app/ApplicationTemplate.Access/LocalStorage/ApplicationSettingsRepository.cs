@@ -7,11 +7,11 @@ using Nventive.Persistence;
 
 namespace ApplicationTemplate.DataAccess;
 
-public partial class ApplicationSettingsService : IApplicationSettingsService
+public partial class ApplicationSettingsRepository : IApplicationSettingsRepository
 {
 	private readonly IObservableDataPersister<ApplicationSettings> _dataPersister;
 
-	public ApplicationSettingsService(IObservableDataPersister<ApplicationSettings> dataPersister)
+	public ApplicationSettingsRepository(IObservableDataPersister<ApplicationSettings> dataPersister)
 	{
 		_dataPersister = dataPersister ?? throw new ArgumentNullException(nameof(dataPersister));
 	}

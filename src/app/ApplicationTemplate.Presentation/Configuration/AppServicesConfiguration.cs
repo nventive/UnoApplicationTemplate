@@ -26,7 +26,7 @@ public static class AppServicesConfiguration
 			.AddSingleton<IMessageDialogService, AcceptOrDefaultMessageDialogService>()
 			.AddSingleton<IConnectivityProvider, MockedConnectivityProvider>()
 			.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
-			.AddSingleton<IApplicationSettingsService, ApplicationSettingsService>()
+			.AddSingleton<IApplicationSettingsRepository, ApplicationSettingsRepository>()
 			.AddSingleton<IPostService, PostService>()
 			.AddSingleton<IDadJokesService, DadJokesService>()
 			.AddSingleton<IAuthenticationService, AuthenticationService>()

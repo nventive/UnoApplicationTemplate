@@ -8,7 +8,7 @@ using Refit;
 namespace ApplicationTemplate.DataAccess;
 
 [Headers("Authorization: Bearer")]
-public interface IUserProfileEndpoint
+public interface IUserProfileRepository
 {
 	/// <summary>
 	/// Returns the current user profile.

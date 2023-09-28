@@ -7,9 +7,9 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="ApiEndpoints\DadJokes\DadJokesEndpointMock.FetchData.json" />
-		<EmbeddedResource Include="ApiEndpoints\Posts\PostEndpointMock.GetAll.json" />
-		<EmbeddedResource Include="ApiEndpoints\UserProfile\UserProfileEndpointMock.Get.json" />
+		<EmbeddedResource Include="ApiClients\DadJokes\DadJokesRepositoryMock.FetchData.json" />
+		<EmbeddedResource Include="ApiClients\Posts\PostsRepositoryMock.GetAll.json" />
+		<EmbeddedResource Include="ApiClients\UserProfile\UserProfileRepositoryMock.Get.json" />
 	</ItemGroup>
 
 	<ItemGroup>

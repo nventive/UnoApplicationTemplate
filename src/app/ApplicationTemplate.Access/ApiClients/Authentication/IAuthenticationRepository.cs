@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess;
 
-public interface IAuthenticationEndpoint
+public interface IAuthenticationRepository
 {
 	/// <summary>
 	/// Logs the user in using the provided <paramref name="email"/> and <paramref name="password"/>.

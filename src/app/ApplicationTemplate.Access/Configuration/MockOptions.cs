@@ -17,7 +17,7 @@ public class MockOptions
 	// Feel free to add more specific properties in this class if you want a more granular control on mock implementations and their behavior.
 	// Here are some examples:
 	// You could use enums to define mock presets.
-	// You could have one property per endpoint.
+	// You could have one property per API client.
 	// You could have multiple implementations for the same mocked service.
 	// You could have custom input for mocked services to control their behavior.
 }

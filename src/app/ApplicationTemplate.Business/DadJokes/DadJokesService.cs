@@ -13,15 +13,15 @@ namespace ApplicationTemplate.Business;
 
 public sealed class DadJokesService : IDadJokesService, IDisposable
 {
-	private readonly IApplicationSettingsService _applicationSettingsService;
-	private readonly IDadJokesEndpoint _dadJokesEndpoint;
+	private readonly IApplicationSettingsRepository _applicationSettingsRepository;
+	private readonly IDadJokesRepository _dadJokesRepository;
 	private SourceList<DadJokesQuote> _favouriteQuotes;
 	private ReplaySubject<PostTypes> _postType;
 
-	public DadJokesService(IApplicationSettingsService applicationSettingsService, IDadJokesEndpoint dadJokesEndpoint)
+	public DadJokesService(IApplicationSettingsRepository applicationSettingsRepository, IDadJokesRepository dadJokesRepository)
 	{
-		_applicationSettingsService = applicationSettingsService ?? throw new ArgumentNullException(nameof(applicationSettingsService));
-		_dadJokesEndpoint = dadJokesEndpoint ?? throw new ArgumentNullException(nameof(dadJokesEndpoint));
+		_applicationSettingsRepository = applicationSettingsRepository ?? throw new ArgumentNullException(nameof(applicationSettingsRepository));
+		_dadJokesRepository = dadJokesRepository ?? throw new ArgumentNullException(nameof(dadJokesRepository));
 		_postType = new ReplaySubject<PostTypes>(1);
 		_postType.OnNext(PostTypes.Hot);
 	}
@@ -32,9 +32,9 @@ public sealed class DadJokesService : IDadJokesService, IDisposable
 
 		var postType = pt.ToRedditFilter();
 
-		var response = await _dadJokesEndpoint.FetchData(ct, postType);
+		var response = await _dadJokesRepository.FetchData(ct, postType);
 
-		var settings = await _applicationSettingsService.GetCurrent(ct);
+		var settings = await _applicationSettingsRepository.GetCurrent(ct);
 
 		return response
 			.Data
@@ -68,7 +68,7 @@ public sealed class DadJokesService : IDadJokesService, IDisposable
 			throw new ArgumentNullException(nameof(quote));
 		}
 
-		var settings = await _applicationSettingsService.GetCurrent(ct);
+		var settings = await _applicationSettingsRepository.GetCurrent(ct);
 
 		quote = quote with { IsFavorite = isFavorite };
 
@@ -76,7 +76,7 @@ public sealed class DadJokesService : IDadJokesService, IDisposable
 			? settings.FavoriteQuotes.Add(quote.Id, quote.ToFavoriteJokeData())
 			: settings.FavoriteQuotes.Remove(quote.Id);
 
-		await _applicationSettingsService.SetFavoriteQuotes(ct, updatedFavorites);
+		await _applicationSettingsRepository.SetFavoriteQuotes(ct, updatedFavorites);
 
 		var source = await GetFavouriteQuotesSource(ct);
 
@@ -98,7 +98,7 @@ public sealed class DadJokesService : IDadJokesService, IDisposable
 	{
 		if (_favouriteQuotes == null)
 		{
-			var settings = await _applicationSettingsService.GetCurrent(ct);
+			var settings = await _applicationSettingsRepository.GetCurrent(ct);
 
 			_favouriteQuotes = new SourceList<DadJokesQuote>();
 			_favouriteQuotes.AddRange(settings.FavoriteQuotes.Values.Select(favoriteData => new DadJokesQuote(favoriteData)));

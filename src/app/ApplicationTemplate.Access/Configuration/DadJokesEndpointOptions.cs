@@ -4,6 +4,6 @@ using System.Text;
 
 namespace ApplicationTemplate;
 
-public class DadJokesEndpointOptions : EndpointOptions
+public class DadJokesApiClientOptions : ApiClientOptions
 {
 }

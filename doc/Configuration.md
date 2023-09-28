@@ -8,7 +8,7 @@ For more documentation on configuration, read the references listed at the botto
 
 The `IConfiguration` is populated using 3 layers of configuration files.
 1. `appsettings.json` is the base layer. Use this to set default values.
-1. `appsettings.{environment}.json` is the environment specific layer. Use this to set values that are specific to environments such as API endpoints, API keys, etc. You can customize the environments like you want. Check [Environments.md](Environments.md) for more info.
+1. `appsettings.{environment}.json` is the environment specific layer. Use this to set values that are specific to environments such as API clients, API keys, etc. You can customize the environments like you want. Check [Environments.md](Environments.md) for more info.
    
    **Don't put production secrets directly in appsettings.production.json!** Instead, use a placeholder token along with a powershell replace in the  pipeline to inject secrets in your configuration files.
  

@@ -15,24 +15,24 @@ public partial class AuthenticationService : IAuthenticationService
 {
 	private readonly ISubject<Unit> _sessionExpired = new Subject<Unit>();
 
-	private readonly IApplicationSettingsService _applicationSettingsService;
-	private readonly IAuthenticationEndpoint _authenticationEndpoint;
+	private readonly IApplicationSettingsRepository _applicationSettingsRepository;
+	private readonly IAuthenticationRepository _authenticationRepository;
 	private readonly IAuthenticationTokenProvider<AuthenticationData> _authTokenProvider;
 
 	public AuthenticationService(
 		ILoggerFactory loggerFactory,
-		IApplicationSettingsService applicationSettingsService,
-		IAuthenticationEndpoint authenticationEndpoint)
+		IApplicationSettingsRepository applicationSettingsRepository,
+		IAuthenticationRepository authenticationRepository)
 	{
-		_applicationSettingsService = applicationSettingsService ?? throw new ArgumentNullException(nameof(applicationSettingsService));
-		_authenticationEndpoint = authenticationEndpoint ?? throw new ArgumentNullException(nameof(authenticationEndpoint));
+		_applicationSettingsRepository = applicationSettingsRepository ?? throw new ArgumentNullException(nameof(applicationSettingsRepository));
+		_authenticationRepository = authenticationRepository ?? throw new ArgumentNullException(nameof(authenticationRepository));
 		_authTokenProvider = new ConcurrentAuthenticationTokenProvider<AuthenticationData>(loggerFactory, GetTokenInternal, NotifySessionExpiredInternal, RefreshTokenInternal);
 	}
 
 	/// <inheritdoc/>
 	public IObservable<AuthenticationData> GetAndObserveAuthenticationData()
 	{
-		return _applicationSettingsService
+		return _applicationSettingsRepository
 			.GetAndObserveCurrent()
 			.Select(s => s.AuthenticationData);
 	}
@@ -50,9 +50,9 @@ public partial class AuthenticationService : IAuthenticationService
 	/// <inheritdoc/>
 	public async Task<AuthenticationData> Login(CancellationToken ct, string email, string password)
 	{
-		var authenticationData = await _authenticationEndpoint.Login(ct, email, password);
+		var authenticationData = await _authenticationRepository.Login(ct, email, password);
 
-		await _applicationSettingsService.SetAuthenticationData(ct, authenticationData);
+		await _applicationSettingsRepository.SetAuthenticationData(ct, authenticationData);
 
 		return authenticationData;
 	}
@@ -60,15 +60,15 @@ public partial class AuthenticationService : IAuthenticationService
 	/// <inheritdoc/>
 	public async Task Logout(CancellationToken ct)
 	{
-		await _applicationSettingsService.DiscardUserSettings(ct);
+		await _applicationSettingsRepository.DiscardUserSettings(ct);
 	}
 
 	/// <inheritdoc/>
 	public async Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password)
 	{
-		var authenticationData = await _authenticationEndpoint.CreateAccount(ct, email, password);
+		var authenticationData = await _authenticationRepository.CreateAccount(ct, email, password);
 
-		await _applicationSettingsService.SetAuthenticationData(ct, authenticationData);
+		await _applicationSettingsRepository.SetAuthenticationData(ct, authenticationData);
 
 		return authenticationData;
 	}
@@ -76,7 +76,7 @@ public partial class AuthenticationService : IAuthenticationService
 	/// <inheritdoc/>
 	public async Task ResetPassword(CancellationToken ct, string email)
 	{
-		await _authenticationEndpoint.ResetPassword(ct, email);
+		await _authenticationRepository.ResetPassword(ct, email);
 	}
 
 	/// <inheritdoc />
@@ -93,23 +93,23 @@ public partial class AuthenticationService : IAuthenticationService
 
 	private async Task<AuthenticationData> GetTokenInternal(CancellationToken ct, HttpRequestMessage request)
 	{
-		var settings = await _applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
+		var settings = await _applicationSettingsRepository.GetAndObserveCurrent().FirstAsync(ct);
 
 		return settings.AuthenticationData;
 	}
 
 	private async Task NotifySessionExpiredInternal(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
 	{
-		await _applicationSettingsService.SetAuthenticationData(ct, default(AuthenticationData));
+		await _applicationSettingsRepository.SetAuthenticationData(ct, default(AuthenticationData));
 
 		_sessionExpired.OnNext(Unit.Default);
 	}
 
 	private async Task<AuthenticationData> RefreshTokenInternal(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
 	{
-		var authenticationData = await _authenticationEndpoint.RefreshToken(ct, unauthorizedToken);
+		var authenticationData = await _authenticationRepository.RefreshToken(ct, unauthorizedToken);
 
-		await _applicationSettingsService.SetAuthenticationData(ct, authenticationData);
+		await _applicationSettingsRepository.SetAuthenticationData(ct, authenticationData);
 
 		return authenticationData;
 	}

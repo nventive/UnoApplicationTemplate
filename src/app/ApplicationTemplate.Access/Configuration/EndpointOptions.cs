@@ -5,9 +5,9 @@ using System.Text;
 namespace ApplicationTemplate;
 
 /// <summary>
-/// Contains the configuration options of an API endpoint.
+/// Contains the configuration options of an API client.
 /// </summary>
-public class EndpointOptions
+public class ApiClientOptions
 {
 	public Uri Url { get; set; }
 }

@@ -4,9 +4,9 @@ We use [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Exte
 
 For more documentation on HTTP requests, read the references listed at the bottom.
 
-## HTTP endpoints
+## HTTP clients
 
-- You can register a service with a dependency to `HttpClient` using `services.AddHttpClient<IEndpoint, EndpointImplementation>()` in the [ApiConfiguration.cs](../src/app/ApplicationTemplate.Presentation/Configuration/ApiConfiguration.cs) file.
+- You can register a service with a dependency to `HttpClient` using `services.AddHttpClient<IRepository, RepositoryImplementation>()` in the [ApiConfiguration.cs](../src/app/ApplicationTemplate.Presentation/Configuration/ApiConfiguration.cs) file.
 
 - We use `DelegatingHandler` to create HTTP request / response pipelines. There are lot of delegating handlers implementation in the community, we provide some in [MallardMessageHandlers](https://github.com/nventive/MallardMessageHandlers).
 
