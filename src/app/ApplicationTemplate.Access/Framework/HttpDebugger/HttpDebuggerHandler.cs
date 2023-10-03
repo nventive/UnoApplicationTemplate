@@ -34,7 +34,7 @@ public class HttpDebuggerHandler : DelegatingHandler
 				ResponseVersion = response.Version,
 				ResponseHeaders = response.Headers,
 				ResponseContentHeaders = response.Content.Headers,
-				ResponseContent = await response.Content.ReadAsStringAsync(),
+				ResponseContent = await response.Content.ReadAsStringAsync(CancellationToken.None),
 			});
 
 			return response;

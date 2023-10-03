@@ -91,7 +91,7 @@ public sealed partial class FormattingTextBoxBehavior
 		while (control != null);
 	}
 
-	private class FormattingTextInputFilter : Java.Lang.Object, Android.Text.IInputFilter
+	private sealed class FormattingTextInputFilter : Java.Lang.Object, Android.Text.IInputFilter
 	{
 		private string _stringFormat;
 		private TextBox _targetTextBox;

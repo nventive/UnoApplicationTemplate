@@ -37,6 +37,7 @@ public static class ReviewConfiguration
 			.AddSingleton<IReviewService, ReviewServiceAdapter>();
 	}
 
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1812:Avoid uninstantiated internal classes", Justification = "The constructor is invoked by DI.")]
 	private sealed class ReviewServiceAdapter : IReviewService
 	{
 		private readonly IReviewService<ReviewSettings> _reviewService;

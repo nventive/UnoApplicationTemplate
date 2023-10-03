@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.DataAccess;
 using MallardMessageHandlers;

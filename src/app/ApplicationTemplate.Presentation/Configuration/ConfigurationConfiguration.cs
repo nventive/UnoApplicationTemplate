@@ -56,6 +56,7 @@ public static class ConfigurationConfiguration
 	/// </summary>
 	/// <param name="configurationBuilder">The configuration builder.</param>
 	/// <param name="folderPath">The folder containing the configuration override files.</param>
+	/// <param name="environmentManager">The environment manager.</param>
 	private static IConfigurationBuilder AddReadOnlyConfiguration(this IConfigurationBuilder configurationBuilder, string folderPath, IEnvironmentManager environmentManager)
 	{
 		return configurationBuilder.AddInMemoryCollection(GetCodeConfiguration(folderPath));
@@ -91,6 +92,7 @@ public static class ConfigurationConfiguration
 	/// The environment can be overriden by the user.
 	/// </summary>
 	/// <param name="configurationBuilder">The configuration builder.</param>
+	/// <param name="environmentManager">The environment manager.</param>
 	private static IConfigurationBuilder AddEnvironmentConfiguration(this IConfigurationBuilder configurationBuilder, IEnvironmentManager environmentManager)
 	{
 		var currentEnvironment = environmentManager.Current;
@@ -119,6 +121,7 @@ public static class ConfigurationConfiguration
 	/// Registers the <see cref="IConfiguration"/> as a singleton.
 	/// </summary>
 	/// <param name="hostBuilder">The host builder.</param>
+	/// <param name="environmentManager">The environment manager.</param>
 	private static IHostBuilder AddConfiguration(this IHostBuilder hostBuilder, IEnvironmentManager environmentManager)
 	{
 		if (hostBuilder is null)
@@ -190,7 +193,7 @@ public static class ConfigurationConfiguration
 
 				_appSettingsFiles = executingAssembly
 					.GetManifestResourceNames()
-					.Where(fileName => fileName.ToUpperInvariant().Contains(AppSettingsFileName.ToUpperInvariant()))
+					.Where(fileName => fileName.ToUpperInvariant().Contains(AppSettingsFileName.ToUpperInvariant(), StringComparison.Ordinal))
 					.Select(fileName => new AppSettingsFile(fileName, executingAssembly))
 					.ToArray();
 			}

@@ -22,9 +22,11 @@ public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 		_connectivity.ConnectivityChanged += OnConnectivityChanged;
 	}
 
+	/// <remarks>
+	/// We should only refresh when <see cref="IDataLoader" /> state is <see cref="NoNetworkException"/> AND network access is <see cref="NetworkAccess.Internet"/>.
+	/// </remarks>
 	private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
 	{
-		/// Should only refresh when <see cref="IDataLoader" /> state is <see cref="NoNetworkException"/> AND network access is <see cref="NetworkAccess.Internet"/>.
 		if (_dataLoader.State.Error is NoNetworkException &&
 			e.NetworkAccess == NetworkAccess.Internet)
 		{

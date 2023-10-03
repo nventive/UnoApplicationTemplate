@@ -82,7 +82,7 @@ public class DiagnosticsService : IDiagnosticsService
 #if __IOS__
 //+:cnd:noEmit
 		/// This will be handled by <see cref="AppDomain.CurrentDomain.UnhandledException" />
-		UIKit.UIApplication.SharedApplication.InvokeOnMainThread(() => throw new Exception("This is a test of an exception in the MainThread. Please ignore."));
+		UIKit.UIApplication.SharedApplication.InvokeOnMainThread(() => throw new InvalidOperationException("This is a test of an exception in the MainThread. Please ignore."));
 //-:cnd:noEmit
 #elif __ANDROID__
 //+:cnd:noEmit

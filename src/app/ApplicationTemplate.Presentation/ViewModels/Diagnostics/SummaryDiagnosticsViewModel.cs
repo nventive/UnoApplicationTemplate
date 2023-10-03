@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Presentation;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "Default behavior is acceptable for diagnostics.")]
 public partial class SummaryDiagnosticsViewModel : ViewModel
 {
 	private readonly DateTimeOffset _now = DateTimeOffset.Now;

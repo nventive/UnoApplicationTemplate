@@ -20,6 +20,7 @@ namespace ApplicationTemplate.Views.Controls;
 /// </remarks>
 public sealed partial class AppBarBackButton : AppBarButton
 {
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "It's disposed via OnUnloaded.")]
 	private IDisposable _backButtonVisibilitySubscription;
 
 	public AppBarBackButton()

@@ -42,27 +42,27 @@ internal enum SubscribeToElementOptions : byte
 internal enum UiEventSubscriptionsOptions
 {
 	/// <summary>
-	/// Default is ImmediateSubscribe.
-	/// </summary>
-	Default = ImmediateSubscribe,
-
-	/// <summary>
-	/// Subscribe and Unsubscribe will be enforced on Dispacther scheduler.
+	/// Subscribe and Unsubscribe will be enforced on Dispatcher scheduler.
 	/// </summary>
 	/// <remarks>Be sure to not miss an event between subscribe to observable and real event handler add.</remarks>
 	DispatcherOnly = 0,
 
 	/// <summary>
-	/// Add event handler immediatly on Subscribe.
+	/// Add event handler immediately on Subscribe.
 	/// </summary>
 	/// <remarks>This mean you must call subscribe on dispatcher.</remarks>
 	ImmediateSubscribe = 1,
 
 	/// <summary>
-	/// Remove event handler immediatly on Dispose / Complete.
+	/// Remove event handler immediately on Dispose / Complete.
 	/// </summary>
 	/// <remarks>This mean you must dispose subscription on dispatcher.</remarks>
 	ImmediateUnsubscribe = 2,
+
+	/// <summary>
+	/// Default is ImmediateSubscribe.
+	/// </summary>
+	Default = ImmediateSubscribe,
 }
 
 internal static class ObservableExtensions

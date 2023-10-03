@@ -29,6 +29,6 @@ public sealed class MockedConnectivityProvider : IConnectivityProvider
 			ConnectivityChanged?.Invoke(this, new ConnectivityChangedEventArgs(value));
 		}
 	}
-	
+
 	public event EventHandler<ConnectivityChangedEventArgs> ConnectivityChanged;
 }

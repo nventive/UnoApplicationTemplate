@@ -35,8 +35,8 @@ public interface IPostService
 	/// </summary>
 	/// <param name="ct"><see cref="CancellationToken"/></param>
 	/// <param name="postId">Post id</param>
-	/// <param name="post"><see cref="PostData"/></param>
-	/// <returns>Updated <see cref="PostData"/></returns>
+	/// <param name="post"><see cref="Post"/></param>
+	/// <returns>Updated <see cref="Post"/></returns>
 	Task<Post> Update(CancellationToken ct, long postId, Post post);
 
 	/// <summary>

@@ -118,7 +118,7 @@ public class ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty<T> :
 public class ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty<TSource, TResult> : ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty, IDynamicProperty<TResult>
 {
 	/// <summary>
-	/// Initializes a new instance of the <see cref="ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty{T}"/> class.
+	/// Initializes a new instance of the <see cref="ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty{TSource, TResult}"/> class.
 	/// </summary>
 	/// <param name="name">The name of the this property.</param>
 	/// <param name="source">Source.</param>

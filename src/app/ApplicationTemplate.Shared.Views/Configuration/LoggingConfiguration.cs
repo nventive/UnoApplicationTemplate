@@ -58,6 +58,7 @@ public static class LoggingConfiguration
 #endif
 	}
 
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "False positive: These are message template. The brackets are expected.")]
 	private static LoggerConfiguration AddConsoleLogging(LoggerConfiguration configuration)
 	{
 		return configuration
@@ -78,6 +79,7 @@ public static class LoggingConfiguration
 //+:cnd:noEmit
 	}
 
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "False positive: These are message template. The brackets are expected.")]
 	private static LoggerConfiguration AddFileLogging(LoggerConfiguration configuration, string logFilePath)
 	{
 //-:cnd:noEmit
