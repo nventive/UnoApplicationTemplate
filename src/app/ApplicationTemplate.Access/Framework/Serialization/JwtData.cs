@@ -18,10 +18,10 @@ public class JwtData<TPayload>
 	private TPayload _payload;
 
 	/// <summary>
-	/// Initialize a new JWT.
+	/// Initializes a new instance of the <see cref="JwtData{TPayload}"/> class.
 	/// </summary>
 	/// <remarks>
-	/// Header & Payload will be deserialized only if a JSON serializer is supplied.
+	/// Header and Payload will be deserialized only if a JSON serializer is supplied.
 	/// </remarks>
 	/// <param name="token">The raw token.</param>
 	/// <param name="jsonSerializerOptions">Should be a JSON serializer. Using a serializer for another format won't be RFC 7519 compliant.</param>

@@ -10,7 +10,7 @@ namespace ApplicationTemplate;
 /// <summary>
 /// This class abstracts the startup of the actual app (UWP, iOS, Android and not test projects).
 /// This abstract class is responsible for building the host of the application as well as startup diagnostics.
-/// The implementator class is responsible for the application-specific code that initializes the application's services.
+/// The implementer class is responsible for the application-specific code that initializes the application's services.
 /// </summary>
 public abstract class StartupBase
 {
@@ -61,6 +61,8 @@ public abstract class StartupBase
 	/// Initializes the application.
 	/// </summary>
 	/// <param name="contentRootPath">Specifies the content root directory to be used by the host.</param>
+	/// <param name="settingsFolderPath">The folder path indicating where the override files are.</param>
+	/// <param name="loggingConfigurator">The delegate to call to configure logging.</param>
 	public void Initialize(string contentRootPath, string settingsFolderPath, LoggingConfigurator­­­ loggingConfigurator)
 	{
 		if (State.IsInitialized)

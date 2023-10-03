@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Reactive.Linq;
 using ByteSizeLib;
 using Chinook.DynamicMvvm;
@@ -161,12 +162,12 @@ public sealed partial class DiagnosticsOverlayViewModel : ViewModel
 		.Select(_ => DiagnosticsCountersService.Counters);
 
 	public string PrivateMemorySize => this.GetFromObservable(
-		source: _memoryProvider.ObservePrivateMemorySize().Select(x => ByteSize.FromBytes(x).ToString("0.#")),
+		source: _memoryProvider.ObservePrivateMemorySize().Select(x => ByteSize.FromBytes(x).ToString("0.#", CultureInfo.InvariantCulture)),
 		initialValue: string.Empty
 	);
 
 	public string ManagedMemorySize => this.GetFromObservable(
-		source: _memoryProvider.ObserveManagedMemorySize().Select(x => ByteSize.FromBytes(x).ToString("0.#")),
+		source: _memoryProvider.ObserveManagedMemorySize().Select(x => ByteSize.FromBytes(x).ToString("0.#", CultureInfo.InvariantCulture)),
 		initialValue: string.Empty
 	);
 }

@@ -74,6 +74,7 @@ public sealed partial class FormattingTextBoxBehavior
 		}
 	}
 
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Naming", "CA1711:Identifiers should not have incorrect suffix", Justification = "Delegate is fine in this case because it's not referring the delegate construct but rather the base class.")]
 	public class UITextFieldDelegatingDelegate : UITextFieldDelegate
 	{
 		private SinglelineTextBoxView _nativeView;

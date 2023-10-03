@@ -63,6 +63,7 @@ internal static class DispatcherQueueExtensions
 	/// <param name="dispatcher">The target <see cref="DispatcherQueue"/> to invoke the code on.</param>
 	/// <param name="priority">The priority level for the function to invoke.</param>
 	/// <param name="asyncAction">The <see cref="DispatcherQueueHandler"/> to invoke.</param>
+	/// <typeparam name="T">The return type of the task.</typeparam>
 	/// <returns>A <see cref="Task"/> that completes when the invocation of <paramref name="asyncAction"/> is over.</returns>
 	/// <remarks>If the current thread has access to <paramref name="dispatcher"/>, <paramref name="asyncAction"/> will be invoked directly.</remarks>
 	internal static Task<T> RunTaskAsync<T>(this DispatcherQueue dispatcher, DispatcherQueuePriority priority, Func<Task<T>> asyncAction)

@@ -17,7 +17,7 @@ public static class ApplicationTemplateServiceCollectionExtensions
 {
 	/// <summary>
 	/// Registers <typeparamref name="T"/> as an option bound to the <paramref name="configuration"/>
-	/// using the typename as key (minus the -Options prefix).
+	/// using the type name as key (minus the -Options suffix).
 	/// The validation, based on Data Annotations, happens when options are retrieved from DI,
 	/// not at the time of registration.
 	/// </summary>
@@ -26,8 +26,8 @@ public static class ApplicationTemplateServiceCollectionExtensions
 	/// <param name="configuration">The <see cref="IConfiguration"/>.</param>
 	/// <param name="key">
 	/// The configuration section key name to use.
-	/// If not provided, it will be the <typeparamref name="T"/> type name without the -Options prefix.
-	/// (see <see cref="ConfigurationExtensions.DefaultOptionsName(Type)"/>.
+	/// If not provided, it will be the <typeparamref name="T"/> type name without the -Options suffix.
+	/// (see <see cref="ApplicationTemplateConfigurationExtensions.DefaultOptionsName(Type)"/>.
 	/// </param>
 	/// <returns>The <see cref="IServiceCollection"/> with services registered.</returns>
 	public static IServiceCollection BindOptionsToConfiguration<T>(

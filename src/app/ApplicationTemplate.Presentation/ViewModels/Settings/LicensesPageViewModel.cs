@@ -43,7 +43,7 @@ public class LicensesPageViewModel : ViewModel
 
 		using (var streamReader = new StreamReader(resourceStream))
 		{
-			return await streamReader.ReadToEndAsync();
+			return await streamReader.ReadToEndAsync(ct);
 		}
 	}
 }

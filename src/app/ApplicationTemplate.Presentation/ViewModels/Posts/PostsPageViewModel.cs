@@ -13,6 +13,7 @@ public partial class PostsPageViewModel : ViewModel
 {
 	private readonly Func<Task> _onGetPostsCalled;
 
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "It will be disposed by the DataLoader when passed via WithTrigger.")]
 	private readonly ManualDataLoaderTrigger _deletePostTrigger = new();
 
 	public PostsPageViewModel(Func<Task> onGetPostsCalled = null)

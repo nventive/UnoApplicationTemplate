@@ -28,7 +28,6 @@ public class BaseMock
 	/// <returns>Deserialized value</returns>
 	/// <remarks>
 	/// If left empty, the <paramref name="resourceName" /> will implicitly be treated as "{callerTypeName}.{callerMemberName}.json".
-	/// If <paramref name="serializer" /> is left empty, the serializer defined in ctor. will be used".
 	/// Note that this will deserialize the first embedded resource whose name ends with the specified <paramref name="resourceName" />.
 	/// </remarks>
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "Not available for Desktop")]
@@ -62,7 +61,6 @@ public class BaseMock
 	/// </summary>
 	/// <remarks>
 	/// If left empty, the <paramref name="resourceName" /> will implicitly be treated as "{callerTypeName}.{callerMemberName}.json".
-	/// If <paramref name="serializer" /> is left empty, the serializer defined in ctor. will be used".
 	/// Note that this will deserialize the first embedded resource whose name ends with the specified <paramref name="resourceName" />.
 	/// </remarks>
 	/// <typeparam name="T">Type of object</typeparam>

@@ -194,6 +194,7 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 		return JsonSerializer.Serialize(result, _jsonOptions);
 	}
 
+	[System.Diagnostics.CodeAnalysis.SuppressMessage("Performance", "CA1851:Possible multiple enumerations of 'IEnumerable' collection", Justification = "It's fine because it's an Any() before the real enumeration.")]
 	private static object GetConfigurationValue(IConfigurationSection section)
 	{
 		var children = section.GetChildren();
@@ -240,7 +241,7 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 
 	private static List<string> GetKeysFromOptionsTypes()
 	{
-		var optionsTypes = GetAssemblies().SelectMany(a => a.GetTypes().Where(t => t.Name.EndsWith("Options") && !t.IsAbstract && t.IsClass)).ToArray();
+		var optionsTypes = GetAssemblies().SelectMany(a => a.GetTypes().Where(t => t.Name.EndsWith("Options", StringComparison.Ordinal) && !t.IsAbstract && t.IsClass)).ToArray();
 		var keys = new List<string>();
 
 		foreach (var optionsType in optionsTypes)
@@ -313,7 +314,7 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 				for (int j = i + 1; j < keys.Count; j++)
 				{
 					var next = keys[j];
-					if (next.StartsWith(current))
+					if (next.StartsWith(current, StringComparison.Ordinal))
 					{
 						keys.RemoveAt(i);
 						--i;
