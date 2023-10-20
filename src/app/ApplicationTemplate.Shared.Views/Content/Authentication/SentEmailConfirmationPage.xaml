@@ -1,16 +1,17 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.SentEmailConfirmationPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:toolkit="using:Uno.UI.Toolkit">
+	  xmlns:toolkit="using:Uno.UI.Toolkit"
+	  xmlns:utu="using:Uno.Toolkit.UI">
 
 	<Grid Background="{ThemeResource BackgroundBrush}">
-		
+
 		<!-- Background Image -->
 		<Image Source="{StaticResource BackgroundMustachesLightImage}"
 			   Stretch="UniformToFill" />
 
-		<Grid toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom">
-			
+		<Grid utu:SafeArea.Insets="Top,Bottom">
+
 			<Grid.RowDefinitions>
 				<RowDefinition Height="Auto" />
 				<RowDefinition Height="*" />
@@ -23,7 +24,7 @@
 			<StackPanel VerticalAlignment="Center"
 						Margin="0,0,0,50"
 						Grid.Row="1">
-				
+
 				<!-- Image -->
 				<Image Source="ms-appx:///Assets/Letters.png"
 					   MaxWidth="300"

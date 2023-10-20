@@ -78,7 +78,7 @@
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.4.0-dev.36" />
-		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.62" />
+		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.72" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
@@ -86,7 +86,8 @@
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Material.WinUI" Version="3.0.40" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="4.2.22" />
+		<PackageReference Include="Uno.Toolkit.WinUI" Version="5.0.0-dev.120" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="5.0.0-dev.120" />
 	</ItemGroup>
 
 	<ItemGroup>
