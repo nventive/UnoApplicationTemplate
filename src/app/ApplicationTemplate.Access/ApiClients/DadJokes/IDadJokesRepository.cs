@@ -7,14 +7,17 @@ using Refit;
 
 namespace ApplicationTemplate.DataAccess;
 
+/// <summary>
+/// Provides access to the dad jokes API.
+/// </summary>
 public interface IDadJokesRepository
 {
 	/// <summary>
 	/// Returns a list of dad jokes based on /r/dadjokes.
 	/// </summary>
-	/// <param name="ct"><see cref="CancellationToken"/></param>
-	/// <param name="typePost"><see cref="string"/></param>
-	/// <returns>List of quotes</returns>
+	/// <param name="ct">The <see cref="CancellationToken"/>.</param>
+	/// <param name="typePost">The type of post.</param>
+	/// <returns>A list of jokes.</returns>
 	[Get("/{typePost}.json")]
 	Task<DadJokesResponse> FetchData(CancellationToken ct, string typePost);
 }

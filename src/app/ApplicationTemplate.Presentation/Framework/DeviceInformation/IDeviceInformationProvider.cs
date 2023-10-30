@@ -1,5 +1,8 @@
 ﻿namespace ApplicationTemplate;
 
+/// <summary>
+/// Provides information about the device.
+/// </summary>
 public interface IDeviceInformationProvider
 {
 	/// <summary>

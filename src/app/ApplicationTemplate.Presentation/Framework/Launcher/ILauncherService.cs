@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationTemplate;
 
+/// <summary>
+/// Provides access to the launcher which allows the application to launch the default app associated with the specified URI scheme name.
+/// </summary>
 public interface ILauncherService
 {
 	/// <summary>

@@ -5,6 +5,10 @@ using System.Text;
 
 namespace ApplicationTemplate;
 
+/// <summary>
+/// Allows to override the culture of the threads.
+/// This is used to change the language of the application.
+/// </summary>
 public interface IThreadCultureOverrideService
 {
 	/// <summary>
@@ -17,7 +21,7 @@ public interface IThreadCultureOverrideService
 	/// Sets the specified <paramref name="culture"/> as the culture override.
 	/// To apply these changes, use the <see cref="TryApply"/> method.
 	/// </summary>
-	/// <param name="culture">Culture</param>
+	/// <param name="culture">The culture to use.</param>
 	void SetCulture(CultureInfo culture);
 
 	/// <summary>

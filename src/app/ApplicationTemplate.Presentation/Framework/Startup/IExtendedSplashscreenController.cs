@@ -4,10 +4,13 @@ using System.Text;
 
 namespace ApplicationTemplate;
 
+/// <summary>
+/// Controls the extended splash screen.
+/// </summary>
 public interface IExtendedSplashscreenController
 {
 	/// <summary>
-	/// Dismisses the extended splashscreen.
+	/// Dismisses the extended splash screen.
 	/// </summary>
 	void Dismiss();
 }

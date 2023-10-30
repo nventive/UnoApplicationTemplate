@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<LangVersion>10.0</LangVersion>
-	</PropertyGroup>
-	<PropertyGroup>
 		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
 		<SingleProject>true</SingleProject>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
 		<UseMauiEssentials>true</UseMauiEssentials>

@@ -87,7 +87,7 @@ public class ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty : Va
 /// <summary>
 /// This is an implementation of a <see cref="IDynamicProperty{T}"/> using a <see cref="IDynamicProperty{T}"/> that ensures <see cref="IDynamicProperty.ValueChanged"/> is raised on a background thread.
 /// </summary>
-/// <typeparam name="T">Type of value</typeparam>
+/// <typeparam name="T">The type of value.</typeparam>
 public class ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty<T> : ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty, IDynamicProperty<T>
 {
 	/// <summary>

@@ -17,17 +17,17 @@ internal enum SubscribeToElementOptions : byte
 	None = 0,
 
 	/// <summary>
-	/// Default is StartLoaded | ResubscribeOnLoadEvenIfCompleted
+	/// Default is StartLoaded | ResubscribeOnLoadEvenIfCompleted.
 	/// </summary>
 	Default = StartLoaded | ResubscribeOnLoadEvenIfCompleted,
 
 	/// <summary>
-	/// Consider the control as loaded on subscribe
+	/// Consider the control as loaded on subscribe.
 	/// </summary>
 	StartLoaded = 1,
 
 	/// <summary>
-	/// If observable completes or fails, re-subscribe on next loaded
+	/// If observable completes or fails, re-subscribe on next loaded.
 	/// </summary>
 	ResubscribeOnLoadEvenIfCompleted = 2,
 
@@ -75,7 +75,7 @@ internal static class ObservableExtensions
 	/// <param name="element">The framework element to subscribe to.</param>
 	/// <param name="onNext">The action invoked when the observable pushes a new value.</param>
 	/// <param name="onError">The action invoked when the observable pushes an error.</param>
-	/// <param name="onCompleted">The action invoked on when the </param>
+	/// <param name="onCompleted">The action invoked on when the observable completes. </param>
 	/// <param name="options">The subscription options.</param>
 	/// <returns>A disposable that unsubscribes.</returns>
 	public static IDisposable SubscribeToElement<T>(
