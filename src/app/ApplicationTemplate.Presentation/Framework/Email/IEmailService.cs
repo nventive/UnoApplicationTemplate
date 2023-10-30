@@ -2,6 +2,9 @@
 
 namespace ApplicationTemplate;
 
+/// <summary>
+/// Provides methods to send emails.
+/// </summary>
 public interface IEmailService
 {
 	/// <summary>

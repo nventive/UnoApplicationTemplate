@@ -6,6 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
 ## 2.1.X
+- Install `GooseAnalyzers` to enable the `SA1600` rule with its scope limited to interfaces and improve xml documentation.
 - Replace local `DispatcherQueue` extension methods with the ones from the WinUI and Uno.WinUI Community Toolkit.
 - Add `Microsoft.VisualStudio.Threading.Analyzers` to check for async void usages and fix async void usages.
 - Enable `TreatWarningsAsErrors` for the Access, Business, and Presentation projects.

@@ -13,16 +13,22 @@ namespace ApplicationTemplate.Views.Behaviors;
 /// <summary>
 /// This text box behavior allows you to format the input text based on specified format.
 /// The specified format follows the following convention:
-/// '#' allows anycharacters
-/// 'A' : capital letter
-/// 'a' : lower case letter
-/// '0' : digit
-/// 'N' : Capital alphanumeric
-/// 'n' : lower case alphanumeric
+/// <list type="table">
+/// <item> '#' : allows any characters</item>
+/// <item> 'A' : capital letter</item>
+/// <item> 'a' : lower case letter</item>
+/// <item> '0' : digit</item>
+/// <item> 'N' : Capital alphanumeric</item>
+/// <item> 'n' : lower case alphanumeric</item>
+/// </list>
+/// <example>
 /// Example of formats:
-/// - (000) 000-000 = Phone number
-/// - 0000 0000 0000 0000  = credit card
-/// - A0A 0A0 = code postal
+/// <list type="table">
+/// <item> - (000) 000-000 = Phone number</item>
+/// <item> - 0000 0000 0000 0000  = credit card</item>
+/// <item> - A0A 0A0 = code postal</item>
+/// </list>
+/// </example>
 /// </summary>
 public sealed partial class FormattingTextBoxBehavior
 {
@@ -330,11 +336,11 @@ public sealed partial class FormattingTextBoxBehavior
 	}
 
 	/// <summary>
-	/// Check if the text insertion is conform to the specified format
+	/// Checks if the text insertion is conform to the specified format.
 	/// </summary>
-	/// <param name="format">text format</param>
-	/// <param name="offset">index where <paramref name="input"/> should be inserted</param>
-	/// <param name="input">fragment to be inserted at <paramref name="offset"/></param>
+	/// <param name="format">The text format.</param>
+	/// <param name="offset">The index where <paramref name="input"/> should be inserted.</param>
+	/// <param name="input">The fragment to be inserted at <paramref name="offset"/>.</param>
 	private static bool ValidateInput(string format, int offset, string input)
 	{
 		if (offset + input.Length > format.Length)

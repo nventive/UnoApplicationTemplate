@@ -2,6 +2,10 @@
 
 namespace ApplicationTemplate;
 
+/// <summary>
+/// Provides access to the application version.
+/// This is useful when displaying the version in the application.
+/// </summary>
 public interface IVersionProvider
 {
 	/// <summary>

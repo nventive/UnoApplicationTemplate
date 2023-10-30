@@ -54,7 +54,7 @@ public abstract class CoreStartupBase : IDisposable
 	/// <param name="settingsFolderPath">The folder path indicating where the override files are.</param>
 	/// <param name="environmentManager">The environment manager.</param>
 	/// <param name="loggingConfiguration">The delegate to call to configure logging.</param>
-	/// <param name="extraHostConfiguration">Extra host configuration</param>
+	/// <param name="extraHostConfiguration">The extra host configuration.</param>
 	public void Initialize(
 		string contentRootPath,
 		string settingsFolderPath,
@@ -132,7 +132,7 @@ public abstract class CoreStartupBase : IDisposable
 	/// This method will be called once the app is initialized.
 	/// This is a chance to apply any configuration required to start the app.
 	/// </summary>
-	/// <param name="services">Services</param>
+	/// <param name="services">The services.</param>
 	protected abstract void OnInitialized(IServiceProvider services);
 
 	/// <summary>
@@ -169,7 +169,7 @@ public abstract class CoreStartupBase : IDisposable
 	/// This method can be called multiple times.
 	/// This method will run on a background thread.
 	/// </summary>
-	/// <param name="services">Services</param>
+	/// <param name="services">The services.</param>
 	/// <param name="isFirstStart">True if it's the first start; false otherwise.</param>
 	/// <returns>Task that completes when the services are started.</returns>
 	protected abstract Task StartServices(IServiceProvider services, bool isFirstStart);
