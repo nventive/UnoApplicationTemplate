@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Dispatching;
+﻿using CommunityToolkit.WinUI;
+using Microsoft.UI.Dispatching;
 
 namespace ApplicationTemplate;
 
@@ -13,7 +14,7 @@ public sealed class ExtendedSplashscreenController : IExtendedSplashscreenContro
 
 	public void Dismiss()
 	{
-		_ = _dispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, DismissSplashScreen);
+		_ = _dispatcherQueue.EnqueueAsync(DismissSplashScreen);
 
 		void DismissSplashScreen() // Runs on UI thread.
 		{

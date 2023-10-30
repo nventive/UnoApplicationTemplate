@@ -9,6 +9,7 @@ using Chinook.BackButtonManager;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
+using CommunityToolkit.WinUI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -125,7 +126,7 @@ public sealed class Startup : StartupBase
 
 	private static async Task SetShellViewModel()
 	{
-		await App.Instance.Shell.DispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, SetDataContextUI);
+		await App.Instance.Shell.DispatcherQueue.EnqueueAsync(SetDataContextUI);
 
 		static void SetDataContextUI() // Runs on UI thread.
 		{
@@ -159,7 +160,7 @@ public sealed class Startup : StartupBase
 		void OnStateChanged(bool canNavigateBackOrCloseModal)
 		{
 			var dispatcherQueue = services.GetRequiredService<DispatcherQueue>();
-			_ = dispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, UpdateBackButtonUI);
+			_ = dispatcherQueue.EnqueueAsync(UpdateBackButtonUI);
 
 			void UpdateBackButtonUI() // Runs on UI thread.
 			{
@@ -181,7 +182,7 @@ public sealed class Startup : StartupBase
 #if __ANDROID__ || __IOS__
 		var dispatcherQueue = services.GetRequiredService<DispatcherQueue>();
 		var backButtonManager = services.GetRequiredService<IBackButtonManager>();
-		await dispatcherQueue.RunAsync(DispatcherQueuePriority.High, AddSystemBackButtonSourceInner);
+		await dispatcherQueue.EnqueueAsync(AddSystemBackButtonSourceInner, DispatcherQueuePriority.High);
 
 		// Runs on main thread.
 		void AddSystemBackButtonSourceInner()

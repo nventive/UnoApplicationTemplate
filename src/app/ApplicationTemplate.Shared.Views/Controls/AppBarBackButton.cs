@@ -3,6 +3,7 @@ using System.Reactive.Linq;
 using System.Windows.Input;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
+using CommunityToolkit.WinUI;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Dispatching;
@@ -77,7 +78,7 @@ public sealed partial class AppBarBackButton : AppBarButton
 		void OnStateChanged(bool canNavigateBackOrCloseModal)
 		{
 			var dispatcherQueue = ServiceProvider.GetRequiredService<DispatcherQueue>();
-			_ = dispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, UpdateBackButtonUI);
+			_ = dispatcherQueue.EnqueueAsync(UpdateBackButtonUI);
 
 			void UpdateBackButtonUI() // Runs on UI thread.
 			{

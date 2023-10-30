@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Text;
+using CommunityToolkit.WinUI;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -196,7 +197,7 @@ public sealed partial class FormattingTextBoxBehavior
 			return;
 		}
 
-		_ = textbox.DispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, () =>
+		_ = textbox.DispatcherQueue.EnqueueAsync(() =>
 		{
 			textbox.Text = formattedText;
 			textbox.SelectionStart = selectionStart;

@@ -391,3 +391,12 @@ dotnet_diagnostic.SA1210.severity = suggestion
 dotnet_diagnostic.CA1308.severity = none
 # CS1587: XML comment is not placed on a valid language element
 dotnet_diagnostic.CS1587.severity = none
+
+# VSTHRD110: This one is bugged: https://github.com/microsoft/vs-threading/issues/899
+dotnet_diagnostic.VSTHRD110.severity = none
+# VSTHRD200: Use `Async` naming convention
+dotnet_diagnostic.VSTHRD200.severity = none
+# VSTHRD100: Avoid async void methods
+dotnet_diagnostic.VSTHRD100.severity = error
+# VSTHRD101: Avoid unsupported async delegates
+dotnet_diagnostic.VSTHRD101.severity = error
