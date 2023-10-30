@@ -109,7 +109,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Version\VersionProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controls\AppBarBackButton.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DispatcherQueueExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FrameworkElementExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">

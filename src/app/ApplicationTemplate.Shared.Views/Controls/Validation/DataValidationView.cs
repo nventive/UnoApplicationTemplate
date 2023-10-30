@@ -4,6 +4,7 @@ using System.Linq;
 using Microsoft.UI.Dispatching;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using CommunityToolkit.WinUI;
 
 namespace ApplicationTemplate;
 
@@ -78,7 +79,7 @@ public sealed partial class DataValidationView : ContentControl
 
 	private void OnErrorsChanged(object sender, DataErrorsChangedEventArgs e)
 	{
-		_ = DispatcherQueue.RunAsync(DispatcherQueuePriority.Normal, ErrorsChangedUI);
+		_ = DispatcherQueue.EnqueueAsync(ErrorsChangedUI);
 
 		void ErrorsChangedUI()
 		{

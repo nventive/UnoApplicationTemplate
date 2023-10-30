@@ -21,8 +21,7 @@ public static class ObservableExtensions2
 	/// <param name="delay">Time delay</param>
 	/// <param name="scheduler">Scheduler</param>
 	/// <returns>Output observable</returns>
-	[SuppressMessage("nventive.Globalization", "NV2005:NV2005 - Simple cyclomatic complexity​​", Justification = "Imported code")]
-	[SuppressMessage("nventive.Reliability", "NV0016:NV0016 - Do not create an async void lambda expression", Justification = "Imported code")]
+	[SuppressMessage("Usage", "VSTHRD101:Avoid unsupported async delegates", Justification = "Imported code")]
 	public static IObservable<T> ThrottleOrImmediate<T>(this IObservable<T> source, TimeSpan delay, IScheduler scheduler)
 	{
 		// Throttle behavior:

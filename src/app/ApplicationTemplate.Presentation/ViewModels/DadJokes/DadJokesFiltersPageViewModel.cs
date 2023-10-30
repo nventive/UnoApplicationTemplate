@@ -16,15 +16,6 @@ public class DadJokesFiltersPageViewModel : ViewModel
 {
 	public DadJokesFiltersPageViewModel()
 	{
-		var pt = this.GetService<IDadJokesService>().GetAndObservePostTypeFilter();
-		var postType = GetPostType(pt);
-
-		PostTypeFilter = postType.Result;
-
-		async Task<PostTypes> GetPostType(ReplaySubject<PostTypes> ptArg)
-		{
-			return await ptArg.FirstAsync();
-		}
 	}
 
 	public IDynamicCommand HandleCheck => this.GetCommand((string pt) =>
@@ -40,7 +31,7 @@ public class DadJokesFiltersPageViewModel : ViewModel
 
 	public PostTypes PostTypeFilter
 	{
-		get => this.Get<PostTypes>(initialValue: PostTypes.Hot);
+		get => this.GetFromTask<PostTypes>(ct => this.GetService<IDadJokesService>().GetAndObservePostTypeFilter().FirstAsync(ct), initialValue: PostTypes.Hot);
 		set => this.Set(value);
 	}
 }

@@ -28,6 +28,7 @@
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.62" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
+		<PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.100" />
 		<PackageReference Include="Uno.Material.WinUI" Version="3.0.40" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />

@@ -88,7 +88,7 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 			ConfigurationValue = this.GetService<IConfiguration>()[value];
 
 			// Erase the selection from the ComboBox because we put it in the TextBox.
-			Task.Run(() => RaisePropertyChanged(nameof(SelectedKey)));
+			_ = Task.Run(() => RaisePropertyChanged(nameof(SelectedKey)));
 		}
 	}
 
