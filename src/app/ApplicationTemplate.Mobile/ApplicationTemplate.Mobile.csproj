@@ -150,6 +150,8 @@
 				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
 				<CodesignEntitlements>iOS\Entitlements.plist</CodesignEntitlements>
+				<!-- Workaround for clang++ error on iOS simulator on ARM base macOS system. See "https://github.com/dotnet/maui/issues/16778#issuecomment-1683343255" for more detail. -->
+				<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">

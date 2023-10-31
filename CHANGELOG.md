@@ -11,6 +11,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Add `Microsoft.VisualStudio.Threading.Analyzers` to check for async void usages and fix async void usages.
 - Enable `TreatWarningsAsErrors` for the Access, Business, and Presentation projects.
 - Update analyzers packages and severity of rules.
+- Fix crash from ARM base mac on net7.0-iOS. Add `ForceSimulatorX64ArchitectureInIDE` property to mobile head.
 
 ## 2.0.X
 - Renamed the classes providing data to use the `Repository` suffix instead of `Endpoint` or `Service`.
