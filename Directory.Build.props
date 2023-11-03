@@ -8,6 +8,9 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
+		<!-- Microsoft.VisualStudio.Threading.Analyzers has the async void analyzers. -->
+		<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.5.22" PrivateAssets="all" />
+		<PackageReference Include="GooseAnalyzers" Version="0.2.0" PrivateAssets="all" />
 	</ItemGroup>
 
 	<ItemGroup>

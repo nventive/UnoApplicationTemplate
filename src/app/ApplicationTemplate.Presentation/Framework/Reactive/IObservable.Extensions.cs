@@ -17,12 +17,11 @@ public static class ObservableExtensions2
 	/// This operator is like the throttle operator, but it doesn't wait for the <paramref name="delay"/> for initial values.
 	/// </summary>
 	/// <typeparam name="T">The type of the observable.</typeparam>
-	/// <param name="source">Source observable</param>
-	/// <param name="delay">Time delay</param>
-	/// <param name="scheduler">Scheduler</param>
-	/// <returns>Output observable</returns>
-	[SuppressMessage("nventive.Globalization", "NV2005:NV2005 - Simple cyclomatic complexity​​", Justification = "Imported code")]
-	[SuppressMessage("nventive.Reliability", "NV0016:NV0016 - Do not create an async void lambda expression", Justification = "Imported code")]
+	/// <param name="source">The source observable.</param>
+	/// <param name="delay">The time delay.</param>
+	/// <param name="scheduler">The scheduler.</param>
+	/// <returns>A throttled observable sequence.</returns>
+	[SuppressMessage("Usage", "VSTHRD101:Avoid unsupported async delegates", Justification = "Imported code")]
 	public static IObservable<T> ThrottleOrImmediate<T>(this IObservable<T> source, TimeSpan delay, IScheduler scheduler)
 	{
 		// Throttle behavior:

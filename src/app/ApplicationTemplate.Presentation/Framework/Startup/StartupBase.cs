@@ -106,21 +106,20 @@ public abstract class StartupBase
 	/// <summary>
 	/// Initializes view services into the provided <see cref="IHostBuilder"/>.
 	/// </summary>
-	/// <param name="hostBuilder">The hostbuilder in which services must be added.</param>
+	/// <param name="hostBuilder">The host builder in which services must be added.</param>
 	protected abstract void InitializeViewServices(IHostBuilder hostBuilder);
 
 	/// <summary>
 	/// This method will be called once the app is initialized.
 	/// This is a chance to apply any configuration required to start the app.
 	/// </summary>
-	/// <param name="services">Services</param>
+	/// <param name="services">The services.</param>
 	protected abstract void OnInitialized(IServiceProvider services);
 
 	/// <summary>
 	/// Starts the application.
 	/// This method can be called multiple times.
 	/// </summary>
-	/// <returns><see cref="Task"/></returns>
 	public async Task Start()
 	{
 		if (!State.IsInitialized)
@@ -166,7 +165,7 @@ public abstract class StartupBase
 	/// This method can be called multiple times.
 	/// This method will run on a background thread.
 	/// </summary>
-	/// <param name="services">Services</param>
+	/// <param name="services">The services.</param>
 	/// <param name="isFirstStart">True if it's the first start; false otherwise.</param>
 	/// <returns>Task that completes when the services are started.</returns>
 	protected abstract Task StartViewServices(IServiceProvider services, bool isFirstStart);

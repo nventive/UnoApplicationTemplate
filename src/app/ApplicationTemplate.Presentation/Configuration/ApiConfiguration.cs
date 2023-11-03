@@ -157,10 +157,10 @@ public static class ApiConfiguration
 	/// <summary>
 	/// Adds a Refit client to the service collection.
 	/// </summary>
-	/// <typeparam name="T">Type of the Refit interface</typeparam>
-	/// <param name="services">Service collection</param>
-	/// <param name="settings">Optional. Settings to configure the instance with</param>
-	/// <returns>Updated IHttpClientBuilder</returns>
+	/// <typeparam name="T">The type of the Refit interface.</typeparam>
+	/// <param name="services">The service collection.</param>
+	/// <param name="settings">Optional. The settings to configure the instance with.</param>
+	/// <returns>The updated IHttpClientBuilder.</returns>
 	private static IHttpClientBuilder AddRefitHttpClient<T>(this IServiceCollection services, Func<IServiceProvider, RefitSettings> settings = null)
 		where T : class
 	{

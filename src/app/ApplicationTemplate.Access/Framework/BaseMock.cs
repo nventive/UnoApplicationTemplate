@@ -22,10 +22,10 @@ public class BaseMock
 	/// <summary>
 	/// Gets the deserialized value of the specified embedded resource.
 	/// </summary>
-	/// <typeparam name="T">Type of value</typeparam>
-	/// <param name="resourceName">Name of the resource</param>
-	/// <param name="callerMemberName">Caller member name</param>
-	/// <returns>Deserialized value</returns>
+	/// <typeparam name="T">The type of value.</typeparam>
+	/// <param name="resourceName">The name of the resource.</param>
+	/// <param name="callerMemberName">The caller member name.</param>
+	/// <returns>The deserialized value.</returns>
 	/// <remarks>
 	/// If left empty, the <paramref name="resourceName" /> will implicitly be treated as "{callerTypeName}.{callerMemberName}.json".
 	/// Note that this will deserialize the first embedded resource whose name ends with the specified <paramref name="resourceName" />.
@@ -63,10 +63,10 @@ public class BaseMock
 	/// If left empty, the <paramref name="resourceName" /> will implicitly be treated as "{callerTypeName}.{callerMemberName}.json".
 	/// Note that this will deserialize the first embedded resource whose name ends with the specified <paramref name="resourceName" />.
 	/// </remarks>
-	/// <typeparam name="T">Type of object</typeparam>
-	/// <param name="resourceName">Name of the resource</param>
-	/// <param name="callerMemberName">Name of the caller (used if no resource name provided)</param>
-	/// <returns>Deserialized object</returns>
+	/// <typeparam name="T">The type of object.</typeparam>
+	/// <param name="resourceName">The name of the resource.</param>
+	/// <param name="callerMemberName">The name of the caller (used if no resource name provided).</param>
+	/// <returns>The deserialized object.</returns>
 	protected Task<T> GetTaskFromEmbeddedResource<T>(
 		string resourceName = null,
 		[CallerMemberName] string callerMemberName = null

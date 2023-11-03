@@ -6,20 +6,22 @@ using System.Threading.Tasks;
 
 namespace ApplicationTemplate.Business;
 
+/// <summary>
+/// Provides access to the user profile.
+/// </summary>
 public interface IUserProfileService
 {
 	/// <summary>
 	/// Gets the current user profile.
 	/// </summary>
-	/// <param name="ct"><see cref="CancellationToken"/></param>
-	/// <returns><see cref="UserProfile"/></returns>
+	/// <param name="ct">The <see cref="CancellationToken"/>.</param>
+	/// <returns>The current <see cref="UserProfile"/>.</returns>
 	Task<UserProfile> GetCurrent(CancellationToken ct);
 
 	/// <summary>
 	/// Updates the current user profile.
 	/// </summary>
-	/// <param name="ct"><see cref="CancellationToken"/></param>
-	/// <param name="userProfile"><see cref="UserProfile"/></param>
-	/// <returns><see cref="Task"/></returns>
+	/// <param name="ct">The <see cref="CancellationToken"/>.</param>
+	/// <param name="userProfile">The <see cref="UserProfile"/>.</param>
 	Task Update(CancellationToken ct, UserProfile userProfile);
 }

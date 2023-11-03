@@ -1,10 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<LangVersion>10.0</LangVersion>
-	</PropertyGroup>
-	<PropertyGroup>
 		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
 		<SingleProject>true</SingleProject>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
 		<UseMauiEssentials>true</UseMauiEssentials>
@@ -28,6 +27,7 @@
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.62" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
+		<PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.100" />
 		<PackageReference Include="Uno.Material.WinUI" Version="3.0.40" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
@@ -150,6 +150,8 @@
 				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
 				<CodesignEntitlements>iOS\Entitlements.plist</CodesignEntitlements>
+				<!-- Workaround for clang++ error on iOS simulator on ARM base macOS system. See "https://github.com/dotnet/maui/issues/16778#issuecomment-1683343255" for more detail. -->
+				<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">

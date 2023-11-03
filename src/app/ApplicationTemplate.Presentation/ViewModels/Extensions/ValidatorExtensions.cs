@@ -10,11 +10,11 @@ namespace Presentation;
 public static class ValidatorExtensions
 {
 	/// <summary>
-	/// Returns true if value is over 18 years olds.
+	/// Adds a validation rule that checks whether the age is over 18 years old based on the date of birth.
 	/// </summary>
-	/// <typeparam name="T">Date of birth</typeparam>
-	/// <param name="ruleBuilder"> Rule builder</param>
-	/// <returns>Validation result.</returns>
+	/// <typeparam name="T">The type containing the property to validate.</typeparam>
+	/// <param name="ruleBuilder">The rule builder.</param>
+	/// <returns>The modified rule builder.</returns>
 	public static IRuleBuilderOptions<T, DateTimeOffset> MustBe18OrOlder<T>(this IRuleBuilder<T, DateTimeOffset> ruleBuilder)
 	{
 		return ruleBuilder.Must(dateOfBirth =>
@@ -39,33 +39,33 @@ public static class ValidatorExtensions
 	}
 
 	/// <summary>
-	/// Returns true if value is over 18 years olds.
+	/// Adds a validation rule that checks whether a string is a phone number.
 	/// </summary>
-	/// <typeparam name="T">Date of birth</typeparam>
-	/// <param name="ruleBuilder"> Rule builder</param>
-	/// <returns>Validation result.</returns>
+	/// <typeparam name="T">The type containing the property to validate.</typeparam>
+	/// <param name="ruleBuilder">The rule builder.</param>
+	/// <returns>The modified rule builder.</returns>
 	public static IRuleBuilderOptions<T, string> MustBePhoneNumber<T>(this IRuleBuilder<T, string> ruleBuilder)
 	{
 		var charsToTrim = new char[] { '(', ')', '-', ' ' };
 
-		return ruleBuilder.Must(phonenumber =>
+		return ruleBuilder.Must(phoneNumber =>
 		{
-			phonenumber = phonenumber ?? string.Empty;
+			phoneNumber = phoneNumber ?? string.Empty;
 
-			var strippedNumber = new string(phonenumber
+			var strippedNumber = new string(phoneNumber
 				.Where(x => x.ToString(CultureInfo.InvariantCulture).IsNumber() &&
 					!x.ToString(CultureInfo.InvariantCulture).IsNullOrWhiteSpace())
 				.ToArray());
 
-			var trimmedNumber = phonenumber.Trim(charsToTrim);
+			var trimmedNumber = phoneNumber.Trim(charsToTrim);
 			var result = strippedNumber.Length == 10 || strippedNumber.Length == 0; // 10 = "(000) 000-0000".Length - "() -".Length;
 
 			return result;
 		})
-		.Must(phonenumber =>
+		.Must(phoneNumber =>
 		{
-			phonenumber = phonenumber ?? string.Empty;
-			var result = phonenumber
+			phoneNumber = phoneNumber ?? string.Empty;
+			var result = phoneNumber
 				.All(pn => pn.ToString(CultureInfo.InvariantCulture).IsNumber() ||
 					pn == '(' || pn == ')' || pn == '-' || pn == ' ');
 			return result;

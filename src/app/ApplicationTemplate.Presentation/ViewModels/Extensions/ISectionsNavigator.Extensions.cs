@@ -10,7 +10,7 @@ namespace Chinook.SectionsNavigation;
 public static class SectionsNavigatorExtensions
 {
 	/// <summary>
-	/// Observe the active section and return the name
+	/// Observes the active section and returns its name.
 	/// </summary>
 	/// <param name="sectionsNavigator">The sections navigator.</param>
 	/// <returns>A string of the active section.</returns>

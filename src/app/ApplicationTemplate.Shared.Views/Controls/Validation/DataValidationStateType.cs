@@ -3,7 +3,7 @@
 public enum DataValidationStateType
 {
 	/// <summary>
-	/// The field doesn't have any validation yet. (Not error, nor valid)
+	/// The field doesn't have any validation yet (not error, nor valid).
 	/// </summary>
 	Default = 0,
 

@@ -7,12 +7,15 @@ using MallardMessageHandlers;
 
 namespace ApplicationTemplate.Business;
 
+/// <summary>
+/// Manages the authentication.
+/// </summary>
 public interface IAuthenticationService : IAuthenticationTokenProvider<AuthenticationData>
 {
 	/// <summary>
 	/// Gets and observes the current <see cref="AuthenticationData"/>.
 	/// </summary>
-	/// <returns>Current <see cref="AuthenticationData"/></returns>
+	/// <returns>An observable sequence containing the current <see cref="AuthenticationData"/>.</returns>
 	IObservable<AuthenticationData> GetAndObserveAuthenticationData();
 
 	/// <summary>
@@ -24,39 +27,37 @@ public interface IAuthenticationService : IAuthenticationTokenProvider<Authentic
 	/// <summary>
 	/// Raised when the user has been automatically logged out because the session expired.
 	/// </summary>
-	/// <returns><see cref="Unit"/></returns>
+	/// <returns>A observable sequence notifying whenever the session expires.</returns>
 	IObservable<Unit> ObserveSessionExpired();
 
 	/// <summary>
 	/// Logs the user in using the provided <paramref name="email"/> and <paramref name="password"/>.
 	/// </summary>
-	/// <param name="ct"><see cref="CancellationToken"/></param>
-	/// <param name="email">Email</param>
-	/// <param name="password">Password</param>
-	/// <returns><see cref="AuthenticationData"/></returns>
+	/// <param name="ct">The <see cref="CancellationToken"/>.</param>
+	/// <param name="email">The email.</param>
+	/// <param name="password">The password.</param>
+	/// <returns>The <see cref="AuthenticationData"/>.</returns>
 	Task<AuthenticationData> Login(CancellationToken ct, string email, string password);
 
 	/// <summary>
 	/// Logs the user out.
 	/// </summary>
-	/// <param name="ct"><see cref="CancellationToken"/></param>
-	/// <returns><see cref="Task"/></returns>
+	/// <param name="ct">The <see cref="CancellationToken"/>.</param>
 	Task Logout(CancellationToken ct);
 
 	/// <summary>
 	/// Creates a user account.
 	/// </summary>
-	/// <param name="ct"><see cref="CancellationToken"/></param>
-	/// <param name="email">Email</param>
-	/// <param name="password">Password</param>
-	/// <returns><see cref="AuthenticationData"/></returns>
+	/// <param name="ct">The <see cref="CancellationToken"/>.</param>
+	/// <param name="email">The email.</param>
+	/// <param name="password">The password.</param>
+	/// <returns>The <see cref="AuthenticationData"/>.</returns>
 	Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password);
 
 	/// <summary>
 	/// Resets the password.
 	/// </summary>
-	/// <param name="ct"><see cref="CancellationToken"/></param>
-	/// <param name="email">Email</param>
-	/// <returns><see cref="Task"/></returns>
+	/// <param name="ct">THe <see cref="CancellationToken"/>.</param>
+	/// <param name="email">The email.</param>
 	Task ResetPassword(CancellationToken ct, string email);
 }

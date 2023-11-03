@@ -8,7 +8,7 @@ namespace ApplicationTemplate;
 /// <summary>
 /// Specialized type to hold RFC 7519 JSON Web Token (JWT) information.
 /// </summary>
-/// <typeparam name="TPayload">The type of the Payload to deserialize</typeparam>
+/// <typeparam name="TPayload">The type of the Payload to deserialize.</typeparam>
 public class JwtData<TPayload>
 	where TPayload : class
 {
@@ -37,34 +37,34 @@ public class JwtData<TPayload>
 	}
 
 	/// <summary>
-	/// Represents the raw token as received as constructor parameter
+	/// Gets the raw token as received as constructor parameter.
 	/// </summary>
 	public string Token { get; }
 
 	/// <summary>
-	/// Represents the decoded (but non-deserialized) header part of the JWT - in JSON text
+	/// Gets the decoded (but non-deserialized) header part of the JWT - in JSON text.
 	/// </summary>
 	public string RawHeader { get; }
 
 	/// <summary>
-	/// Represents the decoded (but non-deserialized) payload part of the JWT - in JSON text
+	/// Gets the decoded (but non-deserialized) payload part of the JWT - in JSON text.
 	/// </summary>
 	public string RawPayload { get; }
 
 	/// <summary>
-	/// Deserialized header
+	/// Gets the deserialized header.
 	/// </summary>
 	public IDictionary<string, string> Header
 		=> _header ?? (_header = JsonSerializer.Deserialize(RawHeader, typeof(IDictionary<string, string>), _jsonSerializerOptions) as IDictionary<string, string>);
 
 	/// <summary>
-	/// Deserialized payload
+	/// Gets the deserialized payload.
 	/// </summary>
 	public TPayload Payload
 		=> _payload ?? (_payload = JsonSerializer.Deserialize(RawPayload, typeof(TPayload), _jsonSerializerOptions) as TPayload);
 
 	/// <summary>
-	/// Decoded signature of the JWT
+	/// Gets the decoded signature of the JWT.
 	/// </summary>
 	public byte[] Signature { get; }
 
