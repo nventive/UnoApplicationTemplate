@@ -1,8 +1,8 @@
-steps:
+﻿steps:
   - task: gitversion/setup@0
     retryCountOnTaskFailure: 3
     inputs:
-      versionSpec: '5.10.1'
+      versionSpec: '5.12.0'
     displayName: 'Install GitVersion'
 
 #-if false
