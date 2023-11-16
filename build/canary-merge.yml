@@ -12,7 +12,7 @@ trigger: # Start a new run as soon as canaries/dev changes.
       - canaries/dev
 
 pool:
-  name: Windows 2022
+  vmImage: $(windowsHostedAgentImage)
 
 variables:
  SolutionFileName: ApplicationTemplate.sln
