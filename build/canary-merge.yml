@@ -15,7 +15,7 @@ pool:
   vmImage: $(windowsHostedAgentImage)
 
 variables:
- SolutionFileName: ApplicationTemplate.sln
+- template: variables.yml
 
 steps:
 - checkout: self
@@ -31,7 +31,7 @@ steps:
   env:
     SYSTEM_ACCESSTOKEN: $(System.AccessToken)
   inputs:
-    solution: '$(Build.SourcesDirectory)/src/$(SolutionFileName)'
+    solution: '$(Build.SourcesDirectory)/src/$(SolutionName).sln'
     usePrivateFeed: false
     useNuGetOrg: true
     mergeBranch: true
