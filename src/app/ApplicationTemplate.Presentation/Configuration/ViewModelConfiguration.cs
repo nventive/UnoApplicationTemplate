@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using ApplicationTemplate.Presentation;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.DynamicMvvm.Implementations;
@@ -41,6 +42,7 @@ public static class ViewModelConfiguration
 				new DynamicCommandBuilderFactory(c => c
 					.CatchErrors(s.GetRequiredService<IDynamicCommandErrorHandler>())
 					.WithLogs(s.GetRequiredService<ILogger<IDynamicCommand>>())
+					.WithStrategy(new AnalyticsCommandStrategy(s.GetRequiredService<IAnalyticsSink>(), c.ViewModel))
 					.WithStrategy(new RaiseCanExecuteOnDispatcherCommandStrategy(c.ViewModel))
 					.DisableWhileExecuting()
 					.OnBackgroundThread()
@@ -61,9 +63,9 @@ public static class ViewModelConfiguration
 			return new DataLoaderBuilderFactory(b => b
 				.OnBackgroundThread()
 				.WithEmptySelector(GetIsEmpty)
-				.WithAnalytics(
-					onSuccess: async (ct, request, value) => { /* Some analytics */ },
-					onError: async (ct, request, error) => { /* Somme analytics */ }
+				.WithMonitoring(
+					onSuccess: async (ct, request, value) => { /* Some monitoring logic */ },
+					onError: async (ct, request, error) => { /* Some monitoring logic */ }
 				)
 				.WithLoggedErrors(s.GetRequiredService<ILogger<IDataLoader>>())
 			);
