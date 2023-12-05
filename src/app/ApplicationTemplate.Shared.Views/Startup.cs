@@ -216,7 +216,7 @@ public sealed class Startup : StartupBase
 			.ObserveOn(dispatcher)
 			.Subscribe(onNext: state =>
 			{
-				var currentVmType = state.CurrentState.GetViewModelType();
+				var currentVmType = state.CurrentState.GetCurrentOrNextViewModelType();
 
 				// We set the default status bar color to white.
 				var statusBarColor = Microsoft.UI.Colors.White;
