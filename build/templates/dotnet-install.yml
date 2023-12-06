@@ -1,15 +1,19 @@
 parameters:
-- name: installMobileWorkload
-  type: boolean
-  default: true
+  DotNetVersion: '7.0.400'
+  UnoCheck_Version: '1.17.0'
+  UnoCheck_Manifest: 'https://raw.githubusercontent.com/unoplatform/uno.check/262bebd06e916ec022b8fdc4a2a9df14f0554b92/manifests/uno.ui.manifest.json'
 
 steps:
-  - task: UseDotNet@2
-    displayName: 'Install .NET SDK'
-    inputs:
-      packageType: 'sdk'
-      version: '7.0.203'
+- task: UseDotNet@2
+  displayName: 'Use .NET SDK ${{ parameters.DotNetVersion }}'
+  inputs:
+    packageType: 'sdk'
+    version: ${{ parameters.DotNetVersion }}
 
-  - powershell: dotnet workload install maui --source https://aka.ms/dotnet6/nuget/index.json --source https://api.nuget.org/v3/index.json
-    condition: ${{ parameters.installMobileWorkload }}
-    displayName: Install .NET MAUI Workload
+- powershell: |
+    & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
+    & uno-check -v --ci --non-interactive --fix --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
+  displayName: Install .NET Workloads | Uno-check
+  errorActionPreference: continue
+  ignoreLASTEXITCODE: true
+  retryCountOnTaskFailure: 3

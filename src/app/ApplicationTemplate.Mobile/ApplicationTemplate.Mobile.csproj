@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<LangVersion>10.0</LangVersion>
+		<LangVersion>11.0</LangVersion>
 		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
 		<SingleProject>true</SingleProject>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -17,25 +17,25 @@
 		<TrimMode>partial</TrimMode>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="1.1.2" />
-		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.2.0" />
-		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
-		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
-		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.5.0-dev.60" />
-		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="0.6.0-dev.58" />
-		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.4.0-dev.36" />
-		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.62" />
-		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
+		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.0.0-feature.Uno5Update.8" />
+		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0-feature.Uno5Update.7" />
+		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="2.0.0-feature.Uno5Update.6" />
+		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="3.0.0-feature.Uno5Update.7" />
+		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.0-feature.Uno5Update.6" />
+		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0-feature.Uno5Update.10" />
+		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.0-feature.Uno5Update.49" />
+		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-feature.Uno5Update.81" />
+		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.0-feature.Uno5.2" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
-		<PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.100" />
-		<PackageReference Include="Uno.Material.WinUI" Version="3.0.40" />
-		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
-		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="4.2.22" />
-		<PackageReference Include="Uno.WinUI" Version="4.8.24" />
-		<PackageReference Include="Uno.WinUI.RemoteControl" Version="4.8.24" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.WinUI.Lottie" Version="4.8.24" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="4.8.24" />
+		<PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.200" />
+		<PackageReference Include="Uno.Material.WinUI" Version="4.0.6" />
+		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.4.2" />
+		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.4.2" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="5.0.17" />
+		<PackageReference Include="Uno.WinUI" Version="5.0.64" />
+		<PackageReference Include="Uno.WinUI.DevServer" Version="5.0.64" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.64" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.64" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
