@@ -6,9 +6,7 @@ jobs:
 - deployment: AppStore_iOS_${{ parameters.deploymentEnvironment}}
 
   pool:
-    name: $(macOSPoolName)
-    demands:
-      - Xamarin.iOS_Version -equals $(XAMARIN_IOS_VERSION)
+    vmImage: $(macOSHostedAgentImage)
 
   environment: ${{ parameters.deploymentEnvironment }}
 
