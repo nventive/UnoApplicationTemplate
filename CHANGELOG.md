@@ -16,7 +16,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Enable `TreatWarningsAsErrors` for the Access, Business, and Presentation projects.
 - Update analyzers packages and severity of rules.
 - Fix crash from ARM base mac on net7.0-iOS. Add `ForceSimulatorX64ArchitectureInIDE` property to mobile head.
-- Consolidate build agents to Microsoft-hosted agents.
+- Consolidate Windows and macOS build agents to Microsoft-hosted agents.
 
 ## 2.0.X
 - Renamed the classes providing data to use the `Repository` suffix instead of `Endpoint` or `Service`.
