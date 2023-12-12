@@ -6,6 +6,8 @@ schedules:
     include:
       - main
 
+trigger: none
+
 variables:
 - template: build/variables.yml
 

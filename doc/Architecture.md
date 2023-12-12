@@ -176,6 +176,11 @@ This application uses [FluentValidation](https://www.nuget.org/packages/FluentVa
 
 See [Validation.md](Validation.md) for more details.
 
+### Analytics
+This application has a built-in analytics base that can be used to track events and errors with potentially any analytics service (e.g. AppCenter, Firebase, Segment, etc.). This base is built around the [IAnalyticsSink](../src/app/ApplicationTemplate.Presentation/Framework/Analytics/IAnalyticsSink.cs) interface.
+
+See [DefaultAnalytics.md](DefaultAnalytics.md) for more details.
+
 ## View
 
 ### UI Framework
