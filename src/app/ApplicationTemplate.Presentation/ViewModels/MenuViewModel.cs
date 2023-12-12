@@ -34,7 +34,7 @@ public sealed partial class MenuViewModel : ViewModel
 
 	public string MenuState => this.GetFromObservable(
 		ObserveMenuState(),
-		initialValue: GetMenuState(_sectionsNavigator.State.GetViewModelType())
+		initialValue: GetMenuState(_sectionsNavigator.State.GetCurrentOrNextViewModelType())
 	);
 
 	public int SelectedIndex => this.GetFromObservable<int>(ObserveSelectedIndex(), initialValue: 0);
@@ -56,7 +56,7 @@ public sealed partial class MenuViewModel : ViewModel
 			.ObserveCurrentState()
 			.Select(state =>
 			{
-				var vmType = state.GetViewModelType();
+				var vmType = state.GetCurrentOrNextViewModelType();
 				return GetMenuState(vmType);
 			})
 			.DistinctUntilChanged()

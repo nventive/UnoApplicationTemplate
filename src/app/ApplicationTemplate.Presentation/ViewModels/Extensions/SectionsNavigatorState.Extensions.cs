@@ -5,7 +5,7 @@ namespace Chinook.SectionsNavigation;
 
 public static class SectionsNavigatorStateExtensions
 {
-	public static Type GetViewModelType(this SectionsNavigatorState sectionsNavigatorState)
+	public static Type GetCurrentOrNextViewModelType(this SectionsNavigatorState sectionsNavigatorState)
 	{
 		switch (sectionsNavigatorState.LastRequestState)
 		{

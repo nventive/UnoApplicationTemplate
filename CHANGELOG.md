@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 2.2.X
+- Added hooks for default analytics (page views and command invocations).
+- Renamed the `AnalyticsDataLoaderStrategy` to `MonitoringDataLoaderStrategy`. (The same renaming was applied to related methods and classes).
+- Remove all triggers on the API Integration tests CI.
+
 ## 2.1.X
 - Install `GooseAnalyzers` to enable the `SA1600` rule with its scope limited to interfaces and improve xml documentation.
 - Replace local `DispatcherQueue` extension methods with the ones from the WinUI and Uno.WinUI Community Toolkit.
@@ -12,7 +17,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Enable `TreatWarningsAsErrors` for the Access, Business, and Presentation projects.
 - Update analyzers packages and severity of rules.
 - Fix crash from ARM base mac on net7.0-iOS. Add `ForceSimulatorX64ArchitectureInIDE` property to mobile head.
-- Consolidate build agents to Microsoft-hosted agents.
+- Consolidate Windows and macOS build agents to Microsoft-hosted agents.
 
 ## 2.0.X
 - Renamed the classes providing data to use the `Repository` suffix instead of `Endpoint` or `Service`.

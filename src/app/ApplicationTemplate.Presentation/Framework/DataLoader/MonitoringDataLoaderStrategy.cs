@@ -8,15 +8,15 @@ using Uno;
 namespace Chinook.DataLoader;
 
 /// <summary>
-/// This class is a <see cref="DelegatingDataLoaderStrategy"/> that offers callbacks on success and on error, ideal for analytics.
-/// This class demontrates how easy it is to extend the DataLoader recipe.
+/// This class is a <see cref="DelegatingDataLoaderStrategy"/> that offers callbacks on success and on error, ideal for monitoring.
+/// This class demonstrates how easy it is to extend the DataLoader recipe.
 /// </summary>
-public class AnalyticsDataLoaderStrategy : DelegatingDataLoaderStrategy
+public class MonitoringDataLoaderStrategy : DelegatingDataLoaderStrategy
 {
 	private readonly ActionAsync<IDataLoaderRequest, object> _onSuccess;
 	private readonly ActionAsync<IDataLoaderRequest, Exception> _onError;
 
-	public AnalyticsDataLoaderStrategy(ActionAsync<IDataLoaderRequest, object> onSuccess, ActionAsync<IDataLoaderRequest, Exception> onError)
+	public MonitoringDataLoaderStrategy(ActionAsync<IDataLoaderRequest, object> onSuccess, ActionAsync<IDataLoaderRequest, Exception> onError)
 	{
 		_onSuccess = onSuccess;
 		_onError = onError;
@@ -41,19 +41,19 @@ public class AnalyticsDataLoaderStrategy : DelegatingDataLoaderStrategy
 	}
 }
 
-public static class AnalyticsDataLoaderStrategyExtensions
+public static class MonitoringDataLoaderStrategyExtensions
 {
 	/// <summary>
-	/// Adds a <see cref="AnalyticsDataLoaderStrategy"/> to this builder.
+	/// Adds a <see cref="MonitoringDataLoaderStrategy"/> to this builder.
 	/// </summary>
 	/// <typeparam name="TBuilder">The type of the builder.</typeparam>
 	/// <param name="builder">The builder.</param>
 	/// <param name="onSuccess">The callback when the strategy loads successfully.</param>
 	/// <param name="onError">The callback when the strategy fails to load.</param>
 	/// <returns>The original builder.</returns>
-	public static TBuilder WithAnalytics<TBuilder>(this TBuilder builder, ActionAsync<IDataLoaderRequest, object> onSuccess, ActionAsync<IDataLoaderRequest, Exception> onError)
+	public static TBuilder WithMonitoring<TBuilder>(this TBuilder builder, ActionAsync<IDataLoaderRequest, object> onSuccess, ActionAsync<IDataLoaderRequest, Exception> onError)
 		where TBuilder : IDataLoaderBuilder
 	{
-		return builder.WithStrategy(new AnalyticsDataLoaderStrategy(onSuccess, onError));
+		return builder.WithStrategy(new MonitoringDataLoaderStrategy(onSuccess, onError));
 	}
 }

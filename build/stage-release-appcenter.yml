@@ -61,7 +61,7 @@ jobs:
 
 - deployment: AppCenter_iOS
   pool:
-    name: $(macOSPoolName)
+    vmImage: $(macOSHostedAgentImage)
     demands:
     - fastlane
   variables:

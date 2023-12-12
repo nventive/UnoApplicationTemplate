@@ -49,6 +49,7 @@ public sealed class CoreStartup : CoreStartupBase
 				.AddLocalization()
 				.AddReviewServices()
 				.AddAppServices()
+				.AddAnalytics()
 			);
 	}
 
@@ -70,13 +71,10 @@ public sealed class CoreStartup : CoreStartupBase
 		if (isFirstStart)
 		{
 			// TODO: Start your core services and customize the initial navigation logic here.
-
+			StartAutomaticAnalyticsCollection(services);
 			await services.GetRequiredService<IReviewService>().TrackApplicationLaunched(CancellationToken.None);
-
 			NotifyUserOnSessionExpired(services);
-
 			services.GetRequiredService<DiagnosticsCountersService>().Start();
-
 			await ExecuteInitialNavigation(CancellationToken.None, services);
 		}
 	}
@@ -117,6 +115,16 @@ public sealed class CoreStartup : CoreStartupBase
 		}
 
 		services.GetRequiredService<IExtendedSplashscreenController>().Dismiss();
+	}
+
+	private void StartAutomaticAnalyticsCollection(IServiceProvider services)
+	{
+		var analyticsSink = services.GetRequiredService<IAnalyticsSink>();
+		var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
+		sectionsNavigator
+			.ObserveCurrentState()
+			.Subscribe(analyticsSink.TrackNavigation)
+			.DisposeWith(Disposables);
 	}
 
 	private void NotifyUserOnSessionExpired(IServiceProvider services)
