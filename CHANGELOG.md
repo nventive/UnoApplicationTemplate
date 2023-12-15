@@ -6,7 +6,7 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
 ## 3.0.X
-- Updated to Uno 5
+- Updated to Uno 5.
 
 ## 2.2.X
 - Added hooks for default analytics (page views and command invocations).
