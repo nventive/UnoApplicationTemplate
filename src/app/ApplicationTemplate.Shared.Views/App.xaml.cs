@@ -4,6 +4,7 @@ using Chinook.SectionsNavigation;
 using Microsoft.Extensions.Logging;
 using Microsoft.UI.Xaml;
 using Uno.Extensions;
+using Uno.UI;
 using Windows.Graphics.Display;
 
 namespace ApplicationTemplate;
@@ -79,6 +80,10 @@ public sealed partial class App : Application
 		CurrentWindow.Activate();
 #endif
 //+:cnd:noEmit
+
+#if DEBUG
+		CurrentWindow.EnableHotReload();
+#endif
 
 		_ = Task.Run(() => Startup.Start());
 	}
