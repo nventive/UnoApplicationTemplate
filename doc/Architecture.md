@@ -101,7 +101,7 @@ See [Logging.md](Logging.md) for more details.
 ### Testing
 The architecture of application was designed with automated testing in mind.
 Automated testing explains why the application is divided in layers that are not multi-targeted.
-> i.e. The Access, Business, and Presentation libs target only .net7.0, and **not** .net7.0-ios nor .net7.0-android.
+> i.e. The Access, Business, and Presentation libs target only .net8.0, and **not** .net8.0-ios nor .net8.0-android.
 
 It also explains the separation of `Startup` and `CoreStartup`. `CoreStartup` can setup all the services that are non-UI dependent which can then be used to run simulations of the application using ViewModels that aren't attached to any UI.
 

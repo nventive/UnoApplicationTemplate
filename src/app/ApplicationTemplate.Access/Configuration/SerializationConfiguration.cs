@@ -56,7 +56,7 @@ public static class SerializationConfiguration
 	private static JsonSerializerOptions GetOptionsWithSourceGeneration()
 	{
 		var options = GetBaseOptions();
-		options.AddContext<JsonContext>();
+		options.TypeInfoResolver = JsonContext.Default;
 		return options;
 	}
 
