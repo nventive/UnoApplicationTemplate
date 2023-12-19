@@ -62,8 +62,6 @@ jobs:
 - deployment: AppCenter_iOS
   pool:
     vmImage: $(macOSHostedAgentImage)
-    demands:
-    - fastlane
   variables:
   - name: artifactName
     value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
