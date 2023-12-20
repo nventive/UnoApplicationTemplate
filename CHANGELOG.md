@@ -9,6 +9,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Added hooks for default analytics (page views and command invocations).
 - Renamed the `AnalyticsDataLoaderStrategy` to `MonitoringDataLoaderStrategy`. (The same renaming was applied to related methods and classes).
 - Remove all triggers on the API Integration tests CI.
+- Ensures API Integration tests CI runs every day of the week.
 
 ## 2.1.X
 - Install `GooseAnalyzers` to enable the `SA1600` rule with its scope limited to interfaces and improve xml documentation.
