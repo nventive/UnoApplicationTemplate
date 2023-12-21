@@ -1,67 +1,60 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-					xmlns:u="using:Nventive.View.Controls"
-					xmlns:c="using:ApplicationTemplate.Views.Controls">
+﻿<ResourceDictionary
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:c="using:ApplicationTemplate.Views.Controls"
+	xmlns:u="using:Nventive.View.Controls">
 
-	<Style x:Key="DefaultBottomTabBarButtonStyle"
-		   TargetType="c:BottomTabBarButton">
+	<Style x:Key="DefaultBottomTabBarButtonStyle" TargetType="c:BottomTabBarButton">
 
-		<Setter Property="Background"
-				Value="Transparent" />
-		<Setter Property="BorderBrush"
-				Value="Transparent" />
-		<Setter Property="HorizontalAlignment"
-				Value="Stretch" />
-		<Setter Property="VerticalAlignment"
-				Value="Stretch" />
-		<Setter Property="HorizontalContentAlignment"
-				Value="Center" />
-		<Setter Property="VerticalContentAlignment"
-				Value="Center" />
-		<Setter Property="Padding"
-				Value="20,9.5,20,7.5" />
-		<Setter Property="MinWidth"
-				Value="0" />
-		<Setter Property="MinWidth"
-				Value="0" />
+		<Setter Property="Background" Value="Transparent" />
+		<Setter Property="BorderBrush" Value="Transparent" />
+		<Setter Property="HorizontalAlignment" Value="Stretch" />
+		<Setter Property="VerticalAlignment" Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment" Value="Center" />
+		<Setter Property="VerticalContentAlignment" Value="Center" />
+		<Setter Property="Padding" Value="20,9.5,20,7.5" />
+		<Setter Property="MinWidth" Value="0" />
+		<Setter Property="MinWidth" Value="0" />
 
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="c:BottomTabBarButton">
-					<Grid x:Name="Root"
-						  Background="{TemplateBinding Background}"
-						  BorderBrush="{TemplateBinding BorderBrush}"
-						  BorderThickness="{TemplateBinding BorderThickness}"
-						  Padding="{TemplateBinding Padding}">
+					<Grid
+						x:Name="Root"
+						Padding="{TemplateBinding Padding}"
+						Background="{TemplateBinding Background}"
+						BorderBrush="{TemplateBinding BorderBrush}"
+						BorderThickness="{TemplateBinding BorderThickness}">
 
 						<Grid.RowDefinitions>
 							<RowDefinition Height="*" />
 							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 
-						<!-- Icon -->
-						<u:PathControl x:Name="Icon"
-									   VerticalAlignment="Bottom"
-									   Style="{TemplateBinding IconStyle}"
-									   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" />
+						<!--  Icon  -->
+						<u:PathControl
+							x:Name="Icon"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalAlignment="Bottom"
+							Style="{TemplateBinding IconStyle}" />
 
-						<!-- Label -->
-						<TextBlock x:Name="ContentPresenter"
-								   Text="{TemplateBinding Content}"
-								   Foreground="{TemplateBinding Foreground}"
-								   TextAlignment="Center"
-								   HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-								   VerticalAlignment="Bottom"
-								   AutomationProperties.AccessibilityView="Raw"
-								   Margin="0,5"
-								   Grid.Row="1" />
+						<!--  Label  -->
+						<TextBlock
+							x:Name="ContentPresenter"
+							Grid.Row="1"
+							Margin="0,5"
+							HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+							VerticalAlignment="Bottom"
+							AutomationProperties.AccessibilityView="Raw"
+							Foreground="{TemplateBinding Foreground}"
+							Text="{TemplateBinding Content}"
+							TextAlignment="Center" />
 					</Grid>
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
 	</Style>
 
-	<Style TargetType="c:BottomTabBarButton"
-		   BasedOn="{StaticResource DefaultBottomTabBarButtonStyle}" />
+	<Style BasedOn="{StaticResource DefaultBottomTabBarButtonStyle}" TargetType="c:BottomTabBarButton" />
 
 </ResourceDictionary>

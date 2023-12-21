@@ -5,6 +5,7 @@
 							 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 							 xmlns:c="using:ApplicationTemplate.Views.Controls"
 							 xmlns:utu="using:Uno.Toolkit.UI"
+							 xmlns:animations="using:ApplicationTemplate.Views.Animations"
 							 xmlns:toolkit="using:Uno.UI.Toolkit"
 							 ne:BindableVisualState.VisualStateName="{Binding MenuState}">
 
@@ -77,18 +78,27 @@
 				<utu:TabBarItem Command="{Binding ShowHomeSection}">
 					<c:BottomTabBarButton IconStyle="{StaticResource HomePathControlStyle}"
 										  Foreground="{ThemeResource OnPrimaryMediumBrush}"
+										  animations:YTranslationAnimationExtension.AnimationTrigger="{Binding}"
+										  animations:YTranslationAnimationExtension.DelayTrigger="0:0:0.55"
+										  animations:YTranslationAnimationExtension.AnimationDuration="0:0:0.75"
 										  Content="Jokes"
 										  x:Uid="Menu_Home" />
 				</utu:TabBarItem>
 				<utu:TabBarItem Command="{Binding ShowPostsSection}">
 					<c:BottomTabBarButton IconStyle="{StaticResource PostsPathControlStyle}"
 										  Foreground="{ThemeResource OnPrimaryMediumBrush}"
+										  animations:YTranslationAnimationExtension.AnimationTrigger="{Binding}"
+										  animations:YTranslationAnimationExtension.DelayTrigger="0:0:0.70"
+										  animations:YTranslationAnimationExtension.AnimationDuration="0:0:0.75"
 										  Content="Posts"
 										  x:Uid="Menu_Posts" />
 				</utu:TabBarItem>
 				<utu:TabBarItem Command="{Binding ShowSettingsSection}">
 					<c:BottomTabBarButton IconStyle="{StaticResource SettingsPathControlStyle}"
 										  Foreground="{ThemeResource OnPrimaryMediumBrush}"
+										  animations:YTranslationAnimationExtension.AnimationTrigger="{Binding}"
+										  animations:YTranslationAnimationExtension.DelayTrigger="0:0:0.95"
+										  animations:YTranslationAnimationExtension.AnimationDuration="0:0:0.75"
 										  Content="Profile"
 										  x:Uid="Menu_Settings" />
 				</utu:TabBarItem>
