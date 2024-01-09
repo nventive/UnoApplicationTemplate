@@ -81,9 +81,11 @@ public sealed partial class App : Application
 #endif
 //+:cnd:noEmit
 
+//-:cnd:noEmit
 #if DEBUG
 		CurrentWindow.EnableHotReload();
 #endif
+//+:cnd:noEmit
 
 		_ = Task.Run(() => Startup.Start());
 	}
