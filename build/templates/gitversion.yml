@@ -1,4 +1,4 @@
-steps:
+﻿steps:
   - task: gitversion/setup@0
     retryCountOnTaskFailure: 3
     inputs:

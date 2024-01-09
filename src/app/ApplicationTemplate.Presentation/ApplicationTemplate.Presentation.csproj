@@ -26,16 +26,16 @@
 		<PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
 		<PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.4" />
-		<PackageReference Include="Chinook.DynamicMvvm" Version="1.1.2" />
-		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="1.1.2" />
-		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="1.1.2" />
-		<PackageReference Include="Chinook.DynamicMvvm.CollectionTracking" Version="1.1.2" />
-		<PackageReference Include="Chinook.DataLoader" Version="1.2.0" />
-		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="1.1.0" />
-		<PackageReference Include="Chinook.BackButtonManager" Version="1.1.2" />
-		<PackageReference Include="Chinook.SectionsNavigation" Version="1.1.2" />
-		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="1.1.2" />
-		<PackageReference Include="MessageDialogService" Version="0.5.0-dev.54" />
+		<PackageReference Include="Chinook.DynamicMvvm" Version="2.0.0" />
+		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="2.0.0" />
+		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="2.0.0" />
+		<PackageReference Include="Chinook.DynamicMvvm.CollectionTracking" Version="2.0.0" />
+		<PackageReference Include="Chinook.DataLoader" Version="2.0.0" />
+		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="2.0.0" />
+		<PackageReference Include="Chinook.BackButtonManager" Version="2.0.0" />
+		<PackageReference Include="Chinook.SectionsNavigation" Version="3.0.0" />
+		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="3.0.0" />
+		<PackageReference Include="MessageDialogService" Version="2.0.0" />
 		<PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
 		<PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
 	</ItemGroup>

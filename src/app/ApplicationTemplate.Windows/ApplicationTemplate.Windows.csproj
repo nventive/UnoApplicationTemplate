@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<LangVersion>10.0</LangVersion>
+		<LangVersion>11.0</LangVersion>
 		<OutputType>WinExe</OutputType>
 		<TargetFramework>net7.0-windows10.0.22621.0</TargetFramework>
 		<TargetPlatformMinVersion>10.0.19041.0</TargetPlatformMinVersion>
@@ -67,26 +67,25 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="1.1.2" />
-		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="1.2.0" />
-		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="1.1.2" />
-		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="1.1.2" />
+		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.0.0" />
+		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0" />
+		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="2.0.0" />
+		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="3.0.0" />
 		<PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
-		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="0.5.0-dev.60" />
-		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="0.6.0-dev.58" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.1.5" />
+		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.0" />
+		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.2.0" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
-		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.4.0-dev.36" />
-		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.5.0-dev.62" />
-		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="0.6.0-dev.50" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
+		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.0" />
+		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.6.0" />
+		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.0" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.3.1-uno.2" />
-		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.3.1-uno.2" />
-		<PackageReference Include="Uno.Material.WinUI" Version="3.0.40" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="4.2.22" />
+		<PackageReference Include="Uno.Material.WinUI" Version="4.0.6" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="5.0.17" />
 	</ItemGroup>
 
 	<ItemGroup>
