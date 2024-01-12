@@ -7,6 +7,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 
 ## 3.0.X
 - Updated to Uno 5.
+- Fix canary builds by updating canary merge yml
 
 ## 2.2.X
 - Added hooks for default analytics (page views and command invocations).
