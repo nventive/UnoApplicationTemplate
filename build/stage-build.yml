@@ -68,7 +68,7 @@ jobs:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}
     - name: BuildTargetFramework 
-      value: net7.0-windows10.0.22621.0
+      value: net8.0-windows10.0.22621.0
         # For optimization, if we are on light build, we only build the project else we publish it.
     - name: dotNetCommand
       ${{ if eq(variables['IsLightBuild'], 'true') }}:
@@ -107,7 +107,7 @@ jobs:
     - name: ApplicationPlatform
       value: AnyCPU
     - name: BuildTargetFramework
-      value: net7.0-android
+      value: net8.0-android
 
     # For optimization, if we are on light build, we only build the project else we publish it.
     - name: dotNetCommand
@@ -133,7 +133,7 @@ jobs:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}
     - name: BuildTargetFramework
-      value: net7.0-ios
+      value: net8.0-ios
     - name: ArtifactName
       value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
 

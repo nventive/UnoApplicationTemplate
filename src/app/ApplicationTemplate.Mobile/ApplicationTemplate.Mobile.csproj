@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<LangVersion>11.0</LangVersion>
-		<TargetFrameworks>net7.0-android;net7.0-ios</TargetFrameworks>
+		<LangVersion>12.0</LangVersion>
+		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
 		<SingleProject>true</SingleProject>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
 		<UseMauiEssentials>true</UseMauiEssentials>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-android'">29.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net7.0-ios'">14.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">29.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">14.2</SupportedOSPlatformVersion>
 		<NoWarn>Uno0001</NoWarn>
 	</PropertyGroup>
 	<!-- Linker configuration. -->
@@ -46,7 +46,7 @@
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
 	<Choose>
-		<When Condition="'$(TargetFramework)'=='net7.0-android'">
+		<When Condition="'$(TargetFramework)'=='net8.0-android'">
 			<PropertyGroup>
 				<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 				<BundleAssemblies>False</BundleAssemblies>
@@ -100,7 +100,7 @@
 			<ItemGroup>
 				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
 				<PackageReference Include="Mono.AotProfiler.Android" Version="7.0.0" />
-				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.8.0" />
+				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.9.0.1" />
 			</ItemGroup>
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
@@ -141,7 +141,7 @@
 				</AndroidResource>
 			</ItemGroup>
 		</When>
-		<When Condition="'$(TargetFramework)'=='net7.0-ios'">
+		<When Condition="'$(TargetFramework)'=='net8.0-ios'">
 			<PropertyGroup>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName)</MtouchExtraArgs>
