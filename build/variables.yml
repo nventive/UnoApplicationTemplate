@@ -75,6 +75,9 @@
   windowsHostedAgentImage: 'windows-2022'
   macOSHostedAgentImage: 'macOS-12'
 
+  # SDK versions
+  DotNetVersion: '7.0.400'
+
   # Name of the folder where the artefacts will be placed. Variable used in build and release phases.
   # We make seperate folders so that releases can each download only the folder they need.
   AndroidArtifactName: Android

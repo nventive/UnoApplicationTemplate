@@ -23,9 +23,10 @@ steps:
   persistCredentials: true
 
 - task: UseDotNet@2
-  displayName: 'Use .Net Core runtime 2.2.x'
+  displayName: 'Use .NET SDK $(DotNetVersion)'
   inputs:
-    version: 2.2.x
+    packageType: 'sdk'
+    version: $(DotNetVersion)
 
 - task: nventiveCanaryUpdater@5
   env:
@@ -42,11 +43,11 @@ steps:
     pushBranch: true
     gitUserName: 'nventive DevOps'
     gitUserEmail: 'devops@nventive.com'
-    nugetUpdaterVersion: '2.1.1'
+    nugetUpdaterVersion: '2.3.0-alpha.46'
     nugetVersion: 'dev,beta,stable'
     allowDowngrade: true
-    packageAuthor: 'nventive'
-    ignorePackages: 'GeneratedSerializers.Json;Nventive.View.Uno;BiometryService'
+    packageAuthor: 'nventive,uno platform,unoplatform'
+    ignorePackages: 'GeneratedSerializers.Json;BiometryService'
     useVersionOverrides: true
     versionOverridesFile: 'https://raw.githubusercontent.com/nventive/Canary/master/version-overrides.json'
 
