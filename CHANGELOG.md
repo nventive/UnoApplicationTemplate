@@ -7,6 +7,8 @@ Prefix your items with `(Template)` if the change is about the template and not 
 
 ## 3.1.X
 - Updated to .NET 8.
+- Added MAUI essentials on Windows.
+- Fixed MAUI essentials warning.
 
 ## 3.0.X
 - Updated to Uno 5.

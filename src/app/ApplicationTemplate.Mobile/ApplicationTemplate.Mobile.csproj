@@ -6,7 +6,6 @@
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
-		<UseMauiEssentials>true</UseMauiEssentials>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">29.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">14.2</SupportedOSPlatformVersion>
 		<NoWarn>Uno0001</NoWarn>
@@ -23,6 +22,7 @@
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="3.0.0" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.0" />
 		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.3" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.0" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.6.0" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.0" />
