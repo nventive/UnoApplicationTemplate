@@ -38,30 +38,30 @@
 
 								<!-- Email Label -->
 								<TextBlock Text="Email"
-									   x:Uid="Settings_Email"
-									   Style="{StaticResource TitleSmall}"
-									   Margin="0,16,0,0" />
+										   x:Uid="Settings_Email"
+										   Style="{StaticResource TitleSmall}"
+										   Margin="0,16,0,0" />
 
 								<!-- Email Value -->
 								<TextBlock Text="{Binding Data.Email}"
 										   Style="{StaticResource BodyMedium}" />
 							</StackPanel>
-							
+
 							<!-- Separator -->
 							<Rectangle Fill="{StaticResource SeparatorBrush}"
-									Height="1"
-									HorizontalAlignment="Stretch"
-									Margin="0,16,0,0" />
+									   Height="1"
+									   HorizontalAlignment="Stretch"
+									   Margin="0,16,0,0" />
 
 							<!-- Password Section -->
 							<StackPanel Padding="24,16,24,0">
-								
+
 								<!-- Password -->
 								<TextBlock Text="Password"
-											x:Uid="Settings_Password"
-											Style="{StaticResource TitleSmall}" />
+										   x:Uid="Settings_Password"
+										   Style="{StaticResource TitleSmall}" />
 								<TextBlock Text="xxxxxxxx"
-											Style="{StaticResource BodyMedium}" />
+										   Style="{StaticResource BodyMedium}" />
 
 								<!-- Change password -->
 								<Button Content="CHANGE PASSWORD"
@@ -75,7 +75,7 @@
 				</dl:DataLoaderView>
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -114,7 +114,7 @@
 				</StackPanel>
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -126,12 +126,12 @@
 					</Grid.ColumnDefinitions>
 
 					<StackPanel VerticalAlignment="Center">
-						
+
 						<!-- Label -->
 						<TextBlock Text="Notification"
 								   x:Uid="Settings_Notification"
 								   Style="{StaticResource TitleSmall}" />
-						
+
 						<!-- Info -->
 						<TextBlock Text="I agree to receive notifications when there are new jokes."
 								   x:Uid="Settings_Notification_Details"
@@ -145,7 +145,7 @@
 				</Grid>
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -171,7 +171,7 @@
 				</Grid>
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -182,7 +182,7 @@
 						Style="{StaticResource TextWithRightArrowAlternativeButtonStyle}" />
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -193,7 +193,7 @@
 						Style="{StaticResource TextWithRightArrowAlternativeButtonStyle}" />
 
 				<!-- Separator -->
-				<Rectangle Fill="{StaticResource SeparatorBrush}" 
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
 						   Height="1"
 						   HorizontalAlignment="Stretch" />
 
@@ -204,6 +204,19 @@
 						Background="{ThemeResource PrimaryAccentBrush}"
 						HorizontalAlignment="Left"
 						Margin="24,16" />
+
+				<!-- Separator -->
+				<Rectangle Fill="{StaticResource SeparatorBrush}"
+						   Height="1"
+						   HorizontalAlignment="Stretch" />
+
+				<TextBox x:Uid="Settings_TextBox"
+						 Text="{Binding SettingsSavedText, Mode=TwoWay}" />
+				
+				<Button Content="SAVE"
+						x:Uid="Settings_Save"
+						Command="{Binding SaveSettingsText}" />
+
 			</StackPanel>
 		</ScrollViewer>
 	</Grid>

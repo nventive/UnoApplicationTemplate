@@ -47,6 +47,10 @@
 	</ItemGroup>
 	<Choose>
 		<When Condition="'$(TargetFramework)'=='net7.0-android'">
+			<ItemGroup>
+				<PackageReference Include="Google.Apis.Auth" Version="1.66.0" />
+				<PackageReference Include="Google.Apis.Drive.v3" Version="1.66.0.3296" />
+			</ItemGroup>
 			<PropertyGroup>
 				<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 				<BundleAssemblies>False</BundleAssemblies>

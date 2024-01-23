@@ -19,8 +19,20 @@ public sealed partial class SettingsPageViewModel : ViewModel
 	[Inject] private IStringLocalizer _stringLocalizer;
 	[Inject] private ISectionsNavigator _sectionsNavigator;
 	[Inject] private IAuthenticationService _authenticationService;
+	[Inject] private ISavedSettingsService _savedSettingsService;
+
+	public SettingsPageViewModel()
+	{
+		SettingsSavedText = _savedSettingsService?.ReadSavedString("SettingsText");
+	}
 
 	public string VersionNumber => this.Get(GetVersionNumber);
+
+	public string SettingsSavedText
+	{
+		get => this.Get<string>();
+		set => this.Set(value);
+	}
 
 	public IDataLoader<UserProfile> UserProfile => this.GetDataLoader(GetUserProfile, db => db
 		.TriggerFromObservable(_authenticationService.GetAndObserveIsAuthenticated().Skip(1))
@@ -69,6 +81,11 @@ public sealed partial class SettingsPageViewModel : ViewModel
 		var url = _stringLocalizer["TermsAndConditionsUrl"];
 
 		await _browserService.Launch(new Uri(url));
+	});
+
+	public IDynamicCommand SaveSettingsText => this.GetCommandFromTask(async CollectionTracking =>
+	{
+		_savedSettingsService?.SetSavedString("SettingsText", SettingsSavedText);
 	});
 
 	private async Task<UserProfile> GetUserProfile(CancellationToken ct)

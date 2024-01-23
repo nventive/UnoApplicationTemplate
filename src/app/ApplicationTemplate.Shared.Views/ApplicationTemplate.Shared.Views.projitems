@@ -93,11 +93,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FiltersConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableAppBarButtonToAppBarButtonConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\AndroidSavedSettingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DiagnosticsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DeviceInformation\DeviceInformationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\IOSSavedSettingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Connectivity\ConnectivityProvider.cs" />

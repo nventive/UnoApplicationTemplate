@@ -33,7 +33,8 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
-			.AddMessageDialog();
+			.AddMessageDialog()
+			.AddSavedSetting();
 	}
 
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
@@ -61,5 +62,18 @@ public static class ViewServicesConfiguration
 #endif
 //+:cnd:noEmit
 		);
+	}
+
+	private static IServiceCollection AddSavedSetting(this IServiceCollection services)
+	{
+		//-:cnd:noEmit
+#if IOS
+		return services.AddSingleton<ISavedSettingsService, IOSSavedSettingService>();
+#elif ANDROID
+		return services.AddSingleton<ISavedSettingsService, AndroidSavedSettingService>();
+#else
+		return services;
+#endif
+		//+:cnd:noEmit
 	}
 }
