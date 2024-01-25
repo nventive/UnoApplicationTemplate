@@ -62,4 +62,9 @@ public class LoginPageViewModel : ViewModel
 	{
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ForgotPasswordPageViewModel());
 	});
+
+	public IDynamicCommand LoginGoogle => this.GetCommandFromTask(async ct =>
+	{
+		this.GetService<ISavedSettingsService>().LoginSaved();
+	});
 }

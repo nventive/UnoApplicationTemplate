@@ -124,6 +124,7 @@
 					<Button x:Name="GoogleLoginButton"
 							x:Uid="Login_Google"
 							Content="CONTINUE WITH GOOGLE"
+							Command="{Binding LoginGoogle}"
 							Style="{StaticResource GoogleButtonStyle}"
 							HorizontalAlignment="Stretch"
 							Margin="0,32,0,0" />

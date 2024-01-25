@@ -95,6 +95,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AndroidSavedSettingService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\CredentialManagerCallback.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DiagnosticsService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Windows.cs" />

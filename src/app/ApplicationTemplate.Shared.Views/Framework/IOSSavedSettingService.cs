@@ -8,6 +8,10 @@ namespace ApplicationTemplate.Views
 {
 	public class IOSSavedSettingService : ISavedSettingsService
 	{
+		public void LoginSaved()
+		{
+		}
+
 		public void DeleteSaved(string key)
 		{
 			var store = NSUbiquitousKeyValueStore.DefaultStore;
