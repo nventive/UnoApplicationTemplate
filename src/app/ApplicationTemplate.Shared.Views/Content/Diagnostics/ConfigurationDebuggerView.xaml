@@ -438,7 +438,7 @@
 												  MinWidth="{ThemeResource ComboBoxPopupThemeMinWidth}"
 												  AutomationProperties.AccessibilityView="Raw"
 												  BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-												  CornerRadius="{StaticResource MaterialComboBoxCornerRadius}"
+												  CornerRadius="4"
 												  HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
 												  HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
 												  IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"

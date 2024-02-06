@@ -24,6 +24,8 @@
 						 Color="#FFFF8888" />
 		<SolidColorBrush x:Key="SelectionBackgroundBrush"
 						 Color="#33FFFFFF" />
+		<SolidColorBrush x:Key="FocusedBorderBrush"
+						 Color="#55FFFFFF" />
 
 		<Style x:Key="HttpDebuggerTextBlockStyle"
 			   TargetType="TextBlock">
@@ -71,7 +73,7 @@
 									<VisualState x:Name="Focused">
 										<VisualState.Setters>
 											<Setter Target="Root.BorderBrush"
-													Value="{StaticResource TextBoxFilledFocusIndicatorColorBrush}" />
+													Value="{StaticResource FocusedBorderBrush}" />
 										</VisualState.Setters>
 									</VisualState>
 								</VisualStateGroup>
