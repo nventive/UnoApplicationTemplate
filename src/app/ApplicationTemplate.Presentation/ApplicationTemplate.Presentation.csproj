@@ -32,7 +32,7 @@
 		<PackageReference Include="Chinook.DynamicMvvm.CollectionTracking" Version="2.0.0" />
 		<PackageReference Include="Chinook.DataLoader" Version="2.0.0" />
 		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="2.0.0" />
-		<PackageReference Include="Chinook.BackButtonManager" Version="2.0.0" />
+		<PackageReference Include="Chinook.BackButtonManager" Version="2.1.0" />
 		<PackageReference Include="Chinook.SectionsNavigation" Version="3.0.0" />
 		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="3.0.0" />
 		<PackageReference Include="MessageDialogService" Version="2.0.0" />

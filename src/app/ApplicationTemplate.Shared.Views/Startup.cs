@@ -86,6 +86,7 @@ public sealed class Startup : StartupBase
 			await SetShellViewModel();
 
 			await AddSystemBackButtonSource(services);
+			await AddMouseBackButtonSource(services);
 
 			HandleSystemBackVisibility(services);
 
@@ -188,6 +189,27 @@ public sealed class Startup : StartupBase
 		void AddSystemBackButtonSourceInner()
 		{
 			var source = new SystemNavigationBackButtonSource();
+			backButtonManager.AddSource(source);
+		}
+#endif
+//+:cnd:noEmit
+	}
+
+	/// <summary>
+	/// Adds mouse back button to the IBackButtonManager.
+	/// </summary>
+	private async Task AddMouseBackButtonSource(IServiceProvider services)
+	{
+//-:cnd:noEmit
+#if __WINDOWS__
+		var dispatcherQueue = services.GetRequiredService<DispatcherQueue>();
+		var backButtonManager = services.GetRequiredService<IBackButtonManager>();
+		await dispatcherQueue.EnqueueAsync(AddSystemBackButtonSourceInner, DispatcherQueuePriority.High);
+
+		// Runs on main thread.
+		void AddSystemBackButtonSourceInner()
+		{
+			var source = new PointerXButton1BackButtonSource(App.Instance.Shell);
 			backButtonManager.AddSource(source);
 		}
 #endif
