@@ -7,6 +7,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 
 ## 3.2.X
 - Added support for mouse back button navigation.
+- Set `fetchDepth` to 0 on canary merge CI to avoid `refusing to merge unrelated histories` errors.
 
 ## 3.1.X
 - Updated to .NET 8.
