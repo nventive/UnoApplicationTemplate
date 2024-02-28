@@ -2,6 +2,7 @@ assembly-versioning-scheme: MajorMinorPatch
 mode: ContinuousDeployment
 next-version: 1.0.0
 continuous-delivery-fallback-tag: ""
+tag-prefix: '(?!x)x' # Use a regex pattern impossible to match so it never affects build version & number.
 branches:
   main:
     regex: ^master$|^main$
