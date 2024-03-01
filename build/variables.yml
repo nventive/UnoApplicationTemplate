@@ -73,7 +73,7 @@
 
   # Virtual machine images
   windowsHostedAgentImage: 'windows-2022'
-  macOSHostedAgentImage: 'macOS-12'
+  macOSHostedAgentImage: 'macOS-13'
 
   # SDK versions
   DotNetVersion: '7.0.400'

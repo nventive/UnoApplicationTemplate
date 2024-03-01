@@ -41,7 +41,7 @@ If you're unfamiliar with Azure Pipeline, you should at least read about the fol
   - You can follow [this guide](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/pipelines-sign-up?view=azure-devops) for more details.
 - For compilation, access to the the following [Microsoft-hosted agents](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&tabs=yaml) is required.
   - `windows-2022`
-  - `macOS-12`
+  - `macOS-13`
 - For deployment, access to Mac agents with the following capabilities is required.
   - `fastlane 2.212.1`
 
