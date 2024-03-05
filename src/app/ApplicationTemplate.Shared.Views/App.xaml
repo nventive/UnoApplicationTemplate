@@ -16,6 +16,7 @@
 							   FontOverrideSource="ms-appx:///Styles/Application/Fonts.xaml"
 							   ColorOverrideSource="ms-appx:///Styles/Application/MaterialOverride.xaml" />
 
+				<ResourceDictionary Source="Styles/Controls/AsyncWebView.xaml" />
 				<ResourceDictionary Source="Styles/Application/ColorPalette.xaml" />
 				<ResourceDictionary Source="Styles/Application/Brushes.xaml" />
 				<ResourceDictionary Source="Styles/Application/Converters.xaml" />
