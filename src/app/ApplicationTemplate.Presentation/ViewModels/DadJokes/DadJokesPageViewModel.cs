@@ -19,7 +19,7 @@ public partial class DadJokesPageViewModel : ViewModel
 	[Inject] private IDadJokesService _dadJokesService;
 	[Inject] private ISectionsNavigator _sectionsNavigator;
 
-	public Uri SourceUri = new Uri("https://www.youtube.com/watch?v=2yJgwwDcgV8");
+	public Uri SourceUri { get; } = new Uri("https://www.youtube.com/watch?v=2yJgwwDcgV8");
 
 	public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 	{
