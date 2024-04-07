@@ -1,4 +1,4 @@
-<Page x:Class="ApplicationTemplate.Views.Content.DadJokesPage"
+﻿<Page x:Class="ApplicationTemplate.Views.Content.DadJokesPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -10,7 +10,6 @@
 	  mc:Ignorable="android">
 
 	<Page.Resources>
-
 		<!-- Jokes Empty Template -->
 		<DataTemplate x:Key="JokesEmptyTemplate">
 			<Grid>				
@@ -27,7 +26,6 @@
 	</Page.Resources>
 
 	<Grid Background="{ThemeResource BackgroundBrush}">
-
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
@@ -35,21 +33,7 @@
 
 		<!-- CommandBar -->
 		<CommandBar Content="Jokes"
-					x:Uid="DadJokesPage_CommandBar">
-			
-			<!-- Feature hidden until we work on this phase 2 task for adjustments -->
-			<!-- https://nventive.visualstudio.com/Practice%20committees/_workitems/edit/245444 -->
-			<!--
-			<CommandBar.PrimaryCommands>
-				<AppBarButton Command="{Binding NavigateToFilters}">
-					<AppBarButton.Icon>
-						<BitmapIcon UriSource="{StaticResource FilterImage}"
-									Foreground="{ThemeResource OnPrimaryBrush}" />
-					</AppBarButton.Icon>
-				</AppBarButton>
-			</CommandBar.PrimaryCommands>
-			-->
-		</CommandBar>
+					x:Uid="DadJokesPage_CommandBar" />
 
 		<!-- DataLoaderView -->
 		<dl:DataLoaderView x:Name="JokesDataLoader"
@@ -57,7 +41,6 @@
 						   EmptyTemplate="{StaticResource JokesEmptyTemplate}"
 						   Grid.Row="1">
 			<DataTemplate>
-
 				<!-- SwipeRefresh -->
 				<u:SwipeRefresh x:Name="RefreshContent"
 								RefreshCommand="{Binding ElementName=JokesDataLoader, Path=RefreshCommand}"
@@ -119,6 +102,40 @@
 								</Grid>
 							</DataTemplate>
 						</ListView.ItemTemplate>
+
+						<ListView.FooterTemplate>
+							<DataTemplate>
+								<StackPanel Margin="16,16,16,24">
+									<Grid>
+										<Grid.ColumnDefinitions>
+											<ColumnDefinition Width="*" />
+											<ColumnDefinition Width="Auto" />
+										</Grid.ColumnDefinitions>
+
+										<!-- Landmark Label -->
+										<TextBlock Text="Landmarks Nearby"
+												   Grid.Column="0" />
+
+										<!-- Optional Label -->
+										<TextBlock Text="Optional"
+												   Grid.Column="1" />
+									</Grid>
+
+									<!-- Additional Info Input -->
+									<TextBox x:Name="LandmarkTextBox"
+											 Text="{Binding Parent[LandmarkInformation], Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+											 PlaceholderText="Add information about nearby landmarks (optional)"
+											 AcceptsReturn="True"
+											 TextWrapping="Wrap"
+											 MinHeight="80"
+											 Margin="0,8,0,0" />
+
+									<!-- Next Button -->
+									<Button Content="Next"
+											Margin="0,16,0,0" />
+								</StackPanel>
+							</DataTemplate>
+						</ListView.FooterTemplate>
 					</ListView>
 				</u:SwipeRefresh>
 			</DataTemplate>
