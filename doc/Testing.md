@@ -2,7 +2,7 @@
 
 For more documentation on testing, read the references listed at the bottom.
 
-## Unit testing
+## Unit Testing
 
 - We use [xUnit](https://www.nuget.org/packages/xunit/) to create the tests.
   You create a test as a `Fact` like this:
@@ -25,152 +25,166 @@ For more documentation on testing, read the references listed at the bottom.
     result.UserIdentifier.Should().Be(post.UserIdentifier);
     ```
 
-- We use [Moq](https://www.nuget.org/packages/Moq/) to mock behaviors. An example of a mocked object could look like this:
+- We use [NSubstitute](https://www.nuget.org/packages/NSubstitute/) to mock behaviors. An example of a mocked object could look like this:
 
     ```csharp
-    var mock = new Mock<IService>();
-    mock.Setup(m => m.MyMethod("parameter")).Returns(true);
+    // Arrange
+    var service = Substitute.For<IService>();
+    service.MyMethod("parameter").Returns(true);
 
-    var myService = mock.Object;
-    myService.MyMethod("parameter");
-
-    mock.Verify(m => m.MyMethod("parameter"), Times.AtMostOnce());
+    // Act
+    mock.MyMethod("parameter");
+    
+    // Assert
+    mock.Received(1).MyMethod("parameter");
     ```
 
-## Integration testing
+## Functional Testing
 
-- This template is unit-test safe which means we can do full integration tests using unit tests libraries without worrying about the user interface. This means you could do a unit-test that does the following:
-  - Starts the application
-  - Navigates to a specific page
-  - Executes a command on that page
-  - Executes an API call
-  - Assert that the result is in the correct format and is cached in the app settings.
+This template comes with full support for functional testing without any UI.
+You can run simulations of the app with simple code and test complex scenarios.
+Functional tests can be configured to use mocked or real API connections.
 
-- This template provides a `IntegrationTestBase` class that allows you to do those kinds of tests without worrying about bootstrapping your application; it does it for you. This is an example of an integration test.
-  ```csharp
-  public class MyIntegrationTest : IntegrationTestBase
-  {
-      [Fact]
-	  public async Task It_Should_Do_Something()
-	  {
-          var navigationService = GetService<IStackNavigator>();
-
-          // From the home page, navigate to another page.
-          var homeViewModel = (HomeViewModel)navigationService.State.Stack.Last().ViewModel;
-          await homeViewModel.NavigateToOtherPage.Execute();
-
-          // From the other page, execute an API request
-          var otherViewModel = (OtherViewModel)navigationService.State.Stack.Last().ViewModel;
-          await otherViewModel.GetFavorites.Execute();
-
-          // Confirm the result is cached
-          var settingsService = GetService<IApplicationSettingsService>();
-          var favorites = settingService.GetFavorites();
-          favorites.Should().NotBeEmpty();
-      }
-  }
-  ```
-
-  With a simple test, you can do very advanced integration tests. The `IntegrationTestBase` class bootstraps the application in its initialization phase using the `CoreStartup`, reusing all the IoC already configured in your project.
-
-## Mocking
-
-You can also mock services that are normally registered with their implementations. In your test class, simply call `InitializeServices` with your specific configuration.
+This template provides a `FunctionalTestBase` class that bootstraps the application with all its services and configurations.
+This is an example of a functional test.
 
 ```csharp
-  public class MyIntegrationTestClass : IntegrationTestBase
+public sealed class DadJokesShould : FunctionalTestBase
+{
+  [Fact]
+  public async Task LoadAListOfJokes()
   {
-	private void YourTest_SpecialConfiguration(IHostBuilder host)
-	{
-		host.ConfigureServices(services =>
-		{
-			// This will replace the actual implementation of IApplicationSettingsService with a mocked version.
-			ReplaceWithMock<IServiceInterface>(services, mock =>
-			{
-				mock
-					.Setup(m => m.Method(It.IsAny<CancellationToken>()))
-					.ReturnsAsync(new MockObject());
-			});
-		});
-	}
-	
-	[Fact]
-	public async Task YourTest()
-	{
-		// Arrange
-		InitializeServices(YourTest_SpecialConfiguration);
+    // Arrange
 
-		// Act
+    // Start the app, reach the login page (by completing the onboarding), and login.
+    await this.Login(await this.ReachLoginPage());
 
-		// Assert
-	}
+    // Get the active view model.
+    var vm = GetAndAssertActiveViewModel<DadJokesPageViewModel>();
 
-    ...
+    // Act
+
+    // Load the jokes. (That's normally done by the UI.)
+    var jokes = await vm.Jokes.Load(CancellationToken.None);
+
+    // Assert
+    jokes.Should().NotBeEmpty();
   }
-  ```
+}
+```
+
+### Manipulating the App Simulation
+The `FunctionalTestBase` class provides a few members to ease manipulating the app simulation.
+- `ActiveViewModel` is the active view model returned by the `ISectionsNavigator`.
+- `GetAndAssertActiveViewModel<T>` returns `ActiveViewModel` as the expected type `T`.
+It throws an exception if the active view model is not of the expected type.
+- `Shell` is the `ShellViewModel` of the app.
+- `Menu` is the `MenuViewModel` of the app.
+Use this to change sections as you would with the bottom navigation menu.
+To better simulate the app behavior, accessing this property will fail when the active view model is not supposed to have the bottom menu.
+
+On top of that, we suggest you extract common operations as extensions methods in `FunctionalTestBase.Extensions.cs` like we did for `ReachLoginPage` and `Login`.
+This keeps the tests clean and easy to read.
+
+### Overriding the Configuration
+The `FunctionalTestBase` class has a few `virtual` members that you can override to change the app behavior for a specific test.
+
+#### ConfigureHost
+You can override the `ConfigureHost` method to add extra configuration.
+This extra configuration is added on top of what `CoreStartup` does, which allows overriding the default configuration. 
+
+```csharp
+public sealed class DadJokesShould : FunctionalTestBase
+{
+  protected override void ConfigureHost(IHostBuilder hostBuilder)
+  {
+    // Use a custom implementation of IDadJokesRepository.
+    hostBuilder.ConfigureServices(serviceCollection =>
+      serviceCollection.AddSingleton<IDadJokesRepository, CustomDadJokesImplementation>()
+    );
+  }
+}
+```
+
+#### ApplicationSettings
+
+You can also override the `ApplicationSettings` property to change the settings of the app. This offers a simple way to change the behavior of the app that rely on settings without too much code.
+
+```csharp
+public override ApplicationSettings ApplicationSettings { get; } = new ApplicationSettings
+{
+  IsOnboardingCompleted = true,
+};
+```
+
+## Logging
+
+See https://xunit.net/docs/capturing-output.
+
+When doing functional tests, you can pass the `ITestOutputHelper` to the base constructor of `FunctionalTestBase` to automatically setup the Serilog logging for your tests using the same configuration as the app.
 
 ## Naming
 
 It is important to follow certain rules about the names of your class and your methods. The idea here is to make a sentence when combining your class name with one of your test.
 
-- The suggested test class nomenclature is "<TestedClass>Should".
-- The suggested test method nomenclature is "<ExpectedResult>_<Condition>" (Condition is optional in the default case).
+- The suggested test class nomenclature is `"<TestedClass>Should"`.
+- The suggested test method nomenclature is `"<ExpectedResult>_<Condition>"` (Condition is optional in the default case).
 
 Here is an example:
 Let's say we want to test this class.
 
 ```csharp
-  public class MyTestClassViewModel
+public class MyTestClassViewModel
+{
+  public async Task<int[]> MyTestMethod(bool isNeeded)
   {
-	public async Task<int[]> MyTestMethod(bool isNeeded)
-	{
-		if(isNeeded)
-		{
-			return Array.Empty<int>();
-		}
-		...
-
-		return aFullArray;
-	}
-
+    if (isNeeded)
+    {
+      return Array.Empty<int>();
+    }
     ...
+
+    return aFullArray;
   }
-  ```
+
+  // ...
+}
+```
 
  The test class of MyTestClassViewModel should look like this.
   
 ```csharp
-  public class MyTestClassViewModelShould : IntegrationTestBase
+public class MyTestClassViewModelShould
+{
+  [Fact]
+  public async Task ReturnAnEmptyArray_WhenItIsNotNeeded()
   {
-	[Fact]
-	public async Task ReturnAnEmptyArray_WhenItIsNotNeeded()
-	{
-		// Arrange
-		var vm = new MyTestClassViewModel()
+    // Arrange
+    var vm = new MyTestClassViewModel()
 
-		// Act
-		var result = vm.MyTestMethod(false);
+    // Act
+    var result = vm.MyTestMethod(false);
 
-		// Assert
-		result.Should().BeEmpty();
-	}
-	
-	[Fact]
-	public async Task ReturnAFullArray()
-	{
-		// Arrange
-		var vm = new MyTestClassViewModel()
-
-		// Act
-		var result = vm.MyTestMethod(true);
-
-		// Assert
-		result.Should().NotBeEmpty();
-	}
-
-    ...
+    // Assert
+    result.Should().BeEmpty();
   }
-  ```
+
+  [Fact]
+  public async Task ReturnAFullArray()
+  {
+    // Arrange
+    var vm = new MyTestClassViewModel()
+
+    // Act
+    var result = vm.MyTestMethod(true);
+
+    // Assert
+    result.Should().NotBeEmpty();
+  }
+
+  // ...
+}
+```
   
  When executing this test class, the result will look something like this:
  - MyTestClassViewModelShould ReturnAFullArray -> My Test Class View Model Should Return A Full Array.
@@ -182,23 +196,27 @@ We use [Coverlet.MSBuild](https://www.nuget.org/packages/coverlet.msbuild/) to c
 
 The result of the code coverage data (using the cobertura format) is used to generate a report that is presented as part of the CI process.
 
-You can collect the code coverage locally using the following command line.
+You can collect the code coverage locally using the following command lines.
 
-```
-dotnet test .\src\ApplicationTemplate.sln /p:Configuration=Release_Tests /p:CollectCoverage=true /p:IncludeTestAssembly=true /p:CoverletOutputFormat=cobertura /p:ExcludeByFile="**/*.g.cs" /p:Exclude="[*]*.Tests.*" --logger trx --no-build
-```
+- For Functional tests:
+  ```powershell
+  dotnet test src/app/ApplicationTemplate.Tests.Functional/ApplicationTemplate.Tests.Functional.csproj --collect:"XPlat Code Coverage" --settings build/test.runsettings
+  ```
 
-_Note: We need to include the test assembly since we're using shared projects. In order to ignore coverage on the tests themselves, we simply exclude anything under the `*.Tests` namespace._
+- For Unit tests:
+  ```powershell
+  dotnet test src/app/ApplicationTemplate.Tests.Unit/ApplicationTemplate.Tests.Unit.csproj --collect:"XPlat Code Coverage" --settings build/test.runsettings
+  ```
 
-## UI testing
+### Limitations
+There are some limitations related to code coverage.
 
-- We use [Uno.UITest](https://github.com/unoplatform/Uno.UITest) and [Xamarin.UITest](https://docs.microsoft.com/en-us/appcenter/test-cloud/frameworks/uitest/) to execute UI tests.
+- The **branch coverage** is not 100% accurate because we merge multiple reports into one.
+See https://github.com/danielpalme/ReportGenerator/issues/455.
 
-- We use [SpecFlow](https://specflow.org/) to define the different UI tests to execute.
-
-### References
+## References
 
 - [Getting started with xUnit](https://xunit.net/docs/getting-started/netfx/visual-studio)
 - [Getting started with Fluent Assertions](https://fluentassertions.com/introduction)
-- [How to use Moq](https://github.com/moq/moq4)
+- [How to use NSubstitute](https://github.com/nsubstitute/NSubstitute)
 - [How to use Coverlet](https://github.com/coverlet-coverage/coverlet)

@@ -1,32 +1,54 @@
 GitHub Issue: #
 
-## PR Type
+## Proposed Changes
+<!-- Please check one or more that apply to this PR. -->
 
-What kind of change does this PR introduce?
-<!-- Please uncomment one or more that apply to this PR -->
-
-- Bugfix
-- Feature
-- Code style update (formatting)
-- Refactoring (no functional changes, no api changes)
-- Build or CI related changes
-- Documentation content changes
-- Other... Please describe:
-
+ - [ ] Bug fix
+ - [ ] Feature
+ - [ ] Code style update (formatting)
+ - [ ] Refactoring (no functional changes, no api changes)
+ - [ ] Build or CI related changes
+ - [ ] Documentation content changes
+ - [ ] Other, please describe:
 
 ## Description
 
 <!-- (Please describe the changes that this PR introduces.) -->
 
 
+## Impact on version
+<!-- Please select one or more based on your commits. -->
+
+- [ ] **Major**
+  - The template structure was changed.
+- [ ] **Minor**
+  - New functionalities were added.
+- [ ] **Patch**
+  - A bug in behavior was fixed.
+  - Documentation was changed.
+
 ## PR Checklist 
-Please check if your PR fulfills the following requirements:
 
-- [ ] Interface members are XML documented
-- [ ] Documentation (XML or comments) has been added and/or existing documentation has been updated
-- [ ] [Architecture documents](./doc/Architecture.md) have been updated
+### Always applicable
+No matter your changes, these checks always apply.
+- [ ] Your conventional commits are aligned with the **Impact on version** section.
+- [ ] Updated [CHANGELOG.md](../CHANGELOG.md).
+  - Use the latest Major.Minor.X header if you do a **Patch** change.
+  - Create a new Major.Minor.X header if you do a **Minor** or **Major** change.
+  - If you create a new header, it aligns with the **Impact on version** section and matches what is generated in the build pipeline.
+- [ ] Documentation files were updated according with the changes.
+  - Update `README.md` and `TemplateConfig.md` if you made changes to **templating**.
+  - Update `AzurePipelines.md` and `APP_README.md` if you made changes to **pipelines**.
+  - Update `Diagnostics.md` if you made changes to **diagnostic tools**.
+  - Update `Architecture.md` and its diagrams if you made **architecture decisions** or if you introduced new **recipes**.
+  - ...and so forth: Make sure you update the documentation files associated to the recipes you changed. Review the topics by looking at the content of the `doc/` folder.
+- [ ] Images about the template are referenced from the [wiki](https://github.com/nventive/UnoApplicationTemplate/wiki/Images) and added as images in this git.
+- [ ] TODO comments are hints for next steps for users of the template and not planned work.
+
+### Contextual
+Based on your changes these checks may not apply.
+- [ ] Automated tests for the changes have been added/updated.
 - [ ] Tested on all relevant platforms
-
 
 ## Other information
 

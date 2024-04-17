@@ -41,7 +41,7 @@ You can also use `IServiceProvider.GetService<IService>()` which will return `de
 
 - Circular dependencies will not work with this container. If you do have them, you will get the following exception `A circular dependency was detected for the service of type`.
 
-- You can access the service provider **statically** using `App.Instance.Startup.ServiceProvider`.
+- You can access the service provider **statically** using `App.Instance.Startup.ServiceProvider` (only from the code of the ApplicationTemplate.Shared.Views shared project).
 
 - You can access your services from a **view model** using `this.GetService<MyService>`.
 

@@ -1,0 +1,297 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:dl="using:Chinook.DataLoader">
+
+	<DataTemplate x:Key="DataLoaderViewEmptyTemplate">
+		<Grid Background="{ThemeResource BackgroundBrush}">
+			<TextBlock Text="Nothing to show here"
+					   Style="{StaticResource BodyLarge}"
+					   HorizontalAlignment="Center"
+					   VerticalAlignment="Top"
+					   Margin="0,44,0,0" />
+		</Grid>
+	</DataTemplate>
+
+	<DataTemplate x:Key="DataLoaderViewErrorNotificationTemplate">
+		<Grid Background="#570000"
+			  VerticalAlignment="Bottom"
+			  Padding="8">
+
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<TextBlock Style="{StaticResource BodyLarge}"
+					   Foreground="White"
+					   HorizontalAlignment="Left"
+					   VerticalAlignment="Center">
+				<Run Text="Something went wrong." />
+				<Run Text="{Binding Error.Message}" />
+			</TextBlock>
+
+			<!-- Try Again Button -->
+			<Button Content="Try Again"
+					Background="#990000"
+					HorizontalAlignment="Center"
+					Command="{Binding View.RefreshCommand}"
+					Grid.Column="1" />
+		</Grid>
+	</DataTemplate>
+
+	<!-- Error State -->
+	<DataTemplate x:Key="DataLoaderViewErrorTemplate">
+		<Grid Background="{ThemeResource BackgroundBrush}">
+			<StackPanel VerticalAlignment="Center"
+						HorizontalAlignment="Stretch">
+
+				<!-- Image -->
+				<Canvas Width="210"
+						Height="226">
+					<Path Data="{StaticResource ErrorStateHalfCircleIcon}"
+						  Fill="{ThemeResource PrimaryBrush}" />
+					<Path Data="{StaticResource ErrorStateMustacheIcon}"
+						  Fill="{ThemeResource SecondaryBrush}" />
+					<Rectangle Canvas.Top="74"
+							   Canvas.Left="22"
+							   Width="67"
+							   Height="5"
+							   Fill="{ThemeResource ErrorBrush}">
+						<Rectangle.RenderTransform>
+							<RotateTransform CenterX="34.6439"
+											 CenterY="65.7733"
+											 Angle="34" />
+						</Rectangle.RenderTransform>
+					</Rectangle>
+					<Path Data="{StaticResource ErrorStateHatIcon}"
+						  Stroke="{ThemeResource ErrorBrush}"
+						  StrokeThickness="5" />
+				</Canvas>
+
+				<!-- Title -->
+				<TextBlock Text="Something went wrong"
+						   Foreground="{ThemeResource OnBackgroundBrush}"
+						   Style="{StaticResource TitleLarge}"
+						   TextAlignment="Center"
+						   Margin="0,0,0,8" />
+
+				<!-- Message -->
+				<TextBlock Text="Please try again."
+						   Foreground="{ThemeResource OnSurfaceMediumBrush}"
+						   Style="{StaticResource BodyLarge}"
+						   TextAlignment="Center" />
+
+				<!-- Try Again Button -->
+				<Button Content="RELOAD PAGE"
+						HorizontalAlignment="Stretch"
+						Command="{Binding View.RefreshCommand}"
+						Margin="22,24,22,0" />
+			</StackPanel>
+		</Grid>
+	</DataTemplate>
+
+	<Style x:Key="DefaultDataLoaderViewStyle"
+		   TargetType="dl:DataLoaderView">
+		<Setter Property="IsTabStop"
+				Value="False" />
+		<Setter Property="HorizontalAlignment"
+				Value="Stretch" />
+		<Setter Property="VerticalAlignment"
+				Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Stretch" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Stretch" />
+
+		<Setter Property="EmptyTemplate"
+				Value="{StaticResource DataLoaderViewEmptyTemplate}" />
+		<Setter Property="ErrorTemplate"
+				Value="{StaticResource DataLoaderViewErrorTemplate}" />
+		<Setter Property="ErrorNotificationTemplate"
+				Value="{StaticResource DataLoaderViewErrorNotificationTemplate}" />
+
+		<!-- This represents the minimum duration of a visual state.
+			 You should keep this high enough to prevents visual states from changing too fast.
+			 This is the property that prevents flickers. -->
+		<Setter Property="StateMinimumDuration"
+				Value="0:0:1.5" />
+
+		<!-- This represents the time before updating to a new state during which another update can happen.
+			 You should keep this low enough to prevents slowing down your user experience.
+			 This is the property that prevents seeing loading states that are not necessary. -->
+		<Setter Property="StateChangingThrottleDelay"
+				Value="0:0:0.100" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="dl:DataLoaderView">
+					<Grid>
+						<VisualStateManager.VisualStateGroups>
+
+							<VisualStateGroup x:Name="DataStates">
+								<VisualState x:Name="Initial" />
+								<VisualState x:Name="Data">
+									<VisualState.Setters>
+										<Setter Target="ContentPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Empty" />
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="ErrorStates">
+								<VisualState x:Name="NoError" />
+								<VisualState x:Name="Error" />
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="LoadingStates">
+								<VisualState x:Name="NotLoading" />
+								<VisualState x:Name="Loading" />
+							</VisualStateGroup>
+
+							<VisualStateGroup x:Name="CombinedStates">
+								<VisualState x:Name="Initial_NoError_NotLoading" />
+								<VisualState x:Name="Initial_NoError_Loading">
+									<VisualState.Setters>
+										<Setter Target="LoadingIndicator.Visibility"
+												Value="Visible" />
+										<Setter Target="LoadingIndicator.IsActive"
+												Value="True" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Initial_Error_NotLoading">
+									<VisualState.Setters>
+										<Setter Target="ErrorPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Initial_Error_Loading">
+									<VisualState.Setters>
+										<Setter Target="LoadingIndicator.Visibility"
+												Value="Visible" />
+										<Setter Target="LoadingIndicator.IsActive"
+												Value="True" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Data_NoError_NotLoading" />
+								<VisualState x:Name="Data_NoError_Loading">
+									<VisualState.Setters>
+										<Setter Target="RefreshPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="RefreshingIndicator.IsActive"
+												Value="True" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Data_Error_NotLoading">
+									<VisualState.Setters>
+										<Setter Target="ErrorNotificationPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Data_Error_Loading">
+									<VisualState.Setters>
+										<Setter Target="ErrorNotificationPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+
+								<VisualState x:Name="Empty_NoError_NotLoading">
+									<VisualState.Setters>
+										<Setter Target="EmptyPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Empty_NoError_Loading">
+									<VisualState.Setters>
+										<Setter Target="RefreshPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="RefreshingIndicator.IsActive"
+												Value="True" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Empty_Error_NotLoading">
+									<VisualState.Setters>
+										<Setter Target="ErrorNotificationPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+								<VisualState x:Name="Empty_Error_Loading">
+									<VisualState.Setters>
+										<Setter Target="RefreshPresenter.Visibility"
+												Value="Visible" />
+										<Setter Target="RefreshingIndicator.IsActive"
+												Value="True" />
+										<Setter Target="ErrorNotificationPresenter.Visibility"
+												Value="Visible" />
+									</VisualState.Setters>
+								</VisualState>
+							</VisualStateGroup>
+						</VisualStateManager.VisualStateGroups>
+
+						<ContentPresenter x:Name="ContentPresenter"
+										  Content="{TemplateBinding State}"
+										  ContentTemplate="{TemplateBinding ContentTemplate}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Visibility="Collapsed"
+										  Padding="{TemplateBinding Padding}" />
+
+						<ContentPresenter x:Name="EmptyPresenter"
+										  Content="{TemplateBinding State}"
+										  ContentTemplate="{TemplateBinding EmptyTemplate}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Visibility="Collapsed"
+										  Padding="{TemplateBinding Padding}" />
+
+						<ContentPresenter x:Name="ErrorPresenter"
+										  Content="{TemplateBinding State}"
+										  ContentTemplate="{TemplateBinding ErrorTemplate}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Visibility="Collapsed"
+										  Padding="{TemplateBinding Padding}" />
+
+						<!-- TODO: Make it a dismissable toast -->
+						<ContentPresenter x:Name="ErrorNotificationPresenter"
+										  Content="{TemplateBinding State}"
+										  ContentTemplate="{TemplateBinding ErrorNotificationTemplate}"
+										  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+										  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+										  Visibility="Collapsed"
+										  Padding="{TemplateBinding Padding}" />
+
+						<ProgressRing x:Name="LoadingIndicator"
+									  Foreground="{ThemeResource OnBackgroundBrush}"
+									  Visibility="Collapsed"
+									  IsActive="False"
+									  Width="20"
+									  Height="20"
+									  HorizontalAlignment="Center"
+									  VerticalAlignment="Center" />
+
+						<Grid Visibility="{Binding State.Request.Context[IsForceRefreshing], RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource TrueToCollapsed}}"
+							  IsHitTestVisible="False">
+							<Grid x:Name="RefreshPresenter"
+								  Visibility="Collapsed"
+								  HorizontalAlignment="Center"
+								  VerticalAlignment="Center"
+								  Padding="16"
+								  CornerRadius="8">
+								<ProgressRing x:Name="RefreshingIndicator"
+											  IsActive="False"
+											  Width="20"
+											  Height="20" />
+							</Grid>
+						</Grid>
+					</Grid>
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style TargetType="dl:DataLoaderView"
+		   BasedOn="{StaticResource DefaultDataLoaderViewStyle}" />
+
+</ResourceDictionary>

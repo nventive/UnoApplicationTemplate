@@ -1,0 +1,112 @@
+parameters:
+- name: iosCertificateFile
+  type: string
+  default: ''
+- name: iosCertificatePassword
+  type: string
+  default: ''
+- name: iosProvisioningProfileFile
+  type: string
+  default: ''
+- name: pathToSrc
+  type: string
+  default: ''
+- name: solutionName
+  type: string
+  default: ''
+- name: pathToInfoPlist
+  type: string
+  default: ''
+- name: BannerVersionNameText
+  type: string
+  default: ''
+
+steps:
+- template: templates/dotnet-install.yml
+
+#-if false
+- download: current
+  condition: eq('GeneratedApp', '${{ parameters.solutionName }}')
+  artifact: GeneratedApp
+#-endif
+
+- template: templates/gitversion.yml
+
+- task: InstallAppleCertificate@2
+  displayName: Install Certificate
+  inputs:
+    certSecureFile: ${{ parameters.iosCertificateFile }}
+    certPwd: $(AppleCertificatePassword)
+    keychain: temp
+    deleteCert: true
+
+- task: InstallAppleProvisioningProfile@1
+  displayName: 'Install Apple Provisioning Profile'
+  name: provisioningProfile
+  inputs:
+    provisioningProfileLocation: 'secureFiles'
+    provProfileSecureFile: ${{ parameters.iosProvisioningProfileFile }}
+
+- task: UpdateiOSVersionInfoPlist@1
+  displayName: "Bump iOS Version"
+  inputs:
+    infoPlistPath: ${{ parameters.pathToInfoPlist }}
+    bundleShortVersionString: $(MajorMinorPatch)
+    bundleVersion: $(PreReleaseNumber)
+
+- task: ios-bundle-identifier@1
+  displayName: "Replace iOS Bundle Identifier"
+  inputs:
+    sourcePath: ${{ parameters.pathToInfoPlist }}
+    bundleIdentifier: $(ApplicationIdentifier)
+    printFile: true
+
+- task: LaunchIconBadge@1 
+  condition: and(succeeded(), ne(variables['ApplicationEnvironment'], 'Production'))
+  inputs:
+    bannerVersionNameText: ${{ parameters.BannerVersionNameText }}
+    bannerVersionNameColor: $(BannerVersionNameColor)
+    contents: '$(Build.SourcesDirectory)/src/app/${{ parameters.solutionName }}.Mobile/iOS/Media.xcassets/AppIcons.appiconset/Icon-*.png'
+    bannerVersionNamePosition: 'bottomRight'
+    bannerVersionNumberPosition: 'top'
+    bannerVersionNumberText: '$(MajorMinorPatch)'
+
+- bash: |
+    cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile
+    dotnet $(dotNetCommand) -f:$(BuildTargetFramework) -c:Release /p:ApplicationIdentifier=$(ApplicationIdentifier) /p:CodesignProvision=$(provisioningProfile.provisioningProfileUuid) /p:ArchiveOnBuild=true /bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog "/p:InformationalVersion=$GITVERSION_INFORMATIONALVERSION" /p:IsLightBuild=$(IsLightBuild)
+  displayName: Build project for Release - $(BuildTargetFramework)
+
+- task: CopyFiles@2
+  displayName: 'Copy IPA'
+  inputs:
+    Contents: '**/*.ipa'
+    flattenFolders : true
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net8.0-ios'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy DSYM'
+  inputs:
+    Contents: '**/*.dSYM/**'
+    flattenFolders : true
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net8.0-ios'
+    TargetFolder: '$(Build.ArtifactStagingDirectory)/${{ parameters.solutionName }}.Mobile.dSYM'
+
+- publish: $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish Artifact'
+  condition: always()
+  artifact: $(ArtifactName)
+
+#-if false
+- task: DeleteFiles@1
+  displayName: "Remove Downloaded Artifacts (GeneratedApp Folder)"
+  condition: always()
+  inputs:
+    SourceFolder: $(Pipeline.Workspace)/GeneratedApp
+    RemoveSourceFolder: true
+    Contents: '**'
+#-endif
+
+- task: PostBuildCleanup@3
+  displayName: 'Post-Build Cleanup: Cleanup files to keep build server clean!'
+  condition: always()

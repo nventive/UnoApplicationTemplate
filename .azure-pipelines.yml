@@ -1,36 +1,66 @@
-﻿schedules:
-- cron: "30 08 * * Mon-Fri" # Format is "Minutes Hours DayOfMonth Month DayOfWeet" in UTC (that's why 08 is 3h EST)
-  displayName: 'Nightly weekdays build - 3:30 EST'
-  always: false # If nothing changed, don't start a new run.
-  branches:
-    include:
-      - master
-      - release/*
-      - feature/*
+﻿# Use this to schedule a build at defined days and times
+# schedules:
+# - cron: "30 08 * * Mon-Fri" # Format is "Minutes Hours DayOfMonth Month DayOfWeek" in UTC (that's why 08 is 3h EST)
+#   displayName: 'Nightly weekdays build - 3:30 EST'
+#   always: false # If nothing changed, don't start a new run.
+#   branches:
+#     include:
+#       - main
+#       - develop
+#       - release/*
+#       - feature/*
+
 pr:
  branches:
    include:
-   - master
+   - main
    - release/*
    - feature/*
 
-trigger: none
-# trigger:        # Use this if you want runs whenever the master branch is updated.
-#   branches:
-#     include:
-#       - master
-
-resources:
-  containers:
-    - container: windows
-      image: nventive/vs_build-tools:16.8.6
+trigger:
+  branches:
+    include:
+      - main
 
 variables:
 - template: build/variables.yml
 
 stages:
+#-if false
+# This special if is used to remove those Dotnet_New stages for generated application.
+- stage: Dotnet_New_GeneratedApp
+  jobs:
+  - template: .template.config/build/stage-donetnew.yaml
+
+- stage: Build_Staging_GeneratedApp
+  dependsOn: Dotnet_New_GeneratedApp
+  jobs:
+  - template: build/stage-build.yml
+    parameters:
+      pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
+      solutionName: 'GeneratedApp'
+      pathToInfoPlist: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/iOS/Info.plist'
+      pathToAndroidManifest: '$(Pipeline.Workspace)/GeneratedApp/src/app/GeneratedApp.Mobile/Android/AndroidManifest.xml'
+      applicationEnvironment: Generated_Staging
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      iosProvisioningProfileFile: $(InternalProvisioningProfile)
+      iosCertificateFile: $(InternalCertificate)
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
+
+- stage: Publish_Template_Package
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+  dependsOn:
+   - Build_Staging_GeneratedApp
+   - Build_Staging
+  jobs:
+  - template: .template.config/build/stage-publish-template.yml
+
+#-endif
 - stage: Build_Staging
-  condition: eq(variables['IsCanary'], 'false')
+#-if false
+  dependsOn: []
+#-endif
   jobs:
   - template: build/stage-build.yml
     parameters:
@@ -40,9 +70,31 @@ stages:
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
+      BannerVersionNameText: "STAGING"
+
+- stage: AppCenter_TestFlight_Staging
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+  dependsOn: Build_Staging
+  jobs:
+  - template: build/stage-release-appcenter.yml
+    parameters:
+      applicationEnvironment: Staging
+      deploymentEnvironment: AppCenter
+      appCenterWindowsSlug: $(AppCenterWindowsSlug)
+      appCenteriOSSlug: $(AppCenteriOSSlug)
+      appCenterAndroidSlug: $(AppCenterAndroidSlug)
+      androidKeyStoreFile: $(InternalKeystore)
+      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      appCenterServiceConnectionName: $(AppCenterServiceConnection)
+      appCenterDistributionGroup: $(AppCenterDistributionGroup)
+
+  - template: build/stage-release-appstore.yml
+    parameters:
+      applicationEnvironment: Staging
+      deploymentEnvironment: TestFlight
 
 - stage: Build_Production
-  dependsOn: Build_Staging # Use dependsOn: [] if you want to run both builds in parallel.
+  dependsOn: Build_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   jobs:
   - template: build/stage-build.yml
@@ -54,89 +106,36 @@ stages:
       iosCertificateFile: $(AppStoreCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
-# Build steps for the Canary
-# Build the project the same as prod and QA builds, but update all nuget packages to latest
-- stage: Build_Canary
-  condition: and(ne(variables['Build.Reason'], 'PullRequest'), eq(variables['IsCanary'], 'true'))
-  dependsOn: []
-  jobs:
-  - template: build/stage-build.yml
-    parameters:
-      applicationEnvironment: Staging
-      androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      iosProvisioningProfileFile: $(InternalProvisioningProfile)
-      iosCertificateFile: $(InternalCertificate)
-      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
-    
-- stage: AppCenter_Staging
-  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-  dependsOn: Build_Staging
-
-  jobs:
-  - template: build/stage-release-appcenter.yml
-    parameters:
-      applicationEnvironment: Staging
-      deploymentEnvironment: AppCenter
-      appCenterUWPSlug: $(AppCenterUWPSlug)
-      appCenteriOSSlug: $(AppCenteriOSSlug)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug)
-      androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-
 - stage: AppCenter_Production
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
-
   jobs:
   - template: build/stage-release-appcenter.yml
     parameters:
       applicationEnvironment: Production
       deploymentEnvironment: 'AppCenter Prod'
-      appCenterUWPSlug: $(AppCenterUWPSlug_Production)
+      appCenterWindowsSlug: $(AppCenterWindowsSlug_Production)
       appCenteriOSSlug: $(AppCenteriOSSlug_Production)
       appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
       androidKeyStoreFile: $(GooglePlayKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
-
-- stage: AppCenter_Canary
-  condition: and(succeeded(), eq(variables['IsCanary'], 'true'))
-  dependsOn: Build_Canary
-
-  jobs:
-  - template: build/stage-release-appcenter.yml
-    parameters:
-      applicationEnvironment: Staging
-      deploymentEnvironment: AppCenter
-      appCenterUWPSlug: $(AppCenterUWPSlug_Canary)
-      appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
-      androidKeyStoreFile: $(InternalKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-
-# - stage: Azure
-#   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-#   dependsOn: Build_Production
-
-#   jobs:
-#   - template: build/stage-release-wasm.yml
+      appCenterServiceConnectionName: $(AppCenterServiceConnection)
+      appCenterDistributionGroup: $(AppCenterDistributionGroup)
 
 - stage: AppStore
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
-
   jobs:
   - template: build/stage-release-appstore.yml
-    parameters:    
+    parameters:
       applicationEnvironment: Production
       deploymentEnvironment: AppStore
 
 - stage: GooglePlay
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
-
   jobs:
   - template: build/stage-release-googleplay.yml
-    parameters:    
+    parameters:
       applicationEnvironment: Production
       deploymentEnvironment: GooglePlay
