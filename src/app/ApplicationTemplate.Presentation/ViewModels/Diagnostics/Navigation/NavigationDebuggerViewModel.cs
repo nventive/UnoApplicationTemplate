@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using ApplicationTemplate.DataAccess;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Uno;
@@ -38,5 +39,13 @@ public sealed partial class NavigationDebuggerViewModel : TabViewModel
 	public IDynamicCommand Reinitialize => this.GetCommandFromTask(async ct =>
 	{
 		await CoreStartup.ExecuteInitialNavigation(ct, ServiceProvider);
+	});
+
+	/// <summary>
+	/// Gets a command that raises the event that triggers the navigation to the force update page.
+	/// </summary>
+	public IDynamicCommand NavigateToForceUpdatePage => this.GetCommand(() =>
+	{
+		this.GetService<IMinimumVersionReposiory>().CheckMinimumVersion();
 	});
 }

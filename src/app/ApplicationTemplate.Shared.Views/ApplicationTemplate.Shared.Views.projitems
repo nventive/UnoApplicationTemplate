@@ -61,6 +61,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\Diagnostics\NavigationDebuggerView.xaml.cs">
       <DependentUpon>NavigationDebuggerView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\ForcedUpdate\ForcedUpdatePage.xaml.cs">
+      <DependentUpon>ForcedUpdatePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DeviceInformation\DeviceInformationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\AppStoreUriProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Connectivity\ConnectivityProvider.cs" />
@@ -232,6 +236,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\Diagnostics\NavigationDebuggerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\ForcedUpdate\ForcedUpdatePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

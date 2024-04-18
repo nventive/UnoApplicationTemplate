@@ -42,6 +42,7 @@ public static class NavigationConfiguration
 		{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
+		{ typeof(ForcedUpdatePageViewModel), typeof(ForcedUpdatePage) },
 	};
 
 	/// <summary>

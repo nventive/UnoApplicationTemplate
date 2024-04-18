@@ -102,6 +102,10 @@
 			<Button Content="Reinitialize navigation"
 					Style="{StaticResource NavigationDebuggerButtonStyle}"
 					Command="{Binding Reinitialize}" />
+
+			<Button Content="Force update"
+					Style="{StaticResource NavigationDebuggerButtonStyle}"
+					Command="{Binding NavigateToForceUpdatePage}" />
 		</StackPanel>
 	</StackPanel>
 </UserControl>

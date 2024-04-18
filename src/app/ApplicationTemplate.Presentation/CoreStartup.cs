@@ -76,6 +76,7 @@ public sealed class CoreStartup : CoreStartupBase
 			NotifyUserOnSessionExpired(services);
 			services.GetRequiredService<DiagnosticsCountersService>().Start();
 			await ExecuteInitialNavigation(CancellationToken.None, services);
+			SuscribeToRequiredUpdate(services);
 		}
 	}
 
@@ -197,6 +198,25 @@ public sealed class CoreStartup : CoreStartupBase
 
 			OnError(exception, e.IsTerminating);
 		};
+	}
+
+	private void SuscribeToRequiredUpdate(IServiceProvider services)
+	{
+		var updateRequiredService = services.GetRequiredService<IUpdateRequiredService>();
+
+		updateRequiredService.UpdateRequired += ForceUpdate;
+
+		void ForceUpdate(object sender, EventArgs e)
+		{
+			var navigationController = services.GetRequiredService<ISectionsNavigator>();
+
+			_ = Task.Run(async () =>
+			{
+				await navigationController.NavigateAndClear(CancellationToken.None, () => new ForcedUpdatePageViewModel());
+			});
+
+			updateRequiredService.UpdateRequired -= ForceUpdate;
+		}
 	}
 
 	/// <summary>

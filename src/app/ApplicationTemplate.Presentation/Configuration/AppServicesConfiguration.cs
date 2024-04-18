@@ -31,6 +31,7 @@ public static class AppServicesConfiguration
 			.AddSingleton<IDadJokesService, DadJokesService>()
 			.AddSingleton<IAuthenticationService, AuthenticationService>()
 			.AddSingleton<IUserProfileService, UserProfileService>()
+			.AddSingleton<IUpdateRequiredService, UpdateRequiredService>()
 			.AddSingleton<DiagnosticsCountersService>();
 	}
 }
