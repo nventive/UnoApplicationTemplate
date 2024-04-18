@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+
+	<!--
+		IMPORTANT DOCUMENTATION
+		https://github.com/unoplatform/uno/blob/master/doc/articles/controls/ToggleSwitch.md
+	-->
+	
+	<!-- ResourceDictionary containing only 1 item doesn't work if that item refers Material resources. -->
+	<x:Int32 x:Key="ToggleSwitchWorkaround">0</x:Int32>
+
+	<Style TargetType="ToggleSwitch"
+		   BasedOn="{StaticResource ToggleSwitchStyle}" />
+
+</ResourceDictionary>

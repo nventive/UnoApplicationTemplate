@@ -1,0 +1,185 @@
+﻿using System.Collections.Generic;
+using System.Reactive.Concurrency;
+using System.Threading.Tasks;
+using ApplicationTemplate.DataAccess;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using NSubstitute;
+using Serilog;
+using Xunit.Abstractions;
+
+[assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true)]
+
+namespace ApplicationTemplate.Tests;
+
+/// <summary>
+/// Gives access to the services and their configuration.
+/// </summary>
+public class FunctionalTestBase : IAsyncLifetime
+{
+	private readonly ITestOutputHelper _output;
+	private readonly CoreStartup _coreStartup;
+	private readonly Lazy<ShellViewModel> _shellViewModel = new Lazy<ShellViewModel>(() => new ShellViewModel());
+
+	/// <summary>
+	/// Initializes a new instance of the <see cref="FunctionalTestBase"/> class.
+	/// </summary>
+	/// <remarks>
+	/// This is called before every test.
+	/// </remarks>
+	/// <param name="output">Optional output parameter. Provide it when you want to consult the logs of this test.</param>
+	public FunctionalTestBase(ITestOutputHelper output = null)
+	{
+		_output = output;
+		_coreStartup = new CoreStartup();
+		_coreStartup.PreInitialize();
+		_coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, environmentManager: new TestEnvironmentManager(), ConfigureLogging, Configure);
+
+		void Configure(IHostBuilder hostBuilder)
+		{
+			// Add the mock options overrides.
+			hostBuilder.ConfigureAppConfiguration(configurationBuilder =>
+				configurationBuilder.AddInMemoryCollection(GetTestConfigurationValues())
+			);
+
+			// Override the application settings if the derived class overrides the ApplicationSettings property.
+			OverrideApplicationSettings(hostBuilder);
+
+			ConfigureTestServices(hostBuilder);
+
+			// Add the extra configuration from the specific test. (ConfigureHost is a virtual method.)
+			ConfigureHost(hostBuilder);
+
+			IEnumerable<KeyValuePair<string, string>> GetTestConfigurationValues()
+			{
+				// Override the IsMockEnabled value based on the USE_REAL_APIS environment variable.
+				bool.TryParse(Environment.GetEnvironmentVariable("USE_REAL_APIS"), out var useReadApis);
+				var key = ApplicationTemplateConfigurationExtensions.DefaultOptionsName<MockOptions>() + ":" + nameof(MockOptions.IsMockEnabled);
+				yield return new KeyValuePair<string, string>(key, (!useReadApis).ToString());
+			}
+
+			void OverrideApplicationSettings(IHostBuilder hostBuilder)
+			{
+				if (ApplicationSettings != ApplicationSettings.Default)
+				{
+					hostBuilder.ConfigureServices(services =>
+					{
+						services.AddSingleton(s => PersistenceConfiguration.CreateObservableDataPersister(s, ApplicationSettings));
+					});
+				}
+			}
+		}
+	}
+
+	/// <summary>
+	/// Gets the <see cref="ShellViewModel"/> associated with this test. It represents the ViewModel of the root of the app.
+	/// </summary>
+	public ShellViewModel Shell => _shellViewModel.Value;
+
+	/// <summary>
+	/// Gets the <see cref="MenuViewModel"/> associated with this test.
+	/// This is useful to change the section of the app.
+	/// </summary>
+	public MenuViewModel Menu
+	{
+		get
+		{
+			var menu = Shell.Menu;
+			if (menu.MenuState == "Closed")
+			{
+				throw new InvalidOperationException("The menu is currently closed and therefore cannot be accessed. You must be on a page that displays the menu in order to access it. This is to replicate the behavior of the app.");
+			}
+			return menu;
+		}
+	}
+
+	/// <summary>
+	/// Gets the active ViewModel from the <see cref="ISectionsNavigator"/>.
+	/// </summary>
+	/// <remarks>
+	/// Use <see cref="GetAndAssertActiveViewModel{TViewModel}"/> to get the active ViewModel as a specific type in order to interact with its members.
+	/// </remarks>
+	public INavigableViewModel ActiveViewModel => GetService<ISectionsNavigator>().GetActiveViewModel();
+
+	/// <summary>
+	/// Asserts that the active ViewModel is of the expected type and returns it.
+	/// </summary>
+	/// <typeparam name="TViewModel">The expected ViewModel type.</typeparam>
+	/// <returns>The active ViewModel .</returns>
+	public TViewModel GetAndAssertActiveViewModel<TViewModel>()
+		where TViewModel : INavigableViewModel
+	{
+		return Assert.IsType<TViewModel>(ActiveViewModel);
+	}
+
+	/// <summary>
+	/// Configures the services required for functional testing.
+	/// </summary>
+	/// <param name="host">The host builder.</param>
+	private static void ConfigureTestServices(IHostBuilder host)
+	{
+		host.ConfigureServices(services =>
+		{
+			services
+				.AddSingleton<IScheduler>(s => TaskPoolScheduler.Default)
+				.AddSingleton<IDispatcherScheduler>(s => new DispatcherSchedulerAdapter(
+					s.GetRequiredService<IScheduler>()
+				))
+				.AddSingleton(s => Substitute.For<ILauncherService>());
+		});
+	}
+
+	private void ConfigureLogging(HostBuilderContext hostBuilderContext, ILoggingBuilder loggingBuilder, bool isAppLogging)
+	{
+		if (_output is null)
+		{
+			return;
+		}
+
+		var serilogConfiguration = new LoggerConfiguration()
+			.ReadFrom.Configuration(hostBuilderContext.Configuration)
+			.Enrich.With(new ThreadIdEnricher())
+			.WriteTo.TestOutput(_output, outputTemplate: "{Timestamp:HH:mm:ss.fff} Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}");
+
+		var logger = serilogConfiguration.CreateLogger();
+		loggingBuilder.AddSerilog(logger);
+	}
+
+	/// <summary>
+	/// Override this method in your test to add extra configuration such as services overrides.
+	/// </summary>
+	/// <param name="hostBuilder">The host builder.</param>
+	protected virtual void ConfigureHost(IHostBuilder hostBuilder)
+	{
+	}
+
+	/// <summary>
+	/// Gets the application settings to use for this test.
+	/// </summary>
+	public virtual ApplicationSettings ApplicationSettings { get; } = ApplicationSettings.Default;
+
+	/// <summary>
+	/// Returns the requested service.
+	/// </summary>
+	/// <typeparam name="TService">Type of service.</typeparam>
+	/// <returns>The requested service.</returns>
+	protected virtual TService GetService<TService>()
+	{
+		return _coreStartup.ServiceProvider.GetRequiredService<TService>();
+	}
+
+	async Task IAsyncLifetime.InitializeAsync()
+	{
+		await _coreStartup.Start();
+
+		// This sometimes fails when parallelization is enabled. (That's one of the reasons why parallelization is disabled.)
+		ViewModelBase.DefaultServiceProvider.Should().BeSameAs(_coreStartup.ServiceProvider, because: "We want the ViewModels of this test to use the services that we just initialized.");
+	}
+
+	async Task IAsyncLifetime.DisposeAsync()
+	{
+		_coreStartup.Dispose();
+	}
+}

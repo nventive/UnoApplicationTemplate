@@ -1,0 +1,239 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:u="using:Nventive.View.Controls">
+
+	<!-- KNOWN ISSUE : It is impossible to add a StaticResource in a setter in this file. -->
+	<SolidColorBrush x:Key="OnBackgroundPathControlBrush"
+					 Color="{ThemeResource OnBackgroundColor}" />
+
+	<!--  Home navigation Paths -->
+	<!--  Home section -->
+	<Style x:Key="HomePathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Fill="{TemplateBinding Foreground}"
+						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						  MaxHeight="{TemplateBinding MaxHeight}"
+						  MaxWidth="{TemplateBinding MaxWidth}"
+						  Data="{StaticResource HomePathControlIcon}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--  Posts section -->
+	<Style x:Key="PostsPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Fill="{TemplateBinding Foreground}"
+						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						  MaxHeight="{TemplateBinding MaxHeight}"
+						  MaxWidth="{TemplateBinding MaxWidth}"
+						  Data="{StaticResource PostsPathControlIcon}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--  Settings section -->
+	<Style x:Key="SettingsPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Fill="{TemplateBinding Foreground}"
+						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						  MaxHeight="{TemplateBinding MaxHeight}"
+						  MaxWidth="{TemplateBinding MaxWidth}"
+						  Data="{StaticResource SettingsPathControlIcon}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--  SuccessCheckPathControlStyle -->
+	<Style x:Key="SuccessCheckPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{StaticResource SuccessBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="15" />
+		<Setter Property="Width"
+				Value="15" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="{StaticResource SuccessCheckPathControlIcon}"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--  ErrorXPathControlStyle -->
+	<Style x:Key="ErrorXPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{ThemeResource ErrorBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="15" />
+		<Setter Property="Width"
+				Value="15" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="{StaticResource ErrorXPathControlIcon}"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- LightCirclePathControlStyle -->
+	<Style x:Key="LightCirclePathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{StaticResource AlternateOnSurfaceBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="4" />
+		<Setter Property="Width"
+				Value="4" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="{StaticResource CirclePathControlIcon}"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!-- DarkCirclePathControlStyle -->
+	<Style x:Key="DarkCirclePathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnBackgroundBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="4" />
+		<Setter Property="Width"
+				Value="4" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="M-4,0a4,4 0 1,0 8,0a4,4 0 1,0 -8,0"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<!--  RightArrowPathControlStyle -->
+	<Style x:Key="RightArrowPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{StaticResource OnBackgroundPathControlBrush}" />
+		<Setter Property="Stretch"
+				Value="Uniform" />
+		<Setter Property="Height"
+				Value="12" />
+		<Setter Property="Width"
+				Value="8" />
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Data="{StaticResource RightArrowPathControlIcon}"
+						  Stretch="{TemplateBinding Stretch}"
+						  Width="{TemplateBinding Width}"
+						  Height="{TemplateBinding Height}"
+						  Fill="{TemplateBinding Foreground}"
+						  HorizontalAlignment="Stretch" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="OutlinedHeartPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment"	
+				Value="Stretch" />
+		<Setter Property="FontSize"
+				Value="16" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path x:Name="Heart"
+						  Data="{StaticResource OutlinedHeartPathControlIcon}"
+						  Fill="{TemplateBinding Foreground}"
+						  VerticalAlignment="Center"
+						  HorizontalAlignment="Center"
+						  Stretch="Uniform"
+						  Width="30" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+	<Style x:Key="FilledHeartPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Foreground"
+				Value="{ThemeResource ErrorBrush}" />
+		<Setter Property="VerticalContentAlignment"
+				Value="Stretch" />
+		<Setter Property="HorizontalContentAlignment"
+				Value="Stretch" />
+		<Setter Property="FontSize"
+				Value="16" />
+
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path x:Name="Heart"
+						  Data="{StaticResource FilledHeartPathControlIcon}"
+						  Fill="{TemplateBinding Foreground}"
+						  VerticalAlignment="Center"
+						  HorizontalAlignment="Center"
+						  Stretch="Uniform"
+						  Width="30" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
+</ResourceDictionary>
+

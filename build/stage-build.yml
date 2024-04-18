@@ -1,4 +1,4 @@
-parameters:
+﻿parameters:
 - name: applicationEnvironment
   type: string
   default: ''
@@ -14,95 +14,145 @@ parameters:
 - name: iosProvisioningProfileFile
   type: string
   default: ''
+- name: iosCertificatePassword
+  type: string
+  default: ''
 - name: iosVariableGroup
+  type: string
+  default: ''
+- name: additionalReleaseNotesFile
+  type: string
+  default: 'Canary.md'
+- name: removeHyperlinksFromReleaseNotes
+  type: boolean
+  default: false
+- name: pathToSrc
+  type: string
+  default: '$(Build.SourcesDirectory)/src'
+- name: solutionName
+  type: string
+  default: '$(SolutionName)'
+- name: pathToInfoPlist
+  type: string
+  default: '$(InfoPlistPath)'
+- name: pathToAndroidManifest
+  type: string
+  default: '$(AndroidManifestPath)'
+- name: BannerVersionNameText
   type: string
   default: ''
 
 jobs:
-  - job: On_Windows # Build UWP and Android on a windows machine
-    strategy:
-      maxParallel: 3
-      matrix:
-        Android:
-          ApplicationConfiguration: Release_Android
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-        UWP:
-          ApplicationConfiguration: Release_UWP
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(UWPArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-        Tests:
-          ApplicationConfiguration: Release_Tests
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-          
+  - job: On_Windows_ReleaseNotes
     pool:
-      name: $(windowsPoolName)
-
+      vmImage : $(windowsHostedAgentImage)
     variables:
-    - group: ${{ parameters.androidVariableGroup }}
-    
-    container: windows
+      ArtifactName: ReleaseNotes_${{ parameters.applicationEnvironment }}
+      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+    steps:
+      - template: steps-build-release-notes.yml
+        parameters:
+          additionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
+          removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
+
+  - job: OnWindows_Windows
+    pool:
+      vmImage : $(windowsHostedAgentImage)
+    variables:
+    - name: ApplicationConfiguration
+      value: Release
+    - name: ApplicationPlatform
+      value: x64
+    - name: ArtifactName
+      value: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
+    - name: ApplicationEnvironment
+      value: ${{ parameters.applicationEnvironment }}
+    - name: BuildTargetFramework 
+      value: net8.0-windows10.0.22621.0
+        # For optimization, if we are on light build, we only build the project else we publish it.
+    - name: dotNetCommand
+      ${{ if eq(variables['IsLightBuild'], 'true') }}:
+        value: build
+      ${{ else }}:
+        value: publish
 
     steps:
-      - template: steps-build.yml
+      - template: steps-build-windows.yml
         parameters:
-          androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
+          pathToSrc: ${{ parameters.pathToSrc }}
+          solutionFileName: '${{ parameters.solutionName }}.sln'
+          solutionName: ${{ parameters.solutionName }}
 
-  - job: On_Mac # Build iOS on a mac
-    strategy:
-      maxParallel: 3
-      matrix:
-        iOS:
-          ApplicationConfiguration: Release_iOS
-          ApplicationPlatform: Any CPU
-          ArtifactName: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
-          ApplicationEnvironment: ${{ parameters.applicationEnvironment }}   
+  - job: OnWindows_Tests
     pool:
-      name: $(macOSPoolName)
-      demands:
-        - Xamarin.iOS -equals $(XAMARIN_IOS_VERSION)
-      
+      vmImage : $(windowsHostedAgentImage)
     variables:
-    - name: SkipUnknownFrameworks
-      value: true # Used by TargetFrameworks.Filtering package to build only what's possible on a mac for the multitargeted library
+      ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
+      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+    steps:
+      - template: steps-build-tests.yml
+        parameters:
+          pathToSrc: ${{ parameters.pathToSrc }}
+          solutionFileName: '${{ parameters.solutionName }}.sln'
+          solutionName: ${{ parameters.solutionName }}
+
+  - job: OnWindows_Android
+    pool:
+      vmImage : $(windowsHostedAgentImage)
+    variables:
+    - name: ApplicationEnvironment
+      value: ${{ parameters.applicationEnvironment }}
+    - name: ArtifactName
+      value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+    - name: ApplicationPlatform
+      value: AnyCPU
+    - name: BuildTargetFramework
+      value: net8.0-android
+
+    # For optimization, if we are on light build, we only build the project else we publish it.
+    - name: dotNetCommand
+      ${{ if eq(variables['IsLightBuild'], 'true') }}:
+        value: build
+      ${{ else }}:
+        value: publish
+
+    - group: ${{ parameters.androidVariableGroup }}
+
+    steps:
+    - template: steps-build-android.yml
+      parameters:
+        pathToSrc: ${{ parameters.pathToSrc }}
+        solutionName: ${{ parameters.solutionName }}
+        pathToAndroidManifest: ${{ parameters.pathToAndroidManifest }}
+        androidKeyStoreFile: ${{ parameters.androidKeyStoreFile }}
+
+  - job: OnMac_iOS
+    pool:
+      vmImage: $(macOSHostedAgentImage)
+    variables:
+    - name: ApplicationEnvironment
+      value: ${{ parameters.applicationEnvironment }}
+    - name: BuildTargetFramework
+      value: net8.0-ios
+    - name: ArtifactName
+      value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+
+    # For optimization, if we are on light build, we only build the project else we publish it.
+    - name: dotNetCommand
+      ${{ if eq(variables['IsLightBuild'], 'true') }}:
+        value: build
+      ${{ else }}:
+        value: publish
+
     - group: ${{ parameters.iosVariableGroup }}
 
     steps:
-    - task: UseDotNet@2
-      displayName: 'Install .Net Core runtime 2.1.x'
-      inputs:
-        version: 2.1.x
-        packageType: 'runtime'
-        installationPath: '$(Agent.ToolsDirectory)/dotnet'
-        
-    - template: steps-build.yml
+    - template: steps-build-ios.yml
       parameters:
-        iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
+        pathToSrc: ${{ parameters.pathToSrc }}
+        solutionName: ${{ parameters.solutionName }}
+        pathToInfoPlist: ${{ parameters.pathToInfoPlist }}
         iosCertificateFile: ${{ parameters.iosCertificateFile }}
-        iosCertificatePassword: $(AppleCertificatePassword)
-
-  # - job: On_Linux
-  #   strategy:
-  #     maxParallel: 1
-  #     matrix:
-  #       Wasm:
-  #         ApplicationConfiguration: Release_WASM
-  #         ApplicationPlatform: Any CPU
-  #         ArtifactName: $(WASMArtifactName)
-  #         ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-
-  #   container: unoplatform/wasm-build:2.2
-
-  #   pool:
-  #     vmImage: 'ubuntu-18.04'
-
-  #   variables:
-  #     NUGET_PACKAGES: $(build.sourcesdirectory)/.nuget
-  #     SkipUnknowFrameworks: True
-
-  #   steps:
-  #     - template: steps-build-wasm.yml
+        iosCertificatePassword: ${{ parameters.iosCertificatePassword }}
+        iosProvisioningProfileFile: ${{ parameters.iosProvisioningProfileFile }}
+        BannerVersionNameText: ${{ parameters.BannerVersionNameText }}

@@ -1,0 +1,16 @@
+jobs:
+    # This job installs the template and then uses it to generate a project.
+    # The generated project folder is published to be built in a later stage.
+  - job: On_Windows_Dotnet_New
+    pool:
+      vmImage : windows-2022
+    steps:
+    - script: dotnet new -i $(Build.SourcesDirectory)
+      displayName: 'Install UnoApplicationTemplate'
+
+    - script: dotnet new nv-mobile -n GeneratedApp
+      displayName: 'Generate Project'
+
+    - publish: GeneratedApp
+      displayName: 'Publish GeneratedApp Folder'
+      artifact: GeneratedApp

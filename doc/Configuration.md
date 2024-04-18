@@ -6,19 +6,27 @@ For more documentation on configuration, read the references listed at the botto
 
 ## Configuring
 
-The host is configured inside the [Startup.cs](../src/app/ApplicationTemplate.Shared/Startup.cs) file.
+The `IConfiguration` is populated using 3 layers of configuration files.
+1. `appsettings.json` is the base layer. Use this to set default values.
+1. `appsettings.{environment}.json` is the environment specific layer. Use this to set values that are specific to environments such as API clients, API keys, etc. You can customize the environments like you want. Check [Environments.md](Environments.md) for more info.
+   
+   **Don't put production secrets directly in appsettings.production.json!** Instead, use a placeholder token along with a powershell replace in the  pipeline to inject secrets in your configuration files.
+ 
+1. `appsettings.override.json` is an optional file that appears when you override a value from the application.
 
-- **File configuration**: The configuration is loaded from the [appsettings.json](../src/app/ApplicationTemplate.Shared/appsettings.json) file. We could have a settings file per configuration (e.g. _appsettings.production.json_).
-We extract the file from the assembly and use `AddJsonStream` to import it. 
-We could use `.AddJsonFile`, but it freezes in WebAssembly.
-As of now, loading the configuration file doesn't create poor startup performance (< 500ms startup times). It will be something to check in the future.
-
-- **In-memory configuration**: The configuration can also be loaded from a dictionnary using `AddInMemoryConfiguration`.
-
-- **Precedence**: Multiple configurations can be loaded, the order in which they are loaded determines which one is used.
-For example, if you have two keys with the same name, the last one will overwrite the first one.
+Check the `AddAppSettings` method from [AppSettingsConfiguration.cs](../src/app/ApplicationTemplate.Presentation/Configuration/AppSettingsConfiguration.cs) file to see how the 3 layers are setup.
 
 ## Accessing
+
+- The `IConfiguration` interface is registered as a service to simplify the process of resolving an application setting.
+
+  ```csharp
+  // You can resolve the configuration in the constructor of a service using the IoC.
+  public class MyService(IConfiguration configuration) { ... }
+
+  // You can resolve the configuration from a view model using the IoC.
+  var configuration = this.GetService<IConfiguration>();
+  ```
 
 - Custom properties can be added to the configuration. They can then be resolved using `IConfiguration`. 
 
@@ -50,16 +58,6 @@ For example, if you have two keys with the same name, the last one will overwrit
 
       ...
   }
-  ```
-
-- The `IConfiguration` interface is registered as a service to simplify the process of resolving an application setting.
-
-  ```csharp
-  // You can resolve the configuration in the constructor of a service using the IoC.
-  public class MyService(IConfiguration configuration) { ... }
-
-  // You can resolve the configuration from a view model using the IoC.
-  var configuration = this.GetService<IConfiguration>();
   ```
 
 ## References

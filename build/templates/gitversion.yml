@@ -1,0 +1,25 @@
+﻿steps:
+  - task: gitversion/setup@0
+    retryCountOnTaskFailure: 3
+    inputs:
+      versionSpec: '5.12.0'
+    displayName: 'Install GitVersion'
+
+#-if false
+# The GitVersion configuration is different between the template and the generated application.
+  - task: gitversion/execute@0
+    inputs:
+      useConfigFile: true
+      configFilePath: $(Build.SourcesDirectory)/.template.config/build/gitversion-config.yml
+    displayName: 'Calculate Template Version'
+#-endif
+
+  - task: gitversion/execute@0
+#-if false
+# This task is used for the generated application. It's not used for the template's own pipeline.
+    condition: false
+#-endif
+    inputs:
+      useConfigFile: true
+      configFilePath: $(Build.SourcesDirectory)/build/gitversion-config.yml
+    displayName: 'Calculate App Version'

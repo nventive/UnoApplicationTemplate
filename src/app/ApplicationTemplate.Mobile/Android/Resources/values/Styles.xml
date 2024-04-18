@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+	<style name="Theme.AppCompat.Translucent">
+		<item name="android:windowIsTranslucent">true</item>
+		<item name="android:windowAnimationStyle">@android:style/Animation</item>
+	</style>
+
+	<!-- This defines the SplashScreen theme -->
+	<style name="AppTheme.Starting" parent="Theme.SplashScreen">
+		<!-- Set the splash screen background. -->
+		<item name="windowSplashScreenBackground">@color/primaryColor</item>
+		<!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an animated drawable. -->
+		<item name="windowSplashScreenAnimatedIcon">@drawable/Logo</item>
+		<!-- Set the theme of the Activity that directly follows your splash screen. -->
+		<item name="postSplashScreenTheme">@style/AppTheme</item>
+	</style>
+	
+	<style name="AppTheme" parent="Theme.AppCompat.DayNight">
+		<!-- This removes the ActionBar -->
+		<item name="windowActionBar">false</item>
+		<item name="android:windowActionBar">false</item>
+		<item name="windowNoTitle">true</item>
+		<item name="android:windowNoTitle">true</item>
+
+		<!-- SplashScreen -->
+		<item name="android:windowBackground">@drawable/splash</item>
+
+		<!-- This makes the status bar translucent and allows content to be drawn behind -->
+		<item name="android:windowTranslucentStatus">true</item>
+
+		<!-- This makes the navigation bar translucent and allows content to be drawn behind -->
+		<item name="android:windowTranslucentNavigation">true</item>
+
+		<!-- This makes the scrollviewer show a edge when reaching the maximum scrollable area. -->
+		<!-- Change this to ripple_material_dark if you are using dark lists or any accent color. -->
+		<item name="android:colorEdgeEffect">@color/ripple_material_light</item>
+
+		<!-- Color style for toggle switch -->
+		<item name="colorControlActivated">@color/MaterialPrimaryColor</item>
+		<item name="colorSwitchThumbNormal">@color/MaterialSurfaceVariantColor</item>
+	</style>
+</resources>

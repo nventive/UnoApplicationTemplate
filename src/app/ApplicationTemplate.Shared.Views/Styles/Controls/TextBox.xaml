@@ -1,0 +1,19 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<SolidColorBrush x:Key="OutlinedTextBoxBorderBrush"
+					 Color="{ThemeResource OnSurfaceColor}" />
+
+	<!-- Styles -->
+	<Style x:Key="TextBoxStyle"
+		   BasedOn="{StaticResource OutlinedTextBoxStyle}"
+		   TargetType="TextBox">
+
+		<Setter Property="Background"
+				Value="{ThemeResource SurfaceBrush}" />
+	</Style>
+
+	<!-- Default Style -->
+	<Style TargetType="TextBox"
+		   BasedOn="{StaticResource TextBoxStyle}" />
+</ResourceDictionary>

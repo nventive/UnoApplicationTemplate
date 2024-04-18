@@ -1,56 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using ApplicationTemplate.Presentation;
-using Chinook.SectionsNavigation;
-using Chinook.StackNavigation;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using ApplicationTemplate.Views.Content;
+using Chinook.SectionsNavigation;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace ApplicationTemplate.Views
+namespace ApplicationTemplate.Views;
+
+/// <summary>
+/// This class is used for navigation configuration.
+/// - Configures the navigator.
+/// </summary>
+public static class NavigationConfiguration
 {
-	/// <summary>
-	/// This class is used for navigation configuration.
-	/// - Configures the navigator.
-	/// </summary>
-	public static class NavigationConfiguration
+	public static IServiceCollection AddNavigation(this IServiceCollection services)
 	{
-		public static IServiceCollection AddNavigation(this IServiceCollection services)
-		{
-			return services.AddSingleton<ISectionsNavigator>(s =>
-				new FrameSectionsNavigator(
-					App.Instance.NavigationMultiFrame,
-					GetPageRegistrations()
-				)
-			);
-		}
+		return services.AddSingleton<ISectionsNavigator>(s =>
+			new FrameSectionsNavigator(
+				App.Instance.NavigationMultiFrame,
+				GetPageRegistrations()
+			)
+		);
+	}
 
-		private static IReadOnlyDictionary<Type, Type> GetPageRegistrations() => new Dictionary<Type, Type>()
-		{
-			{ typeof(HomePageViewModel), typeof(HomePage) },
-			{ typeof(PostsPageViewModel), typeof(PostsPage) },
-			{ typeof(EditPostPageViewModel), typeof(EditPostPage) },
-			{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
-			{ typeof(WelcomePageViewModel), typeof(WelcomePage) },
-			{ typeof(CreateAccountPageViewModel), typeof(CreateAccountPage) },
-			{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
-			{ typeof(LoginPageViewModel), typeof(LoginPage) },
-			{ typeof(OnboardingPageViewModel), typeof(OnboardingPage) },
-			{ typeof(SettingsPageViewModel), typeof(SettingsPage) },
-			{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
-			{ typeof(WebViewPageViewModel), typeof(WebViewPage) },
-			{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
-			{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
-			{ typeof(ChuckNorrisSearchPageViewModel), typeof(ChuckNorrisSearchPage) },
-			{ typeof(ChuckNorrisFavoritesPageViewModel), typeof(ChuckNorrisFavoritesPage) },
-		};
+	private static IReadOnlyDictionary<Type, Type> GetPageRegistrations() => new Dictionary<Type, Type>()
+	{
+		// TODO: Add your ViewModel and Page associations here.
+		{ typeof(WelcomePageViewModel), typeof(WelcomePage) },
+		{ typeof(PostsPageViewModel), typeof(PostsPage) },
+		{ typeof(EditPostPageViewModel), typeof(EditPostPage) },
+		{ typeof(DiagnosticsPageViewModel), typeof(DiagnosticsPage) },
+		{ typeof(CreateAccountPageViewModel), typeof(CreateAccountPage) },
+		{ typeof(ForgotPasswordPageViewModel), typeof(ForgotPasswordPage) },
+		{ typeof(LoginPageViewModel), typeof(LoginPage) },
+		{ typeof(OnboardingPageViewModel), typeof(OnboardingPage) },
+		{ typeof(SettingsPageViewModel), typeof(SettingsPage) },
+		{ typeof(LicensesPageViewModel), typeof(LicensesPage) },
+		{ typeof(EnvironmentPickerPageViewModel), typeof(EnvironmentPickerPage) },
+		{ typeof(EditProfilePageViewModel), typeof(EditProfilePage) },
+		{ typeof(DadJokesPageViewModel), typeof(DadJokesPage) },
+		{ typeof(DadJokesFiltersPageViewModel), typeof(DadJokesFiltersPage) },
+		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
+		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
+	};
 
-		private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)
-		{
-			frameSectionsNavigator.DefaultSetActiveSectionTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
-			frameSectionsNavigator.DefaultOpenModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
-			frameSectionsNavigator.DefaultCloseModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
-		}
+	/// <summary>
+	/// Disable navigation animations.
+	/// </summary>
+	/// <remarks>
+	/// Do not remove even if it's not used by default.
+	/// </remarks>
+	/// <param name="frameSectionsNavigator"><see cref="FrameSectionsNavigator"/>.</param>
+	private static void DisableAnimations(FrameSectionsNavigator frameSectionsNavigator)
+	{
+		frameSectionsNavigator.DefaultSetActiveSectionTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
+		frameSectionsNavigator.DefaultOpenModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
+		frameSectionsNavigator.DefaultCloseModalTransitionInfo = FrameSectionsTransitionInfo.SuppressTransition;
 	}
 }

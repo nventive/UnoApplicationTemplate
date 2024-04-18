@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					mc:Ignorable="d">
+	<FontFamily x:Key="SymbolThemeFontFamily">ms-appx:///Assets/Fonts/segmdl2.ttf#Segoe MDL2 Assets</FontFamily>
+
+	<!--Override Uno Material Fonts-->
+	<FontFamily x:Key="MaterialRegularFontFamily">ms-appx:///Assets/Fonts/Guillon-Regular.ttf#Guillon</FontFamily>
+	<FontFamily x:Key="MaterialLightFontFamily">ms-appx:///Assets/Fonts/Guillon-Light.ttf#Guillon Light</FontFamily>
+	<FontFamily x:Key="MaterialMediumFontFamily">ms-appx:///Assets/Fonts/Guillon-SemiBold.ttf#Guillon Demi</FontFamily>
+
+	<!--Not part of the Uno Material Fonts-->
+	<FontFamily x:Key="BoldFontFamily">ms-appx:///Assets/Fonts/Guillon-Bold.ttf#Guillon</FontFamily>
+	<FontFamily x:Key="ExtraBoldFontFamily">ms-appx:///Assets/Fonts/Guillon-Black.ttf#Guillon Black</FontFamily>
+</ResourceDictionary>

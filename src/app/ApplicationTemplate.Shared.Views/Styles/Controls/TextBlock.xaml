@@ -1,0 +1,129 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!-- List of Material TextBlock styles: https://github.com/unoplatform/Uno.Themes/blob/master/src/library/Uno.Material/Styles/Controls/TextBlock.xaml -->
+	<ResourceDictionary.MergedDictionaries>
+		<ResourceDictionary Source="../Application/Brushes.xaml" />
+		<ResourceDictionary Source="../Application/Fonts.xaml" />
+	</ResourceDictionary.MergedDictionaries>
+
+	<!--
+	******************************************************************
+		STYLE GUIDE TEXTBLOCKS STYLES
+	******************************************************************
+	-->
+
+	<Style x:Key="HeadlineLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource HeadlineLarge}">
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="FontWeight"
+				Value="Bold" />
+		<Setter Property="CharacterSpacing"
+				Value="-0.5" />
+	</Style>
+	
+	<Style x:Key="HeadlineMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource HeadlineMedium}">
+		<Setter Property="FontWeight"
+				Value="Bold" />
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+	</Style>
+
+	<Style x:Key="TitleLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource TitleLarge}">
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="FontWeight"
+				Value="Medium" />
+		<Setter Property="LineHeight"
+				Value="32" />
+		<Setter Property="CharacterSpacing"
+				Value="0.18" />
+	</Style>
+
+	<Style x:Key="TitleMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource TitleMedium}">
+		<Setter Property="FontSize"
+				Value="18" />
+		<Setter Property="FontStyle"
+				Value="Italic" />
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="24" />
+		<Setter Property="CharacterSpacing"
+				Value="0.2" />
+	</Style>
+
+	<Style x:Key="TitleSmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource TitleSmall}">
+		<Setter Property="FontSize"
+				Value="16" />
+		<Setter Property="LineHeight"
+				Value="24" />
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="24" />
+		<Setter Property="CharacterSpacing"
+				Value="0.1" />
+	</Style>
+
+	<Style x:Key="BodyLarge"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource BodyLarge}">
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="24" />
+		<Setter Property="CharacterSpacing"
+				Value="0.5" />
+	</Style>
+
+	<Style x:Key="BodyMedium"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource BodyMedium}">
+		<Setter Property="FontSize"
+				Value="14" />
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="20" />
+		<Setter Property="CharacterSpacing"
+				Value="0.25" />
+	</Style>
+
+	<Style x:Key="BodyMediumLight"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource BodyMedium}">
+		<Setter Property="FontSize"
+				Value="12" />
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="17" />
+		<Setter Property="CharacterSpacing"
+				Value="0.4" />
+	</Style>
+
+	<Style x:Key="BodySmall"
+		   TargetType="TextBlock"
+		   BasedOn="{StaticResource BodySmall}">
+		<Setter Property="FontSize"
+				Value="12" />
+		<Setter Property="Foreground"
+				Value="{ThemeResource OnSurfaceBrush}" />
+		<Setter Property="LineHeight"
+				Value="17" />
+		<Setter Property="CharacterSpacing"
+				Value="0.4" />
+	</Style>
+
+</ResourceDictionary>
