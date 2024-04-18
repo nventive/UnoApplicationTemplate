@@ -139,6 +139,10 @@ Business services are always declared using an interface and implemented in a se
 
 This application uses [DynamicData](https://github.com/reactivemarbles/DynamicData) to expose observable lists from business services. These can then be used in the presentation layer to create ViewModels that are automatically disposed when their associated items are removed from the list.
 
+### Forced Update
+
+This application uses the [IUpdateRequiredService](/src/app/ApplicationTemplate.Business/ForcedUpdates/IUpdateRequiredService.cs) which exposes an event that allows you to know when you should redirect the user to a page that will lead him to the appstore where he can update the app. 
+
 ## Presentation
 
 ### MVVM - ViewModels

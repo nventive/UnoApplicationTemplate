@@ -2,6 +2,7 @@
 using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using ApplicationTemplate.DataAccess;
+using Chinook.BackButtonManager;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -21,6 +22,7 @@ public class FunctionalTestBase : IAsyncLifetime
 {
 	private readonly ITestOutputHelper _output;
 	private readonly CoreStartup _coreStartup;
+	private readonly FunctionalTestBackButtonSource _backButtonSource = new();
 	private readonly Lazy<ShellViewModel> _shellViewModel = new Lazy<ShellViewModel>(() => new ShellViewModel());
 
 	/// <summary>
@@ -36,6 +38,8 @@ public class FunctionalTestBase : IAsyncLifetime
 		_coreStartup = new CoreStartup();
 		_coreStartup.PreInitialize();
 		_coreStartup.Initialize(contentRootPath: string.Empty, settingsFolderPath: string.Empty, environmentManager: new TestEnvironmentManager(), ConfigureLogging, Configure);
+
+		_coreStartup.ServiceProvider.GetRequiredService<IBackButtonManager>().AddSource(_backButtonSource);
 
 		void Configure(IHostBuilder hostBuilder)
 		{
@@ -115,6 +119,14 @@ public class FunctionalTestBase : IAsyncLifetime
 	}
 
 	/// <summary>
+	/// Simulates the back button press.
+	/// </summary>
+	public void NavigateBackUsingHardwareButton()
+	{
+		_backButtonSource.RaiseBackRequested();
+	}
+
+	/// <summary>
 	/// Configures the services required for functional testing.
 	/// </summary>
 	/// <param name="host">The host builder.</param>
@@ -181,5 +193,22 @@ public class FunctionalTestBase : IAsyncLifetime
 	async Task IAsyncLifetime.DisposeAsync()
 	{
 		_coreStartup.Dispose();
+	}
+
+	private sealed class FunctionalTestBackButtonSource : IBackButtonSource
+	{
+		public string Name => "FunctionalTestBackButtonSource";
+
+		public event BackRequestedEventHandler BackRequested;
+
+		public void Dispose()
+		{
+			BackRequested = null;
+		}
+
+		public void RaiseBackRequested()
+		{
+			BackRequested?.Invoke(this, new BackRequestedEventArgs());
+		}
 	}
 }

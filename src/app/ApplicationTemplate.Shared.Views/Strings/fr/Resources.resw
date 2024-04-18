@@ -446,4 +446,7 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   <data name="ResetPassword_Reset.Content" xml:space="preserve">
     <value>ENREGISTRER MON MOT DE PASSE</value>
   </data>
+  <data name="ForcedUpdateContent.Text" xml:space="preserve">
+    <value>Une mise à jour de l'application est nécessaire pour continuer de l'utiliser.</value>
+  </data>
 </root>

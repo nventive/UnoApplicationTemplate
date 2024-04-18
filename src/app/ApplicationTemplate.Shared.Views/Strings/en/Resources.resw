@@ -446,4 +446,7 @@ it's happening!</value>
   <data name="ResetPassword_Reset.Content" xml:space="preserve">
     <value>SAVE MY PASSWORD</value>
   </data>
+  <data name="ForcedUpdateContent.Text" xml:space="preserve">
+    <value>An update is required to continue using the application.</value>
+  </data>
 </root>
