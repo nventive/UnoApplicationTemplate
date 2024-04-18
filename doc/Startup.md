@@ -5,7 +5,7 @@ The startup of the application is divided into 3 different classes.
 - **App**
   - This is the main entry point of the application (equivalent to `Program.cs`).
   - It contains platform specific application delegates (e.g. `OnLaunched`, `DidEnterBackground`, etc.).
-  - It is located under `UWP/App.xaml.cs`.
+  - It is located under `Shared.Views/App.xaml.cs`.
 
 - **Startup**
   - This is the UI startup. It will initialize any **UI related components**.
@@ -13,7 +13,7 @@ The startup of the application is divided into 3 different classes.
 
 - **CoreStartup**
   - As it name suggests, this is the core startup. It will initialize any **non-UI related components**.
-  - It is located under `Shared/CoreStartup.cs`.
+  - It is located under `Presentation/CoreStartup.cs`.
 
 The startup is divided because not all startup will have access to UI components and we want to share as much initialization code as possible.
 

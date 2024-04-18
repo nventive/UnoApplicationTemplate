@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+	<!-- ResourceDictionary containing only 1 item doesn't work if that item refers Material resources. -->
+	<x:Int32 x:Key="BrushesWorkaround">0</x:Int32>
+
+	<!-- Success brushes -->
+	<SolidColorBrush x:Key="SuccessBrush"
+					 Color="{ThemeResource SuccessColor}" />
+	<SolidColorBrush x:Key="OnSuccessBrush"
+					 Color="{ThemeResource OnSuccessColor}" />
+
+	<SolidColorBrush x:Key="PrimaryAccentBrush"
+					 Color="{ThemeResource PrimaryAccentColor}" />
+	
+	<SolidColorBrush x:Key="SeparatorBrush"
+					 Color="{ThemeResource OnSurfaceColor}"
+					 Opacity="0.12" />
+
+	<!--
+		Some of the pages design flip the dichotomy of Background colors with their OnBackground complement.
+		So we have those brushes to avoid using material brushes contrary to their design.
+	-->
+	<SolidColorBrush x:Key="AlternateBackgroundBrush"
+					 Color="{ThemeResource OnBackgroundColor}" />
+	<SolidColorBrush x:Key="AlternateOnBackgroundBrush"
+					 Color="{ThemeResource BackgroundColor}" />
+	<SolidColorBrush x:Key="AlternateSurfacedBrush"
+					 Color="{ThemeResource OnSurfaceColor}" />
+	<SolidColorBrush x:Key="AlternateOnSurfaceBrush"
+					 Color="{ThemeResource SurfaceColor}" />
+	
+	<!-- ToggleSwitch Brushes -->
+
+	<!-- Toggle On -->
+	<StaticResource x:Key="ToggleSwitchOnBackgroundBrush"
+					ResourceKey="OnSurfaceLowBrush" />
+
+	<!-- Toggle Off -->
+	<StaticResource x:Key="ToggleSwitchOffBackgroundBrush"
+					ResourceKey="OnSurfaceLowBrush" />
+
+	<!-- Toggle On Disabled -->
+	<StaticResource x:Key="ToggleSwitchOnLowButtonBrush"
+					ResourceKey="OnSurfaceMediumBrush" />
+	<StaticResource x:Key="ToggleSwitchOnLowBackgroundBrush"
+					ResourceKey="OnSurfaceSelectedBrush" />
+</ResourceDictionary>

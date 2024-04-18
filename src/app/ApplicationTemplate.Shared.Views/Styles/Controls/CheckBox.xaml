@@ -1,0 +1,20 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+					xmlns:win="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+					xmlns:xamarin="http://uno.ui/xamarin"
+					xmlns:not_ios="http://uno.ui/not_ios"
+					xmlns:ios="http://uno.ui/ios"
+					mc:Ignorable="xamarin ios not_ios">
+
+	<Style x:Key="CheckBoxStyle"
+		   TargetType="CheckBox"
+		   BasedOn="{StaticResource CheckBoxStyle}">
+		<Setter Property="FontSize"
+				Value="12" />
+	</Style>	
+
+	<!-- Default Style -->
+	<Style TargetType="CheckBox"
+		   BasedOn="{StaticResource CheckBoxStyle}" />
+</ResourceDictionary>

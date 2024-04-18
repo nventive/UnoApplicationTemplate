@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>ApplicationTemplate</value>
+  </data>
+  <data name="MessageDialog_Ok_Label" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="MessageDialog_Cancel_Label" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="MessageDialog_No_Label" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="MessageDialog_Retry_Label" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="MessageDialog_Close_Label" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Default_Error_Title" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Default_Error_Body" xml:space="preserve">
+    <value>An unexpected error has occurred.</value>
+  </data>
+  <data name="Default_Error_DialogTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Default_Error_DialogBody" xml:space="preserve">
+    <value>An unexpected error has occurred.</value>
+  </data>
+  <data name="NoNetwork_Error_DialogTitle" xml:space="preserve">
+    <value>No network</value>
+  </data>
+  <data name="NoNetwork_Error_DialogBody" xml:space="preserve">
+    <value>Please check your network connectivity.</value>
+  </data>
+  <data name="Login_Error_DialogTitle" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Login_Error_DialogBody" xml:space="preserve">
+    <value>Failed to login.</value>
+  </data>
+  <data name="Logout_Title" xml:space="preserve">
+    <value>Logging out</value>
+  </data>
+  <data name="Logout_Content" xml:space="preserve">
+    <value>Are you sure you want to log out?</value>
+  </data>
+  <data name="Logout_Confirm" xml:space="preserve">
+    <value>Log Out</value>
+  </data>
+  <data name="CreateAccount_CommandBar.Content" xml:space="preserve">
+    <value>Create Account</value>
+  </data>
+  <data name="Settings_Password.Text" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Settings_Version_Details.Text" xml:space="preserve">
+    <value>This application makes use of the dadjokes API from Dadjokes.io, which contains thousands of jokes.</value>
+  </data>
+  <data name="Settings_CommandBar.Content" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Settings_Email.Text" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Settings_PrivacyPolicy.Content" xml:space="preserve">
+    <value>Privacy Policy</value>
+  </data>
+  <data name="Settings_TermsAndConditions.Content" xml:space="preserve">
+    <value>Terms &amp; conditions</value>
+  </data>
+  <data name="Settings_ChangePassword.Content" xml:space="preserve">
+    <value>CHANGE PASSWORD</value>
+  </data>
+  <data name="Settings_Version.Text" xml:space="preserve">
+    <value>DAD Jokes - Version</value>
+  </data>
+  <data name="Settings_DarkMode.Text" xml:space="preserve">
+    <value>Dark mode</value>
+  </data>
+  <data name="Settings_Notification.Text" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="Settings_Notification_Details.Text" xml:space="preserve">
+    <value>I agree to receive notifications when there are new jokes.</value>
+  </data>
+  <data name="Settings_ReplayTutorial.Content" xml:space="preserve">
+    <value>REPLAY TUTORIAL</value>
+  </data>
+  <data name="Settings_Logout.Content" xml:space="preserve">
+    <value>LOGOUT</value>
+  </data>
+  <data name="Welcome_Title.Text" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="Welcome_Login.Content" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Welcome_CreateAccount.Content" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="Welcome_Continue.Content" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Posts_CommandBar.Content" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="Posts_NewPost.Content" xml:space="preserve">
+    <value>New post</value>
+  </data>
+  <data name="Onboarding_Content" xml:space="preserve">
+    <value>Get your shot of good humor everyday. Read the latest and greatest dad jokes!</value>
+  </data>
+  <data name="Onboarding_Continue.InRangeValue" xml:space="preserve">
+    <value>CONTINUE</value>
+  </data>
+  <data name="Onboarding_Skip.DefaultValue" xml:space="preserve">
+    <value>SKIP</value>
+  </data>
+  <data name="Menu_Home.Content" xml:space="preserve">
+    <value>Jokes</value>
+  </data>
+  <data name="Menu_Posts.Content" xml:space="preserve">
+    <value>Posts</value>
+  </data>
+  <data name="Menu_Settings.Content" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Login_Title1" xml:space="preserve">
+    <value>Welcome
+on board!</value>
+  </data>
+  <data name="Login_Title2" xml:space="preserve">
+    <value>Nice to see
+you again!</value>
+  </data>
+  <data name="Login_TitleMedium" xml:space="preserve">
+    <value>"Welcome to the Assumption Club.
+I think we all know why we are here."</value>
+  </data>
+  <data name="Login_TitleSmall" xml:space="preserve">
+    <value>"What do you call it when an Apple user looks you in the eye? iContact."</value>
+  </data>
+  <data name="Login_Email.PlaceholderText" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Login_Password.PlaceholderText" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login_Login.Content" xml:space="preserve">
+    <value>LOG IN</value>
+  </data>
+  <data name="Login_CreateAccount.Content" xml:space="preserve">
+    <value>CREATE ACCOUNT</value>
+  </data>
+  <data name="Login_Google.Content" xml:space="preserve">
+    <value>CONTINUE WITH GOOGLE</value>
+  </data>
+  <data name="Login_ForgotPassword.Content" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="Home_Text.Text" xml:space="preserve">
+    <value>"Welcome to the Assumption Club.
+I think we all know why we are here."</value>
+  </data>
+  <data name="ForgotPassword_CommandBar.Content" xml:space="preserve">
+    <value>Forgot Password</value>
+  </data>
+  <data name="EditPost_NewPost" xml:space="preserve">
+    <value>New Post</value>
+  </data>
+  <data name="EditPost_Save.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="EditPost_Cancel.Content" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="SessionExpired_DialogTitle" xml:space="preserve">
+    <value>Session Expired</value>
+  </data>
+  <data name="SessionExpired_DialogBody" xml:space="preserve">
+    <value>Your session is expired. Please re-login.</value>
+  </data>
+  <data name="PrivacyPolicyUrl" xml:space="preserve">
+    <value>http://nventive.com</value>
+  </data>
+  <data name="TermsAndConditionsUrl" xml:space="preserve">
+    <value>http://nventive.com</value>
+  </data>
+  <data name="Licenses_CommandBar" xml:space="preserve">
+    <value>Licenses</value>
+  </data>
+  <data name="CreateAccount_FirstName.PlaceholderText" xml:space="preserve">
+    <value>First Name</value>
+  </data>
+  <data name="CreateAccount_LastName.PlaceholderText" xml:space="preserve">
+    <value>Last Name</value>
+  </data>
+  <data name="CreateAccount_Title.Text" xml:space="preserve">
+    <value>Join the fun!</value>
+  </data>
+  <data name="CreateAccount_Subtitle.Text" xml:space="preserve">
+    <value>Only 2 seconds to create an account</value>
+  </data>
+  <data name="CreateAccount_Email.PlaceholderText" xml:space="preserve">
+    <value>Enter an email</value>
+  </data>
+  <data name="CreateAccount_PhoneNumber.PlaceholderText" xml:space="preserve">
+    <value>Phone Number (000) 000-0000</value>
+  </data>
+  <data name="CreateAccount_DateOfBirth.Text" xml:space="preserve">
+    <value>Date of Birth</value>
+  </data>
+  <data name="CreateAccount_PostalCode.PlaceholderText" xml:space="preserve">
+    <value>Postal Code A0A 0A0</value>
+  </data>
+  <data name="CreateAccount_Password.PlaceholderText" xml:space="preserve">
+    <value>Choose a password</value>
+  </data>
+  <data name="CreateAccount_FavoriteDadNames.Text" xml:space="preserve">
+    <value>Favorite dad nickname (pick at least 1)</value>
+  </data>
+  <data name="CreateAccount_TermsOfServices.Content" xml:space="preserve">
+    <value>I agree to the terms of service</value>
+  </data>
+  <data name="CreateAccount_Confirm.Content" xml:space="preserve">
+    <value>CREATE AN ACCOUNT</value>
+  </data>
+  <data name="CreateAccount_PasswordValidation" xml:space="preserve">
+    <value>Password must be 8 chracters or more and contain at least 1 number.</value>
+  </data>
+  <data name="CreateAccount_PhoneNumberValidation" xml:space="preserve">
+    <value>Please provide a complete phone number.</value>
+  </data>
+  <data name="CreateAccount_PostalValidation" xml:space="preserve">
+    <value>Please provide a complete postal code.</value>
+  </data>
+  <data name="CreateAccount_DateOfBirthValidation" xml:space="preserve">
+    <value>You must be 18+ years old to create an account.</value>
+  </data>
+  <data name="CreateAccount_PasswordConfirmValidation" xml:space="preserve">
+    <value>Passwords don't match</value>
+  </data>
+  <data name="CreateAccount_FavoriteDadNameValidation" xml:space="preserve">
+    <value>You need to provide at least 1 name.</value>
+  </data>
+  <data name="CreateAccount_TermsOfServiceValidation" xml:space="preserve">
+    <value>You must accepts terms of service to create an account.</value>
+  </data>
+  <data name="ForgotPassword_Title.Text" xml:space="preserve">
+    <value>Oh no,
+it's happening!</value>
+  </data>
+  <data name="ForgotPassword_Subtitle.Text" xml:space="preserve">
+    <value>We’ll send you a link to reset your password by email.</value>
+  </data>
+  <data name="ForgotPassword_Email.PlaceholderText" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ForgotPassword_Reset.Content" xml:space="preserve">
+    <value>SEND A MAGIC LINK</value>
+  </data>
+  <data name="DadJokesSearch_CommandBar" xml:space="preserve">
+    <value>Quotes</value>
+  </data>
+  <data name="DadJokesSearch_SearchTerm.PlaceholderText" xml:space="preserve">
+    <value>Enter a search term</value>
+  </data>
+  <data name="Profile_CommandBar" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Profile_FirstName.PlaceholderText" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="Profile_LastName.PlaceholderText" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="Profile_Save.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="ValidationNotEmpty_Email" xml:space="preserve">
+    <value>The email must not be empty.</value>
+  </data>
+  <data name="ValidationNotEmpty_Password" xml:space="preserve">
+    <value>The password must not be empty.</value>
+  </data>
+  <data name="ValidationError_Email" xml:space="preserve">
+    <value>Something is wrong, try to verify your email.</value>
+  </data>
+  <data name="DadJokesFiltersPage_CommandBar.Content" xml:space="preserve">
+    <value>Filters</value>
+  </data>
+  <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
+    <value>Jokes</value>
+  </data>
+  <data name="Password_Validation1.Text" xml:space="preserve">
+    <value>8 characters minimum</value>
+  </data>
+  <data name="Password_Validation2.Text" xml:space="preserve">
+    <value>One number</value>
+  </data>
+  <data name="Password_Validation3.Text" xml:space="preserve">
+    <value>One uppercase character</value>
+  </data>
+  <data name="EditPost_JokeContent.PlaceholderText" xml:space="preserve">
+    <value>Write the joke</value>
+  </data>
+  <data name="EditPost_JokeTitle.PlaceholderText" xml:space="preserve">
+    <value>Joke's title</value>
+  </data>
+  <data name="SentEmailConfirmation_Title.Text" xml:space="preserve">
+    <value>Email sent!</value>
+  </data>
+  <data name="SentEmailConfirmation_Subtitle.Text" xml:space="preserve">
+    <value>You can now go in your email to restart your account.</value>
+  </data>
+  <data name="ResetPassword_Title.Text" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ResetPassword_Subtitle.Text" xml:space="preserve">
+    <value>Welcome back, choose a new password that you can easily remember.</value>
+  </data>
+  <data name="ResetPassword_Password.PlaceholderText" xml:space="preserve">
+    <value>Choose a new password</value>
+  </data>
+  <data name="ResetPassword_Reset.Content" xml:space="preserve">
+    <value>SAVE MY PASSWORD</value>
+  </data>
+</root>

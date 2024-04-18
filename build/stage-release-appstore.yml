@@ -2,16 +2,14 @@
   applicationEnvironment: '' # e.g. "Staging", "Production"
   deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
 
-jobs: 
-- deployment: AppStore_iOS
+jobs:
+- deployment: AppStore_iOS_${{ parameters.deploymentEnvironment}}
 
   pool:
-    name: $(macOSPoolName)
-    demands:
-      - Xamarin.iOS -equals $(XAMARIN_IOS_VERSION)
+    vmImage: $(macOSHostedAgentImage)
 
   environment: ${{ parameters.deploymentEnvironment }}
-    
+
   variables:
   - group: ApplicationTemplate.Distribution.AppStore
   - name: artifactName
@@ -36,7 +34,9 @@ jobs:
             shouldSkipWaitingForProcessing: true
             teamId: $(AppleTeamId)
             teamName: $(AppleTeamName)
-        
+            appSpecificPassword: '$(AppleAppSpecificPasswordFastLane)'
+            appSpecificId: '$(AppleStoreConnectIdentifier)' # allows to bypass 2FA when specified with appSpecificPassword.
+
         - task: DeleteFiles@1
           displayName: "Remove downloaded artifacts"
           condition: always()

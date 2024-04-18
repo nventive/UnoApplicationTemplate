@@ -2,7 +2,7 @@
 
 ## UI scheduling
 
-If you need access to the UIThread, you can simply use the `IDispatcherScheduler` that is registered in the IoC.
+If you need access to the _UI Thread_, you can simply use the `IDispatcherScheduler` that is registered in the IoC.
 
 If you're in a view model, you can simply use `RunOnDispatcher`.
 

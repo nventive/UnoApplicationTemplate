@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<LangVersion>12.0</LangVersion>
+		<RootNamespace>ApplicationTemplate.DataAccess</RootNamespace>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<TreatWarningsAsErrors Condition="'$(Configuration)'=='Release'">true</TreatWarningsAsErrors>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<EmbeddedResource Include="ApiClients\DadJokes\DadJokesRepositoryMock.FetchData.json" />
+		<EmbeddedResource Include="ApiClients\Posts\PostsRepositoryMock.GetAll.json" />
+		<EmbeddedResource Include="ApiClients\UserProfile\UserProfileRepositoryMock.Get.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="DynamicData" Version="7.1.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="3.1.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.0" />
+		<PackageReference Include="Reactive.Annex" Version="2.0.0" />
+		<PackageReference Include="Refit" Version="7.0.0" />
+		<PackageReference Include="ReviewService.Abstractions" Version="1.0.0" />
+		<PackageReference Include="System.Text.Json" Version="7.0.3" />
+		<PackageReference Include="MallardMessageHandlers" Version="0.2.0-dev.21" />
+		<PackageReference Include="Nventive.Persistence.Reactive" Version="0.5.0" />
+		<PackageReference Include="Nventive.Persistence" Version="0.5.0" />
+		<PackageReference Include="System.Reactive" Version="5.0.0" />
+	</ItemGroup>
+</Project>

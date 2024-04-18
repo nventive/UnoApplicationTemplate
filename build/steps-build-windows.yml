@@ -1,0 +1,50 @@
+﻿parameters:
+- name: pathToSrc
+  type: string
+  default: ''
+- name: solutionFileName
+  type: string
+  default: ''
+- name: solutionName
+  type: string
+  default: ''
+
+steps:
+- template: templates/dotnet-install.yml
+
+#-if false
+- download: current
+  condition: eq('GeneratedApp.sln', '${{ parameters.solutionFileName }}')
+  artifact: GeneratedApp
+#-endif
+
+- script: >
+    cd ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Windows
+
+    dotnet $(dotNetCommand)
+    -f:$(BuildTargetFramework)
+    -c:Release
+    -r:win-x64
+    -bl:$(build.ArtifactStagingDirectory)/build-$(BuildTargetFramework).binlog
+    -p:Platform=$(ApplicationPlatform)
+    -p:ApplicationEnvironment=$(ApplicationEnvironment)
+  displayName: 'Build solution in $(ApplicationConfiguration) | $(ApplicationPlatform)'
+
+- publish: $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish artifact $(ApplicationConfiguration) | $(ApplicationPlatform)'
+  condition: always()
+  artifact: $(ArtifactName)
+
+#-if false
+- task: DeleteFiles@1
+  displayName: "Remove downloaded artifacts (GeneratedApp folder)"
+  condition: always()
+  inputs:
+    SourceFolder: $(Pipeline.Workspace)/GeneratedApp
+    RemoveSourceFolder: true
+    Contents: '**'
+#-endif
+
+- task: PostBuildCleanup@3
+  displayName: 'Post-Build Cleanup: Cleanup files to keep build server clean!'
+  condition: always()

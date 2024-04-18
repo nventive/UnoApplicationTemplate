@@ -1,6 +1,6 @@
 # Localization
 
-We use [Microsoft.Extensions.Localization](https://www.nuget.org/packages/Microsoft.Extensions.Localization) for any configuration related work.
+We use [Microsoft.Extensions.Localization](https://www.nuget.org/packages/Microsoft.Extensions.Localization) for any localization related work.
 
 For more documentation on localization, read the references listed at the bottom.
 
@@ -9,6 +9,8 @@ For more documentation on localization, read the references listed at the bottom
 - We use `.resw` files located under the [Strings folder](../src/app/ApplicationTemplate.Shared/Strings) to localize texts.
 
 - An Uno implementation of `IStringLocalizer` (`ResourceLoaderStringLocalizer`) is registered as service in the [LocalizationConfiguration.cs](../src/app/ApplicationTemplate.Shared/Configuration/LocalizationConfiguration.cs) file.
+
+- For tests projects, a mock implementation of `IStringLocalizer` is used to avoid relying on a file. This improves performance and eases test parallelization.
 
 - We use `IStringLocalizer` to resolve those localized texts
   ```csharp

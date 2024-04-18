@@ -1,0 +1,94 @@
+﻿parameters:
+- name: pathToSrc
+  type: string
+  default: ''
+- name: solutionFileName
+  type: string
+  default: ''
+- name: solutionName
+  type: string
+  default: ''
+- name: useRealApis
+  type: boolean
+  default: false
+
+steps:
+- template: templates/dotnet-install.yml
+  parameters:
+    installMobileWorkload: false
+
+#-if false
+- download: current
+  condition: eq('GeneratedApp.sln', '${{ parameters.solutionFileName }}')
+  artifact: GeneratedApp
+#-endif
+
+# We need to run the tests in sequence otherwise some files get locked and the code coverage collection silently fails.
+- script: >
+    dotnet test ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Tests.Unit/${{ parameters.solutionName }}.Tests.Unit.csproj
+    --collect:"XPlat Code Coverage"
+    --settings build/test.runsettings
+  displayName: 'Run Unit Tests'
+  condition: succeeded()
+
+- script: >
+    dotnet test ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Tests.Functional/${{ parameters.solutionName }}.Tests.Functional.csproj
+    --collect:"XPlat Code Coverage"
+    --settings build/test.runsettings
+  displayName: 'Run Functional Tests With Mocked APIs'
+  condition: succeeded()
+  env:
+    USE_REAL_APIS: false
+
+- script: >
+    dotnet test ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Tests.Functional/${{ parameters.solutionName }}.Tests.Functional.csproj
+    --collect:"XPlat Code Coverage"
+    --settings build/test.runsettings
+    --logger "trx;logfilename=output.with-APIs.trx"
+  displayName: 'Run Functional Tests With Real APIs'
+  condition: ${{ parameters.useRealApis }}
+  env:
+    USE_REAL_APIS: true
+
+- task: PublishTestResults@2
+  displayName: Publish Test Results
+  condition: succeeded()
+  inputs:
+    testResultsFormat : VSTest
+    testResultsFiles: '**/*.trx'
+    searchFolder: ${{ parameters.pathToSrc }}
+
+- task: reportgenerator@5
+  displayName: Merge Code Coverage Reports
+  inputs:
+    reports: '${{ parameters.pathToSrc }}/**/*.cobertura.xml'
+    targetdir: '${{ parameters.pathToSrc }}/CoverageReport'
+
+- task: PublishCodeCoverageResults@1
+  displayName: Publish Code Coverage Results
+  condition: succeeded()
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: "${{ parameters.pathToSrc }}/CoverageReport/Cobertura.xml"
+    reportDirectory: '${{ parameters.pathToSrc }}/CoverageReport'
+  env:
+    DISABLE_COVERAGE_AUTOGENERATE: 'true' # This is disabled because we manually generate the report from at least 2 collections (Unit & Functional).
+
+- publish: $(Build.ArtifactStagingDirectory)
+  displayName: 'Publish Artifact'
+  condition: always()
+  artifact: $(ArtifactName)
+
+#-if false
+- task: DeleteFiles@1
+  displayName: "Remove downloaded artifacts (GeneratedApp folder)"
+  condition: always()
+  inputs:
+    SourceFolder: $(Pipeline.Workspace)/GeneratedApp
+    RemoveSourceFolder: true
+    Contents: '**'
+#-endif
+
+- task: PostBuildCleanup@3
+  displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
+  condition: always()

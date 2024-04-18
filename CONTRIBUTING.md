@@ -69,7 +69,7 @@ can build and all tests pass, as well as follow the current coding guidelines.
 When submitting a pull request, please use our [pull request
 template](.github/PULL_REQUEST_TEMPLATE.md).
 
-Pull requests should all be done to the **master** branch.
+Pull requests should all be done to the **main** branch.
 
 ---
 
