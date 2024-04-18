@@ -20,7 +20,7 @@ stages:
       iosProvisioningProfileFile: $(InternalProvisioningProfile)
       iosCertificateFile: $(InternalCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
-      removeHyperlinksFromReleaseNotes: true
+      removeHyperlinksFromReleaseNotes: false
       BannerVersionNameText: "CANARY"
 
 - stage: AppCenter_TestFlight_Canary
