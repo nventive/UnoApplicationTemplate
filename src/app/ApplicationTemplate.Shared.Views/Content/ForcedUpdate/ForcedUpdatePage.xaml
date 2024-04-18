@@ -21,6 +21,6 @@
 				VerticalAlignment="Center"
 				Command="{Binding NavigateToStore}"
 				Content="Update"
-				Grid.Row="1"/>
+				Grid.Row="1" />
 	</Grid>
 </Page>

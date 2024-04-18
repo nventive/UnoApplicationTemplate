@@ -7,7 +7,7 @@ namespace ApplicationTemplate.Business;
 /// <summary>
 /// Implementation of the <see cref="IUpdateRequiredService"/>.
 /// </summary>
-public sealed class UpdateRequiredService : IUpdateRequiredService
+public sealed class UpdateRequiredService : IUpdateRequiredService, IDisposable
 {
 	private readonly IDisposable _subscription;
 

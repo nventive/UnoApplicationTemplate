@@ -5,7 +5,7 @@ namespace ApplicationTemplate.Business;
 /// <summary>
 /// This service checks if the application is running the minimum required version.
 /// </summary>
-public interface IUpdateRequiredService : IDisposable
+public interface IUpdateRequiredService
 {
 	/// <summary>
 	/// Event that is raised when the application needs to be updated.

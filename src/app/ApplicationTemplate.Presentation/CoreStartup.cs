@@ -216,7 +216,6 @@ public sealed class CoreStartup : CoreStartupBase
 			});
 
 			updateRequiredService.UpdateRequired -= ForceUpdate;
-			updateRequiredService.Dispose();
 		}
 	}
 
