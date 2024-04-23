@@ -141,7 +141,11 @@ This application uses [DynamicData](https://github.com/reactivemarbles/DynamicDa
 
 ### Forced Update
 
-This application uses the [IUpdateRequiredService](/src/app/ApplicationTemplate.Business/ForcedUpdates/IUpdateRequiredService.cs) which exposes an event that allows you to know when you should redirect the user to a page that will lead him to the appstore where he can update the app. 
+This application uses the [IUpdateRequiredService](../src/app/ApplicationTemplate.Business/ForcedUpdates/IUpdateRequiredService.cs) which exposes an event that allows you to know when you should redirect the user to a page that will lead him to the appstore where he can update the app. 
+
+### Kill Switch
+
+This application uses the [IKillSwitchService](../src/app/ApplicationTemplate.Business/KillSwitch/IKillSwitchService.cs) which exposes an event that allows you to know when you the Kill switch is activated and when it gets deactivated.
 
 ## Presentation
 

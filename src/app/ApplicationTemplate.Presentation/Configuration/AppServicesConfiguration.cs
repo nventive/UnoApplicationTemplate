@@ -32,6 +32,7 @@ public static class AppServicesConfiguration
 			.AddSingleton<IAuthenticationService, AuthenticationService>()
 			.AddSingleton<IUserProfileService, UserProfileService>()
 			.AddSingleton<IUpdateRequiredService, UpdateRequiredService>()
+			.AddSingleton<IKillSwitchService, KillSwitchService>()
 			.AddSingleton<DiagnosticsCountersService>();
 	}
 }

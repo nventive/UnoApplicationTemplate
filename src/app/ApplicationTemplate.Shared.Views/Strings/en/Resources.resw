@@ -449,4 +449,7 @@ it's happening!</value>
   <data name="ForcedUpdateContent.Text" xml:space="preserve">
     <value>An update is required to continue using the application.</value>
   </data>
+  <data name="KillSwitchMessage.Text" xml:space="preserve">
+    <value>The app is not available at the moment, please come back later.</value>
+  </data>
 </root>

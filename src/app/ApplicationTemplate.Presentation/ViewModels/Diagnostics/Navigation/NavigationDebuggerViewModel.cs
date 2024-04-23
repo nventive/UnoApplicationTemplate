@@ -48,4 +48,17 @@ public sealed partial class NavigationDebuggerViewModel : TabViewModel
 	{
 		this.GetService<IMinimumVersionReposiory>().CheckMinimumVersion();
 	});
+
+	/// <summary>
+	/// Gets a command that raises the kill switch event.
+	/// </summary>
+	public IDynamicCommand TriggerKillSwitch => this.GetCommand(() =>
+	{
+		var killSwitchRepository = this.GetService<IKillSwitchRepository>();
+
+		if (killSwitchRepository is KillSwitchRepositoryMock killSwitchRepositoryMock)
+		{
+			killSwitchRepositoryMock.ChangeKillSwitchActivation();
+		}
+	});
 }

@@ -43,6 +43,7 @@ public static class NavigationConfiguration
 		{ typeof(SentEmailConfirmationPageViewModel), typeof(SentEmailConfirmationPage) },
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
 		{ typeof(ForcedUpdatePageViewModel), typeof(ForcedUpdatePage) },
+		{ typeof(KillSwitchPageViewModel), typeof(KillSwitchPage) },
 	};
 
 	/// <summary>

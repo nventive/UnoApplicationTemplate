@@ -449,4 +449,7 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   <data name="ForcedUpdateContent.Text" xml:space="preserve">
     <value>Une mise à jour de l'application est nécessaire pour continuer de l'utiliser.</value>
   </data>
+  <data name="KillSwitchMessage.Text" xml:space="preserve">
+    <value>L'application n'est pas disponible pour le moment, veuillez revenir plus tard.</value>
+  </data>
 </root>

@@ -64,6 +64,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Content\ForcedUpdate\ForcedUpdatePage.xaml.cs">
       <DependentUpon>ForcedUpdatePage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Content\KillSwitch\KillSwitchPage.xaml.cs">
+      <DependentUpon>KillSwitchPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Content\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="$(MSBuildThisFileDirectory)Content\ForcedUpdate\ForcedUpdatePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="$(MSBuildThisFileDirectory)Content\KillSwitch\KillSwitchPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -77,6 +77,7 @@ public sealed class CoreStartup : CoreStartupBase
 			services.GetRequiredService<DiagnosticsCountersService>().Start();
 			await ExecuteInitialNavigation(CancellationToken.None, services);
 			SuscribeToRequiredUpdate(services);
+			SuscribeToKillSwitch(services);
 		}
 	}
 
@@ -216,6 +217,57 @@ public sealed class CoreStartup : CoreStartupBase
 			});
 
 			updateRequiredService.UpdateRequired -= ForceUpdate;
+		}
+	}
+
+	private void SuscribeToKillSwitch(IServiceProvider serviceProvider)
+	{
+		var killSwitchService = serviceProvider.GetRequiredService<IKillSwitchService>();
+		var navigationController = serviceProvider.GetRequiredService<ISectionsNavigator>();
+
+		killSwitchService.ObserveKillSwitchActivation()
+			.SelectManyDisposePrevious(async (activated, ct) =>
+			{
+				Logger.LogTrace("Kill switch activation changed to {Activated}.", activated);
+
+				if (activated)
+				{
+					await OnKillSwitchActivated(ct);
+				}
+				else
+				{
+					await OnKillSwitchDeactivated(ct);
+				}
+			})
+			.Subscribe()
+			.DisposeWith(Disposables);
+
+		async Task OnKillSwitchActivated(CancellationToken ct)
+		{
+			// Clear all navigation stacks and show the kill switch page.
+			// We clear the navigation stack to avoid weird animations once the kill switch is deactivated.
+			foreach (var modal in navigationController.State.Modals)
+			{
+				await navigationController.CloseModal(ct);
+			}
+
+			foreach (var stack in navigationController.State.Sections)
+			{
+				await ClearNavigationStack(ct, stack.Value);
+			}
+
+			await navigationController.NavigateAndClear(ct, () => new KillSwitchPageViewModel());
+
+			Logger.LogInformation("Navigated to kill switch page succesfully.");
+		}
+
+		async Task OnKillSwitchDeactivated(CancellationToken ct)
+		{
+			if (navigationController.GetActiveViewModel() is KillSwitchPageViewModel)
+			{
+				await ExecuteInitialNavigation(ct, serviceProvider);
+				Logger.LogInformation("The kill switch was deactivated.");
+			}
 		}
 	}
 
