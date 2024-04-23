@@ -92,20 +92,28 @@
 				   Style="{StaticResource NavigationDebuggerTextBlockStyle}" />
 
 		<!-- Clear and Reinitialize buttons -->
-		<StackPanel Orientation="Horizontal"
+		<StackPanel Orientation="Vertical"
 					Spacing="8">
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+				<Button Content="Clear all pages"
+						Style="{StaticResource NavigationDebuggerButtonStyle}"
+						Command="{Binding Clear}" />
+
+				<Button Content="Reinitialize navigation"
+						Style="{StaticResource NavigationDebuggerButtonStyle}"
+						Command="{Binding Reinitialize}" />
+			</StackPanel>
 			
-			<Button Content="Clear all pages"
-					Style="{StaticResource NavigationDebuggerButtonStyle}"
-					Command="{Binding Clear}" />
-
-			<Button Content="Reinitialize navigation"
-					Style="{StaticResource NavigationDebuggerButtonStyle}"
-					Command="{Binding Reinitialize}" />
-
-			<Button Content="Force update"
-					Style="{StaticResource NavigationDebuggerButtonStyle}"
-					Command="{Binding NavigateToForceUpdatePage}" />
+			<StackPanel Orientation="Horizontal"
+						Spacing="8">
+				<Button Content="Force update"
+						Style="{StaticResource NavigationDebuggerButtonStyle}"
+						Command="{Binding NavigateToForceUpdatePage}" />
+				<Button Content="Toggle kill switch"
+						Style="{StaticResource NavigationDebuggerButtonStyle}"
+						Command="{Binding TriggerKillSwitch}" />
+			</StackPanel>
 		</StackPanel>
 	</StackPanel>
 </UserControl>

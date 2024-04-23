@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 3.4.X
+- Added a kill switch feature to the app.
+
 ## 3.3.X
 - Added a forced update feature to the app.
 

@@ -25,8 +25,7 @@ public sealed class ForceUpdatesShould : FunctionalTestBase
 		// This will raise the update required event.
 		minimumVersionReposiory.CheckMinimumVersion();
 
-		// Waits for the navigation to be completed, we need the StartWith in case the navigation already finished before we started observing.
-		await sectionNavigator.ObserveCurrentState().StartWith(sectionNavigator.State).Where(x => x.LastRequestState != NavigatorRequestState.Processing).FirstAsync();
+		await WaitForNavigation(viewModelType: typeof(ForcedUpdatePageViewModel), isDestination: true);
 
 		// Assert
 		ActiveViewModel.Should().BeOfType<ForcedUpdatePageViewModel>();
@@ -47,8 +46,7 @@ public sealed class ForceUpdatesShould : FunctionalTestBase
 		// This will raise the update required event.
 		minimumVersionReposiory.CheckMinimumVersion();
 
-		// Waits for the navigation to be completed, we need the StartWith in case the navigation already finished before we started observing.
-		await sectionNavigator.ObserveCurrentState().StartWith(sectionNavigator.State).Where(x => x.LastRequestState != NavigatorRequestState.Processing).FirstAsync();
+		await WaitForNavigation(viewModelType: typeof(ForcedUpdatePageViewModel), isDestination: true);
 
 		NavigateBackUsingHardwareButton();
 
