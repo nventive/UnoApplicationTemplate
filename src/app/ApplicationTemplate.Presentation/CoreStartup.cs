@@ -251,11 +251,6 @@ public sealed class CoreStartup : CoreStartupBase
 				await navigationController.CloseModal(ct);
 			}
 
-			foreach (var stack in navigationController.State.Sections)
-			{
-				await ClearNavigationStack(ct, stack.Value);
-			}
-
 			await navigationController.NavigateAndClear(ct, () => new KillSwitchPageViewModel());
 
 			Logger.LogInformation("Navigated to kill switch page succesfully.");
@@ -265,6 +260,11 @@ public sealed class CoreStartup : CoreStartupBase
 		{
 			if (navigationController.GetActiveViewModel() is KillSwitchPageViewModel)
 			{
+				foreach (var stack in navigationController.State.Sections)
+				{
+					await ClearNavigationStack(ct, stack.Value);
+				}
+
 				await ExecuteInitialNavigation(ct, serviceProvider);
 				Logger.LogInformation("The kill switch was deactivated.");
 			}
