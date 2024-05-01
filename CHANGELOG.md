@@ -7,6 +7,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 
 ## 3.4.X
 - Added a kill switch feature to the app.
+- Bump Uno.WinUI, Uno.WinUI.DevServer, Uno.WinUI.Lottie and Uno.UI.Adapter.Microsoft.Extensions.Logging to 5.0.159 to fix backNavigation/CloseModal crash.
 
 ## 3.3.X
 - Added a forced update feature to the app.

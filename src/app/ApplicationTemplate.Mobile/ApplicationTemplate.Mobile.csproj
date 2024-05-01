@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<LangVersion>12.0</LangVersion>
 		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
@@ -32,10 +32,10 @@
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.4.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.4.2" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="5.0.17" />
-		<PackageReference Include="Uno.WinUI" Version="5.0.64" />
-		<PackageReference Include="Uno.WinUI.DevServer" Version="5.0.64" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.64" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.64" />
+		<PackageReference Include="Uno.WinUI" Version="5.0.159" />
+		<PackageReference Include="Uno.WinUI.DevServer" Version="5.0.159" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.WinUI.Lottie" Version="5.0.159" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.0.159" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
