@@ -13,6 +13,14 @@ public sealed partial class Shell : UserControl
 		Instance = this;
 	}
 
+	protected override void OnApplyTemplate()
+	{
+		base.OnApplyTemplate();
+#if __IOS__
+		EntryPoint.LaunchIntercom();
+#endif
+	}
+
 	public static Shell Instance { get; private set; }
 
 	public IExtendedSplashScreen ExtendedSplashScreen => this.AppExtendedSplashScreen;

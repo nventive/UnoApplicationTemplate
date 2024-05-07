@@ -6,6 +6,7 @@ using ApplicationTemplate.Business;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
+using DynamicData;
 
 namespace ApplicationTemplate.Presentation;
 

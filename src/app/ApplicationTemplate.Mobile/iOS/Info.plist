@@ -42,6 +42,10 @@
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
+		<key>NSPhotoLibraryUsageDescription</key>
+		<string>Used to send us messaging documents.</string>
+		<key>NSCameraUsageDescription</key>
+		<string>Used to send us messaging documents with camera.</string>
 		<key>XSAppIconAssets</key>
 		<string>Media.xcassets/AppIcons.appiconset</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
