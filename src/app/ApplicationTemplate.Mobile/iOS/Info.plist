@@ -5,7 +5,7 @@
 		<key>CFBundleDisplayName</key>
 		<string>ApplicationTemplate</string>
 		<key>CFBundleIdentifier</key>
-		<string>com.nventive.applicationtemplate</string>
+		<string>com.nventive.internal.mymdevo</string>
 		<key>CFBundleShortVersionString</key>
 		<string>1.0.0</string>
 		<key>CFBundleVersion</key>

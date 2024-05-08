@@ -34,6 +34,6 @@ public sealed class EntryPoint
 		var attributes = new Binding.Intercom.iOS.ICMUserAttributes() { Email = "bina80@cma.ca", Name = "Mrs. YOSSRA CLUNAS", UserId = "dcd50c9e-db98-4129-a564-7d244bcae4da" };
 		attributes.CustomAttributes = new Foundation.NSDictionary<Foundation.NSString, Foundation.NSObject>(new Foundation.NSString("is_authenticated"), new Foundation.NSNumber(true));
 		IntercomBinding.LoginUserWithUserAttributes(attributes, null, null);
-		IntercomBinding.PresentIntercom();
+		IntercomBinding.PresentMessageComposer("Hello default message");
 	}
 }
