@@ -37,9 +37,17 @@ public static class LoggingConfiguration
 			AddConsoleLogging(serilogConfiguration);
 		}
 
+		var filepath = logFilesProvider.GetLogFilePath(isAppLogging);
+
 		if (options.IsFileLoggingEnabled)
 		{
-			AddFileLogging(serilogConfiguration, logFilesProvider.GetLogFilePath(isAppLogging));
+			AddFileLogging(serilogConfiguration, filepath);
+		}
+		else
+		{
+			// Ensures the directory is created so we can still write on files down the line.
+			var directoryPath = Path.GetDirectoryName(filepath);
+			Directory.CreateDirectory(directoryPath);
 		}
 
 		var logger = serilogConfiguration.CreateLogger();
