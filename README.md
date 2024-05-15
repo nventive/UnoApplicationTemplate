@@ -1,4 +1,4 @@
-# Uno Platform Application Template
+﻿# Uno Platform Application Template
 
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg?style=flat-square)](LICENSE) ![Version](https://img.shields.io/nuget/v/NV.Templates.Mobile?style=flat-square) ![Downloads](https://img.shields.io/nuget/dt/NV.Templates.Mobile?style=flat-square)
 
@@ -21,7 +21,7 @@ From left to right: WinUI, iOS, and Android.
 
 ## Requirements
 
-Visual Studio 2022 with .Net 7 are required.
+Visual Studio 2022 with .NET 8 are required.
 
 This template largely relies on Uno Platform, if you want to make sure you got everything installed correctly on your machine, we encourage you to use `uno-check`, the documentation is available [here](https://platform.uno/docs/articles/uno-check.html)
 

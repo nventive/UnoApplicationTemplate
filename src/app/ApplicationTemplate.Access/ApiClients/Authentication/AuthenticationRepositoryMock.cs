@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess;
 
-public class AuthenticationRepositoryMock : IAuthenticationRepository
+public sealed class AuthenticationRepositoryMock : IAuthenticationRepository
 {
 	private readonly JsonSerializerOptions _serializerOptions;
 
@@ -43,10 +41,7 @@ public class AuthenticationRepositoryMock : IAuthenticationRepository
 
 	public async Task<AuthenticationData> RefreshToken(CancellationToken ct, AuthenticationData unauthorizedToken)
 	{
-		if (unauthorizedToken is null)
-		{
-			throw new ArgumentNullException(nameof(unauthorizedToken));
-		}
+		ArgumentNullException.ThrowIfNull(unauthorizedToken);
 
 		// We add a delay to simulate a long API call
 		await Task.Delay(TimeSpan.FromSeconds(2));

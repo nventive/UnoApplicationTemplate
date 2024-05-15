@@ -63,10 +63,7 @@ public sealed class DadJokesService : IDadJokesService, IDisposable
 
 	public async Task SetIsFavorite(CancellationToken ct, DadJokesQuote quote, bool isFavorite)
 	{
-		if (quote is null)
-		{
-			throw new ArgumentNullException(nameof(quote));
-		}
+		ArgumentNullException.ThrowIfNull(quote);
 
 		var settings = await _applicationSettingsRepository.GetCurrent(ct);
 

@@ -29,10 +29,7 @@ public static class ConfigurationConfiguration
 	/// <param name="environmentManager">The environment manager.</param>
 	public static IHostBuilder AddConfiguration(this IHostBuilder hostBuilder, string folderPath, IEnvironmentManager environmentManager)
 	{
-		if (hostBuilder is null)
-		{
-			throw new ArgumentNullException(nameof(hostBuilder));
-		}
+		ArgumentNullException.ThrowIfNull(hostBuilder);
 
 		return hostBuilder
 			.AddConfiguration(environmentManager)
@@ -124,10 +121,7 @@ public static class ConfigurationConfiguration
 	/// <param name="environmentManager">The environment manager.</param>
 	private static IHostBuilder AddConfiguration(this IHostBuilder hostBuilder, IEnvironmentManager environmentManager)
 	{
-		if (hostBuilder is null)
-		{
-			throw new ArgumentNullException(nameof(hostBuilder));
-		}
+		ArgumentNullException.ThrowIfNull(hostBuilder);
 
 		return hostBuilder.ConfigureServices((hostBuilderContext, serviceCollection) => serviceCollection
 			.AddSingleton(serviceProvider => hostBuilderContext.Configuration)
@@ -136,7 +130,7 @@ public static class ConfigurationConfiguration
 		);
 	}
 
-	public class AppSettingsFile
+	public sealed class AppSettingsFile
 	{
 		private static AppSettingsFile[] _appSettingsFiles;
 

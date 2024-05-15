@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using static ApplicationTemplate.ConfigurationConfiguration;
 
 namespace ApplicationTemplate;
@@ -10,7 +8,7 @@ namespace ApplicationTemplate;
 /// <summary>
 /// This implementation of <see cref="IEnvironmentManager"/> uses local files to support the override features.
 /// </summary>
-public class EnvironmentManager : IEnvironmentManager
+public sealed class EnvironmentManager : IEnvironmentManager
 {
 //-:cnd:noEmit
 #if PRODUCTION
@@ -58,10 +56,7 @@ public class EnvironmentManager : IEnvironmentManager
 
 	public void Override(string environment)
 	{
-		if (environment == null)
-		{
-			throw new ArgumentNullException(nameof(environment));
-		}
+		ArgumentNullException.ThrowIfNull(environment);
 
 		environment = environment.ToUpperInvariant();
 

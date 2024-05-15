@@ -14,7 +14,7 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public partial class DadJokesPageViewModel : ViewModel
+public sealed partial class DadJokesPageViewModel : ViewModel
 {
 	[Inject] private IDadJokesService _dadJokesService;
 	[Inject] private ISectionsNavigator _sectionsNavigator;
@@ -67,7 +67,7 @@ public partial class DadJokesPageViewModel : ViewModel
 		void UpdateItemViewModels(IChangeSet<DadJokesQuote> changeSet)
 		{
 			var quotesVMs = Jokes.State.Data;
-			if (quotesVMs != null && quotesVMs.Any())
+			if (quotesVMs != null && quotesVMs.Length != 0)
 			{
 				var addedItems = changeSet.GetAddedItems();
 				var removedItems = changeSet.GetRemovedItems();

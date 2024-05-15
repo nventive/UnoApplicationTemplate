@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Globalization;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
@@ -180,7 +181,7 @@ public class FunctionalTestBase : IAsyncLifetime
 		var serilogConfiguration = new LoggerConfiguration()
 			.ReadFrom.Configuration(hostBuilderContext.Configuration)
 			.Enrich.With(new ThreadIdEnricher())
-			.WriteTo.TestOutput(_output, outputTemplate: "{Timestamp:HH:mm:ss.fff} Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}");
+			.WriteTo.TestOutput(_output, outputTemplate: "{Timestamp:HH:mm:ss.fff} Thread:{ThreadId} {Level:u1}/{SourceContext}: {Message:lj} {Exception}{NewLine}", formatProvider: CultureInfo.InvariantCulture);
 
 		var logger = serilogConfiguration.CreateLogger();
 		loggingBuilder.AddSerilog(logger);
@@ -208,7 +209,6 @@ public class FunctionalTestBase : IAsyncLifetime
 
 		return services.Replace(ServiceDescriptor.Singleton<TService>(mockedService));
 	}
-
 
 	/// <summary>
 	/// Gets the application settings to use for this test.
