@@ -13,6 +13,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Bump Uno.WinUI, Uno.WinUI.DevServer, Uno.WinUI.Lottie and Uno.UI.Adapter.Microsoft.Extensions.Logging to 5.0.159 to fix backNavigation/CloseModal crash.
 - Fixed an issue with logging configuration not creating the directory before writing the log file in the case logging was disabled by default.
 - Fixed Post commands binding issue on Android.
+- Updated Uno to fix a crash on iOS.
 
 ## 3.3.X
 - Added a forced update feature to the app.
