@@ -48,6 +48,9 @@
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <PackageReference Update="GooseAnalyzers" Version="1.0.0" />
+	</ItemGroup>
 	<Choose>
 		<When Condition="'$(TargetFramework)'=='net8.0-android'">
 			<PropertyGroup>

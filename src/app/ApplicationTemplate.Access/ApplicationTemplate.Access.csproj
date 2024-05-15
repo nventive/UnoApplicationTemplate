@@ -29,4 +29,8 @@
 		<PackageReference Include="Nventive.Persistence" Version="0.5.0" />
 		<PackageReference Include="System.Reactive" Version="5.0.0" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="GooseAnalyzers" Version="1.0.0" />
+	</ItemGroup>
 </Project>

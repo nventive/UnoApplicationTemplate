@@ -9,4 +9,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj" />
 	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Update="GooseAnalyzers" Version="1.0.0" />
+	</ItemGroup>
 </Project>
