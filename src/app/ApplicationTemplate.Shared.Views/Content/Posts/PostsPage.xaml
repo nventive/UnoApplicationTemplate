@@ -2,10 +2,10 @@
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:u="using:Nventive.View.Controls"
-	  xmlns:dl="using:Chinook.DataLoader">
+	  xmlns:dl="using:Chinook.DataLoader"
+	  xmlns:behaviors="using:ApplicationTemplate.Views.Behaviors">
 
 	<Grid Background="{ThemeResource BackgroundBrush}">
-
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="*" />
@@ -21,11 +21,8 @@
 							   Source="{Binding Posts}">
 
 				<DataTemplate>
-					<!-- Swipe to Refresh -->
-					<u:SwipeRefresh RefreshCommand="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand}"
-									IsRefreshing="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand.IsExecuting}"
-									IndicatorColor="{ThemeResource PrimaryBrush}">
-
+					<!-- Refresh Container -->
+					<RefreshContainer behaviors:RefreshContainerCommandBehavior.Command="{Binding View.RefreshCommand}">
 						<!-- ListView -->
 						<ListView ItemsSource="{Binding Data}">
 							<ListView.ItemTemplate>
@@ -63,7 +60,16 @@
 								</DataTemplate>
 							</ListView.ItemTemplate>
 						</ListView>
+					</RefreshContainer>
+
+					<!--
+					<u:SwipeRefresh RefreshCommand="{Binding View.RefreshCommand}"
+									IsRefreshing="{Binding View.RefreshCommand.IsExecuting}"
+									IndicatorColor="{ThemeResource PrimaryBrush}">
+
+						
 					</u:SwipeRefresh>
+					-->
 				</DataTemplate>
 			</dl:DataLoaderView>
 
