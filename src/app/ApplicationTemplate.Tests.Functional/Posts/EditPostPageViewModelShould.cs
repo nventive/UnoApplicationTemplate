@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Immutable;
+﻿using System.Collections.Immutable;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Business;
-using ApplicationTemplate.Presentation;
-using Chinook.DynamicMvvm;
-using FluentAssertions;
-using FluentAssertions.Execution;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace ApplicationTemplate.Tests;
@@ -27,10 +20,12 @@ public sealed class EditPostPageViewModelShould : FunctionalTestBase
 		await Menu.ShowPostsSection.Execute();
 
 		var postsVM = GetAndAssertActiveViewModel<PostsPageViewModel>();
-		var posts = await postsVM.Posts.Load(CancellationToken.None) as ImmutableList<Post>;
+		var postItemViewModels = await postsVM.Posts.Load(CancellationToken.None) as ImmutableList<PostItemViewModel>;
 
-		var post = posts.First();
-		await postsVM.NavigateToPost.Execute(post);
+		var postItemViewModel = postItemViewModels.First();
+		var post = postItemViewModel.Post;
+
+		await postItemViewModel.EditPost.Execute();
 		var sut = GetAndAssertActiveViewModel<EditPostPageViewModel>();
 
 		// Assert

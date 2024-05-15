@@ -4,8 +4,7 @@
 	  xmlns:u="using:Nventive.View.Controls"
 	  xmlns:dl="using:Chinook.DataLoader">
 
-	<Grid x:Name="PostPage"
-		  Background="{ThemeResource BackgroundBrush}">
+	<Grid Background="{ThemeResource BackgroundBrush}">
 
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
@@ -17,15 +16,13 @@
 					x:Uid="Posts_CommandBar" />
 
 		<Grid Grid.Row="1">
-
 			<!-- DataLoader View -->
 			<dl:DataLoaderView x:Name="PostsDataLoaderView"
 							   Source="{Binding Posts}">
-				<DataTemplate>
 
+				<DataTemplate>
 					<!-- Swipe to Refresh -->
-					<u:SwipeRefresh x:Name="RefreshContent"
-									RefreshCommand="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand}"
+					<u:SwipeRefresh RefreshCommand="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand}"
 									IsRefreshing="{Binding ElementName=PostsDataLoaderView, Path=RefreshCommand.IsExecuting}"
 									IndicatorColor="{ThemeResource PrimaryBrush}">
 
@@ -33,17 +30,16 @@
 						<ListView ItemsSource="{Binding Data}">
 							<ListView.ItemTemplate>
 								<DataTemplate>
-
 									<StackPanel Background="{ThemeResource SurfaceBrush}"
 												Margin="0,16,0,0"
 												Padding="16">
 
 										<!-- Title -->
-										<TextBlock Text="{Binding Title}"
+										<TextBlock Text="{Binding Post.Title}"
 												   Style="{StaticResource TitleMedium}" />
 
 										<!-- Body -->
-										<TextBlock Text="{Binding Body}"
+										<TextBlock Text="{Binding Post.Body}"
 												   Foreground="{ThemeResource OnSurfaceBrush}"
 												   Style="{StaticResource BodyMedium}"
 												   Opacity="{StaticResource MediumOpacity}"
@@ -55,14 +51,12 @@
 
 											<!-- Delete Button -->
 											<Button Content="Delete"
-													Command="{Binding ElementName=PostPage, Path=DataContext.DeletePost}"
-													CommandParameter="{Binding}"
+													Command="{Binding DeletePost}"
 													Style="{StaticResource OutlinedButtonStyle}" />
 
 											<!-- Edit Button -->
 											<Button Content="Edit"
-													Command="{Binding ElementName=PostPage, Path=DataContext.NavigateToPost}"
-													CommandParameter="{Binding}"
+													Command="{Binding EditPost}"
 													Margin="4,0,0,0" />
 										</StackPanel>
 									</StackPanel>
@@ -74,8 +68,7 @@
 			</dl:DataLoaderView>
 
 			<!-- Create New Post Button -->
-			<Button Command="{Binding NavigateToNewPost}"
-					CommandParameter="{Binding}"
+			<Button Command="{Binding CreatePost}"
 					Style="{StaticResource IconButtonStyle}"
 					Background="Transparent"
 					HorizontalAlignment="Right"
