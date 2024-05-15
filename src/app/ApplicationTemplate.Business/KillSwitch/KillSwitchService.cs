@@ -26,5 +26,5 @@ public sealed class KillSwitchService : IKillSwitchService
 
 	/// <inheritdoc/>
 	public IObservable<bool> ObserveKillSwitchActivation() => _killSwitchRepository.ObserveKillSwitchActivation()
-		.Do(isActive => _logger.LogInformation("Kill switch is now {isActive}.", isActive));
+		.Do(isActive => _logger.LogInformation("Kill switch is now {IsActive}.", isActive));
 }

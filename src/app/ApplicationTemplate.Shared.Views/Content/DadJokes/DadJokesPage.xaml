@@ -1,10 +1,10 @@
-<Page x:Class="ApplicationTemplate.Views.Content.DadJokesPage"
+﻿<Page x:Class="ApplicationTemplate.Views.Content.DadJokesPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	  xmlns:dl="using:Chinook.DataLoader"
 	  xmlns:u="using:Nventive.View.Controls"
-	  xmlns:um="using:Uno.Material"
+	  xmlns:ut="using:Uno.Themes"
 	  xmlns:android="http://uno.ui/android"
 	  xmlns:not_android="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  mc:Ignorable="android">
@@ -103,18 +103,16 @@
 
 										<!-- IsChecked:False Content -->
 										<ToggleButton.Content>
-
 											<!-- Icon -->
 											<u:PathControl Style="{StaticResource OutlinedHeartPathControlStyle}"
 														   Foreground="{ThemeResource OnSurfaceLowBrush}" />
 										</ToggleButton.Content>
 
 										<!-- IsChecked:True Content -->
-										<um:ControlExtensions.AlternateContent>
-											
+										<ut:ControlExtensions.AlternateContent>
 											<!-- Icon -->
 											<u:PathControl Style="{StaticResource FilledHeartPathControlStyle}" />
-										</um:ControlExtensions.AlternateContent>
+										</ut:ControlExtensions.AlternateContent>
 									</ToggleButton>
 								</Grid>
 							</DataTemplate>

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace DynamicData;
 
@@ -8,10 +7,7 @@ public static class ChangeSetExtensions
 {
 	public static IEnumerable<T> GetAddedItems<T>(this IChangeSet<T> changeSet)
 	{
-		if (changeSet is null)
-		{
-			throw new ArgumentNullException(nameof(changeSet));
-		}
+		ArgumentNullException.ThrowIfNull(changeSet);
 
 		foreach (var change in changeSet)
 		{
@@ -38,10 +34,7 @@ public static class ChangeSetExtensions
 
 	public static IEnumerable<T> GetRemovedItems<T>(this IChangeSet<T> changeSet)
 	{
-		if (changeSet is null)
-		{
-			throw new ArgumentNullException(nameof(changeSet));
-		}
+		ArgumentNullException.ThrowIfNull(changeSet);
 
 		foreach (var change in changeSet)
 		{

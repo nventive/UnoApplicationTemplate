@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Reactive.Concurrency;
@@ -9,7 +8,6 @@ using System.Text;
 using System.Text.Json;
 using ApplicationTemplate.DataAccess;
 using Chinook.DynamicMvvm;
-using Chinook.DynamicMvvm.Deactivation;
 using DynamicData;
 using Uno;
 using Uno.Extensions;
@@ -18,6 +16,8 @@ namespace ApplicationTemplate.Presentation;
 
 public sealed partial class HttpDebuggerViewModel : TabViewModel
 {
+	private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true };
+
 	[Inject] private IHttpDebuggerService _httpDebuggerService;
 
 	public HttpDebuggerViewModel()
@@ -261,7 +261,7 @@ public sealed partial class HttpDebuggerViewModel : TabViewModel
 			var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(content));
 			if (JsonDocument.TryParseValue(ref reader, out var jsonDoc))
 			{
-				return JsonSerializer.Serialize(jsonDoc, new JsonSerializerOptions { WriteIndented = true });
+				return JsonSerializer.Serialize(jsonDoc, _jsonSerializerOptions);
 			}
 		}
 
