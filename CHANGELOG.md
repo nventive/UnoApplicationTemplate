@@ -7,6 +7,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 
 ## 3.5.X
 - Bump Uno packages to 5.2.121 to fix a crash on iOS.
+- Ensure NV.Template.Mobile nuget is only deployed from the main branch.
 
 ## 3.4.X
 - Added a kill switch feature to the app.
