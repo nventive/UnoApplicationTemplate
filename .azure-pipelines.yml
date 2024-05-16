@@ -92,10 +92,10 @@ stages:
       appCenterServiceConnectionName: $(AppCenterServiceConnection)
       appCenterDistributionGroup: $(AppCenterDistributionGroup)
 
-  - template: build/stage-release-appstore.yml
-    parameters:
-      applicationEnvironment: Staging
-      deploymentEnvironment: TestFlight
+  # - template: build/stage-release-appstore.yml
+  #   parameters:
+  #     applicationEnvironment: Staging
+  #     deploymentEnvironment: TestFlight
 
 - stage: Build_Production
   dependsOn: Build_Staging
