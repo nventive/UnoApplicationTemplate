@@ -1,0 +1,46 @@
+# This template is used to validate that the commit messages follow the Conventional Commits specification (https://www.conventionalcommits.org/en/v1.0.0/).
+# Consider placing this at the beginning of the build pipeline to ensure that the commits are valid before proceeding with longer build steps.
+steps:
+  - task: PowerShell@2
+    condition: eq(variables['Build.Reason'], 'PullRequest')
+    inputs:
+      targetType: 'inline'
+      script: |
+        # Pre-Validation Logging
+        Write-Host "Starting PR Validation..."
+        Write-Host "Source Branch: $(System.PullRequest.SourceBranch)"
+        Write-Host "Target Branch: $(System.PullRequest.TargetBranch)"
+        Write-Host "Pull Request ID: $(System.PullRequest.PullRequestId)"
+        write-Host "Repository: $(Build.Repository.Name)"
+        Write-Host "Build.SourceBranch: $(Build.SourceBranch)"
+
+        # Fetch commit range
+        Write-Host "Retrieving commits..."
+        git fetch origin
+        Write-Host "Commit Range: origin/$(System.PullRequest.TargetBranch)..origin/$(System.PullRequest.SourceBranch)"
+        $commits = git log origin/$(System.PullRequest.TargetBranch)..origin/$(System.PullRequest.SourceBranch) --pretty=format:"%H %B"
+        $commitCount = ($commits | Measure-Object).Count
+        Write-Host "Commits found: $commitCount"
+
+        # Regex pattern for Conventional Commits
+        $pattern = '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([\w\.\-]+\))?(!)?: ([\w ])+([\s\S]*)|^(Merged PR \d+: .+)|^(Merge pull request #/d+ from .+)|^(Merge branch .+)'
+        Write-Host "Regular Expression: $pattern"
+
+        # Validate each commit message
+        $invalidCommits = @()
+        foreach ($commit in $commits -split "`n") {
+          $commitMessage = $commit.Substring($commit.IndexOf(" ") + 1)
+          Write-Host "Validating commit: $commitMessage"
+
+          if ($commitMessage -notmatch $pattern) {
+            $invalidCommits += $commitMessage
+          } 
+        }
+
+        if($invalidCommits.count -gt 0) {
+          Write-Error "The following commit messages do no follow the Conventional Commits standard: `n$($invalidCommits -join "`n")"
+          exit 1
+        } else {
+          Write-Host "All commit messages are valid."
+        }
+    displayName: 'Validate Commit Messages'
