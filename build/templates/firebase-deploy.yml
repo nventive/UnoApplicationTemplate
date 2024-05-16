@@ -1,0 +1,50 @@
+parameters:
+  fileName: ''
+
+steps:
+# Install Firebase tools
+- script: 'npm install -g firebase-tools'
+  displayName: 'Install Firebase Tools'
+
+- download: current
+  displayName: "Download Artifact" 
+  artifact: $(artifactName)
+
+- download: current
+  displayName: "Download Release Notes" 
+  artifact: $(releaseNotesArtifactName)
+
+- task: DownloadSecureFile@1
+  inputs:
+    secureFile: $(FirebaseDistributionServiceConnectionFile)
+  name: DistributionServiceConnection
+  displayName: "Download Firebase Service connection" 
+
+- script: |
+    firebase appdistribution:distribute '$(Pipeline.Workspace)/$(artifactName)/${{ parameters.fileName }}' \
+    --app '$(FirebaseAppId)' \
+    --release-notes-file '$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md' \
+    --groups "nventive"
+  env: 
+    GOOGLE_APPLICATION_CREDENTIALS: $(DistributionServiceConnection.secureFilePath)
+  displayName: 'Deploy to Firebase'
+
+- task: DeleteFiles@1
+  displayName: "Remove Downloaded Artifacts (Build)"
+  condition: always()
+  inputs:
+    SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+    RemoveSourceFolder: true
+    Contents: '**'
+
+- task: DeleteFiles@1
+  displayName: "Remove Downloaded Artifacts (Release Notes)"
+  condition: always()
+  inputs:
+    SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
+    RemoveSourceFolder: true
+    Contents: '**'
+
+- task: PostBuildCleanup@3
+  displayName: 'Post-Build Cleanup: Cleanup files to keep build server clean!'
+  condition: always()
