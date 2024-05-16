@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Runtime.CompilerServices;
-using System.Text;
-using Chinook.DynamicMvvm;
-using Chinook.DynamicMvvm.Implementations;
 
 namespace Chinook.DynamicMvvm;
 
@@ -20,10 +16,7 @@ public static class ChinookViewModelExtensionsForPropertiesFromDynamicProperty
 	/// <returns>The property's value.</returns>
 	public static T GetFromDynamicProperty<T>(this IViewModel viewModel, IDynamicProperty<T> source, [CallerMemberName] string name = null)
 	{
-		if (source is null)
-		{
-			throw new ArgumentNullException(nameof(source));
-		}
+		ArgumentNullException.ThrowIfNull(source);
 
 		return viewModel.Get<T>(viewModel.GetOrCreateDynamicProperty(name, n => new ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty<T>(name, source, viewModel, source.Value)));
 	}
@@ -41,10 +34,7 @@ public static class ChinookViewModelExtensionsForPropertiesFromDynamicProperty
 	/// <returns>The property's value.</returns>
 	public static TResult GetFromDynamicProperty<TSource, TResult>(this IViewModel viewModel, IDynamicProperty<TSource> source, Func<TSource, TResult> selector, [CallerMemberName] string name = null)
 	{
-		if (source is null)
-		{
-			throw new ArgumentNullException(nameof(source));
-		}
+		ArgumentNullException.ThrowIfNull(source);
 
 		return viewModel.Get<TResult>(viewModel.GetOrCreateDynamicProperty(name, n =>
 			new ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty<TSource, TResult>(name, source, viewModel, selector, selector(source.Value))));
