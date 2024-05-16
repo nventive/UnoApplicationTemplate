@@ -44,6 +44,7 @@ No matter your changes, these checks always apply.
   - ...and so forth: Make sure you update the documentation files associated to the recipes you changed. Review the topics by looking at the content of the `doc/` folder.
 - [ ] Images about the template are referenced from the [wiki](https://github.com/nventive/UnoApplicationTemplate/wiki/Images) and added as images in this git.
 - [ ] TODO comments are hints for next steps for users of the template and not planned work.
+- [ ] TODO:
 
 ### Contextual
 Based on your changes these checks may not apply.
