@@ -119,6 +119,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FrameworkElementExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RemoteConfigRepository.Android.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RemoteConfigRepository.Ios.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
