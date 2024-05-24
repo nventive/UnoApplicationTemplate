@@ -1,4 +1,5 @@
 ﻿using System.Reactive.Concurrency;
+using ApplicationTemplate.DataAccess;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,6 +35,14 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
+#if __ANDROID__
+			.AddSingleton<RemoteConfigRepository>()
+			.AddSingleton<IKillSwitchRepository>(s => s.GetRequiredService<RemoteConfigRepository>())
+			.AddSingleton<IMinimumVersionReposiory>(s => s.GetRequiredService<RemoteConfigRepository>())
+#else
+			.AddSingleton<IKillSwitchRepository, KillSwitchRepositoryMock>()
+			.AddSingleton<IMinimumVersionReposiory, MinimumVersionRepositoryMock>()
+#endif
 			.AddMessageDialog();
 	}
 

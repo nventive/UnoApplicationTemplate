@@ -16,6 +16,9 @@
 		<TrimMode>partial</TrimMode>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Android\RemoteConfigRepository.cs" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.1.0" />
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0" />
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="2.1.0" />
@@ -100,7 +103,15 @@
 			<ItemGroup>
 				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
 				<PackageReference Include="Mono.AotProfiler.Android" Version="7.0.0" />
-				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.9.23.1" />
+				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.9.22.1" />
+				<PackageReference Include="Xamarin.Firebase.Config" Version="121.6.1.1" />
+			</ItemGroup>
+
+			<!-- Android Firebase configuration. -->
+			<ItemGroup>
+				<GoogleServicesJson Include="Android\google-services.json">
+					<Link>google-services.json</Link>
+				</GoogleServicesJson>
 			</ItemGroup>
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
@@ -153,6 +164,12 @@
 				<!-- Workaround for clang++ error on iOS simulator on ARM base macOS system. See "https://github.com/dotnet/maui/issues/16778#issuecomment-1683343255" for more detail. -->
 				<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>
 			</PropertyGroup>
+			<!-- iOS Firebase configuration. -->
+			<ItemGroup>
+				<BundleResource Include="iOS\GoogleService-Info.plist">
+					<Link>GoogleService-Info.plist</Link>
+				</BundleResource>
+			</ItemGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
 					<PropertyGroup>
