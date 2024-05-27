@@ -155,6 +155,9 @@
 				<MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
 				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
+				<!-- Required with AdamE.Firebase.iOS.CloudMessaging 10.17+. -->
+				<MtouchExtraArgs Condition="'$(Platform)'=='iPhone'">$(MtouchExtraArgs) --gcc_flags -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos</MtouchExtraArgs>
+				<MtouchExtraArgs Condition="'$(Platform)'=='simulator'">$(MtouchExtraArgs) --gcc_flags -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/</MtouchExtraArgs>
 				<CodesignEntitlements>iOS\Entitlements.plist</CodesignEntitlements>
 				<!-- Workaround for clang++ error on iOS simulator on ARM base macOS system. See "https://github.com/dotnet/maui/issues/16778#issuecomment-1683343255" for more detail. -->
 				<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>
@@ -213,7 +216,7 @@
 			</Choose>
 			<ItemGroup>
 				<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
-				<PackageReference Include="Xamarin.Firebase.iOS.RemoteConfig" Version="8.10.0.3" />
+				<PackageReference Include="AdamE.Firebase.iOS.RemoteConfig" Version="10.22.0-alpha1" />
 			</ItemGroup>
 			<ItemGroup>
 				<TrimmerRootDescriptor Include="iOS\LinkerExclusions.xml" />
@@ -281,4 +284,8 @@
 		</When>
 	</Choose>
 	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
+
+
+	<!-- Required with AdamE.Firebase.iOS.CloudMessaging https://github.com/AdamEssenmacher/GoogleApisForiOSComponents?tab=readme-ov-file#firebase-analytics -->
+	<Import Project="..\..\..\LinkWithSwiftSystemLibrariesWorkaround.targets" Condition="'$(TargetFramework)' == 'net7.0-ios'" />
 </Project>
