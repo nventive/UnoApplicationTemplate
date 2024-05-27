@@ -42,7 +42,6 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-		<PackageReference Include="Xamarin.Firebase.iOS.RemoteConfig" Version="8.10.0.3" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj" />
@@ -109,11 +108,6 @@
 			</ItemGroup>
 
 			<!-- Android Firebase configuration. -->
-			<ItemGroup>
-				<GoogleServicesJson Include="Android\google-services.json">
-					<Link>google-services.json</Link>
-				</GoogleServicesJson>
-			</ItemGroup>
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
 				<AndroidEnvironment Include="Android\environment.conf" />
@@ -219,6 +213,7 @@
 			</Choose>
 			<ItemGroup>
 				<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
+				<PackageReference Include="Xamarin.Firebase.iOS.RemoteConfig" Version="8.10.0.3" />
 			</ItemGroup>
 			<ItemGroup>
 				<TrimmerRootDescriptor Include="iOS\LinkerExclusions.xml" />

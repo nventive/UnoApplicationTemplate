@@ -35,7 +35,7 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
-#if __ANDROID__
+#if __ANDROID__ || __IOS__
 			.AddSingleton<RemoteConfigRepository>()
 			.AddSingleton<IKillSwitchRepository>(s => s.GetRequiredService<RemoteConfigRepository>())
 			.AddSingleton<IMinimumVersionReposiory>(s => s.GetRequiredService<RemoteConfigRepository>())
