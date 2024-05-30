@@ -23,6 +23,10 @@ trigger:
       - main
 
 variables:
+#-if false
+- name: IsReleaseBranch
+  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+#-endif
 - template: build/variables.yml
 
 stages:
@@ -49,7 +53,7 @@ stages:
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 
 - stage: Publish_Template_Package
-  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'), eq(variables['IsReleaseBranch'], 'true'))
   dependsOn:
    - Build_Staging_GeneratedApp
    - Build_Staging
