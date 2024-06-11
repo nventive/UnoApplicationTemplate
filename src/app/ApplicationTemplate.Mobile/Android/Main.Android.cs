@@ -7,7 +7,7 @@ namespace ApplicationTemplate.Droid;
 
 [global::Android.App.ApplicationAttribute(
 	Label = "@string/ApplicationName",
-	Icon = "@mipmap/ic_launcher",
+	Icon = "@mipmap/icon",
 	LargeHeap = true,
 	HardwareAccelerated = true,
 	Theme = "@style/AppTheme.Starting",

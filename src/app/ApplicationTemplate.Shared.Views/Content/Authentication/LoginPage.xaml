@@ -37,6 +37,16 @@
 			<StackPanel toolkit:VisibleBoundsPadding.PaddingMask="Top,Bottom"
 						VerticalAlignment="Center"
 						Margin="0,32">
+				<Image Source="ms-appx:///rocket_ship.png"
+					   Stretch="UniformToFill"
+					   HorizontalAlignment="Center"
+					   Height="100"
+					   Width="100" />
+				<Image Source="ms-appx:///Assets/Icons/Google_Icon.png"
+					   Stretch="UniformToFill"
+					   HorizontalAlignment="Center"
+					   Height="100"
+					   Width="100" />
 
 				<!-- Title -->
 				<TextBlock Text="{Binding Title}"

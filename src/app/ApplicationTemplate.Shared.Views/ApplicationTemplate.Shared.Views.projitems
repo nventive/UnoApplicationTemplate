@@ -154,6 +154,7 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Google_Icon.scale-200.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Google_Icon.scale-300.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Google_Icon.scale-400.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Icons\Google_Icon.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-100.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-150.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Image_Example.scale-200.png" />
@@ -424,5 +425,13 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Guillon-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Guillon-SemiBold.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\segmdl2.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Assets\Icons\icon.svg" />
+    <None Include="$(MSBuildThisFileDirectory)Assets\Icons\icon_foreground1.svg" />
+    <None Include="$(MSBuildThisFileDirectory)Assets\Icons\icon_foreground.svg" />
+    <None Include="$(MSBuildThisFileDirectory)Assets\Images\icon_foreground.svg" />
+    <None Include="$(MSBuildThisFileDirectory)Assets\Images\rocket_ship.svg" />
+    <None Include="$(MSBuildThisFileDirectory)Assets\SplashScreen\splash_screen.svg" />
   </ItemGroup>
 </Project>

@@ -8,9 +8,9 @@
 	<!-- This defines the SplashScreen theme -->
 	<style name="AppTheme.Starting" parent="Theme.SplashScreen">
 		<!-- Set the splash screen background. -->
-		<item name="windowSplashScreenBackground">@color/primaryColor</item>
+		<item name="windowSplashScreenBackground">@color/uno_splash_color</item>
 		<!-- Use windowSplashScreenAnimatedIcon to add either a drawable or an animated drawable. -->
-		<item name="windowSplashScreenAnimatedIcon">@drawable/Logo</item>
+		<item name="windowSplashScreenAnimatedIcon">@drawable/uno_splash_image</item>
 		<!-- Set the theme of the Activity that directly follows your splash screen. -->
 		<item name="postSplashScreenTheme">@style/AppTheme</item>
 	</style>

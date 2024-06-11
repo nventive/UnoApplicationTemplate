@@ -87,6 +87,10 @@
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 		<PackageReference Include="Uno.Material.WinUI" Version="5.0.13" />
+		<PackageReference Include="Uno.Resizetizer" Version="1.5.0-dev.106">
+		  <PrivateAssets>all</PrivateAssets>
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.0.18" />
 	</ItemGroup>
 
@@ -124,6 +128,9 @@
 	</ItemGroup>
 
 	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
+	<ItemGroup>
+		<UnoImage Include="..\ApplicationTemplate.Shared.Views\Assets\Images\*" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<!-- This prevents the xaml file links from being visible from this project. It removes unnecessary clutter. -->
