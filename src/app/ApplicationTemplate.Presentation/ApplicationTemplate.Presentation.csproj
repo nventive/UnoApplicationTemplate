@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
 		<TargetFramework>net8.0</TargetFramework>
@@ -39,6 +39,10 @@
 		<PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
 		<PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
 	</ItemGroup>
+
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+  </PropertyGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />

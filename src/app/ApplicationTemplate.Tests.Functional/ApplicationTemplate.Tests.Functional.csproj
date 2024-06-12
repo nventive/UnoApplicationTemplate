@@ -34,6 +34,9 @@
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
 		</PackageReference>
 	</ItemGroup>
+	<PropertyGroup>
+		<ManagePackageVersionsCentrally>false</ManagePackageVersionsCentrally>
+	</PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />

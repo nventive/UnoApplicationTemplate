@@ -1,0 +1,64 @@
+﻿<Project ToolsVersion="15.0">
+  <!--
+    To update the version of Uno, you should instead update the Sdk version in the global.json file.
+
+    See https://aka.platform.uno/using-uno-sdk for more information.
+  -->
+  <ItemGroup>
+    <PackageVersion Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Localization.Abstractions" Version="8.0.6" />
+    <PackageVersion Include="Nventive.View.Uno.WinUI" Version="0.6.0" />
+    <PackageVersion Include="DynamicData" Version="7.1.1" />
+    <PackageVersion Include="Microsoft.Extensions.Http" Version="3.1.0" />
+    <PackageVersion Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.1" />
+    <PackageVersion Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="3.1.0" />
+    <PackageVersion Include="Reactive.Annex" Version="2.0.0" />
+    <PackageVersion Include="Refit" Version="7.0.0" />
+    <PackageVersion Include="ReviewService.Abstractions" Version="1.0.0" />
+    <PackageVersion Include="System.Text.Json" Version="7.0.3" />
+    <PackageVersion Include="MallardMessageHandlers" Version="1.2.0" />
+    <PackageVersion Include="Nventive.Persistence.Reactive" Version="0.5.0" />
+    <PackageVersion Include="Nventive.Persistence" Version="0.5.0" />
+    <PackageVersion Include="System.Reactive" Version="5.0.0" />
+    <PackageVersion Include="ByteSize" Version="2.1.2" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
+    <PackageVersion Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.2" />
+    <PackageVersion Include="ReviewService" Version="1.0.0" />
+    <PackageVersion Include="Uno.SourceGenerationTasks" Version="4.2.0" />
+    <PackageVersion Include="Serilog.Extensions.Hosting" Version="3.0.0" />
+    <PackageVersion Include="Serilog.Settings.Configuration" Version="3.4.0" />
+    <PackageVersion Include="Serilog.Sinks.Debug" Version="1.0.1" />
+    <PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.4" />
+    <PackageVersion Include="Chinook.DynamicMvvm" Version="2.1.0" />
+    <PackageVersion Include="Chinook.DynamicMvvm.Reactive" Version="2.1"/>
+
+		<!--Shared-->
+    <PackageVersion Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.1.0" />
+    <PackageVersion Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0" />
+    <PackageVersion Include="Chinook.DynamicMvvm.Uno.WinUI" Version="2.1.0" />
+    <PackageVersion Include="Chinook.SectionsNavigation.Uno.WinUI" Version="3.0.2" />
+    <PackageVersion Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.0" />
+    <PackageVersion Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
+    <PackageVersion Include="Microsoft.Maui.Essentials" Version="8.0.3" />
+    <PackageVersion Include="Nventive.Persistence.Uno.WinUI" Version="0.5.0" />
+    <PackageVersion Include="Nventive.View.Uno.WinUI" Version="0.6.0" />
+    <PackageVersion Include="Reactive.Annex.Uno.WinUI" Version="2.0.0" />
+    <PackageVersion Include="ReviewService.NativePrompters" Version="1.0.0" />
+    <PackageVersion Include="Serilog.Sinks.File" Version="5.0.0" />
+
+    <!--Windows-->
+    <PackageVersion Include="CommunityToolkit.WinUI" Version="7.1.2" />
+    <PackageVersion Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
+
+
+    <!--Mobile-->
+    <PackageVersion Include="Uno.CommunityToolkit.WinUI" Version="7.1.200" />
+    <PackageVersion Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.4.2" />
+    <PackageVersion Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.4.2" />
+    <PackageVersion Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
+
+    <!--Android-->
+    <PackageVersion Include="Mono.AotProfiler.Android" Version="7.0.0" />
+    <PackageVersion Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.9.23.1" />
+  </ItemGroup>
+</Project>

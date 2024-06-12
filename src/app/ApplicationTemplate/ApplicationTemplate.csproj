@@ -1,0 +1,135 @@
+<Project Sdk="Uno.Sdk">
+  <Choose>
+    <When Condition="'$(TargetFramework)'=='net8.0-ios'">
+      <ItemGroup>
+
+        <!--Mobile-->
+        <PackageReference Include="Uno.CommunityToolkit.WinUI" />
+        <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" />
+        <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" />
+        <PackageReference Include="Serilog.Sinks.Xamarin" />
+
+        <!--IOS-->
+      </ItemGroup>
+    </When>
+    <When Condition="'$(TargetFramework)'=='net8.0-android'">
+      <ItemGroup>
+        <PackageReference Include="Uno.CommunityToolkit.WinUI" />
+        <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" />
+        <PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" />
+        <PackageReference Include="Serilog.Sinks.Xamarin" />
+
+        <!--Android-->
+        <PackageReference Include="Mono.AotProfiler.Android" />
+        <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" />
+      </ItemGroup>
+      <PropertyGroup>
+        <SupportedOSPlatformVersion>29.0</SupportedOSPlatformVersion>
+      </PropertyGroup>
+    </When>
+    <When Condition="'$(TargetFramework)'=='net8.0-windows10.0.19041'">
+
+      <ItemGroup>
+        <PackageReference Include="CommunityToolkit.WinUI" />
+        <PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" />
+      </ItemGroup>
+    </When>
+  </Choose>
+  <ItemGroup>
+    <None Remove="Shell.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" />
+    <PackageReference Include="Chinook.DataLoader.Uno.WinUI" />
+    <PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" />
+    <PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" />
+    <PackageReference Include="ExtendedSplashScreen.Uno.WinUI" />
+    <PackageReference Include="MessageDialogService.Uno.WinUI" />
+    <PackageReference Include="Microsoft.Maui.Essentials" />
+    <PackageReference Include="Nventive.Persistence.Uno.WinUI" />
+    <PackageReference Include="Nventive.View.Uno.WinUI" />
+    <PackageReference Include="Reactive.Annex.Uno.WinUI" />
+    <PackageReference Include="ReviewService.NativePrompters" />
+    <PackageReference Include="Serilog.Sinks.File" />
+  </ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>
+      net8.0-android;
+      net8.0-ios;
+      net8.0-windows10.0.19041;
+    </TargetFrameworks>
+
+    <OutputType>Exe</OutputType>
+    <UnoSingleProject>true</UnoSingleProject>
+
+    <!-- Display name -->
+    <ApplicationTitle>ApplicationTemplate</ApplicationTitle>
+    <!-- App Identifier -->
+    <ApplicationId>com.nventive.internal.applicationtemplate</ApplicationId>
+    <!-- Versions -->
+    <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+    <ApplicationVersion>1</ApplicationVersion>
+    <!--
+      If you encounter this error message:
+
+        error NETSDK1148: A referenced assembly was compiled using a newer version of Microsoft.Windows.SDK.NET.dll.
+        Please update to a newer .NET SDK in order to reference this assembly.
+
+      This means that the two packages below must be aligned with the "build" version number of
+      the "Microsoft.Windows.SDK.BuildTools" package above, and the "revision" version number
+      must be the highest found in https://www.nuget.org/packages/Microsoft.Windows.SDK.NET.Ref.
+    -->
+    <!-- <WindowsSdkPackageVersion>10.0.22621.28</WindowsSdkPackageVersion> -->
+
+    <!--
+      UnoFeatures let's you quickly add and manage implicit package references based on the features you want to use.
+      https://aka.platform.uno/singleproject-features
+    -->
+    <WindowsSdkPackageVersion>10.0.22621.28</WindowsSdkPackageVersion>
+
+    <UnoFeatures>
+      Material;
+      Toolkit;
+    </UnoFeatures>
+  </PropertyGroup>
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Shell.xaml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Platforms\iOS\LinkerExclusions.xml" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Contents.json" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-1024.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-20%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-20%403x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-20.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-29%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-29%403x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-29.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-40%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-40%403x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-40.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-60%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-60%403x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-76.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\Icon-83.5%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\ios-marketing-1024x1024%401x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\iPad-76x76%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\iPad-84x84%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\iPhone-20x20%402x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\iPhone-20x20%403x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\iPhone-40x40%403x.png" />
+    <Content Include="Platforms\iOS\Media.xcassets\AppIcons.appiconset\iPhone-60x60%402x.png" />
+    <Content Include="Platforms\iOS\Resources\Assets\splashscreen_icon%402x.png" />
+    <Content Include="Platforms\iOS\Resources\Assets\splashscreen_icon%403x.png" />
+    <Content Include="Platforms\iOS\Resources\Assets\splashscreen_icon.png" />
+    <Content Include="Platforms\iOS\Resources\Fonts\uno-fluentui-assets.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj" />
+    <ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
+    <ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
+  </ItemGroup>
+
+</Project>
