@@ -81,10 +81,10 @@ TODO: Fill the following table with your own pipelines.
 | Link | Code Entry Point | Goal | Triggers |
 |-|-|-|-|
 | [Name of Main Pipeline](link-to-pipeline)| [`.azure-pipelines.yml`](.azure-pipelines.yml)| Build validation during pull request.| Pull requests.
-| [Name of Main Pipeline](link-to-pipeline)| [`.azure-pipelines.yml`](.azure-pipelines.yml)| Build and deploy the application to AppCenter, TestFlight, and GooglePlay. | Changes on the `main` branch.<br/>Manual trigger.
+| [Name of Main Pipeline](link-to-pipeline)| [`.azure-pipelines.yml`](.azure-pipelines.yml)| Build and deploy the application to Firebase, TestFlight, and GooglePlay. | Changes on the `main` branch.<br/>Manual trigger.
 | [Name of API Integration Tests Pipeline](link-to-pipeline)| [`.azure-pipelines-api-integration-tests.yml`](.azure-pipelines.yml)| Run all tests, including APIs integration tests. | Daily cron job.<br/>Manual trigger.
 | [Name of Canary Merge Pipeline](link-to-pipeline)| [`build/canary-merge.yml`](.azure-pipelines.yml)| Creation of canary branches (`canary/build/*`). | Daily cron job.
-| [Name of Canary Pipeline](link-to-pipeline)| [`.azure-pipelines-canary.yml`](.azure-pipelines.yml)| Build and deploy canary versions of the app to AppCenter and TestFlight. | Upon creation of branches with the `canary/build/*` pattern.
+| [Name of Canary Pipeline](link-to-pipeline)| [`.azure-pipelines-canary.yml`](.azure-pipelines.yml)| Build and deploy canary versions of the app to Firebase and TestFlight. | Upon creation of branches with the `canary/build/*` pattern.
 
 
 ## Additional Information
