@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Chinook.DynamicMvvm.Implementations;
 
 namespace Chinook.DynamicMvvm;
@@ -35,10 +33,7 @@ public class ValueChangedOnBackgroundTaskDynamicPropertyFromDynamicProperty : Va
 		get => base.Value;
 		set
 		{
-			if (_isDisposed)
-			{
-				throw new ObjectDisposedException(Name);
-			}
+			ObjectDisposedException.ThrowIf(_isDisposed, this);
 
 			if (!Equals(value, base.Value))
 			{

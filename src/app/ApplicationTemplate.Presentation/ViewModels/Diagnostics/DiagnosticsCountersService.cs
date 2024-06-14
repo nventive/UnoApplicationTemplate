@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace ApplicationTemplate.Presentation;
 
-public class DiagnosticsCountersService
+public sealed class DiagnosticsCountersService
 {
 	public event EventHandler CountersChanged;
 
@@ -92,7 +92,7 @@ public class DiagnosticsCountersService
 	}
 }
 
-public partial class CountersData
+public sealed partial class CountersData
 {
 	public CountersData()
 	{
@@ -100,10 +100,7 @@ public partial class CountersData
 
 	public CountersData(CountersData source)
 	{
-		if (source is null)
-		{
-			throw new ArgumentNullException(nameof(source));
-		}
+		ArgumentNullException.ThrowIfNull(source);
 
 		CreatedViewModels = source.CreatedViewModels;
 		DisposedViewModels = source.DisposedViewModels;

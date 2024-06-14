@@ -5,6 +5,13 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 4.0.x
+- Using Firebase app distribution instead of AppCenter for internal distribution.
+
+## 3.5.X
+- Bump Uno packages to 5.2.121 to fix a crash on iOS.
+- Ensure NV.Template.Mobile nuget is only deployed from the main branch.
+
 ## 3.4.X
 - Added a kill switch feature to the app.
 - Bump Uno.WinUI, Uno.WinUI.DevServer, Uno.WinUI.Lottie and Uno.UI.Adapter.Microsoft.Extensions.Logging to 5.0.159 to fix backNavigation/CloseModal crash.

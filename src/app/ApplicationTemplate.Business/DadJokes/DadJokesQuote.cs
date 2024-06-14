@@ -14,10 +14,7 @@ public record DadJokesQuote
 			return;
 		}
 
-		if (data is null)
-		{
-			throw new ArgumentNullException(nameof(data));
-		}
+		ArgumentNullException.ThrowIfNull(data);
 
 		Id = data.Id;
 		Selftext = data.Selftext;

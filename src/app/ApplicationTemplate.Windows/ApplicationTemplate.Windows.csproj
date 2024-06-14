@@ -70,8 +70,8 @@
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.1.0" />
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0" />
-		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="2.0.0" />
-		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="3.0.0" />
+		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="2.1.0" />
+		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="3.0.2" />
 		<PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.0" />
 		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
@@ -86,8 +86,8 @@
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
-		<PackageReference Include="Uno.Material.WinUI" Version="4.0.6" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="5.0.17" />
+		<PackageReference Include="Uno.Material.WinUI" Version="5.0.13" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.0.18" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -128,5 +128,5 @@
 	<ItemGroup>
 		<!-- This prevents the xaml file links from being visible from this project. It removes unnecessary clutter. -->
 		<Page Update="..\ApplicationTemplate.Shared.Views\**\*.xaml" Visible="false" />
-	</ItemGroup>	
+	</ItemGroup>
 </Project>

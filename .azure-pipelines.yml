@@ -23,6 +23,10 @@ trigger:
       - main
 
 variables:
+#-if false
+- name: IsReleaseBranch
+  value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
+#-endif
 - template: build/variables.yml
 
 stages:
@@ -49,7 +53,7 @@ stages:
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 
 - stage: Publish_Template_Package
-  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'), eq(variables['IsReleaseBranch'], 'true'))
   dependsOn:
    - Build_Staging_GeneratedApp
    - Build_Staging
@@ -72,21 +76,16 @@ stages:
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
       BannerVersionNameText: "STAGING"
 
-- stage: AppCenter_TestFlight_Staging
+- stage: Firebase_TestFlight_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Staging
   jobs:
-  - template: build/stage-release-appcenter.yml
+  - template: build/stage-release-firebase.yml
     parameters:
       applicationEnvironment: Staging
       deploymentEnvironment: AppCenter
-      appCenterWindowsSlug: $(AppCenterWindowsSlug)
-      appCenteriOSSlug: $(AppCenteriOSSlug)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug)
-      androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      appCenterServiceConnectionName: $(AppCenterServiceConnection)
-      appCenterDistributionGroup: $(AppCenterDistributionGroup)
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.Ios'
 
   - template: build/stage-release-appstore.yml
     parameters:
@@ -105,22 +104,6 @@ stages:
       iosProvisioningProfileFile: $(AppStoreProvisioningProfile)
       iosCertificateFile: $(AppStoreCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
-
-- stage: AppCenter_Production
-  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
-  dependsOn: Build_Production
-  jobs:
-  - template: build/stage-release-appcenter.yml
-    parameters:
-      applicationEnvironment: Production
-      deploymentEnvironment: 'AppCenter Prod'
-      appCenterWindowsSlug: $(AppCenterWindowsSlug_Production)
-      appCenteriOSSlug: $(AppCenteriOSSlug_Production)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
-      androidKeyStoreFile: $(GooglePlayKeystore)
-      androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
-      appCenterServiceConnectionName: $(AppCenterServiceConnection)
-      appCenterDistributionGroup: $(AppCenterDistributionGroup)
 
 - stage: AppStore
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))

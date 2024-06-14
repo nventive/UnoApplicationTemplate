@@ -32,7 +32,7 @@ GitHub Issue: #
 ### Always applicable
 No matter your changes, these checks always apply.
 - [ ] Your conventional commits are aligned with the **Impact on version** section.
-- [ ] Updated [CHANGELOG.md](../CHANGELOG.md).
+- [ ] Updated [CHANGELOG.md](../blob/main/CHANGELOG.md).
   - Use the latest Major.Minor.X header if you do a **Patch** change.
   - Create a new Major.Minor.X header if you do a **Minor** or **Major** change.
   - If you create a new header, it aligns with the **Impact on version** section and matches what is generated in the build pipeline.
