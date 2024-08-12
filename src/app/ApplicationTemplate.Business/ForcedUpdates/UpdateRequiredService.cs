@@ -18,7 +18,13 @@ public sealed class UpdateRequiredService : IUpdateRequiredService, IDisposable
 	public UpdateRequiredService(IMinimumVersionReposiory minimumVersionReposiory)
 	{
 		_subscription = minimumVersionReposiory.MinimumVersionObservable
-			.Subscribe(_ => UpdateRequired?.Invoke(this, EventArgs.Empty));
+			.Subscribe(version =>
+			{
+				if (version > new Version("1.1.0"))
+				{
+					UpdateRequired?.Invoke(this, EventArgs.Empty);
+				}
+			});
 	}
 
 	/// <inheritdoc />
