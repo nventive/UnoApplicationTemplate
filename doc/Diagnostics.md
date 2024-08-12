@@ -38,7 +38,7 @@ The page also allows you to manually set some configuration values.
 It also has various diagnostics utilities such as the following.
 - Send information via email (including log files as attachements).
 - Throw exceptions from various threads (to test the error handling or crash reporting).
-- Open the settings folder where the settings files can be found (UWP only).
+- Open the settings folder where the settings files can be found (WinUI only).
 
 ## Http Debugger
 
@@ -52,7 +52,7 @@ Check the following for more details.
 - [`IHttpDebuggerService`](..\src\app\ApplicationTemplate.Access\Framework\HttpDebugger\IHttpDebuggerService.cs)
 - [`HttpDebuggerHandler`](..\src\app\ApplicationTemplate.Access\Framework\HttpDebugger\HttpDebuggerHandler.cs)
 - [`HttpDebuggerViewModel`](..\src\app\ApplicationTemplate.Presentation\ViewModels\Diagnostics\HttpDebugger\HttpDebuggerViewModel.cs)
-- [`HttpDebuggerView`](..\src\app\ApplicationTemplate.UWP\Views\Content\Diagnostics\HttpDebuggerView.xaml)
+- [`HttpDebuggerView`](..\src\app\ApplicationTemplate.Shared.Views\Content\Diagnostics\HttpDebuggerView.xaml)
 
 ## Configuration Debugger
 
