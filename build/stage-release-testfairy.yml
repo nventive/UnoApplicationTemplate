@@ -7,7 +7,7 @@ parameters:
 jobs:
 - deployment: TestFairy_Android
   pool:
-    vmImage: $(macHostedAgentImage)
+    vmImage: $(macOSHostedAgentImage)
   variables:
   - name: artifactName
     value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
@@ -19,6 +19,8 @@ jobs:
       runOnce:
         deploy:
           steps:
+          - checkout: self
+
           - download: current
             displayName: "Download Artifact"
             artifact: $(artifactName)
@@ -74,6 +76,10 @@ jobs:
               RemoveSourceFolder: true
               Contents: '**'
 
+          - task: PostBuildCleanup@3
+            displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
+            condition: always()
+
 - deployment: TestFairy_iOS
   pool:
     vmImage: $(macOSHostedAgentImage)
@@ -87,6 +93,8 @@ jobs:
     runOnce:
       deploy:
         steps:
+        - checkout: self
+
         - download: current
           displayName: "Download Artifact"
           artifact: $(artifactName)
@@ -142,3 +150,7 @@ jobs:
             SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
             RemoveSourceFolder: true
             Contents: '**'
+
+          - task: PostBuildCleanup@3
+            displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
+            condition: always()
