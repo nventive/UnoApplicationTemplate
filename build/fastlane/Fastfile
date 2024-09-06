@@ -6,24 +6,26 @@ default_platform(:ios)
 platform :ios do
   desc "Upload iOS Application to TestFairy"
   lane :upload_testfairy_ios do
-		testfairy(
-			api_key: ENV['testFairyApiKey'],
-			ipa: ENV['ipaFile'],
-			symbols_file: ENV['symbolsFile'],
-			comment: ENV['releasesNotes'],
-			auto_update: ENV['auto_update'],
-			notify: ENV['notify']
-		 )
+	testfairy(
+		api_key: ENV['testFairyApiKey'],
+		ipa: ENV['ipaFile'],
+		symbols_file: ENV['symbolsFile'],
+		comment: ENV['releasesNotes'],
+		auto_update: ENV['auto_update'],
+		notify: ENV['notify']
+	)
 	end
 end
 
 platform :android do
   desc "Upload Android Application to TestFairy"
   lane :upload_testfairy_android do
+	testfairy(
 		api_key: ENV['testFairyApiKey'],
 		apk: ENV['apkFile'],
 		comment: ENV['releasesNotes'],
 		auto_update: ENV['auto_update'],
-		notify: ENV['notify'],
+		notify: ENV['notify']
+	)
 	end
 end

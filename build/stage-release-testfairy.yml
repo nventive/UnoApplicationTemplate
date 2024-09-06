@@ -54,11 +54,11 @@ jobs:
             workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
             condition: succeeded()
             env:
-              testFairyApiKey: ${{ parameters.TestFairyApiKey }}
+              testFairyApiKey: $(TestFairyApiKey)
               releasesNotes: "$(releaseNotes)"
               apkFile: '$(Pipeline.Workspace)/$(artifactName)/*Signed.aab'
-              auto_update: ${{ parameters.AutoUpdate }}
-              notify: ${{ parameters.Notify }}
+              auto_update: $(AutoUpdate)
+              notify: $(Notify)
 
           - task: DeleteFiles@1
             displayName: "Remove Downloaded Artifacts (Build)"
@@ -124,16 +124,16 @@ jobs:
 
         - script: |
             bundle exec fastlane upload_testfairy_ios --verbose
-          displayName: Deploy Android to TestFairy
+          displayName: Deploy iOS to TestFairy
           workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
           condition: succeeded()
           env:
-            testFairyApiKey: ${{ parameters.TestFairyApiKey }}
+            testFairyApiKey: $(TestFairyApiKey)
             releasesNotes: "$(releaseNotes)"
             ipaFile: $(Pipeline.Workspace)/$(artifactName)/*.ipa
             symbolsFile: $(Pipeline.Workspace)/$(artifactName)/*.dSYM
-            auto_update: ${{ parameters.AutoUpdate }}
-            notify: ${{ parameters.Notify }}
+            auto_update: $(AutoUpdate)
+            notify: $(Notify)
 
         - task: DeleteFiles@1
           displayName: "Remove Downloaded Artifacts (Build)"
