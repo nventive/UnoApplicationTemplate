@@ -18,14 +18,14 @@ These pipelines rely on a few variable groups and secrets in order to fully work
 
 At high level, the CI/CD pipelines do the following:
 - **Build** the app in **staging**.
-  - **Deploy** the staging app (to AppCenter and/or TestFlight and GooglePlay).
+  - **Deploy** the staging app (to TestFairy and/or TestFlight and GooglePlay).
 - **Build** the app in **production**.
   - **Deploy** the production app (to TestFlight and GooglePlay).
 
 It also runs automated tests during the build steps.
 
 ### Pull request runs
-Due to the length of mobile builds, pipelines are configured to behave a little differently when building in a context of **pull request (PR) build validation**. To reduce the build time, some runtime performance optimizations are disabled for PR builds. This requires a specific variable called `IsLightBuild` to be set, hence why it is appearing in the pipeline. 
+Due to the length of mobile builds, pipelines are configured to behave a little differently when building in a context of **pull request (PR) build validation**. To reduce the build time, some runtime performance optimizations are disabled for PR builds. This requires a specific variable called `IsLightBuild` to be set, hence why it is appearing in the pipeline.
 
 Also, all release stages are disabled in the context of PR build validation because, with the optimizations differences, the resulting application would not represent the real thing.
 
@@ -68,8 +68,8 @@ This is where the exact build steps are defined. These vary depending on the pla
 
 The release stages are even more straigtforward than the build ones. One thing to note is that, for the same reason as it is done at the end of the build steps, a clean-up step is included in every stage.
 
-### AppCenter Release Stage ([stage-release-appcenter.yml](../build/stage-release-appcenter.yml))
-This stage is in charge of pushing the application to AppCenter. It's divided into 2 jobs, one for each platform.
+### TestFairy Release Stage ([stage-release-testfairy.yml](../build/stage-release-testfairy.yml))
+This stage is in charge of pushing the application to TestFairy. It's divided into 2 jobs, one for each platform.
 
 ### Apple AppStore Release Stage ([stage-release-appstore.yml](../build/stage-release-appstore.yml))
 This stage is in charge of pushing the iOS version to the Apple AppStore. Given that the build stage signs the application, this is as simple as using the proper task and pushing the **IPA** file. This should only be run for configurations that properly sign the application.

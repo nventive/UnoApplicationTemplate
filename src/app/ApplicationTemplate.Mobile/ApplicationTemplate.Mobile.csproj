@@ -15,6 +15,10 @@
 		<PublishTrimmed>True</PublishTrimmed>
 		<TrimMode>partial</TrimMode>
 	</PropertyGroup>
+	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+	  <CodesignKey>Apple Distribution: nventive inc. (4PZ69335CF)</CodesignKey>
+	  <CodesignProvision>Application Template (Ad-hoc)</CodesignProvision>
+	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.1.0" />
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0" />

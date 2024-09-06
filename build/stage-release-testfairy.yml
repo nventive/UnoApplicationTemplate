@@ -1,0 +1,144 @@
+parameters:
+  applicationEnvironment: '' # e.g. "Staging", "Production"
+  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "TestFairy"
+  androidVariableGroup: ''
+  iosVariableGroup: ''
+
+jobs:
+- deployment: TestFairy_Android
+  pool:
+    vmImage: $(macHostedAgentImage)
+  variables:
+  - name: artifactName
+    value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+  - name: releaseNotesArtifactName
+    value: ReleaseNotes_${{ parameters.applicationEnvironment }}
+  - group: ${{ parameters.androidVariableGroup }}
+  environment: ${{ parameters.deploymentEnvironment }}
+  strategy:
+      runOnce:
+        deploy:
+          steps:
+          - download: current
+            displayName: "Download Artifact"
+            artifact: $(artifactName)
+
+          - download: current
+            displayName: "Download Release Notes"
+            artifact: $(releaseNotesArtifactName)
+
+          - task: Bash@3
+            inputs:
+              targetType: 'inline'
+              script: echo "##vso[task.setvariable variable=releaseNotes]$(cat '$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md')"
+            displayName: Read Release Notes
+
+          - script: |
+              gem install bundler
+              bundle init
+              bundle update --bundler
+            displayName: Update Bundler
+            workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+            condition: succeeded()
+
+          - script: |
+              bundle install --path ~/.gem
+            displayName: Run Bundle install
+            workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+
+          - script: |
+              bundle exec fastlane upload_testfairy_android --verbose
+            displayName: Deploy Android to TestFairy
+            workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+            condition: succeeded()
+            env:
+              testFairyApiKey: ${{ parameters.TestFairyApiKey }}
+              releasesNotes: "$(releaseNotes)"
+              apkFile: '$(Pipeline.Workspace)/$(artifactName)/*Signed.aab'
+              auto_update: ${{ parameters.AutoUpdate }}
+              notify: ${{ parameters.Notify }}
+
+          - task: DeleteFiles@1
+            displayName: "Remove Downloaded Artifacts (Build)"
+            condition: always()
+            inputs:
+              SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+              RemoveSourceFolder: true
+              Contents: '**'
+
+          - task: DeleteFiles@1
+            displayName: "Remove Downloaded Artifacts (Release Notes)"
+            condition: always()
+            inputs:
+              SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
+              RemoveSourceFolder: true
+              Contents: '**'
+
+- deployment: TestFairy_iOS
+  pool:
+    vmImage: $(macOSHostedAgentImage)
+  variables:
+  - name: artifactName
+    value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+  - name: releaseNotesArtifactName
+    value: ReleaseNotes_${{ parameters.applicationEnvironment }}
+  environment: ${{ parameters.deploymentEnvironment }}
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - download: current
+          displayName: "Download Artifact"
+          artifact: $(artifactName)
+
+        - download: current
+          displayName: "Download Release Notes"
+          artifact: $(releaseNotesArtifactName)
+
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: echo "##vso[task.setvariable variable=releaseNotes]$(cat '$(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md')"
+          displayName: Read Release Notes
+
+        - script: |
+            gem install bundler
+            bundle init
+            bundle update --bundler
+          displayName: Update Bundler
+          workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+          condition: succeeded()
+
+        - script: |
+            bundle install --path ~/.gem
+          displayName: Run Bundle install
+          workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+
+        - script: |
+            bundle exec fastlane upload_testfairy_ios --verbose
+          displayName: Deploy Android to TestFairy
+          workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+          condition: succeeded()
+          env:
+            testFairyApiKey: ${{ parameters.TestFairyApiKey }}
+            releasesNotes: "$(releaseNotes)"
+            ipaFile: $(Pipeline.Workspace)/$(artifactName)/*.ipa
+            symbolsFile: $(Pipeline.Workspace)/$(artifactName)/*.dSYM
+            auto_update: ${{ parameters.AutoUpdate }}
+            notify: ${{ parameters.Notify }}
+
+        - task: DeleteFiles@1
+          displayName: "Remove Downloaded Artifacts (Build)"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+            RemoveSourceFolder: true
+            Contents: '**'
+
+        - task: DeleteFiles@1
+          displayName: "Remove Downloaded Artifacts (Release Notes)"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
+            RemoveSourceFolder: true
+            Contents: '**'
