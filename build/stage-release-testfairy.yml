@@ -151,6 +151,6 @@ jobs:
             RemoveSourceFolder: true
             Contents: '**'
 
-          - task: PostBuildCleanup@3
-            displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
-            condition: always()
+        - task: PostBuildCleanup@3
+          displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
+          condition: always()
