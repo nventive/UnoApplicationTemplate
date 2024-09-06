@@ -87,10 +87,10 @@ stages:
           androidVariableGroup: "ApplicationTemplate.Distribution.Internal.Android"
           iosVariableGroup: "ApplicationTemplate.Distribution.Internal.Ios"
 
-      - template: build/stage-release-appstore.yml
-        parameters:
-          applicationEnvironment: Staging
-          deploymentEnvironment: TestFlight
+      #- template: build/stage-release-appstore.yml
+      #  parameters:
+      #    applicationEnvironment: Staging
+      #    deploymentEnvironment: TestFlight
 
   - stage: Build_Production
     dependsOn: Build_Staging
@@ -122,4 +122,3 @@ stages:
         parameters:
           applicationEnvironment: Production
           deploymentEnvironment: GooglePlay
-
