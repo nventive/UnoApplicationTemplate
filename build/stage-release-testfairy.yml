@@ -49,14 +49,14 @@ jobs:
             workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
 
           - script: |
-              bundle exec fastlane upload_testfairy_android --verbose
+              bundle exec fastlane android upload_testfairy --verbose
             displayName: Deploy Android to TestFairy
             workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
             condition: succeeded()
             env:
               testFairyApiKey: $(TestFairyApiKey)
               releasesNotes: "$(releaseNotes)"
-              apkFile: '$(Pipeline.Workspace)/$(artifactName)/*Signed.aab'
+              apkFile: '$(Pipeline.Workspace)/$(artifactName)/$(ApplicationIdentifier)-Signed.apk'
               auto_update: $(AutoUpdate)
               notify: $(Notify)
 
@@ -123,15 +123,15 @@ jobs:
           workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
 
         - script: |
-            bundle exec fastlane upload_testfairy_ios --verbose
+            bundle exec fastlane ios upload_testfairy --verbose
           displayName: Deploy iOS to TestFairy
           workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
           condition: succeeded()
           env:
             testFairyApiKey: $(TestFairyApiKey)
             releasesNotes: "$(releaseNotes)"
-            ipaFile: $(Pipeline.Workspace)/$(artifactName)/*.ipa
-            symbolsFile: $(Pipeline.Workspace)/$(artifactName)/*.dSYM
+            ipaFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.ipa'
+            symbolsFile: $(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.dSYM
             auto_update: $(AutoUpdate)
             notify: $(Notify)
 

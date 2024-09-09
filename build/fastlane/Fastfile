@@ -5,7 +5,7 @@ default_platform(:ios)
 
 platform :ios do
   desc "Upload iOS Application to TestFairy"
-  lane :upload_testfairy_ios do
+  lane :upload_testfairy do
 	testfairy(
 		api_key: ENV['testFairyApiKey'],
 		ipa: ENV['ipaFile'],
@@ -19,7 +19,7 @@ end
 
 platform :android do
   desc "Upload Android Application to TestFairy"
-  lane :upload_testfairy_android do
+  lane :upload_testfairy do
 	testfairy(
 		api_key: ENV['testFairyApiKey'],
 		apk: ENV['apkFile'],
