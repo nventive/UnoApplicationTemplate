@@ -15,10 +15,6 @@
 		<PublishTrimmed>True</PublishTrimmed>
 		<TrimMode>partial</TrimMode>
 	</PropertyGroup>
-	<PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-	  <CodesignKey>Apple Distribution: nventive inc. (4PZ69335CF)</CodesignKey>
-	  <CodesignProvision>Application Template (Ad-hoc)</CodesignProvision>
-	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.1.0" />
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0" />
@@ -37,7 +33,8 @@
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.4.2" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.0.18" />
 		<PackageReference Include="Uno.WinUI" Version="5.2.121" />
-		<PackageReference Include="Uno.WinUI.DevServer" Version="5.2.121" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.WinUI.DevServer" Version="5.2.121"
+			Condition="'$(Configuration)'=='Debug'" />
 		<PackageReference Include="Uno.WinUI.Lottie" Version="5.2.121" />
 		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.2.121" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
@@ -47,7 +44,8 @@
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
-		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
+		<ProjectReference
+			Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
 	<Choose>
 		<When Condition="'$(TargetFramework)'=='net8.0-android'">
@@ -147,14 +145,18 @@
 		</When>
 		<When Condition="'$(TargetFramework)'=='net8.0-ios'">
 			<PropertyGroup>
-				<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
-				<MtouchExtraArgs>$(MtouchExtraArgs) --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName)</MtouchExtraArgs>
+				<MtouchExtraArgs>
+					$(MtouchExtraArgs)
+					--setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
+				<MtouchExtraArgs>$(MtouchExtraArgs) --xml=./iOS/LinkerExclusions.xml
+					--linkskip=$(AssemblyName)</MtouchExtraArgs>
 				<!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
 				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
 				<CodesignEntitlements>iOS\Entitlements.plist</CodesignEntitlements>
-				<!-- Workaround for clang++ error on iOS simulator on ARM base macOS system. See "https://github.com/dotnet/maui/issues/16778#issuecomment-1683343255" for more detail. -->
+				<!-- Workaround for clang++ error on iOS simulator on ARM base macOS system. See
+				"https://github.com/dotnet/maui/issues/16778#issuecomment-1683343255" for more detail. -->
 				<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>
 			</PropertyGroup>
 			<Choose>
@@ -162,7 +164,8 @@
 					<PropertyGroup>
 						<ProvisioningType>manual</ProvisioningType>
 						<MtouchDebug>True</MtouchDebug>
-						<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_LOG_LEVEL=debug --setenv=MONO_LOG_MASK=gc</MtouchExtraArgs>
+						<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_LOG_LEVEL=debug
+							--setenv=MONO_LOG_MASK=gc</MtouchExtraArgs>
 						<Optimize>False</Optimize>
 					</PropertyGroup>
 					<PropertyGroup Condition="'$(Platform)'=='iPhone'">
@@ -271,5 +274,6 @@
 			</ItemGroup>
 		</When>
 	</Choose>
-	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
+	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems"
+		Label="Shared" />
 </Project>

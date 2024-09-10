@@ -55,46 +55,46 @@ jobs:
           additionalReleaseNotesFile: ${{ parameters.additionalReleaseNotesFile }}
           removeHyperlinksFromReleaseNotes: ${{ parameters.removeHyperlinksFromReleaseNotes }}
 
-  # - job: OnWindows_Windows
-  #   pool:
-  #     vmImage : $(windowsHostedAgentImage)
-  #   variables:
-  #   - name: ApplicationConfiguration
-  #     value: Release
-  #   - name: ApplicationPlatform
-  #     value: x64
-  #   - name: ArtifactName
-  #     value: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
-  #   - name: ApplicationEnvironment
-  #     value: ${{ parameters.applicationEnvironment }}
-  #   - name: BuildTargetFramework
-  #     value: net8.0-windows10.0.22621.0
-  #       # For optimization, if we are on light build, we only build the project else we publish it.
-  #   - name: dotNetCommand
-  #     ${{ if eq(variables['IsLightBuild'], 'true') }}:
-  #       value: build
-  #     ${{ else }}:
-  #       value: publish
+  - job: OnWindows_Windows
+    pool:
+      vmImage : $(windowsHostedAgentImage)
+    variables:
+    - name: ApplicationConfiguration
+      value: Release
+    - name: ApplicationPlatform
+      value: x64
+    - name: ArtifactName
+      value: $(WindowsArtifactName)_${{ parameters.applicationEnvironment }}
+    - name: ApplicationEnvironment
+      value: ${{ parameters.applicationEnvironment }}
+    - name: BuildTargetFramework
+      value: net8.0-windows10.0.22621.0
+        # For optimization, if we are on light build, we only build the project else we publish it.
+    - name: dotNetCommand
+      ${{ if eq(variables['IsLightBuild'], 'true') }}:
+        value: build
+      ${{ else }}:
+        value: publish
 
-  #   steps:
-  #     - template: steps-build-windows.yml
-  #       parameters:
-  #         pathToSrc: ${{ parameters.pathToSrc }}
-  #         solutionFileName: '${{ parameters.solutionName }}.sln'
-  #         solutionName: ${{ parameters.solutionName }}
+    steps:
+      - template: steps-build-windows.yml
+        parameters:
+          pathToSrc: ${{ parameters.pathToSrc }}
+          solutionFileName: '${{ parameters.solutionName }}.sln'
+          solutionName: ${{ parameters.solutionName }}
 
-  # - job: OnWindows_Tests
-  #   pool:
-  #     vmImage : $(windowsHostedAgentImage)
-  #   variables:
-  #     ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
-  #     ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
-  #   steps:
-  #     - template: steps-build-tests.yml
-  #       parameters:
-  #         pathToSrc: ${{ parameters.pathToSrc }}
-  #         solutionFileName: '${{ parameters.solutionName }}.sln'
-  #         solutionName: ${{ parameters.solutionName }}
+  - job: OnWindows_Tests
+    pool:
+      vmImage : $(windowsHostedAgentImage)
+    variables:
+      ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
+      ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
+    steps:
+      - template: steps-build-tests.yml
+        parameters:
+          pathToSrc: ${{ parameters.pathToSrc }}
+          solutionFileName: '${{ parameters.solutionName }}.sln'
+          solutionName: ${{ parameters.solutionName }}
 
   - job: OnWindows_Android
     pool:
