@@ -1,0 +1,15 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Upload Application to Deploygate"
+  lane :upload_deploygate do
+	deploygate(
+		api_token: ENV['deploygateApiToken'],
+		user: ENV['deploygateUsername'],
+      	ipa: ENV['ipaFile'],
+		apk: ENV['apkFile'],
+		dsym: ENV['symbolsFile'],
+		release_not: ENV['notify']
+	)
+	end
+end

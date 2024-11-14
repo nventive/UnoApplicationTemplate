@@ -2,7 +2,7 @@ trigger: # Start a new run as soon as a "canaries/build/(...)" branch is created
   branches:
     include:
       - canaries/build/*
-      
+
 variables:
 - template: build/variables.yml
 
@@ -23,22 +23,17 @@ stages:
       removeHyperlinksFromReleaseNotes: true
       BannerVersionNameText: "CANARY"
 
-- stage: AppCenter_TestFlight_Canary
+- stage: Deploygate_TestFlight_Canary
   condition: and(succeeded(), eq(variables['IsCanary'], 'true'))
   dependsOn: Build_Canary
 
   jobs:
-  - template: build/stage-release-appcenter.yml
+  - template: build/stage-release-deploygate.yml
     parameters:
       applicationEnvironment: Staging
-      deploymentEnvironment: AppCenter
-      appCenterWindowsSlug: $(AppCenterWindowsSlug_Canary)
-      appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
+      deploymentEnvironment: Deploygate
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      appCenterServiceConnectionName: $(AppCenterCanaryServiceConnection)
-      appCenterDistributionGroup: $(AppCenterCanaryDistributionGroup)
 
   - template: build/stage-release-appstore.yml
     parameters:

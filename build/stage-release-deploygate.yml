@@ -1,0 +1,163 @@
+parameters:
+  applicationEnvironment: '' # e.g. "Staging", "Production"
+  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "Deploygate"
+  androidKeyStoreFile: ''
+  androidVariableGroup: ''
+
+jobs:
+- deployment: Deploygate_Android
+  pool:
+    vmImage: $(macOSHostedAgentImage)
+  variables:
+  - name: artifactName
+    value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+  - name: releaseNotesArtifactName
+    value: ReleaseNotes_${{ parameters.applicationEnvironment }}
+  - group: ${{ parameters.androidVariableGroup }}
+  environment: ${{ parameters.deploymentEnvironment }}
+  strategy:
+      runOnce:
+        deploy:
+          steps:
+          - checkout: self
+
+          - download: current
+            displayName: "Download Artifact"
+            artifact: $(artifactName)
+
+          - download: current
+            displayName: "Download Release Notes"
+            artifact: $(releaseNotesArtifactName)
+
+          - script: |
+              fileContent=$(cat $(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md)
+              modifiedContent=$(echo "$fileContent" | tr '\n' ' ')
+              echo "##vso[task.setvariable variable=releaseNotes]$modifiedContent"
+            displayName: Read Release Notes
+
+          - script: |
+              gem install bundler
+              bundle init
+              bundle update --bundler
+            displayName: Update Bundler
+            workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+            condition: succeeded()
+
+          - script: |
+              bundle install --path ~/.gem
+            displayName: Run Bundle install
+            workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+
+          - script: |
+              bundle exec fastlane upload_deploygate --verbose
+            displayName: Deploy Android to Deploygate
+            workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+            condition: succeeded()
+            env:
+              deploygateApiToken: $(DeploygateApiToken)
+              deploygateUsername: $(DeploygateUsername)
+              releasesNotes: "$(releaseNotes)"
+              apkFile: '$(Pipeline.Workspace)/$(artifactName)/$(ApplicationIdentifier)-Signed.apk'
+
+          - task: DeleteFiles@1
+            displayName: "Remove Downloaded Artifacts (Build)"
+            condition: always()
+            inputs:
+              SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+              RemoveSourceFolder: true
+              Contents: '**'
+
+          - task: DeleteFiles@1
+            displayName: "Remove Downloaded Artifacts (Release Notes)"
+            condition: always()
+            inputs:
+              SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
+              RemoveSourceFolder: true
+              Contents: '**'
+
+          - task: PostBuildCleanup@3
+            displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
+            condition: always()
+
+- deployment: Deploygate_iOS
+  pool:
+    vmImage: $(macOSHostedAgentImage)
+  variables:
+  - name: artifactName
+    value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
+  - name: releaseNotesArtifactName
+    value: ReleaseNotes_${{ parameters.applicationEnvironment }}
+  environment: ${{ parameters.deploymentEnvironment }}
+  strategy:
+    runOnce:
+      deploy:
+        steps:
+        - checkout: self
+
+        - download: current
+          displayName: "Download Artifact"
+          artifact: $(artifactName)
+
+        - download: current
+          displayName: "Download Release Notes"
+          artifact: $(releaseNotesArtifactName)
+
+        - script: |
+            fileContent=$(cat $(Pipeline.Workspace)/$(releaseNotesArtifactName)/ReleaseNotes-Excerpt.md)
+            modifiedContent=$(echo "$fileContent" | tr '\n' ' ')
+            echo "##vso[task.setvariable variable=releaseNotes]$modifiedContent"
+          displayName: Read Release Notes
+
+        - task: ArchiveFiles@2
+          inputs:
+            rootFolderOrFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.dSYM'  # The folder or file to archive
+            includeRootFolder: false  # Whether to include the root folder in the archive
+            archiveType: 'zip'  # The type of archive to create
+            archiveFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.dSYM.zip'  # The output archive file
+            replaceExistingArchive: true  # Replace the archive if it already exists
+          displayName: Archive dSYM folder
+
+        - script: |
+            gem install bundler
+            bundle init
+            bundle update --bundler
+          displayName: Update Bundler
+          workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+          condition: succeeded()
+
+        - script: |
+            bundle install --path ~/.gem
+          displayName: Run Bundle install
+          workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+
+        - script: |
+            bundle exec fastlane upload_deploygate --verbose
+          displayName: Deploy iOS to Deploygate
+          workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+          condition: succeeded()
+          env:
+            deploygateApiToken: $(DeploygateApiToken)
+            deploygateUsername: $(DeploygateUsername)
+            releasesNotes: "$(releaseNotes)"
+            ipaFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.ipa'
+            symbolsFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.dSYM.zip'
+
+        - task: DeleteFiles@1
+          displayName: "Remove Downloaded Artifacts (Build)"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(artifactName)
+            RemoveSourceFolder: true
+            Contents: '**'
+
+        - task: DeleteFiles@1
+          displayName: "Remove Downloaded Artifacts (Release Notes)"
+          condition: always()
+          inputs:
+            SourceFolder: $(Pipeline.Workspace)/$(releaseNotesArtifactName)
+            RemoveSourceFolder: true
+            Contents: '**'
+
+        - task: PostBuildCleanup@3
+          displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
+          condition: always()
