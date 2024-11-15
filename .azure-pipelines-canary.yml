@@ -34,6 +34,7 @@ stages:
       deploymentEnvironment: Deploygate
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 
   - template: build/stage-release-appstore.yml
     parameters:

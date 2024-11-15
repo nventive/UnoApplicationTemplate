@@ -86,6 +86,7 @@ stages:
       deploymentEnvironment: Deploygate
       androidKeyStoreFile: $(InternalKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
 
   - template: build/stage-release-appstore.yml
     parameters:
@@ -115,6 +116,7 @@ stages:
       deploymentEnvironment: 'Deploygate Prod'
       androidKeyStoreFile: $(GooglePlayKeystore)
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
+      iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
 - stage: AppStore
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))

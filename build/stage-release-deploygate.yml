@@ -3,6 +3,7 @@ parameters:
   deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "Deploygate"
   androidKeyStoreFile: ''
   androidVariableGroup: ''
+  iosVariableGroup: ''
 
 jobs:
 - deployment: Deploygate_Android
@@ -82,6 +83,7 @@ jobs:
     value: $(iOSArtifactName)_${{ parameters.applicationEnvironment }}
   - name: releaseNotesArtifactName
     value: ReleaseNotes_${{ parameters.applicationEnvironment }}
+  - group: ${{ parameters.iosVariableGroup }}
   environment: ${{ parameters.deploymentEnvironment }}
   strategy:
     runOnce:
