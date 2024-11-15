@@ -103,15 +103,6 @@ jobs:
             echo "##vso[task.setvariable variable=releaseNotes]$modifiedContent"
           displayName: Read Release Notes
 
-        - task: ArchiveFiles@2
-          inputs:
-            rootFolderOrFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.dSYM'  # The folder or file to archive
-            includeRootFolder: false  # Whether to include the root folder in the archive
-            archiveType: 'zip'  # The type of archive to create
-            archiveFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.dSYM.zip'  # The output archive file
-            replaceExistingArchive: true  # Replace the archive if it already exists
-          displayName: Archive dSYM folder
-
         - script: |
             gem install bundler
             bundle install --path ~/.gem
@@ -130,7 +121,6 @@ jobs:
             deploygateUsername: $(DeploygateUsername)
             releasesNotes: "$(releaseNotes)"
             ipaFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.ipa'
-            symbolsFile: '$(Pipeline.Workspace)/$(artifactName)/$(SolutionName).Mobile.dSYM.zip'
 
         - task: DeleteFiles@1
           displayName: "Remove Downloaded Artifacts (Build)"

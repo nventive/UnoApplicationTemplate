@@ -8,8 +8,7 @@ platform :ios do
 		user: ENV['deploygateUsername'],
       	ipa: ENV['ipaFile'],
 		apk: ENV['apkFile'],
-		dsym: ENV['symbolsFile'],
-		release_not: ENV['notify']
+		message: ENV['releasesNotes']
 	)
 	end
 end
