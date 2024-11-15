@@ -23,7 +23,7 @@
 		<PackageReference Include="Reactive.Annex" Version="2.0.0" />
 		<PackageReference Include="Refit" Version="7.0.0" />
 		<PackageReference Include="ReviewService.Abstractions" Version="1.0.0" />
-		<PackageReference Include="System.Text.Json" Version="8.0.4" />
+		<PackageReference Include="System.Text.Json" Version="8.0.5" />
 		<PackageReference Include="MallardMessageHandlers" Version="1.2.0" />
 		<PackageReference Include="Nventive.Persistence.Reactive" Version="0.5.0" />
 		<PackageReference Include="Nventive.Persistence" Version="0.5.0" />
