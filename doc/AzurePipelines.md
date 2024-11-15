@@ -25,7 +25,7 @@ At high level, the CI/CD pipelines do the following:
 It also runs automated tests during the build steps.
 
 ### Pull request runs
-Due to the length of mobile builds, pipelines are configured to behave a little differently when building in a context of **pull request (PR) build validation**. To reduce the build time, some runtime performance optimizations are disabled for PR builds. This requires a specific variable called `IsLightBuild` to be set, hence why it is appearing in the pipeline. 
+Due to the length of mobile builds, pipelines are configured to behave a little differently when building in a context of **pull request (PR) build validation**. To reduce the build time, some runtime performance optimizations are disabled for PR builds. This requires a specific variable called `IsLightBuild` to be set, hence why it is appearing in the pipeline.
 
 Also, all release stages are disabled in the context of PR build validation because, with the optimizations differences, the resulting application would not represent the real thing.
 
@@ -68,7 +68,7 @@ This is where the exact build steps are defined. These vary depending on the pla
 
 The release stages are even more straigtforward than the build ones. One thing to note is that, for the same reason as it is done at the end of the build steps, a clean-up step is included in every stage.
 
-### AppCenter Release Stage ([stage-release-appcenter.yml](../build/stage-release-appcenter.yml))
+### Deploygate Release Stage ([stage-release-deploygate.yml](../build/stage-release-deploygate.yml))
 This stage is in charge of pushing the application to AppCenter. It's divided into 2 jobs, one for each platform.
 
 ### Apple AppStore Release Stage ([stage-release-appstore.yml](../build/stage-release-appstore.yml))
