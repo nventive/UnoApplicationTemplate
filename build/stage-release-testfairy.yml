@@ -37,16 +37,11 @@ jobs:
 
             - script: |
                 gem install bundler
-                bundle init
-                bundle update --bundler
-              displayName: Update Bundler
-              workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
-              condition: succeeded()
-
-            - script: |
                 bundle install --path ~/.gem
+                bundle update --bundler
               displayName: Run Bundle install
               workingDirectory: '$(Build.SourcesDirectory)/build/fastlane'
+              condition: succeeded()
 
             - script: |
                 bundle exec fastlane upload_testfairy --verbose
