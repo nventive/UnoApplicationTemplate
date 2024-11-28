@@ -325,3 +325,7 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder
 .mfractor/
+
+# Firebase
+*google-services.json
+*GoogleService-Info.plist
