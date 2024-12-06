@@ -1,0 +1,7 @@
+# This stage is responsible for running the template to validate the commits of the PR
+jobs:
+  - job: OnWindows_ValidateCommits
+    pool:
+      vmImage : $(windowsHostedAgentImage)
+    steps:
+      - template: templates/validate-commits.yaml
