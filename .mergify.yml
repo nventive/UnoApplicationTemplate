@@ -1,40 +1,19 @@
 queue_rules:
   - name: default
-    conditions:
-      # Conditions to get out of the queue (= merged)
-      - check-success=nventive.UnoApplicationTemplate
-
-pull_request_rules:
-
-  - name: automatic strict merge when CI passes, has 2 reviews, no requests for change and is labeled 'ready-to-merge' unless labelled 'do-not-merge/breaking-change' or 'do-not-merge/work-in-progress'
-    conditions:
-      # Only pull-requests sent to the main branch
+    queue_conditions:
       - base=main
-
-      # All Azure builds should be green:
       - status-success=nventive.UnoApplicationTemplate
-
-      # CLA check must pass:
-      #- "status-success=license/cla"
-
-      # Note that this only matches people with write / admin access to the repo,
-      # see <https://doc.mergify.io/conditions.html#attribute-list>
       - "#approved-reviews-by>=2"
       - "#changes-requested-reviews-by=0"
-
-      # Pull-request must be labeled with:
       - label=ready-to-merge
-
-      # Do not automatically merge pull-requests that are labelled as do-not-merge
-      # see <https://doc.mergify.io/examples.html#id6>
       - label!=do-not-merge/breaking-change
       - label!=do-not-merge/work-in-progress
+    merge_conditions:
+      # Conditions to get out of the queue (= merged)
+      - check-success=nventive.UnoApplicationTemplate
+    merge_method: merge
 
-    # Note: mergify cannot break branch protection rules
-    actions:
-      queue:
-        method: merge
-        name: default
+pull_request_rules:
 
   - name: automatic merge for allcontributors pull requests
     conditions:
@@ -42,3 +21,9 @@ pull_request_rules:
     actions:
       merge:
         method: merge
+  - name: automatic strict merge when CI passes, has 2 reviews, no requests for change
+      and is labeled 'ready-to-merge' unless labelled 'do-not-merge/breaking-change'
+      or 'do-not-merge/work-in-progress'
+    conditions: []
+    actions:
+      queue:
