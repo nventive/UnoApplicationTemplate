@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 3.6.X
+- Added conventional commit validation stage `stage-commit-validation.yml`
 
 ## 3.5.X
 - Bump Uno packages to 5.2.121 to fix a crash on iOS.
