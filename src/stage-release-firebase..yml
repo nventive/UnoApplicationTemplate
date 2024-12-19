@@ -1,0 +1,34 @@
+﻿parameters:
+  serviceConnectionKeyFileName: ''
+  pathToAab: ''
+  applicationEnvironment: '' # e.g. "Staging", "Production"
+jobs:
+  variables:
+  - name: artifactName
+    value: $(AndroidArtifactName)_${{ parameters.applicationEnvironment }}
+
+
+  job: ReleaseFirebase
+  displayName: Release to Firebase app distribution
+  steps:
+
+  # Step 1: Install Firebase tools
+  - script: 'npm install -g firebase-tools'
+    displayName: 'Install Firebase Tools'
+
+  # Step 2: Download the service connection key file
+  - task: DownloadSecureFile@1
+    inputs:
+      secureFile: ${{ parameters.serviceConnectionKeyFileName }}
+    name: DistributionServiceConnection
+    displayName: "Download Firebase Service connection"
+
+  # Step 3: Deploy to Firebase App Distribution
+  - script: |
+      firebase appdistribution:distribute  ${{ parameters.pathToAab }} \
+      --app $(ApplicationIdentifier)
+      # --release-notes-file {add release notes file here} \
+      # --groups {add group name here}
+    env:
+      GOOGLE_APPLICATION_CREDENTIALS: $(DistributionServiceConnection.secureFilePath)
+    displayName: 'Deploy to Firebase'

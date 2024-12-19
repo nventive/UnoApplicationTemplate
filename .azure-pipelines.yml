@@ -114,6 +114,16 @@ stages:
       iosCertificateFile: $(AppStoreCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
+- stage: Firebase_App_Distribution
+  condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
+  dependsOn: Build_Production
+  jobs:
+  - template: build/stage-release-firebase.yml
+    parameters:
+      applicationEnvironment: Staging
+      serviceConnectionKeyFileName: $(FirebaseAppDistributionServiceConnection)
+      pathToAab: '$(Pipeline.Workspace)/$(artifactName)/*Signed.aab'
+
 - stage: AppCenter_Production
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
