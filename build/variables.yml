@@ -42,6 +42,7 @@
   AppCenterServiceConnection: AppCenter-nventive-framework
   AppStoreServiceConnection: AppStore-nventive
   AppCenterCanaryServiceConnection: AppCenter-nventive-framework
+  FirebaseAppDistributionServiceConnection: com.nventive.applicationtemplate.firebaseappdistribution.json
 
   # AppCenter slugs
   # The "app slug" corresponds to the identifiers of the app in AppCenter; to find it, navigate to the app in a browser and;

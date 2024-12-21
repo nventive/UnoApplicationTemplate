@@ -87,14 +87,10 @@ stages:
   - template: build/stage-release-appcenter.yml
     parameters:
       applicationEnvironment: Staging
-      deploymentEnvironment: AppCenter
-      appCenterWindowsSlug: $(AppCenterWindowsSlug)
-      appCenteriOSSlug: $(AppCenteriOSSlug)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug)
-      androidKeyStoreFile: $(InternalKeystore)
+      deploymentEnvironment: Firebase App Distribution
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      appCenterServiceConnectionName: $(AppCenterServiceConnection)
-      appCenterDistributionGroup: $(AppCenterDistributionGroup)
+      serviceConnectionKeyFileName: $(FirebaseAppDistributionServiceConnection)
+      pathToAab: '$(Pipeline.Workspace)/$(artifactName)/*Signed.aab'
 
   - template: build/stage-release-appstore.yml
     parameters:

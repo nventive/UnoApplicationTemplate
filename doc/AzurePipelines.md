@@ -1,4 +1,4 @@
-# Azure Pipelines
+﻿# Azure Pipelines
 
 ## Pipeline Code
 This project uses CI/CD pipelines that are implemented as yaml code.
@@ -18,7 +18,7 @@ These pipelines rely on a few variable groups and secrets in order to fully work
 
 At high level, the CI/CD pipelines do the following:
 - **Build** the app in **staging**.
-  - **Deploy** the staging app (to AppCenter and/or TestFlight and GooglePlay).
+  - **Deploy** the staging app (to Firebase app distribution and/or TestFlight and GooglePlay).
 - **Build** the app in **production**.
   - **Deploy** the production app (to TestFlight and GooglePlay).
 
@@ -69,7 +69,10 @@ This is where the exact build steps are defined. These vary depending on the pla
 The release stages are even more straigtforward than the build ones. One thing to note is that, for the same reason as it is done at the end of the build steps, a clean-up step is included in every stage.
 
 ### AppCenter Release Stage ([stage-release-appcenter.yml](../build/stage-release-appcenter.yml))
-This stage is in charge of pushing the application to AppCenter. It's divided into 2 jobs, one for each platform.
+This stage is in charge of pushing the application to AppCenter. Only for iOS
+
+### Firebase app distribution Release Stage ([stage-release-firebase.yml](../build/stage-release-firebase.yml))
+This stage is in charge of pushing the application to Firebase app distribution. Only for android.
 
 ### Apple AppStore Release Stage ([stage-release-appstore.yml](../build/stage-release-appstore.yml))
 This stage is in charge of pushing the iOS version to the Apple AppStore. Given that the build stage signs the application, this is as simple as using the proper task and pushing the **IPA** file. This should only be run for configurations that properly sign the application.
