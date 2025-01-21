@@ -1,6 +1,6 @@
 ﻿parameters:
   applicationEnvironment: '' # e.g. "Staging", "Production"
-  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "AppCenter"
+  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "Firebase App Distribution"
 
 jobs:
 - deployment: AppStore_iOS_${{ parameters.deploymentEnvironment}}

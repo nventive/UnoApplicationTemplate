@@ -11,7 +11,7 @@ using Chinook.SectionsNavigation;
 namespace ApplicationTemplate.Presentation;
 
 /// <summary>
-/// This service collects raw analytics data from the application and processes it to send to an analytics provider (such as AppCenter, Firebase, Segment, etc.).
+/// This service collects raw analytics data from the application and processes it to send to an analytics provider (such as Firebase, Segment, etc.).
 /// </summary>
 public interface IAnalyticsSink
 {

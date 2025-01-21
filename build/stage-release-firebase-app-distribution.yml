@@ -1,0 +1,42 @@
+﻿parameters:
+  applicationEnvironment: '' # e.g. "Staging", "Production"
+  deploymentEnvironment: '' # e.g. "GooglePlay", "AppStore", "Firebase App Distribution"
+  androidVariableGroup: ''
+  artifactFileName: ''
+  serviceConnectionKeyFileName: ""
+
+jobs:
+- deployment: Firebase_Android
+  pool:
+    vmImage: $(windowsHostedAgentImage)
+  variables:
+  - group: ${{ parameters.androidVariableGroup }}
+  - name: pathToAab
+    value: '$(Pipeline.Workspace)/$(AndroidArtifactName)_${{ parameters.applicationEnvironment }}/${{ parameters.artifactFileName }}'
+  environment: ${{ parameters.deploymentEnvironment }}
+  strategy:
+      runOnce:
+        deploy:
+           steps:
+            # Step 1: Install Firebase tools
+            - script: "npm install -g firebase-tools"
+              displayName: "Install Firebase Tools"
+
+            # Step 2: Download the service connection key file
+            - task: DownloadSecureFile@1
+              inputs:
+                secureFile: ${{ parameters.serviceConnectionKeyFileName }}
+              name: DistributionServiceConnection
+              displayName: "Download Firebase Service Connection"
+
+            # Step 3: Deploy to Firebase App Distribution
+            - script: |
+                echo "Deploying to Firebase App Distribution..."
+                echo "App ID: $(FirebaseAppId)"
+                echo "Path to AAB: $(pathToAab)"
+                $pathWithBackslash = $(pathToAab -replace '/', '\')
+                echo "Path with backslash: $pathWithBackslash"
+                firebase appdistribution:distribute $(pathToAab) --app $(FirebaseAppId) --release-notes "UnoApplicationTemplate" --groups "nventive" --debug
+              env:
+                GOOGLE_APPLICATION_CREDENTIALS: $(DistributionServiceConnection.secureFilePath)
+              displayName: "Deploy to Firebase"

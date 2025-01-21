@@ -23,22 +23,17 @@ stages:
       removeHyperlinksFromReleaseNotes: true
       BannerVersionNameText: "CANARY"
 
-- stage: AppCenter_TestFlight_Canary
+- stage: FirebaseDistribution_TestFlight_Canary
   condition: and(succeeded(), eq(variables['IsCanary'], 'true'))
   dependsOn: Build_Canary
-
   jobs:
-  - template: build/stage-release-appcenter.yml
+  - template: build/stage-release-firebase-app-distribution.yml
     parameters:
       applicationEnvironment: Staging
-      deploymentEnvironment: AppCenter
-      appCenterWindowsSlug: $(AppCenterWindowsSlug_Canary)
-      appCenteriOSSlug: $(AppCenteriOSSlug_Canary)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug_Canary)
-      androidKeyStoreFile: $(InternalKeystore)
+      deploymentEnvironment: Firebase App Distribution
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      appCenterServiceConnectionName: $(AppCenterCanaryServiceConnection)
-      appCenterDistributionGroup: $(AppCenterCanaryDistributionGroup)
+      serviceConnectionKeyFileName: $(FirebaseAppDistributionServiceConnection)
+      artifactFileName: 'com.nventive.internal.applicationtemplate-Signed.apk'
 
   - template: build/stage-release-appstore.yml
     parameters:

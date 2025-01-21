@@ -7,6 +7,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 
 ## 3.6.X
 - Added conventional commit validation stage `stage-commit-validation.yml`
+- Replacing Appcenter with Firebase app distribution for android.
 
 ## 3.5.X
 - Bump Uno packages to 5.2.121 to fix a crash on iOS.
