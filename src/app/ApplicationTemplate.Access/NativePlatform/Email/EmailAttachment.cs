@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace ApplicationTemplate;
+namespace ApplicationTemplate.DataAccess;
 
 public sealed class EmailAttachment
 {

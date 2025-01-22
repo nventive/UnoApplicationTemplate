@@ -36,7 +36,7 @@ The application solution is divided in 3 main areas.
   The other layers are `.Net Standard 2.0` libraries that are platform agnostic.
 
 ### Access (DAL)
-The _data access layer_ is where you would put external dependencies such as API clients and local storage.
+The _data access layer_ is where you would put external dependencies such as API clients, local storage and native platform access.
 Classes providing data should be suffixed with `Repository`.
 This is where you put serializable entities.
 The associated `csproj` is named `Access` (and not `DataAccess`) so that it shows as the first element alphabetically.

@@ -1,4 +1,5 @@
 ﻿using System;
+using ApplicationTemplate.DataAccess;
 using Chinook.DataLoader;
 using MallardMessageHandlers;
 
@@ -12,9 +13,9 @@ namespace ApplicationTemplate;
 public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 {
 	private readonly IDataLoader _dataLoader;
-	private readonly IConnectivityProvider _connectivity;
+	private readonly IConnectivityRepository _connectivity;
 
-	public NetworkReconnectionDataLoaderTrigger(IDataLoader dataLoader, IConnectivityProvider connectivity)
+	public NetworkReconnectionDataLoaderTrigger(IDataLoader dataLoader, IConnectivityRepository connectivity)
 		: base("NetworkReconnection")
 	{
 		_dataLoader = dataLoader ?? throw new ArgumentNullException(nameof(dataLoader));
@@ -23,12 +24,12 @@ public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 	}
 
 	/// <remarks>
-	/// We should only refresh when <see cref="IDataLoader" /> state is <see cref="NoNetworkException"/> AND network access is <see cref="NetworkAccess.Internet"/>.
+	/// We should only refresh when <see cref="IDataLoader" /> state is <see cref="NoNetworkException"/> AND network access is <see cref="ConnectivityState.Internet"/>.
 	/// </remarks>
 	private void OnConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
 	{
 		if (_dataLoader.State.Error is NoNetworkException &&
-			e.NetworkAccess == NetworkAccess.Internet)
+			e.State == ConnectivityState.Internet)
 		{
 			RaiseLoadRequested();
 		}
@@ -44,7 +45,7 @@ public sealed class NetworkReconnectionDataLoaderTrigger : DataLoaderTriggerBase
 
 public static class NetworkReconnectionDataLoaderExtensions
 {
-	public static TBuilder TriggerOnNetworkReconnection<TBuilder>(this TBuilder dataLoaderBuilder, IConnectivityProvider connectivity)
+	public static TBuilder TriggerOnNetworkReconnection<TBuilder>(this TBuilder dataLoaderBuilder, IConnectivityRepository connectivity)
 		where TBuilder : IDataLoaderBuilder
 		=> (TBuilder)dataLoaderBuilder.WithTrigger(dataLoader => new NetworkReconnectionDataLoaderTrigger(dataLoader, connectivity));
 }

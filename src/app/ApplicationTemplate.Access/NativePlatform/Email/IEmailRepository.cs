@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
 
-namespace ApplicationTemplate;
+namespace ApplicationTemplate.DataAccess;
 
 /// <summary>
-/// Provides methods to send emails.
+/// Provides access to native methods to send emails.
 /// </summary>
-public interface IEmailService
+public interface IEmailRepository
 {
 	/// <summary>
 	/// Launches the email application with a new <see cref="Email"/> displayed.

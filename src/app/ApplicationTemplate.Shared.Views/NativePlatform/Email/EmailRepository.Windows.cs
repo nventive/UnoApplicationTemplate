@@ -3,10 +3,11 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationTemplate.DataAccess;
 
 namespace ApplicationTemplate;
 
-public sealed partial class EmailService : IEmailService
+public sealed partial class EmailRepository : IEmailRepository
 {
 	public Task Compose(Email email)
 	{

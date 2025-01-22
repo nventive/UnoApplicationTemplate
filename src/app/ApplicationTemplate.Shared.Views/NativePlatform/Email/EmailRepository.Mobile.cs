@@ -2,10 +2,11 @@
 #if __MOBILE__
 using System.Linq;
 using System.Threading.Tasks;
+using ApplicationTemplate.DataAccess;
 
 namespace ApplicationTemplate;
 
-public sealed partial class EmailService : IEmailService
+public sealed partial class EmailRepository : IEmailRepository
 {
 	public async Task Compose(Email email)
 	{

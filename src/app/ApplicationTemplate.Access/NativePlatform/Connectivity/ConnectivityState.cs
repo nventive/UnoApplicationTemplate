@@ -1,9 +1,9 @@
-﻿namespace ApplicationTemplate;
+﻿namespace ApplicationTemplate.DataAccess;
 
 /// <summary>
 /// Various states of the connection to the internet.
 /// </summary>
-public enum NetworkAccess
+public enum ConnectivityState
 {
 	/// <summary>
 	/// The state of the connectivity is not known.

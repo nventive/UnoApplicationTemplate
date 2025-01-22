@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
+using ApplicationTemplate.DataAccess;
 using Chinook.DataLoader;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -27,7 +28,7 @@ public sealed partial class DadJokesPageViewModel : ViewModel
 	public IDataLoader<DadJokesItemViewModel[]> Jokes => this.GetDataLoader(LoadJokes, b => b
 		// Dispose the previous ItemViewModels when Quotes produces new values.
 		.DisposePreviousData()
-		.TriggerOnNetworkReconnection(this.GetService<IConnectivityProvider>())
+		.TriggerOnNetworkReconnection(this.GetService<IConnectivityRepository>())
 		.TriggerFromObservable(this.GetService<IDadJokesService>().GetAndObservePostTypeFilter().Skip(1))
 	);
 
