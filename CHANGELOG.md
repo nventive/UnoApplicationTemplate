@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 3.7.X
+- Replacing Appcenter with Firebase app distribution for Android.
+
 ## 3.6.X
 - Added conventional commit validation stage `stage-commit-validation.yml`
 
