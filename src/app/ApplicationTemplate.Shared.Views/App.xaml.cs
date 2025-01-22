@@ -83,7 +83,9 @@ public sealed partial class App : Application
 
 //-:cnd:noEmit
 #if DEBUG
+#pragma warning disable UNO0008 // We are not using Uno.Sdk, so we need to disable this warning.
 		CurrentWindow.EnableHotReload();
+#pragma warning restore UNO0008
 #endif
 //+:cnd:noEmit
 

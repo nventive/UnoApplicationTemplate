@@ -10,6 +10,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Updated Pipeline Code Coverage Task from V1 to V2.
 - Fixed iOS crash by updating package and configuring the interpreter.
 - Added support for arm64 and x86 cpus in the mobile project.
+- Update Uno packages from 5.2.121 to 5.5.95.
 
 ## 3.7.X
 - Replacing Appcenter with Firebase app distribution for Android.
