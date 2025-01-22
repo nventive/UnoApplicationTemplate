@@ -77,7 +77,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{6E8378CB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "templates", "templates", "{560A7587-83FE-4092-A4CF-508AE33104BF}"
 	ProjectSection(SolutionItems) = preProject
+		..\build\templates\dotnet-install.yml = ..\build\templates\dotnet-install.yml
 		..\build\templates\gitversion.yml = ..\build\templates\gitversion.yml
+		..\build\templates\validate-commits.yaml = ..\build\templates\validate-commits.yaml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApplicationTemplate.Tests.Functional", "app\ApplicationTemplate.Tests.Functional\ApplicationTemplate.Tests.Functional.csproj", "{9B07CC3A-3D9A-474B-A243-CDD099D20415}"

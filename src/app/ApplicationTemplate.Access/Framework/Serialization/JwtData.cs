@@ -54,14 +54,12 @@ public class JwtData<TPayload>
 	/// <summary>
 	/// Gets the deserialized header.
 	/// </summary>
-	public IDictionary<string, string> Header
-		=> _header ?? (_header = JsonSerializer.Deserialize(RawHeader, typeof(IDictionary<string, string>), _jsonSerializerOptions) as IDictionary<string, string>);
+	public IDictionary<string, string> Header => _header ??= JsonSerializer.Deserialize<IDictionary<string, string>>(RawHeader, _jsonSerializerOptions);
 
 	/// <summary>
 	/// Gets the deserialized payload.
 	/// </summary>
-	public TPayload Payload
-		=> _payload ?? (_payload = JsonSerializer.Deserialize(RawPayload, typeof(TPayload), _jsonSerializerOptions) as TPayload);
+	public TPayload Payload => _payload ??= JsonSerializer.Deserialize<TPayload>(RawPayload, _jsonSerializerOptions);
 
 	/// <summary>
 	/// Gets the decoded signature of the JWT.

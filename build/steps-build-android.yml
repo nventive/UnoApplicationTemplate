@@ -1,4 +1,4 @@
-parameters:
+﻿parameters:
 - name: androidKeyStoreFile
   type: string
   default: ''
@@ -69,7 +69,7 @@ steps:
   displayName: 'Copy Binary Files'
   retryCountOnTaskFailure: 3
   inputs:
-    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net8.0-android'
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net9.0-android35.0'
     Contents: |
       **/*.aab
       **/*.apk

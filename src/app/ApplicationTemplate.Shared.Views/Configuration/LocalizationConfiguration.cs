@@ -21,12 +21,12 @@ public static class LocalizationConfiguration
 {
 	private static ThreadCultureOverrideService _cultureOverrideService;
 
-	private static CultureInfo[] SupportedCultures { get; } = new CultureInfo[]
-	{
+	private static CultureInfo[] SupportedCultures { get; } =
+	[
 		// TODO: Set your supported cultures here.
 		new CultureInfo("en-CA"),
 		new CultureInfo("fr-CA"),
-	};
+	];
 
 	/// <summary>
 	/// Adds the localization services to the <see cref="IServiceCollection"/>.
@@ -109,10 +109,7 @@ public class ResourceLoaderStringLocalizer : IStringLocalizer
 
 	private LocalizedString GetLocalizedString(string name, params object[] arguments)
 	{
-		if (name is null)
-		{
-			throw new ArgumentNullException(nameof(name));
-		}
+		ArgumentNullException.ThrowIfNull(name);
 
 		var resource = _resourceLoader.GetString(name);
 
@@ -125,7 +122,7 @@ public class ResourceLoaderStringLocalizer : IStringLocalizer
 
 		resource ??= name;
 
-		var value = arguments.Any()
+		var value = arguments.Length != 0
 			? string.Format(CultureInfo.CurrentCulture, resource, arguments)
 			: resource;
 
@@ -224,14 +221,9 @@ public class ThreadCultureOverrideService : IThreadCultureOverrideService
 	/// <inheritdoc/>
 	public void SetCulture(CultureInfo culture)
 	{
-		if (culture is null)
-		{
-			throw new ArgumentNullException(nameof(culture));
-		}
+		ArgumentNullException.ThrowIfNull(culture);
 
-		using (var writer = File.CreateText(_settingFilePath))
-		{
-			writer.Write(culture.Name);
-		}
+		using var writer = File.CreateText(_settingFilePath);
+		writer.Write(culture.Name);
 	}
 }
