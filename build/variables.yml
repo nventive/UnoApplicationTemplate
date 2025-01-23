@@ -3,7 +3,7 @@
   # Make sure you have the following variable groups in your Azure pipeline library:
   #
   # ApplicationTemplate.Distribution.Internal.Android
-  #   ApplicationIdentifier: This is the internal application id of the app for AppCenter releases. Note that this variable is used by Nimue to automatically change the package name.
+  #   ApplicationIdentifier: This is the internal application id of the app for iOS releases.
   #   AndroidSigningKeyAlias: This is the keystore alias.
   #   AndroidSigningKeyPass: This is the keystore keypass (secured).
   #   AndroidSigningStorePass: This is the keystore storepass (secured).
@@ -15,7 +15,7 @@
   #   AndroidSigningStorePass: This is the keystore storepass (secured).
   #
   # ApplicationTemplate.Distribution.Internal.iOS
-  #   ApplicationIdentifier: This is the internal application id of the app for AppCenter releases. Note that this variable is used by Nimue to automatically change the bundle id.
+  #   ApplicationIdentifier: This is the internal application id of the app for iOS releases.
   #   AppleCertificatePassword: The certificate password (secured).
   #
   # ApplicationTemplate.Distribution.AppStore
@@ -39,26 +39,8 @@
   # Prerequisites - Service connections
   # Make sure you have the following service connections in your Azure pipeline library.
   GooglePlayServiceConnection: GooglePlay-nventive-ApplicationTemplate
-  AppCenterServiceConnection: AppCenter-nventive-framework
   AppStoreServiceConnection: AppStore-nventive
-  AppCenterCanaryServiceConnection: AppCenter-nventive-framework
-
-  # AppCenter slugs
-  # The "app slug" corresponds to the identifiers of the app in AppCenter; to find it, navigate to the app in a browser and;
-  # the URL should look like this: https://appcenter.ms/orgs/{orgId}/apps/{appId}; the slug is simply: "{orgId}/{appId}".
-  AppCenterAndroidSlug: 'nventive-framework/Application-Template-1'
-  AppCenteriOSSlug: 'nventive-framework/Application-Template'
-  AppCenterWindowsSlug: 'nventive-framework/Application-Template-2'
-  AppCenterAndroidSlug_Production: 'nventive-framework/ApplicationTemplate-Production-1'
-  AppCenteriOSSlug_Production: 'nventive-framework/ApplicationTemplate-Production'
-  AppCenterWindowsSlug_Production: 'nventive-framework/ApplicationTemplate-Production-2'
-  AppCenterAndroidSlug_Canary: 'nventive-framework/Application-Template-Canary-1'
-  AppCenteriOSSlug_Canary: 'nventive-framework/Application-Template-Canary'
-  AppCenterWindowsSlug_Canary: 'nventive-framework/Application-Template-Canary-2'
-
-  # AppCenter Distribution Groups
-  AppCenterDistributionGroup: '00000000-0000-0000-0000-000000000000'
-  AppCenterCanaryDistributionGroup: '00000000-0000-0000-0000-000000000000'
+  FirebaseAppDistributionServiceConnection: com.nventive.applicationtemplate.firebaseappdistribution.json
 
   # Azure subscription
   # AzureSubscriptionName:

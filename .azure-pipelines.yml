@@ -23,6 +23,8 @@ trigger:
       - main
 
 variables:
+- name: system.debug
+  value: true
 #-if false
 - name: IsReleaseBranch
   value: $[eq(variables['Build.SourceBranch'], 'refs/heads/main')]
@@ -80,21 +82,17 @@ stages:
       iosVariableGroup: 'ApplicationTemplate.Distribution.Internal.iOS'
       BannerVersionNameText: "STAGING"
 
-- stage: AppCenter_TestFlight_Staging
+- stage: FirebaseDistribution_TestFlight_Staging
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Staging
   jobs:
-  - template: build/stage-release-appcenter.yml
+  - template: build/stage-release-firebase-app-distribution.yml
     parameters:
       applicationEnvironment: Staging
-      deploymentEnvironment: AppCenter
-      appCenterWindowsSlug: $(AppCenterWindowsSlug)
-      appCenteriOSSlug: $(AppCenteriOSSlug)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug)
-      androidKeyStoreFile: $(InternalKeystore)
+      deploymentEnvironment: Firebase App Distribution
       androidVariableGroup: 'ApplicationTemplate.Distribution.Internal.Android'
-      appCenterServiceConnectionName: $(AppCenterServiceConnection)
-      appCenterDistributionGroup: $(AppCenterDistributionGroup)
+      serviceConnectionKeyFileName: $(FirebaseAppDistributionServiceConnection)
+      artifactFileName: 'com.nventive.internal.applicationtemplate-Signed.apk'
 
   - template: build/stage-release-appstore.yml
     parameters:
@@ -114,21 +112,17 @@ stages:
       iosCertificateFile: $(AppStoreCertificate)
       iosVariableGroup: 'ApplicationTemplate.Distribution.AppStore'
 
-- stage: AppCenter_Production
+- stage: FirebaseDistribution_Production
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
   dependsOn: Build_Production
   jobs:
-  - template: build/stage-release-appcenter.yml
+  - template: build/stage-release-firebase-app-distribution.yml
     parameters:
       applicationEnvironment: Production
-      deploymentEnvironment: 'AppCenter Prod'
-      appCenterWindowsSlug: $(AppCenterWindowsSlug_Production)
-      appCenteriOSSlug: $(AppCenteriOSSlug_Production)
-      appCenterAndroidSlug: $(AppCenterAndroidSlug_Production)
-      androidKeyStoreFile: $(GooglePlayKeystore)
+      deploymentEnvironment: Firebase App Distribution
       androidVariableGroup: 'ApplicationTemplate.Distribution.GooglePlay'
-      appCenterServiceConnectionName: $(AppCenterServiceConnection)
-      appCenterDistributionGroup: $(AppCenterDistributionGroup)
+      serviceConnectionKeyFileName: $(FirebaseAppDistributionServiceConnection)
+      artifactFileName: 'com.nventive.applicationtemplate-Signed.apk'
 
 - stage: AppStore
   condition: and(succeeded(), eq(variables['IsLightBuild'], 'false'))
