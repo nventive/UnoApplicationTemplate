@@ -275,6 +275,8 @@ dotnet_diagnostic.CA1065.severity = none
 dotnet_diagnostic.CA1303.severity = none
 # IDE0047:Remove unnecessary parentheses
 dotnet_diagnostic.IDE0047.severity = suggestion
+# IDE0130: Namespace does not match folder structure
+dotnet_diagnostic.IDE0130.severity = none
 # CA1056:Uri properties should not be strings
 dotnet_diagnostic.CA1056.severity = suggestion
 # CA1819:Properties should not return arrays

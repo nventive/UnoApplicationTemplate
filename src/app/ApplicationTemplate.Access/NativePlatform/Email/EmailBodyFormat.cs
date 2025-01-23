@@ -1,4 +1,4 @@
-﻿namespace ApplicationTemplate;
+﻿namespace ApplicationTemplate.DataAccess;
 
 public enum EmailBodyFormat
 {

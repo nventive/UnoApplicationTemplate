@@ -7,6 +7,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 
 ## 3.7.X
 - Replacing Appcenter with Firebase app distribution for Android.
+- Refactored the email and connectivity services to be in the access layer.
 
 ## 3.6.X
 - Added conventional commit validation stage `stage-commit-validation.yml`

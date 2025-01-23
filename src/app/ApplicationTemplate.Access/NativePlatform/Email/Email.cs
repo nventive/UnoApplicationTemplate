@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace ApplicationTemplate;
+namespace ApplicationTemplate.DataAccess;
 
 public sealed class Email
 {

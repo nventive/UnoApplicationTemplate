@@ -101,13 +101,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DiagnosticsService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Mobile.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Email\EmailService.Windows.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NativePlatform\Email\EmailRepository.Mobile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NativePlatform\Email\EmailRepository.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DeviceInformation\DeviceInformationProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\AppStoreUriProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Launcher\LauncherService.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Framework\Connectivity\ConnectivityProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NativePlatform\Connectivity\ConnectivityRepository.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Memory\MemoryProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\Memory\MemoryProvider.iOS.cs" />
@@ -424,5 +424,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Guillon-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Guillon-SemiBold.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\segmdl2.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)NativePlatform\" />
   </ItemGroup>
 </Project>

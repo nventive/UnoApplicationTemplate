@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Reactive.Concurrency;
 using System.Threading;
+using System.Threading.Tasks;
+using ApplicationTemplate.DataAccess;
 using Uno.Extensions;
 using Uno.Logging;
 using Windows.Networking.Connectivity;
 
 namespace ApplicationTemplate;
 
-public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
+public sealed class ConnectivityRepository : IConnectivityRepository, IDisposable
 {
 	private bool _subscribed = false;
 
@@ -33,32 +35,36 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 
 	private event EventHandler<ConnectivityChangedEventArgs> InnerConnectivityChanged;
 
-	public NetworkAccess NetworkAccess
+	public ConnectivityState State
 	{
 		get
 		{
 #if __WINDOWS__
-			// This is null if we access it from the UI thread.
-			var networkConnectivityLevel = DefaultScheduler.Instance.Run(
-				func: () => NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel(),
-				cancellationToken: CancellationToken.None
-			).Result;
+			var joinableTaskFactory = new Microsoft.VisualStudio.Threading.JoinableTaskFactory(new Microsoft.VisualStudio.Threading.JoinableTaskContext());
+			var networkConnectivityLevel = joinableTaskFactory.Run(static async () =>
+			{
+				// Needs to run on the UI thread on Windows.
+				return await DefaultScheduler.Instance.Run(
+					func: () => NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel(),
+					cancellationToken: CancellationToken.None
+				);
+			});
 #else
 			var networkConnectivityLevel = NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel();
 #endif
 			switch (networkConnectivityLevel)
 			{
 				case NetworkConnectivityLevel.None:
-					return NetworkAccess.None;
+					return ConnectivityState.None;
 				case NetworkConnectivityLevel.LocalAccess:
-					return NetworkAccess.Local;
+					return ConnectivityState.Local;
 				case NetworkConnectivityLevel.ConstrainedInternetAccess:
-					return NetworkAccess.ConstrainedInternet;
+					return ConnectivityState.ConstrainedInternet;
 				case NetworkConnectivityLevel.InternetAccess:
-					return NetworkAccess.Internet;
+					return ConnectivityState.Internet;
 				default:
 					this.Log().Error($"Unsupported Network Connectivity Level: {networkConnectivityLevel}");
-					return NetworkAccess.Unknown;
+					return ConnectivityState.Unknown;
 			}
 		}
 	}
@@ -82,6 +88,6 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 
 	private void OnNetworkStatusChanged(object sender)
 	{
-		InnerConnectivityChanged.Invoke(this, new ConnectivityChangedEventArgs(NetworkAccess));
+		InnerConnectivityChanged.Invoke(this, new ConnectivityChangedEventArgs(State));
 	}
 }

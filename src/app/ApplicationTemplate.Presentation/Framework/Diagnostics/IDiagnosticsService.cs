@@ -32,4 +32,16 @@ public interface IDiagnosticsService
 	/// This value is based on the platform.
 	/// </summary>
 	bool CanOpenSettingsFolder { get; }
+
+	/// <summary>
+	/// Sends the diagnostics summary by email.
+	/// </summary>
+	/// <param name="ct">The cancellation token.</param>
+	Task SendSummary(CancellationToken ct);
+
+	/// <summary>
+	/// Gets the diagnostics summary.
+	/// </summary>
+	/// <returns>The diagnostics summary.</returns>
+	string GetSummary();
 }

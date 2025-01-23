@@ -143,7 +143,7 @@ public static class ApiConfiguration
 	{
 		return services
 			.AddSingleton<INetworkAvailabilityChecker>(s =>
-					new NetworkAvailabilityChecker(ct => Task.FromResult(s.GetRequiredService<IConnectivityProvider>().NetworkAccess is NetworkAccess.Internet))
+					new NetworkAvailabilityChecker(ct => Task.FromResult(s.GetRequiredService<IConnectivityRepository>().State is ConnectivityState.Internet))
 			)
 			.AddTransient<NetworkExceptionHandler>();
 	}
