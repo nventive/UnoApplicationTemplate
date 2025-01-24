@@ -64,13 +64,11 @@ steps:
     reports: '${{ parameters.pathToSrc }}/**/*.cobertura.xml'
     targetdir: '${{ parameters.pathToSrc }}/CoverageReport'
 
-- task: PublishCodeCoverageResults@1
+- task: PublishCodeCoverageResults@2
   displayName: Publish Code Coverage Results
   condition: succeeded()
   inputs:
-    codeCoverageTool: 'Cobertura'
     summaryFileLocation: "${{ parameters.pathToSrc }}/CoverageReport/Cobertura.xml"
-    reportDirectory: '${{ parameters.pathToSrc }}/CoverageReport'
   env:
     DISABLE_COVERAGE_AUTOGENERATE: 'true' # This is disabled because we manually generate the report from at least 2 collections (Unit & Functional).
 

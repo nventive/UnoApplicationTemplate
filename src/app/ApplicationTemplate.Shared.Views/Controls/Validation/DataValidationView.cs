@@ -119,7 +119,7 @@ public sealed partial class DataValidationView : ContentControl
 				.Cast<object>()
 				.ToImmutableList();
 
-			if (errors.Any())
+			if (!errors.IsEmpty)
 			{
 				state = new DataValidationState(DataValidationStateType.Error, errors);
 			}

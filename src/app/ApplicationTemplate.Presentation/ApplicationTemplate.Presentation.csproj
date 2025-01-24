@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net8.0</TargetFramework>
-		<LangVersion>12.0</LangVersion>
+		<TargetFramework>net9.0</TargetFramework>
+		<LangVersion>13.0</LangVersion>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<TreatWarningsAsErrors Condition="'$(Configuration)'=='Release'">true</TreatWarningsAsErrors>
 	</PropertyGroup>
@@ -26,10 +26,10 @@
 		<PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
 		<PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.4" />
-		<PackageReference Include="Chinook.DynamicMvvm" Version="2.1.0" />
-		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="2.1.0" />
-		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="2.1.0" />
-		<PackageReference Include="Chinook.DynamicMvvm.CollectionTracking" Version="2.1.0" />
+		<PackageReference Include="Chinook.DynamicMvvm" Version="2.1.1" />
+		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="2.1.1" />
+		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="2.1.1" />
+		<PackageReference Include="Chinook.DynamicMvvm.CollectionTracking" Version="2.1.1" />
 		<PackageReference Include="Chinook.DataLoader" Version="2.0.0" />
 		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="2.0.0" />
 		<PackageReference Include="Chinook.BackButtonManager" Version="2.1.0" />

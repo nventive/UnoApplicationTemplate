@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<LangVersion>12.0</LangVersion>
-		<TargetFrameworks>net8.0-android;net8.0-ios</TargetFrameworks>
+		<LangVersion>13.0</LangVersion>
+		<TargetFrameworks>net9.0-android35.0;net9.0-ios</TargetFrameworks>
 		<SingleProject>true</SingleProject>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-android'">29.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net8.0-ios'">14.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-android35.0'">29.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-ios'">14.2</SupportedOSPlatformVersion>
 		<NoWarn>Uno0001</NoWarn>
 	</PropertyGroup>
 	<!-- Linker configuration. -->
@@ -18,11 +18,11 @@
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.1.0" />
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0" />
-		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="2.1.0" />
+		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="2.1.1" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="3.0.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.0" />
 		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="8.0.3" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.30" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.0" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.6.0" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.0" />
@@ -46,7 +46,7 @@
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
 	<Choose>
-		<When Condition="'$(TargetFramework)'=='net8.0-android'">
+		<When Condition="'$(TargetFramework)'=='net9.0-android35.0'">
 			<PropertyGroup>
 				<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 				<BundleAssemblies>False</BundleAssemblies>
@@ -141,7 +141,7 @@
 				</AndroidResource>
 			</ItemGroup>
 		</When>
-		<When Condition="'$(TargetFramework)'=='net8.0-ios'">
+		<When Condition="'$(TargetFramework)'=='net9.0-ios'">
 			<PropertyGroup>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName)</MtouchExtraArgs>

@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 3.8.X
+- Updated from .NET 8 to .NET 9.
+- Updated Pipeline Code Coverage Task from V1 to V2.
+
 ## 3.7.X
 - Replacing Appcenter with Firebase app distribution for Android.
 - Refactored the email and connectivity services to be in the access layer.
