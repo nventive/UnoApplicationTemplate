@@ -17,14 +17,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="ByteSize" Version="2.1.2" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.2" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Hosting" Version="9.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
 		<PackageReference Include="ReviewService" Version="1.0.0" />
 		<PackageReference Include="Uno.SourceGenerationTasks" Version="4.2.0" />
-		<PackageReference Include="Serilog.Extensions.Hosting" Version="3.0.0" />
-		<PackageReference Include="Serilog.Settings.Configuration" Version="3.4.0" />
-		<PackageReference Include="Serilog.Sinks.Debug" Version="1.0.1" />
+		<PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
+		<PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.4" />
 		<PackageReference Include="Chinook.DynamicMvvm" Version="2.1.1" />
 		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="2.1.1" />

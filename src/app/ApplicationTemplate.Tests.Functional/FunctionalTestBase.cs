@@ -22,12 +22,13 @@ namespace ApplicationTemplate.Tests;
 /// <summary>
 /// Gives access to the services and their configuration.
 /// </summary>
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "IAsyncLifetime provides a DisposeAsync method that is automatically called.")]
 public class FunctionalTestBase : IAsyncLifetime
 {
 	private readonly ITestOutputHelper _output;
 	private readonly CoreStartup _coreStartup;
 	private readonly FunctionalTestBackButtonSource _backButtonSource = new();
-	private readonly Lazy<ShellViewModel> _shellViewModel = new Lazy<ShellViewModel>(() => new ShellViewModel());
+	private readonly Lazy<ShellViewModel> _shellViewModel = new(() => new ShellViewModel());
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="FunctionalTestBase"/> class.
@@ -63,7 +64,7 @@ public class FunctionalTestBase : IAsyncLifetime
 			IEnumerable<KeyValuePair<string, string>> GetTestConfigurationValues()
 			{
 				// Override the IsMockEnabled value based on the USE_REAL_APIS environment variable.
-				bool.TryParse(Environment.GetEnvironmentVariable("USE_REAL_APIS"), out var useReadApis);
+				_ = bool.TryParse(Environment.GetEnvironmentVariable("USE_REAL_APIS"), out var useReadApis);
 				var key = ApplicationTemplateConfigurationExtensions.DefaultOptionsName<MockOptions>() + ":" + nameof(MockOptions.IsMockEnabled);
 				yield return new KeyValuePair<string, string>(key, (!useReadApis).ToString());
 			}
@@ -147,7 +148,8 @@ public class FunctionalTestBase : IAsyncLifetime
 		var navTask = sectionNavigator.ObserveCurrentState()
 			.StartWith(sectionNavigator.State)
 			.Where(x => x.LastRequestState != NavigatorRequestState.Processing
-				&& (x.GetCurrentOrNextViewModelType() == viewModelType) == isDestination)
+				&& x.GetCurrentOrNextViewModelType() != null
+				&& x.GetCurrentOrNextViewModelType() == viewModelType == isDestination)
 			// The CancellationToken is so that this returns a task.
 			.FirstAsync(CancellationToken.None);
 
@@ -233,9 +235,11 @@ public class FunctionalTestBase : IAsyncLifetime
 		ViewModelBase.DefaultServiceProvider.Should().BeSameAs(_coreStartup.ServiceProvider, because: "We want the ViewModels of this test to use the services that we just initialized.");
 	}
 
-	async Task IAsyncLifetime.DisposeAsync()
+	Task IAsyncLifetime.DisposeAsync()
 	{
 		_coreStartup.Dispose();
+		_backButtonSource.Dispose();
+		return Task.CompletedTask;
 	}
 
 	private sealed class FunctionalTestBackButtonSource : IBackButtonSource

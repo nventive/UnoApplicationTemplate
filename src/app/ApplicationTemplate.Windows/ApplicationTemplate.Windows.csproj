@@ -78,15 +78,15 @@
 		<PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.12.19" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.30" />
 		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.22621.756" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="7.0.0" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.0" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.6.0" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.0" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.0.1" />
-		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
 		<PackageReference Include="Uno.Material.WinUI" Version="5.0.13" />
 		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.0.18" />
 	</ItemGroup>
