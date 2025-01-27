@@ -8,6 +8,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 ## 3.8.X
 - Updated from .NET 8 to .NET 9.
 - Updated Pipeline Code Coverage Task from V1 to V2.
+- Added support for arm64 and x86 cpus in the mobile project.
 
 ## 3.7.X
 - Replacing Appcenter with Firebase app distribution for Android.
