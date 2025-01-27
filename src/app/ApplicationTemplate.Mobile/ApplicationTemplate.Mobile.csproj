@@ -54,6 +54,7 @@
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
 					<PropertyGroup>
+						<RuntimeIdentifiers>android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
 						<AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
 						<UseHighDPIResources>False</UseHighDPIResources>
 						<EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
