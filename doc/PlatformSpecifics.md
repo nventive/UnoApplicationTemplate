@@ -2,7 +2,7 @@
 
 ## Android
 
-#### AndroidManifest
+### AndroidManifest
 - Information usually found in AndroidManifest is split into three files.
     - `AndroidManifest.xml` for various options, intent filters providers etc.
     - `AssemblyInfo.cs` for the permissions.
@@ -43,6 +43,28 @@ To generate this file, following the following steps:
 - [For more information, check this article.](https://devblogs.microsoft.com/dotnet/performance-improvements-in-dotnet-maui)
 - [For more documentation, check this GitHub.](https://github.com/jonathanpeppers/Mono.Profiler.Android)
 
-### iOS
 
-### Windows
+## iOS
+
+### Interpreter
+
+If the iOS application is crashing instantly on launch, it may be caused by the AOT compilation (ahead of time) for iOS.
+Some NuGet packages don’t always support the necessary AOT conditions and instead are JIT compiled (just in time).
+
+1. Connect your iPhone to your Mac via cable.
+2. Open the 'Console' application on your Mac.
+   > 💡 [Console User Guide for Mac – Apple Support (SG)](https://support.apple.com/en-sg/guide/console/welcome/mac)
+3. Choose your phone and click on start stream.
+4. Open the application that has the problem.
+5. Search for the error in the Mac 'Console' application, it should provide you with the assembly that is causing the issue.
+   > 💡 Search for 'Failed to load AOT module'.
+6. Then include it in the list of assemblies that should be interpreted.
+   ```xml
+   <ItemGroup>
+	   <MtouchInterpreter>-all,InterpretedAssembly</MtouchInterpreter>
+   </ItemGroup>
+   ```
+7. Try again, sometime you may need to add more assemblies to the list.
+
+
+## Windows
