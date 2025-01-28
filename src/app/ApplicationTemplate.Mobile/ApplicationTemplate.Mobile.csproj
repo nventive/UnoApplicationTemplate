@@ -27,15 +27,15 @@
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.6.0" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.0" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
-		<PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.200" />
-		<PackageReference Include="Uno.Material.WinUI" Version="5.0.13" />
+		<PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.204" />
+		<PackageReference Include="Uno.Material.WinUI" Version="5.3.1" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.4.2" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.4.2" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.0.18" />
-		<PackageReference Include="Uno.WinUI" Version="5.2.121" />
-		<PackageReference Include="Uno.WinUI.DevServer" Version="5.2.121" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.WinUI.Lottie" Version="5.2.121" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.2.121" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.3.7" />
+		<PackageReference Include="Uno.WinUI" Version="5.5.95" />
+		<PackageReference Include="Uno.WinUI.DevServer" Version="5.5.95" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.WinUI.Lottie" Version="5.5.95" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.5.95" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
@@ -99,9 +99,9 @@
 				</When>
 			</Choose>
 			<ItemGroup>
-				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.36" />
+				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.37" />
 				<PackageReference Include="Mono.AotProfiler.Android" Version="7.0.0" />
-				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.9.23.1" />
+				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.0.21.2" />
 			</ItemGroup>
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
