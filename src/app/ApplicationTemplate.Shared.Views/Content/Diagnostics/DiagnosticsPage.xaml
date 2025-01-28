@@ -1,7 +1,6 @@
 ﻿<Page x:Class="ApplicationTemplate.Views.Content.DiagnosticsPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-	  xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
 	  xmlns:core="using:Microsoft.Xaml.Interactions.Core">
 
 	<Grid Background="{ThemeResource BackgroundBrush}">
@@ -152,11 +151,9 @@
 									  Width="50"
 									  MinWidth="50"
 									  Grid.Column="1">
-							<interactivity:Interaction.Behaviors>
-								<core:EventTriggerBehavior EventName="Toggled">
-									<core:InvokeCommandAction Command="{Binding NotifyNeedsRestart}" />
-								</core:EventTriggerBehavior>
-							</interactivity:Interaction.Behaviors>
+							<core:EventTriggerBehavior EventName="Toggled">
+								<core:InvokeCommandAction Command="{Binding NotifyNeedsRestart}" />
+							</core:EventTriggerBehavior>
 						</ToggleSwitch>
 					</Grid>
 

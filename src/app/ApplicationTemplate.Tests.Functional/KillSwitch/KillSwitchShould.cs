@@ -12,7 +12,7 @@ namespace KillSwitch;
 /// <summary>
 /// Tests for the kill switch flow.
 /// </summary>
-public sealed class KillSwitchShould : FunctionalTestBase
+public sealed class KillSwitchShould : FunctionalTestBase, IDisposable
 {
 	private IKillSwitchRepository _killSwitchRepository;
 	private Subject<bool> _killSwitchActivatedSubject = new Subject<bool>();
@@ -83,6 +83,12 @@ public sealed class KillSwitchShould : FunctionalTestBase
 
 		// Assert
 		ActiveViewModel.Should().NotBeOfType<KillSwitchPageViewModel>();
+	}
+
+	/// <inheritdoc />
+	public void Dispose()
+	{
+		_killSwitchActivatedSubject.Dispose();
 	}
 
 	/// <inheritdoc />
