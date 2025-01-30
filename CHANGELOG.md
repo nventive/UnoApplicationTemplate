@@ -11,6 +11,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Fixed iOS crash by updating package and configuring the interpreter.
 - Added support for arm64 and x86 cpus in the mobile project.
 - Update Uno packages from 5.2.121 to 5.5.95.
+- Adding workaround for uno safe area issue https://github.com/unoplatform/uno/issues/6218
 
 ## 3.7.X
 - Replacing Appcenter with Firebase app distribution for Android.
