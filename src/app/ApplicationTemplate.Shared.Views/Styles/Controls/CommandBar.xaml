@@ -31,8 +31,6 @@
 				<!-- Note: NavigationCommand is an AppBarButton, not an ICommand. -->
 				<ContentControl Content="{Binding (toolkit:CommandBarExtensions.NavigationCommand), RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource NullableAppBarButtonToAppBarButton}}"
 								Foreground="{TemplateBinding Foreground}"
-								MaxHeight="{StaticResource MaterialCommandBarHeight}"
-								MaxWidth="{StaticResource MaterialCommandBarHeight}"
 								IsTabStop="False" />
 
 				<!--
@@ -87,9 +85,6 @@
 				</DataTemplate>
 			</Setter.Value>
 		</Setter>
-
-		<Setter Property="Height"
-				Value="{StaticResource MaterialCommandBarHeight}" />
 
 		<Setter Property="HorizontalAlignment"
 				Value="Stretch" />
