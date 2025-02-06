@@ -1,4 +1,4 @@
-# This template is used to validate that the commit messages follow the Conventional Commits specification (https://www.conventionalcommits.org/en/v1.0.0/).
+﻿# This template is used to validate that the commit messages follow the Conventional Commits specification (https://www.conventionalcommits.org/en/v1.0.0/).
 # Consider placing this at the beginning of the build pipeline to ensure that the commits are valid before proceeding with longer build steps.
 steps:
   - task: PowerShell@2
@@ -18,8 +18,9 @@ steps:
         Write-Host "Retrieving commits..."
         git fetch origin
         Write-Host "Commit Range: origin/$(System.PullRequest.TargetBranch)..origin/$(System.PullRequest.SourceBranch)"
-        $commits = git log origin/$(System.PullRequest.TargetBranch)..origin/$(System.PullRequest.SourceBranch) --pretty=format:"%H %B"
-        $commitCount = ($commits | Measure-Object).Count
+        $commits = git log origin/$(System.PullRequest.TargetBranch)..origin/$(System.PullRequest.SourceBranch) --pretty=format:"%s"
+        $commitArray = $commits -split "`n"
+        $commitCount = $commitArray.Count
         Write-Host "Commits found: $commitCount"
 
         # Regex pattern for Conventional Commits
@@ -28,8 +29,8 @@ steps:
 
         # Validate each commit message
         $invalidCommits = @()
-        foreach ($commit in $commits -split "`n") {
-          $commitMessage = $commit.Substring($commit.IndexOf(" ") + 1)
+        foreach ($commit in $commitArray) {
+          $commitMessage = $commit.Trim()
           Write-Host "Validating commit: $commitMessage"
 
           if ($commitMessage -notmatch $pattern) {
