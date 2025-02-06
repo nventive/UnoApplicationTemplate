@@ -24,7 +24,7 @@ steps:
         Write-Host "Commits found: $commitCount"
 
         # Regex pattern for Conventional Commits
-        $pattern = '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([\w\.\-]+\))?(!)?: ([\w ])+([\s\S]*)|^(Merged PR \d+: .+)|^(Merge pull request #/d+ from .+)|^(Merge branch .+)'
+        $pattern = '^(build|chore|ci|docs|feat|fix|perf|refactor|revert|style|test){1}(\([\w\.\-]+\))?(!)?: ([\w ])+([\s\S]*)|^(Merged PR \d+: .+)|^(Merge pull request #\d+ from .+)|^(Merge branch .+)'
         Write-Host "Regular Expression: $pattern"
 
         # Validate each commit message
