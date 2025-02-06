@@ -10,6 +10,10 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Updated Pipeline Code Coverage Task from V1 to V2.
 - Fixed iOS crash by updating package and configuring the interpreter.
 - Added support for arm64 and x86 cpus in the mobile project.
+- Updated Uno packages from 5.2.121 to 5.6.30.
+- Adding workaround for uno safe area issue https://github.com/unoplatform/uno/issues/6218
+- Removing MaterialCommandbarHeight property.
+- Updated commit validation for the CI/CD.
 
 ## 3.7.X
 - Replacing Appcenter with Firebase app distribution for Android.
