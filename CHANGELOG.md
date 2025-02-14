@@ -14,6 +14,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Adding workaround for uno safe area issue https://github.com/unoplatform/uno/issues/6218
 - Removing MaterialCommandbarHeight property.
 - Updated commit validation for the CI/CD.
+- Added missing association between JsonContext and Refit.
 
 ## 3.7.X
 - Replacing Appcenter with Firebase app distribution for Android.
