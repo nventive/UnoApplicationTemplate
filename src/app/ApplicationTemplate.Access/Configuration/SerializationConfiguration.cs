@@ -6,6 +6,7 @@ using System.Text.Json.Serialization;
 using ApplicationTemplate.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
+using Refit;
 
 namespace ApplicationTemplate;
 
@@ -69,6 +70,9 @@ public static class SerializationConfiguration
 	{
 		services
 			.AddSingleton(DefaultJsonSerializerOptions)
+			// Add the adapter for Refit.
+			.AddSingleton<IHttpContentSerializer>(new SystemTextJsonContentSerializer(DefaultJsonSerializerOptions))
+			// Add the adapter for Nventive.Persistence.
 			.AddSingleton<ISettingsSerializer>(c => new JsonSerializerToSettingsSerializerAdapter(DefaultJsonSerializerOptions));
 
 		return services;

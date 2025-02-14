@@ -173,12 +173,17 @@ public static class ApiConfiguration
 	/// </summary>
 	/// <typeparam name="T">The type of the Refit interface.</typeparam>
 	/// <param name="services">The service collection.</param>
-	/// <param name="settings">Optional. The settings to configure the instance with.</param>
+	/// <param name="settingsProvider">Optional. The function to provide customized RefitSettings.</param>
 	/// <returns>The updated IHttpClientBuilder.</returns>
-	private static IHttpClientBuilder AddRefitHttpClient<T>(this IServiceCollection services, Func<IServiceProvider, RefitSettings> settings = null)
+	private static IHttpClientBuilder AddRefitHttpClient<T>(this IServiceCollection services, Func<IServiceProvider, RefitSettings> settingsProvider = null)
 		where T : class
 	{
-		services.AddSingleton(serviceProvider => RequestBuilder.ForType<T>(settings?.Invoke(serviceProvider)));
+		services.AddSingleton(serviceProvider =>
+		{
+			var settings = settingsProvider?.Invoke(serviceProvider) ?? new RefitSettings();
+			settings.ContentSerializer = serviceProvider.GetRequiredService<IHttpContentSerializer>();
+			return RequestBuilder.ForType<T>(settings);
+		});
 
 		return services
 			.AddHttpClient(typeof(T).FullName)
