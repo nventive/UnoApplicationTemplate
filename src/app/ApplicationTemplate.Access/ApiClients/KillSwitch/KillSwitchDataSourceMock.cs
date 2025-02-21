@@ -7,7 +7,7 @@ namespace ApplicationTemplate.DataAccess;
 /// <summary>
 /// Mock implementation of the kill switch repository.
 /// </summary>
-public sealed class KillSwitchRepositoryMock : IKillSwitchRepository, IDisposable
+public sealed class KillSwitchDataSourceMock : IKillSwitchDataSource, IDisposable
 {
 	private readonly Subject<bool> _killSwitchActivatedSubject = new();
 	private bool _killSwitchActivated = false;

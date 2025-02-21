@@ -9,7 +9,7 @@ using Windows.Networking.Connectivity;
 
 namespace ApplicationTemplate;
 
-public sealed class ConnectivityRepository : IConnectivityRepository, IDisposable
+public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 {
 	private bool _subscribed = false;
 

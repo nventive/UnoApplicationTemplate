@@ -33,26 +33,34 @@ The application solution is divided in 3 main areas.
 - `app-shared` contains the shared code used by the heads and the tests.
   - It's divided per application layer.
   - You can only put platform-specific code (things like `#if __IOS__`) in the Views layer.
-  The other layers are `.Net Standard 2.0` libraries that are platform agnostic.
+  The other layers are regular (non-multi-targeted) `netX.0` libraries that are platform agnostic.
 
 ### Access (DAL)
-The _data access layer_ is where you would put external dependencies such as API clients, local storage and native platform access.
-Classes providing data should be suffixed with `Repository`.
-This is where you put serializable entities.
+The _data access layer_ is where you would put external dependencies such as API clients, local storage and native platform services.
+Access Type | Suffix | Explanation
+-|-|-
+Generic | `DataSource`, `Provider` | `DataSource` or `Provider` are generic suffixes that can apply to any type of data access layer component.
+API Clients (such as HTTP) | `ApiClient`, `Repository` | `ApiClient` is a good generic suffix when dealing with any external API.<br/>`Repository` is a good suffix when dealing with a CRUD-like API.
+Local Storage | `Repository` | `Repository` is a good suffix when dealing a CRUD-like storage.
+Native Platform Service | `Service` | `Service` is a good suffix for components that give write access or have a fire-and-forget nature.
+
+This layer is also where you put serializable entities (also known as data transfer objects).
+Classes representing data transfer objects (DTOs) should be suffixed with `Data`.
 The associated `csproj` is named `Access` (and not `DataAccess`) so that it shows as the first element alphabetically.
 The root namespace is however configured to be `DataAccess`.
 
 ### Business
-The business layer is where you put your business services and entities that manipulate data from the data access layer.
-Classes providing business services should be suffixed with `Service`.
+The _business logic layer_ is where you put your business services and entities that manipulate data from the data access layer.
+Classes representing business services should be suffixed with `Service`.
 Entities from the business layer are usually immutable and they don't need to be serializable.
 
 ### Presentation
-The presentation layer implements the user experience (UX).
+The _presentation layer_ implements the user experience (UX).
 It contains all the ViewModels, navigation, dialogs, and most of the configuration.
+Classes representing ViewModels should be suffixed with `ViewModel` or `PageViewModel` when the ViewModel is associated to a page (for navigation).
 
 ### View
-The view layer implements the user interface (UI).
+The _view layer_ implements the user interface (UI).
 It contains all the XAML, converters, templates, styles, assets, and other UI resources.
 This layer also contains platform-specific implementations of services.
 For that reason, it also contains a good portion of the configuration.
@@ -101,14 +109,16 @@ See [Logging.md](Logging.md) for more details.
 ### Testing
 The architecture of application was designed with automated testing in mind.
 Automated testing explains why the application is divided in layers that are not multi-targeted.
-> i.e. The Access, Business, and Presentation libs target only .net9.0, and **not** .net9.0-ios nor .net9.0-android35.0.
+> i.e. The Access, Business, and Presentation libs target only `.net9.0`, and **not** `.net9.0-ios` nor `.net9.0-android35.0`.
 
-It also explains the separation of `Startup` and `CoreStartup`. `CoreStartup` can setup all the services that are non-UI dependent which can then be used to run simulations of the application using ViewModels that aren't attached to any UI.
+It also explains the separation of `Startup` and `CoreStartup`.
+`CoreStartup` can setup all the services that are non-UI dependent which can then be used to run simulations of the application using ViewModels that aren't attached to any UI.
 
 See [Testing.md](Testing.md) for more details.
 
 ## Access (DAL)
-Data access services (also referred to as _repositories_) are always declared using an interface and implemented in a separate class. These interfaces are meant to be used from the business layer.
+Data access components are always declared using an interface and implemented in a separate class.
+These interfaces are meant to be used from the business layer.
 
 ### HTTP Requests
 
@@ -133,11 +143,13 @@ See [Serialization.md](Serialization.md) for more details.
 This application uses [AuthenticationTokenHandler](https://github.com/nventive/MallardMessageHandlers#authenticationtokenhandler) from [MallardMessageHandlers](https://github.com/nventive/MallardMessageHandlers) to authorize HTTP requests and automatically refresh authentication tokens.
 
 ## Business
-Business services are always declared using an interface and implemented in a separate class. These interfaces are meant to be used from the presentation layer and sometimes by other business services.
+Business services are always declared using an interface and implemented in a separate class.
+These interfaces are meant to be used from the presentation layer and sometimes by other business services.
 
 ### Observable Collections
 
-This application uses [DynamicData](https://github.com/reactivemarbles/DynamicData) to expose observable lists from business services. These can then be used in the presentation layer to create ViewModels that are automatically disposed when their associated items are removed from the list.
+This application uses [DynamicData](https://github.com/reactivemarbles/DynamicData) to expose observable lists from business services.
+These can then be used in the presentation layer to create item ViewModels that are automatically disposed when their associated items are removed from the list.
 
 ### Forced Update
 
@@ -150,12 +162,14 @@ This application uses the [IKillSwitchService](../src/app/ApplicationTemplate.Bu
 ## Presentation
 
 ### MVVM - ViewModels
-This application uses [Chinook.DynamicMvvm](https://github.com/nventive/Chinook.DynamicMvvm) to implement the MVVM pattern. The `ViewModel` class is used as a base class for all ViewModels.
+This application uses [Chinook.DynamicMvvm](https://github.com/nventive/Chinook.DynamicMvvm) to implement the MVVM pattern.
+The `ViewModel` class is used as a base class for all ViewModels.
 
 All classes inheriting from `ViewModel` should be suffixed with `"ViewModel"`.
 
 ### Navigation
-This application uses [Chinook.Navigation](https://github.com/nventive/Chinook.Navigation) for app navigation. The navigation deals with which _PageViewModel_ is currently active.
+This application uses [Chinook.Navigation](https://github.com/nventive/Chinook.Navigation) for app navigation.
+The navigation deals with which _PageViewModel_ is currently active.
 
 This application uses bottom tab navigation and modals, and therefore uses **Sections Navigation**.
 
@@ -170,7 +184,8 @@ This application uses [MessageDialogService](https://github.com/nventive/Message
 
 ### Async Data Loading
 
-This application uses [Chinook.DataLoader](https://github.com/nventive/Chinook.DataLoader) to load data asynchronously from the presentation layer. This ties to the usage of `DataLoaderView` in the View layer and allows to present a loading state while data is being loaded. It also allows to handle errors and empty states.
+This application uses [Chinook.DataLoader](https://github.com/nventive/Chinook.DataLoader) to load data asynchronously from the presentation layer.
+This ties to the usage of `DataLoaderView` in the View layer and allows to present a loading state while data is being loaded. It also allows to handle errors and empty states.
 
 ### Localization
 
@@ -180,12 +195,14 @@ See [Localization.md](Localization.md) for more details.
 
 ### Validation
 
-This application uses [FluentValidation](https://www.nuget.org/packages/FluentValidation/) to implement validation rules of input forms. It leverages [some extensions from Chinook.DynamicMvvm](https://github.com/nventive/Chinook.DynamicMvvm#add-validation-using-fluentvalidations) to ease the implementation.
+This application uses [FluentValidation](https://www.nuget.org/packages/FluentValidation/) to implement validation rules of input forms.
+It leverages [some extensions from Chinook.DynamicMvvm](https://github.com/nventive/Chinook.DynamicMvvm#add-validation-using-fluentvalidations) to ease the implementation.
 
 See [Validation.md](Validation.md) for more details.
 
 ### Analytics
-This application has a built-in analytics base that can be used to track events and errors with potentially any analytics service (e.g. Firebase, Segment, etc.). This base is built around the [IAnalyticsSink](../src/app/ApplicationTemplate.Presentation/Framework/Analytics/IAnalyticsSink.cs) interface.
+This application has a built-in analytics base that can be used to track events and errors with potentially any analytics service (e.g. Firebase, Segment, etc.).
+This base is built around the [IAnalyticsSink](../src/app/ApplicationTemplate.Presentation/Framework/Analytics/IAnalyticsSink.cs) interface.
 
 See [DefaultAnalytics.md](DefaultAnalytics.md) for more details.
 
@@ -193,11 +210,13 @@ See [DefaultAnalytics.md](DefaultAnalytics.md) for more details.
 
 ### UI Framework
 
-This applications uses [WinUI](https://learn.microsoft.com/en-us/windows/apps/winui/) and [Uno Platform](https://platform.uno/) as the UI framework. All the UI is implemented using XAML.
+This applications uses [WinUI](https://learn.microsoft.com/en-us/windows/apps/winui/) and [Uno Platform](https://platform.uno/) as the UI framework.
+All the UI is implemented using XAML.
 
 ### Platform Specific Code
 
-This application shares its UI code across all its platforms, but some platform-specific code is used to implement some services. This is done using preprocessor directives such as the following:
+This application shares its UI code across all its platforms, but some platform-specific code is used to implement some services.
+This is done using preprocessor directives such as the following:
 - `#if __IOS__`
 - `#if __ANDROID__`
 - `#if __MOBILE__`
@@ -209,7 +228,8 @@ See [PlatformSpecifics.md](PlatformSpecifics.md) for more details.
 
 ### Design System
 
-This application uses resources from [Uno.Themes](https://github.com/unoplatform/Uno.Themes). More specifically, it uses the **Uno.Material** theme, which is based on Material Design.
+This application uses resources from [Uno.Themes](https://github.com/unoplatform/Uno.Themes).
+More specifically, it uses the **Uno.Material** theme, which is based on Material Design.
 
 Resources from **Uno.Material** are used for the following:
 - Color system
@@ -218,7 +238,8 @@ Resources from **Uno.Material** are used for the following:
 
 ### Extended Splash Screen
 
-This application uses [ExtendedSplashScreen](https://github.com/nventive/ExtendedSplashScreen) to display a loading indicator while the application is loading. The extended splash screen is dismissed once the first page of the app has been navigated to.
+This application uses [ExtendedSplashScreen](https://github.com/nventive/ExtendedSplashScreen) to display a loading indicator while the application is loading.
+The extended splash screen is dismissed once the first page of the app has been navigated to.
 
 ### Reusable UI Components
 

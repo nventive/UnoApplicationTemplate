@@ -5,7 +5,7 @@ namespace ApplicationTemplate.DataAccess;
 /// <summary>
 /// Provides access to the current connectivity state and detects changes.
 /// </summary>
-public interface IConnectivityRepository
+public interface IConnectivityProvider
 {
 	/// <summary>
 	/// Occurs when connectivity state changes.

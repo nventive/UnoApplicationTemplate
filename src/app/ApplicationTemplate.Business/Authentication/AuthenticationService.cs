@@ -16,16 +16,16 @@ public partial class AuthenticationService : IAuthenticationService
 	private readonly ISubject<Unit> _sessionExpired = new Subject<Unit>();
 
 	private readonly IApplicationSettingsRepository _applicationSettingsRepository;
-	private readonly IAuthenticationRepository _authenticationRepository;
+	private readonly IAuthenticationApiClient _authenticationApiClient;
 	private readonly IAuthenticationTokenProvider<AuthenticationData> _authTokenProvider;
 
 	public AuthenticationService(
 		ILoggerFactory loggerFactory,
 		IApplicationSettingsRepository applicationSettingsRepository,
-		IAuthenticationRepository authenticationRepository)
+		IAuthenticationApiClient authenticationApiClient)
 	{
 		_applicationSettingsRepository = applicationSettingsRepository ?? throw new ArgumentNullException(nameof(applicationSettingsRepository));
-		_authenticationRepository = authenticationRepository ?? throw new ArgumentNullException(nameof(authenticationRepository));
+		_authenticationApiClient = authenticationApiClient ?? throw new ArgumentNullException(nameof(authenticationApiClient));
 		_authTokenProvider = new ConcurrentAuthenticationTokenProvider<AuthenticationData>(loggerFactory, GetTokenInternal, NotifySessionExpiredInternal, RefreshTokenInternal);
 	}
 
@@ -50,7 +50,7 @@ public partial class AuthenticationService : IAuthenticationService
 	/// <inheritdoc/>
 	public async Task<AuthenticationData> Login(CancellationToken ct, string email, string password)
 	{
-		var authenticationData = await _authenticationRepository.Login(ct, email, password);
+		var authenticationData = await _authenticationApiClient.Login(ct, email, password);
 
 		await _applicationSettingsRepository.SetAuthenticationData(ct, authenticationData);
 
@@ -66,7 +66,7 @@ public partial class AuthenticationService : IAuthenticationService
 	/// <inheritdoc/>
 	public async Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password)
 	{
-		var authenticationData = await _authenticationRepository.CreateAccount(ct, email, password);
+		var authenticationData = await _authenticationApiClient.CreateAccount(ct, email, password);
 
 		await _applicationSettingsRepository.SetAuthenticationData(ct, authenticationData);
 
@@ -76,7 +76,7 @@ public partial class AuthenticationService : IAuthenticationService
 	/// <inheritdoc/>
 	public async Task ResetPassword(CancellationToken ct, string email)
 	{
-		await _authenticationRepository.ResetPassword(ct, email);
+		await _authenticationApiClient.ResetPassword(ct, email);
 	}
 
 	/// <inheritdoc />
@@ -107,7 +107,7 @@ public partial class AuthenticationService : IAuthenticationService
 
 	private async Task<AuthenticationData> RefreshTokenInternal(CancellationToken ct, HttpRequestMessage request, AuthenticationData unauthorizedToken)
 	{
-		var authenticationData = await _authenticationRepository.RefreshToken(ct, unauthorizedToken);
+		var authenticationData = await _authenticationApiClient.RefreshToken(ct, unauthorizedToken);
 
 		await _applicationSettingsRepository.SetAuthenticationData(ct, authenticationData);
 

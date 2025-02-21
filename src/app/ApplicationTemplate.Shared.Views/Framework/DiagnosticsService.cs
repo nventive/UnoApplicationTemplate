@@ -27,7 +27,7 @@ public sealed class DiagnosticsService : IDiagnosticsService
 	private readonly IDispatcherScheduler _dispatcherScheduler;
 	private readonly IOptions<ReadOnlyConfigurationOptions> _configurationOptions;
 	private readonly ILogger _logger;
-	private readonly IEmailRepository _emailRepository;
+	private readonly IEmailService _emailRepository;
 	private readonly ILogFilesProvider _logFilesProvider;
 	private readonly LoggingOutputOptions _loggingOutputOptions;
 	private readonly IEnvironmentManager _environmentManager;
@@ -40,7 +40,7 @@ public sealed class DiagnosticsService : IDiagnosticsService
 		IDispatcherScheduler dispatcherScheduler,
 		IOptions<ReadOnlyConfigurationOptions> configurationOptions,
 		ILogger<DiagnosticsService> logger,
-		IEmailRepository emailRepository,
+		IEmailService emailRepository,
 		ILogFilesProvider logFilesProvider,
 		IOptionsMonitor<LoggingOutputOptions> optionsMonitor,
 		IEnvironmentManager environmentManager,

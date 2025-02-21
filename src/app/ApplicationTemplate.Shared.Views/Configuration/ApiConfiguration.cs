@@ -14,7 +14,7 @@ public static class ApiConfiguration
 			.AddMainHandler()
 			.AddSingleton<INetworkAvailabilityChecker>(serviceProvider =>
 			{
-				var connectivityProvider = serviceProvider.GetRequiredService<IConnectivityRepository>();
+				var connectivityProvider = serviceProvider.GetRequiredService<IConnectivityProvider>();
 				return new NetworkAvailabilityChecker(_ => Task.FromResult(connectivityProvider.State is ConnectivityState.Internet));
 			});
 	}

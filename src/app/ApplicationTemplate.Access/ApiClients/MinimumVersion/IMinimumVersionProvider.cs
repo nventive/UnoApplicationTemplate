@@ -5,7 +5,7 @@ namespace ApplicationTemplate.DataAccess;
 /// <summary>
 /// Gets the minimum version required to use the application.
 /// </summary>
-public interface IMinimumVersionReposiory
+public interface IMinimumVersionProvider
 {
 	/// <summary>
 	/// Checks the minimum required version.

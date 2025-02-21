@@ -9,7 +9,7 @@ namespace ApplicationTemplate.DataAccess;
 /// <summary>
 /// Provides access to the authentication API.
 /// </summary>
-public interface IAuthenticationRepository
+public interface IAuthenticationApiClient
 {
 	/// <summary>
 	/// Logs the user in using the provided <paramref name="email"/> and <paramref name="password"/>.

@@ -14,14 +14,14 @@ namespace ApplicationTemplate.Business;
 public sealed class DadJokesService : IDadJokesService, IDisposable
 {
 	private readonly IApplicationSettingsRepository _applicationSettingsRepository;
-	private readonly IDadJokesRepository _dadJokesRepository;
+	private readonly IDadJokesApiClient _dadJokesApiClient;
 	private SourceList<DadJokesQuote> _favouriteQuotes;
 	private ReplaySubject<PostTypes> _postType;
 
-	public DadJokesService(IApplicationSettingsRepository applicationSettingsRepository, IDadJokesRepository dadJokesRepository)
+	public DadJokesService(IApplicationSettingsRepository applicationSettingsRepository, IDadJokesApiClient dadJokesApiClient)
 	{
 		_applicationSettingsRepository = applicationSettingsRepository ?? throw new ArgumentNullException(nameof(applicationSettingsRepository));
-		_dadJokesRepository = dadJokesRepository ?? throw new ArgumentNullException(nameof(dadJokesRepository));
+		_dadJokesApiClient = dadJokesApiClient ?? throw new ArgumentNullException(nameof(dadJokesApiClient));
 		_postType = new ReplaySubject<PostTypes>(1);
 		_postType.OnNext(PostTypes.Hot);
 	}
@@ -32,7 +32,7 @@ public sealed class DadJokesService : IDadJokesService, IDisposable
 
 		var postType = pt.ToRedditFilter();
 
-		var response = await _dadJokesRepository.FetchData(ct, postType);
+		var response = await _dadJokesApiClient.FetchData(ct, postType);
 
 		var settings = await _applicationSettingsRepository.GetCurrent(ct);
 

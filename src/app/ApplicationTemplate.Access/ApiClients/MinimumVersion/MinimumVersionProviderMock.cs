@@ -6,7 +6,7 @@ namespace ApplicationTemplate.DataAccess;
 /// <summary>
 /// A mock implementation of the minimum version repository. Used for testing.
 /// </summary>
-public sealed class MinimumVersionRepositoryMock : IMinimumVersionReposiory, IDisposable
+public sealed class MinimumVersionProviderMock : IMinimumVersionProvider, IDisposable
 {
 	private readonly Subject<Version> _minimumVersionSubject = new();
 

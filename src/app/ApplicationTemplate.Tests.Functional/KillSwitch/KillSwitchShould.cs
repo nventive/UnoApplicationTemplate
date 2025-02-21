@@ -14,7 +14,7 @@ namespace KillSwitch;
 /// </summary>
 public sealed class KillSwitchShould : FunctionalTestBase, IDisposable
 {
-	private IKillSwitchRepository _killSwitchRepository;
+	private IKillSwitchDataSource _killSwitchDataSource;
 	private Subject<bool> _killSwitchActivatedSubject = new Subject<bool>();
 
 	/// <summary>
@@ -97,8 +97,8 @@ public sealed class KillSwitchShould : FunctionalTestBase, IDisposable
 		base.ConfigureHost(hostBuilder);
 		hostBuilder.ConfigureServices(serviceCollection =>
 		{
-			ReplaceWithMock<IKillSwitchRepository>(serviceCollection, out _killSwitchRepository);
-			_killSwitchRepository.ObserveKillSwitchActivation().Returns(_killSwitchActivatedSubject);
+			ReplaceWithMock<IKillSwitchDataSource>(serviceCollection, out _killSwitchDataSource);
+			_killSwitchDataSource.ObserveKillSwitchActivation().Returns(_killSwitchActivatedSubject);
 		});
 	}
 }

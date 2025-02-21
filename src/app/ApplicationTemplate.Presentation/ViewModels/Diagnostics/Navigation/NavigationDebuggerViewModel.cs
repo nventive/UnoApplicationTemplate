@@ -46,7 +46,7 @@ public sealed partial class NavigationDebuggerViewModel : TabViewModel
 	/// </summary>
 	public IDynamicCommand NavigateToForceUpdatePage => this.GetCommand(() =>
 	{
-		this.GetService<IMinimumVersionReposiory>().CheckMinimumVersion();
+		this.GetService<IMinimumVersionProvider>().CheckMinimumVersion();
 	});
 
 	/// <summary>
@@ -54,9 +54,9 @@ public sealed partial class NavigationDebuggerViewModel : TabViewModel
 	/// </summary>
 	public IDynamicCommand TriggerKillSwitch => this.GetCommand(() =>
 	{
-		var killSwitchRepository = this.GetService<IKillSwitchRepository>();
+		var killSwitchRepository = this.GetService<IKillSwitchDataSource>();
 
-		if (killSwitchRepository is KillSwitchRepositoryMock killSwitchRepositoryMock)
+		if (killSwitchRepository is KillSwitchDataSourceMock killSwitchRepositoryMock)
 		{
 			killSwitchRepositoryMock.ChangeKillSwitchActivation();
 		}
