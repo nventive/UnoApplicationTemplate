@@ -15,6 +15,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Removing MaterialCommandbarHeight property.
 - Updated commit validation for the CI/CD.
 - Added missing association between JsonContext and Refit.
+- Update versions of CI/CD tasks.
 
 ## 3.7.X
 - Replacing Appcenter with Firebase app distribution for Android.
