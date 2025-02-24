@@ -52,7 +52,7 @@ steps:
     useVersionOverrides: true
     versionOverridesFile: 'https://raw.githubusercontent.com/nventive/Canary/master/version-overrides.json'
 
-- task: PostBuildCleanup@3
+- task: PostBuildCleanup@4
   displayName: 'Clean Agent Directories'
   condition: always()
   

@@ -107,6 +107,6 @@ steps:
     Contents: '**'
 #-endif
 
-- task: PostBuildCleanup@3
+- task: PostBuildCleanup@4
   displayName: 'Post-Build Cleanup: Cleanup files to keep build server clean!'
   condition: always()

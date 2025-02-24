@@ -10,7 +10,7 @@ steps:
 - powershell: New-Item -Path '$(ArtifactName)' -ItemType Directory
   displayName: Create ReleaseNotes folder
 
-- task: nventiveReleaseNotesCompiler@5
+- task: nventiveReleaseNotesCompiler@6
   displayName: 'Compile Release Notes'
   inputs:
     EnvironmentName: $(ApplicationEnvironment)

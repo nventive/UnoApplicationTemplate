@@ -65,6 +65,6 @@ jobs:
       nuGetFeedType: 'external'
       publishFeedCredentials: 'NuGet.org - nventive'
 
-  - task: PostBuildCleanup@3
+  - task: PostBuildCleanup@4
     displayName: 'Post-Build cleanup :  Cleanup files to keep build server clean!'
     condition: always()
