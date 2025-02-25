@@ -4,22 +4,24 @@ using System.IO;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Options;
 
 namespace ApplicationTemplate.DataAccess;
 
 public sealed class AuthenticationApiClientMock : IAuthenticationApiClient
 {
 	private readonly JsonSerializerOptions _serializerOptions;
+	private readonly IOptionsMonitor<MockOptions> _mockOptionsMonitor;
 
-	public AuthenticationApiClientMock(JsonSerializerOptions serializerOptions)
+	public AuthenticationApiClientMock(JsonSerializerOptions serializerOptions, IOptionsMonitor<MockOptions> mockOptionsMonitor)
 	{
 		_serializerOptions = serializerOptions;
+		_mockOptionsMonitor = mockOptionsMonitor;
 	}
 
 	public async Task<AuthenticationData> CreateAccount(CancellationToken ct, string email, string password)
 	{
-		// We add a delay to simulate a long API call
-		await Task.Delay(TimeSpan.FromSeconds(2));
+		await SimulateDelay(ct);
 
 		// We authenticate the user on account creation, since we don't have a backend to register and validate the user
 		return CreateAuthenticationData();
@@ -27,14 +29,12 @@ public sealed class AuthenticationApiClientMock : IAuthenticationApiClient
 
 	public async Task ResetPassword(CancellationToken ct, string email)
 	{
-		// We add a delay to simulate a long API call
-		await Task.Delay(TimeSpan.FromSeconds(2));
+		await SimulateDelay(ct);
 	}
 
 	public async Task<AuthenticationData> Login(CancellationToken ct, string email, string password)
 	{
-		// We add a delay to simulate a long API call
-		await Task.Delay(TimeSpan.FromSeconds(2));
+		await SimulateDelay(ct);
 
 		return CreateAuthenticationData();
 	}
@@ -43,8 +43,7 @@ public sealed class AuthenticationApiClientMock : IAuthenticationApiClient
 	{
 		ArgumentNullException.ThrowIfNull(unauthorizedToken);
 
-		// We add a delay to simulate a long API call
-		await Task.Delay(TimeSpan.FromSeconds(2));
+		await SimulateDelay(ct);
 
 		return CreateAuthenticationData(unauthorizedToken.AccessTokenPayload);
 	}
@@ -79,5 +78,14 @@ public sealed class AuthenticationApiClientMock : IAuthenticationApiClient
 		}
 
 		return header + '.' + payload + '.' + signature;
+	}
+
+	private async Task SimulateDelay(CancellationToken ct)
+	{
+		if (_mockOptionsMonitor.CurrentValue.IsDelayForSimulatedApiCallsEnabled)
+		{
+			// We add a delay to simulate a long API call
+			await Task.Delay(TimeSpan.FromSeconds(2), ct);
+		}
 	}
 }

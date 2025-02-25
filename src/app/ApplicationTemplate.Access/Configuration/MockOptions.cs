@@ -14,6 +14,11 @@ public class MockOptions
 	/// </summary>
 	public bool IsMockEnabled { get; set; }
 
+	/// <summary>
+	/// Gets or sets a value indicating whether a delay should be added to simulate API calls.
+	/// </summary>
+	public bool IsDelayForSimulatedApiCallsEnabled { get; set; }
+
 	// Feel free to add more specific properties in this class if you want a more granular control on mock implementations and their behavior.
 	// Here are some examples:
 	// You could use enums to define mock presets.

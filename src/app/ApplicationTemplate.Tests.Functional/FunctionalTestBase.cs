@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using NSubstitute;
 using Serilog;
 using Xunit.Abstractions;
+using static Microsoft.Extensions.Configuration.ApplicationTemplateConfigurationExtensions;
 
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true)]
 
@@ -66,8 +67,12 @@ public class FunctionalTestBase : IAsyncLifetime
 			{
 				// Override the IsMockEnabled value based on the USE_REAL_APIS environment variable.
 				_ = bool.TryParse(Environment.GetEnvironmentVariable("USE_REAL_APIS"), out var useReadApis);
-				var key = ApplicationTemplateConfigurationExtensions.DefaultOptionsName<MockOptions>() + ":" + nameof(MockOptions.IsMockEnabled);
-				yield return new KeyValuePair<string, string>(key, (!useReadApis).ToString());
+				var isMockEnabledKey = $"{DefaultOptionsName<MockOptions>()}:{nameof(MockOptions.IsMockEnabled)}";
+				yield return new KeyValuePair<string, string>(isMockEnabledKey, (!useReadApis).ToString());
+
+				// Override the IsDelayForSimulatedApiCallsEnabled value to false to avoid unnecessary delays in automated tests.
+				var isDelayForSimulatedApiCallsEnabledKey = $"{DefaultOptionsName<MockOptions>()}:{nameof(MockOptions.IsDelayForSimulatedApiCallsEnabled)}";
+				yield return new KeyValuePair<string, string>(isDelayForSimulatedApiCallsEnabledKey, "false");
 			}
 
 			void OverrideApplicationSettings(IHostBuilder hostBuilder)
