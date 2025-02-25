@@ -14,7 +14,7 @@ public sealed class UpdateRequiredService : IUpdateRequiredService, IDisposable
 	/// <summary>
 	/// Initializes a new instance of the <see cref="UpdateRequiredService"/> class.
 	/// </summary>
-	/// <param name="minimumVersionProvider">A repository that contains an observable we can use to update the app.</param>
+	/// <param name="minimumVersionProvider">The component that contains an observable we can use to update the app.</param>
 	public UpdateRequiredService(IMinimumVersionProvider minimumVersionProvider)
 	{
 		_subscription = minimumVersionProvider.MinimumVersionObservable

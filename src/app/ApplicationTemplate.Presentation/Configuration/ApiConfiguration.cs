@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.DataAccess;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using MallardMessageHandlers;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;

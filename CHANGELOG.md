@@ -8,6 +8,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 ## 3.9.X
 - Removed unnecessary `IsExternalInit.cs` files.
 - Renamed multiple components from the data access layer to not all be named `Repository`.
+- Move many components from the presentation layer to the data access layer.
 
 ## 3.8.X
 - Updated from .NET 8 to .NET 9.

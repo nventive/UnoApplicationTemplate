@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Reactive.Linq;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using ByteSizeLib;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;

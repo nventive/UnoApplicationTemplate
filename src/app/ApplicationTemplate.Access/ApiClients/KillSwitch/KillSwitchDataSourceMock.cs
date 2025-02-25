@@ -5,7 +5,7 @@ using DynamicData;
 namespace ApplicationTemplate.DataAccess;
 
 /// <summary>
-/// Mock implementation of the kill switch repository.
+/// Mock implementation of the kill switch data source.
 /// </summary>
 public sealed class KillSwitchDataSourceMock : IKillSwitchDataSource, IDisposable
 {

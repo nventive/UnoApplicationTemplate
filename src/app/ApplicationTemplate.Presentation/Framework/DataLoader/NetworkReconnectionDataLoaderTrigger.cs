@@ -1,5 +1,5 @@
 ﻿using System;
-using ApplicationTemplate.DataAccess;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DataLoader;
 using MallardMessageHandlers;
 

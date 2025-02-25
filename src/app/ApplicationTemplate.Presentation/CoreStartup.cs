@@ -42,6 +42,7 @@ public sealed class CoreStartup : CoreStartupBase
 				.AddMock(context.Configuration)
 				.AddApi(context.Configuration)
 				.AddMvvm()
+				.AddNativePlaformServices()
 				.AddPersistence()
 				.AddNavigationCore()
 				.AddErrorHandling()
@@ -91,13 +92,13 @@ public sealed class CoreStartup : CoreStartupBase
 	/// <param name="services">The service provider.</param>
 	public static async Task ExecuteInitialNavigation(CancellationToken ct, IServiceProvider services)
 	{
-		var applicationSettingsService = services.GetRequiredService<IApplicationSettingsRepository>();
+		var applicationSettingsRepository = services.GetRequiredService<IApplicationSettingsRepository>();
 		var sectionsNavigator = services.GetRequiredService<ISectionsNavigator>();
 		var authenticationService = services.GetRequiredService<IAuthenticationService>();
 
 		await sectionsNavigator.SetActiveSection(ct, "Login");
 
-		var currentSettings = await applicationSettingsService.GetAndObserveCurrent().FirstAsync(ct);
+		var currentSettings = await applicationSettingsRepository.GetAndObserveCurrent().FirstAsync(ct);
 		if (currentSettings.IsOnboardingCompleted)
 		{
 			var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);

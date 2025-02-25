@@ -54,11 +54,11 @@ public sealed partial class NavigationDebuggerViewModel : TabViewModel
 	/// </summary>
 	public IDynamicCommand TriggerKillSwitch => this.GetCommand(() =>
 	{
-		var killSwitchRepository = this.GetService<IKillSwitchDataSource>();
+		var killSwitchDataSource = this.GetService<IKillSwitchDataSource>();
 
-		if (killSwitchRepository is KillSwitchDataSourceMock killSwitchRepositoryMock)
+		if (killSwitchDataSource is KillSwitchDataSourceMock killSwitchDataSourceMock)
 		{
-			killSwitchRepositoryMock.ChangeKillSwitchActivation();
+			killSwitchDataSourceMock.ChangeKillSwitchActivation();
 		}
 	});
 }

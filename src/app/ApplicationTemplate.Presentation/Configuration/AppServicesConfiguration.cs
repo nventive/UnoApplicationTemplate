@@ -23,7 +23,6 @@ public static class AppServicesConfiguration
 	{
 		return services
 			.AddSingleton<IMessageDialogService, AcceptOrDefaultMessageDialogService>()
-			.AddSingleton<IConnectivityProvider, MockedConnectivityProvider>()
 			.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 			.AddSingleton<IApplicationSettingsRepository, ApplicationSettingsRepository>()
 			.AddSingleton<IPostService, PostService>()

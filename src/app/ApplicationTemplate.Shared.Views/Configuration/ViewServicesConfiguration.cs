@@ -1,5 +1,5 @@
 ﻿using System.Reactive.Concurrency;
-using ApplicationTemplate.DataAccess;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
