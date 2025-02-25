@@ -7,10 +7,8 @@ using System.Reactive.Concurrency;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.DataAccess;
-using ApplicationTemplate.Presentation;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using MessageDialogService;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Windows.Storage;
@@ -27,7 +25,7 @@ public sealed class DiagnosticsService : IDiagnosticsService
 	private readonly IDispatcherScheduler _dispatcherScheduler;
 	private readonly IOptions<ReadOnlyConfigurationOptions> _configurationOptions;
 	private readonly ILogger _logger;
-	private readonly IEmailService _emailRepository;
+	private readonly IEmailService _emailService;
 	private readonly ILogFilesProvider _logFilesProvider;
 	private readonly LoggingOutputOptions _loggingOutputOptions;
 	private readonly IEnvironmentManager _environmentManager;
@@ -40,7 +38,7 @@ public sealed class DiagnosticsService : IDiagnosticsService
 		IDispatcherScheduler dispatcherScheduler,
 		IOptions<ReadOnlyConfigurationOptions> configurationOptions,
 		ILogger<DiagnosticsService> logger,
-		IEmailService emailRepository,
+		IEmailService emailService,
 		ILogFilesProvider logFilesProvider,
 		IOptionsMonitor<LoggingOutputOptions> optionsMonitor,
 		IEnvironmentManager environmentManager,
@@ -53,7 +51,7 @@ public sealed class DiagnosticsService : IDiagnosticsService
 		_dispatcherScheduler = dispatcherScheduler;
 		_configurationOptions = configurationOptions;
 		_logger = logger;
-		_emailRepository = emailRepository;
+		_emailService = emailService;
 		_logFilesProvider = logFilesProvider;
 		_loggingOutputOptions = optionsMonitor.CurrentValue;
 		_environmentManager = environmentManager;
@@ -148,7 +146,7 @@ public sealed class DiagnosticsService : IDiagnosticsService
 			}
 		}
 
-		await _dispatcherScheduler.Run(_ => _emailRepository.Compose(message), ct);
+		await _dispatcherScheduler.Run(_ => _emailService.Compose(message), ct);
 
 		_logger.LogInformation("Environment summary sent.");
 	}

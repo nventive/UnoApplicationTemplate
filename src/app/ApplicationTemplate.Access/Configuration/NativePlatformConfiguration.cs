@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ApplicationTemplate.DataAccess.PlatformServices;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate.DataAccess;
 
@@ -9,11 +10,11 @@ namespace ApplicationTemplate.DataAccess;
 public static class NativePlatformConfiguration
 {
 	/// <summary>
-	/// Adds the native platform repositories to the <see cref="IServiceCollection"/>.
+	/// Adds the native platform components to the <see cref="IServiceCollection"/>.
 	/// </summary>
 	/// <param name="services">Service collection.</param>
 	/// <returns><see cref="IServiceCollection"/>.</returns>
-	public static IServiceCollection AddNativePlaformRepositories(this IServiceCollection services)
+	public static IServiceCollection AddNativePlaformServices(this IServiceCollection services)
 	{
 		return services
 			.AddSingleton<IConnectivityProvider, MockedConnectivityProvider>()

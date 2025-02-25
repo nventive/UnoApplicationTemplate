@@ -4,7 +4,7 @@ using System.Reactive.Subjects;
 namespace ApplicationTemplate.DataAccess;
 
 /// <summary>
-/// A mock implementation of the minimum version repository. Used for testing.
+/// A mock implementation of the minimum version provider. Used for testing.
 /// </summary>
 public sealed class MinimumVersionProviderMock : IMinimumVersionProvider, IDisposable
 {
