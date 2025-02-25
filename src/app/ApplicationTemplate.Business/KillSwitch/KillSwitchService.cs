@@ -10,21 +10,21 @@ namespace ApplicationTemplate.Business;
 /// </summary>
 public sealed class KillSwitchService : IKillSwitchService
 {
-	private readonly IKillSwitchRepository _killSwitchRepository;
+	private readonly IKillSwitchDataSource _killSwitchDataSource;
 	private readonly ILogger<KillSwitchService> _logger;
 
 	/// <summary>
 	/// Initializes a new instance of the <see cref="KillSwitchService"/> class.
 	/// </summary>
-	/// <param name="killSwitchRepository">The <see cref="IKillSwitchRepository"/>.</param>
+	/// <param name="killSwitchDataSource">The <see cref="IKillSwitchDataSource"/>.</param>
 	/// <param name="logger">The <see cref="ILogger{KillSwitchService}"/>.</param>
-	public KillSwitchService(IKillSwitchRepository killSwitchRepository, ILogger<KillSwitchService> logger)
+	public KillSwitchService(IKillSwitchDataSource killSwitchDataSource, ILogger<KillSwitchService> logger)
 	{
-		_killSwitchRepository = killSwitchRepository;
+		_killSwitchDataSource = killSwitchDataSource;
 		_logger = logger;
 	}
 
 	/// <inheritdoc/>
-	public IObservable<bool> ObserveKillSwitchActivation() => _killSwitchRepository.ObserveKillSwitchActivation()
+	public IObservable<bool> ObserveKillSwitchActivation() => _killSwitchDataSource.ObserveKillSwitchActivation()
 		.Do(isActive => _logger.LogInformation("Kill switch is now {IsActive}.", isActive));
 }

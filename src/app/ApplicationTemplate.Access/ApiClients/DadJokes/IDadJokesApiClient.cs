@@ -10,7 +10,7 @@ namespace ApplicationTemplate.DataAccess;
 /// <summary>
 /// Provides access to the dad jokes API.
 /// </summary>
-public interface IDadJokesRepository
+public interface IDadJokesApiClient
 {
 	/// <summary>
 	/// Returns a list of dad jokes based on /r/dadjokes.

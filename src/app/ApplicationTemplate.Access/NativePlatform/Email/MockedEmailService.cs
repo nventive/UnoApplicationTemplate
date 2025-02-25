@@ -3,11 +3,11 @@ using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.DataAccess;
 
-public sealed class MockedEmailRepository : IEmailRepository
+public sealed class MockedEmailService : IEmailService
 {
-	private readonly ILogger<MockedEmailRepository> _logger;
+	private readonly ILogger<MockedEmailService> _logger;
 
-	public MockedEmailRepository(ILogger<MockedEmailRepository> logger)
+	public MockedEmailService(ILogger<MockedEmailService> logger)
 	{
 		_logger = logger;
 	}

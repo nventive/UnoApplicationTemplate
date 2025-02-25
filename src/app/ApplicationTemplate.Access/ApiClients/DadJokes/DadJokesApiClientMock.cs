@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess;
 
-public class DadJokesRepositoryMock : BaseMock, IDadJokesRepository
+public class DadJokesApiClientMock : BaseMock, IDadJokesApiClient
 {
-	public DadJokesRepositoryMock(JsonSerializerOptions serializerOptions)
+	public DadJokesApiClientMock(JsonSerializerOptions serializerOptions)
 		: base(serializerOptions)
 	{
 	}

@@ -29,7 +29,7 @@ public static class ApiConfiguration
 	{
 		// TODO: Configure your HTTP clients here.
 
-		// For example purpose: the following line loads the DadJokesRepository configuration section and make IOptions<DadJokesApiClientOptions> available for DI.
+		// For example purpose: the following line loads the DadJokesRepository configuration section and makes IOptions<DadJokesApiClientOptions> available for DI.
 		services.BindOptionsToConfiguration<DadJokesApiClientOptions>(configuration);
 
 		services
@@ -58,19 +58,19 @@ public static class ApiConfiguration
 	private static IServiceCollection AddMinimumVersion(this IServiceCollection services)
 	{
 		// This one doesn't have an actual remote API yet. It's always a mock implementation.
-		return services.AddSingleton<IMinimumVersionReposiory, MinimumVersionRepositoryMock>();
+		return services.AddSingleton<IMinimumVersionProvider, MinimumVersionProviderMock>();
 	}
 
 	private static IServiceCollection AddKillSwitch(this IServiceCollection services)
 	{
 		// This one doesn't have an actual remote API yet. It's always a mock implementation.
-		return services.AddSingleton<IKillSwitchRepository, KillSwitchRepositoryMock>();
+		return services.AddSingleton<IKillSwitchDataSource, KillSwitchDataSourceMock>();
 	}
 
 	private static IServiceCollection AddAuthentication(this IServiceCollection services)
 	{
 		// This one doesn't have an actual remote API yet. It's always a mock implementation.
-		return services.AddSingleton<IAuthenticationRepository, AuthenticationRepositoryMock>();
+		return services.AddSingleton<IAuthenticationApiClient, AuthenticationApiClientMock>();
 	}
 
 	private static IServiceCollection AddPosts(this IServiceCollection services, IConfiguration configuration)
@@ -89,7 +89,7 @@ public static class ApiConfiguration
 
 	private static IServiceCollection AddDadJokes(this IServiceCollection services, IConfiguration configuration)
 	{
-		return services.AddApiClient<IDadJokesRepository, DadJokesRepositoryMock>(configuration, "DadJokesApiClient");
+		return services.AddApiClient<IDadJokesApiClient, DadJokesApiClientMock>(configuration, "DadJokesApiClient");
 	}
 
 	private static IServiceCollection AddApiClient<TInterface, TMock>(
@@ -143,7 +143,7 @@ public static class ApiConfiguration
 	{
 		return services
 			.AddSingleton<INetworkAvailabilityChecker>(s =>
-					new NetworkAvailabilityChecker(ct => Task.FromResult(s.GetRequiredService<IConnectivityRepository>().State is ConnectivityState.Internet))
+					new NetworkAvailabilityChecker(ct => Task.FromResult(s.GetRequiredService<IConnectivityProvider>().State is ConnectivityState.Internet))
 			)
 			.AddTransient<NetworkExceptionHandler>();
 	}

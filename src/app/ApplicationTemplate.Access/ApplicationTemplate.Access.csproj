@@ -9,7 +9,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<EmbeddedResource Include="ApiClients\DadJokes\DadJokesRepositoryMock.FetchData.json" />
+		<EmbeddedResource Include="ApiClients\DadJokes\DadJokesApiClientMock.FetchData.json" />
 		<EmbeddedResource Include="ApiClients\Posts\PostsRepositoryMock.GetAll.json" />
 		<EmbeddedResource Include="ApiClients\UserProfile\UserProfileRepositoryMock.Get.json" />
 	</ItemGroup>

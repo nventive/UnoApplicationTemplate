@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess;
 
-public sealed class AuthenticationRepositoryMock : IAuthenticationRepository
+public sealed class AuthenticationApiClientMock : IAuthenticationApiClient
 {
 	private readonly JsonSerializerOptions _serializerOptions;
 
-	public AuthenticationRepositoryMock(JsonSerializerOptions serializerOptions)
+	public AuthenticationApiClientMock(JsonSerializerOptions serializerOptions)
 	{
 		_serializerOptions = serializerOptions;
 	}

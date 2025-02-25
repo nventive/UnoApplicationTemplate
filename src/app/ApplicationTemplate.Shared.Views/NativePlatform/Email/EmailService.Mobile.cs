@@ -6,7 +6,7 @@ using ApplicationTemplate.DataAccess;
 
 namespace ApplicationTemplate;
 
-public sealed partial class EmailRepository : IEmailRepository
+public sealed partial class EmailService : IEmailService
 {
 	public async Task Compose(Email email)
 	{

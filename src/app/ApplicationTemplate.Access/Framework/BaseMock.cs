@@ -30,7 +30,6 @@ public class BaseMock
 	/// If left empty, the <paramref name="resourceName" /> will implicitly be treated as "{callerTypeName}.{callerMemberName}.json".
 	/// Note that this will deserialize the first embedded resource whose name ends with the specified <paramref name="resourceName" />.
 	/// </remarks>
-	[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1307:Specify StringComparison", Justification = "Not available for Desktop")]
 	protected T GetFromEmbeddedResource<T>(
 		string resourceName = null,
 		[CallerMemberName] string callerMemberName = null)
@@ -38,7 +37,7 @@ public class BaseMock
 		var assembly = GetType().GetTypeInfo().Assembly;
 
 		var desiredResourceName = resourceName != null
-			? resourceName.Replace("/", ".")
+			? resourceName.Replace("/", ".", StringComparison.OrdinalIgnoreCase)
 			: $"{GetType().Name}.{callerMemberName}.json";
 
 		var actualResourceName = assembly

@@ -5,12 +5,11 @@ namespace ApplicationTemplate.DataAccess;
 /// <summary>
 /// Provides access to native methods to send emails.
 /// </summary>
-public interface IEmailRepository
+public interface IEmailService
 {
 	/// <summary>
-	/// Launches the email application with a new <see cref="Email"/> displayed.
+	/// Launches the device's email application with a pre-composed <see cref="Email"/>.
 	/// </summary>
-	/// <param name="email"><see cref="Email"/>.</param>
-	/// <returns><see cref="Task"/>.</returns>
+	/// <param name="email">The email to compose.</param>
 	Task Compose(Email email);
 }

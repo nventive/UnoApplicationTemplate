@@ -19,11 +19,11 @@ public sealed class ForceUpdatesShould : FunctionalTestBase
 		// Arrange
 		var vm = await this.ReachLoginPage();
 		var sectionNavigator = GetService<ISectionsNavigator>();
-		var minimumVersionReposiory = GetService<IMinimumVersionReposiory>();
+		var minimumVersionProvider = GetService<IMinimumVersionProvider>();
 
 		// Act
 		// This will raise the update required event.
-		minimumVersionReposiory.CheckMinimumVersion();
+		minimumVersionProvider.CheckMinimumVersion();
 
 		await WaitForNavigation(viewModelType: typeof(ForcedUpdatePageViewModel), isDestination: true);
 
@@ -40,11 +40,11 @@ public sealed class ForceUpdatesShould : FunctionalTestBase
 		// Arrange
 		var vm = await this.ReachLoginPage();
 		var sectionNavigator = GetService<ISectionsNavigator>();
-		var minimumVersionReposiory = GetService<IMinimumVersionReposiory>();
+		var minimumVersionProvider = GetService<IMinimumVersionProvider>();
 
 		// Act
 		// This will raise the update required event.
-		minimumVersionReposiory.CheckMinimumVersion();
+		minimumVersionProvider.CheckMinimumVersion();
 
 		await WaitForNavigation(viewModelType: typeof(ForcedUpdatePageViewModel), isDestination: true);
 

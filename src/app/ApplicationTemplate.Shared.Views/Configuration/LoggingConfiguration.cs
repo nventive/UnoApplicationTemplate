@@ -61,9 +61,11 @@ public static class LoggingConfiguration
 		loggingBuilder.AddSerilog(logger);
 		loggingBuilder.Services.AddSingleton<ILogFilesProvider>(logFilesProvider);
 
+//-:cnd:noEmit
 #if __ANDROID__ || __IOS__
 		global::Uno.UI.Adapter.Microsoft.Extensions.Logging.LoggingAdapter.Initialize();
 #endif
+//+:cnd:noEmit
 	}
 
 	[System.Diagnostics.CodeAnalysis.SuppressMessage("Globalization", "CA1305:Specify IFormatProvider", Justification = "False positive: These are message template. The brackets are expected.")]

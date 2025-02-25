@@ -2,16 +2,16 @@
 
 namespace ApplicationTemplate.DataAccess;
 
-public sealed class MockedConnectivityRepository : IConnectivityRepository
+public sealed class MockedConnectivityProvider : IConnectivityProvider
 {
 	private ConnectivityState _state;
 
-	public MockedConnectivityRepository()
+	public MockedConnectivityProvider()
 	{
 		State = ConnectivityState.Internet;
 	}
 
-	public MockedConnectivityRepository(ConnectivityState state)
+	public MockedConnectivityProvider(ConnectivityState state)
 	{
 		State = state;
 	}

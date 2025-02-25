@@ -16,7 +16,7 @@ public static class NativePlatformConfiguration
 	public static IServiceCollection AddNativePlaformRepositories(this IServiceCollection services)
 	{
 		return services
-			.AddSingleton<IConnectivityRepository, MockedConnectivityRepository>()
-			.AddSingleton<IEmailRepository, MockedEmailRepository>();
+			.AddSingleton<IConnectivityProvider, MockedConnectivityProvider>()
+			.AddSingleton<IEmailService, MockedEmailService>();
 	}
 }
