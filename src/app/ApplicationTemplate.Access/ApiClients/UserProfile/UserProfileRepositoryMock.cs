@@ -5,19 +5,23 @@ using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using MallardMessageHandlers;
+using Microsoft.Extensions.Options;
 
 namespace ApplicationTemplate.DataAccess;
 
 public class UserProfileRepositoryMock : BaseMock, IUserProfileRepository
 {
 	private readonly IAuthenticationTokenProvider<AuthenticationData> _tokenProvider;
+	private readonly IOptionsMonitor<MockOptions> _mockOptionsMonitor;
 
 	public UserProfileRepositoryMock(
 		IAuthenticationTokenProvider<AuthenticationData> tokenProvider,
-		JsonSerializerOptions serializerOptions)
+		JsonSerializerOptions serializerOptions,
+		IOptionsMonitor<MockOptions> mockOptionsMonitor)
 		: base(serializerOptions)
 	{
 		_tokenProvider = tokenProvider ?? throw new ArgumentNullException(nameof(tokenProvider));
+		_mockOptionsMonitor = mockOptionsMonitor;
 	}
 
 	public async Task<UserProfileData> Get(CancellationToken ct)
@@ -29,13 +33,22 @@ public class UserProfileRepositoryMock : BaseMock, IUserProfileRepository
 			return default(UserProfileData);
 		}
 
-		await Task.Delay(TimeSpan.FromSeconds(2), ct);
+		await SimulateDelay(ct);
 
 		return await GetTaskFromEmbeddedResource<UserProfileData>();
 	}
 
 	public async Task Update(CancellationToken ct, UserProfileData userProfile)
 	{
-		await Task.Delay(TimeSpan.FromSeconds(2), ct);
+		await SimulateDelay(ct);
+	}
+
+	private async Task SimulateDelay(CancellationToken ct)
+	{
+		if (_mockOptionsMonitor.CurrentValue.IsDelayForSimulatedApiCallsEnabled)
+		{
+			// We add a delay to simulate a long API call
+			await Task.Delay(TimeSpan.FromSeconds(2), ct);
+		}
 	}
 }
