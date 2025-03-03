@@ -20,6 +20,8 @@ public class CommandBarSafeAreaBehavior
 	{
 		if (d is CommandBar commandBar && (bool)e.NewValue)
 		{
+			// We can remove this workaround when uno.winui 5.7.0 is stable because they fixed it, as of right now it's in prerelease.
+			// It's also being backported to 5.6.0 which we are on right now but it's not backported as of now.
 #if ANDROID
 			commandBar.Loaded += (s, args) =>
 			{
