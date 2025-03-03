@@ -10,6 +10,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Renamed multiple components from the data access layer to not all be named `Repository`.
 - Moved many components from the presentation layer to the data access layer.
 - Disabled simulated API call delays in automated tests.
+- Updated Configuration documentation and uno workaround comment.
 
 ## 3.8.X
 - Updated from .NET 8 to .NET 9.
