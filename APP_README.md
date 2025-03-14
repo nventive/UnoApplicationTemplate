@@ -20,12 +20,12 @@ This repository was generated using the **nventive Mobile Template**.
 ### Local Development Requirements
 All development is expected to be done from Visual Studio in a Windows environment.
 
-- .NET 8
-- Visual Studio 2022 (17.4 and above)
+- .NET 9
+- Visual Studio 2022 (17.12 and above)
   - We recommend validating your components using this [Uno guide](https://platform.uno/docs/articles/get-started-vs-2022.html).
 - For mobile development, MAUI workloads are required.
   - You can install them using [`uno-check`](https://platform.uno/docs/articles/external/uno.check/doc/using-uno-check.html).
-- For local iOS compilation and debugging, you need access to Mac with Xcode 14.2 (more recent versions may work too).
+- For local iOS compilation and debugging, you need access to Mac with Xcode 16 (more recent versions may work too).
   > 💡 You'll need an [Apple provisioning profile](https://developer.apple.com/help/account/manage-profiles/create-a-development-provisioning-profile/) to start your application.
 
 ### Pipelines Requirements
@@ -42,7 +42,7 @@ If you're unfamiliar with Azure Pipeline, you should at least read about the fol
   - You can follow [this guide](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/pipelines-sign-up?view=azure-devops) for more details.
 - For compilation, access to the the following [Microsoft-hosted agents](https://learn.microsoft.com/en-us/azure/devops/pipelines/agents/hosted?view=azure-devops&tabs=yaml) is required.
   - `windows-2022`
-  - `macOS-13`
+  - `macOS-15`
 - For deployment, access to Mac agents with the following capabilities is required.
   - `fastlane 2.212.1`
 
