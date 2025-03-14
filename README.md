@@ -21,7 +21,7 @@ From left to right: WinUI, iOS, and Android.
 
 ## Requirements
 
-Visual Studio 2022 with .NET 8 are required.
+Visual Studio 2022 with .NET 9 are required.
 
 This template largely relies on Uno Platform, if you want to make sure you got everything installed correctly on your machine, we encourage you to use `uno-check`, the documentation is available [here](https://platform.uno/docs/articles/uno-check.html)
 
