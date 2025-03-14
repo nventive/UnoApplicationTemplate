@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using FluentValidation;
 using Uno.Extensions;
 
-namespace Presentation;
+namespace FluentValidation;
 
-public static class ValidatorExtensions
+public static class RuleBuilderExtensions
 {
 	/// <summary>
 	/// Adds a validation rule that checks whether the age is over 18 years old based on the date of birth.

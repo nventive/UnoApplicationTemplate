@@ -11,7 +11,7 @@
 		<Platforms>x86;x64;arm64</Platforms>
 		<RuntimeIdentifiers>win-x86;win-x64;win-arm64</RuntimeIdentifiers>
 		<SelfContained>true</SelfContained>
-		<PublishProfile>win-$(Platform).pubxml</PublishProfile>
+		<PublishProfile>Properties/Properties/win-$(Platform).pubxml</PublishProfile>
 		<UseWinUI>true</UseWinUI>
 		<EnablePreviewMsixTooling>true</EnablePreviewMsixTooling>
 		<Configurations>Debug;Release</Configurations>
@@ -75,11 +75,11 @@
 		<PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.0" />
 		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.12.19" />
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.30" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250108002" />
+		<PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.13.2" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.50" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250228001" />
 		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.0" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.6.0" />
@@ -87,8 +87,11 @@
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.1.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
-		<PackageReference Include="Uno.Material.WinUI" Version="5.3.1" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.3.7" />
+		<PackageReference Include="Uno.Material.WinUI" Version="5.4.0" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.4.3" />
+
+		<!-- It would normally be a transitive dependency, however, the version included with one of the packages has a vulnerability. -->
+		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -108,20 +111,6 @@
 		<ProjectReference Include="..\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
-	</ItemGroup>
-	
-	<ItemGroup>
-		<!--
-			If you encounter this error message:
-		
-				error NETSDK1148: A referenced assembly was compiled using a newer version of Microsoft.Windows.SDK.NET.dll. Please update to a newer .NET SDK in order to reference this assembly.
-
-			This means that the two packages below must be aligned with the "build" version number of
-			the "Microsoft.Windows.SDK.BuildTools" package above, and the "revision" version number
-			must be the highest found in https://www.nuget.org/packages/Microsoft.Windows.SDK.NET.Ref.
-		-->
-		<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" RuntimeFrameworkVersion="10.0.22621.28" />
-		<FrameworkReference Update="Microsoft.Windows.SDK.NET.Ref" TargetingPackVersion="10.0.22621.28" />
 	</ItemGroup>
 
 	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
