@@ -23,6 +23,8 @@
 
 steps:
 - template: templates/dotnet-install.yml
+  parameters:
+    installAppleWorkload: true
 
 #-if false
 - download: current

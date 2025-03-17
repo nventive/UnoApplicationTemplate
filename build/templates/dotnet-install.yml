@@ -1,6 +1,21 @@
 ﻿parameters:
-  UnoCheck_Version: '1.27.4'
-  UnoCheck_Manifest: 'https://raw.githubusercontent.com/unoplatform/uno.check/870b2615fc2783e9355374c12015597a92dd242a/manifests/uno.ui.manifest.json'
+- name: UnoCheck_Version
+  type: string
+  default: '1.27.4'
+
+- name: UnoCheck_Manifest
+  type: string
+  default: 'https://raw.githubusercontent.com/unoplatform/uno.check/870b2615fc2783e9355374c12015597a92dd242a/manifests/uno.ui.manifest.json'
+
+# Whether the Android workload should be installed.
+- name: installAndroidWorkload
+  type: boolean
+  default: false
+
+# Whether the iOS workload should be installed.
+- name: installAppleWorkload
+  type: boolean
+  default: false
 
 steps:
 - task: UseDotNet@2
@@ -11,8 +26,18 @@ steps:
 
 - powershell: |
     & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
-    & uno-check -v --ci --non-interactive --fix --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
-  displayName: Install .NET Workloads | Uno Check
+    & uno-check -v --ci --non-interactive --fix --skip ios --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
+  displayName: Install Android .NET Workloads | Uno Check
   errorActionPreference: continue
   ignoreLASTEXITCODE: true
   retryCountOnTaskFailure: 3
+  condition: and(succeeded(), eq('${{ parameters.installAndroidWorkload }}', true))
+
+- powershell: |
+    & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
+    & uno-check -v --ci --non-interactive --fix --skip android --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
+  displayName: Install iOS .NET Workloads | Uno Check
+  errorActionPreference: continue
+  ignoreLASTEXITCODE: true
+  retryCountOnTaskFailure: 3
+  condition: and(succeeded(), eq('${{ parameters.installAppleWorkload }}', true))
