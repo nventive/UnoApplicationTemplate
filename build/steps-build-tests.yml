@@ -14,8 +14,6 @@
 
 steps:
 - template: templates/dotnet-install.yml
-  parameters:
-    installMobileWorkload: false
 
 #-if false
 - download: current
