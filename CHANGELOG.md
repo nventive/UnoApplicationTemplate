@@ -11,6 +11,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Moved many components from the presentation layer to the data access layer.
 - Disabled simulated API call delays in automated tests.
 - Updated Configuration documentation and uno workaround comment.
+- Cleanup (fixes warnings on Windows, fixes vulnerabilities and renamed extensions) & Update packages.
 
 ## 3.8.X
 - Updated from .NET 8 to .NET 9.

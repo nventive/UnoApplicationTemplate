@@ -2,7 +2,6 @@
 using Chinook.DynamicMvvm;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
-using Presentation;
 using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
