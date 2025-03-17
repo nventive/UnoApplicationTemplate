@@ -12,6 +12,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Disabled simulated API call delays in automated tests.
 - Updated Configuration documentation and uno workaround comment.
 - Cleanup (fixes warnings on Windows, fixes vulnerabilities and renamed extensions) & Update packages.
+- Updated the Segoe MDL2 Assets font to fix an issue with the Flip View icons on Windows.
 
 ## 3.8.X
 - Updated from .NET 8 to .NET 9.
