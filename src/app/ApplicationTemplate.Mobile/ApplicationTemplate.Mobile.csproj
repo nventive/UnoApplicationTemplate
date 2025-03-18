@@ -53,11 +53,11 @@
 			<PropertyGroup>
 				<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 				<BundleAssemblies>False</BundleAssemblies>
+				<RuntimeIdentifiers>android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
 					<PropertyGroup>
-						<RuntimeIdentifiers>android-arm;android-arm64;android-x86;android-x64</RuntimeIdentifiers>
 						<AndroidUseSharedRuntime>True</AndroidUseSharedRuntime>
 						<UseHighDPIResources>False</UseHighDPIResources>
 						<EmbedAssembliesIntoApk>False</EmbedAssembliesIntoApk>
@@ -152,7 +152,7 @@
 			<PropertyGroup>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName)</MtouchExtraArgs>
-				<MtouchInterpreter>-all,ByteSize,Uno.Core.Extensions,Uno.Core.Extensions.Collections,Uno.Core.Extensions.Equality,Uno.Core.Extensions.Threading,Uno.Core.Extensions.Disposables,Uno.Core.Extensions.Logging,Nventive.Persistence.Reactive,Reactive.Annex,ReviewService.Abstractions,MallardMessageHandlers,FluentValidation,Chinook.DataLoader.Abstractions,Chinook.DynamicMvvm.Abstractions,Chinook.SectionsNavigation.Abstractions,Chinook.StackNavigation.Abstractions,Chinook.BackButtonManager.Abstractions,ApplicationTemplate.Business,Uno.Injectable,Chinook.DynamicMvvm.FluentValidation,Chinook.DataLoader.DynamicMvvm,Chinook.DataLoader</MtouchInterpreter>
+				<MtouchInterpreter>-all,ByteSize,Uno.Core.Extensions,Uno.Core.Extensions.Collections,Uno.Core.Extensions.Equality,Uno.Core.Extensions.Threading,Uno.Core.Extensions.Disposables,Uno.Core.Extensions.Logging,Nventive.Persistence.Reactive,Reactive.Annex,ReviewService.Abstractions,MallardMessageHandlers,FluentValidation,Chinook.DataLoader.Abstractions,Chinook.DynamicMvvm.Abstractions,Chinook.SectionsNavigation.Abstractions,Chinook.StackNavigation.Abstractions,Chinook.BackButtonManager.Abstractions,ApplicationTemplate.Business,Uno.Injectable,Chinook.DynamicMvvm.FluentValidation,Chinook.DataLoader.DynamicMvvm,Chinook.DataLoader,Microsoft.Maui.Controls.HotReload.Forms</MtouchInterpreter>
 				<!-- See https://github.com/unoplatform/uno/issues/9430 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
 				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
@@ -215,12 +215,8 @@
 			</ItemGroup>
 			<ItemGroup>
 				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon.png" />
-				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon%402x.png" />
-				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon%403x.png" />
-				<!--
-				Removing this fix release build.
-				<InterfaceDefinition Include="iOS\LaunchScreen.storyboard" />
-				-->
+				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon@2x.png" />
+				<BundleResource Include="iOS\Resources\Assets\splashscreen_icon@3x.png" />
 				<ImageAsset Include="iOS\Media.xcassets\AppIcons.appiconset\Contents.json">
 					<Visible>false</Visible>
 				</ImageAsset>

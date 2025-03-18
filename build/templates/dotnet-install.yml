@@ -26,7 +26,7 @@ steps:
 
 - powershell: |
     & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
-    & uno-check -v --ci --non-interactive --fix --skip ios --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
+    & uno-check -v --ci --non-interactive --fix --target android --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
   displayName: Install Android .NET Workloads | Uno Check
   errorActionPreference: continue
   ignoreLASTEXITCODE: true
@@ -35,7 +35,7 @@ steps:
 
 - powershell: |
     & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
-    & uno-check -v --ci --non-interactive --fix --skip android --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
+    & uno-check -v --ci --non-interactive --fix --target ios --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
   displayName: Install iOS .NET Workloads | Uno Check
   errorActionPreference: continue
   ignoreLASTEXITCODE: true
