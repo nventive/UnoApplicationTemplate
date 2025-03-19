@@ -15,6 +15,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Updated the Segoe MDL2 Assets font to fix an issue with the Flip View icons on Windows.
 - Optimized the .NET workloads install process.
 - Fixed the iOS application icon size.
+- Added VM Disposal in Functional Tests.
 
 ## 3.8.X
 - Updated from .NET 8 to .NET 9.

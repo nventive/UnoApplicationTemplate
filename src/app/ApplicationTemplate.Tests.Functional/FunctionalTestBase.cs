@@ -241,11 +241,16 @@ public class FunctionalTestBase : IAsyncLifetime
 		ViewModelBase.DefaultServiceProvider.Should().BeSameAs(_coreStartup.ServiceProvider, because: "We want the ViewModels of this test to use the services that we just initialized.");
 	}
 
-	Task IAsyncLifetime.DisposeAsync()
+	async Task IAsyncLifetime.DisposeAsync()
 	{
+		// To prevent scheduled tasks in view models from running after the test is completed.
+		// Once the test is finished, the view models should no longer be active.
+		// Therefore, we clear the stack navigator, which disposes of all view models.
+		await GetService<ISectionsNavigator>().CloseModals(CancellationToken.None);
+		await GetService<ISectionsNavigator>().ClearSections(CancellationToken.None);
+
 		_coreStartup.Dispose();
 		_backButtonSource.Dispose();
-		return Task.CompletedTask;
 	}
 
 	private sealed class FunctionalTestBackButtonSource : IBackButtonSource
