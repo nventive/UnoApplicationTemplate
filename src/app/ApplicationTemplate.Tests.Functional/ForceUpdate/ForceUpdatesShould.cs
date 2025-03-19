@@ -2,8 +2,9 @@
 using System.Reactive.Linq;
 using System.Threading.Tasks;
 using ApplicationTemplate.DataAccess;
+using ApplicationTemplate.Tests;
 
-namespace ApplicationTemplate.Tests;
+namespace ForceUpdate;
 
 /// <summary>
 /// Tests for the forced update flow.

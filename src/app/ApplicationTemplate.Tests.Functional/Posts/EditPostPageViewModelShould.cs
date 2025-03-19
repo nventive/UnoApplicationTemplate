@@ -2,9 +2,10 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using ApplicationTemplate.Tests;
 using Xunit.Abstractions;
 
-namespace ApplicationTemplate.Tests;
+namespace Posts;
 
 public sealed class EditPostPageViewModelShould : FunctionalTestBase
 {
