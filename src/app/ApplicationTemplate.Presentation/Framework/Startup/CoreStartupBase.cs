@@ -183,6 +183,20 @@ public abstract class CoreStartupBase : IDisposable
 			{
 				loggingConfiguration(hostBuilderContext, loggingBuilder, isAppLogging: false);
 			})
+			/* This code configures the default service provider for the host.
+			 * The service provider is responsible for dependency injection in the application.
+			 * The options.ValidateScopes and options.ValidateOnBuild properties are set based on the hosting environment.
+			 * If the application is in development mode, these properties are set to true to enable additional validation checks.
+			 * ValidateScopes ensures that scoped services are not resolved from the root provider, which can lead to unintended behavior.
+			 * ValidateOnBuild validates the service provider's configuration when it is built, ensuring all services can be created and there are no missing or circular dependencies.
+			 * In non-development mode, these validations are disabled to improve performance.
+			 */
+			.UseDefaultServiceProvider((context, options) =>
+			{
+				// Enable validation checks in development mode.
+				options.ValidateScopes = context.HostingEnvironment.IsDevelopment();
+				options.ValidateOnBuild = context.HostingEnvironment.IsDevelopment();
+			})
 			.Build();
 
 		return coreHost.Services;
