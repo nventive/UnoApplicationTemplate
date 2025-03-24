@@ -10,6 +10,7 @@ namespace ApplicationTemplate.Views;
 
 /// <summary>
 /// This class is used for persistence configuration.
+/// - Configures the review settings.
 /// - Configures the application settings.
 /// </summary>
 public static class PersistenceConfiguration
@@ -22,11 +23,11 @@ public static class PersistenceConfiguration
 	public static IServiceCollection AddPersistence(this IServiceCollection services)
 	{
 		return services
-			.AddSingleton(s => CreateDataPersister(s, defaultValue: new ReviewSettings(), SerializationConfiguration.NoSourceGenerationJsonSerializerOptions))
-			.AddSingleton(s => CreateSecureDataPersister(s, defaultValue: ApplicationSettings.Default));
+			.AddSingleton(s => CreateDataPersister<ReviewSettings>(s, SerializationConfiguration.NoSourceGenerationJsonSerializerOptions))
+			.AddSingleton(s => CreateSecureDataPersister<ApplicationSettings>(s));
 	}
 
-	private static IObservableDataPersister<T> CreateSecureDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	private static IObservableDataPersister<T> CreateSecureDataPersister<T>(IServiceProvider services)
 	{
 //-:cnd:noEmit
 #if __ANDROID__
@@ -52,13 +53,13 @@ public static class PersistenceConfiguration
 //-:cnd:noEmit
 #else
 //+:cnd:noEmit
-		return CreateObservableDataPersister(services, defaultValue);
+		return CreateObservableDataPersister<T>(services);
 //-:cnd:noEmit
 #endif
 //+:cnd:noEmit
 	}
 
-	private static IDataPersister<T> CreateDataPersister<T>(IServiceProvider services, T defaultValue = default(T), JsonSerializerOptions jsonSerializerOptions = null)
+	private static IDataPersister<T> CreateDataPersister<T>(IServiceProvider services, JsonSerializerOptions jsonSerializerOptions = null)
 	{
 		return UnoDataPersister.CreateFromFile<T>(
 			FolderType.WorkingData,
@@ -68,9 +69,9 @@ public static class PersistenceConfiguration
 		);
 	}
 
-	private static IObservableDataPersister<T> CreateObservableDataPersister<T>(IServiceProvider services, T defaultValue = default(T))
+	private static IObservableDataPersister<T> CreateObservableDataPersister<T>(IServiceProvider services)
 	{
-		return CreateDataPersister(services, defaultValue)
+		return CreateDataPersister<T>(services)
 			.ToObservablePersister(services.GetRequiredService<IBackgroundScheduler>());
 	}
 }
