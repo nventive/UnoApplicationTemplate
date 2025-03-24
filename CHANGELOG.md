@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 3.10.X
+- Added Dependency Injection validation in the development environment.
+
 ## 3.9.X
 - Removed unnecessary `IsExternalInit.cs` files.
 - Renamed multiple components from the data access layer to not all be named `Repository`.

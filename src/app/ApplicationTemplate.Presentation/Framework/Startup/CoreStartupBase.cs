@@ -183,6 +183,13 @@ public abstract class CoreStartupBase : IDisposable
 			{
 				loggingConfiguration(hostBuilderContext, loggingBuilder, isAppLogging: false);
 			})
+			// Configures the default service provider for the host.
+			.UseDefaultServiceProvider((context, options) =>
+			{
+				// Enable validation check in development mode.
+				// Validates the service provider's configuration when it is built, ensuring all services can be created and there are no missing or circular dependencies.
+				options.ValidateOnBuild = context.HostingEnvironment.IsDevelopment();
+			})
 			.Build();
 
 		return coreHost.Services;
