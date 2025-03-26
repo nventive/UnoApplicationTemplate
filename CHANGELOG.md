@@ -5,6 +5,9 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 3.11.X
+- Added API Client tests project.
+
 ## 3.10.X
 - Added Dependency Injection validation in the development environment.
 - Cleaned up the persistence configuration files (removed unused parameters and updated documentation).

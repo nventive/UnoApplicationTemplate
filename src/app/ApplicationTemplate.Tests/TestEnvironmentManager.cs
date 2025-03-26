@@ -1,9 +1,11 @@
-﻿namespace ApplicationTemplate.Tests;
+﻿using System;
+
+namespace ApplicationTemplate.Tests;
 
 /// <summary>
 /// This implementation of <see cref="IEnvironmentManager"/> doesn't support the override features.
 /// </summary>
-public class TestEnvironmentManager : IEnvironmentManager
+public sealed class TestEnvironmentManager : IEnvironmentManager
 {
 	public TestEnvironmentManager(string currentEnvironment = "DEVELOPMENT", string defaultEnvironment = "DEVELOPMENT")
 	{
@@ -22,7 +24,7 @@ public class TestEnvironmentManager : IEnvironmentManager
 
 	public string Default { get; }
 
-	public string[] AvailableEnvironments { get; } = new string[] { "DEVELOPMENT", "STAGING", "PRODUCTION" };
+	public string[] AvailableEnvironments { get; } = ["DEVELOPMENT", "STAGING", "PRODUCTION"];
 
 	public void ClearOverride()
 	{

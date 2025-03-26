@@ -1,6 +1,5 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
-  <PropertyGroup>
+	<PropertyGroup>
 		<TargetFramework>net9.0</TargetFramework>
 		<IsPackable>false</IsPackable>
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
@@ -41,6 +40,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
+		<ProjectReference Include="..\ApplicationTemplate.Tests\ApplicationTemplate.Tests.csproj" />
 	</ItemGroup>
 </Project>

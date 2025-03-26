@@ -8,7 +8,7 @@
 - name: solutionName
   type: string
   default: ''
-- name: useRealApis
+- name: runApiTests
   type: boolean
   default: false
 
@@ -35,18 +35,14 @@ steps:
     --settings build/test.runsettings
   displayName: 'Run Functional Tests With Mocked APIs'
   condition: succeeded()
-  env:
-    USE_REAL_APIS: false
 
 - script: >
-    dotnet test ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Tests.Functional/${{ parameters.solutionName }}.Tests.Functional.csproj
+    dotnet test ${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Tests.Api/${{ parameters.solutionName }}.Tests.Api.csproj
     --collect:"XPlat Code Coverage"
     --settings build/test.runsettings
     --logger "trx;logfilename=output.with-APIs.trx"
-  displayName: 'Run Functional Tests With Real APIs'
-  condition: ${{ parameters.useRealApis }}
-  env:
-    USE_REAL_APIS: true
+  displayName: 'Run API Tests'
+  condition: ${{ parameters.runApiTests }}
 
 - task: PublishTestResults@2
   displayName: Publish Test Results
