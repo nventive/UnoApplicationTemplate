@@ -117,6 +117,34 @@ public override ApplicationSettings ApplicationSettings { get; } = new Applicati
 };
 ```
 
+## API Testing
+
+The API integration tests are designed to validate the behavior of the application's API clients.
+These tests use the `ApiTestBase` class, which configures the necessary services and settings to mirror the application's real-world behavior.
+This ensures that the tests are as close to the actual application environment as possible.
+
+### Example
+
+Here is an example of an API endpoint test.
+
+```csharp
+public sealed class MyApiClientShould : ApiEndpointTestBase
+{
+  [Fact]
+  public async Task ReturnExpectedResult_WhenCalledWithValidInput()
+  {
+    // Arrange
+    var apiClient = this.GetService<IMyApiClient>();
+
+    // Act
+    var response = await apiClient.GetSomething();
+
+    // Assert
+    response.Property.Should().Be("ExpectedValue");
+  }
+}
+```
+
 ## Logging
 
 See https://xunit.net/docs/capturing-output.

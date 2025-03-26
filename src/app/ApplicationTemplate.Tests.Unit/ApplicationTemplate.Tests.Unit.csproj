@@ -6,7 +6,6 @@
 		<GenerateDocumentationFile>True</GenerateDocumentationFile>
 		<LangVersion>13.0</LangVersion>
 		<IsTestProject>True</IsTestProject>
-		<DefineConstants>TESTS</DefineConstants>
 	</PropertyGroup>
 
 	<ItemGroup>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -24,8 +25,8 @@ namespace ApplicationTemplate.Tests;
 /// <summary>
 /// Gives access to the services and their configuration.
 /// </summary>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "IAsyncLifetime provides a DisposeAsync method that is automatically called.")]
-public class FunctionalTestBase : IAsyncLifetime
+[SuppressMessage("Design", "CA1001:Types that own disposable fields should be disposable", Justification = "IAsyncLifetime provides a DisposeAsync method that is automatically called.")]
+public abstract class FunctionalTestBase : IAsyncLifetime
 {
 	private readonly ITestOutputHelper _output;
 	private readonly CoreStartup _coreStartup;
@@ -39,7 +40,7 @@ public class FunctionalTestBase : IAsyncLifetime
 	/// This is called before every test.
 	/// </remarks>
 	/// <param name="output">Optional output parameter. Provide it when you want to consult the logs of this test.</param>
-	public FunctionalTestBase(ITestOutputHelper output = null)
+	protected FunctionalTestBase(ITestOutputHelper output = null)
 	{
 		_output = output;
 		_coreStartup = new CoreStartup();
@@ -102,11 +103,10 @@ public class FunctionalTestBase : IAsyncLifetime
 		get
 		{
 			var menu = Shell.Menu;
-			if (menu.MenuState == "Closed")
-			{
-				throw new InvalidOperationException("The menu is currently closed and therefore cannot be accessed. You must be on a page that displays the menu in order to access it. This is to replicate the behavior of the app.");
-			}
-			return menu;
+
+			return menu.MenuState is "Closed"
+				? throw new InvalidOperationException("The menu is currently closed and therefore cannot be accessed. You must be on a page that displays the menu in order to access it. This is to replicate the behavior of the app.")
+				: menu;
 		}
 	}
 
