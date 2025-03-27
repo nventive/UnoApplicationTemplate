@@ -2,11 +2,10 @@
 using Microsoft.Extensions.Hosting;
 
 [assembly: CollectionBehavior(CollectionBehavior.CollectionPerAssembly, DisableTestParallelization = true)]
-
 namespace ApplicationTemplate.Tests;
 
 /// <summary>
-///  Gives access to the API endpoints and their configuration.
+/// Gives access to the API endpoints and their configuration.
 /// </summary>
 public abstract class ApiTestBase : IDisposable
 {
@@ -27,8 +26,6 @@ public abstract class ApiTestBase : IDisposable
 	public void Dispose()
 	{
 		_host.Dispose();
-
-		GC.SuppressFinalize(this);
 	}
 
 	/// <summary>
