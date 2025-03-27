@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 
@@ -11,7 +8,7 @@ namespace ApplicationTemplate.DataAccess;
 /// Provides access to the user profile API.
 /// </summary>
 [Headers("Authorization: Bearer")]
-public interface IUserProfileRepository
+public interface IUserProfileApiClient
 {
 	/// <summary>
 	/// Returns the current user profile.

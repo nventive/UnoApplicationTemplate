@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate;
 
-public class JwtDataJsonConverter<TPayload> : JsonConverter<JwtData<TPayload>>
+public sealed class JwtDataJsonConverter<TPayload> : JsonConverter<JwtData<TPayload>>
 	where TPayload : class
 {
 	public override JwtData<TPayload> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
