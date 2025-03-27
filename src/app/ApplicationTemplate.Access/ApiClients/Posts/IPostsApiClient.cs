@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 
@@ -11,7 +8,7 @@ namespace ApplicationTemplate.DataAccess;
 /// Provides access to the posts API.
 /// </summary>
 [Headers("Authorization: Bearer")]
-public interface IPostsRepository
+public interface IPostsApiClient
 {
 	/// <summary>
 	/// Gets the list of all posts.

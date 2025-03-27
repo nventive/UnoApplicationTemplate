@@ -12,9 +12,9 @@ namespace ApplicationTemplate.Business;
 
 public partial class UserProfileService : IUserProfileService
 {
-	private readonly IUserProfileRepository _profileRepository;
+	private readonly IUserProfileApiClient _profileRepository;
 
-	public UserProfileService(IUserProfileRepository profileRepository)
+	public UserProfileService(IUserProfileApiClient profileRepository)
 	{
 		_profileRepository = profileRepository ?? throw new ArgumentNullException(nameof(profileRepository));
 	}

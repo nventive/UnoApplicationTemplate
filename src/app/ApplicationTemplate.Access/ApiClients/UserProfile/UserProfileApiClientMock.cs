@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,12 +7,12 @@ using Microsoft.Extensions.Options;
 
 namespace ApplicationTemplate.DataAccess;
 
-public class UserProfileRepositoryMock : BaseMock, IUserProfileRepository
+public sealed class UserProfileApiClientMock : BaseMock, IUserProfileApiClient
 {
 	private readonly IAuthenticationTokenProvider<AuthenticationData> _tokenProvider;
 	private readonly IOptionsMonitor<MockOptions> _mockOptionsMonitor;
 
-	public UserProfileRepositoryMock(
+	public UserProfileApiClientMock(
 		IAuthenticationTokenProvider<AuthenticationData> tokenProvider,
 		JsonSerializerOptions serializerOptions,
 		IOptionsMonitor<MockOptions> mockOptionsMonitor)

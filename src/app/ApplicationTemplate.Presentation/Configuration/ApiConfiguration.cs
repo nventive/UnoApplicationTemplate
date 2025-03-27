@@ -53,7 +53,7 @@ public static class ApiConfiguration
 	private static IServiceCollection AddUserProfile(this IServiceCollection services)
 	{
 		// This one doesn't have an actual remote API yet. It's always a mock implementation.
-		return services.AddSingleton<IUserProfileRepository, UserProfileRepositoryMock>();
+		return services.AddSingleton<IUserProfileApiClient, UserProfileApiClientMock>();
 	}
 
 	private static IServiceCollection AddMinimumVersion(this IServiceCollection services)
@@ -79,10 +79,10 @@ public static class ApiConfiguration
 		return services
 			.AddSingleton<IErrorResponseInterpreter<PostErrorResponse>>(s => new ErrorResponseInterpreter<PostErrorResponse>(
 				(request, response, deserializedResponse) => deserializedResponse.Error != null,
-				(request, response, deserializedResponse) => new PostRepositoryException(deserializedResponse)
+				(request, response, deserializedResponse) => new PostsApiClientException(deserializedResponse)
 			))
 			.AddTransient<ExceptionInterpreterHandler<PostErrorResponse>>()
-			.AddApiClient<IPostsRepository, PostsRepositoryMock>(configuration, "PostApiClient", b => b
+			.AddApiClient<IPostsApiClient, PostsApiClientMock>(configuration, "PostApiClient", b => b
 				.AddHttpMessageHandler<ExceptionInterpreterHandler<PostErrorResponse>>()
 				.AddHttpMessageHandler<AuthenticationTokenHandler<AuthenticationData>>()
 			);

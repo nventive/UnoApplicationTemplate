@@ -1,4 +1,5 @@
-﻿using System.Reactive.Concurrency;
+﻿using System;
+using System.Reactive.Concurrency;
 using ApplicationTemplate.Business;
 using ApplicationTemplate.DataAccess;
 using ApplicationTemplate.Presentation;
@@ -22,6 +23,7 @@ public static class AppServicesConfiguration
 	public static IServiceCollection AddAppServices(this IServiceCollection services)
 	{
 		return services
+			.AddSingleton<TimeProvider>(TimeProvider.System)
 			.AddSingleton<IMessageDialogService, AcceptOrDefaultMessageDialogService>()
 			.AddSingleton<IBackgroundScheduler>(s => TaskPoolScheduler.Default.ToBackgroundScheduler())
 			.AddSingleton<IApplicationSettingsRepository, ApplicationSettingsRepository>()

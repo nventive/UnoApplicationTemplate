@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.DataAccess;
 
-public record PostData
+public sealed record PostData
 {
 	public PostData(long id, string title, string body, long userIdentifier)
 	{

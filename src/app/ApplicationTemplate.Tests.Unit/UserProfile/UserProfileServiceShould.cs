@@ -19,7 +19,7 @@ public sealed partial class UserProfileServiceShould
 	public async Task GetCurrentProfile()
 	{
 		// Arrange
-		var mockedUserProfileRepository = Substitute.For<IUserProfileRepository>();
+		var mockedUserProfileRepository = Substitute.For<IUserProfileApiClient>();
 		mockedUserProfileRepository
 			.Get(Arg.Any<CancellationToken>())
 			.Returns(Task.FromResult(GetMockedUserProfile()));
@@ -41,7 +41,7 @@ public sealed partial class UserProfileServiceShould
 			new UserProfile { Id = "12345", FirstName = "Nventive", LastName = "Nventive", Email = "nventive@nventive.ca" };
 
 		// Arrange
-		var mockedUserProfileRepository = Substitute.For<IUserProfileRepository>();
+		var mockedUserProfileRepository = Substitute.For<IUserProfileApiClient>();
 		mockedUserProfileRepository
 			.Get(Arg.Any<CancellationToken>())
 			.Returns(Task.FromResult(userProfile.ToData()));
