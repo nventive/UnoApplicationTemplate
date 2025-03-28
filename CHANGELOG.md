@@ -20,6 +20,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Optimized the .NET workloads install process.
 - Fixed the iOS application icon size.
 - Added VM Disposal in Functional Tests.
+- Updated Contributing documentation.
 
 ## 3.8.X
 - Updated from .NET 8 to .NET 9.

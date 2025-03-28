@@ -1,4 +1,4 @@
-# How to Contribute
+﻿# How to Contribute
 
 We'd love to accept your patches, contributions and suggestions to this project.
 Here are a few small guidelines you need to follow.
@@ -68,6 +68,27 @@ https://help.github.com/articles/using-pull-requests. Make sure the repository
 can build and all tests pass, as well as follow the current coding guidelines.
 When submitting a pull request, please use our [pull request
 template](.github/PULL_REQUEST_TEMPLATE.md).
+
+**How to use the pull request template**
+
+Proposed Changes:
+Check the item in the list that corresponds to the type of change you're making. This should align with your conventional commit message.
+
+Description:
+Add a quick description of your changes.
+
+Impact on version:
+Please check the impact of your changes on the version. This should align with the changes made to the changelog file.
+
+PR Checklist:
+This list is a reminder of things that are often forgotten when making a pull request. Put an `x` in all the boxes that apply to your changes.
+Don't forget to fill the Contextual section below it.
+
+Other information:
+Add any other information that is relevant to your pull request.
+
+Internal Issue:
+If your pull request is related to an internal issue, please add the issue number here.
 
 Pull requests should all be done to the **main** branch.
 
