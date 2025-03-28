@@ -408,4 +408,6 @@ dotnet_diagnostic.VSTHRD100.severity = error
 dotnet_diagnostic.VSTHRD101.severity = error
 
 # CA1063: Implement IDisposable Correctly
-dotnet_diagnostic.CA1063.severity = none
+dotnet_diagnostic.CA1063.severity = suggestion
+# CA1816: Dispose methods should call SuppressFinalize
+dotnet_diagnostic.CA1816.severity = suggestion
