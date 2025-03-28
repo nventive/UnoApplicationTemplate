@@ -45,30 +45,26 @@ public sealed class AuthenticationApiClientMock : IAuthenticationApiClient
 
 		await SimulateDelay(ct);
 
-		return CreateAuthenticationData(unauthorizedToken.AccessTokenPayload);
+		return CreateAuthenticationData(unauthorizedToken.AccessToken.Payload);
 	}
 
-	private AuthenticationData CreateAuthenticationData(AuthenticationToken token = null, TimeSpan? timeToLive = null)
+	private AuthenticationData CreateAuthenticationData(AuthenticationToken token = null)
 	{
-		var encodedJwt = CreateJsonWebToken(token, timeToLive);
-		var jwt = new JwtData<AuthenticationToken>(encodedJwt, _serializerOptions);
+		var encodedJwt = CreateJsonWebToken(token);
 
 		return new AuthenticationData()
 		{
-			AccessToken = jwt.Token,
+			AccessToken = new JwtData<AuthenticationToken>(encodedJwt, _serializerOptions),
 			RefreshToken = Guid.NewGuid().ToString(format: null, CultureInfo.InvariantCulture),
-			Expiration = jwt.Payload.Expiration,
 		};
 	}
 
-	private string CreateJsonWebToken(AuthenticationToken token = null, TimeSpan? timeToLive = null)
+	private string CreateJsonWebToken(AuthenticationToken token = null)
 	{
 		const string header = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9"; // alg=HS256, type=JWT
 		const string signature = "QWqnPP8W6ymexz74P6quP-oG-wxr7vMGqrEL8y_tV6M"; // dummy stuff
 
-		var now = DateTimeOffset.Now;
-
-		token = token ?? new AuthenticationToken(default, DateTimeOffset.MinValue, DateTimeOffset.MinValue);
+		token ??= new AuthenticationToken(default, DateTimeOffset.MinValue, DateTimeOffset.MinValue);
 
 		string payload;
 		using (var stream = new MemoryStream())

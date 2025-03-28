@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -15,7 +14,7 @@ namespace ApplicationTemplate;
 [JsonSerializable(typeof(AuthenticationToken))]
 [JsonSerializable(typeof(AuthenticationData))]
 [JsonSerializable(typeof(ApplicationSettings))]
-[JsonSerializable(typeof(Refit.ProblemDetails))]
+[JsonSerializable(typeof(ProblemDetails))]
 [JsonSerializable(typeof(PostData))]
 [JsonSerializable(typeof(PostData[]))]
 [JsonSerializable(typeof(DadJokesResponse))]

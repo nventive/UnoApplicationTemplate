@@ -6,12 +6,15 @@
 		<RootNamespace>ApplicationTemplate.DataAccess</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<TreatWarningsAsErrors Condition="'$(Configuration)'=='Release'">true</TreatWarningsAsErrors>
+
+		<!-- Disable warning SYSLIB0030 because it's triggered by generated files from System.Text.Json. -->
+		<NoWarn>$(NoWarn);SYSLIB0020</NoWarn>
 	</PropertyGroup>
 
 	<ItemGroup>
 		<EmbeddedResource Include="ApiClients\DadJokes\DadJokesApiClientMock.FetchData.json" />
-		<EmbeddedResource Include="ApiClients\Posts\PostsRepositoryMock.GetAll.json" />
-		<EmbeddedResource Include="ApiClients\UserProfile\UserProfileRepositoryMock.Get.json" />
+		<EmbeddedResource Include="ApiClients\Posts\PostsApiClientMock.GetAll.json" />
+		<EmbeddedResource Include="ApiClients\UserProfile\UserProfileApiClientMock.Get.json" />
 	</ItemGroup>
 
 	<ItemGroup>

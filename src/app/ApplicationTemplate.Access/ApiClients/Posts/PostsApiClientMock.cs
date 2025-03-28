@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using Refit;
 
 namespace ApplicationTemplate.DataAccess;
 
-public class PostsRepositoryMock : BaseMock, IPostsRepository
+public sealed class PostsApiClientMock : BaseMock, IPostsApiClient
 {
-	public PostsRepositoryMock(JsonSerializerOptions serializerOptions)
+	public PostsApiClientMock(JsonSerializerOptions serializerOptions)
 		: base(serializerOptions)
 	{
 	}
