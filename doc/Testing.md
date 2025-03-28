@@ -120,7 +120,7 @@ public override ApplicationSettings ApplicationSettings { get; } = new Applicati
 ## API Testing
 
 The API integration tests are designed to validate the behavior of the application's API clients.
-These tests use the `ApiTestBase` class, which configures the necessary services and settings to mirror the application's real-world behavior.
+These tests use the `ApiTestBase` class, which configures the necessary services and settings.
 This ensures that the tests are as close to the actual application environment as possible.
 
 ### Example
@@ -234,6 +234,11 @@ You can collect the code coverage locally using the following command lines.
 - For Unit tests:
   ```powershell
   dotnet test src/app/ApplicationTemplate.Tests.Unit/ApplicationTemplate.Tests.Unit.csproj --collect:"XPlat Code Coverage" --settings build/test.runsettings
+  ```
+
+- For API tests:
+  ```powershell
+  dotnet test src/app/ApplicationTemplate.Tests.Api/ApplicationTemplate.Tests.Api.csproj --collect:"XPlat Code Coverage" --settings build/test.runsettings
   ```
 
 ### Limitations
