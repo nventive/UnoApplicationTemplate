@@ -8,6 +8,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 ## 3.10.X
 - Added Dependency Injection validation in the development environment.
 - Cleaned up the persistence configuration files (removed unused parameters and updated documentation).
+- Adding a workaround for a bug with the language change on android.
 
 ## 3.9.X
 - Removed unnecessary `IsExternalInit.cs` files.

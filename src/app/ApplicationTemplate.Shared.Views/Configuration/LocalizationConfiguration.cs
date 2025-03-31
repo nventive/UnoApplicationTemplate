@@ -75,7 +75,7 @@ public static class LocalizationConfiguration
 		var folderPath = string.Empty;
 //-:cnd:noEmit
 #endif
-//+:cnd:noEmit
+		//+:cnd:noEmit
 
 		return Path.Combine(folderPath, "culture-override");
 	}
@@ -170,7 +170,19 @@ public class ThreadCultureOverrideService : IThreadCultureOverrideService
 	{
 		try
 		{
+//-:cnd:noEmit
+#if ANDROID
+//+:cnd:noEmit
+			// We need a special case for Android because the CurrentCulture does not return the correct value after changing the device language.
+			var locale = Java.Util.Locale.Default; // Gets the real system language
+			var culture = new CultureInfo(locale.ToString());
+//-:cnd:noEmit
+#else
+//+:cnd:noEmit
 			var culture = CultureInfo.CurrentCulture;
+//-:cnd:noEmit
+#endif
+//+:cnd:noEmit
 
 			// Use the settings culture if it is set.
 			var settingsCulture = GetCulture();
