@@ -1,4 +1,4 @@
-schedules:
+﻿schedules:
 - cron: "00 05 * * *" # Format is "Minutes Hours DayOfMonth Month DayOfWeek" in UTC (that's why 05 is 1h EST)
   displayName: 'Nightly weekdays build - 1:00 EST'
   always: true # Start a new run even if the code didn't change (because packages might have changed).
@@ -33,7 +33,7 @@ stages:
           pathToSrc: '$(Pipeline.Workspace)/GeneratedApp/src'
           solutionFileName: 'GeneratedApp.sln'
           solutionName: 'GeneratedApp'
-          useRealApis: true
+          runApiTests: true
 
 #-endif
 - stage: Test_Staging
@@ -53,4 +53,4 @@ stages:
           pathToSrc: '$(Build.SourcesDirectory)/src'
           solutionFileName: '$(SolutionName).sln'
           solutionName: '$(SolutionName)'
-          useRealApis: true
+          runApiTests: true

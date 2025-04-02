@@ -81,7 +81,8 @@ Similar to the App Store stage, this stage pushes the **AAB** produced by the bu
 This pipeline is in charge of running all tests, including the API integration tests.
 It runs all the tests and merges their coverage results into one file to have a better idea of the overall coverage.
 
-The API integration tests are the ones defined in the Functional Tests project.
+The API integration tests are the ones defined in the Api Tests project.
+It's also possible to run the functional tests with real APIs instead of mocked ones.
 Their configuration is simply changed so that they use real endpoint implementations instead of mocked implementations.
 This is done by setting the environment variable `USE_REAL_APIS` to `true`.
 
