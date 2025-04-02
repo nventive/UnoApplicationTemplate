@@ -8,7 +8,9 @@ Prefix your items with `(Template)` if the change is about the template and not 
 ## 3.10.X
 - Added Dependency Injection validation in the development environment.
 - Cleaned up the persistence configuration files (removed unused parameters and updated documentation).
+- Updated Contributing documentation.
 - Adding a workaround for a bug with the language change on android.
+- Cleanup the 'Access' layer's code (renamed repositories into API clients, removed unused namespaces, and sealed some classes).
 
 ## 3.9.X
 - Removed unnecessary `IsExternalInit.cs` files.
@@ -21,7 +23,6 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Optimized the .NET workloads install process.
 - Fixed the iOS application icon size.
 - Added VM Disposal in Functional Tests.
-- Updated Contributing documentation.
 
 ## 3.8.X
 - Updated from .NET 8 to .NET 9.

@@ -8,9 +8,9 @@ namespace ApplicationTemplate.Business;
 
 public partial class PostService : IPostService
 {
-	private readonly IPostsRepository _postsRepository;
+	private readonly IPostsApiClient _postsRepository;
 
-	public PostService(IPostsRepository postsRepository)
+	public PostService(IPostsApiClient postsRepository)
 	{
 		_postsRepository = postsRepository;
 	}
