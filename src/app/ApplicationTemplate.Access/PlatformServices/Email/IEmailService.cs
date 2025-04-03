@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
@@ -10,6 +11,7 @@ public interface IEmailService
 	/// <summary>
 	/// Launches the device's email application with a pre-composed <see cref="Email"/>.
 	/// </summary>
+	/// /// <param name="ct">The cancellation token.</param>
 	/// <param name="email">The email to compose.</param>
-	Task Compose(Email email);
+	Task Compose(CancellationToken ct, Email email);
 }

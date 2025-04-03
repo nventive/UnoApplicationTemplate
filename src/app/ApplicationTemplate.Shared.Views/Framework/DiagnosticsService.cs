@@ -146,7 +146,7 @@ public sealed class DiagnosticsService : IDiagnosticsService
 			}
 		}
 
-		await _dispatcherScheduler.Run(_ => _emailService.Compose(message), ct);
+		await _emailService.Compose(ct, message);
 
 		_logger.LogInformation("Environment summary sent.");
 	}

@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
@@ -12,7 +13,7 @@ public sealed class MockedEmailService : IEmailService
 		_logger = logger;
 	}
 
-	public Task Compose(Email email)
+	public Task Compose(CancellationToken ct, Email email)
 	{
 		_logger.LogInformation("Email composed: {Email}", email);
 		return Task.CompletedTask;
