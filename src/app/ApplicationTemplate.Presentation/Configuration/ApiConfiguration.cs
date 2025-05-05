@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -43,8 +43,6 @@ public static class ApiConfiguration
 			.AddAuthentication()
 			.AddPosts(configuration)
 			.AddUserProfile()
-			.AddMinimumVersion()
-			.AddKillSwitch()
 			.AddDadJokes(configuration);
 
 		return services;

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reactive.Linq;
 using ApplicationTemplate.DataAccess;
 
@@ -17,8 +17,14 @@ public sealed class UpdateRequiredService : IUpdateRequiredService, IDisposable
 	/// <param name="minimumVersionProvider">The component that contains an observable we can use to update the app.</param>
 	public UpdateRequiredService(IMinimumVersionProvider minimumVersionProvider)
 	{
-		_subscription = minimumVersionProvider.MinimumVersionObservable
-			.Subscribe(_ => UpdateRequired?.Invoke(this, EventArgs.Empty));
+		_subscription = minimumVersionReposiory.MinimumVersionObservable
+			.Subscribe(version =>
+			{
+				if (version > new Version("1.1.0"))
+				{
+					UpdateRequired?.Invoke(this, EventArgs.Empty);
+				}
+			});
 	}
 
 	/// <inheritdoc />

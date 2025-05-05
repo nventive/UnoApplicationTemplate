@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
 		<LangVersion>13.0</LangVersion>
 		<TargetFrameworks>net9.0-android35.0;net9.0-ios</TargetFrameworks>
@@ -15,6 +15,9 @@
 		<PublishTrimmed>True</PublishTrimmed>
 		<TrimMode>partial</TrimMode>
 	</PropertyGroup>
+	<ItemGroup>
+	  <Compile Remove="Android\RemoteConfigRepository.cs" />
+	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="2.1.0" />
 		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="2.0.0" />
@@ -42,6 +45,7 @@
 
 		<!-- It would normally be a transitive dependency, however, the version included with one of the packages has a vulnerability. -->
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\ApplicationTemplate.Access\ApplicationTemplate.Access.csproj" />
@@ -108,7 +112,11 @@
 
 				<!-- Required with the last version of Uno otherwise an exception is thrown in the main activity. -->
 				<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.5" />
+				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.9.22.1" />
+				<PackageReference Include="Xamarin.Firebase.Config" Version="121.6.1.1" />
 			</ItemGroup>
+
+			<!-- Android Firebase configuration. -->
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
 				<AndroidEnvironment Include="Android\environment.conf" />
@@ -157,10 +165,19 @@
 				<MtouchExtraArgs>$(MtouchExtraArgs) --registrar:static</MtouchExtraArgs>
 				<!-- See https://github.com/xamarin/xamarin-macios/issues/14812 for more details. -->
 				<MtouchExtraArgs>$(MtouchExtraArgs) --marshal-objectivec-exceptions:disable</MtouchExtraArgs>
+				<!-- Required with AdamE.Firebase.iOS.CloudMessaging 10.17+. -->
+				<MtouchExtraArgs Condition="'$(Platform)'=='iPhone'">$(MtouchExtraArgs) --gcc_flags -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphoneos</MtouchExtraArgs>
+				<MtouchExtraArgs Condition="'$(Platform)'=='simulator'">$(MtouchExtraArgs) --gcc_flags -L/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/swift/iphonesimulator/</MtouchExtraArgs>
 				<CodesignEntitlements>iOS\Entitlements.plist</CodesignEntitlements>
 				<!-- Workaround for clang++ error on iOS simulator on ARM base macOS system. See "https://github.com/dotnet/maui/issues/16778#issuecomment-1683343255" for more detail. -->
 				<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>
 			</PropertyGroup>
+			<!-- iOS Firebase configuration. -->
+			<ItemGroup>
+				<BundleResource Include="iOS\GoogleService-Info.plist">
+					<Link>GoogleService-Info.plist</Link>
+				</BundleResource>
+			</ItemGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
 					<PropertyGroup>
@@ -209,6 +226,7 @@
 			</Choose>
 			<ItemGroup>
 				<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
+				<PackageReference Include="AdamE.Firebase.iOS.RemoteConfig" Version="10.22.0-alpha1" />
 			</ItemGroup>
 			<ItemGroup>
 				<TrimmerRootDescriptor Include="iOS\LinkerExclusions.xml" />
@@ -272,4 +290,8 @@
 		</When>
 	</Choose>
 	<Import Project="..\ApplicationTemplate.Shared.Views\ApplicationTemplate.Shared.Views.projitems" Label="Shared" />
+
+
+	<!-- Required with AdamE.Firebase.iOS.CloudMessaging https://github.com/AdamEssenmacher/GoogleApisForiOSComponents?tab=readme-ov-file#firebase-analytics -->
+	<Import Project="..\..\..\LinkWithSwiftSystemLibrariesWorkaround.targets" Condition="'$(TargetFramework)' == 'net7.0-ios'" />
 </Project>
