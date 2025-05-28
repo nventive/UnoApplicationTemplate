@@ -13,11 +13,6 @@ namespace ApplicationTemplate.Presentation;
 /// </summary>
 public abstract class TabViewModel : DeactivatableViewModelBase
 {
-	protected TabViewModel()
-	{
-		(this as IInjectable)?.Inject((t, n) => this.GetService(t));
-	}
-
 	/// <summary>
 	/// Gets the title of this Tab.
 	/// This is to be displayed in a TabBar.
@@ -39,6 +34,16 @@ public abstract class TabViewModel : DeactivatableViewModelBase
 		{
 			base.Reactivate();
 		}
+	}
+
+	/// <summary>
+	/// Resolves a service of type <typeparamref name="TService"/> from the service provider.
+	/// </summary>
+	/// <typeparam name="TService">The type of service to resolve.</typeparam>
+	/// <param name="service">The service variable in which to return the resolved service.</param>
+	protected void ResolveService<TService>(out TService service)
+	{
+		service = this.GetService<TService>();
 	}
 }
 

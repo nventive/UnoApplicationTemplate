@@ -8,12 +8,14 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class NavigationDebuggerViewModel : TabViewModel
+public sealed class NavigationDebuggerViewModel : TabViewModel
 {
-	[Inject] private ISectionsNavigator _sectionsNavigator;
+	private readonly ISectionsNavigator _sectionsNavigator;
 
 	public NavigationDebuggerViewModel()
 	{
+		ResolveService(out _sectionsNavigator);
+
 		Title = "Navigation";
 	}
 

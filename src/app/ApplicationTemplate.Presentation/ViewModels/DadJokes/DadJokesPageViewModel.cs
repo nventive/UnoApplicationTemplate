@@ -16,10 +16,16 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class DadJokesPageViewModel : ViewModel
+public sealed class DadJokesPageViewModel : ViewModel
 {
-	[Inject] private IDadJokesService _dadJokesService;
-	[Inject] private ISectionsNavigator _sectionsNavigator;
+	private readonly IDadJokesService _dadJokesService;
+	private readonly ISectionsNavigator _sectionsNavigator;
+
+	public DadJokesPageViewModel()
+	{
+		ResolveService(out _dadJokesService);
+		ResolveService(out _sectionsNavigator);
+	}
 
 	public IDynamicCommand NavigateToFilters => this.GetCommandFromTask(async ct =>
 	{

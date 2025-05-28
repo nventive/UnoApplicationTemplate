@@ -14,14 +14,16 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class HttpDebuggerViewModel : TabViewModel
+public sealed class HttpDebuggerViewModel : TabViewModel
 {
 	private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true };
 
-	[Inject] private IHttpDebuggerService _httpDebuggerService;
+	private readonly IHttpDebuggerService _httpDebuggerService;
 
 	public HttpDebuggerViewModel()
 	{
+		ResolveService(out _httpDebuggerService);
+
 		Title = "HTTP";
 		_httpDebuggerService.TraceUpdated += OnTraceUpdated;
 		AddDisposable(Disposable.Create(() => _httpDebuggerService.TraceUpdated -= OnTraceUpdated));

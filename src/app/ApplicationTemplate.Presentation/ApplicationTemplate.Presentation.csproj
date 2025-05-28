@@ -21,23 +21,20 @@
 		<PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="9.0.3" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
 		<PackageReference Include="ReviewService" Version="1.0.0" />
-		<PackageReference Include="Uno.SourceGenerationTasks" Version="4.2.0" />
 		<PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
 		<PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
 		<PackageReference Include="Serilog.Sinks.Debug" Version="3.0.0" />
 		<PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="9.5.4" />
-		<PackageReference Include="Chinook.DynamicMvvm" Version="2.1.1" />
-		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="2.1.1" />
-		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="2.1.1" />
-		<PackageReference Include="Chinook.DynamicMvvm.CollectionTracking" Version="2.1.1" />
-		<PackageReference Include="Chinook.DataLoader" Version="2.0.0" />
-		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="2.0.0" />
-		<PackageReference Include="Chinook.BackButtonManager" Version="2.1.0" />
-		<PackageReference Include="Chinook.SectionsNavigation" Version="3.0.2" />
-		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="3.0.2" />
+		<PackageReference Include="Chinook.DynamicMvvm" Version="3.0.1" />
+		<PackageReference Include="Chinook.DynamicMvvm.Reactive" Version="3.0.1" />
+		<PackageReference Include="Chinook.DynamicMvvm.FluentValidation" Version="3.0.1" />
+		<PackageReference Include="Chinook.DynamicMvvm.CollectionTracking" Version="3.0.1" />
+		<PackageReference Include="Chinook.DataLoader" Version="3.0.1" />
+		<PackageReference Include="Chinook.DataLoader.DynamicMvvm" Version="3.0.1" />
+		<PackageReference Include="Chinook.BackButtonManager" Version="3.0.1" />
+		<PackageReference Include="Chinook.SectionsNavigation" Version="4.0.1" />
+		<PackageReference Include="Chinook.SectionsNavigation.Reactive" Version="4.0.1" />
 		<PackageReference Include="MessageDialogService" Version="2.0.0" />
-		<PackageReference Include="Uno.Injectable" Version="2.0.0-dev.10" />
-		<PackageReference Include="Uno.CodeGen" Version="2.0.0-dev.10" />
 	</ItemGroup>
 
 	<ItemGroup>

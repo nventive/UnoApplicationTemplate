@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using ApplicationTemplate.Business;
 using ApplicationTemplate.DataAccess;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -10,7 +9,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation;
 
-public partial class OnboardingPageViewModel : ViewModel
+public sealed class OnboardingPageViewModel : ViewModel
 {
 	private bool _isFromSettingsPage = false;
 

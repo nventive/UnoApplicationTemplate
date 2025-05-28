@@ -2,7 +2,7 @@
 
 namespace ApplicationTemplate.Presentation;
 
-public partial class SummaryDiagnosticsViewModel : ViewModel
+public sealed class SummaryDiagnosticsViewModel : ViewModel
 {
 	public string Summary => this.Get(this.GetService<IDiagnosticsService>().GetSummary);
 
