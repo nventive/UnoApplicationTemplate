@@ -9,14 +9,15 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class EnvironmentPickerPageViewModel : ViewModel
+public sealed class EnvironmentPickerPageViewModel : ViewModel
 {
 	private readonly string _currentEnvironment;
 
-	[Inject] private IEnvironmentManager _environmentManager;
+	private readonly IEnvironmentManager _environmentManager;
 
 	public EnvironmentPickerPageViewModel(string currentEnvironment)
 	{
+		ResolveService(out _environmentManager);
 		_currentEnvironment = currentEnvironment;
 	}
 

@@ -10,12 +10,14 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class DiagnosticsOverlayViewModel : ViewModel
+public sealed class DiagnosticsOverlayViewModel : ViewModel
 {
-	[Inject] private IMemoryProvider _memoryProvider;
+	private readonly IMemoryProvider _memoryProvider;
 
 	public DiagnosticsOverlayViewModel()
 	{
+		ResolveService(out _memoryProvider);
+
 		Tabs = new TabViewModel[]
 		{
 			this.AttachChild(new HttpDebuggerViewModel(), "HttpDebugger"),

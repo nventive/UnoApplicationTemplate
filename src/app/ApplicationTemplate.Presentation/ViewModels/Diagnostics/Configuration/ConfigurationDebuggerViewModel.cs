@@ -11,11 +11,10 @@ using Chinook.DynamicMvvm;
 using MessageDialogService;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
+public sealed class ConfigurationDebuggerViewModel : TabViewModel
 {
 	private static readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions
 	{
@@ -26,11 +25,14 @@ public sealed partial class ConfigurationDebuggerViewModel : TabViewModel
 	private readonly SerialDisposable _changeCallback = new();
 	private readonly string[] _initialKeys;
 
-	[Inject] private IDiagnosticsService _diagnosticsService;
-	[Inject] private IEnvironmentManager _environmentManager;
+	private readonly IDiagnosticsService _diagnosticsService;
+	private readonly IEnvironmentManager _environmentManager;
 
 	public ConfigurationDebuggerViewModel()
 	{
+		ResolveService(out _diagnosticsService);
+		ResolveService(out _environmentManager);
+
 		Title = "Configuration";
 		AvailableEnvironments = _environmentManager.AvailableEnvironments;
 		ResetEnvironmentContent = $"Reset to default ({_environmentManager.Default})";

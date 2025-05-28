@@ -7,6 +7,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 
 ## 3.11.X
 - Added API Client tests project.
+- Removed all references to Uno.SourceGenerationTasks packages and adjusted the dependency injection recipe in ViewModels accordingly.
 
 ## 3.10.X
 - Added Dependency Injection validation in the development environment.

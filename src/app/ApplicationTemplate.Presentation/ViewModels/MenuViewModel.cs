@@ -10,7 +10,7 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class MenuViewModel : ViewModel
+public sealed class MenuViewModel : ViewModel
 {
 	public enum Section
 	{
@@ -19,8 +19,14 @@ public sealed partial class MenuViewModel : ViewModel
 		Settings
 	}
 
-	[Inject] private ISectionsNavigator _sectionsNavigator;
-	[Inject] private IReviewService _reviewService;
+	private readonly ISectionsNavigator _sectionsNavigator;
+	private readonly IReviewService _reviewService;
+
+	public MenuViewModel()
+	{
+		ResolveService(out _sectionsNavigator);
+		ResolveService(out _reviewService);
+	}
 
 	/// <summary>
 	/// The list of ViewModel types on which the bottom menu should be visible.

@@ -45,14 +45,18 @@ You can also use `IServiceProvider.GetService<IService>()` which will return `de
 
 - You can access your services from a **view model** using `this.GetService<MyService>`.
 
-- You can also access your services from a **view model** using the `[Inject]` attribute.
+- You can also access your services from a **view model** using the `ResolveService` method.
 
   ```csharp
-  // Your class needs to be partial.
-  public partial class MyViewModel
+  public class MyViewModel
   {
     // This property will be automatically assigned in the constructor.
-    [Inject] private MyService _service;
+    private readonly MyService _service;
+
+	public MyViewModel()
+	{
+		ResolveService(out _service);
+	}
   }
   ```
 
@@ -62,4 +66,3 @@ You can also use `IServiceProvider.GetService<IService>()` which will return `de
 
 - [Understanding Generic Host](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0)
 - [Using dependency injection](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/dependency-injection?view=aspnetcore-3.0)
-- [Using Uno.Injectable](https://github.com/unoplatform/Uno.CodeGen/blob/master/doc/Injectable%20Generation.md)

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Threading.Tasks;
-using ApplicationTemplate.Presentation;
-using Chinook.DynamicMvvm;
+﻿using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
-using MallardMessageHandlers;
 
 namespace ApplicationTemplate.Presentation;
 
-public partial class WelcomePageViewModel : ViewModel
+public sealed class WelcomePageViewModel : ViewModel
 {
 	public IDynamicCommand NavigateToOnboarding => this.GetCommandFromTask(async ct =>
 	{

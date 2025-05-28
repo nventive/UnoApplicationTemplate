@@ -11,7 +11,7 @@ using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class PostsPageViewModel : ViewModel
+public sealed class PostsPageViewModel : ViewModel
 {
 	[SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "It will be disposed by the DataLoader when passed via WithTrigger.")]
 	private readonly ManualDataLoaderTrigger _deletePostTrigger = new();

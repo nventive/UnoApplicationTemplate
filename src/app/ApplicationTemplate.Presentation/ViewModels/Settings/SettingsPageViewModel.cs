@@ -14,12 +14,20 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
-public sealed partial class SettingsPageViewModel : ViewModel
+public sealed class SettingsPageViewModel : ViewModel
 {
-	[Inject] private ILauncherService _browserService;
-	[Inject] private IStringLocalizer _stringLocalizer;
-	[Inject] private ISectionsNavigator _sectionsNavigator;
-	[Inject] private IAuthenticationService _authenticationService;
+	private readonly ILauncherService _browserService;
+	private readonly IStringLocalizer _stringLocalizer;
+	private readonly ISectionsNavigator _sectionsNavigator;
+	private readonly IAuthenticationService _authenticationService;
+
+	public SettingsPageViewModel()
+	{
+		ResolveService(out _browserService);
+		ResolveService(out _stringLocalizer);
+		ResolveService(out _sectionsNavigator);
+		ResolveService(out _authenticationService);
+	}
 
 	public string VersionNumber => this.Get(GetVersionNumber);
 
