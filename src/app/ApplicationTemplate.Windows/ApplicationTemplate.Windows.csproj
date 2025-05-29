@@ -75,20 +75,20 @@
 		<PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.1" />
 		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
-		<PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.13.2" />
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.50" />
-		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.6.250228001" />
-		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.1742" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
-		<PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.0.9" />
+		<PackageReference Include="Microsoft.VisualStudio.Threading" Version="17.14.15" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.70" />
+		<PackageReference Include="Microsoft.WindowsAppSDK" Version="1.7.250513003" />
+		<PackageReference Include="Microsoft.Windows.SDK.BuildTools" Version="10.0.26100.4188" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.5" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.WinUI.Managed" Version="3.0.0" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.1-dev.57" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.7.0-dev.88" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.1" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.1.1" />
-		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
-		<PackageReference Include="Uno.Material.WinUI" Version="5.4.0" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.4.3" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
+		<PackageReference Include="Uno.Material.WinUI" Version="5.5.4" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="7.0.7" />
 
 		<!-- It would normally be a transitive dependency, however, the version included with one of the packages has a vulnerability. -->
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
