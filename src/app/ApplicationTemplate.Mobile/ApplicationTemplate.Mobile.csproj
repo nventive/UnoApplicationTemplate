@@ -22,23 +22,23 @@
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="4.0.1" />
 		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.1" />
 		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.50" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.70" />
 		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.1-dev.57" />
 		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.7.0-dev.88" />
 		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.1" />
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
 		<PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.204" />
-		<PackageReference Include="Uno.Material.WinUI" Version="5.4.0" />
-		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.4.2" />
+		<PackageReference Include="Uno.Material.WinUI" Version="5.5.4" />
+		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="3.0.3" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.4.2" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.4.3" />
-		<PackageReference Include="Uno.WinUI" Version="5.6.81" />
-		<PackageReference Include="Uno.WinUI.DevServer" Version="5.6.81" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.WinUI.Lottie" Version="5.6.81" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.6.81" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.3" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="7.0.7" />
+		<PackageReference Include="Uno.WinUI" Version="6.0.704" />
+		<PackageReference Include="Uno.WinUI.DevServer" Version="6.0.704" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.WinUI.Lottie" Version="6.0.704" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="6.0.704" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="9.0.5" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
-		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
 
 		<!-- It would normally be a transitive dependency, however, the version included with one of the packages has a vulnerability. -->
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
@@ -103,11 +103,11 @@
 			</Choose>
 			<ItemGroup>
 				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.37" />
-				<PackageReference Include="Mono.AotProfiler.Android" Version="7.0.0" />
-				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.0.21.2" />
+				<PackageReference Include="Mono.AotProfiler.Android" Version="9.0.0" />
+				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.0.21.3" />
 
 				<!-- Required with the last version of Uno otherwise an exception is thrown in the main activity. -->
-				<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.5" />
+				<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.6" />
 			</ItemGroup>
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
