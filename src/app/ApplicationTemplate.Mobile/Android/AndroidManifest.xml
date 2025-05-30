@@ -19,6 +19,7 @@
 					  android:required="false" />
 
 		<!-- This is to properly support widescreen devices. -->
+		<!-- This requires the activity to be resizable. -->
 		<!-- See https://android-developers.googleblog.com/2017/03/update-your-app-to-take-advantage-of.html for more details. -->
 		<meta-data android:name="android.max_aspect" android:value="2.1" />
 
