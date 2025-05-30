@@ -10,7 +10,7 @@ namespace ApplicationTemplate;
 	ConfigurationChanges = global::Uno.UI.ActivityHelper.AllConfigChanges,
 	WindowSoftInputMode = SoftInput.AdjustNothing | SoftInput.StateHidden,
 	ScreenOrientation = ScreenOrientation.Portrait,
-	ResizeableActivity = false,
+	ResizeableActivity = true,
 	LaunchMode = LaunchMode.SingleTask
 )]
 public sealed class MainActivity : Microsoft.UI.Xaml.ApplicationActivity
