@@ -18,6 +18,7 @@ public abstract class ApiTestBase : IDisposable
 				.AddDiagnostics(context.Configuration)
 				.AddMock(context.Configuration)
 				.AddApi(context.Configuration)
+				.AddSingleton<System.TimeProvider>(System.TimeProvider.System)
 				.AddSerialization()
 		).Build();
 	}

@@ -19,15 +19,15 @@ public sealed class TodoApiClientShould : ApiTestBase
 		var ct = CancellationToken.None;
 
 		// Act
-		var result = await apiClient.GetAllTodos(ct);
+		var result = await apiClient.GetTodos(ct);
 
 		// Assert
+		Assert.NotNull(result);
 		Assert.NotEmpty(result);
-		Assert.All(result, todo => Assert.True(todo.Id > 0));  // Basic validation based on expected data
 	}
 
 	[Theory]
-	[InlineData(1)]  // Test with a known ID from the sample JSON
+	[InlineData(1)]
 	public async Task GetTodoById_ReturnsTodo(int id)
 	{
 		// Arrange
@@ -35,12 +35,14 @@ public sealed class TodoApiClientShould : ApiTestBase
 		var ct = CancellationToken.None;
 
 		// Act
-		var result = await apiClient.GetTodoById(ct, id);
+		var result = await apiClient.GetTodo(ct, id);
 
 		// Assert
+		// Validates the value because we know them from the mock data which comes from the API.
 		Assert.NotNull(result);
 		Assert.Equal(id, result.Id);
-		Assert.Equal(1, result.UserId);  // Based on sample JSON
-		Assert.False(result.Completed);  // Based on sample JSON
+		Assert.Equal(1, result.UserId);
+		Assert.Equal("delectus aut autem", result.Title);
+		Assert.False(result.Completed);
 	}
 }

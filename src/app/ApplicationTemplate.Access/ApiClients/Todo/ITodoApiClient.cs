@@ -16,7 +16,7 @@ public interface ITodoApiClient
 	/// <param name="ct">The cancellation token.</param>
 	/// <returns>A list of todo items.</returns>
 	[Get("/todos")]
-	Task<List<TodoData>> GetAllTodos(CancellationToken ct);
+	Task<List<TodoData>> GetTodos(CancellationToken ct);
 
 	/// <summary>
 	/// Retrieves a single todo item by its ID.
@@ -25,5 +25,5 @@ public interface ITodoApiClient
 	/// <param name="id">The ID of the todo item.</param>
 	/// <returns>The todo item.</returns>
 	[Get("/todos/{id}")]
-	Task<TodoData> GetTodoById(CancellationToken ct, int id);
+	Task<TodoData> GetTodo(CancellationToken ct, int id);
 }

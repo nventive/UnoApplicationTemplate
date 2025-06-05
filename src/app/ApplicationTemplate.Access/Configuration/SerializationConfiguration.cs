@@ -70,7 +70,7 @@ public static class SerializationConfiguration
 		services
 			.AddSingleton(DefaultJsonSerializerOptions)
 			// Add the adapter for Refit.
-			.AddSingleton<IHttpContentSerializer>(new SystemTextJsonContentSerializer(DefaultJsonSerializerOptions))
+			.AddSingleton<IHttpContentSerializer>(new SystemTextJsonContentSerializer(NoSourceGenerationJsonSerializerOptions))
 			// Add the adapter for Nventive.Persistence.
 			.AddSingleton<ISettingsSerializer>(c => new JsonSerializerToSettingsSerializerAdapter(DefaultJsonSerializerOptions));
 

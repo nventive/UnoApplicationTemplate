@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;  // For potential JSON attribute usage if needed
+﻿using System.Text.Json.Serialization;
 
 namespace ApplicationTemplate.DataAccess;
 
@@ -25,7 +25,7 @@ public sealed class TodoData
 	/// <summary>
 	/// Gets the user ID.
 	/// </summary>
-	[JsonPropertyName("userId")]  // Matches JSON key exactly; adjust if using different serializer
+	[JsonPropertyName("userId")]
 	public int UserId { get; }
 
 	/// <summary>
