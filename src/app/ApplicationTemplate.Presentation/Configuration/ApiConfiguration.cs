@@ -45,7 +45,8 @@ public static class ApiConfiguration
 			.AddUserProfile()
 			.AddMinimumVersion()
 			.AddKillSwitch()
-			.AddDadJokes(configuration);
+			.AddDadJokes(configuration)
+			.AddTodo(configuration);
 
 		return services;
 	}
@@ -91,6 +92,12 @@ public static class ApiConfiguration
 	private static IServiceCollection AddDadJokes(this IServiceCollection services, IConfiguration configuration)
 	{
 		return services.AddApiClient<IDadJokesApiClient, DadJokesApiClientMock>(configuration, "DadJokesApiClient");
+	}
+
+	// Inserted: New method to add Todo API client, mirroring AddDadJokes for consistency
+	private static IServiceCollection AddTodo(this IServiceCollection services, IConfiguration configuration)
+	{
+		return services.AddApiClient<ITodoApiClient, TodoApiClientMock>(configuration, "TodoApiClient");
 	}
 
 	private static IServiceCollection AddApiClient<TInterface, TMock>(
