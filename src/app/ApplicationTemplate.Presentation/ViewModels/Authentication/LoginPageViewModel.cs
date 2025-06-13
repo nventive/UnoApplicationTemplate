@@ -16,8 +16,6 @@ public class LoginPageViewModel : ViewModel
 
 	public LoginFormViewModel Form => this.GetChild(() => new LoginFormViewModel());
 
-	//public bool IsFirstLogin { get; }
-
 	public string Title
 	{
 		get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_Title1"] : this.GetService<IStringLocalizer>()["Login_Title2"];
