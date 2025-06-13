@@ -1,7 +1,4 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using ApplicationTemplate.Business;
+﻿using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -51,11 +48,6 @@ public class LoginPageViewModel : ViewModel
 	public IDynamicCommand NavigateToHome => this.GetCommandFromTask(async ct =>
 	{
 		await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
-	});
-
-	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
-	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>
