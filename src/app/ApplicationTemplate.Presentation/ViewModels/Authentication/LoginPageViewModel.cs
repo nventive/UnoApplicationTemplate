@@ -14,6 +14,8 @@ public class LoginPageViewModel : ViewModel
 		IsFirstLogin = isFirstLogin;
 	}
 
+	public bool IsFirstLogin { get; }
+
 	public LoginFormViewModel Form => this.GetChild(() => new LoginFormViewModel());
 
 	public string Title
