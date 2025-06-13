@@ -16,6 +16,8 @@ public class LoginPageViewModel : ViewModel
 
 	public LoginFormViewModel Form => this.GetChild(() => new LoginFormViewModel());
 
+	//public bool IsFirstLogin { get; }
+
 	public string Title
 	{
 		get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_Title1"] : this.GetService<IStringLocalizer>()["Login_Title2"];
@@ -48,5 +50,10 @@ public class LoginPageViewModel : ViewModel
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>
 	{
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ForgotPasswordPageViewModel());
+	});
+
+	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
+	{
+		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 }
