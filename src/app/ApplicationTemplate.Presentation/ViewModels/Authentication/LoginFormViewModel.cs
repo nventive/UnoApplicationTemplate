@@ -4,7 +4,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation;
 
-public class LoginFormViewModel : ViewModel
+public sealed class LoginFormViewModel : ViewModel
 {
 	public string Email
 	{
@@ -24,7 +24,7 @@ public class LoginFormViewModel : ViewModel
 	});
 }
 
-public class LoginFormValidator : AbstractValidator<LoginFormViewModel>
+public sealed class LoginFormValidator : AbstractValidator<LoginFormViewModel>
 {
 	public LoginFormValidator(IStringLocalizer localizer)
 	{

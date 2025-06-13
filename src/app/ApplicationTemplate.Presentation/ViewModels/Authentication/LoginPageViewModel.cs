@@ -7,7 +7,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation;
 
-public class LoginPageViewModel : ViewModel
+public sealed class LoginPageViewModel : ViewModel
 {
 	public LoginPageViewModel(bool isFirstLogin)
 	{
@@ -54,6 +54,6 @@ public class LoginPageViewModel : ViewModel
 
 	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
+		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel()); // Assuming CreateAccountPageViewModel is defined elsewhere.
 	});
 }
