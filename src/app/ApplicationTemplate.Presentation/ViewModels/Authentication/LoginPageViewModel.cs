@@ -28,14 +28,9 @@ public class LoginPageViewModel : ViewModel
 		set => this.Set(value);
 	}
 
-	public bool IsFirstLogin
-	{
-		get => this.Get<bool>();
-		set => this.Set(value);
-	}
-
 	public IDynamicCommand Login => this.GetCommandFromTask(async ct =>
 	{
+		// Validate the form before proceeding with login
 		var validationResult = await Form.Validate(ct);
 
 		if (validationResult.IsValid)

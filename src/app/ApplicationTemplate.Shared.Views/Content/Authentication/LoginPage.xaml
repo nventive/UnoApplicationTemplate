@@ -46,7 +46,7 @@
 						   Margin="20,0" />
 
 				<StackPanel Margin="40,0">
-					
+
 					<!-- Quote -->
 					<TextBlock Text="{Binding Quote}"
 							   x:Uid="Login_Subtitle"
@@ -113,20 +113,6 @@
 							Style="{StaticResource OutlinedButtonStyle}"
 							HorizontalAlignment="Stretch"
 							Margin="0,16,0,0" />
-
-					<!-- Separator -->
-					<Rectangle Fill="{StaticResource SeparatorBrush}"
-							   Height="1"
-							   HorizontalAlignment="Stretch"
-							   Margin="0,32,0,0" />
-
-					<!-- Google Login Button -->
-					<Button x:Name="GoogleLoginButton"
-							x:Uid="Login_Google"
-							Content="CONTINUE WITH GOOGLE"
-							Style="{StaticResource GoogleButtonStyle}"
-							HorizontalAlignment="Stretch"
-							Margin="0,32,0,0" />
 				</StackPanel>
 			</StackPanel>
 		</ScrollViewer>
