@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Tests;
@@ -29,18 +26,16 @@ public sealed class DadJokesShould : FunctionalTestBase
 	{
 		// Arrange
 		await this.Login(await this.ReachLoginPage());
+
 		var vm = GetAndAssertActiveViewModel<DadJokesPageViewModel>();
 		var jokes = await vm.Jokes.Load(CancellationToken.None);
-		jokes.Should().NotBeEmpty();
-
 		var firstJoke = jokes.First();
 		var initialFavoriteState = firstJoke.IsFavorite;
 
 		// Act
-		await vm.ToggleIsFavorite.Execute(CancellationToken.None, firstJoke);
+		await vm.ToggleIsFavorite.Execute(firstJoke);
 
 		// Assert
-		firstJoke.IsFavorite.Should().Be(!initialFavoriteState,
-			because: "the favorite state should be toggled from its initial value");
+		firstJoke.IsFavorite.Should().Be(!initialFavoriteState, because: "the favorite state should be toggled from its initial value");
 	}
 }
