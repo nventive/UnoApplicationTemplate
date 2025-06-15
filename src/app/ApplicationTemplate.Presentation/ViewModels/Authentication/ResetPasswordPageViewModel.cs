@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reactive.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Chinook.DynamicMvvm;
+﻿using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
-using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -22,7 +15,6 @@ public class ResetPasswordPageViewModel : ViewModel
 		}
 		else
 		{
-			PasswordForm.ValidatePasswordHints();
 		}
 	});
 }

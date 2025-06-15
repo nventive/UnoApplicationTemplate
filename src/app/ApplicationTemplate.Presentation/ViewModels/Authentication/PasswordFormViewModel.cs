@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
-using System.Text;
 using Chinook.DynamicMvvm;
 using Uno.Extensions;
 
@@ -19,12 +17,6 @@ public class PasswordFormViewModel : ViewModel
 	public bool? PasswordHasMinimumLength
 	{
 		get => this.GetFromObservable(ObservePasswordHasMinimumLength(), initialValue: null);
-		private set => this.Set(value);
-	}
-
-	public bool? PasswordHasNumber
-	{
-		get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
 		private set => this.Set(value);
 	}
 
@@ -64,29 +56,12 @@ public class PasswordFormViewModel : ViewModel
 			});
 	}
 
-	private IObservable<bool?> ObservePasswordHasUppercase()
-	{
-		return this.GetProperty(x => x.Password)
-			.Observe()
-			.Select<string, bool?>(password =>
-			{
-				if (password.IsNullOrEmpty())
-				{
-					return null;
-				}
-
-				return password.Any(char.IsUpper);
-			});
-	}
-
 	public void ValidatePasswordHints()
 	{
 		if (Password.IsNullOrEmpty())
 		{
 			// A password was not entered, we need to trigger validation hints
 			PasswordHasMinimumLength = false;
-			PasswordHasNumber = false;
-			PasswordHasUppercase = false;
 		}
 	}
 }

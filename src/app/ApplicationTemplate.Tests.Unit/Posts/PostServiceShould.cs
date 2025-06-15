@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
@@ -24,6 +25,10 @@ public sealed partial class PostServiceShould
 			.Returns(Task.FromResult(GetMockedPosts().ToArray()));
 
 		var sut = new PostService(mockedPostsRepository);
+
+		var test = new DadJokesApiClientMock(JsonSerializerOptions.Default);
+		var test2 = await test.FetchData(CancellationToken.None, "hot");
+		
 
 		// Act
 		var results = await sut.GetPosts(CancellationToken.None);
