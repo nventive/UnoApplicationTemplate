@@ -26,6 +26,12 @@ public class PasswordFormViewModel : ViewModel
 		private set => this.Set(value);
 	}
 
+	public bool? PasswordHasNumber
+	{
+		get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
+		private set => this.Set(value);
+	}
+
 	private IObservable<bool?> ObservePasswordHasMinimumLength()
 	{
 		return this.GetProperty(x => x.Password)
@@ -62,6 +68,8 @@ public class PasswordFormViewModel : ViewModel
 		{
 			// A password was not entered, we need to trigger validation hints
 			PasswordHasMinimumLength = false;
+			PasswordHasNumber = false;
+			PasswordHasUppercase = false;
 		}
 	}
 }
