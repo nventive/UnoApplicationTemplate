@@ -15,7 +15,6 @@ public class ResetPasswordPageViewModel : ViewModel
 		}
 		else
 		{
-			PasswordForm.ValidatePasswordHints();
 		}
 	});
 }

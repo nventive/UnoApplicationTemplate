@@ -1,10 +1,13 @@
-﻿using System;
+﻿// src/app/ApplicationTemplate.Presentation/ViewModels/Authentication/PasswordFormViewModel.cs
+using System;
 using System.Linq;
 using System.Reactive.Linq;
 using Chinook.DynamicMvvm;
 using Uno.Extensions;
 
+
 namespace ApplicationTemplate.Presentation;
+
 
 public class PasswordFormViewModel : ViewModel
 {
@@ -14,11 +17,20 @@ public class PasswordFormViewModel : ViewModel
 		set => this.Set(value);
 	}
 
+
 	public bool? PasswordHasMinimumLength
 	{
 		get => this.GetFromObservable(ObservePasswordHasMinimumLength(), initialValue: null);
 		private set => this.Set(value);
 	}
+
+
+	public bool? PasswordHasNumber
+	{
+		get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
+		private set => this.Set(value);
+	}
+
 
 	public bool? PasswordHasUppercase
 	{
@@ -26,11 +38,6 @@ public class PasswordFormViewModel : ViewModel
 		private set => this.Set(value);
 	}
 
-	public bool? PasswordHasNumber
-	{
-		get => this.GetFromObservable(ObservePasswordHasNumber(), initialValue: null);
-		private set => this.Set(value);
-	}
 
 	private IObservable<bool?> ObservePasswordHasMinimumLength()
 	{
@@ -43,9 +50,11 @@ public class PasswordFormViewModel : ViewModel
 					return null;
 				}
 
+
 				return password.Length >= PresentationConstants.PasswordMinLength;
 			});
 	}
+
 
 	private IObservable<bool?> ObservePasswordHasNumber()
 	{
@@ -58,9 +67,28 @@ public class PasswordFormViewModel : ViewModel
 					return null;
 				}
 
+
 				return password.Any(char.IsDigit);
 			});
 	}
+
+
+	private IObservable<bool?> ObservePasswordHasUppercase()
+	{
+		return this.GetProperty(x => x.Password)
+			.Observe()
+			.Select<string, bool?>(password =>
+			{
+				if (password.IsNullOrEmpty())
+				{
+					return null;
+				}
+
+
+				return password.Any(char.IsUpper);
+			});
+	}
+
 
 	public void ValidatePasswordHints()
 	{
