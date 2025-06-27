@@ -106,9 +106,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Email\EmailService.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Email\EmailService.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\DeviceInformation\DeviceInformationProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)platformservices\embeddedbrowser\EmbeddedBrowser.iOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)platformservices\embeddedbrowser\EmbeddedBrowserService.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)platformservices\embeddedbrowser\EmbeddedBrowserService.Android.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)platformservices\embeddedbrowser\EmbeddedBrowserService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)platformservices\embeddedbrowser\EmbeddedBrowserService.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Launcher\AppStoreUriProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Launcher\LauncherServiceExtensions.cs" />
