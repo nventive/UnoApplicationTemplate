@@ -1,49 +1,36 @@
 ﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/EmbeddedBrowser/EmbeddedBrowserService.Windows.cs
-#if WINDOWS
+#if __WINDOWS__
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.UI.Xaml.Controls;
+using CPS.DataAccess;
+using Microsoft.UI.Dispatching;
+using Microsoft.Web.WebView2.Core;
+using Windows.System;
 
-namespace ApplicationTemplate.Views.PlatformServices.EmbeddedBrowser
+
+namespace ApplicationTemplate.Views.PlatformServices;
+
+
+public class EmbeddedBrowserService : IEmbeddedBrowserService
 {
-    public partial class EmbeddedBrowserService
-    {
-        public override async Task NavigateTo(CancellationToken ct, Uri uri)
-        {
-            if (uri == null)
-            {
-                throw new ArgumentNullException(nameof(uri));
-            }
+	private readonly DispatcherQueue _dispatcherQueue;
 
-            ct.ThrowIfCancellationRequested();
 
-            try
-            {
-                // Create a WebView for embedded browsing and display in a ContentDialog.
-                var webView = new WebView
-                {
-                    Source = uri
-                };
+	public EmbeddedBrowserService(DispatcherQueue dispatcherQueue)
+	{
+		_dispatcherQueue = dispatcherQueue;
+	}
 
-                var dialog = new ContentDialog
-                {
-                    Title = "Embedded Browser",
-                    Content = webView,
-                    CloseButtonText = "Close",
-                    XamlRoot = App.Instance.CurrentWindow.Content.XamlRoot  // Assumes access to the current window
-                };
 
-                // Show the dialog and wait for dismissal.
-                await dialog.ShowAsync();
-            }
-            catch (Exception ex)
-            {
-                // Handle errors (e.g., WebView loading failure).
-                // Optionally log: this.GetService<ILogger>().LogError(ex, "Failed to launch embedded browser.");
-                throw;  // Or fallback to system browser if needed.
-            }
-        }
-    }
+	public async Task NavigateTo(CancellationToken ct, Uri uri)
+	{
+		// For Windows, we'll use the system default browser as embedded browser
+		// In a real implementation, you might want to create a WebView2 control
+		await _dispatcherQueue.EnqueueAsync(async () =>
+		{
+			await Launcher.LaunchUriAsync(uri);
+		});
+	}
 }
 #endif

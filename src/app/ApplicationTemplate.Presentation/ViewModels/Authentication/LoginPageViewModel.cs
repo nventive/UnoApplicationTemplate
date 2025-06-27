@@ -56,8 +56,8 @@ public class LoginPageViewModel : ViewModel
 
 	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 	{
-		//await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
-		await this.GetService<IEmbeddedBrowserService>().NavigateTo(ct, new Uri("https://www.google.com"));
+		var embeddedBrowserService = this.GetService<IEmbeddedBrowserService>();
+		await embeddedBrowserService.NavigateTo(ct, new Uri("https://www.google.com"));
 	});
 
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>

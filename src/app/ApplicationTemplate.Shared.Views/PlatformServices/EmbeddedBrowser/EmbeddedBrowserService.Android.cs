@@ -3,36 +3,39 @@
 using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Android.Content;
 using AndroidX.Browser.CustomTabs;
-using Windows.System;  // For fallback Launcher if needed
+using CPS.DataAccess;
+using Microsoft.UI.Dispatching;
 
-namespace ApplicationTemplate.Views.PlatformServices.EmbeddedBrowser
+
+namespace ApplicationTemplate.Views.PlatformServices;
+
+
+public class EmbeddedBrowserService : IEmbeddedBrowserService
 {
-    public partial class EmbeddedBrowserService
+    private readonly DispatcherQueue _dispatcherQueue;
+
+
+    public EmbeddedBrowserService(DispatcherQueue dispatcherQueue)
     {
-        public override async Task NavigateTo(CancellationToken ct, Uri uri)
+        _dispatcherQueue = dispatcherQueue;
+    }
+
+
+    public async Task NavigateTo(CancellationToken ct, Uri uri)
+    {
+        await Task.Run(() =>
         {
-            if (uri == null)
+            _dispatcherQueue.TryEnqueue(() =>
             {
-                throw new ArgumentNullException(nameof(uri));
-            }
-
-            ct.ThrowIfCancellationRequested();
-
-            try
-            {
-                // Use Custom Tabs for an in-app embedded browser experience.
-                var customTabsIntent = new CustomTabsIntent.Builder().Build();
-                customTabsIntent.LaunchUrl(Android.App.Application.Context, Android.Net.Uri.Parse(uri.ToString()));
-            }
-            catch (Exception ex)
-            {
-                // Fallback to system browser if Custom Tabs fail (e.g., no compatible browser installed).
-                await Launcher.LaunchUriAsync(uri);  // Uses system launcher as a backup.
-                // Optionally log the error: e.g., this.GetService<ILogger>().LogError(ex, "Failed to launch embedded browser.");
-            }
-        }
+                var context = Platform.CurrentActivity ?? Android.App.Application.Context;
+                var intent = new CustomTabsIntent.Builder()
+                    .SetShowTitle(true)
+                    .Build();
+                
+                intent.LaunchUrl(context, Android.Net.Uri.Parse(uri.ToString()));
+            });
+        });
     }
 }
 #endif
