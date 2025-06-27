@@ -1,6 +1,8 @@
 ﻿using System.Reactive.Concurrency;
 using ApplicationTemplate.DataAccess.PlatformServices;
+using ApplicationTemplate.Views.PlatformServices.EmbeddedBrowser;
 using Chinook.DynamicMvvm;
+using CPS.DataAccess;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
@@ -35,7 +37,8 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
-			.AddMessageDialog();
+			.AddMessageDialog()
+			.AddSingleton<IEmbeddedBrowserService, EmbeddedBrowserService>();  // Registers the platform-specific implementation
 	}
 
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
