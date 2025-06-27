@@ -1,41 +1,34 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/EmbeddedBrowser/EmbeddedBrowserService.Android.cs
-#if __ANDROID__
+﻿#if __ANDROID__
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 using AndroidX.Browser.CustomTabs;
-using CPS.DataAccess;
 using Microsoft.UI.Dispatching;
 
+namespace CPS.DataAccess;
 
-namespace ApplicationTemplate.Views.PlatformServices;
-
-
-public class EmbeddedBrowserService : IEmbeddedBrowserService
+public sealed class EmbeddedBrowserService : IEmbeddedBrowserService
 {
-    private readonly DispatcherQueue _dispatcherQueue;
+	private readonly DispatcherQueue _dispatcherQueue;
 
+	public EmbeddedBrowserService(DispatcherQueue dispatcherQueue)
+	{
+		_dispatcherQueue = dispatcherQueue;
+	}
 
-    public EmbeddedBrowserService(DispatcherQueue dispatcherQueue)
-    {
-        _dispatcherQueue = dispatcherQueue;
-    }
+	public async Task NavigateTo(CancellationToken ct, Uri uri)
+	{
+		ArgumentNullException.ThrowIfNull(uri, nameof(uri));
 
+		_dispatcherQueue.TryEnqueue(() =>
+		{
+			var context = Uno.UI.ContextHelper.Current;
+			var intent = new CustomTabsIntent.Builder()
+				.SetShowTitle(true)
+				.Build();
 
-    public async Task NavigateTo(CancellationToken ct, Uri uri)
-    {
-        await Task.Run(() =>
-        {
-            _dispatcherQueue.TryEnqueue(() =>
-            {
-                var context = Platform.CurrentActivity ?? Android.App.Application.Context;
-                var intent = new CustomTabsIntent.Builder()
-                    .SetShowTitle(true)
-                    .Build();
-                
-                intent.LaunchUrl(context, Android.Net.Uri.Parse(uri.ToString()));
-            });
-        });
-    }
+			intent.LaunchUrl(context, Android.Net.Uri.Parse(uri.ToString()));
+		});
+	}
 }
 #endif

@@ -1,6 +1,5 @@
 ﻿using System.Reactive.Concurrency;
 using ApplicationTemplate.DataAccess.PlatformServices;
-using ApplicationTemplate.Views.PlatformServices;
 using Chinook.DynamicMvvm;
 using CPS.DataAccess;
 using MessageDialogService;
@@ -37,7 +36,7 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
-			.AddSingleton<IEmbeddedBrowserService>(s => new EmbeddedBrowserService(s.GetRequiredService<DispatcherQueue>()))
+			.AddSingleton<IEmbeddedBrowserService, EmbeddedBrowserService>()
 			.AddMessageDialog();
 	}
 

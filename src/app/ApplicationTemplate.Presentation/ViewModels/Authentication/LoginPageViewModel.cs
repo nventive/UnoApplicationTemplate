@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
@@ -56,8 +54,7 @@ public class LoginPageViewModel : ViewModel
 
 	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 	{
-		var embeddedBrowserService = this.GetService<IEmbeddedBrowserService>();
-		await embeddedBrowserService.NavigateTo(ct, new Uri("https://www.google.com"));
+		await this.GetService<IEmbeddedBrowserService>().NavigateTo(ct, new Uri("https://www.google.com"));
 	});
 
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>
