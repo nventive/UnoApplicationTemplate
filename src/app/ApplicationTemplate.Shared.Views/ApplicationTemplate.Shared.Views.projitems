@@ -113,7 +113,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Memory\MemoryProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Memory\MemoryProvider.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)platformservices\toast\ToastService.Android.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)platformservices\toast\ToastService.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)platformservices\toast\ToastService.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Version\VersionProvider.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Version\VersionProvider.Windows.cs" />

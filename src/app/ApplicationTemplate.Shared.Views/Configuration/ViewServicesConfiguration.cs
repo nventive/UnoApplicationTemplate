@@ -1,4 +1,5 @@
-﻿using System.Reactive.Concurrency;
+﻿// src/app/ApplicationTemplate.Shared.Views/Configuration/ViewServicesConfiguration.cs
+using System.Reactive.Concurrency;
 using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.UI.Dispatching;
 using ReviewService;
+using CPS.DataAccess.PlatformServices;
 
 namespace ApplicationTemplate.Views;
 
@@ -35,8 +37,8 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
-			.AddSingleton<IToastService, ToastService>()  // Added registration for IToastService using ToastService implementation
-			.AddMessageDialog();
+			.AddMessageDialog()
+			.AddToastService();
 	}
 
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
@@ -61,6 +63,19 @@ public static class ViewServicesConfiguration
 			)
 #else
 			new AcceptOrDefaultMessageDialogService()
+#endif
+//+:cnd:noEmit
+		);
+	}
+
+	private static IServiceCollection AddToastService(this IServiceCollection services)
+	{
+		return services.AddSingleton<IToastService>(s =>
+//-:cnd:noEmit
+#if __ANDROID__ || __WINDOWS__
+			new ToastService(s.GetRequiredService<DispatcherQueue>())
+#else
+			new FakeToastService()
 #endif
 //+:cnd:noEmit
 		);
