@@ -1,33 +1,48 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/Toast/ToastService.Windows.cs
-#if __WINDOWS__
-using Microsoft.UI.Dispatching;
-using Windows.Data.Xml.Dom;
+﻿#if __WINDOWS__
+using System;
+using Microsoft.Extensions.Logging;
+using Uno.Extensions;
+using Uno.Logging;
 using Windows.UI.Notifications;
 
 namespace CPS.DataAccess.PlatformServices;
 
+/// <summary>
+/// The Windows implementation of the <see cref="IToastService"/>.
+/// </summary>
 public sealed class ToastService : IToastService
 {
-	private readonly DispatcherQueue _dispatcherQueue;
-
-
-	public ToastService(DispatcherQueue dispatcherQueue)
-	{
-		_dispatcherQueue = dispatcherQueue;
-	}
-
+	/// <inheritdoc/>
 	public void ShowNotification(string message, ToastDuration duration = ToastDuration.Short)
 	{
-		_dispatcherQueue.TryEnqueue(() =>
+		if (this.Log().IsEnabled(LogLevel.Debug))
+		{
+			this.Log().Debug($"Showing a notification (message: '{message}', duration: '{duration}').");
+		}
+
+		var toastNotifier = ToastNotificationManager.CreateToastNotifier();
+
+		if (toastNotifier.Setting == NotificationSetting.Enabled)
 		{
 			var toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastText01);
-			var textElements = toastXml.GetElementsByTagName("text");
-			textElements[0].AppendChild(toastXml.CreateTextNode(message));
 
+			var toastText = toastXml.GetElementsByTagName("text");
+			var toastExpiration = DateTimeOffset.Now.AddMilliseconds((int)duration);
 
-			var toast = new ToastNotification(toastXml);
-			ToastNotificationManager.CreateToastNotifier().Show(toast);
-		});
+			toastText[0].AppendChild(toastXml.CreateTextNode(message));
+
+			var toast = new ToastNotification(toastXml)
+			{
+				ExpirationTime = toastExpiration,
+			};
+
+			toastNotifier.Show(toast);
+
+			if (this.Log().IsEnabled(LogLevel.Information))
+			{
+				this.Log().Info($"Showed a notification (message: '{message}', duration: '{duration}').");
+			}
+		}
 	}
 }
 #endif

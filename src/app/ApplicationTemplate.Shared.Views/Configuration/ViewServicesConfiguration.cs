@@ -1,13 +1,12 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/Configuration/ViewServicesConfiguration.cs
-using System.Reactive.Concurrency;
+﻿using System.Reactive.Concurrency;
 using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
+using CPS.DataAccess.PlatformServices;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Localization;
 using Microsoft.UI.Dispatching;
 using ReviewService;
-using CPS.DataAccess.PlatformServices;
 
 namespace ApplicationTemplate.Views;
 
