@@ -5,6 +5,7 @@ using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
+using CPS.DataAccess.PlatformServices;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
 
@@ -55,7 +56,8 @@ public class LoginPageViewModel : ViewModel
 
 	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
+		this.GetService<IToastService>().ShowNotification("test");
+		//await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>
