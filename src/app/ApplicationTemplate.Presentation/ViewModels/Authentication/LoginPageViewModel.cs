@@ -56,7 +56,7 @@ public class LoginPageViewModel : ViewModel
 
 	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 	{
-		this.GetService<IToastService>().ShowNotification("test");
+		this.GetService<IToastService>().ShowNotification("Test");
 		//await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 

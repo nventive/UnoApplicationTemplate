@@ -18,4 +18,6 @@ public sealed partial class Shell : UserControl
 	public IExtendedSplashScreen ExtendedSplashScreen => this.AppExtendedSplashScreen;
 
 	public MultiFrame NavigationMultiFrame => this.RootNavigationMultiFrame;
+
+	public Panel Panel => this.MyRootPanel;
 }

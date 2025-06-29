@@ -24,6 +24,11 @@
 					VerticalAlignment="Bottom"
 					Grid.Row="1" />
 
+		<!-- This is required for the ToastService. -->
+		<Grid x:Name="MyRootPanel"
+			  Margin="0,0,0,52"
+			  VerticalAlignment="Stretch" />
+
 		<local:DiagnosticsOverlay DataContext="{Binding DiagnosticsOverlay}"
 								  Visibility="{Binding ShouldDisplayOverlay, Converter={StaticResource TrueToVisible}, FallbackValue=Collapsed}"
 								  Grid.RowSpan="2" />

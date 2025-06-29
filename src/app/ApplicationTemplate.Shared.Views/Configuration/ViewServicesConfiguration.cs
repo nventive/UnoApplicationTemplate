@@ -74,7 +74,38 @@ public static class ViewServicesConfiguration
 #if __ANDROID__ || __WINDOWS__
 			new ToastService(s.GetRequiredService<DispatcherQueue>())
 #else
-			new FakeToastService()
+			new ToastService(
+				s.GetRequiredService<IDispatcherScheduler>(),
+				Shell.Instance.Panel,
+				new Microsoft.UI.Xaml.DataTemplate(() =>
+				{
+					var border = new Microsoft.UI.Xaml.Controls.Border
+					{
+						IsHitTestVisible = false,
+						CornerRadius = 10,
+						Margin = new Microsoft.UI.Xaml.Thickness(20),
+						Padding = new Microsoft.UI.Xaml.Thickness(20, 10),
+						VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Bottom,
+						HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
+						Background = CommunityToolkit.WinUI.Helpers.ColorHelper.ToColor("#CC000000"),
+					};
+
+					var textBlock = new Microsoft.UI.Xaml.Controls.TextBlock
+					{
+						Foreground = Microsoft.UI.Colors.White,
+						FontSize = 17,
+						TextWrapping = Microsoft.UI.Xaml.TextWrapping.Wrap,
+						TextAlignment = Microsoft.UI.Xaml.TextAlignment.Center,
+						HorizontalAlignment = Microsoft.UI.Xaml.HorizontalAlignment.Center,
+						VerticalAlignment = Microsoft.UI.Xaml.VerticalAlignment.Center,
+					};
+
+					textBlock.SetBinding("Text", "Message");
+					border.Child = textBlock;
+
+					return border;
+				})
+			)
 #endif
 //+:cnd:noEmit
 		);
