@@ -7,6 +7,7 @@ using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
+using CPS.DataAccess.PlatformServices;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -55,7 +56,7 @@ public class LoginPageViewModel : ViewModel
 
 	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 	{
-		this.GetService<IToastService>().ShowNotification("Test");  // Added to display a "Test" toast before navigating to the create
+		this.GetService<IToastService>().ShowNotification("Test");
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 

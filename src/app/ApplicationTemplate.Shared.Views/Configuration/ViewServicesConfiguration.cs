@@ -71,8 +71,10 @@ public static class ViewServicesConfiguration
 	{
 		return services.AddSingleton<IToastService>(s =>
 //-:cnd:noEmit
-#if __ANDROID__ || __WINDOWS__ || __IOS__  // Updated to include __IOS__ for proper ToastService injection on iOS
+#if __ANDROID__ || __WINDOWS__
 			new ToastService(s.GetRequiredService<DispatcherQueue>())
+#elif __IOS__
+			new ToastService(s.GetRequiredService<DispatcherQueue>(), App.Instance.Shell.Panel)
 #else
 			new FakeToastService()
 #endif
