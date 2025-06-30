@@ -106,8 +106,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Email\EmailService.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Email\EmailService.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\DeviceInformation\DeviceInformationProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)platformservices\focus\FocusService.Android.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)platformservices\focus\FocusService.iOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Focus\FocusService.Android.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Focus\FocusService.iOS.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Launcher\AppStoreUriProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Launcher\LauncherServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Launcher\LauncherService.cs" />
@@ -429,6 +429,6 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\segmdl2.ttf" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)PlatformServices\Focus\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Focus\" />
   </ItemGroup>
 </Project>
