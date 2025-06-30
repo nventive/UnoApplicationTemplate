@@ -36,16 +36,19 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
-			.AddSingleton<IFocusService>(s =>
-//-:cnd:noEmit
+			.AddFocusService()
+			.AddMessageDialog();
+	}
+
+	private static IServiceCollection AddFocusService(this IServiceCollection services)
+	{
+		//-:cnd:noEmit
 #if __ANDROID__ || __IOS__
-				new FocusService()
+		return services.AddSingleton<IFocusService, FocusService>();
 #else
-				new ApplicationTemplate.DataAccess.PlatformServices.FakeFocusService()
+		return services.AddSingleton<IFocusService>(s => new FakeFocusService());
 #endif
 //+:cnd:noEmit
-			)
-			.AddMessageDialog();
 	}
 
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
