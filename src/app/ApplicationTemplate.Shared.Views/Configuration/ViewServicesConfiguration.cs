@@ -1,4 +1,5 @@
-﻿using System.Reactive.Concurrency;
+﻿// src/app/ApplicationTemplate.Shared.Views/Configuration/ViewServicesConfiguration.cs
+using System.Reactive.Concurrency;
 using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
@@ -35,7 +36,21 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
+			.AddFocusService()
 			.AddMessageDialog();
+	}
+
+	private static IServiceCollection AddFocusService(this IServiceCollection services)
+	{
+		return services.AddSingleton<IFocusService>(
+//-:cnd:noEmit
+#if __ANDROID__ || __IOS__
+			new PlatformServices.FocusService()
+#else
+			new FakeFocusService()
+#endif
+//+:cnd:noEmit
+		);
 	}
 
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
