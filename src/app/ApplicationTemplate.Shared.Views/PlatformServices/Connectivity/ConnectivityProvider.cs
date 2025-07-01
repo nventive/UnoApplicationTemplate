@@ -1,64 +1,78 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/Connectivity/ConnectivityProvider.cs
-using System;
+﻿using System;
 using Microsoft.Extensions.Logging;
+using Uno.Extensions;
+using Uno.Logging;
 using Windows.Networking.Connectivity;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
-/// <summary>
-/// Provides access to the current connectivity state and detects changes.
-/// </summary>
-public class ConnectivityProvider : IConnectivityProvider
+public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 {
-	private readonly ILogger<ConnectivityProvider> _logger;
+	private bool _subscribed = false;
 
-	public ConnectivityProvider(ILogger<ConnectivityProvider> logger)
+	public event EventHandler<ConnectivityChangedEventArgs> ConnectivityChanged
 	{
-		_logger = logger ?? throw new ArgumentNullException(nameof(logger));
+		add
+		{
+			if (!_subscribed)
+			{
+				_subscribed = true;
+				NetworkInformation.NetworkStatusChanged += OnNetworkStatusChanged;
+				this.Log().Debug("Subscribed to NetworkInformation.NetworkStatusChanged.");
+			}
+			InnerConnectivityChanged += value;
+		}
 
-		NetworkInformation.NetworkStatusChanged += OnNetworkStatusChanged;
+		remove
+		{
+			InnerConnectivityChanged -= value;
+			UnsubscribeLocalEvent();
+		}
 	}
 
-	/// <inheritdoc/>
-	public event EventHandler<ConnectivityChangedEventArgs> ConnectivityChanged;
+	private event EventHandler<ConnectivityChangedEventArgs> InnerConnectivityChanged;
 
-	/// <inheritdoc/>
-	public ConnectivityState State => GetCurrentConnectivityState();
+	public ConnectivityState State
+	{
+		get
+		{
+			var networkConnectivityLevel = NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel();
+			switch (networkConnectivityLevel)
+			{
+				case NetworkConnectivityLevel.None:
+					return ConnectivityState.None;
+				case NetworkConnectivityLevel.LocalAccess:
+					return ConnectivityState.Local;
+				case NetworkConnectivityLevel.ConstrainedInternetAccess:
+					return ConnectivityState.ConstrainedInternet;
+				case NetworkConnectivityLevel.InternetAccess:
+					return ConnectivityState.Internet;
+				default:
+					this.Log().Error($"Unsupported Network Connectivity Level: {networkConnectivityLevel}");
+					return ConnectivityState.Unknown;
+			}
+		}
+	}
+
+	public void Dispose()
+	{
+		InnerConnectivityChanged = null;
+		UnsubscribeLocalEvent();
+		GC.SuppressFinalize(this);
+	}
+
+	private void UnsubscribeLocalEvent()
+	{
+		if (_subscribed && InnerConnectivityChanged is null)
+		{
+			_subscribed = false;
+			NetworkInformation.NetworkStatusChanged -= OnNetworkStatusChanged;
+			this.Log().Debug("Unsubscribed to NetworkInformation.NetworkStatusChanged because no subscriptions were left on the ConnectivityProvider.ConnectivityChanged event.");
+		}
+	}
 
 	private void OnNetworkStatusChanged(object sender)
 	{
-		var newState = GetCurrentConnectivityState();
-		_logger.LogDebug("Network status changed to: {ConnectivityState}", newState);
-
-		ConnectivityChanged?.Invoke(this, new ConnectivityChangedEventArgs(newState));
-	}
-
-	private ConnectivityState GetCurrentConnectivityState()
-	{
-		try
-		{
-			var profile = NetworkInformation.GetInternetConnectionProfile();
-
-			if (profile == null)
-			{
-				return ConnectivityState.None;
-			}
-
-			var level = profile.GetNetworkConnectivityLevel();
-
-			return level switch
-			{
-				NetworkConnectivityLevel.None => ConnectivityState.None,
-				NetworkConnectivityLevel.LocalAccess => ConnectivityState.Local,
-				NetworkConnectivityLevel.ConstrainedInternetAccess => ConnectivityState.ConstrainedInternet,
-				NetworkConnectivityLevel.InternetAccess => ConnectivityState.Internet,
-				_ => ConnectivityState.Unknown
-			};
-		}
-		catch (Exception ex)
-		{
-			_logger.LogError(ex, "Failed to get connectivity state");
-			return ConnectivityState.Unknown;
-		}
+		InnerConnectivityChanged.Invoke(this, new ConnectivityChangedEventArgs(State));
 	}
 }
