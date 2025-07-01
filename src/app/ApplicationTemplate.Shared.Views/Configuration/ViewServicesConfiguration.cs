@@ -31,7 +31,6 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IAppStoreUriProvider, AppStoreUriProvider>()
 			.AddSingleton<IDeviceInformationProvider, DeviceInformationProvider>()
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
-			.AddSingleton<IConnectivityProvider, ConnectivityProvider>()
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()

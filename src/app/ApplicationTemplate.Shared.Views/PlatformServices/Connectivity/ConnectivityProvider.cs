@@ -1,92 +1,74 @@
-﻿using System;
-using System.Reactive.Concurrency;
-using System.Threading;
-using System.Threading.Tasks;
-using Uno.Extensions;
-using Uno.Logging;
-using Windows.Networking.Connectivity;
+﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/Connectivity/ConnectivityProvider.cs
+using System;
+using Uno.Platform.Networking;
 
-namespace ApplicationTemplate.DataAccess.PlatformServices;
-
-public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
+namespace ApplicationTemplate.DataAccess.PlatformServices
 {
-	private bool _subscribed = false;
-
-	public event EventHandler<ConnectivityChangedEventArgs> ConnectivityChanged
+	public class ConnectivityProvider : IConnectivityProvider, IDisposable
 	{
-		add
+		private readonly object _lock = new();
+		private ConnectivityState _state;
+
+		public ConnectivityProvider()
 		{
-			if (!_subscribed)
+			NetworkInformation.ConnectionProfilesChanged += OnConnectionProfilesChanged;
+			UpdateState();
+		}
+
+		public void Dispose()
+		{
+			NetworkInformation.ConnectionProfilesChanged -= OnConnectionProfilesChanged;
+		}
+
+		public event EventHandler ConnectivityChanged;
+
+		public ConnectivityState State => _state;
+
+		private void OnConnectionProfilesChanged(object sender, object e)
+		{
+			UpdateState();
+			ConnectivityChanged?.Invoke(this, new ConnectivityChangedEventArgs(_state));
+		}
+
+		private void UpdateState()
+		{
+			lock (_lock)
 			{
-				_subscribed = true;
-				NetworkInformation.NetworkStatusChanged += OnNetworkStatusChanged;
-				this.Log().Debug("Subscribed to NetworkInformation.NetworkStatusChanged.");
+				var profiles = NetworkInformation.GetConnectionProfiles();
+				if (profiles == null || profiles.Length == 0)
+				{
+					_state = ConnectivityState.None;
+					return;
+				}
+
+				var bestLevel = NetworkConnectivityLevel.None;
+				foreach (var profile in profiles)
+				{
+					if (profile.NetworkConnectivityLevel > bestLevel)
+					{
+						bestLevel = profile.NetworkConnectivityLevel;
+					}
+				}
+
+				switch (bestLevel)
+				{
+					case NetworkConnectivityLevel.None:
+						_state = ConnectivityState.None;
+						break;
+					case NetworkConnectivityLevel.LocalAccess:
+						_state = ConnectivityState.Local;
+						break;
+					case NetworkConnectivityLevel.ConstrainedInternetAccess:
+						_state = ConnectivityState.ConstrainedInternet;
+						break;
+					case NetworkConnectivityLevel.InternetAccess:
+						_state = ConnectivityState.Internet;
+						break;
+					default:
+						_state = ConnectivityState.Unknown;
+						break;
+				}
 			}
-			InnerConnectivityChanged += value;
 		}
-
-		remove
-		{
-			InnerConnectivityChanged -= value;
-			UnsubscribeLocalEvent();
-		}
-	}
-
-	private event EventHandler<ConnectivityChangedEventArgs> InnerConnectivityChanged;
-
-	public ConnectivityState State
-	{
-		get
-		{
-#if __WINDOWS__
-			var joinableTaskFactory = new Microsoft.VisualStudio.Threading.JoinableTaskFactory(new Microsoft.VisualStudio.Threading.JoinableTaskContext());
-			var networkConnectivityLevel = joinableTaskFactory.Run(static async () =>
-			{
-				// Needs to run on the UI thread on Windows.
-				return await DefaultScheduler.Instance.Run(
-					func: () => NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel(),
-					cancellationToken: CancellationToken.None
-				);
-			});
-#else
-			var networkConnectivityLevel = NetworkInformation.GetInternetConnectionProfile()?.GetNetworkConnectivityLevel();
-#endif
-			switch (networkConnectivityLevel)
-			{
-				case NetworkConnectivityLevel.None:
-					return ConnectivityState.None;
-				case NetworkConnectivityLevel.LocalAccess:
-					return ConnectivityState.Local;
-				case NetworkConnectivityLevel.ConstrainedInternetAccess:
-					return ConnectivityState.ConstrainedInternet;
-				case NetworkConnectivityLevel.InternetAccess:
-					return ConnectivityState.Internet;
-				default:
-					this.Log().Error($"Unsupported Network Connectivity Level: {networkConnectivityLevel}");
-					return ConnectivityState.Unknown;
-			}
-		}
-	}
-
-	public void Dispose()
-	{
-		InnerConnectivityChanged = null;
-		UnsubscribeLocalEvent();
-		GC.SuppressFinalize(this);
-	}
-
-	private void UnsubscribeLocalEvent()
-	{
-		if (_subscribed && InnerConnectivityChanged is null)
-		{
-			_subscribed = false;
-			NetworkInformation.NetworkStatusChanged -= OnNetworkStatusChanged;
-			this.Log().Debug("Unsubscribed to NetworkInformation.NetworkStatusChanged because no subscriptions were left on the ConnectivityProvider.ConnectivityChanged event.");
-		}
-	}
-
-	private void OnNetworkStatusChanged(object sender)
-	{
-		InnerConnectivityChanged.Invoke(this, new ConnectivityChangedEventArgs(State));
 	}
 }
