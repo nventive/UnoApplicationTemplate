@@ -1,4 +1,5 @@
-﻿using System.Reactive.Concurrency;
+﻿// src/app/ApplicationTemplate.Shared.Views/Configuration/ViewServicesConfiguration.cs
+using System.Reactive.Concurrency;
 using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
@@ -31,6 +32,7 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IAppStoreUriProvider, AppStoreUriProvider>()
 			.AddSingleton<IDeviceInformationProvider, DeviceInformationProvider>()
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
+			.AddSingleton<IConnectivityProvider, ConnectivityProvider>()
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()

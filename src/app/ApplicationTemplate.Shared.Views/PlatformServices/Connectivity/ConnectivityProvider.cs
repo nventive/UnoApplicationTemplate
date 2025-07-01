@@ -1,74 +1,64 @@
 ﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/Connectivity/ConnectivityProvider.cs
 using System;
-using Uno.Platform.Networking;
+using Microsoft.Extensions.Logging;
+using Windows.Networking.Connectivity;
 
-namespace ApplicationTemplate.DataAccess.PlatformServices
+namespace ApplicationTemplate.DataAccess.PlatformServices;
+
+/// <summary>
+/// Provides access to the current connectivity state and detects changes.
+/// </summary>
+public class ConnectivityProvider : IConnectivityProvider
 {
-	public class ConnectivityProvider : IConnectivityProvider, IDisposable
+	private readonly ILogger<ConnectivityProvider> _logger;
+
+	public ConnectivityProvider(ILogger<ConnectivityProvider> logger)
 	{
-		private readonly object _lock = new();
-		private ConnectivityState _state;
+		_logger = logger ?? throw new ArgumentNullException(nameof(logger));
 
-		public ConnectivityProvider()
+		NetworkInformation.NetworkStatusChanged += OnNetworkStatusChanged;
+	}
+
+	/// <inheritdoc/>
+	public event EventHandler<ConnectivityChangedEventArgs> ConnectivityChanged;
+
+	/// <inheritdoc/>
+	public ConnectivityState State => GetCurrentConnectivityState();
+
+	private void OnNetworkStatusChanged(object sender)
+	{
+		var newState = GetCurrentConnectivityState();
+		_logger.LogDebug("Network status changed to: {ConnectivityState}", newState);
+
+		ConnectivityChanged?.Invoke(this, new ConnectivityChangedEventArgs(newState));
+	}
+
+	private ConnectivityState GetCurrentConnectivityState()
+	{
+		try
 		{
-			NetworkInformation.ConnectionProfilesChanged += OnConnectionProfilesChanged;
-			UpdateState();
-		}
+			var profile = NetworkInformation.GetInternetConnectionProfile();
 
-		public void Dispose()
-		{
-			NetworkInformation.ConnectionProfilesChanged -= OnConnectionProfilesChanged;
-		}
-
-		public event EventHandler ConnectivityChanged;
-
-		public ConnectivityState State => _state;
-
-		private void OnConnectionProfilesChanged(object sender, object e)
-		{
-			UpdateState();
-			ConnectivityChanged?.Invoke(this, new ConnectivityChangedEventArgs(_state));
-		}
-
-		private void UpdateState()
-		{
-			lock (_lock)
+			if (profile == null)
 			{
-				var profiles = NetworkInformation.GetConnectionProfiles();
-				if (profiles == null || profiles.Length == 0)
-				{
-					_state = ConnectivityState.None;
-					return;
-				}
-
-				var bestLevel = NetworkConnectivityLevel.None;
-				foreach (var profile in profiles)
-				{
-					if (profile.NetworkConnectivityLevel > bestLevel)
-					{
-						bestLevel = profile.NetworkConnectivityLevel;
-					}
-				}
-
-				switch (bestLevel)
-				{
-					case NetworkConnectivityLevel.None:
-						_state = ConnectivityState.None;
-						break;
-					case NetworkConnectivityLevel.LocalAccess:
-						_state = ConnectivityState.Local;
-						break;
-					case NetworkConnectivityLevel.ConstrainedInternetAccess:
-						_state = ConnectivityState.ConstrainedInternet;
-						break;
-					case NetworkConnectivityLevel.InternetAccess:
-						_state = ConnectivityState.Internet;
-						break;
-					default:
-						_state = ConnectivityState.Unknown;
-						break;
-				}
+				return ConnectivityState.None;
 			}
+
+			var level = profile.GetNetworkConnectivityLevel();
+
+			return level switch
+			{
+				NetworkConnectivityLevel.None => ConnectivityState.None,
+				NetworkConnectivityLevel.LocalAccess => ConnectivityState.Local,
+				NetworkConnectivityLevel.ConstrainedInternetAccess => ConnectivityState.ConstrainedInternet,
+				NetworkConnectivityLevel.InternetAccess => ConnectivityState.Internet,
+				_ => ConnectivityState.Unknown
+			};
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Failed to get connectivity state");
+			return ConnectivityState.Unknown;
 		}
 	}
 }
