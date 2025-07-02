@@ -1,7 +1,8 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/NetworkType/NetworkTypeProvider.iOS.cs
-#if __IOS__
-using Network;
+﻿#if __IOS__
+using System;
 using SystemConfiguration;
+using Uno.Extensions;
+using Uno.Logging;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
@@ -13,32 +14,35 @@ public sealed class NetworkTypeProvider : INetworkTypeProvider
 	/// <inheritdoc/>
 	public NetworkType NetworkType => GetNetworkType();
 
-	private static NetworkType GetNetworkType()
+	private NetworkType GetNetworkType()
 	{
-		var reachability = new NetworkReachability("www.google.com");
-
-		if (!reachability.TryGetFlags(out var flags))
+		try
 		{
+			var reachability = new NetworkReachability("www.google.com");
+
+			if (!reachability.TryGetFlags(out var flags) || !flags.HasFlag(NetworkReachabilityFlags.Reachable))
+			{
+				return NetworkType.None;
+			}
+
+			if (flags.HasFlag(NetworkReachabilityFlags.IsWWAN))
+			{
+				return NetworkType.Cellular;
+			}
+
+			if (!flags.HasFlag(NetworkReachabilityFlags.ConnectionRequired))
+			{
+				// Direct connection (likely WiFi or Ethernet)
+				return NetworkType.Wifi;
+			}
+
+			return NetworkType.Unknown;
+		}
+		catch (Exception e)
+		{
+			this.Log().Error("Unable to get the Network Type.", e);
 			return NetworkType.None;
 		}
-
-		if (!flags.HasFlag(NetworkReachabilityFlags.Reachable))
-		{
-			return NetworkType.None;
-		}
-
-		if (flags.HasFlag(NetworkReachabilityFlags.IsWWAN))
-		{
-			return NetworkType.Cellular;
-		}
-
-		if (!flags.HasFlag(NetworkReachabilityFlags.ConnectionRequired))
-		{
-			// Direct connection (likely WiFi or Ethernet)
-			return NetworkType.Wifi;
-		}
-
-		return NetworkType.Unknown;
 	}
 }
 #endif
