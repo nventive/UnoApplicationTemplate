@@ -1,7 +1,9 @@
-﻿using System;
+﻿// src/app/ApplicationTemplate.Presentation/ViewModels/Authentication/LoginPageViewModel.cs
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -21,19 +23,25 @@ public class LoginPageViewModel : ViewModel
 
 	public string Title
 	{
-		get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_Title1"] : this.GetService<IStringLocalizer>()["Login_Title2"];
+		get => IsFirstLogin ? this.GetService()["Login_Title1"] : this.GetService()["Login_Title2"];
 		set => this.Set(value);
 	}
 
 	public string Quote
 	{
-		get => IsFirstLogin ? this.GetService<IStringLocalizer>()["Login_TitleMedium"] : this.GetService<IStringLocalizer>()["Login_TitleSmall"];
+		get => IsFirstLogin ? this.GetService()["Login_TitleMedium"] : this.GetService()["Login_TitleSmall"];
+		set => this.Set(value);
+	}
+
+	public string Version
+	{
+		get => $"{this.GetService().VersionString} ({this.GetService().BuildString})";
 		set => this.Set(value);
 	}
 
 	public bool IsFirstLogin
 	{
-		get => this.Get<bool>();
+		get => this.Get();
 		set => this.Set(value);
 	}
 
@@ -43,23 +51,23 @@ public class LoginPageViewModel : ViewModel
 
 		if (validationResult.IsValid)
 		{
-			await this.GetService<IAuthenticationService>().Login(ct, Form.Email.Trim(), Form.Password);
+			await this.GetService().Login(ct, Form.Email.Trim(), Form.Password);
 			await NavigateToHome.Execute();
 		}
 	});
 
 	public IDynamicCommand NavigateToHome => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
+		await this.GetService().SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
 	});
 
 	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
+		await this.GetService().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ForgotPasswordPageViewModel());
+		await this.GetService().Navigate(ct, () => new ForgotPasswordPageViewModel());
 	});
 }
