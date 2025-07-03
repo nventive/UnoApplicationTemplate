@@ -116,6 +116,9 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DependencyObjectExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FrameworkElementExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\ObservableExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Version\VersionProvider.Android.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Version\VersionProvider.iOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Version\VersionProvider.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
     </Compile>
