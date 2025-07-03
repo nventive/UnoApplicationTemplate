@@ -1,4 +1,5 @@
-﻿using System.Reactive.Concurrency;
+﻿// src/app/ApplicationTemplate.Shared.Views/Configuration/ViewServicesConfiguration.cs
+using System.Reactive.Concurrency;
 using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
@@ -34,6 +35,7 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
+			.AddSingleton<IVersionProvider, VersionProvider>()
 			.AddMessageDialog();
 	}
 

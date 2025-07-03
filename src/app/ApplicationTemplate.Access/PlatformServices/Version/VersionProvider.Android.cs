@@ -1,21 +1,45 @@
 ﻿// src/app/ApplicationTemplate.Access/PlatformServices/Version/VersionProvider.Android.cs
+#if __ANDROID__
+using System;
 using Android.Content;
+using Android.Content.PM;
 
-namespace ApplicationTemplate.DataAccess.PlatformServices
+
+namespace ApplicationTemplate.DataAccess.PlatformServices;
+
+
+public class VersionProvider : IVersionProvider
 {
-	public class VersionProvider : IVersionProvider
-	{
-		private readonly Context _context;
+    private readonly Lazy<PackageInfo> _packageInfo;
 
-		public VersionProvider(Context context) => _context = context;
 
-		public string BuildString => _context.PackageManager.GetPackageInfo(_context.PackageName, 0).VersionCode.ToString();
-		public Version Version => new Version(
-			int.Parse(_context.PackageManager.GetPackageInfo(_context.PackageName, 0).VersionName.Split('.')[0]),
-			int.Parse(_context.PackageManager.GetPackageInfo(_context.PackageName, 0).VersionName.Split('.')[1]),
-			int.Parse(_context.PackageManager.GetPackageInfo(_context.PackageName, 0).VersionName.Split('.')[2]),
-			_context.PackageManager.GetPackageInfo(_context.PackageName, 0).VersionCode
-		);
-		public string VersionString => _context.PackageManager.GetPackageInfo(_context.PackageName, 0).VersionName;
-	}
+    public VersionProvider()
+    {
+        _packageInfo = new Lazy<PackageInfo>(() =>
+        {
+            var context = Platform.CurrentActivity?.ApplicationContext ?? Android.App.Application.Context;
+            return context.PackageManager.GetPackageInfo(context.PackageName, 0);
+        });
+    }
+
+
+    public string BuildString => _packageInfo.Value.LongVersionCode.ToString();
+
+
+    public Version Version
+    {
+        get
+        {
+            var versionName = _packageInfo.Value.VersionName;
+            if (System.Version.TryParse(versionName, out var version))
+            {
+                return version;
+            }
+            return new Version(1, 0, 0);
+        }
+    }
+
+
+    public string VersionString => Version.ToString(3);
 }
+#endif

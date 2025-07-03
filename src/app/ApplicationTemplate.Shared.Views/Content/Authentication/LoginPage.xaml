@@ -46,7 +46,7 @@
 						   Margin="20,0" />
 
 				<StackPanel Margin="40,0">
-					
+
 					<!-- Quote -->
 					<TextBlock Text="{Binding Quote}"
 							   x:Uid="Login_Subtitle"
@@ -127,6 +127,13 @@
 							Style="{StaticResource GoogleButtonStyle}"
 							HorizontalAlignment="Stretch"
 							Margin="0,32,0,0" />
+
+					<!-- App Version -->
+					<TextBlock Text="{Binding AppVersion}"
+							   Style="{StaticResource BodySmall}"
+							   Foreground="{ThemeResource OnSurfaceVariantBrush}"
+							   TextAlignment="Center"
+							   Margin="0,16,0,0" />
 				</StackPanel>
 			</StackPanel>
 		</ScrollViewer>
