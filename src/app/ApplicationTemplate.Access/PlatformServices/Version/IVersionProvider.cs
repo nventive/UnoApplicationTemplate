@@ -21,7 +21,7 @@ public interface IVersionProvider
 	public Version Version { get; }
 
 	/// <summary>
-	/// Gets the application version string (Major.Minor.Build).
+	/// Gets the application version string (Major.Minor.Patch).
 	/// </summary>
 	/// <returns>The application version string.</returns>
 	public string VersionString { get; }

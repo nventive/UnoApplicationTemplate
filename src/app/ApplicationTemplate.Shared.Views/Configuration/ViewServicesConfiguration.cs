@@ -27,7 +27,6 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
 			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
 			.AddSingleton<ILauncherService>(s => new LauncherService(s.GetRequiredService<DispatcherQueue>()))
-			.AddSingleton<IVersionProvider, VersionProvider>()
 			.AddSingleton<IAppStoreUriProvider, AppStoreUriProvider>()
 			.AddSingleton<IDeviceInformationProvider, DeviceInformationProvider>()
 			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
