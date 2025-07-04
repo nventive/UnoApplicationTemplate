@@ -1,39 +1,66 @@
-﻿using System;
+﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/Orientation/OrientationProvider.cs
+using System;
+using System.Reactive.Linq;
 using System.Reactive.Subjects;
-using Windows.UI.ViewManagement;
+using ApplicationTemplate.DataAccess.PlatformServices;
+using Microsoft.UI.Xaml;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
-public class OrientationProvider : IOrientationProvider, IDisposable
+public sealed class OrientationProvider : IOrientationProvider, IDisposable
 {
-	private readonly BehaviorSubject _isLandscapeSubject;
-	private readonly ApplicationView _applicationView;
+	private readonly BehaviorSubject<bool> _isLandscapeSubject;
+	private bool _disposed;
 
 	public OrientationProvider()
 	{
-		_applicationView = ApplicationView.GetForCurrentView();
-		_isLandscapeSubject = new BehaviorSubject(GetIsLandscape());
-		_applicationView.OrientationChanged += OnOrientationChanged;
-	}
+		var currentIsLandscape = GetCurrentIsLandscape();
+		_isLandscapeSubject = new BehaviorSubject<bool>(currentIsLandscape);
 
-	private void OnOrientationChanged(ApplicationView sender, object args)
-	{
-		_isLandscapeSubject.OnNext(GetIsLandscape());
+		if (Window.Current != null)
+		{
+			Window.Current.SizeChanged += OnWindowSizeChanged;
+		}
 	}
 
 	public bool GetIsLandscape()
 	{
-		return _applicationView.Orientation == ApplicationViewOrientation.Landscape;
+		return GetCurrentIsLandscape();
 	}
 
-	public IObservable GetAndObserveIsLandscape()
+	public IObservable<bool> GetAndObserveIsLandscape()
 	{
 		return _isLandscapeSubject.AsObservable();
 	}
 
+	private bool GetCurrentIsLandscape()
+	{
+		if (Window.Current?.Bounds != null)
+		{
+			var bounds = Window.Current.Bounds;
+			return bounds.Width > bounds.Height;
+		}
+		return false;
+	}
+
+	private void OnWindowSizeChanged(object sender, Microsoft.UI.Xaml.WindowSizeChangedEventArgs e)
+	{
+		if (_disposed) return;
+
+		var isLandscape = e.Size.Width > e.Size.Height;
+		_isLandscapeSubject.OnNext(isLandscape);
+	}
+
 	public void Dispose()
 	{
-		_applicationView.OrientationChanged -= OnOrientationChanged;
-		_isLandscapeSubject.Dispose();
+		if (_disposed) return;
+
+		if (Window.Current != null)
+		{
+			Window.Current.SizeChanged -= OnWindowSizeChanged;
+		}
+
+		_isLandscapeSubject?.Dispose();
+		_disposed = true;
 	}
 }
