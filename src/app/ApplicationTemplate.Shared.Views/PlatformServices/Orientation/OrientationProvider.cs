@@ -1,53 +1,39 @@
 ﻿using System;
-using System.Reactive.Linq;
-using Windows.Devices.Sensors;
-using Windows.Foundation;
+using System.Reactive.Subjects;
+using Windows.UI.ViewManagement;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
-/// <summary>
-/// The Windows implementation of <see cref="IOrientationProvider"/>.
-/// </summary>
-public sealed class OrientationProvider : IOrientationProvider
+public class OrientationProvider : IOrientationProvider, IDisposable
 {
-	private readonly SimpleOrientationSensor _simpleOrientationSensor;
+	private readonly BehaviorSubject _isLandscapeSubject;
+	private readonly ApplicationView _applicationView;
 
 	public OrientationProvider()
 	{
-		_simpleOrientationSensor = SimpleOrientationSensor.GetDefault();
+		_applicationView = ApplicationView.GetForCurrentView();
+		_isLandscapeSubject = new BehaviorSubject(GetIsLandscape());
+		_applicationView.OrientationChanged += OnOrientationChanged;
 	}
 
-	/// <inheritdoc />
-	public IObservable<bool> GetAndObserveIsLandscape()
+	private void OnOrientationChanged(ApplicationView sender, object args)
 	{
-		if (_simpleOrientationSensor is null)
-		{
-			return Observable.Return(GetIsLandscape());
-		}
-
-		return Observable.FromEventPattern<TypedEventHandler<SimpleOrientationSensor, SimpleOrientationSensorOrientationChangedEventArgs>, SimpleOrientationSensorOrientationChangedEventArgs>(
-			h => _simpleOrientationSensor.OrientationChanged += h,
-			h => _simpleOrientationSensor.OrientationChanged -= h
-		)
-		.Select(args => GetIsLandscape(args.EventArgs.Orientation))
-		.StartWith(GetIsLandscape());
+		_isLandscapeSubject.OnNext(GetIsLandscape());
 	}
 
-	/// <inheritdoc />
 	public bool GetIsLandscape()
 	{
-		var currentOrientation = _simpleOrientationSensor?.GetCurrentOrientation();
-
-		return GetIsLandscape(currentOrientation);
+		return _applicationView.Orientation == ApplicationViewOrientation.Landscape;
 	}
 
-	/// <summary>
-	/// Gets whether the given <see cref="SimpleOrientation"/> is landscape.
-	/// </summary>
-	/// <param name="simpleOrientation">The simple orientation.</param>
-	/// <returns>Whether the given orientation is landscape.</returns>
-	private static bool GetIsLandscape(SimpleOrientation? simpleOrientation)
+	public IObservable GetAndObserveIsLandscape()
 	{
-		return simpleOrientation is SimpleOrientation.Rotated90DegreesCounterclockwise or SimpleOrientation.Rotated270DegreesCounterclockwise;
+		return _isLandscapeSubject.AsObservable();
+	}
+
+	public void Dispose()
+	{
+		_applicationView.OrientationChanged -= OnOrientationChanged;
+		_isLandscapeSubject.Dispose();
 	}
 }
