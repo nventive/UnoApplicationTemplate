@@ -13,10 +13,12 @@ namespace ApplicationTemplate.Presentation;
 public sealed class DiagnosticsOverlayViewModel : ViewModel
 {
 	private readonly IMemoryProvider _memoryProvider;
+	private readonly IAmbientLightProvider _ambientLightProvider;
 
 	public DiagnosticsOverlayViewModel()
 	{
 		ResolveService(out _memoryProvider);
+		ResolveService(out _ambientLightProvider);
 
 		Tabs = new TabViewModel[]
 		{
@@ -26,6 +28,11 @@ public sealed class DiagnosticsOverlayViewModel : ViewModel
 		};
 		Tabs.SetActiveTabIndex(-1);
 	}
+
+	public string Illuminance => this.GetFromObservable(
+		source: _ambientLightProvider.GetAndObserveCurrentReading().Select(x => $"{x:F2} lux"),
+		initialValue: "0.00 lux"
+	);
 
 	public TabViewModel[] Tabs { get; }
 

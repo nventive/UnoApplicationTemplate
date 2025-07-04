@@ -268,7 +268,7 @@
 				</VisualState>
 			</VisualStateGroup>
 		</VisualStateManager.VisualStateGroups>
-		
+
 		<Grid x:Name="RootGrid"
 			  Background="#AA000000"
 			  BorderThickness="1"
@@ -288,6 +288,22 @@
 			<StackPanel HorizontalAlignment="Right"
 						Padding="4"
 						xamarin:IsHitTestVisible="False">
+
+				<!-- Illuminance -->
+				<TextBlock Grid.Row="1"
+						   Foreground="LightGreen"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}"
+						   TextAlignment="Right">
+
+					<!-- Label & Value -->
+					<Run Text="{Binding Illuminance}" />
+
+					<!-- Tool Tip -->
+					<ToolTipService.ToolTip>
+						<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
+								 Content="Current ambient light (illuminance level) reading in lux." />
+					</ToolTipService.ToolTip>
+				</TextBlock>
 
 				<!-- Active ViewModels -->
 				<TextBlock Foreground="#4cbfe1"
