@@ -29,11 +29,6 @@ public sealed class DiagnosticsOverlayViewModel : ViewModel
 		Tabs.SetActiveTabIndex(-1);
 	}
 
-	public string Illuminance => this.GetFromObservable(
-		source: _ambientLightProvider.GetAndObserveCurrentReading().Select(x => $"{x:F2} lux"),
-		initialValue: "0.00 lux"
-	);
-
 	public TabViewModel[] Tabs { get; }
 
 	public int ActiveTabIndex
@@ -179,5 +174,10 @@ public sealed class DiagnosticsOverlayViewModel : ViewModel
 	public string ManagedMemorySize => this.GetFromObservable(
 		source: _memoryProvider.ObserveManagedMemorySize().Select(x => ByteSize.FromBytes(x).ToString("0.#", CultureInfo.InvariantCulture)),
 		initialValue: string.Empty
+	);
+
+	public string AmbientLight => this.GetFromObservable(
+		source: _ambientLightProvider.GetAndObserveCurrentReading().Select(x => $"{x:F1} lux"),
+		initialValue: "0.0 lux"
 	);
 }

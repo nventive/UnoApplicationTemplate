@@ -289,22 +289,6 @@
 						Padding="4"
 						xamarin:IsHitTestVisible="False">
 
-				<!-- Illuminance -->
-				<TextBlock Grid.Row="1"
-						   Foreground="LightGreen"
-						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}"
-						   TextAlignment="Right">
-
-					<!-- Label & Value -->
-					<Run Text="{Binding Illuminance}" />
-
-					<!-- Tool Tip -->
-					<ToolTipService.ToolTip>
-						<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
-								 Content="Current ambient light (illuminance level) reading in lux." />
-					</ToolTipService.ToolTip>
-				</TextBlock>
-
 				<!-- Active ViewModels -->
 				<TextBlock Foreground="#4cbfe1"
 						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}">
@@ -426,6 +410,22 @@
 					<ToolTipService.ToolTip>
 						<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
 								 Content="Amount of managed memory allocated for the application." />
+					</ToolTipService.ToolTip>
+				</TextBlock>
+
+				<!-- Ambient Light -->
+				<TextBlock Grid.Row="1"
+						   Foreground="Gold"
+						   Style="{StaticResource DiagnosticsCounterTextBlockStyle}"
+						   TextAlignment="Right">
+
+					<!-- Label & Value -->
+					<Run Text="{Binding AmbientLight}" />
+
+					<!-- Tool Tip -->
+					<ToolTipService.ToolTip>
+						<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
+								 Content="Current ambient light level measured by the device's light sensor." />
 					</ToolTipService.ToolTip>
 				</TextBlock>
 			</StackPanel>

@@ -1,54 +1,66 @@
-﻿// path/to/file.cs
+﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/AmbientLight/AmbientLightProvider.cs
 using System;
 using System.Reactive.Linq;
 using System.Reactive.Subjects;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using Windows.Devices.Sensors;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
-/// <summary>
-/// Provides access to the current ambient light reading and detects changes.
-/// </summary>
-/// <remarks>
-/// The device or emulator that you're using must support an ambient light sensor.
-/// </remarks>
-public class AmbientLightProvider : IAmbientLightProvider
+public sealed class AmbientLightProvider : IAmbientLightProvider, IDisposable
 {
-	private Luxometer _luxometer;
-	private Subject<float> _readingSubject;
+	private readonly LightSensor _lightSensor;
+	private readonly BehaviorSubject<float> _currentReadingSubject;
+	private bool _disposed;
 
 	public AmbientLightProvider()
 	{
-		_luxometer = Luxometer.GetDefault();
-		if (_luxometer != null)
+		_lightSensor = LightSensor.GetDefault();
+		_currentReadingSubject = new BehaviorSubject<float>(0f);
+
+		if (_lightSensor != null)
 		{
-			_readingSubject = new Subject<float>();
-			_luxometer.ReadingChanged += OnReadingChanged;
+			_lightSensor.ReadingChanged += OnReadingChanged;
+
+			// Get initial reading if available
+			var initialReading = _lightSensor.GetCurrentReading();
+			if (initialReading != null)
+			{
+				_currentReadingSubject.OnNext(initialReading.IlluminanceInLux);
+			}
 		}
 	}
 
 	public float GetCurrentReading()
 	{
-		if (_luxometer == null)
-		{
+		if (_lightSensor == null)
 			return 0f;
-		}
 
-		return _luxometer.CurrentReading.IlluminanceInLux;
+		var reading = _lightSensor.GetCurrentReading();
+		return reading?.IlluminanceInLux ?? 0f;
 	}
 
 	public IObservable<float> GetAndObserveCurrentReading()
 	{
-		if (_luxometer == null)
-		{
-			return Observable.Empty<float>();
-		}
-
-		return _readingSubject.AsObservable();
+		return _currentReadingSubject.AsObservable();
 	}
 
-	private void OnReadingChanged(Luxometer sender, LuxometerReadingChangedEventArgs args)
+	private void OnReadingChanged(LightSensor sender, LightSensorReadingChangedEventArgs args)
 	{
-		_readingSubject?.OnNext(args.Reading.IlluminanceInLux);
+		_currentReadingSubject.OnNext(args.Reading.IlluminanceInLux);
+	}
+
+	public void Dispose()
+	{
+		if (!_disposed)
+		{
+			if (_lightSensor != null)
+			{
+				_lightSensor.ReadingChanged -= OnReadingChanged;
+			}
+
+			_currentReadingSubject?.Dispose();
+			_disposed = true;
+		}
 	}
 }
