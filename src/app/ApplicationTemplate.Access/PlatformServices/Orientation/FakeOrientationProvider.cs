@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reactive.Subjects;
 
-namespace CPS.DataAccess.PlatformServices;
+namespace ApplicationTemplate.DataAccess.PlatformServices;
 
 public sealed class FakeOrientationProvider : IOrientationProvider, IDisposable
 {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace CPS.DataAccess.PlatformServices;
+namespace ApplicationTemplate.DataAccess.PlatformServices;
 
 /// <summary>
 /// Provides the current device orientation.
