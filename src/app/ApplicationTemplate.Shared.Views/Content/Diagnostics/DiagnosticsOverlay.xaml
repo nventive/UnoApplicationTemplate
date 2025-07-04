@@ -420,12 +420,13 @@
 						   TextAlignment="Right">
 
 					<!-- Label & Value -->
-					<Run Text="{Binding AmbientLight}" />
+					<Run Text="{Binding AmbientLightLux}" />
+					<Run Text="lux" />
 
 					<!-- Tool Tip -->
 					<ToolTipService.ToolTip>
 						<ToolTip Style="{StaticResource DiagnosticsCounterToolTipStyle}"
-								 Content="Current ambient light level measured by the device's light sensor." />
+								 Content="Current ambient light level in lux measured by the device's light sensor." />
 					</ToolTipService.ToolTip>
 				</TextBlock>
 			</StackPanel>

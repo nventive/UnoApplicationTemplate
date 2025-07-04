@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Globalization;
 using System.Reactive.Linq;
 using ApplicationTemplate.DataAccess.PlatformServices;
 using ByteSizeLib;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
-using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
@@ -176,8 +174,5 @@ public sealed class DiagnosticsOverlayViewModel : ViewModel
 		initialValue: string.Empty
 	);
 
-	public string AmbientLight => this.GetFromObservable(
-		source: _ambientLightProvider.GetAndObserveCurrentReading().Select(x => $"{x:F1} lux"),
-		initialValue: "0.0 lux"
-	);
+	public float AmbientLightLux => this.GetFromObservable(_ambientLightProvider.GetAndObserveCurrentReading());
 }
