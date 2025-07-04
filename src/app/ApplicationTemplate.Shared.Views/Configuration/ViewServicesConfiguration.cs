@@ -35,7 +35,6 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
-			.AddSingleton<IOrientationProvider, OrientationProvider>()
 			.AddMessageDialog();
 	}
 
