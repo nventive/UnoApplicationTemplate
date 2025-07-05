@@ -106,9 +106,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Email\EmailService.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Email\EmailService.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\DeviceInformation\DeviceInformationProvider.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)platformservices\flashlight\FlashlightService.Android.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)platformservices\flashlight\FlashlightService.iOS.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)platformservices\flashlight\FlashlightService.Windows.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)platformservices\flashlight\FlashlightService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Launcher\AppStoreUriProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Launcher\LauncherServiceExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Launcher\LauncherService.cs" />
