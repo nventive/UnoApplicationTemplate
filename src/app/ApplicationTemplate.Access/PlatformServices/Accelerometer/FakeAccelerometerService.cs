@@ -14,7 +14,7 @@ public sealed class FakeAccelerometerService : IAccelerometerService
 	/// <inheritdoc/>
 	public IObservable<AccelerometerReading> ObserveAcceleration()
 	{
-		return Observable.Return(new AccelerometerReading(0d, 0d, 0d, 0, DateTimeOffset.Now));
+		return Observable.Return(new AccelerometerReading(0d, 0d, 0d, null, DateTimeOffset.Now));
 	}
 
 	/// <inheritdoc/>

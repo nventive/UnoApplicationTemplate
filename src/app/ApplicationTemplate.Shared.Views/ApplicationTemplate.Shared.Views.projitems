@@ -112,7 +112,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Framework\ExtendedSplashscreenController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Memory\MemoryProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Memory\MemoryProvider.iOS.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Accelerometer\AccelerometerService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Version\VersionProvider.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Version\VersionProvider.Windows.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Version\VersionProvider.cs" />
@@ -426,8 +425,5 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Guillon-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Guillon-SemiBold.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\segmdl2.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)PlatformServices\Accelerometer\" />
   </ItemGroup>
 </Project>
