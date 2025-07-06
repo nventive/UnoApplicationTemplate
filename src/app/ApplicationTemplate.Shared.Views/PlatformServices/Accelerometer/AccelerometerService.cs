@@ -1,20 +1,34 @@
-﻿using System;
+﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/Accelerometer/AccelerometerService.cs
+using System;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using Windows.Devices.Sensors;
-using Windows.Foundation;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
 /// <summary>
-/// The <see cref="IAccelerometerService"/> implementation using Uno.
+/// Cross-platform implementation of <see cref="IAccelerometerService"/> using Windows API through Uno Platform.
 /// </summary>
-public sealed class AccelerometerService : IAccelerometerService
+public sealed class AccelerometerService : IAccelerometerService, IDisposable
 {
 	private readonly Accelerometer _accelerometer;
+	private readonly Subject<AccelerometerReading> _accelerationSubject;
+	private readonly Subject<DateTimeOffset> _deviceShakenSubject;
+	private bool _disposed;
 
 	public AccelerometerService()
 	{
 		_accelerometer = Accelerometer.GetDefault();
+		_accelerationSubject = new Subject<AccelerometerReading>();
+		_deviceShakenSubject = new Subject<DateTimeOffset>();
+
+
+		if (_accelerometer != null)
+		{
+			_accelerometer.ReadingChanged += OnReadingChanged;
+			_accelerometer.Shaken += OnShaken;
+		}
 	}
 
 	/// <inheritdoc/>
@@ -23,53 +37,67 @@ public sealed class AccelerometerService : IAccelerometerService
 		get => _accelerometer?.ReportInterval ?? 0;
 		set
 		{
-			if (_accelerometer is null)
+			if (_accelerometer != null)
 			{
-				return;
+				_accelerometer.ReportInterval = value;
 			}
-
-			_accelerometer.ReportInterval = value;
 		}
 	}
 
 	/// <inheritdoc/>
 	public IObservable<AccelerometerReading> ObserveAcceleration()
 	{
-		if (_accelerometer is null)
+		if (_accelerometer == null)
 		{
 			return Observable.Return<AccelerometerReading>(null);
 		}
 
-		return Observable.FromEventPattern<TypedEventHandler<Accelerometer, AccelerometerReadingChangedEventArgs>, AccelerometerReadingChangedEventArgs>(
-			h => _accelerometer.ReadingChanged += h,
-			h => _accelerometer.ReadingChanged -= h
-		)
-		.Select(eventPattern =>
-		{
-			var reading = eventPattern.EventArgs.Reading;
-
-			return new AccelerometerReading(
-				reading.AccelerationX,
-				reading.AccelerationY,
-				reading.AccelerationZ,
-				reading.PerformanceCount,
-				reading.Timestamp
-			);
-		});
+		return _accelerationSubject.AsObservable();
 	}
 
 	/// <inheritdoc/>
 	public IObservable<DateTimeOffset> ObserveDeviceShaken()
 	{
-		if (_accelerometer is null)
+		if (_accelerometer == null)
 		{
-			return Observable.Return(DateTimeOffset.MinValue);
+			return Observable.Return<DateTimeOffset>(default);
 		}
 
-		return Observable.FromEventPattern<TypedEventHandler<Accelerometer, AccelerometerShakenEventArgs>, AccelerometerShakenEventArgs>(
-			h => _accelerometer.Shaken += h,
-			h => _accelerometer.Shaken -= h
-		)
-		.Select(eventPattern => eventPattern.EventArgs.Timestamp);
+		return _deviceShakenSubject.AsObservable();
+	}
+
+	private void OnReadingChanged(Accelerometer sender, AccelerometerReadingChangedEventArgs args)
+	{
+		var reading = args.Reading;
+		var accelerometerReading = new AccelerometerReading(
+			reading.AccelerationX,
+			reading.AccelerationY,
+			reading.AccelerationZ,
+			null, // Performance count not available in Windows API
+			reading.Timestamp
+		);
+
+		_accelerationSubject.OnNext(accelerometerReading);
+	}
+
+	private void OnShaken(Accelerometer sender, AccelerometerShakenEventArgs args)
+	{
+		_deviceShakenSubject.OnNext(args.Timestamp);
+	}
+
+	public void Dispose()
+	{
+		if (!_disposed)
+		{
+			if (_accelerometer != null)
+			{
+				_accelerometer.ReadingChanged -= OnReadingChanged;
+				_accelerometer.Shaken -= OnShaken;
+			}
+
+			_accelerationSubject?.Dispose();
+			_deviceShakenSubject?.Dispose();
+			_disposed = true;
+		}
 	}
 }
