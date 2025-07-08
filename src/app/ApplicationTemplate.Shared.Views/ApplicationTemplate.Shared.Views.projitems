@@ -102,6 +102,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\FromNullableBoolToCustomValueConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\AttachableUserControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Framework\DiagnosticsService.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)platformservices\batteryinformation\BatteryInformationProvider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)platformservices\batteryinformation\BatteryStatus.Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\BatteryInformation\PowerSupplyStatus.Extensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)platformservices\batteryinformation\EnergySaverStatus.Extensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Connectivity\ConnectivityProvider.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Email\EmailService.Mobile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Email\EmailService.Windows.cs" />
