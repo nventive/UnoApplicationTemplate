@@ -10,10 +10,10 @@ using ReviewService;
 
 namespace ApplicationTemplate.Views;
 
-/// 
+/// <summary>
 /// This class is used for view services.
 /// - Configures view services.
-/// 
+/// </summary>
 public static class ViewServicesConfiguration
 {
 	public static IServiceCollection AddViewServices(this IServiceCollection services)
@@ -21,47 +21,47 @@ public static class ViewServicesConfiguration
 		return services
 			.AddSingleton(s => App.Instance.NavigationMultiFrame.DispatcherQueue)
 			.AddSingleton(s => Shell.Instance.ExtendedSplashScreen)
-			.AddSingleton(s => new MainDispatcherScheduler(
-				s.GetRequiredService(),
+			.AddSingleton<IDispatcherScheduler>(s => new MainDispatcherScheduler(
+				s.GetRequiredService<DispatcherQueue>(),
 				DispatcherQueuePriority.Normal
 			))
-			.AddSingleton()
-			.AddSingleton()
-			.AddSingleton(s => new LauncherService(s.GetRequiredService()))
-			.AddSingleton()
-			.AddSingleton()
-			.AddSingleton()
-			.AddSingleton(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
-			.AddSingleton()
-			.AddSingleton()
-			.AddSingleton()
-			.AddSingleton()
-			.AddMessageDialog()
-			.AddSingleton();
+			.AddSingleton<IDispatcherFactory, DispatcherFactory>()
+			.AddSingleton<IDiagnosticsService, DiagnosticsService>()
+			.AddSingleton<ILauncherService>(s => new LauncherService(s.GetRequiredService<DispatcherQueue>()))
+			.AddSingleton<IVersionProvider, VersionProvider>()
+			.AddSingleton<IAppStoreUriProvider, AppStoreUriProvider>()
+			.AddSingleton<IDeviceInformationProvider, DeviceInformationProvider>()
+			.AddSingleton<IExtendedSplashscreenController, ExtendedSplashscreenController>(s => new ExtendedSplashscreenController(Shell.Instance.DispatcherQueue))
+			.AddSingleton<IConnectivityProvider, ConnectivityProvider>()
+			.AddSingleton<IEmailService, EmailService>()
+			.AddSingleton<IMemoryProvider, MemoryProvider>()
+			.AddSingleton<IReviewPrompter, ReviewPrompter>()
+			.AddSingleton<IBatteryInformationProvider, WindowsBatteryInformationProvider>()
+			.AddMessageDialog();
 	}
 
-	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
+private static IServiceCollection AddMessageDialog(this IServiceCollection services)
 	{
-		return services.AddSingleton(s =>
+		return services.AddSingleton<IMessageDialogService>(s =>
 //-:cnd:noEmit
 #if __WINDOWS__ || __IOS__ || __ANDROID__
 			new MessageDialogService.MessageDialogService(
-				s.GetRequiredService(),
+				s.GetRequiredService<DispatcherQueue>(),
 //-:cnd:noEmit
 #if __WINDOWS__
 				new MessageDialogBuilderDelegate(
-					key => s.GetRequiredService()[key],
+					key => s.GetRequiredService<IStringLocalizer>()[key],
 					WinRT.Interop.WindowNative.GetWindowHandle(App.Instance.CurrentWindow)
 				)
 #else
 				new MessageDialogBuilderDelegate(
-					key => s.GetRequiredService()[key]
+					key => s.GetRequiredService<IStringLocalizer>()[key]
 				)
 #endif
 //+:cnd:noEmit
 			)
 #else
-				new AcceptOrDefaultMessageDialogService()
+			new AcceptOrDefaultMessageDialogService()
 #endif
 //+:cnd:noEmit
 		);
