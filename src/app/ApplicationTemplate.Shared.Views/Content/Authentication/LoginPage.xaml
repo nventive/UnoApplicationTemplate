@@ -1,4 +1,5 @@
-﻿<Page x:Class="ApplicationTemplate.Views.Content.LoginPage"
+﻿<!-- src/app/ApplicationTemplate.Shared.Views/Content/Authentication/LoginPage.xaml -->
+<Page x:Class="ApplicationTemplate.Views.Content.LoginPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:ApplicationTemplate"
@@ -46,7 +47,7 @@
 						   Margin="20,0" />
 
 				<StackPanel Margin="40,0">
-					
+
 					<!-- Quote -->
 					<TextBlock Text="{Binding Quote}"
 							   x:Uid="Login_Subtitle"
@@ -110,6 +111,14 @@
 							x:Uid="Login_CreateAccount"
 							Content="CREATE ACCOUNT"
 							Command="{Binding NavigateToCreateAccountPage}"
+							Style="{StaticResource OutlinedButtonStyle}"
+							HorizontalAlignment="Stretch"
+							Margin="0,16,0,0" />
+
+					<!-- Contact Us Button -->
+					<Button x:Name="ContactUsButton"
+							Content="CONTACT US"
+							Command="{Binding ContactUs}"
 							Style="{StaticResource OutlinedButtonStyle}"
 							HorizontalAlignment="Stretch"
 							Margin="0,16,0,0" />

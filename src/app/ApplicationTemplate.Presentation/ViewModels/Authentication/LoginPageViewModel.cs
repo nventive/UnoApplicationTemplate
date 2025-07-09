@@ -1,7 +1,9 @@
-﻿using System;
+﻿// src/app/ApplicationTemplate.Presentation/ViewModels/Authentication/LoginPageViewModel.cs
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -58,14 +60,14 @@ public class LoginPageViewModel : ViewModel
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 
-	public IDynamicCommand ContactUs => this.GetCommandFromTask(async ct =>
-	{
-		var service = this.GetService();
-		service.OpenPhoneCall("123-456-7890");
-	});
-
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>
 	{
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ForgotPasswordPageViewModel());
+	});
+
+	public IDynamicCommand ContactUs => this.GetCommand(() =>
+	{
+		var phoneCallService = this.GetService<IPhoneCallService>();
+		phoneCallService.OpenPhoneCall("+1-555-123-4567"); // Placeholder phone number
 	});
 }

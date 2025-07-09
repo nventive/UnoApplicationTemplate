@@ -1,37 +1,125 @@
 ﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/PhoneCall/PhoneCallService.cs
-// ... existing code ...
 using System;
 using System.Reactive;
-using System.Threading.Tasks;
-using Windows.System;
 using System.Reactive.Linq;
+using System.Reactive.Subjects;
+using System.Threading.Tasks;
+using Windows.ApplicationModel.Calls;
+using Windows.System;
 
-// ... existing code ...
+namespace ApplicationTemplate.DataAccess.PlatformServices;
+
 public sealed class PhoneCallService : IPhoneCallService
 {
-	public Task GetIsCallActive()
+	private readonly Subject<Unit> _callStateSubject = new();
+
+	public PhoneCallService()
 	{
-		return Task.FromResult(false);
+#if __ANDROID__ || __IOS__ || WINDOWS
+		// Subscribe to call state changes if available on the platform
+		try
+		{
+			PhoneCallManager.CallStateChanged += OnCallStateChanged;
+		}
+		catch
+		{
+			// Call state monitoring might not be available on all platforms
+		}
+#endif
 	}
 
-	public Task GetIsCallIncoming()
+	public async Task<bool> GetIsCallActive()
 	{
-		return Task.FromResult(false);
+#if __ANDROID__ || __IOS__ || WINDOWS
+		try
+		{
+			return PhoneCallManager.IsCallActive;
+		}
+		catch
+		{
+			return false;
+		}
+#else
+		return await Task.FromResult(false);
+#endif
+	}
+
+	public async Task<bool> GetIsCallIncoming()
+	{
+#if __ANDROID__ || __IOS__ || WINDOWS
+		try
+		{
+			return PhoneCallManager.IsCallIncoming;
+		}
+		catch
+		{
+			return false;
+		}
+#else
+		return await Task.FromResult(false);
+#endif
 	}
 
 	public void OpenPhoneCall(string phoneNumber)
 	{
-		Launcher.LaunchUriAsync(new Uri($"tel:{phoneNumber}"));
+		if (string.IsNullOrWhiteSpace(phoneNumber))
+			return;
+
+#if __ANDROID__ || __IOS__ || WINDOWS
+		try
+		{
+			PhoneCallManager.ShowPhoneCallUI(phoneNumber, string.Empty);
+		}
+		catch
+		{
+			// Fallback to launcher if PhoneCallManager is not available
+			_ = Launcher.LaunchUriAsync(new Uri($"tel:{phoneNumber}"));
+		}
+#else
+		// For other platforms, use the launcher
+		_ = Launcher.LaunchUriAsync(new Uri($"tel:{phoneNumber}"));
+#endif
 	}
 
 	public void OpenPhoneCallSettings()
 	{
-		throw new NotImplementedException();
+#if __ANDROID__ || WINDOWS
+		try
+		{
+			PhoneCallManager.ShowPhoneCallSettingsUI();
+		}
+		catch
+		{
+			// Settings might not be available, silently fail
+		}
+#endif
+		// Not supported on iOS as mentioned in the interface
 	}
 
-	public IObservable ObserveCallState()
+	public IObservable<Unit> ObserveCallState()
 	{
-		return Observable.Empty();
+		return _callStateSubject.AsObservable();
+	}
+
+#if __ANDROID__ || __IOS__ || WINDOWS
+	private void OnCallStateChanged(object sender, object e)
+	{
+		_callStateSubject.OnNext(Unit.Default);
+	}
+#endif
+
+	public void Dispose()
+	{
+#if __ANDROID__ || __IOS__ || WINDOWS
+		try
+		{
+			PhoneCallManager.CallStateChanged -= OnCallStateChanged;
+		}
+		catch
+		{
+			// Ignore disposal errors
+		}
+#endif
+		_callStateSubject?.Dispose();
 	}
 }
-// ... existing code ...
