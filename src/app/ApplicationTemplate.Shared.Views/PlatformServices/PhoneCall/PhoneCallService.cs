@@ -1,125 +1,60 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/PhoneCall/PhoneCallService.cs
-using System;
+﻿using System;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Reactive.Subjects;
 using System.Threading.Tasks;
+using CommunityToolkit.WinUI;
+using Microsoft.UI.Dispatching;
 using Windows.ApplicationModel.Calls;
-using Windows.System;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
+/// <summary>
+/// The <see cref="IPhoneCallService"/> implementation using Uno.
+/// </summary>
 public sealed class PhoneCallService : IPhoneCallService
 {
-	private readonly Subject<Unit> _callStateSubject = new();
+	private readonly DispatcherQueue _dispatcherQueue;
 
-	public PhoneCallService()
+	public PhoneCallService(DispatcherQueue dispatcherQueue)
 	{
-#if __ANDROID__ || __IOS__ || WINDOWS
-		// Subscribe to call state changes if available on the platform
-		try
-		{
-			PhoneCallManager.CallStateChanged += OnCallStateChanged;
-		}
-		catch
-		{
-			// Call state monitoring might not be available on all platforms
-		}
-#endif
+		_dispatcherQueue = dispatcherQueue ?? throw new ArgumentNullException(nameof(dispatcherQueue));
 	}
 
+	/// <inheritdoc/>
 	public async Task<bool> GetIsCallActive()
 	{
-#if __ANDROID__ || __IOS__ || WINDOWS
-		try
-		{
-			return PhoneCallManager.IsCallActive;
-		}
-		catch
-		{
-			return false;
-		}
-#else
-		return await Task.FromResult(false);
-#endif
+		return await _dispatcherQueue.EnqueueAsync(() => PhoneCallManager.IsCallActive);
 	}
 
+	/// <inheritdoc/>
 	public async Task<bool> GetIsCallIncoming()
 	{
-#if __ANDROID__ || __IOS__ || WINDOWS
-		try
-		{
-			return PhoneCallManager.IsCallIncoming;
-		}
-		catch
-		{
-			return false;
-		}
-#else
-		return await Task.FromResult(false);
-#endif
+		return await _dispatcherQueue.EnqueueAsync(() => PhoneCallManager.IsCallIncoming);
 	}
 
+	/// <inheritdoc/>
 	public void OpenPhoneCall(string phoneNumber)
 	{
-		if (string.IsNullOrWhiteSpace(phoneNumber))
-			return;
-
-#if __ANDROID__ || __IOS__ || WINDOWS
-		try
-		{
-			PhoneCallManager.ShowPhoneCallUI(phoneNumber, string.Empty);
-		}
-		catch
-		{
-			// Fallback to launcher if PhoneCallManager is not available
-			_ = Launcher.LaunchUriAsync(new Uri($"tel:{phoneNumber}"));
-		}
-#else
-		// For other platforms, use the launcher
-		_ = Launcher.LaunchUriAsync(new Uri($"tel:{phoneNumber}"));
-#endif
+		_dispatcherQueue.TryEnqueue(() => PhoneCallManager.ShowPhoneCallUI(phoneNumber, string.Empty));
 	}
 
+	/// <inheritdoc/>
 	public void OpenPhoneCallSettings()
 	{
-#if __ANDROID__ || WINDOWS
-		try
-		{
-			PhoneCallManager.ShowPhoneCallSettingsUI();
-		}
-		catch
-		{
-			// Settings might not be available, silently fail
-		}
+#if __IOS__
+		return;
+#else
+		_dispatcherQueue.TryEnqueue(PhoneCallManager.ShowPhoneCallSettingsUI);
 #endif
-		// Not supported on iOS as mentioned in the interface
 	}
 
+	/// <inheritdoc/>
 	public IObservable<Unit> ObserveCallState()
 	{
-		return _callStateSubject.AsObservable();
-	}
-
-#if __ANDROID__ || __IOS__ || WINDOWS
-	private void OnCallStateChanged(object sender, object e)
-	{
-		_callStateSubject.OnNext(Unit.Default);
-	}
-#endif
-
-	public void Dispose()
-	{
-#if __ANDROID__ || __IOS__ || WINDOWS
-		try
-		{
-			PhoneCallManager.CallStateChanged -= OnCallStateChanged;
-		}
-		catch
-		{
-			// Ignore disposal errors
-		}
-#endif
-		_callStateSubject?.Dispose();
+		return Observable.FromEventPattern<EventHandler<object>, object>(
+			h => PhoneCallManager.CallStateChanged += h,
+			h => PhoneCallManager.CallStateChanged -= h
+		)
+		.Select(_ => Unit.Default);
 	}
 }

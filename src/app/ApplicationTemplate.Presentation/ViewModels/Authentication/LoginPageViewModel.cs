@@ -1,5 +1,4 @@
-﻿// src/app/ApplicationTemplate.Presentation/ViewModels/Authentication/LoginPageViewModel.cs
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
@@ -68,6 +67,6 @@ public class LoginPageViewModel : ViewModel
 	public IDynamicCommand ContactUs => this.GetCommand(() =>
 	{
 		var phoneCallService = this.GetService<IPhoneCallService>();
-		phoneCallService.OpenPhoneCall("+1-555-123-4567"); // Placeholder phone number
+		phoneCallService.OpenPhoneCall("0001112222");
 	});
 }

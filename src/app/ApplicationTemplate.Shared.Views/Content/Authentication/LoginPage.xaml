@@ -1,5 +1,4 @@
-﻿<!-- src/app/ApplicationTemplate.Shared.Views/Content/Authentication/LoginPage.xaml -->
-<Page x:Class="ApplicationTemplate.Views.Content.LoginPage"
+﻿<Page x:Class="ApplicationTemplate.Views.Content.LoginPage"
 	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 	  xmlns:local="using:ApplicationTemplate"
@@ -117,7 +116,7 @@
 
 					<!-- Contact Us Button -->
 					<Button x:Name="ContactUsButton"
-							Content="CONTACT US"
+							Content="Contact Us"
 							Command="{Binding ContactUs}"
 							Style="{StaticResource OutlinedButtonStyle}"
 							HorizontalAlignment="Stretch"
