@@ -27,6 +27,9 @@ public interface IPhoneCallService
 	/// <summary>
 	/// Opens the call settings UI.
 	/// </summary>
+	/// <remarks>
+	/// Not supported on iOS.
+	/// </remarks>
 	void OpenPhoneCallSettings();
 
 	/// <summary>
