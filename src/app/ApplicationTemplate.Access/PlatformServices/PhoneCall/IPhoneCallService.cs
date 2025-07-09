@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reactive;
+using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess.PlatformServices;
 
@@ -11,12 +12,12 @@ public interface IPhoneCallService
 	/// <summary>
 	/// Gets a value that indicates whether an active call is in progress on the device.
 	/// </summary>
-	bool IsCallActive { get; }
+	Task<bool> GetIsCallActive();
 
 	/// <summary>
 	/// Gets a value that indicates if a call is incoming on the device.
 	/// </summary>
-	bool IsCallIncoming { get; }
+	Task<bool> GetIsCallIncoming();
 
 	/// <summary>
 	/// Opens the built-in phone call UI with the specified phone number.

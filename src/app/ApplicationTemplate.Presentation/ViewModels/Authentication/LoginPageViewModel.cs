@@ -58,6 +58,12 @@ public class LoginPageViewModel : ViewModel
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 
+	public IDynamicCommand ContactUs => this.GetCommandFromTask(async ct =>
+	{
+		var service = this.GetService();
+		service.OpenPhoneCall("123-456-7890");
+	});
+
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>
 	{
 		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new ForgotPasswordPageViewModel());
