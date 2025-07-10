@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace ApplicationTemplate.DataAccess.LocalStorage;
 
@@ -12,17 +8,17 @@ namespace ApplicationTemplate.DataAccess.LocalStorage;
 public interface ICredentialsRepository
 {
 	/// <summary>
-	/// 
+	/// Reads the credentials for a given resource and username from the local secure storage.
 	/// </summary>
-	/// <param name="resource"></param>
-	/// <param name="username"></param>
-	/// <returns></returns>
+	/// <param name="resource">The resource to read from.</param>
+	/// <param name="username">The username linked to the crendtials.</param>
+	/// <returns>The persisted credentials.</returns>
 	Task<Credentials> Read(string resource, string username);
 
 	/// <summary>
-	/// 
+	/// Writes the credentials for a given resource to the local secure storage.
 	/// </summary>
-	/// <param name="resource"></param>
-	/// <param name="credentials"></param>
+	/// <param name="resource">The resource to read from.</param>
+	/// <param name="credentials">The credentials to persist.</param>
 	Task Write(string resource, Credentials credentials);
 }
