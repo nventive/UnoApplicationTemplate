@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
+using ApplicationTemplate.DataAccess.LocalStorage;
 using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
@@ -55,7 +56,17 @@ public class LoginPageViewModel : ViewModel
 
 	public IDynamicCommand NavigateToCreateAccountPage => this.GetCommandFromTask(async ct =>
 	{
-		await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
+		this.GetService<ICredentialsRepository>().Write(
+			"ApplicationTemplate",
+			new Credentials
+			{
+				Username = Form.Email,
+				Password = Form.Password,
+			});
+
+		var test = this.GetService<ICredentialsRepository>().Read("ApplicationTemplate", Form.Email);
+
+		//await this.GetService<ISectionsNavigator>().Navigate(ct, () => new CreateAccountPageViewModel());
 	});
 
 	public IDynamicCommand NavigateToForgotPasswordPage => this.GetCommandFromTask(async ct =>

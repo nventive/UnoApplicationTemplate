@@ -1,6 +1,7 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/LocalStorage/CredentialsRepository.cs
+﻿using System;
 using System.Threading.Tasks;
-using ApplicationTemplate.DataAccess.LocalStorage;
+using CommunityToolkit.WinUI;
+using Microsoft.UI.Dispatching;
 using Windows.Security.Credentials;
 
 namespace ApplicationTemplate.DataAccess.LocalStorage;
@@ -8,37 +9,37 @@ namespace ApplicationTemplate.DataAccess.LocalStorage;
 /// <inheritdoc/>
 public sealed class CredentialsRepository : ICredentialsRepository
 {
-	/// <inheritdoc/>
-	public Task<Credentials> Read(string resource, string username)
+	private readonly DispatcherQueue _dispatcherQueue;
+
+	public CredentialsRepository(DispatcherQueue dispatcherQueue)
 	{
-		var vault = new PasswordVault();
-
-		try
-		{
-			var credential = vault.Retrieve(resource, username);
-			credential.RetrievePassword();
-
-			return Task.FromResult(new Credentials
-			{
-				Username = credential.UserName,
-				Password = credential.Password
-			});
-		}
-		catch
-		{
-			// Return null or throw exception based on your requirements
-			return Task.FromResult<Credentials>(null);
-		}
+		_dispatcherQueue = dispatcherQueue ?? throw new ArgumentNullException(nameof(dispatcherQueue));
 	}
 
 	/// <inheritdoc/>
-	public Task Write(string resource, Credentials credentials)
+	public async Task<Credentials> Read(string resource, string username)
 	{
-		var vault = new PasswordVault();
-		var credential = new PasswordCredential(resource, credentials.Username, credentials.Password);
+		return await _dispatcherQueue.EnqueueAsync(() =>
+		{
+			var passwordVault = new PasswordVault();
+			var passwordCredential = passwordVault.Retrieve(resource, username);
+			passwordCredential.RetrievePassword();
 
-		vault.Add(credential);
+			return new Credentials
+			{
+				Username = passwordCredential.UserName,
+				Password = passwordCredential.Password,
+			};
+		});
+	}
 
-		return Task.CompletedTask;
+	/// <inheritdoc/>
+	public async Task Write(string resource, Credentials credentials)
+	{
+		await _dispatcherQueue.EnqueueAsync(() =>
+		{
+			var passwordVault = new PasswordVault();
+			passwordVault.Add(new PasswordCredential(resource, credentials.Username, credentials.Password));
+		});
 	}
 }

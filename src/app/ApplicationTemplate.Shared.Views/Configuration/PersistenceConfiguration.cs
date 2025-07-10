@@ -2,6 +2,7 @@
 using System.Reactive.Concurrency;
 using System.Text.Json;
 using ApplicationTemplate.DataAccess;
+using ApplicationTemplate.DataAccess.LocalStorage;
 using Microsoft.Extensions.DependencyInjection;
 using Nventive.Persistence;
 using ReviewService;
