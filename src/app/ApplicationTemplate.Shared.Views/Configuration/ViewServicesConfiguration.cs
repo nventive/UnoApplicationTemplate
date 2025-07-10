@@ -37,8 +37,8 @@ public static class ViewServicesConfiguration
 			.AddSingleton<IEmailService, EmailService>()
 			.AddSingleton<IMemoryProvider, MemoryProvider>()
 			.AddSingleton<IReviewPrompter, ReviewPrompter>()
-			.AddMessageDialog()
-			.AddSingleton<ICredentialsRepository, CredentialsRepository>();
+			.AddSingleton<ICredentialsRepository, CredentialsRepository>()
+			.AddMessageDialog();
 	}
 
 	private static IServiceCollection AddMessageDialog(this IServiceCollection services)
