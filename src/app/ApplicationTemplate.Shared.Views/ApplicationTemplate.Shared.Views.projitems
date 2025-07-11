@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.Android.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Behaviors\FormattingTextBoxBehavior.iOS.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlatformServices\Camera\CameraService.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\ApiConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LocalizationConfiguration.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Configuration\LoggingConfiguration.cs" />
@@ -425,5 +426,8 @@
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Guillon-Regular.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\Guillon-SemiBold.ttf" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\Fonts\segmdl2.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)PlatformServices\Camera\" />
   </ItemGroup>
 </Project>
