@@ -1,5 +1,4 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/Configuration/ViewServicesConfiguration.cs
-using System.Reactive.Concurrency;
+﻿using System.Reactive.Concurrency;
 using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 using MessageDialogService;
