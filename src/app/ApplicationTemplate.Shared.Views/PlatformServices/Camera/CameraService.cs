@@ -1,7 +1,7 @@
-﻿// src/app/ApplicationTemplate.Shared.Views/PlatformServices/Camera/CameraService.cs
+﻿using System;
 using System.Threading.Tasks;
-using ApplicationTemplate.DataAccess.PlatformServices;
-#if WINDOWS
+using CommunityToolkit.WinUI;
+using Microsoft.UI.Dispatching;
 using Windows.Media.Capture;
 using Windows.Storage;
 using WinRT.Interop;
@@ -81,137 +81,37 @@ namespace ApplicationTemplate.DataAccess.PlatformServices
 				var tcs = new TaskCompletionSource<string>();
 				var activity = Platform.CurrentActivity as AndroidX.AppCompat.App.AppCompatActivity;
 
-				if (activity == null)
-					return null;
+namespace ApplicationTemplate.DataAccess.PlatformServices;
 
-				Intent intent;
-				if (mode == CameraCaptureMode.Video)
-				{
-					intent = new Intent(MediaStore.ActionVideoCapture);
-				}
-				else
-				{
-					intent = new Intent(MediaStore.ActionImageCapture);
-				}
+/// <inheritdoc/>
+public sealed class CameraService : ICameraService
+{
+	private readonly DispatcherQueue _dispatcherQueue;
 
-				if (intent.ResolveActivity(activity.PackageManager) != null)
-				{
-					var file = new File(activity.GetExternalFilesDir(Android.OS.Environment.DirectoryPictures),
-						$"capture_{System.DateTime.Now.Ticks}.{(mode == CameraCaptureMode.Video ? "mp4" : "jpg")}");
+	public CameraService(DispatcherQueue dispatcherQueue)
+	{
+		_dispatcherQueue = dispatcherQueue ?? throw new ArgumentNullException(nameof(dispatcherQueue));
+	}
 
-					var photoURI = FileProvider.GetUriForFile(activity,
-						activity.PackageName, file);
-
-					intent.PutExtra(MediaStore.ExtraOutput, photoURI);
-
-					var launcher = activity.RegisterForActivityResult(
-						new ActivityResultContracts.StartActivityForResult(),
-						new ActivityResultCallback(result =>
-						{
-							if (result.ResultCode == (int)Android.App.Result.Ok)
-							{
-								tcs.SetResult(file.AbsolutePath);
-							}
-							else
-							{
-								tcs.SetResult(null);
-							}
-						}));
-
-					launcher.Launch(intent);
-					return await tcs.Task;
-				}
-
-				return null;
-			}
-			catch
-			{
-				return null;
-			}
-		}
-
-		private class ActivityResultCallback : Java.Lang.Object, IActivityResultCallback
+	/// <inheritdoc/>
+	public async Task<string> CapturePhoto(CameraCaptureMode mode)
+	{
+		return await _dispatcherQueue.EnqueueAsync(async () =>
 		{
-			private readonly System.Action<AndroidX.Activity.Result.ActivityResult> _callback;
+			var captureUI = new CameraCaptureUI();
 
-			public ActivityResultCallback(System.Action<AndroidX.Activity.Result.ActivityResult> callback)
+			captureUI.PhotoSettings.Format = CameraCaptureUIPhotoFormat.Jpeg;
+
+			var captureMode = mode switch
 			{
-				_callback = callback;
-			}
+				CameraCaptureMode.Photo => CameraCaptureUIMode.Photo,
+				CameraCaptureMode.Video => CameraCaptureUIMode.Video,
+				_ => CameraCaptureUIMode.PhotoOrVideo,
+			};
 
-			public void OnActivityResult(Java.Lang.Object result)
-			{
-				_callback?.Invoke(result as AndroidX.Activity.Result.ActivityResult);
-			}
-		}
-#endif
+			var file = await captureUI.CaptureFileAsync(captureMode);
 
-#if IOS
-		private async Task<string> CapturePhotoiOS(CameraCaptureMode mode)
-		{
-			try
-			{
-				var tcs = new TaskCompletionSource<string>();
-
-				var picker = new UIImagePickerController();
-				picker.SourceType = UIImagePickerControllerSourceType.Camera;
-
-				switch (mode)
-				{
-					case CameraCaptureMode.Photo:
-						picker.MediaTypes = new string[] { "public.image" };
-						break;
-					case CameraCaptureMode.Video:
-						picker.MediaTypes = new string[] { "public.movie" };
-						break;
-					case CameraCaptureMode.PhotoOrVideo:
-						picker.MediaTypes = new string[] { "public.image", "public.movie" };
-						break;
-				}
-
-				picker.Finished += (sender, e) =>
-				{
-					var documentsPath = NSSearchPath.GetDirectories(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomain.User)[0];
-					string fileName;
-					string filePath;
-
-					if (e.MediaType == "public.image")
-					{
-						fileName = $"capture_{System.DateTime.Now.Ticks}.jpg";
-						filePath = System.IO.Path.Combine(documentsPath, fileName);
-						var image = e.OriginalImage;
-						var data = image.AsJPEG();
-						data.Save(filePath, true);
-					}
-					else
-					{
-						fileName = $"capture_{System.DateTime.Now.Ticks}.mp4";
-						filePath = System.IO.Path.Combine(documentsPath, fileName);
-						var videoUrl = e.MediaUrl;
-						var videoData = NSData.FromUrl(videoUrl);
-						videoData.Save(filePath, true);
-					}
-
-					picker.DismissViewController(true, null);
-					tcs.SetResult(filePath);
-				};
-
-				picker.Canceled += (sender, e) =>
-				{
-					picker.DismissViewController(true, null);
-					tcs.SetResult(null);
-				};
-
-				var viewController = Platform.GetCurrentUIViewController();
-				await viewController.PresentViewControllerAsync(picker, true);
-
-				return await tcs.Task;
-			}
-			catch
-			{
-				return null;
-			}
-		}
-#endif
+			return file?.Path;
+		});
 	}
 }

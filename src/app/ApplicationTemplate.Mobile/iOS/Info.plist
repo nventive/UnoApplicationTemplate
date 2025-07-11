@@ -46,10 +46,11 @@
 		<string>Media.xcassets/AppIcons.appiconset</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
+		<!-- This is required by the camera service. -->
 		<key>NSCameraUsageDescription</key>
-		<string>This app needs access to camera to capture photos and videos.</string>
+		<string>We need access to the camera to take photos.</string>
 		<key>NSMicrophoneUsageDescription</key>
-		<string>This app needs access to microphone to record videos with audio.</string>
+		<string>We need access to the microphone to record videos.</string>
 		<!-- This is required to access the MAUI Essentials email functionality. -->
 		<key>LSApplicationQueriesSchemes</key>
 		<array>
