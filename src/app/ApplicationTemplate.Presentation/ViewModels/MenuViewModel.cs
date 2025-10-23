@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -37,7 +37,7 @@ public sealed class MenuViewModel : ViewModel
 		typeof(DadJokesPageViewModel),
 		typeof(PostsPageViewModel),
 		typeof(SettingsPageViewModel),
-		typeof(ViewModels.Agentic.AgenticChatPageViewModel),
+		typeof(AgenticChatPageViewModel),
 	};
 
 	public string MenuState => this.GetFromObservable(
@@ -60,7 +60,7 @@ public sealed class MenuViewModel : ViewModel
 		await _sectionsNavigator.SetActiveSection(ct, nameof(Section.Settings), () => new SettingsPageViewModel()));
 
 	public IDynamicCommand ShowAgenticSection => this.GetCommandFromTask(async ct =>
-		await _sectionsNavigator.SetActiveSection(ct, nameof(Section.Agentic), () => new ViewModels.Agentic.AgenticChatPageViewModel()));
+		await _sectionsNavigator.SetActiveSection(ct, nameof(Section.Agentic), () => new AgenticChatPageViewModel()));
 
 	private IObservable<string> ObserveMenuState() =>
 		_sectionsNavigator

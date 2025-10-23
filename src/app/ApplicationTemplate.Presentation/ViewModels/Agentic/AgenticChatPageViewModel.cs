@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
@@ -9,7 +9,7 @@ using ApplicationTemplate.DataAccess.ApiClients.Agentic;
 using Chinook.DynamicMvvm;
 using Microsoft.Extensions.Logging;
 
-namespace ApplicationTemplate.Presentation.ViewModels.Agentic;
+namespace ApplicationTemplate.Presentation;
 
 /// <summary>
 /// ViewModel for the Agentic Chat page with voice integration.

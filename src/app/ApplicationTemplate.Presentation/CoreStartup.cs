@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
@@ -67,8 +67,7 @@ public sealed class CoreStartup : CoreStartupBase
 
 		ValidatorOptions.Global.LanguageManager = new FluentValidationLanguageManager();
 
-		// Register AI agent navigation functions
-		InitializeAgenticFunctions(services);
+
 	}
 
 	protected override async Task StartServices(IServiceProvider services, bool isFirstStart)
@@ -76,6 +75,8 @@ public sealed class CoreStartup : CoreStartupBase
 		if (isFirstStart)
 		{
 			// TODO: Start your core services and customize the initial navigation logic here.
+			
+			InitializeAgenticFunctions(services);
 			StartAutomaticAnalyticsCollection(services);
 			await services.GetRequiredService<IReviewService>().TrackApplicationLaunched(CancellationToken.None);
 			NotifyUserOnSessionExpired(services);
@@ -318,19 +319,34 @@ public sealed class CoreStartup : CoreStartupBase
 	{
 		try
 		{
+			// Get the logger first for better error reporting
+			var logger = services.GetRequiredService<ILogger<CoreStartup>>();
+			
+			// Try to get the required services
+			var toolExecutor = services.GetService<Business.Agentic.IAgenticToolExecutor>();
+			
+			var sectionsNavigator = services.GetService<ISectionsNavigator>();
+			
+			var registryLogger = services.GetService<ILogger<ApplicationTemplate.Presentation.Framework.AgenticNavigationFunctionRegistry>>();
+			
 			var registry = new ApplicationTemplate.Presentation.Framework.AgenticNavigationFunctionRegistry(
-				services.GetRequiredService<Business.Agentic.IAgenticToolExecutor>(),
-				services.GetRequiredService<ISectionsNavigator>(),
-				services.GetRequiredService<ILogger<ApplicationTemplate.Presentation.Framework.AgenticNavigationFunctionRegistry>>()
+				toolExecutor,
+				sectionsNavigator,
+				registryLogger
 			);
 
 			registry.RegisterFunctions();
+			
+			logger.LogInformation("Successfully initialized AI agent navigation functions.");
 		}
 		catch (Exception ex)
 		{
 			// Log but don't fail startup if AI agent is not configured
-			var logger = services.GetRequiredService<ILogger<CoreStartup>>();
-			logger.LogWarning(ex, "Failed to initialize AI agent functions. AI chat features may not work correctly.");
+			var logger = services.GetService<ILogger<CoreStartup>>();
+			if (logger != null)
+			{
+				logger.LogWarning(ex, "Failed to initialize AI agent functions. AI chat features may not work correctly.");
+			}
 		}
 	}
 
@@ -339,5 +355,3 @@ public sealed class CoreStartup : CoreStartupBase
 		return serviceProvider.GetRequiredService<ILogger<CoreStartup>>();
 	}
 }
-
-

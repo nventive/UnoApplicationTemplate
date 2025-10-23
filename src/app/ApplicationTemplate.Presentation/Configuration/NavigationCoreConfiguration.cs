@@ -24,7 +24,7 @@ public static class NavigationCoreConfiguration
 	{
 		return services
 			.AddSingleton<IExtendedSplashscreenController, MockExtendedSplashscreenController>()
-			.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Login", "Home", "Posts", "Settings"))
+			.AddSingleton<ISectionsNavigator>(s => new BlindSectionsNavigator("Login", "Home", "Posts", "Settings", "Agentic"))
 			.AddSingleton<IStackNavigator>(s => new SectionsNavigatorToStackNavigatorAdapter(s.GetService<ISectionsNavigator>()))
 			.AddSingleton<IBackButtonManager>(s =>
 			{

@@ -44,6 +44,8 @@ public static class NavigationConfiguration
 		{ typeof(ResetPasswordPageViewModel), typeof(ResetPasswordPage) },
 		{ typeof(ForcedUpdatePageViewModel), typeof(ForcedUpdatePage) },
 		{ typeof(KillSwitchPageViewModel), typeof(KillSwitchPage) },
+		{ typeof(AgenticChatPageViewModel), typeof(AgenticChatPage) },
+
 	};
 
 	/// <summary>
