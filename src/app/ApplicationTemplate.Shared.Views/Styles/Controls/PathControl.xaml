@@ -58,6 +58,23 @@
 		</Setter>
 	</Style>
 
+	<!--  AIChat section -->
+	<Style x:Key="ChatPathControlStyle"
+		   TargetType="u:PathControl">
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="u:PathControl">
+					<Path Fill="{TemplateBinding Foreground}"
+						  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+						  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+						  MaxHeight="{TemplateBinding MaxHeight}"
+						  MaxWidth="{TemplateBinding MaxWidth}"
+						  Data="{StaticResource ChatPathControlIcon}" />
+				</ControlTemplate>
+			</Setter.Value>
+		</Setter>
+	</Style>
+
 	<!--  SuccessCheckPathControlStyle -->
 	<Style x:Key="SuccessCheckPathControlStyle"
 		   TargetType="u:PathControl">

@@ -92,6 +92,12 @@
 										  Content="Profile"
 										  x:Uid="Menu_Settings" />
 				</utu:TabBarItem>
+				<utu:TabBarItem Command="{Binding ShowAgenticSection}">
+					<c:BottomTabBarButton IconStyle="{StaticResource ChatPathControlStyle}"
+										  Foreground="{ThemeResource OnPrimaryMediumBrush}"
+										  Content="Agentic"
+										  x:Uid="Menu_Agentic" />
+				</utu:TabBarItem>
 			</utu:TabBar.Items>
 		</utu:TabBar>
 	</Grid>

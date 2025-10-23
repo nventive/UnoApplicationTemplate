@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Reactive.Linq;
 using System.Reactive.Threading.Tasks;
 using System.Threading;
@@ -51,6 +51,7 @@ public sealed class CoreStartup : CoreStartupBase
 				.AddReviewServices()
 				.AddAppServices()
 				.AddAnalytics()
+				.AddAgentic(context.Configuration)
 			);
 	}
 
@@ -65,6 +66,9 @@ public sealed class CoreStartup : CoreStartupBase
 		HandleUnhandledExceptions(services);
 
 		ValidatorOptions.Global.LanguageManager = new FluentValidationLanguageManager();
+
+		// Register AI agent navigation functions
+		InitializeAgenticFunctions(services);
 	}
 
 	protected override async Task StartServices(IServiceProvider services, bool isFirstStart)
@@ -306,8 +310,34 @@ public sealed class CoreStartup : CoreStartupBase
 		}
 	}
 
+	/// <summary>
+	/// Initializes AI agent functions by registering navigation handlers.
+	/// </summary>
+	/// <param name="services">The service provider.</param>
+	private static void InitializeAgenticFunctions(IServiceProvider services)
+	{
+		try
+		{
+			var registry = new ApplicationTemplate.Presentation.Framework.AgenticNavigationFunctionRegistry(
+				services.GetRequiredService<Business.Agentic.IAgenticToolExecutor>(),
+				services.GetRequiredService<ISectionsNavigator>(),
+				services.GetRequiredService<ILogger<ApplicationTemplate.Presentation.Framework.AgenticNavigationFunctionRegistry>>()
+			);
+
+			registry.RegisterFunctions();
+		}
+		catch (Exception ex)
+		{
+			// Log but don't fail startup if AI agent is not configured
+			var logger = services.GetRequiredService<ILogger<CoreStartup>>();
+			logger.LogWarning(ex, "Failed to initialize AI agent functions. AI chat features may not work correctly.");
+		}
+	}
+
 	protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)
 	{
 		return serviceProvider.GetRequiredService<ILogger<CoreStartup>>();
 	}
 }
+
+
