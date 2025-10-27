@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Reactive.Concurrency;
 using ApplicationTemplate.Business;
+using ApplicationTemplate.Business.Agentic;
 using ApplicationTemplate.DataAccess;
 using ApplicationTemplate.Presentation;
+using ApplicationTemplate.Presentation.Framework;
 using MessageDialogService;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -33,6 +35,7 @@ public static class AppServicesConfiguration
 			.AddSingleton<IUserProfileService, UserProfileService>()
 			.AddSingleton<IUpdateRequiredService, UpdateRequiredService>()
 			.AddSingleton<IKillSwitchService, KillSwitchService>()
+			.AddSingleton<IDrawingModalService, DrawingModalService>()
 			.AddSingleton<DiagnosticsCountersService>();
 	}
 }

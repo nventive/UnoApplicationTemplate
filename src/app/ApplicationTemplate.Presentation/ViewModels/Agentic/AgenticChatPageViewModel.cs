@@ -419,6 +419,11 @@ public class AgenticChatPageViewModel : ViewModel
 						// TODO: Implement logout logic
 						_logger.LogWarning("Logout requested but not implemented yet");
 						break;
+
+					case NavigationType.DrawContent:
+						var drawingService = this.GetService<Business.Agentic.IDrawingModalService>();
+						await drawingService.ShowDrawingAsync(e.SvgContent, e.Title, e.Description, ct);
+						break;
 				}
 
 				_logger.LogInformation("Navigation completed successfully");

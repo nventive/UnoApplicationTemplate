@@ -387,6 +387,40 @@ public partial class AgenticApiClient
 				}
 			}
 		};
+
+		// Define draw_content function
+		yield return new
+		{
+			type = "function",
+			function = new
+			{
+				name = "draw_content",
+				description = "Draw visual content (illustrations, diagrams, shapes) in a modal using SVG. You can draw any kind of visual content by providing SVG path commands or elements. Examples: draw an apple, create a diagram, illustrate a concept, show a chart.",
+				parameters = new
+				{
+					type = "object",
+					properties = new
+					{
+						svg_content = new
+						{
+							type = "string",
+							description = "The SVG content to display. Can be complete SVG markup with <svg> tag, or just SVG elements like <circle>, <path>, <rect>, <text>, etc. For paths, use standard SVG path commands (M, L, C, Q, etc.). Example for an apple: <circle cx='250' cy='250' r='100' fill='red'/><ellipse cx='250' cy='200' rx='30' ry='50' fill='green'/>"
+						},
+						title = new
+						{
+							type = "string",
+							description = "Title for the drawing modal (e.g., 'Apple Illustration', 'Network Diagram')"
+						},
+						description = new
+						{
+							type = "string",
+							description = "Optional description or caption for the drawing"
+						}
+					},
+					required = new[] { "svg_content", "title" }
+				}
+			}
+		};
 	}
 
 	/// <summary>
@@ -412,17 +446,24 @@ public partial class AgenticApiClient
 			throw new InvalidOperationException("Agent not initialized. Check configuration and agent creation.");
 		}
 
-		_logger.LogInformation("Using persistent agent {AgentId}", _currentAgentId);
+	_logger.LogInformation("Using persistent agent {AgentId}", _currentAgentId);
 
-		// Create new thread via REST API
+	// Create new thread only if we don't have one yet (preserves conversation history)
+	if (string.IsNullOrWhiteSpace(_currentThreadId))
+	{
 		var threadResponse = await _agentsHttpClient.PostAsync($"threads?api-version={ApiVersion}", null, ct);
 		threadResponse.EnsureSuccessStatusCode();
 		var threadJson = await threadResponse.Content.ReadAsStringAsync(ct);
 		var threadData = JsonDocument.Parse(threadJson).RootElement;
 		_currentThreadId = threadData.GetProperty("id").GetString();
-		_logger.LogInformation("Created thread with id {ThreadId}", _currentThreadId);
+		_logger.LogInformation("Created new thread with id {ThreadId}", _currentThreadId);
+	}
+	else
+	{
+		_logger.LogInformation("Reusing existing thread {ThreadId} to preserve conversation history", _currentThreadId);
+	}
 
-		// Post the user message
+	// Post the user message
 		var messageData = new { role = "user", content = userMessage };
 		var messageJson = JsonSerializer.Serialize(messageData);
 		var messageContent = new StringContent(messageJson, Encoding.UTF8, "application/json");
@@ -556,7 +597,8 @@ public partial class AgenticApiClient
 	}
 
 	/// <summary>
-	/// Resets conversation by creating a new thread via REST API.
+	/// Resets conversation by clearing the current thread ID.
+	/// A new thread will be created on the next message, starting a fresh conversation.
 	/// </summary>
 	/// <param name="ct">Cancellation token.</param>
 	public async Task ResetConversationAsync(CancellationToken ct)
@@ -567,12 +609,9 @@ public partial class AgenticApiClient
 			return;
 		}
 
-		// Create a new thread via REST API
-		var threadResponse = await _agentsHttpClient.PostAsync($"threads?api-version={ApiVersion}", null, ct);
-		threadResponse.EnsureSuccessStatusCode();
-		var threadJson = await threadResponse.Content.ReadAsStringAsync(ct);
-		var threadData = JsonDocument.Parse(threadJson).RootElement;
-		_currentThreadId = threadData.GetProperty("id").GetString();
+		// Clear the thread ID so a new thread is created on the next message
+		_currentThreadId = null;
+		_logger.LogInformation("Conversation reset - thread ID cleared. New thread will be created on next message.");
 	}
 
 	/// <summary>
@@ -645,6 +684,40 @@ public partial class AgenticApiClient
 					NavigationRequested?.Invoke(this, new NavigationRequestedEventArgs(NavigationType.Logout));
 					
 					return JsonSerializer.Serialize(new { success = true, message = "Logout has been queued." });
+
+				case "draw_content":
+					var drawArgs = JsonSerializer.Deserialize<JsonElement>(functionArgsJson);
+					
+					// Try to get svg_content (handle both correct and malformed JSON keys)
+					string svgContent = null;
+					if (drawArgs.TryGetProperty("svg_content", out var svgElement))
+					{
+						svgContent = svgElement.GetString();
+					}
+					else if (drawArgs.TryGetProperty("svg_content:", out svgElement)) // Handle malformed key with colon
+					{
+						svgContent = svgElement.GetString();
+					}
+					
+					var drawTitle = drawArgs.TryGetProperty("title", out var titleElement) ? titleElement.GetString() : "Drawing";
+					var drawDescription = drawArgs.TryGetProperty("description", out var descElement) ? descElement.GetString() : string.Empty;
+					
+					if (string.IsNullOrWhiteSpace(svgContent))
+					{
+						_logger.LogWarning("Draw content called but svg_content is missing or empty");
+						return JsonSerializer.Serialize(new { success = false, error = "svg_content is required" });
+					}
+					
+					_logger.LogInformation("Draw content requested: {Title}", drawTitle);
+					
+					// Raise navigation event with drawing data
+					NavigationRequested?.Invoke(this, new NavigationRequestedEventArgs(
+						NavigationType.DrawContent,
+						svgContent: svgContent,
+						title: drawTitle,
+						description: drawDescription));
+					
+					return JsonSerializer.Serialize(new { success = true, message = $"Drawing '{drawTitle}' is being displayed." });
 
 				default:
 					_logger.LogWarning("Unknown tool function: {FunctionName}", functionName);

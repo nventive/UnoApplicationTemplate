@@ -189,6 +189,7 @@ public class AIAgentDataFunctionRegistry
 
 ## Example: Complete Flow
 
+### Navigation Example
 ```
 User: "Navigate to settings"
     ↓
@@ -217,6 +218,41 @@ User: "Navigate to settings"
 11. Get final response: "I've navigated you to Settings"
     ↓
 12. Display in UI
+```
+
+### Drawing Example
+```
+User: "Draw a cat"
+    ↓
+1. Thread is reused (preserves conversation history)
+    ↓
+2. AIAgentApiClient.SendMessageToAssistantAsync()
+    → Azure AI Foundry API
+    ← Response: { tool_calls: [{ function: "draw_content", args: { svg_content: "<svg>...</svg>", title: "Cat", description: "..." } }] }
+    ↓
+3. ExecuteNavigationTool("draw_content", args)
+    ↓
+4. Raise NavigationRequested event (type: DrawContent)
+    ↓
+5. AgenticChatPageViewModel.OnNavigationRequested()
+    ↓
+6. IDrawingModalService.ShowDrawingAsync(svgContent, title, description)
+    ↓
+7. Navigate to DrawingModalViewModel
+    ↓
+8. DrawingModalPage loads SVG in WebView2
+    ↓
+User sees drawing in modal
+
+User: "Make it bigger"
+    ↓
+1. Same thread reused - AI sees previous SVG in history
+    ↓
+2. AI modifies previous SVG (increases size)
+    ↓
+3. New draw_content tool call with modified SVG
+    ↓
+4. Updated drawing displayed
 ```
 
 ## Anti-Patterns to Avoid

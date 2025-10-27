@@ -23,8 +23,15 @@ A complete AI Agent integration with Azure AI Foundry that enables intelligent c
 
 ### Presentation Layer (`ApplicationTemplate.Presentation`)
 - ✅ `ViewModels/Agentic/AgenticChatPageViewModel.cs` - Chat UI ViewModel with navigation event handling
-- ✅ `Views/Content/AgenticChatPage.xaml` - Chat UI view
+- ✅ `ViewModels/Agentic/DrawingModalViewModel.cs` - Drawing modal ViewModel for SVG display
+- ✅ `Framework/DrawingModalService.cs` - Service for displaying drawing modals
+- ✅ `Business/Agentic/IDrawingModalService.cs` - Drawing modal service interface
 - ✅ `Framework/AgenticNavigationFunctionRegistry.cs` - Navigation function definitions and handler implementations (dynamically registered)
+
+### Views (`ApplicationTemplate.Shared.Views`)
+- ✅ `Content/Agentic/AgenticChatPage.xaml` - Chat UI view
+- ✅ `Content/Agentic/DrawingModalPage.xaml` - Modal page for displaying SVG drawings with WebView2
+- ✅ Registered in `NavigationConfiguration.cs` for view-viewmodel mapping
 
 ### Documentation (`doc/`)
 - ✅ `AIAgent_Summary.md` - This file - feature summary
@@ -33,6 +40,9 @@ A complete AI Agent integration with Azure AI Foundry that enables intelligent c
 ### Configuration
 - ✅ Updated `appsettings.json` with Agentic configuration section
 - ✅ Updated `CoreStartup.cs` to register Agentic services and initialize navigation functions
+- ✅ Updated `AppServicesConfiguration.cs` to register DrawingModalService
+- ✅ Updated `AssistantInstructions.md` with drawing tool guidance and iteration examples
+- ✅ Updated `ApplicationTemplate.Shared.Views.projitems` to include DrawingModalPage files
 
 ## Architecture Highlights
 
@@ -47,10 +57,17 @@ A complete AI Agent integration with Azure AI Foundry that enables intelligent c
 - **Presentation Layer**: Navigation implementations and event handling
 - **Access Layer**: HTTP REST API communication with Azure AI Foundry
 
-### ✅ Event-Driven Navigation
+### ✅ Event-Driven Navigation & Drawing
 - Navigation tools raise **NavigationRequested** events
-- ViewModel subscribes to events and performs actual navigation
-- Clean separation between tool execution and UI navigation
+- Drawing tool raises **NavigationRequested** event with DrawContent type
+- ViewModel subscribes to events and performs actual navigation or displays modals
+- Clean separation between tool execution and UI actions
+
+### ✅ Conversation History & Drawing Iteration
+- Threads are reused across messages to preserve conversation history
+- AI assistant can see previous messages and drawings in the conversation
+- Users can ask to modify previous drawings (e.g., "make it bigger", "change the color to red")
+- Thread ID is cleared on "Reset" to start fresh conversations
 
 ### ✅ Extensible Design
 ```csharp
@@ -70,21 +87,27 @@ toolExecutor.RegisterFunctionHandler("my_function", async (args, ct) => {
 
 ## Available Functions
 
-1. **`navigate_to_page`** - Navigate to app pages
+1. **`navigate_to_page`** - Navigate to app pages (Home, Posts, Settings)
 2. **`get_current_page`** - Get current navigation state
 3. **`go_back`** - Navigate back in stack
 4. **`open_settings`** - Open settings page
 5. **`logout`** - Log out user (placeholder)
+6. **`draw_content`** - Create and display SVG drawings/illustrations in a modal
 
 ## Key Features
 
 - ✅ Azure AI Foundry Agents API integration (GA version 2025-05-01)
+- ✅ Assistant search by name (no manual AssistantId configuration needed)
 - ✅ Dynamic tool registration system (definitions + handlers)
 - ✅ Function calling for app navigation via events
+- ✅ **Visual content creation with SVG drawings**
+- ✅ **Drawing modal with Material Design styling**
+- ✅ **Conversation history preserved across messages (thread reuse)**
+- ✅ **Iterative drawing modifications** (AI can modify previous drawings)
 - ✅ Thread and message management
 - ✅ Tool execution with `requires_action` handling
 - ✅ Extensible function registration system
-- ✅ Authentication with DefaultAzureCredential (Azure CLI)
+- ✅ Authentication with DefaultAzureCredential (Azure CLI or Service Principal)
 - ✅ Proper error handling and logging
 - ✅ Clean architecture with layer separation
 - ✅ HTTP REST API (no SDK dependencies for mobile compatibility)
@@ -103,15 +126,28 @@ toolExecutor.RegisterFunctionHandler("my_function", async (args, ct) => {
     "Endpoint": "https://your-ai-foundry-resource.services.ai.azure.com/api/projects/YourProjectName",
     "ApiKey": "your-azure-ai-foundry-api-key",
     "SubscriptionId": "your-azure-subscription-id",
-    "AssistantId": "",
-    "AssistantName": "App Navigation Assistant",
-    "DeploymentName": "gpt-4o-mini"
+    "TenantId": "",
+    "ClientId": "",
+    "ClientSecret": "",
+    "AssistantName": "Mobile App Assistant",
+    "AssistantInstructions": "AssistantInstructions.md",
+    "DeploymentName": "gpt-4o-mini",
+    "Temperature": 0.7,
+    "MaxTokens": 1000
   }
 }
 ```
 
+**Note**: The app searches for an assistant by name on startup. If found, it updates the assistant with the latest tools and instructions. If not found, it creates a new assistant. No manual AssistantId configuration needed!
+
 ### Authentication Setup
+The app supports two authentication methods:
+
+#### Option 1: Azure CLI (Development)
 Run `az login` in a terminal to authenticate with Azure. The app uses `DefaultAzureCredential` which will use your Azure CLI credentials with token scope `https://ai.azure.com/.default`.
+
+#### Option 2: Service Principal (Production)
+Configure `TenantId`, `ClientId`, and `ClientSecret` in `appsettings.json`. The app will use these credentials for authentication via DefaultAzureCredential.
 
 ## Next Steps for Implementation
 
@@ -183,6 +219,17 @@ User: "Go back"
 AI: [calls go_back tool]
 App: [triggers back navigation]
 AI: "Done! I've taken you back to the previous page."
+
+User: "Draw a house"
+AI: [calls draw_content tool with SVG markup]
+App: [displays DrawingModalPage with SVG rendering in WebView2]
+AI: "I've drawn a house for you!"
+
+User: "Make it bigger with a red roof"
+AI: [sees previous SVG in conversation history]
+AI: [calls draw_content tool with modified SVG - larger size, red roof]
+App: [displays updated drawing]
+AI: "I've made the house bigger and added a red roof!"
 ```
 
 ### Code Usage

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using ApplicationTemplate.Presentation;
+using ApplicationTemplate.Presentation.ViewModels.Agentic;
 using ApplicationTemplate.Views.Content;
 using Chinook.SectionsNavigation;
 using Microsoft.Extensions.DependencyInjection;
@@ -45,7 +46,7 @@ public static class NavigationConfiguration
 		{ typeof(ForcedUpdatePageViewModel), typeof(ForcedUpdatePage) },
 		{ typeof(KillSwitchPageViewModel), typeof(KillSwitchPage) },
 		{ typeof(AgenticChatPageViewModel), typeof(AgenticChatPage) },
-
+		{ typeof(DrawingModalViewModel), typeof(DrawingModalPage) },
 	};
 
 	/// <summary>
