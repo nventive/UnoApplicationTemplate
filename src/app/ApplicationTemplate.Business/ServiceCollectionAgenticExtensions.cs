@@ -22,9 +22,12 @@ public static class ServiceCollectionAgenticExtensions
 		// Register configuration
 		services.Configure<AgenticConfiguration>(configuration.GetSection("Agentic"));
 
-		// Register services - note: AgenticToolExecutor doesn't depend on navigation
-		// Navigation functions are registered separately at the Presentation layer
-		services.AddSingleton<IAgenticToolExecutor, AgenticToolExecutor>();
+		// Register services
+		// Tool executor allows dynamic registration of function handlers AND tool definitions from the app
+		services.AddSingleton<AgenticToolExecutor>();
+		services.AddSingleton<IAgenticToolExecutor>(sp => sp.GetRequiredService<AgenticToolExecutor>());
+		services.AddSingleton<IAgenticToolRegistry>(sp => sp.GetRequiredService<AgenticToolExecutor>());
+		
 		services.AddSingleton<IAgenticChatService, AgenticChatService>();
 
 		// Register API client with HttpClient

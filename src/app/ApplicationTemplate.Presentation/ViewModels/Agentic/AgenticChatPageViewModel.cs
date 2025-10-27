@@ -7,6 +7,8 @@ using System.Windows.Input;
 using ApplicationTemplate.Business.Agentic;
 using ApplicationTemplate.DataAccess.ApiClients.Agentic;
 using Chinook.DynamicMvvm;
+using Chinook.SectionsNavigation;
+using Chinook.StackNavigation;
 using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Presentation;
@@ -23,17 +25,20 @@ public class AgenticChatPageViewModel : ViewModel
 	/// Initializes a new instance of the <see cref="AgenticChatPageViewModel"/> class.
 	/// </summary>
 	public AgenticChatPageViewModel()
-		: base()
 	{
-		_chatService = this.GetService<IAgenticChatService>();
-		_logger = this.GetService<ILogger<AgenticChatPageViewModel>>();
+		ResolveService(out _chatService);
+		ResolveService(out _logger);
 
 		SendMessage = this.GetCommandFromTask(OnSendMessage);
 		StartVoiceInput = this.GetCommandFromTask(OnStartVoiceInput);
 		StopVoiceInput = this.GetCommandFromTask(OnStopVoiceInput);
 		PlayVoiceOutput = this.GetCommandFromTask<ChatMessage>(OnPlayVoiceOutput);
+		ToggleVoiceOutputCommand = this.GetCommand(OnToggleVoiceOutput);
 
 		InitializeConversation();
+		
+		// Initialize the AI agent when the ViewModel is created
+		_ = InitializeAgentAsync();
 	}
 
 	/// <summary>
@@ -60,11 +65,29 @@ public class AgenticChatPageViewModel : ViewModel
 	}
 
 	/// <summary>
+	/// Gets or sets a value indicating whether the UI is busy (sending message or processing).
+	/// </summary>
+	public bool IsBusy
+	{
+		get => this.Get<bool>();
+		set => this.Set(value);
+	}
+
+	/// <summary>
 	/// Gets or sets a value indicating whether voice input is active.
 	/// </summary>
 	public bool IsVoiceInputActive
 	{
 		get => this.Get<bool>();
+		set => this.Set(value);
+	}
+
+	/// <summary>
+	/// Gets or sets a value indicating whether voice output is enabled.
+	/// </summary>
+	public bool IsVoiceOutputEnabled
+	{
+		get => this.Get<bool>(initialValue: true);
 		set => this.Set(value);
 	}
 
@@ -92,9 +115,19 @@ public class AgenticChatPageViewModel : ViewModel
 	public ICommand SendMessage { get; }
 
 	/// <summary>
+	/// Gets the command to send a message (alias for XAML binding).
+	/// </summary>
+	public ICommand SendMessageCommand => SendMessage;
+
+	/// <summary>
 	/// Gets the command to start voice input.
 	/// </summary>
 	public ICommand StartVoiceInput { get; }
+
+	/// <summary>
+	/// Gets the command to start voice input (alias for XAML binding).
+	/// </summary>
+	public ICommand StartVoiceInputCommand => StartVoiceInput;
 
 	/// <summary>
 	/// Gets the command to stop voice input.
@@ -105,6 +138,11 @@ public class AgenticChatPageViewModel : ViewModel
 	/// Gets the command to play voice output for a message.
 	/// </summary>
 	public ICommand PlayVoiceOutput { get; }
+
+	/// <summary>
+	/// Gets the command to toggle voice output.
+	/// </summary>
+	public ICommand ToggleVoiceOutputCommand { get; }
 
 	private void InitializeConversation()
 	{
@@ -117,6 +155,43 @@ public class AgenticChatPageViewModel : ViewModel
 		});
 	}
 
+	private async Task InitializeAgentAsync()
+	{
+		try
+		{
+			_logger.LogInformation("Initializing AI Agent on page load");
+			IsBusy = true;
+
+			// Initialize the agent (creates HTTP client and assistant if needed)
+			await _chatService.InitializeAsync(CancellationToken.None);
+
+			// Subscribe to navigation events from the AI agent
+			_chatService.ApiClient.NavigationRequested += OnNavigationRequested;
+
+			_logger.LogInformation("AI Agent initialized successfully");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Error initializing AI Agent");
+
+			// Add error message to chat
+			await RunOnDispatcher(CancellationToken.None, async ct =>
+			{
+				Messages.Add(new ChatMessage
+				{
+					Role = "assistant",
+					Content = "I'm sorry, I encountered an error during initialization. Please try reloading the page.",
+					Timestamp = DateTime.Now
+				});
+				await Task.CompletedTask;
+			});
+		}
+		finally
+		{
+			IsBusy = false;
+		}
+	}
+
 	private async Task OnSendMessage(CancellationToken ct)
 	{
 		if (string.IsNullOrWhiteSpace(CurrentMessage) || IsSending)
@@ -124,53 +199,43 @@ public class AgenticChatPageViewModel : ViewModel
 			return;
 		}
 
+		var userMessage = CurrentMessage;
+		
 		try
 		{
 			IsSending = true;
-			var userMessage = CurrentMessage;
+			IsBusy = true;
+			
+			// Clear input field immediately
 			CurrentMessage = string.Empty;
 
-			// Add user message to the conversation
+			// Create user message
 			var userChatMessage = new ChatMessage
 			{
 				Role = "user",
 				Content = userMessage,
 				Timestamp = DateTime.Now
 			};
-			Messages.Add(userChatMessage);
-
-			// Clear streaming message
-			StreamingMessage = string.Empty;
-
-			// Add a placeholder for the assistant's response
-			var assistantMessage = new ChatMessage
+			
+			// Add user message to collection on UI thread
+			await RunOnDispatcher(ct, async ct2 =>
 			{
-				Role = "assistant",
-				Content = string.Empty,
-				Timestamp = DateTime.Now,
-				IsStreaming = true
-			};
-			Messages.Add(assistantMessage);
+				Messages.Add(userChatMessage);
+				await Task.CompletedTask;
+			});
 
-			// Send message and stream the response
-			var response = await _chatService.SendMessageStreamAsync(
+			// Send message to the assistant (uses Persistent Agents API with threads)
+			var response = await _chatService.SendMessageAsync(
 				userMessage,
-				new ObservableCollection<ChatMessage>(Messages.Where(m => !m.IsStreaming)),
-				chunk =>
-				{
-					// Update the streaming message
-					StreamingMessage += chunk;
-					assistantMessage.Content = StreamingMessage;
-				},
+				new ObservableCollection<ChatMessage>(Messages),
 				ct);
 
-			// Update the assistant's message with the complete response
-			assistantMessage.Content = response.Content;
-			assistantMessage.IsStreaming = false;
-			assistantMessage.ToolCalls = response.ToolCalls;
-
-			// Clear streaming message
-			StreamingMessage = string.Empty;
+			// Add assistant's response on UI thread
+			await RunOnDispatcher(ct, async ct2 =>
+			{
+				Messages.Add(response);
+				await Task.CompletedTask;
+			});
 
 			_logger.LogInformation("Message sent and response received");
 		}
@@ -178,16 +243,22 @@ public class AgenticChatPageViewModel : ViewModel
 		{
 			_logger.LogError(ex, "Error sending message");
 
-			Messages.Add(new ChatMessage
+			// Add error message on UI thread
+			await RunOnDispatcher(ct, async ct2 =>
 			{
-				Role = "assistant",
-				Content = "I'm sorry, I encountered an error processing your request. Please try again.",
-				Timestamp = DateTime.Now
+				Messages.Add(new ChatMessage
+				{
+					Role = "assistant",
+					Content = "I'm sorry, I encountered an error processing your request. Please try again.",
+					Timestamp = DateTime.Now
+				});
+				await Task.CompletedTask;
 			});
 		}
 		finally
 		{
 			IsSending = false;
+			IsBusy = false;
 		}
 	}
 
@@ -288,5 +359,74 @@ public class AgenticChatPageViewModel : ViewModel
 		{
 			IsSpeaking = false;
 		}
+	}
+
+	private void OnToggleVoiceOutput()
+	{
+		IsVoiceOutputEnabled = !IsVoiceOutputEnabled;
+		_logger.LogInformation("Voice output {Status}", IsVoiceOutputEnabled ? "enabled" : "disabled");
+	}
+
+	private void OnNavigationRequested(object sender, NavigationRequestedEventArgs e)
+	{
+		// Handle navigation on the UI thread
+		_ = RunOnDispatcher(CancellationToken.None, async ct =>
+		{
+			try
+			{
+				_logger.LogInformation("Navigation requested: {Type}, Page: {Page}", e.NavigationType, e.PageName);
+
+				var sectionsNavigator = this.GetService<ISectionsNavigator>();
+
+				switch (e.NavigationType)
+				{
+					case NavigationType.Page:
+						// Navigate to the appropriate section with proper ViewModel factory
+						switch (e.PageName)
+						{
+							case "Posts":
+								await sectionsNavigator.SetActiveSection(ct, nameof(MenuViewModel.Section.Posts), () => new PostsPageViewModel());
+								break;
+							
+							case "Home" or "DadJokes" or "Jokes":
+								await sectionsNavigator.SetActiveSection(ct, nameof(MenuViewModel.Section.Home), () => new DadJokesPageViewModel());
+								break;
+							
+							case "Settings" or "UserProfile" or "Profiles" or "Profile" or "EditProfile":
+								await sectionsNavigator.SetActiveSection(ct, nameof(MenuViewModel.Section.Settings), () => new SettingsPageViewModel());
+								break;
+							
+							case "Agentic" or "AgenticChat" or "Chat":
+								await sectionsNavigator.SetActiveSection(ct, nameof(MenuViewModel.Section.Agentic), () => new AgenticChatPageViewModel());
+								break;
+							
+							default:
+								_logger.LogWarning("Unknown page name: {PageName}", e.PageName);
+								break;
+						}
+						break;
+
+					case NavigationType.Back:
+						// Navigate to Home as a fallback for back navigation
+						await sectionsNavigator.SetActiveSection(ct, nameof(MenuViewModel.Section.Home), () => new DadJokesPageViewModel());
+						break;
+
+					case NavigationType.Settings:
+						await sectionsNavigator.SetActiveSection(ct, nameof(MenuViewModel.Section.Settings), () => new SettingsPageViewModel());
+						break;
+
+					case NavigationType.Logout:
+						// TODO: Implement logout logic
+						_logger.LogWarning("Logout requested but not implemented yet");
+						break;
+				}
+
+				_logger.LogInformation("Navigation completed successfully");
+			}
+			catch (Exception ex)
+			{
+				_logger.LogError(ex, "Error handling navigation request");
+			}
+		});
 	}
 }

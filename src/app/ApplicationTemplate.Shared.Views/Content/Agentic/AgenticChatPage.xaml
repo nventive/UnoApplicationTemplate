@@ -26,32 +26,25 @@
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<Grid Margin="0,0,0,12">
-							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="*" />
-								<ColumnDefinition Width="*" />
-							</Grid.ColumnDefinitions>
-
 							<!-- User Message (Right aligned) -->
-							<Border Grid.Column="1"
-									Background="{ThemeResource PrimaryBrush}"
+							<Border Background="{ThemeResource PrimaryBrush}"
 									CornerRadius="12"
 									Padding="12"
-									Margin="40,0,0,0"
+									MaxWidth="400"
 									HorizontalAlignment="Right"
-									Visibility="{Binding IsFromUser, Converter={StaticResource TrueToVisibleConverter}}">
+									Visibility="{Binding IsFromUser, Converter={StaticResource TrueToVisible}}">
 								<TextBlock Text="{Binding Content}"
 										   Foreground="{ThemeResource OnPrimaryBrush}"
 										   TextWrapping="Wrap" />
 							</Border>
 
 							<!-- AI Message (Left aligned) -->
-							<Border Grid.Column="0"
-									Background="{ThemeResource SurfaceBrush}"
+							<Border Background="{ThemeResource SurfaceBrush}"
 									CornerRadius="12"
 									Padding="12"
-									Margin="0,0,40,0"
+									MaxWidth="400"
 									HorizontalAlignment="Left"
-									Visibility="{Binding IsFromUser, Converter={StaticResource FalseToVisibleConverter}}">
+									Visibility="{Binding IsFromUser, Converter={StaticResource TrueToCollapsed}}">
 								<TextBlock Text="{Binding Content}"
 										   Foreground="{ThemeResource OnSurfaceBrush}"
 										   TextWrapping="Wrap" />
@@ -69,25 +62,12 @@
 			  BorderBrush="{ThemeResource OnSurfaceLowBrush}"
 			  BorderThickness="0,1,0,0">
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="*" />
-				<ColumnDefinition Width="Auto" />
 				<ColumnDefinition Width="Auto" />
 			</Grid.ColumnDefinitions>
 
-			<!-- Voice Input Button -->
-			<Button Grid.Column="0"
-					Command="{Binding StartVoiceInputCommand}"
-					Margin="0,0,8,0"
-					Width="40"
-					Height="40"
-					CornerRadius="20"
-					Background="{ThemeResource SurfaceBrush}">
-				<SymbolIcon Symbol="Microphone" />
-			</Button>
-
 			<!-- Text Input -->
-			<TextBox Grid.Column="1"
+			<TextBox Grid.Column="0"
 					 Text="{Binding CurrentMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 					 PlaceholderText="Type a message..."
 					 x:Uid="AgenticChatPage_MessageInput"
@@ -96,32 +76,18 @@
 					 Margin="0,0,8,0" />
 
 			<!-- Send Button -->
-			<Button Grid.Column="2"
+			<Button Grid.Column="1"
 					Command="{Binding SendMessageCommand}"
-					Margin="0,0,8,0"
-					Width="40"
-					Height="40"
-					CornerRadius="20"
-					Background="{ThemeResource PrimaryBrush}">
-				<SymbolIcon Symbol="Send"
-							Foreground="{ThemeResource OnPrimaryBrush}" />
-			</Button>
-
-			<!-- Voice Output Button -->
-			<Button Grid.Column="3"
-					Command="{Binding ToggleVoiceOutputCommand}"
-					Width="40"
-					Height="40"
-					CornerRadius="20"
-					Background="{Binding IsVoiceOutputEnabled, Converter={StaticResource TrueToAccentConverter}}">
-				<SymbolIcon Symbol="Volume" />
-			</Button>
+					Content="Send"
+					Padding="16,8"
+					Background="{ThemeResource PrimaryBrush}"
+					Foreground="{ThemeResource OnPrimaryBrush}" />
 		</Grid>
 
 		<!-- Loading Indicator -->
 		<Grid Grid.RowSpan="3"
 			  Background="#80000000"
-			  Visibility="{Binding IsBusy, Converter={StaticResource TrueToVisibleConverter}}">
+			  Visibility="{Binding IsBusy, Converter={StaticResource TrueToVisible}}">
 			<ProgressRing IsActive="True"
 						  Width="60"
 						  Height="60"

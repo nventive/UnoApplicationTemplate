@@ -313,41 +313,17 @@ public sealed class CoreStartup : CoreStartupBase
 
 	/// <summary>
 	/// Initializes AI agent functions by registering navigation handlers.
+	/// Note: With Azure AI Foundry Agents API, tools are executed server-side.
+	/// Navigation is triggered via NavigationRequested event - see AgenticChatPageViewModel.OnNavigationRequested().
 	/// </summary>
 	/// <param name="services">The service provider.</param>
 	private static void InitializeAgenticFunctions(IServiceProvider services)
 	{
-		try
-		{
-			// Get the logger first for better error reporting
-			var logger = services.GetRequiredService<ILogger<CoreStartup>>();
-			
-			// Try to get the required services
-			var toolExecutor = services.GetService<Business.Agentic.IAgenticToolExecutor>();
-			
-			var sectionsNavigator = services.GetService<ISectionsNavigator>();
-			
-			var registryLogger = services.GetService<ILogger<ApplicationTemplate.Presentation.Framework.AgenticNavigationFunctionRegistry>>();
-			
-			var registry = new ApplicationTemplate.Presentation.Framework.AgenticNavigationFunctionRegistry(
-				toolExecutor,
-				sectionsNavigator,
-				registryLogger
-			);
-
-			registry.RegisterFunctions();
-			
-			logger.LogInformation("Successfully initialized AI agent navigation functions.");
-		}
-		catch (Exception ex)
-		{
-			// Log but don't fail startup if AI agent is not configured
-			var logger = services.GetService<ILogger<CoreStartup>>();
-			if (logger != null)
-			{
-				logger.LogWarning(ex, "Failed to initialize AI agent functions. AI chat features may not work correctly.");
-			}
-		}
+		// Server-side tool execution is used (Azure AI Foundry Agents API)
+		// Tools are defined in AgenticApiClient_Agents.cs and executed on the Azure server
+		// Navigation is triggered via NavigationRequested event from AgenticApiClient
+		// The AgenticChatPageViewModel subscribes to this event and performs actual navigation
+		// No client-side function registration is needed
 	}
 
 	protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)

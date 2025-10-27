@@ -12,6 +12,23 @@ namespace ApplicationTemplate.Business.Agentic;
 public interface IAgenticChatService
 {
 	/// <summary>
+	/// Gets the underlying API client for advanced scenarios (e.g., subscribing to navigation events).
+	/// </summary>
+	IAgenticApiClient ApiClient { get; }
+
+	/// <summary>
+	/// Gets the tool executor for registering custom function handlers.
+	/// </summary>
+	IAgenticToolExecutor ToolExecutor { get; }
+
+	/// <summary>
+	/// Initializes the AI agent and creates the assistant if needed.
+	/// This should be called when the chat interface is first loaded.
+	/// </summary>
+	/// <param name="ct">The cancellation token.</param>
+	Task InitializeAsync(CancellationToken ct);
+
+	/// <summary>
 	/// Sends a chat message and gets a response from the AI agent.
 	/// </summary>
 	/// <param name="message">The user message to send.</param>

@@ -42,6 +42,11 @@ public class ChatMessage
 	/// Gets or sets whether this message is being streamed (partial response).
 	/// </summary>
 	public bool IsStreaming { get; set; }
+
+	/// <summary>
+	/// Gets a value indicating whether this message is from the user.
+	/// </summary>
+	public bool IsFromUser => Role == "user";
 }
 
 /// <summary>

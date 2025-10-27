@@ -7,49 +7,65 @@ A complete AI Agent integration with Azure AI Foundry that enables intelligent c
 ## Files Created
 
 ### Business Layer (`ApplicationTemplate.Business`)
-- ✅ `AIAgent/AIAgentToolExecutor.cs` - Function dispatcher (no UI dependencies)
-- ✅ `AIAgent/IAIAgentToolExecutor.cs` - Interface for tool executor
-- ✅ `AIAgent/AIChatService.cs` - Chat service orchestration
-- ✅ `AIAgent/IAIChatService.cs` - Interface for chat service
-- ✅ `AIAgent/ChatMessage.cs` - Message and tool call models
-- ✅ `ServiceCollectionAIAgentExtensions.cs` - DI registration
+- ✅ `Agentic/AgenticToolExecutor.cs` - Tool definition registry and function executor (dual interface implementation)
+- ✅ `Agentic/IAgenticToolExecutor.cs` - Interface for registering and executing function handlers
+- ✅ `Agentic/IAgenticToolRegistry.cs` - Interface for registering tool definitions (schemas sent to Azure)
+- ✅ `Agentic/AgenticChatService.cs` - Chat service orchestration
+- ✅ `Agentic/IAgenticChatService.cs` - Interface for chat service
+- ✅ `Agentic/AgenticChatMessage.cs` - Message and tool call models
+- ✅ `Agentic/ServiceCollectionAgenticExtensions.cs` - DI registration
 
 ### Access Layer (`ApplicationTemplate.Access`)
-- ✅ `ApiClients/AIAgent/AIAgentApiClient.cs` - Azure AI Foundry HTTP client
-- ✅ `ApiClients/AIAgent/IAIAgentApiClient.cs` - API client interface
-- ✅ `Configuration/AIAgentConfiguration.cs` - Configuration model
+- ✅ `ApiClients/Agentic/AgenticApiClient_Agents.cs` - Azure AI Foundry Agents API HTTP client
+- ✅ `ApiClients/Agentic/IAgenticApiClient.cs` - API client interface
+- ✅ `Configuration/AgenticConfiguration.cs` - Configuration model
+- ✅ `Framework/Resources/AssistantInstructions.md` - Embedded instructions for AI assistant
 
 ### Presentation Layer (`ApplicationTemplate.Presentation`)
-- ✅ `ViewModels/AIChat/AIChatPageViewModel.cs` - Chat UI ViewModel
-- ✅ `Framework/AIAgentNavigationFunctionRegistry.cs` - Navigation function implementations
+- ✅ `ViewModels/Agentic/AgenticChatPageViewModel.cs` - Chat UI ViewModel with navigation event handling
+- ✅ `Views/Content/AgenticChatPage.xaml` - Chat UI view
+- ✅ `Framework/AgenticNavigationFunctionRegistry.cs` - Navigation function definitions and handler implementations (dynamically registered)
 
 ### Documentation (`doc/`)
-- ✅ `AIAgent.md` - Complete feature documentation
-- ✅ `AIAgent_QuickStart.md` - Getting started guide
-- ✅ `AIAgent_Architecture.md` - Architecture and layer separation
-- ✅ `AIAgentFunctionReference.js` - Function definitions reference
-- ✅ `AIChatPage.xaml.example` - Sample XAML UI
+- ✅ `AIAgent_Summary.md` - This file - feature summary
+- ✅ `AIAgent_Architecture.md` - Architecture and dynamic tool registration
 
 ### Configuration
-- ✅ Updated `appsettings.json` with AIAgent configuration section
-- ✅ Updated `CoreStartup.cs` to register AI services and navigation functions
+- ✅ Updated `appsettings.json` with Agentic configuration section
+- ✅ Updated `CoreStartup.cs` to register Agentic services and initialize navigation functions
 
 ## Architecture Highlights
 
-### ✅ Proper Layer Separation
-- **Business Layer**: Function dispatcher (no UI dependencies)
-- **Presentation Layer**: Navigation implementations
-- **Access Layer**: API communication
+### ✅ Dynamic Tool Registration System
+- **IAgenticToolRegistry**: Register tool definitions (schemas sent to Azure)
+- **IAgenticToolExecutor**: Register function handlers (executed client-side)
+- **AgenticToolExecutor**: Single class implementing both interfaces
+- Tools are dynamically registered at app startup, not hardcoded
 
-### ✅ Delegate Pattern
-- Business layer provides registration mechanism
-- Presentation layer registers function handlers
-- Clean separation of concerns maintained
+### ✅ Proper Layer Separation
+- **Business Layer**: Tool registry and executor (no UI dependencies)
+- **Presentation Layer**: Navigation implementations and event handling
+- **Access Layer**: HTTP REST API communication with Azure AI Foundry
+
+### ✅ Event-Driven Navigation
+- Navigation tools raise **NavigationRequested** events
+- ViewModel subscribes to events and performs actual navigation
+- Clean separation between tool execution and UI navigation
 
 ### ✅ Extensible Design
 ```csharp
-// Easy to add custom functions
-_toolExecutor.RegisterFunctionHandler("my_function", MyFunctionAsync);
+// Register tool definition (schema sent to Azure)
+toolRegistry.RegisterToolDefinition(new AgenticToolDefinition {
+    Name = "my_function",
+    Description = "Does something useful",
+    Parameters = new { /* JSON schema */ }
+});
+
+// Register handler (executed when Azure calls the tool)
+toolExecutor.RegisterFunctionHandler("my_function", async (args, ct) => {
+    // Execute logic
+    return JsonSerializer.Serialize(new { success = true });
+});
 ```
 
 ## Available Functions
@@ -62,105 +78,155 @@ _toolExecutor.RegisterFunctionHandler("my_function", MyFunctionAsync);
 
 ## Key Features
 
-- ✅ Azure AI Foundry chat completion with streaming
-- ✅ Function calling for app navigation
-- ✅ Voice input (Speech-to-Text) support
-- ✅ Voice output (Text-to-Speech) support
+- ✅ Azure AI Foundry Agents API integration (GA version 2025-05-01)
+- ✅ Dynamic tool registration system (definitions + handlers)
+- ✅ Function calling for app navigation via events
+- ✅ Thread and message management
+- ✅ Tool execution with `requires_action` handling
 - ✅ Extensible function registration system
+- ✅ Authentication with DefaultAzureCredential (Azure CLI)
 - ✅ Proper error handling and logging
 - ✅ Clean architecture with layer separation
+- ✅ HTTP REST API (no SDK dependencies for mobile compatibility)
 
 ## Configuration Required
 
 ### Azure Resources Needed
-1. **Azure AI Foundry** resource
-2. **Model deployment** (GPT-4 or GPT-3.5-turbo)
-3. **Azure Speech Services** (optional, for voice)
+1. **Azure AI Foundry** resource and project
+2. **Model deployment** (e.g., gpt-4o-mini)
+3. **Azure CLI** installed and authenticated (`az login`)
 
 ### Update appsettings.json
 ```json
 {
-  "AIAgent": {
-    "Endpoint": "https://your-resource.openai.azure.com/...",
-    "ApiKey": "your-api-key",
-    "DeploymentName": "gpt-4",
-    "SpeechEndpoint": "https://your-region.api.cognitive.microsoft.com",
-    "SpeechApiKey": "your-speech-key"
+  "Agentic": {
+    "Endpoint": "https://your-ai-foundry-resource.services.ai.azure.com/api/projects/YourProjectName",
+    "ApiKey": "your-azure-ai-foundry-api-key",
+    "SubscriptionId": "your-azure-subscription-id",
+    "AssistantId": "",
+    "AssistantName": "App Navigation Assistant",
+    "DeploymentName": "gpt-4o-mini"
   }
 }
 ```
 
+### Authentication Setup
+Run `az login` in a terminal to authenticate with Azure. The app uses `DefaultAzureCredential` which will use your Azure CLI credentials with token scope `https://ai.azure.com/.default`.
+
 ## Next Steps for Implementation
 
-### 1. Update Navigation Implementations
-Edit `AIAgentNavigationFunctionRegistry.cs` to match your app's navigation structure:
+### 1. Configure Azure Resources
+1. Create an Azure AI Foundry resource and project
+2. Deploy a model (e.g., gpt-4o-mini)
+3. Run `az login` to authenticate
+4. Update `appsettings.json` with your endpoint and subscription ID
+
+### 2. Customize Navigation Implementations
+The app includes a default `AgenticNavigationFunctionRegistry` with 5 navigation functions. To customize:
+
+1. Update the registry in `ApplicationTemplate.Presentation/Framework/`
+2. Register both tool definitions AND handlers:
 
 ```csharp
-case "settings":
-    await _sectionsNavigator.Navigate(ct, () => new SettingsPageViewModel());
-    return AIAgentToolExecutor.ResponseHelpers.Success("Navigated to Settings");
+// Register tool definition (sent to Azure)
+_toolRegistry.RegisterToolDefinition(new AgenticToolDefinition {
+    Name = "navigate_to_page",
+    Description = "Navigate to a specific page",
+    Parameters = new {
+        type = "object",
+        properties = new {
+            page_name = new { type = "string", description = "Page to navigate to" }
+        },
+        required = new[] { "page_name" }
+    }
+});
+
+// Register handler (executed locally)
+_toolExecutor.RegisterFunctionHandler("navigate_to_page", async (args, ct) => {
+    var pageName = args.RootElement.GetProperty("page_name").GetString();
+    NavigationRequested?.Invoke(this, new NavigationRequestedEventArgs(pageName, null));
+    return JsonSerializer.Serialize(new { success = true, message = $"Navigating to {pageName}" });
+});
 ```
 
-### 2. Add AI Chat Page to Navigation
-Add a menu item or navigation entry to access the AI Chat page.
-
-### 3. Implement Voice Recording (Platform-Specific)
-Add platform-specific implementations for:
-- Microphone recording
-- Audio playback
-- Platform permissions
-
-### 4. Add Custom Functions
+### 3. Add Custom Functions
 Create additional function registries for:
 - Data access functions
 - User management functions
 - App-specific operations
 
-### 5. Configure Azure Resources
-1. Create Azure AI Foundry resource
-2. Deploy a model
-3. Update configuration with endpoint and keys
+Each registry should:
+1. Register tool definitions via `IAgenticToolRegistry`
+2. Register handlers via `IAgenticToolExecutor`
+3. Be initialized in `CoreStartup.InitializeAgenticFunctions()`
+
+### 4. Extend Navigation Mapping
+Update `AgenticChatPageViewModel.OnNavigationRequested()` to handle additional page names and navigation targets.
 
 ## Example Usage
 
 ### User Interaction
 ```
 User: "Take me to the settings page"
-AI: [calls navigate_to_page function]
+AI: [calls navigate_to_page tool on Azure]
+AI: [requires_action returned with tool call]
+App: [executes handler locally, raises NavigationRequested event]
+ViewModel: [navigates to Settings section]
 AI: "I've navigated you to the Settings page."
 
 User: "Where am I now?"
-AI: [calls get_current_page function]
+AI: [calls get_current_page tool]
+App: [returns current section name]
 AI: "You're currently on the Settings page."
 
 User: "Go back"
-AI: [calls go_back function]
+AI: [calls go_back tool]
+App: [triggers back navigation]
 AI: "Done! I've taken you back to the previous page."
 ```
 
 ### Code Usage
 ```csharp
 // In your ViewModel
-var chatService = this.GetService<IAIChatService>();
-var response = await chatService.SendMessageAsync(
-    "Navigate to settings",
-    conversationHistory,
-    ct
-);
+var chatService = this.GetService<IAgenticChatService>();
+var response = await chatService.SendMessageAsync(userMessage, ct);
+
+// Access tool executor for custom registrations
+var toolExecutor = chatService.ToolExecutor;
+toolExecutor.RegisterFunctionHandler("custom_function", async (args, ct) => {
+    // Custom logic
+    return JsonSerializer.Serialize(new { success = true });
+});
 ```
 
 ## Testing
 
 ### Unit Tests
 ```csharp
-// Test function registration
+// Test tool registration
 [Test]
-public void RegisterFunctionHandler_WithValidFunction_Registers()
+public void RegisterToolDefinition_WithValidTool_Registers()
 {
-    var executor = new AIAgentToolExecutor(logger);
-    executor.RegisterFunctionHandler("test", async (args, ct) => "success");
+    var executor = new AgenticToolExecutor(logger);
+    executor.RegisterToolDefinition(new AgenticToolDefinition {
+        Name = "test_tool",
+        Description = "Test tool",
+        Parameters = new { }
+    });
     
-    var result = await executor.ExecuteFunctionAsync("test", "{}", ct);
+    var tools = executor.GetToolDefinitions();
+    Assert.Contains(tools, t => t.Name == "test_tool");
+}
+
+// Test function handler
+[Test]
+public async Task ExecuteFunctionAsync_WithRegisteredHandler_Executes()
+{
+    var executor = new AgenticToolExecutor(logger);
+    executor.RegisterFunctionHandler("test", async (args, ct) => 
+        JsonSerializer.Serialize(new { success = true }));
+    
+    var result = await executor.ExecuteFunctionAsync("test", JsonDocument.Parse("{}"), ct);
     Assert.Contains("success", result);
 }
 ```
@@ -169,18 +235,20 @@ public void RegisterFunctionHandler_WithValidFunction_Registers()
 ```csharp
 // Test navigation flow
 [Test]
-public async Task NavigateToPage_WithValidPage_Navigates()
+public async Task NavigateToPage_WithValidPage_RaisesEvent()
 {
-    var registry = new AIAgentNavigationFunctionRegistry(executor, navigator, logger);
+    var registry = new AgenticNavigationFunctionRegistry(
+        toolRegistry, toolExecutor, sectionsNavigator, logger);
+    
+    var eventRaised = false;
+    registry.NavigationRequested += (s, e) => eventRaised = true;
+    
     registry.RegisterFunctions();
     
-    var result = await executor.ExecuteFunctionAsync(
-        "navigate_to_page",
-        JsonSerializer.Serialize(new { page_name = "Settings" }),
-        ct
-    );
+    var args = JsonDocument.Parse("{\"page_name\": \"Settings\"}");
+    await toolExecutor.ExecuteFunctionAsync("navigate_to_page", args, ct);
     
-    // Verify navigation occurred
+    Assert.True(eventRaised);
 }
 ```
 
@@ -188,41 +256,41 @@ public async Task NavigateToPage_WithValidPage_Navigates()
 
 ### Architecture
 - ✅ Business layer has NO UI dependencies
-- ✅ Navigation is handled exclusively in Presentation layer
-- ✅ Function handlers are registered at startup
+- ✅ Navigation is handled via events (NavigationRequested)
+- ✅ Tool definitions AND handlers are registered dynamically at startup
+- ✅ Single AgenticToolExecutor implements both IAgenticToolRegistry and IAgenticToolExecutor
 - ✅ Clean separation allows for easy testing
+- ✅ HTTP REST API used (no SDK dependencies for mobile compatibility)
 
 ### Security
+- 🔒 Uses DefaultAzureCredential with Azure CLI for development
 - 🔒 Store API keys in Azure Key Vault for production
 - 🔒 Implement rate limiting
 - 🔒 Validate user permissions for sensitive functions
 - 🔒 Sanitize all user inputs
+- 🔒 Do NOT commit personal Azure credentials (use generic placeholders)
 
 ### Performance
-- ⚡ Use streaming for better UX
-- ⚡ Cache frequent responses
-- ⚡ Implement request debouncing
-- ⚡ Monitor Azure costs
+- ⚡ Polling-based run status checking (in_progress → requires_action → completed)
+- ⚡ Tool execution happens locally for navigation functions
+- ⚡ Implement request debouncing for user input
+- ⚡ Monitor Azure AI Foundry costs
 
 ## Documentation Links
 
-- **Full Documentation**: `doc/AIAgent.md`
-- **Quick Start Guide**: `doc/AIAgent_QuickStart.md`
-- **Architecture Details**: `doc/AIAgent_Architecture.md`
-- **Function Reference**: `doc/AIAgentFunctionReference.js`
-- **UI Example**: `doc/AIChatPage.xaml.example`
+- **Architecture Details**: `doc/AIAgent_Architecture.md` - Dynamic tool registration and layer separation
 
 ## Support
 
 For implementation help:
 1. Review the architecture documentation
-2. Check the quick start guide
-3. Examine the example implementations
-4. Review Azure AI Foundry documentation
-5. Check application logs for errors
+2. Check Azure AI Foundry Agents API documentation (version 2025-05-01)
+3. Examine the implementation in `ApplicationTemplate.Business/Agentic/` and `ApplicationTemplate.Access/ApiClients/Agentic/`
+4. Check application logs for errors
+5. Ensure `az login` is successful before running the app
 
 ---
 
 **Status**: ✅ Complete and ready for integration
 
-The AI Agent feature is fully implemented with proper architecture, comprehensive documentation, and example implementations. Update the configuration and navigation implementations to match your specific app structure.
+The Agentic AI feature is fully implemented with dynamic tool registration, proper architecture, HTTP REST API integration with Azure AI Foundry Agents, and comprehensive navigation support. Update the configuration with your Azure resources to get started.

@@ -11,7 +11,7 @@ namespace ApplicationTemplate.Business.Agentic;
 
 /// <summary>
 /// Service for AI chat with Azure AI Foundry integration.
-/// Handles conversation flow, function calling, and voice integration.
+/// Handles conversation flow with Azure AI Foundry Agents API (server-side tool execution).
 /// </summary>
 public class AgenticChatService : IAgenticChatService
 {
@@ -23,7 +23,7 @@ public class AgenticChatService : IAgenticChatService
 	/// Initializes a new instance of the <see cref="AgenticChatService"/> class.
 	/// </summary>
 	/// <param name="apiClient">The AI agent API client.</param>
-	/// <param name="toolExecutor">The AI agent tool executor.</param>
+	/// <param name="toolExecutor">The tool executor for client-side function registration.</param>
 	/// <param name="logger">The logger.</param>
 	public AgenticChatService(
 		IAgenticApiClient apiClient,
@@ -36,70 +36,46 @@ public class AgenticChatService : IAgenticChatService
 	}
 
 	/// <inheritdoc/>
+	public IAgenticApiClient ApiClient => _apiClient;
+
+	/// <inheritdoc/>
+	public IAgenticToolExecutor ToolExecutor => _toolExecutor;
+
+	/// <inheritdoc/>
+	public async Task InitializeAsync(CancellationToken ct)
+	{
+		try
+		{
+			_logger.LogInformation("Initializing AI Assistant");
+
+			// This will ensure the HTTP client is created and the assistant exists
+			// (or creates a new one if AssistantId is empty in config)
+			await _apiClient.InitializeAsync(ct);
+
+			_logger.LogInformation("AI Assistant initialized successfully");
+		}
+		catch (Exception ex)
+		{
+			_logger.LogError(ex, "Error initializing AI Assistant");
+			throw;
+		}
+	}
+
+	/// <inheritdoc/>
 	public async Task<ChatMessage> SendMessageAsync(string message, Collection<ChatMessage> conversationHistory, CancellationToken ct)
 	{
 		try
 		{
-			_logger.LogInformation("Sending message to AI agent: {Message}", message);
+			_logger.LogInformation("Sending message to AI Assistant: {Message}", message);
 
-			// Add user message to history
-			var userMessage = new ChatMessage
-			{
-				Role = "user",
-				Content = message,
-				Timestamp = DateTime.Now
-			};
-
-			// Convert conversation history to API format
-			var apiMessages = ConvertToApiMessages(conversationHistory);
-
-			// Send to AI agent
-			var response = await _apiClient.SendChatCompletionAsync(apiMessages, ct);
-
-			// Check if the response contains tool calls
-			if (response.ToolCalls != null && response.ToolCalls.Count > 0)
-			{
-				_logger.LogInformation("AI agent requested {Count} tool call(s)", response.ToolCalls.Count);
-
-				// Execute tool calls
-				var toolResults = new Collection<ChatMessage>();
-				foreach (var toolCall in response.ToolCalls)
-				{
-					var toolResult = await _toolExecutor.ExecuteFunctionAsync(
-						toolCall.FunctionName,
-						toolCall.FunctionArguments,
-						ct);
-
-					toolResults.Add(new ChatMessage
-					{
-						Role = "tool",
-						Content = toolResult,
-						ToolCallId = toolCall.Id,
-						Timestamp = DateTime.Now
-					});
-				}
-
-				// Add the assistant's tool call message to history
-				conversationHistory.Add(response);
-
-				// Add tool results to history
-				foreach (var result in toolResults)
-				{
-					conversationHistory.Add(result);
-				}
-
-				// Get the final response from the AI agent after tool execution
-				var finalApiMessages = ConvertToApiMessages(conversationHistory);
-				var finalResponse = await _apiClient.SendChatCompletionAsync(finalApiMessages, ct);
-
-				return finalResponse;
-			}
+			// Use the Assistants API (with automatic tool handling on server-side)
+			var response = await _apiClient.SendMessageToAssistantAsync(message, ct);
 
 			return response;
 		}
 		catch (Exception ex)
 		{
-			_logger.LogError(ex, "Error sending message to AI agent");
+			_logger.LogError(ex, "Error sending message to AI assistant");
 			throw;
 		}
 	}
