@@ -21,12 +21,12 @@ To generate this file, following the following steps:
 
 1. Open a command prompt or terminal against your Android project’s directory that contains the .csproj.
 2. Ensure only one Android device is attached.
-3. Execute the following command: `dotnet build -f net9.0-android35.0 -t:BuildAndStartAotProfiling`
+3. Execute the following command: `dotnet build -f net10.0-android36.0 -t:BuildAndStartAotProfiling`
     - The dotnet version targeted must match the one specified in the mobile csproj.
     - If you have a custom Android SDK path, you can specify it with the `AndroidSdkPath` property.
       > 💡 `-p:AndroidSdkDirectory=path/to/android/sdk`
 4. Let your application run until it’s loaded.
-5. Execute the following command: `dotnet build -f net9.0-android35.0 -t:FinishAotProfiling`.
+5. Execute the following command: `dotnet build -f net10.0-android36.0 -t:FinishAotProfiling`.
     - The dotnet version targeted must match the one specified in the mobile csproj.
     - If you have a custom Android SDK path, you can specify it with the `AndroidSdkPath` property.
       > 💡 `-p:AndroidSdkDirectory=path/to/android/sdk`
