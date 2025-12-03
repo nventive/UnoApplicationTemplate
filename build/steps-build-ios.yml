@@ -83,7 +83,7 @@ steps:
   inputs:
     Contents: '**/*.ipa'
     flattenFolders : true
-    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net9.0-ios'
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net10.0-ios'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: CopyFiles@2
@@ -91,7 +91,7 @@ steps:
   inputs:
     Contents: '**/*.dSYM/**'
     flattenFolders : true
-    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net9.0-ios'
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net10.0-ios'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/${{ parameters.solutionName }}.Mobile.dSYM'
 
 - publish: $(Build.ArtifactStagingDirectory)
