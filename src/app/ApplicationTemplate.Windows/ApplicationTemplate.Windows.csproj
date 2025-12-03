@@ -69,7 +69,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="3.0.1" />
-		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="3.0.1" />
+		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="3.0.2" />
 		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="3.0.1" />
 		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="4.0.1" />
 		<PackageReference Include="CommunityToolkit.WinUI" Version="7.1.2" />
@@ -87,8 +87,8 @@
 		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
 		<PackageReference Include="Uno.Core.Extensions.Logging.Singleton" Version="4.1.1" />
 		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
-		<PackageReference Include="Uno.Material.WinUI" Version="5.4.0" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.4.3" />
+		<PackageReference Include="Uno.Material.WinUI" Version="6.0.2" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="8.3.2" />
 
 		<!-- It would normally be a transitive dependency, however, the version included with one of the packages has a vulnerability. -->
 		<PackageReference Include="System.Private.Uri" Version="4.3.2" />
