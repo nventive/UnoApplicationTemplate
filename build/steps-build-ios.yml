@@ -26,6 +26,13 @@ steps:
   parameters:
     installAppleWorkload: true
 
+- task: Bash@3
+  displayName: Select Xcode 26.0
+  inputs:
+    targetType: inline
+    script: |
+      sudo xcode-select -s "/Applications/Xcode_26.0.1.app/Contents/Developer"
+
 #-if false
 - download: current
   condition: eq('GeneratedApp', '${{ parameters.solutionName }}')

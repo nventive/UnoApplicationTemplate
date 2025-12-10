@@ -53,7 +53,7 @@ public static class NavigationConfiguration
 	};
 
 	/// <summary>
-	/// Disable navigation animations. This is necessary after the update to .net 10 because the navigation simply stops working on the iOS platform.
+	/// Disable navigation animations. This is necessary after the update to .NET 10 because navigation stops working on the iOS platform.	
 	/// </summary>
 	/// <remarks>
 	/// Do not remove even if it's not used by default.

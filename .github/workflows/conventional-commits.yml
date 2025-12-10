@@ -1,10 +1,12 @@
-name: Conventional Commits
+﻿name: Conventional Commits
 
 on: [pull_request]
 
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+# We are setting the version to 0.20.0 because of bug happening with the current version of the action.
+# To see more details and know when it will be fixed, please visit: https://github.com/aevea/commitsar/issues/583
 jobs:
   validate-commits:
     runs-on: ubuntu-latest
@@ -12,4 +14,4 @@ jobs:
       - name: Check out code into the Go module directory
         uses: actions/checkout@v1
       - name: Commitsar check
-        uses: docker://aevea/commitsar
+        uses: docker://aevea/commitsar:0.20.0

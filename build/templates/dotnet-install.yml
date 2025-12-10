@@ -1,11 +1,11 @@
 ﻿parameters:
 - name: UnoCheck_Version
   type: string
-  default: '1.27.4'
+  default: '1.33.1'
 
 - name: UnoCheck_Manifest
   type: string
-  default: 'https://raw.githubusercontent.com/unoplatform/uno.check/870b2615fc2783e9355374c12015597a92dd242a/manifests/uno.ui.manifest.json'
+  default: 'https://raw.githubusercontent.com/unoplatform/uno.check/3bd81468f842eb34fe4760d1694baf8e4ba6edba/manifests/uno.ui.manifest.json'
 
 # Whether the Android workload should be installed.
 - name: installAndroidWorkload
