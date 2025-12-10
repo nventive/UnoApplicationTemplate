@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 
 Prefix your items with `(Template)` if the change is about the template and not the resulting application.
 
+## 3.12.X
+- Updated from .NET 9 to .NET 10.
+- Updated Android target SDK version to 36.
+
 ## 3.11.X
 - Added API Client tests project.
 - Removed all references to Uno.SourceGenerationTasks packages and adjusted the dependency injection recipe in ViewModels accordingly.

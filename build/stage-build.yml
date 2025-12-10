@@ -68,7 +68,7 @@ jobs:
     - name: ApplicationEnvironment
       value: ${{ parameters.applicationEnvironment }}
     - name: BuildTargetFramework 
-      value: net9.0-windows10.0.22621.0
+      value: net10.0-windows10.0.22621.0
         # For optimization, if we are on light build, we only build the project else we publish it.
     - name: dotNetCommand
       ${{ if eq(variables['IsLightBuild'], 'true') }}:
