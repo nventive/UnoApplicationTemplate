@@ -26,6 +26,13 @@ steps:
   parameters:
     installAppleWorkload: true
 
+- task: Bash@3
+  displayName: Select Xcode 26.0
+  inputs:
+    targetType: inline
+    script: |
+      sudo xcode-select -s "/Applications/Xcode_26.0.1.app/Contents/Developer"
+
 #-if false
 - download: current
   condition: eq('GeneratedApp', '${{ parameters.solutionName }}')
@@ -83,7 +90,7 @@ steps:
   inputs:
     Contents: '**/*.ipa'
     flattenFolders : true
-    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net9.0-ios'
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net10.0-ios'
     TargetFolder: '$(Build.ArtifactStagingDirectory)'
 
 - task: CopyFiles@2
@@ -91,7 +98,7 @@ steps:
   inputs:
     Contents: '**/*.dSYM/**'
     flattenFolders : true
-    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net9.0-ios'
+    SourceFolder: '${{ parameters.pathToSrc }}/app/${{ parameters.solutionName }}.Mobile/bin/Release/net10.0-ios'
     TargetFolder: '$(Build.ArtifactStagingDirectory)/${{ parameters.solutionName }}.Mobile.dSYM'
 
 - publish: $(Build.ArtifactStagingDirectory)

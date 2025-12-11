@@ -16,10 +16,16 @@ public static class NavigationConfiguration
 	public static IServiceCollection AddNavigation(this IServiceCollection services)
 	{
 		return services.AddSingleton<ISectionsNavigator>(s =>
-			new FrameSectionsNavigator(
-				App.Instance.NavigationMultiFrame,
-				GetPageRegistrations()
-			)
+			{
+				var frameSectionNavigator = new FrameSectionsNavigator(
+					App.Instance.NavigationMultiFrame,
+					GetPageRegistrations()
+				);
+
+				DisableAnimations(frameSectionNavigator);
+
+				return frameSectionNavigator;
+			}
 		);
 	}
 
@@ -47,7 +53,7 @@ public static class NavigationConfiguration
 	};
 
 	/// <summary>
-	/// Disable navigation animations.
+	/// Disable navigation animations. This is necessary after the update to .NET 10 because navigation stops working on the iOS platform.	
 	/// </summary>
 	/// <remarks>
 	/// Do not remove even if it's not used by default.

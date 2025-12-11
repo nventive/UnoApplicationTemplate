@@ -1,13 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 	<PropertyGroup>
-		<LangVersion>13.0</LangVersion>
-		<TargetFrameworks>net9.0-android35.0;net9.0-ios</TargetFrameworks>
+		<LangVersion>14.0</LangVersion>
+		<TargetFrameworks>net10.0-android36.0;net10.0-ios</TargetFrameworks>
 		<SingleProject>true</SingleProject>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<OutputType>Exe</OutputType>
 		<IsUnoHead>true</IsUnoHead>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-android35.0'">29.0</SupportedOSPlatformVersion>
-		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net9.0-ios'">14.2</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net10.0-android36.0'">29.0</SupportedOSPlatformVersion>
+		<SupportedOSPlatformVersion Condition="'$(TargetFramework)' == 'net10.0-ios'">14.2</SupportedOSPlatformVersion>
 		<NoWarn>Uno0001</NoWarn>
 	</PropertyGroup>
 	<!-- Linker configuration. -->
@@ -49,7 +49,7 @@
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
 	<Choose>
-		<When Condition="'$(TargetFramework)'=='net9.0-android35.0'">
+		<When Condition="'$(TargetFramework)'=='net10.0-android36.0'">
 			<PropertyGroup>
 				<AndroidCreatePackagePerAbi>False</AndroidCreatePackagePerAbi>
 				<BundleAssemblies>False</BundleAssemblies>
@@ -148,7 +148,7 @@
 				</AndroidResource>
 			</ItemGroup>
 		</When>
-		<When Condition="'$(TargetFramework)'=='net9.0-ios'">
+		<When Condition="'$(TargetFramework)'=='net10.0-ios'">
 			<PropertyGroup>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --setenv=MONO_GC_PARAMS=soft-heap-limit=512m,nursery-size=64m,evacuation-threshold=66,major=marksweep,concurrent-sweep</MtouchExtraArgs>
 				<MtouchExtraArgs>$(MtouchExtraArgs) --xml=./iOS/LinkerExclusions.xml --linkskip=$(AssemblyName)</MtouchExtraArgs>
