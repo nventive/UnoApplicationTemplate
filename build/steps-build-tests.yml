@@ -46,7 +46,7 @@ steps:
 
 - task: PublishTestResults@2
   displayName: Publish Test Results
-  condition: succeeded()
+  condition: always()
   inputs:
     testResultsFormat : VSTest
     testResultsFiles: '**/*.trx'
@@ -54,13 +54,14 @@ steps:
 
 - task: reportgenerator@5
   displayName: Merge Code Coverage Reports
+  condition: always()
   inputs:
     reports: '${{ parameters.pathToSrc }}/**/*.cobertura.xml'
     targetdir: '${{ parameters.pathToSrc }}/CoverageReport'
 
 - task: PublishCodeCoverageResults@2
   displayName: Publish Code Coverage Results
-  condition: succeeded()
+  condition: always()
   inputs:
     summaryFileLocation: "${{ parameters.pathToSrc }}/CoverageReport/Cobertura.xml"
   env:
