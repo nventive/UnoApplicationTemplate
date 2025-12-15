@@ -31,7 +31,7 @@ steps:
   inputs:
     targetType: inline
     script: |
-      sudo xcode-select -s "/Applications/Xcode_26.0.1.app/Contents/Developer"
+      sudo xcode-select -s "/Applications/Xcode_26.1.1.app/Contents/Developer"
 
 #-if false
 - download: current

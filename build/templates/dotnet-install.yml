@@ -5,7 +5,7 @@
 
 - name: UnoCheck_Manifest
   type: string
-  default: 'https://raw.githubusercontent.com/unoplatform/uno.check/3bd81468f842eb34fe4760d1694baf8e4ba6edba/manifests/uno.ui.manifest.json'
+  default: 'https://raw.githubusercontent.com/unoplatform/uno.check/refs/heads/main/manifests/uno.ui-preview.manifest.json'
 
 # Whether the Android workload should be installed.
 - name: installAndroidWorkload
@@ -25,7 +25,7 @@ steps:
     version: $(DotNetVersion)
 
 - powershell: |
-    & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
+    & dotnet tool update --global uno.check --add-source https://api.nuget.org/v3/index.json
     & uno-check -v --ci --non-interactive --fix --target android --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
   displayName: Install Android .NET Workloads | Uno Check
   errorActionPreference: continue
@@ -34,7 +34,7 @@ steps:
   condition: and(succeeded(), eq('${{ parameters.installAndroidWorkload }}', true))
 
 - powershell: |
-    & dotnet tool update --global uno.check --version ${{ parameters.UnoCheck_Version }} --add-source https://api.nuget.org/v3/index.json
+    & dotnet tool update --global uno.check --add-source https://api.nuget.org/v3/index.json
     & uno-check -v --ci --non-interactive --fix --target ios --skip xcode --skip gtk3 --skip vswin --skip vsmac --skip androidsdk --skip androidemulator --manifest ${{ parameters.UnoCheck_Manifest }}
   displayName: Install iOS .NET Workloads | Uno Check
   errorActionPreference: continue
