@@ -198,7 +198,24 @@
 						<Otherwise>
 							<PropertyGroup>
 								<OptimizePNGs>True</OptimizePNGs>
-								<MtouchUseLlvm>True</MtouchUseLlvm>
+								<!--
+									LLVM has been set to false because it slowed down the build time too much in the pipeline.
+
+									https://github.com/xamarin/xamarin-macios/issues/20210
+									https://github.com/dotnet/runtime/issues/110406
+									https://github.com/dotnet/sdk/issues/43470
+									You can get more context from those three links. The issues are closed but you can see from the comments in the third one:
+									https://github.com/dotnet/sdk/issues/43470#issuecomment-3195907405
+									https://github.com/dotnet/sdk/issues/43470#issuecomment-2522370728
+									
+									That this has not really been resolved. Basically the problem is the dotnet built time has slowed down a lot with recent dotnet versions, especially on a mac, and it's still a problem.
+
+									Setting LLVM to false makes the build time reasonnable, but the problem itself is likely not LLVM itself, but a deeper problem in dotnet.
+									This slow down happens in all kind of dotnet project especially when built on a mac, it's not a purely iOS Uno project problem.
+
+									There are people who have pointed out it's still a problem in the last issue, but nothing about it has been done for now, and it's not clear if anything further is going to happen on the dotnet side.
+									-->
+								<MtouchUseLlvm>False</MtouchUseLlvm>
 								<MtouchUseThumb>True</MtouchUseThumb>
 								<MtouchNoSymbolStrip>False</MtouchNoSymbolStrip>
 								<Optimize>True</Optimize>
