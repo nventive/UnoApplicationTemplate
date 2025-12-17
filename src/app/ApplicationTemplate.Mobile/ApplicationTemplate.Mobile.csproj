@@ -160,6 +160,7 @@
 				<CodesignEntitlements>iOS\Entitlements.plist</CodesignEntitlements>
 				<!-- Workaround for clang++ error on iOS simulator on ARM base macOS system. See "https://github.com/dotnet/maui/issues/16778#issuecomment-1683343255" for more detail. -->
 				<ForceSimulatorX64ArchitectureInIDE>true</ForceSimulatorX64ArchitectureInIDE>
+				<AppIcon>AppIcons</AppIcon>
 			</PropertyGroup>
 			<Choose>
 				<When Condition="'$(Configuration)'=='Debug'">
