@@ -42,8 +42,6 @@
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
 		<false/>
-		<key>XSAppIconAssets</key>
-		<string>Media.xcassets/AppIcons.appiconset</string>
 		<key>UIApplicationSupportsIndirectInputEvents</key>
 		<true/>
 		<!-- This is required to access the MAUI Essentials email functionality. -->
