@@ -246,6 +246,9 @@
   <data name="Menu_Settings.Content" xml:space="preserve">
     <value>Profil</value>
   </data>
+  <data name="Menu_Agentic.Content" xml:space="preserve">
+    <value>Agentique</value>
+  </data>
   <data name="Login_Title1" xml:space="preserve">
     <value>Bienvenue
 à bord !</value>
@@ -412,6 +415,12 @@ Je pense que nous savons tous pourquoi nous sommes ici."</value>
   </data>
   <data name="DadJokesPage_CommandBar.Content" xml:space="preserve">
     <value>Blagues</value>
+  </data>
+  <data name="AgenticChatPage_CommandBar.Content" xml:space="preserve">
+    <value>Chat Agentique</value>
+  </data>
+  <data name="AgenticChatPage_MessageInput.PlaceholderText" xml:space="preserve">
+    <value>Tapez un message...</value>
   </data>
   <data name="Password_Validation1.Text" xml:space="preserve">
     <value>8 caractères minimum</value>

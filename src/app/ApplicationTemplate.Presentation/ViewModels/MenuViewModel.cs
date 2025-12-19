@@ -16,7 +16,8 @@ public sealed class MenuViewModel : ViewModel
 	{
 		Home,
 		Posts,
-		Settings
+		Settings,
+		Agentic
 	}
 
 	private readonly ISectionsNavigator _sectionsNavigator;
@@ -31,11 +32,12 @@ public sealed class MenuViewModel : ViewModel
 	/// <summary>
 	/// The list of ViewModel types on which the bottom menu should be visible.
 	/// </summary>
-	private static Type[] _viewModelsWithBottomMenu = new Type[]
+	private static readonly Type[] _viewModelsWithBottomMenu = new[]
 	{
 		typeof(DadJokesPageViewModel),
 		typeof(PostsPageViewModel),
 		typeof(SettingsPageViewModel),
+		typeof(AgenticChatPageViewModel),
 	};
 
 	public string MenuState => this.GetFromObservable(
@@ -56,6 +58,9 @@ public sealed class MenuViewModel : ViewModel
 
 	public IDynamicCommand ShowSettingsSection => this.GetCommandFromTask(async ct =>
 		await _sectionsNavigator.SetActiveSection(ct, nameof(Section.Settings), () => new SettingsPageViewModel()));
+
+	public IDynamicCommand ShowAgenticSection => this.GetCommandFromTask(async ct =>
+		await _sectionsNavigator.SetActiveSection(ct, nameof(Section.Agentic), () => new AgenticChatPageViewModel()));
 
 	private IObservable<string> ObserveMenuState() =>
 		_sectionsNavigator
@@ -80,6 +85,7 @@ public sealed class MenuViewModel : ViewModel
 					nameof(Section.Home) => 0,
 					nameof(Section.Posts) => 1,
 					nameof(Section.Settings) => 2,
+					nameof(Section.Agentic) => 3,
 					_ => 0,
 				};
 			})

@@ -1,0 +1,97 @@
+<Page x:Class="ApplicationTemplate.Views.Content.AgenticChatPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	  xmlns:u="using:Nventive.View.Controls"
+	  mc:Ignorable="">
+
+	<Grid Background="{ThemeResource BackgroundBrush}">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="*" />
+			<RowDefinition Height="Auto" />
+		</Grid.RowDefinitions>
+
+		<!-- CommandBar -->
+		<CommandBar Grid.Row="0"
+					Content="Agentic Chat"
+					x:Uid="AgenticChatPage_CommandBar" />
+
+		<!-- Chat Messages -->
+		<ScrollViewer Grid.Row="1"
+					  x:Name="ChatScrollViewer"
+					  VerticalScrollBarVisibility="Auto"
+					  Padding="16">
+			<ItemsControl ItemsSource="{Binding Messages}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<Grid Margin="0,0,0,12">
+							<!-- User Message (Right aligned) -->
+							<Border Background="{ThemeResource PrimaryBrush}"
+									CornerRadius="12"
+									Padding="12"
+									MaxWidth="400"
+									HorizontalAlignment="Right"
+									Visibility="{Binding IsFromUser, Converter={StaticResource TrueToVisible}}">
+								<TextBlock Text="{Binding Content}"
+										   Foreground="{ThemeResource OnPrimaryBrush}"
+										   TextWrapping="Wrap" />
+							</Border>
+
+							<!-- AI Message (Left aligned) -->
+							<Border Background="{ThemeResource SurfaceBrush}"
+									CornerRadius="12"
+									Padding="12"
+									MaxWidth="400"
+									HorizontalAlignment="Left"
+									Visibility="{Binding IsFromUser, Converter={StaticResource TrueToCollapsed}}">
+								<TextBlock Text="{Binding Content}"
+										   Foreground="{ThemeResource OnSurfaceBrush}"
+										   TextWrapping="Wrap" />
+							</Border>
+						</Grid>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</ScrollViewer>
+
+		<!-- Input Area -->
+		<Grid Grid.Row="2"
+			  Background="{ThemeResource SurfaceBrush}"
+			  Padding="16"
+			  BorderBrush="{ThemeResource OnSurfaceLowBrush}"
+			  BorderThickness="0,1,0,0">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*" />
+				<ColumnDefinition Width="Auto" />
+			</Grid.ColumnDefinitions>
+
+			<!-- Text Input -->
+			<TextBox Grid.Column="0"
+					 Text="{Binding CurrentMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+					 PlaceholderText="Type a message..."
+					 x:Uid="AgenticChatPage_MessageInput"
+					 AcceptsReturn="False"
+					 VerticalAlignment="Center"
+					 Margin="0,0,8,0" />
+
+			<!-- Send Button -->
+			<Button Grid.Column="1"
+					Command="{Binding SendMessageCommand}"
+					Content="Send"
+					Padding="16,8"
+					Background="{ThemeResource PrimaryBrush}"
+					Foreground="{ThemeResource OnPrimaryBrush}" />
+		</Grid>
+
+		<!-- Loading Indicator -->
+		<Grid Grid.RowSpan="3"
+			  Background="#80000000"
+			  Visibility="{Binding IsBusy, Converter={StaticResource TrueToVisible}}">
+			<ProgressRing IsActive="True"
+						  Width="60"
+						  Height="60"
+						  Foreground="{ThemeResource PrimaryBrush}" />
+		</Grid>
+	</Grid>
+</Page>

@@ -12,6 +12,7 @@
 		<EmbeddedResource Include="appsettings.json" />
 		<EmbeddedResource Include="appsettings.production.json" />
 		<EmbeddedResource Include="appsettings.staging.json" />
+		<EmbeddedResource Include="AssistantInstructions.md" />
 		<EmbeddedResource Include="ThirdPartySoftwareLicenses.txt" />
 	</ItemGroup>
 

@@ -51,6 +51,7 @@ public sealed class CoreStartup : CoreStartupBase
 				.AddReviewServices()
 				.AddAppServices()
 				.AddAnalytics()
+				.AddAgentic(context.Configuration)
 			);
 	}
 
@@ -65,6 +66,8 @@ public sealed class CoreStartup : CoreStartupBase
 		HandleUnhandledExceptions(services);
 
 		ValidatorOptions.Global.LanguageManager = new FluentValidationLanguageManager();
+
+
 	}
 
 	protected override async Task StartServices(IServiceProvider services, bool isFirstStart)
@@ -72,6 +75,8 @@ public sealed class CoreStartup : CoreStartupBase
 		if (isFirstStart)
 		{
 			// TODO: Start your core services and customize the initial navigation logic here.
+			
+			InitializeAgenticFunctions(services);
 			StartAutomaticAnalyticsCollection(services);
 			await services.GetRequiredService<IReviewService>().TrackApplicationLaunched(CancellationToken.None);
 			NotifyUserOnSessionExpired(services);
@@ -304,6 +309,21 @@ public sealed class CoreStartup : CoreStartupBase
 
 			previousVM = currentVM;
 		}
+	}
+
+	/// <summary>
+	/// Initializes AI agent functions by registering navigation handlers.
+	/// Note: With Azure AI Foundry Agents API, tools are executed server-side.
+	/// Navigation is triggered via NavigationRequested event - see AgenticChatPageViewModel.OnNavigationRequested().
+	/// </summary>
+	/// <param name="services">The service provider.</param>
+	private static void InitializeAgenticFunctions(IServiceProvider services)
+	{
+		// Server-side tool execution is used (Azure AI Foundry Agents API)
+		// Tools are defined in AgenticApiClient_Agents.cs and executed on the Azure server
+		// Navigation is triggered via NavigationRequested event from AgenticApiClient
+		// The AgenticChatPageViewModel subscribes to this event and performs actual navigation
+		// No client-side function registration is needed
 	}
 
 	protected override ILogger GetOrCreateLogger(IServiceProvider serviceProvider)

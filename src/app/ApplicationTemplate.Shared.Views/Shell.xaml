@@ -17,7 +17,7 @@
 		</Grid.RowDefinitions>
 
 		<nav:MultiFrame x:Name="RootNavigationMultiFrame"
-						CommaSeparatedSectionsFrameNames="Login,Home,Posts,Settings" />
+						CommaSeparatedSectionsFrameNames="Login,Home,Posts,Settings,Agentic" />
 
 		<local:Menu x:Name="Menu"
 					DataContext="{Binding Menu}"
