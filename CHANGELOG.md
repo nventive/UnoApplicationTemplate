@@ -10,6 +10,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Removed all references to Uno.SourceGenerationTasks packages and adjusted the dependency injection recipe in ViewModels accordingly.
 - Fix Android bottom screen space.
 - Fix yaml configuration for tests to always publish test results.
+- Append job attempt number for test artifact names in build stage to allow retrying jobs.
 
 ## 3.10.X
 - Added Dependency Injection validation in the development environment.

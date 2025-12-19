@@ -87,7 +87,7 @@ jobs:
     pool:
       vmImage : $(windowsHostedAgentImage)
     variables:
-      ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}
+      ArtifactName: $(TestsArtifactName)_${{ parameters.applicationEnvironment }}_Attempt$(System.JobAttempt)
       ApplicationEnvironment: ${{ parameters.applicationEnvironment }}
     steps:
       - template: steps-build-tests.yml
