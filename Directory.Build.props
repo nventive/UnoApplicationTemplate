@@ -4,12 +4,12 @@
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
-		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0">
+		<PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.101">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
 		</PackageReference>
 		<!-- Microsoft.VisualStudio.Threading.Analyzers has the async void analyzers. -->
-		<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.13.2" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.VisualStudio.Threading.Analyzers" Version="17.14.15" PrivateAssets="all" />
 		<PackageReference Include="GooseAnalyzers" Version="1.0.0" PrivateAssets="all" />
 	</ItemGroup>
 

@@ -11,6 +11,7 @@ Prefix your items with `(Template)` if the change is about the template and not 
 - Updated android aot profile and profiling packages to 10.0.0-preview1.
 - Set MtouchUseLlvm to false for iOS release build to fix build time issue.
 - Changed the way that iOS app icons are added to the project.
+- Updated external dependencies packages versions.
 
 ## 3.11.X
 - Added API Client tests project.
