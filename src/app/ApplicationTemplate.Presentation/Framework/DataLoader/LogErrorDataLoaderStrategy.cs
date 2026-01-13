@@ -31,7 +31,10 @@ public class LogErrorDataLoaderStrategy : DelegatingDataLoaderStrategy
 		}
 		catch (Exception error)
 		{
-			_logger.LogError(error, "Failed to load request '{RequestSequenceId}' in DataLoader '{DataLoaderName}'.", request.SequenceId, request.Context.GetDataLoaderName());
+			if (_logger.IsEnabled(LogLevel.Error))
+			{
+				_logger.LogError(error, "Failed to load request '{RequestSequenceId}' in DataLoader '{DataLoaderName}'.", request.SequenceId, request.Context.GetDataLoaderName());
+			}
 
 			throw;
 		}

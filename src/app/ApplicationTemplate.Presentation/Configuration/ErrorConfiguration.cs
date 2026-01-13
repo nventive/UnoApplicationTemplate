@@ -41,7 +41,11 @@ public static class ErrorConfiguration
 		}
 
 		var logger = services.GetRequiredService<ILogger<CoreStartup>>();
-		logger.LogError(exception, "An unhandled exception occurred. StackTrace: {StackTrace}", exception.StackTrace);
+
+		if (logger.IsEnabled(LogLevel.Error))
+		{
+			logger.LogError(exception, "An unhandled exception occurred. StackTrace: {StackTrace}", exception.StackTrace);
+		}
 	}
 
 	private static async Task HandleCommandException(CancellationToken ct, IDynamicCommand command, Exception exception, IServiceProvider services)
