@@ -15,7 +15,10 @@ public sealed class MockedEmailService : IEmailService
 
 	public Task Compose(CancellationToken ct, Email email)
 	{
-		_logger.LogInformation("Email composed: {Email}", email);
+		if (_logger.IsEnabled(LogLevel.Information))
+		{
+			_logger.LogInformation("Email composed: {Email}", email);
+		}
 		return Task.CompletedTask;
 	}
 }

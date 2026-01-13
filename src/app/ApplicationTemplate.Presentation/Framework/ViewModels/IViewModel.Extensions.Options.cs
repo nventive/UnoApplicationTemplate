@@ -126,7 +126,12 @@ public static class ChinookViewModelExtensionsForOptions
 		{
 			if (value is not string && value is not bool)
 			{
-				viewModel.GetService<ILogger<TOptions>>().LogWarning("Serialization of type {TypeName} may be wrong. Consider using the valueToString parameter from the GetFromOptionsMonitor method.", typeof(TValue).Name);
+				var logger = viewModel.GetService<ILogger>();
+
+				if (logger.IsEnabled(LogLevel.Warning))
+				{
+					logger.LogWarning("Serialization of type {TypeName} may be wrong. Consider using the valueToString parameter from the GetFromOptionsMonitor method.", typeof(TValue).Name);
+				}
 			}
 
 			return value.ToString();
