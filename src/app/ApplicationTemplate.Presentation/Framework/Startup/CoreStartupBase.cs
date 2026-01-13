@@ -150,7 +150,10 @@ public abstract class CoreStartupBase : IDisposable
 
 		var isFirstStart = !State.IsStarted;
 
-		Logger.LogDebug("Starting services (isFirstStart: {IsFirstStart}).", isFirstStart);
+		if (Logger.IsEnabled(LogLevel.Debug))
+		{
+			Logger.LogDebug("Starting services (isFirstStart: {IsFirstStart}).", isFirstStart);
+		}
 
 		await StartServices(ServiceProvider, isFirstStart);
 

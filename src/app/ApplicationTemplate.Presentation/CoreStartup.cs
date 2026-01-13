@@ -229,7 +229,10 @@ public sealed class CoreStartup : CoreStartupBase
 		killSwitchService.ObserveKillSwitchActivation()
 			.SelectManyDisposePrevious(async (activated, ct) =>
 			{
-				Logger.LogTrace("Kill switch activation changed to {Activated}.", activated);
+				if (Logger.IsEnabled(LogLevel.Trace))
+				{
+					Logger.LogTrace("Kill switch activation changed to {Activated}.", activated);
+				}
 
 				if (activated)
 				{

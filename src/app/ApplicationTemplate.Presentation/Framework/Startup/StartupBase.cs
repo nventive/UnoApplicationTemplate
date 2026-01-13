@@ -152,7 +152,10 @@ public abstract class StartupBase
 
 		async Task StartViewServicesWithLogs(IServiceProvider services, bool isFirstStart)
 		{
-			Logger.LogDebug("Starting view services (isFirstStart: {IsFirstStart}).", isFirstStart);
+			if (Logger.IsEnabled(LogLevel.Debug))
+			{
+				Logger.LogDebug("Starting view services (isFirstStart: {IsFirstStart}).", isFirstStart);
+			}
 
 			await StartViewServices(services, isFirstStart);
 
