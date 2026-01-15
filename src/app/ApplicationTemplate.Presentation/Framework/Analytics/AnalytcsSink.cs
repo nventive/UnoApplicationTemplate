@@ -25,31 +25,6 @@ public sealed class AnalyticsSink : IAnalyticsSink
 
 	public void TrackNavigation(SectionsNavigatorState navigatorState)
 	{
-		if (navigatorState.LastRequestState != NavigatorRequestState.Processed)
-		{
-			// Skip the requests that are still processing of that failed to process.
-			return;
-		}
-
-		// Get the actual ViewModel instance.
-		// This allows to track based on instances and not types (because there are scenarios where you can open the same page multiple times with different parameters).
-		// Having the instance also allows casting into more specific types to get more information, such as navigation parameters, that could be relevant for analytics.
-		var viewModel = navigatorState.GetActiveStackNavigator().State.Stack.LastOrDefault()?.ViewModel;
-		if (viewModel is null || _lastViewModel == viewModel)
-		{
-			return;
-		}
-
-		// Gather analytics data.
-		var pageName = viewModel.GetType().Name.Replace("ViewModel", string.Empty, StringComparison.OrdinalIgnoreCase);
-		var isInModal = navigatorState.ActiveModal != null;
-		var sectionName = navigatorState.ActiveSection.Name;
-
-		// Send the analytics event.
-		SendPageView(pageName, isInModal, sectionName);
-
-		// Capture the last ViewModel instance to avoid duplicate events in the future.
-		_lastViewModel = viewModel;
 	}
 
 	private void SendPageView(string pageName, bool isInModal, string sectionName)

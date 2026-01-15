@@ -98,24 +98,7 @@ public sealed class CoreStartup : CoreStartupBase
 
 		await sectionsNavigator.SetActiveSection(ct, "Login");
 
-		var currentSettings = await applicationSettingsRepository.GetAndObserveCurrent().FirstAsync(ct);
-		if (currentSettings.IsOnboardingCompleted)
-		{
-			var isAuthenticated = await authenticationService.GetAndObserveIsAuthenticated().FirstAsync(ct);
-
-			if (isAuthenticated)
-			{
-				await sectionsNavigator.SetActiveSection(ct, "Home", () => new DadJokesPageViewModel());
-			}
-			else
-			{
-				await sectionsNavigator.Navigate(ct, () => new LoginPageViewModel(isFirstLogin: false));
-			}
-		}
-		else
-		{
-			await sectionsNavigator.Navigate(ct, () => new OnboardingPageViewModel());
-		}
+		await sectionsNavigator.SetActiveSection(ct, "Posts", () => new DadJokesPageViewModel());
 
 		services.GetRequiredService<IExtendedSplashscreenController>().Dismiss();
 	}
