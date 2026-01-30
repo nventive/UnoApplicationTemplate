@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
@@ -8,6 +9,7 @@ using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class CreateAccountPageViewModel : ViewModel
 {
 	public CreateAccountFormViewModel Form => this.GetChild(() => new CreateAccountFormViewModel());

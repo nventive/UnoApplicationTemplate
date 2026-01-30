@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class LoginPageViewModel : ViewModel
 {
 	public LoginPageViewModel(bool isFirstLogin)

@@ -1,10 +1,12 @@
-﻿using Chinook.DynamicMvvm;
+﻿using System.ComponentModel;
+using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class DiagnosticsPageViewModel : ViewModel
 {
 	private readonly IEnvironmentManager _environmentManager;

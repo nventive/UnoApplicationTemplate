@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class DadJokesItemViewModel : ViewModel
 {
 	public DadJokesItemViewModel(IViewModel parent, DadJokesQuote quote)

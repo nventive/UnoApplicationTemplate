@@ -1,11 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using ApplicationTemplate.DataAccess;
 using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class HttpTraceItemViewModel : ViewModel
 {
 	private readonly HttpTrace _trace;

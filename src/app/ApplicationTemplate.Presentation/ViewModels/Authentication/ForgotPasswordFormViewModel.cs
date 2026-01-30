@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using Chinook.DynamicMvvm;
 using FluentValidation;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class ForgotPasswordFormViewModel : ViewModel
 {
 	public ForgotPasswordFormViewModel()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
@@ -7,6 +8,7 @@ using FluentValidation;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class EditProfileFormViewModel : ViewModel
 {
 	private readonly UserProfile _userProfileData;

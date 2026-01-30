@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Globalization;
 using System.Reactive.Concurrency;
 using System.Reactive.Disposables;
@@ -14,6 +15,7 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class HttpDebuggerViewModel : TabViewModel
 {
 	private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions { WriteIndented = true };
