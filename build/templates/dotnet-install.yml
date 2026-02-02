@@ -5,7 +5,7 @@
 
 - name: UnoCheck_Manifest
   type: string
-  default: 'https://raw.githubusercontent.com/unoplatform/uno.check/3bd81468f842eb34fe4760d1694baf8e4ba6edba/manifests/uno.ui.manifest.json'
+  default: 'https://raw.githubusercontent.com/unoplatform/uno.check/d80cfb2e37941bfbb8d9d7bd9cc6599567382cff/manifests/uno.ui.manifest.json'
 
 # Whether the Android workload should be installed.
 - name: installAndroidWorkload
