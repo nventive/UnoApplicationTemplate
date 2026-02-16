@@ -119,8 +119,4 @@
 		<!-- This prevents the xaml file links from being visible from this project. It removes unnecessary clutter. -->
 		<Page Update="..\ApplicationTemplate.Shared.Views\**\*.xaml" Visible="false" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.102" />
-	</ItemGroup>
 </Project>

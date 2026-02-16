@@ -48,9 +48,6 @@
 		<ProjectReference Include="..\ApplicationTemplate.Business\ApplicationTemplate.Business.csproj" />
 		<ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <PackageReference Update="StyleCop.Analyzers" Version="1.2.0-beta.556" />
-	</ItemGroup>
 	<Choose>
 		<When Condition="'$(TargetFramework)'=='net10.0-android36.0'">
 			<PropertyGroup>

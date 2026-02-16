@@ -37,7 +37,7 @@ steps:
 - download: current
   condition: eq('GeneratedApp', '${{ parameters.solutionName }}')
   artifact: GeneratedApp
-#-endif 
+#-endif
 
 - template: templates/gitversion.yml
 

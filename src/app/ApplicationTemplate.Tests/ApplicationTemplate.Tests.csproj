@@ -9,8 +9,4 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\ApplicationTemplate.Presentation\ApplicationTemplate.Presentation.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.102" />
-	</ItemGroup>
 </Project>
