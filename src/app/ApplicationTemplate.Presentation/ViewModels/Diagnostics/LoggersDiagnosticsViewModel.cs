@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class LoggersDiagnosticsViewModel : ViewModel
 {
 	public LoggersDiagnosticsViewModel()

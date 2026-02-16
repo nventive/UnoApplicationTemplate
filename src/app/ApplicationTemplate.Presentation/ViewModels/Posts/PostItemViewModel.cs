@@ -1,4 +1,5 @@
-﻿using ApplicationTemplate.Business;
+﻿using System.ComponentModel;
+using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using Chinook.StackNavigation;
 
@@ -7,6 +8,7 @@ namespace ApplicationTemplate.Presentation;
 /// <summary>
 /// Post item view model.
 /// </summary>
+[Bindable(true)]
 public sealed class PostItemViewModel : ViewModel
 {
 	/// <summary>

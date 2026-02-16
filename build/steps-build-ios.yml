@@ -27,11 +27,11 @@ steps:
     installAppleWorkload: true
 
 - task: Bash@3
-  displayName: Select Xcode 26.0
+  displayName: Select Xcode 26.1
   inputs:
     targetType: inline
     script: |
-      sudo xcode-select -s "/Applications/Xcode_26.0.1.app/Contents/Developer"
+      sudo xcode-select -s "/Applications/Xcode_26.1.1.app/Contents/Developer"
 
 #-if false
 - download: current

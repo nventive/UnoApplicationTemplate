@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
@@ -7,6 +8,7 @@ using Chinook.SectionsNavigation;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class EditProfilePageViewModel : ViewModel
 {
 	private readonly UserProfile _userProfile;

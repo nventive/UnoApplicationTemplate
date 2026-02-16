@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Globalization;
 using System.Reactive.Linq;
@@ -10,6 +11,7 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class DiagnosticsOverlayViewModel : ViewModel
 {
 	private readonly IMemoryProvider _memoryProvider;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reactive.Linq;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
@@ -6,6 +7,7 @@ using Chinook.SectionsNavigation;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class DadJokesFiltersPageViewModel : ViewModel
 {
 	public IDynamicCommand HandleCheck => this.GetCommand((string pt) =>

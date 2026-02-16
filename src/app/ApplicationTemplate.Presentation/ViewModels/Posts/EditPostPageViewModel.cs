@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System.ComponentModel;
+using System.Threading;
 using System.Threading.Tasks;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
@@ -8,6 +9,7 @@ using Microsoft.Extensions.Localization;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class EditPostPageViewModel : ViewModel
 {
 	public EditPostPageViewModel(Post post = null)

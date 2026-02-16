@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using ApplicationTemplate.DataAccess;
 using Chinook.DynamicMvvm;
@@ -8,6 +9,7 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class NavigationDebuggerViewModel : TabViewModel
 {
 	private readonly ISectionsNavigator _sectionsNavigator;

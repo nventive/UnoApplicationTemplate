@@ -1,7 +1,9 @@
 ﻿using System.Collections.Immutable;
+using System.ComponentModel;
 
 namespace ApplicationTemplate;
 
+[Bindable(true)]
 public sealed class DataValidationState
 {
 	public DataValidationState(DataValidationStateType stateType, ImmutableList<object> errors = null)

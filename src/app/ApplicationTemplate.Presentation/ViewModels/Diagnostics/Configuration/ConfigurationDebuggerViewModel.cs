@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Disposables;
 using System.Reflection;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class ConfigurationDebuggerViewModel : TabViewModel
 {
 	private static readonly JsonSerializerOptions _jsonOptions = new JsonSerializerOptions

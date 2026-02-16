@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class ResetPasswordPageViewModel : ViewModel
 {
 	public PasswordFormViewModel PasswordForm => this.GetChild(() => new PasswordFormViewModel());

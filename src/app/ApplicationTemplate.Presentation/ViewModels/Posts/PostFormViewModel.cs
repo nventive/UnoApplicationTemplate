@@ -1,10 +1,12 @@
 ﻿using System;
+using System.ComponentModel;
 using ApplicationTemplate.Business;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class PostFormViewModel : ViewModel
 {
 	private readonly Post _post;

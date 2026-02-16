@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using Chinook.DynamicMvvm;
 using FluentValidation;
 using Microsoft.Extensions.Localization;
@@ -6,6 +7,7 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class CreateAccountFormViewModel : ViewModel
 {
 	public CreateAccountFormViewModel()

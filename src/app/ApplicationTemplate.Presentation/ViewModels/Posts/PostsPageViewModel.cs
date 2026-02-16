@@ -1,4 +1,5 @@
 ﻿using System.Collections.Immutable;
+using System.ComponentModel;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
@@ -11,6 +12,7 @@ using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class PostsPageViewModel : ViewModel
 {
 	[SuppressMessage("Usage", "CA2213:Disposable fields should be disposed", Justification = "It will be disposed by the DataLoader when passed via WithTrigger.")]

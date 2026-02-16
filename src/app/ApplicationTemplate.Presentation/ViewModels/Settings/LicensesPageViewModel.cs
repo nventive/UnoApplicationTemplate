@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class LicensesPageViewModel : ViewModel
 {
 	private const string LicensesFileName = "ThirdPartySoftwareLicenses.txt";

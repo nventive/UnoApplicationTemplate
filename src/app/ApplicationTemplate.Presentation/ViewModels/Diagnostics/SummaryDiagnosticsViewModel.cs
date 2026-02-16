@@ -1,7 +1,9 @@
-﻿using Chinook.DynamicMvvm;
+﻿using System.ComponentModel;
+using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class SummaryDiagnosticsViewModel : ViewModel
 {
 	public string Summary => this.Get(this.GetService<IDiagnosticsService>().GetSummary);

@@ -16,27 +16,27 @@
 		<TrimMode>partial</TrimMode>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="3.0.1" />
-		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="3.0.1" />
-		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="3.0.1" />
-		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="4.0.1" />
-		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="2.0.1" />
-		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="2.0.0" />
-		<PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.20" />
-		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.5.1-dev.57" />
-		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.7.0-dev.88" />
-		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="2.0.1" />
-		<PackageReference Include="ReviewService.NativePrompters" Version="1.0.0" />
+		<PackageReference Include="Chinook.BackButtonManager.Uno.WinUI" Version="4.0.0" />
+		<PackageReference Include="Chinook.DataLoader.Uno.WinUI" Version="4.0.0" />
+		<PackageReference Include="Chinook.DynamicMvvm.Uno.WinUI" Version="4.0.0" />
+		<PackageReference Include="Chinook.SectionsNavigation.Uno.WinUI" Version="5.0.0" />
+		<PackageReference Include="ExtendedSplashScreen.Uno.WinUI" Version="3.0.0" />
+		<PackageReference Include="MessageDialogService.Uno.WinUI" Version="3.0.0" />
+		<PackageReference Include="Microsoft.Maui.Essentials" Version="10.0.30" />
+		<PackageReference Include="Nventive.Persistence.Uno.WinUI" Version="0.7.0-dev.61" />
+		<PackageReference Include="Nventive.View.Uno.WinUI" Version="0.8.0-dev.90" />
+		<PackageReference Include="Reactive.Annex.Uno.WinUI" Version="3.0.0" />
+		<PackageReference Include="ReviewService.NativePrompters" Version="4.0.0" />
 		<PackageReference Include="Uno.CommunityToolkit.WinUI" Version="7.1.204" />
-		<PackageReference Include="Uno.Material.WinUI" Version="5.4.0" />
-		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="2.4.2" />
+		<PackageReference Include="Uno.Material.WinUI" Version="6.2.0-dev.7" />
+		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.Interactivity.WinUI" Version="3.0.3" />
 		<PackageReference Include="Uno.Microsoft.Xaml.Behaviors.WinUI.Managed" Version="2.4.2" />
-		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="6.4.3" />
-		<PackageReference Include="Uno.WinUI" Version="5.6.81" />
-		<PackageReference Include="Uno.WinUI.DevServer" Version="5.6.81" Condition="'$(Configuration)'=='Debug'" />
-		<PackageReference Include="Uno.WinUI.Lottie" Version="5.6.81" />
-		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="5.6.81" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.1" />
+		<PackageReference Include="Uno.Toolkit.WinUI.Material" Version="8.5.0-dev.24" />
+		<PackageReference Include="Uno.WinUI" Version="6.6.0-dev.153" />
+		<PackageReference Include="Uno.WinUI.DevServer" Version="6.6.0-dev.153" Condition="'$(Configuration)'=='Debug'" />
+		<PackageReference Include="Uno.WinUI.Lottie" Version="6.6.0-dev.153" />
+		<PackageReference Include="Uno.UI.Adapter.Microsoft.Extensions.Logging" Version="6.6.0-dev.153" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Console" Version="10.0.2" />
 		<PackageReference Include="Serilog.Sinks.Xamarin" Version="1.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
 
@@ -105,9 +105,6 @@
 				<PackageReference Include="Uno.UniversalImageLoader" Version="1.9.37" />
 				<PackageReference Include="Mono.AotProfiler.Android" Version="10.0.0-preview1" />
 				<PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="2.0.21.2" />
-
-				<!-- Required with the last version of Uno otherwise an exception is thrown in the main activity. -->
-				<PackageReference Include="Xamarin.AndroidX.AppCompat" Version="1.7.0.5" />
 			</ItemGroup>
 			<ItemGroup>
 				<AndroidAotProfile Include="custom.aprof" />
@@ -224,7 +221,7 @@
 				</When>
 			</Choose>
 			<ItemGroup>
-				<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.7.0" />
+				<PackageReference Include="Uno.Extensions.Logging.OSLog" Version="1.9.0-dev.2" />
 			</ItemGroup>
 			<ItemGroup>
 				<TrimmerRootDescriptor Include="iOS\LinkerExclusions.xml" />
