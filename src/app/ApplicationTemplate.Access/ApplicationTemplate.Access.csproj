@@ -1,8 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
 	<PropertyGroup>
-		<TargetFramework>net9.0</TargetFramework>
-		<LangVersion>13.0</LangVersion>
+		<TargetFramework>net10.0</TargetFramework>
+		<LangVersion>14.0</LangVersion>
 		<RootNamespace>ApplicationTemplate.DataAccess</RootNamespace>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 		<TreatWarningsAsErrors Condition="'$(Configuration)'=='Release'">true</TreatWarningsAsErrors>
@@ -18,18 +18,17 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="DynamicData" Version="9.2.1" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.3" />
-		<PackageReference Include="Microsoft.Extensions.Http" Version="9.0.3" />
-		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="9.0.3" />
-		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.3" />
+		<PackageReference Include="DynamicData" Version="9.4.1" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.2" />
 		<PackageReference Include="Reactive.Annex" Version="2.0.1" />
-		<PackageReference Include="Refit" Version="8.0.0" />
-		<PackageReference Include="ReviewService.Abstractions" Version="1.0.0" />
-		<PackageReference Include="System.Text.Json" Version="9.0.3" />
+		<PackageReference Include="Refit" Version="9.0.2" />
+		<PackageReference Include="ReviewService.Abstractions" Version="4.0.0" />
 		<PackageReference Include="MallardMessageHandlers" Version="2.0.0" />
 		<PackageReference Include="Nventive.Persistence.Reactive" Version="0.5.0" />
 		<PackageReference Include="Nventive.Persistence" Version="0.5.0" />
-		<PackageReference Include="System.Reactive" Version="6.0.1" />
+		<PackageReference Include="System.Reactive" Version="6.1.0" />
 	</ItemGroup>
 </Project>

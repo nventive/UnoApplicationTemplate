@@ -49,7 +49,7 @@ public static class ReviewConfiguration
 
 		public Task<bool> GetAreConditionsSatisfied(CancellationToken ct) => _reviewService.GetAreConditionsSatisfied(ct);
 
-		public Task TryRequestReview(CancellationToken ct) => _reviewService.TryRequestReview(ct);
+		public Task<ReviewRequestResult> TryRequestReview(CancellationToken ct) => _reviewService.TryRequestReview(ct);
 
 		public Task UpdateReviewSettings(CancellationToken ct, Func<ReviewSettings, ReviewSettings> updateFunction) => _reviewService.UpdateReviewSettings(ct, updateFunction);
 	}

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
 using System.Threading;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class SettingsDiagnosticsViewModel : ViewModel
 {
 	public SettingsDiagnosticsViewModel()

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Concurrency;
 using System.Reactive.Linq;
@@ -10,6 +11,7 @@ using Uno.Extensions;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class MenuViewModel : ViewModel
 {
 	public enum Section

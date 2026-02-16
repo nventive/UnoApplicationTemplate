@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public class LoggersDiagnosticsViewModel : ViewModel
 {
 	public LoggersDiagnosticsViewModel()
@@ -83,7 +85,12 @@ public class LoggersDiagnosticsViewModel : ViewModel
 
 	private async Task OnConsoleLoggingChanged(CancellationToken ct, bool isEnabled)
 	{
-		this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{IsEnabled} console logging.", isEnabled ? "Enabling" : "Disabling");
+		var logger = this.GetService<ILogger<LoggersDiagnosticsViewModel>>();
+
+		if (logger.IsEnabled(LogLevel.Information))
+		{
+			logger.LogInformation("{IsEnabled} console logging.", isEnabled ? "Enabling" : "Disabling");
+		}
 
 		await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
 			.Title("Diagnostics")
@@ -94,7 +101,12 @@ public class LoggersDiagnosticsViewModel : ViewModel
 
 	private async Task OnFileLoggingChanged(CancellationToken ct, bool isEnabled)
 	{
-		this.GetService<ILogger<LoggersDiagnosticsViewModel>>().LogInformation("{IsEnabled} file logging.", isEnabled ? "Enabling" : "Disabling");
+		var logger = this.GetService<ILogger<LoggersDiagnosticsViewModel>>();
+
+		if (logger.IsEnabled(LogLevel.Information))
+		{
+			logger.LogInformation("{IsEnabled} file logging.", isEnabled ? "Enabling" : "Disabling");
+		}
 
 		await this.GetService<IMessageDialogService>().ShowMessage(ct, mb => mb
 			.Title("Diagnostics")

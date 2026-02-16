@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Reactive.Concurrency;
 using System.Threading;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using MessageDialogService;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Usage", "CA2201:Do not raise reserved exception types", Justification = "Those are diagnostics exception to test how the app reacts to exceptions.")]
 public class ExceptionsDiagnosticsViewModel : ViewModel
 {

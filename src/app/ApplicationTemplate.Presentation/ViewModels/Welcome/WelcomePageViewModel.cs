@@ -1,9 +1,11 @@
-﻿using Chinook.DynamicMvvm;
+﻿using System.ComponentModel;
+using Chinook.DynamicMvvm;
 using Chinook.SectionsNavigation;
 using Chinook.StackNavigation;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class WelcomePageViewModel : ViewModel
 {
 	public IDynamicCommand NavigateToOnboarding => this.GetCommandFromTask(async ct =>

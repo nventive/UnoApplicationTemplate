@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Text;
 using ApplicationTemplate.DataAccess;
 
 namespace ApplicationTemplate.Business;
 
+[Bindable(true)]
 public record Post
 {
 	public long Id { get; init; }

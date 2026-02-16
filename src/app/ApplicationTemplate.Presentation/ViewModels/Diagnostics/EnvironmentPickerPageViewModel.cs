@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
 using Chinook.DynamicMvvm;
@@ -9,6 +10,7 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class EnvironmentPickerPageViewModel : ViewModel
 {
 	private readonly string _currentEnvironment;

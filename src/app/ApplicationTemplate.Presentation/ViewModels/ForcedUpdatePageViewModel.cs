@@ -1,4 +1,5 @@
-﻿using ApplicationTemplate.DataAccess.PlatformServices;
+﻿using System.ComponentModel;
+using ApplicationTemplate.DataAccess.PlatformServices;
 using Chinook.DynamicMvvm;
 
 namespace ApplicationTemplate.Presentation;
@@ -6,6 +7,7 @@ namespace ApplicationTemplate.Presentation;
 /// <summary>
 /// The ViewModel for the forced update page.
 /// </summary>
+[Bindable(true)]
 public sealed class ForcedUpdatePageViewModel : ViewModel
 {
 	/// <summary>

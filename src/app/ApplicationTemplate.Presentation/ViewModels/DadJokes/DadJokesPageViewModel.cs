@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading;
@@ -16,6 +17,7 @@ using Uno;
 
 namespace ApplicationTemplate.Presentation;
 
+[Bindable(true)]
 public sealed class DadJokesPageViewModel : ViewModel
 {
 	private readonly IDadJokesService _dadJokesService;

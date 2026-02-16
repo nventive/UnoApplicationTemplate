@@ -50,8 +50,10 @@ public class WritableJsonConfigurationProvider : JsonConfigurationProvider
 			}
 		}
 
-		_logger.LogDebug("Serialized ­­­­{PairCount} key-value-pairs in {ElapsedMilliseconds}ms.", Data.Count, stopwatch.ElapsedMilliseconds);
-
+		if (_logger.IsEnabled(LogLevel.Debug))
+		{
+			_logger.LogDebug("Serialized ­­­­{PairCount} key-value-pairs in {ElapsedMilliseconds}ms.", Data.Count, stopwatch.ElapsedMilliseconds);
+		}
 		OnReload();
 	}
 }

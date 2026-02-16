@@ -87,6 +87,6 @@ public sealed class ConnectivityProvider : IConnectivityProvider, IDisposable
 
 	private void OnNetworkStatusChanged(object sender)
 	{
-		InnerConnectivityChanged.Invoke(this, new ConnectivityChangedEventArgs(State));
+		InnerConnectivityChanged?.Invoke(this, new ConnectivityChangedEventArgs(State));
 	}
 }

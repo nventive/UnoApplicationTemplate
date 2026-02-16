@@ -15,6 +15,7 @@ public abstract class ApiTestBase : IDisposable
 		_host = new HostBuilder()
 			.AddConfiguration(string.Empty, new TestEnvironmentManager())
 			.ConfigureServices((context, s) => s
+				.AddSingleton<TimeProvider>(TimeProvider.System)
 				.AddDiagnostics(context.Configuration)
 				.AddMock(context.Configuration)
 				.AddApi(context.Configuration)
